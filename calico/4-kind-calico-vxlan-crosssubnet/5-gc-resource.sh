@@ -9,4 +9,3 @@ brctl delbr br-pool0
 
 ifconfig br-pool1 down
 brctl delbr br-pool1
-
