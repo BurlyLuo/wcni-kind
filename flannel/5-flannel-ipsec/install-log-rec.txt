@@ -1,0 +1,82 @@
+
+# platform env adapt
+sed -i "s/alias ll='ls -lrthF'/alias ll='ls -lhF'/g" ~/.bashrc
+source ~/.bashrc | grep err
+# ~/.bashrc: executed by bash(1) for non-login shells.
+# see /usr/share/doc/bash/examples/startup-files (in the package bash-doc)
+# for examples
+
+# If not running interactively, don't do anything
+[ -z "$PS1" ] && return
+
+sed -i "s/namespace: kube-flannel/namespace: kube-system/g" ./flannel.yaml
+dd if=/dev/urandom count=48 bs=1 status=none | xxd -p -c 48
+608d983a15efbb0d06598dcac6ec2a905e41e247089674f5b1b75e79717fbbf13f2a1eecf80e795a230626ee03b1d857
+
+kubectl apply -f ./flannel.yaml
+namespace/kube-flannel created
+clusterrole.rbac.authorization.k8s.io/flannel created
+clusterrolebinding.rbac.authorization.k8s.io/flannel created
+serviceaccount/flannel created
+configmap/kube-flannel-cfg created
+daemonset.apps/kube-flannel-ds created
+
+kubectl get nodes -owide 
+NAME   STATUS     ROLES                  AGE   VERSION   INTERNAL-IP    EXTERNAL-IP   OS-IMAGE             KERNEL-VERSION      CONTAINER-RUNTIME
+bpf1   NotReady   control-plane,master   21d   v1.23.4   192.168.2.71   <none>        Ubuntu 20.04.5 LTS   5.15.0-52-generic   docker://20.10.21
+bpf2   NotReady   <none>                 21d   v1.23.4   192.168.2.72   <none>        Ubuntu 20.04.5 LTS   5.15.0-52-generic   docker://20.10.21
+bpf3   NotReady   <none>                 21d   v1.23.4   192.168.2.73   <none>        Ubuntu 20.04.5 LTS   5.15.0-52-generic   docker://20.10.21
+
+kubectl get pods -owide -A 
+NAMESPACE     NAME                           READY   STATUS      RESTARTS       AGE   IP             NODE   NOMINATED NODE   READINESS GATES
+kube-system   coredns-7b888c7f44-knf7l       0/1     Completed   0              19d   <none>         bpf2   <none>           <none>
+kube-system   coredns-7b888c7f44-vhg82       1/1     Running     0              19d   10.244.2.2     bpf3   <none>           <none>
+kube-system   etcd-bpf1                      1/1     Running     10 (19d ago)   21d   192.168.2.71   bpf1   <none>           <none>
+kube-system   kube-apiserver-bpf1            1/1     Running     11 (19d ago)   21d   192.168.2.71   bpf1   <none>           <none>
+kube-system   kube-controller-manager-bpf1   1/1     Running     10 (19d ago)   21d   192.168.2.71   bpf1   <none>           <none>
+kube-system   kube-flannel-ds-bgdv8          0/1     Pending     0              0s    <none>         bpf3   <none>           <none>
+kube-system   kube-flannel-ds-cm7sf          0/1     Init:0/2    0              0s    192.168.2.72   bpf2   <none>           <none>
+kube-system   kube-flannel-ds-l8c96          0/1     Init:0/2    0              0s    192.168.2.71   bpf1   <none>           <none>
+kube-system   kube-proxy-7zkvw               1/1     Running     6 (19d ago)    21d   192.168.2.72   bpf2   <none>           <none>
+kube-system   kube-proxy-pl2pk               1/1     Running     6 (20d ago)    21d   192.168.2.73   bpf3   <none>           <none>
+kube-system   kube-proxy-wmv2v               1/1     Running     10 (19d ago)   21d   192.168.2.71   bpf1   <none>           <none>
+kube-system   kube-scheduler-bpf1            1/1     Running     12 (19d ago)   21d   192.168.2.71   bpf1   <none>           <none>
+
+cat <<EOF | kubectl apply -f -
+apiVersion: apps/v1
+kind: DaemonSet
+metadata:
+  labels:
+    app: flannel-ipsec
+  name: flannel-ipsec
+spec:
+  selector:
+    matchLabels:
+      app: flannel-ipsec
+  template:
+    metadata:
+      labels:
+        app: flannel-ipsec
+    spec:
+      containers:
+      - image: 192.168.2.100:5000/nettool
+        name: nettoolbox
+        securityContext:
+          privileged: true
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: serversvc
+spec:
+  type: NodePort
+  selector:
+    app: flannel-ipsec
+  ports:
+  - name: flannel-ipsec
+    port: 8080
+    targetPort: 80
+    nodePort: 32000
+EOF
+daemonset.apps/flannel-ipsec created
+service/serversvc created

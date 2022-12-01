@@ -1,0 +1,231 @@
+
+kubectl apply -f calico.yaml
+configmap/calico-config unchanged
+customresourcedefinition.apiextensions.k8s.io/bgpconfigurations.crd.projectcalico.org configured
+customresourcedefinition.apiextensions.k8s.io/bgppeers.crd.projectcalico.org configured
+customresourcedefinition.apiextensions.k8s.io/blockaffinities.crd.projectcalico.org configured
+customresourcedefinition.apiextensions.k8s.io/caliconodestatuses.crd.projectcalico.org configured
+customresourcedefinition.apiextensions.k8s.io/clusterinformations.crd.projectcalico.org configured
+customresourcedefinition.apiextensions.k8s.io/felixconfigurations.crd.projectcalico.org configured
+customresourcedefinition.apiextensions.k8s.io/globalnetworkpolicies.crd.projectcalico.org configured
+customresourcedefinition.apiextensions.k8s.io/globalnetworksets.crd.projectcalico.org configured
+customresourcedefinition.apiextensions.k8s.io/hostendpoints.crd.projectcalico.org configured
+customresourcedefinition.apiextensions.k8s.io/ipamblocks.crd.projectcalico.org configured
+customresourcedefinition.apiextensions.k8s.io/ipamconfigs.crd.projectcalico.org configured
+customresourcedefinition.apiextensions.k8s.io/ipamhandles.crd.projectcalico.org configured
+customresourcedefinition.apiextensions.k8s.io/ippools.crd.projectcalico.org configured
+customresourcedefinition.apiextensions.k8s.io/ipreservations.crd.projectcalico.org configured
+customresourcedefinition.apiextensions.k8s.io/kubecontrollersconfigurations.crd.projectcalico.org configured
+customresourcedefinition.apiextensions.k8s.io/networkpolicies.crd.projectcalico.org configured
+customresourcedefinition.apiextensions.k8s.io/networksets.crd.projectcalico.org configured
+clusterrole.rbac.authorization.k8s.io/calico-kube-controllers unchanged
+clusterrolebinding.rbac.authorization.k8s.io/calico-kube-controllers unchanged
+clusterrole.rbac.authorization.k8s.io/calico-node unchanged
+clusterrolebinding.rbac.authorization.k8s.io/calico-node unchanged
+daemonset.apps/calico-node configured
+serviceaccount/calico-node unchanged
+deployment.apps/calico-kube-controllers unchanged
+serviceaccount/calico-kube-controllers unchanged
+poddisruptionbudget.policy/calico-kube-controllers configured
+
+kubectl apply -f ../1-multus-macvlan/multus-cni/deployments/multus-daemonset.yml
+customresourcedefinition.apiextensions.k8s.io/network-attachment-definitions.k8s.cni.cncf.io unchanged
+clusterrole.rbac.authorization.k8s.io/multus unchanged
+clusterrolebinding.rbac.authorization.k8s.io/multus unchanged
+serviceaccount/multus unchanged
+configmap/multus-cni-config unchanged
+daemonset.apps/kube-multus-ds unchanged
+
+kubectl apply -f ../1-multus-macvlan/whereabouts/doc/crds/
+serviceaccount/whereabouts unchanged
+clusterrolebinding.rbac.authorization.k8s.io/whereabouts unchanged
+clusterrole.rbac.authorization.k8s.io/whereabouts-cni unchanged
+daemonset.apps/whereabouts unchanged
+customresourcedefinition.apiextensions.k8s.io/ippools.whereabouts.cni.cncf.io configured
+customresourcedefinition.apiextensions.k8s.io/overlappingrangeipreservations.whereabouts.cni.cncf.io configured
+
+kubectl get nodes -o wide
+NAME   STATUS   ROLES                  AGE   VERSION   INTERNAL-IP    EXTERNAL-IP   OS-IMAGE             KERNEL-VERSION      CONTAINER-RUNTIME
+bpf1   Ready    control-plane,master   10d   v1.23.4   192.168.2.71   <none>        Ubuntu 20.04.5 LTS   5.15.0-52-generic   docker://20.10.21
+bpf2   Ready    <none>                 10d   v1.23.4   192.168.2.72   <none>        Ubuntu 20.04.5 LTS   5.15.0-52-generic   docker://20.10.21
+bpf3   Ready    <none>                 10d   v1.23.4   192.168.2.73   <none>        Ubuntu 20.04.5 LTS   5.15.0-52-generic   docker://20.10.21
+
+kubectl get pods -o wide -A
+NAMESPACE     NAME                                       READY   STATUS    RESTARTS      AGE   IP               NODE   NOMINATED NODE   READINESS GATES
+kube-system   calico-kube-controllers-7d77d66bd7-xnqdr   1/1     Running   0             33m   10.244.179.130   bpf3   <none>           <none>
+kube-system   calico-node-7f9f9                          1/1     Running   0             33m   192.168.2.71     bpf1   <none>           <none>
+kube-system   calico-node-cdnl2                          1/1     Running   0             33m   192.168.2.73     bpf3   <none>           <none>
+kube-system   calico-node-fvbs9                          1/1     Running   0             33m   192.168.2.72     bpf2   <none>           <none>
+kube-system   coredns-7b888c7f44-knf7l                   1/1     Running   1 (8d ago)    8d    10.244.230.0     bpf2   <none>           <none>
+kube-system   coredns-7b888c7f44-vhg82                   1/1     Running   1 (8d ago)    8d    10.244.179.129   bpf3   <none>           <none>
+kube-system   etcd-bpf1                                  1/1     Running   10 (8d ago)   10d   192.168.2.71     bpf1   <none>           <none>
+kube-system   kube-apiserver-bpf1                        1/1     Running   11 (8d ago)   10d   192.168.2.71     bpf1   <none>           <none>
+kube-system   kube-controller-manager-bpf1               1/1     Running   10 (8d ago)   10d   192.168.2.71     bpf1   <none>           <none>
+kube-system   kube-multus-ds-nsrmn                       1/1     Running   0             33m   192.168.2.72     bpf2   <none>           <none>
+kube-system   kube-multus-ds-pg7pc                       1/1     Running   0             33m   192.168.2.71     bpf1   <none>           <none>
+kube-system   kube-multus-ds-rsnbj                       1/1     Running   0             33m   192.168.2.73     bpf3   <none>           <none>
+kube-system   kube-proxy-7zkvw                           1/1     Running   6 (8d ago)    10d   192.168.2.72     bpf2   <none>           <none>
+kube-system   kube-proxy-pl2pk                           1/1     Running   7 (8d ago)    10d   192.168.2.73     bpf3   <none>           <none>
+kube-system   kube-proxy-wmv2v                           1/1     Running   10 (8d ago)   10d   192.168.2.71     bpf1   <none>           <none>
+kube-system   kube-scheduler-bpf1                        1/1     Running   12 (8d ago)   10d   192.168.2.71     bpf1   <none>           <none>
+kube-system   whereabouts-9976s                          1/1     Running   0             33m   192.168.2.73     bpf3   <none>           <none>
+kube-system   whereabouts-h7rcx                          1/1     Running   0             33m   192.168.2.71     bpf1   <none>           <none>
+kube-system   whereabouts-nlh9w                          1/1     Running   0             33m   192.168.2.72     bpf2   <none>           <none>
+
+sleep 30
+
+cat <<EOF | kubectl apply -f -
+apiVersion: "k8s.cni.cncf.io/v1"
+kind: NetworkAttachmentDefinition
+metadata:
+  name: macvlan-whereabouts-conf
+spec:
+  config: '{
+      "cniVersion": "0.3.0",
+      "name": "whereaboutsexample",
+      "type": "ipvlan",
+      "master": "ens160",
+      "mode": "l3",
+      "ipam": {
+        "type": "whereabouts",
+        "range": "10.1.1.10-10.1.1.20/24"
+      }
+    }'
+EOF
+networkattachmentdefinition.k8s.cni.cncf.io/macvlan-whereabouts-conf created
+
+cat <<EOF | kubectl apply -f -
+apiVersion: v1
+kind: Pod
+metadata:
+  name: muti-cni-pod
+  annotations:
+    k8s.v1.cni.cncf.io/networks: macvlan-whereabouts-conf@net1
+spec:
+  containers:
+  - name: nettool
+    image: 192.168.2.100:5000/nettool
+    securityContext:
+      privileged: false
+      capabilities:
+        add: ["NET_ADMIN"]
+  nodeName: bpf1
+EOF
+pod/muti-cni-pod created
+
+
+
+cat <<EOF | kubectl apply -f -
+apiVersion: "k8s.cni.cncf.io/v1"
+kind: NetworkAttachmentDefinition
+metadata:
+  name: macvlan-whereabouts-confl3
+spec:
+  config: '{
+      "cniVersion": "0.3.0",
+      "name": "whereaboutsexample",
+      "type": "ipvlan",
+      "master": "ens160",
+      "mode": "l3",
+      "ipam": {
+        "type": "whereabouts",
+        "range": "10.1.2.20-10.1.2.30/24"
+      }
+    }'
+EOF
+networkattachmentdefinition.k8s.cni.cncf.io/macvlan-whereabouts-confl3 created
+
+
+cat <<EOF | kubectl apply -f -
+apiVersion: v1
+kind: Pod
+metadata:
+  name: muti-cni-pod-ipvlanl3
+  annotations:
+    k8s.v1.cni.cncf.io/networks: macvlan-whereabouts-confl3@net1
+spec:
+  containers:
+  - name: nettool
+    image: 192.168.2.100:5000/nettool
+    securityContext:
+      privileged: false
+      capabilities:
+        add: ["NET_ADMIN"]
+  nodeName: bpf1
+EOF
+pod/muti-cni-pod-ipvlanl3 created
+
+
+sleep 5
+
+kubectl exec -it muti-cni-pod -- ifconfig -a
+eth0      Link encap:Ethernet  HWaddr 92:7B:FD:B9:E9:5D  
+          inet addr:10.244.11.69  Bcast:0.0.0.0  Mask:255.255.255.255
+          UP BROADCAST RUNNING MULTICAST  MTU:1480  Metric:1
+          RX packets:15 errors:0 dropped:0 overruns:0 frame:0
+          TX packets:0 errors:0 dropped:0 overruns:0 carrier:0
+          collisions:0 txqueuelen:0 
+          RX bytes:1993 (1.9 KiB)  TX bytes:0 (0.0 B)
+
+lo        Link encap:Local Loopback  
+          inet addr:127.0.0.1  Mask:255.0.0.0
+          UP LOOPBACK RUNNING  MTU:65536  Metric:1
+          RX packets:0 errors:0 dropped:0 overruns:0 frame:0
+          TX packets:0 errors:0 dropped:0 overruns:0 carrier:0
+          collisions:0 txqueuelen:1000 
+          RX bytes:0 (0.0 B)  TX bytes:0 (0.0 B)
+
+net1      Link encap:Ethernet  HWaddr 00:0C:29:67:92:63  
+          inet addr:10.1.1.10  Bcast:10.1.1.255  Mask:255.255.255.0
+          UP BROADCAST RUNNING NOARP MULTICAST  MTU:1500  Metric:1
+          RX packets:0 errors:0 dropped:0 overruns:0 frame:0
+          TX packets:0 errors:0 dropped:0 overruns:0 carrier:0
+          collisions:0 txqueuelen:0 
+          RX bytes:0 (0.0 B)  TX bytes:0 (0.0 B)
+
+tunl0     Link encap:UNSPEC  HWaddr 00-00-00-00-FF-00-00-00-00-00-00-00-00-00-00-00  
+          NOARP  MTU:1480  Metric:1
+          RX packets:0 errors:0 dropped:0 overruns:0 frame:0
+          TX packets:0 errors:0 dropped:0 overruns:0 carrier:0
+          collisions:0 txqueuelen:1000 
+          RX bytes:0 (0.0 B)  TX bytes:0 (0.0 B)
+
+kubectl exec -it muti-cni-pod-ipvlanl3 -- ifconfig -a
+eth0      Link encap:Ethernet  HWaddr D2:64:17:CA:04:58  
+          inet addr:10.244.11.70  Bcast:0.0.0.0  Mask:255.255.255.255
+          UP BROADCAST RUNNING MULTICAST  MTU:1480  Metric:1
+          RX packets:14 errors:0 dropped:0 overruns:0 frame:0
+          TX packets:0 errors:0 dropped:0 overruns:0 carrier:0
+          collisions:0 txqueuelen:0 
+          RX bytes:1886 (1.8 KiB)  TX bytes:0 (0.0 B)
+
+lo        Link encap:Local Loopback  
+          inet addr:127.0.0.1  Mask:255.0.0.0
+          UP LOOPBACK RUNNING  MTU:65536  Metric:1
+          RX packets:0 errors:0 dropped:0 overruns:0 frame:0
+          TX packets:0 errors:0 dropped:0 overruns:0 carrier:0
+          collisions:0 txqueuelen:1000 
+          RX bytes:0 (0.0 B)  TX bytes:0 (0.0 B)
+
+net1      Link encap:Ethernet  HWaddr 00:0C:29:67:92:63  
+          inet addr:10.1.2.20  Bcast:10.1.2.255  Mask:255.255.255.0
+          UP BROADCAST RUNNING NOARP MULTICAST  MTU:1500  Metric:1
+          RX packets:0 errors:0 dropped:0 overruns:0 frame:0
+          TX packets:0 errors:0 dropped:0 overruns:0 carrier:0
+          collisions:0 txqueuelen:0 
+          RX bytes:0 (0.0 B)  TX bytes:0 (0.0 B)
+
+tunl0     Link encap:UNSPEC  HWaddr 00-00-00-00-FF-00-00-00-00-00-00-00-00-00-00-00  
+          NOARP  MTU:1480  Metric:1
+          RX packets:0 errors:0 dropped:0 overruns:0 frame:0
+          TX packets:0 errors:0 dropped:0 overruns:0 carrier:0
+          collisions:0 txqueuelen:1000 
+          RX bytes:0 (0.0 B)  TX bytes:0 (0.0 B)
+
+
+kubectl exec -it muti-cni-pod -- ip r d default via 169.254.1.1 dev eth0
+kubectl exec -it muti-cni-pod -- ip r a default dev net1
+
+kubectl exec -it muti-cni-pod-ipvlanl3 -- ip r d default via 169.254.1.1 dev eth0
+kubectl exec -it muti-cni-pod-ipvlanl3 -- ip r a default dev net1
+
