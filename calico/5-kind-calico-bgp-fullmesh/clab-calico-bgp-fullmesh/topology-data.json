@@ -1,12 +1,12 @@
 {
-  "name": "calico-ipip-crosssubnet",
+  "name": "calico-bgp-fullmesh",
   "type": "clab",
   "clab": {
     "config": {
       "prefix": "clab",
       "mgmt": {
         "network": "clab",
-        "bridge": "br-efad20fa7f23",
+        "bridge": "br-e23ff809d07e",
         "ipv4-subnet": "172.20.20.0/24",
         "ipv4-gw": "172.20.20.1",
         "ipv6-subnet": "2001:172:20:20::/64",
@@ -20,10 +20,10 @@
     "br-pool0": {
       "index": "0",
       "shortname": "br-pool0",
-      "longname": "clab-calico-ipip-crosssubnet-br-pool0",
-      "fqdn": "br-pool0.calico-ipip-crosssubnet.io",
+      "longname": "clab-calico-bgp-fullmesh-br-pool0",
+      "fqdn": "br-pool0.calico-bgp-fullmesh.io",
       "group": "",
-      "labdir": "/root/wcni/calico/2-kind-calico-ipip-crosssubnet/clab-calico-ipip-crosssubnet/br-pool0",
+      "labdir": "/root/wcni/calico/5-kind-calico-bgp-fullmesh/clab-calico-bgp-fullmesh/br-pool0",
       "kind": "bridge",
       "image": "",
       "mgmt-net": "",
@@ -34,23 +34,23 @@
       "mgmt-ipv6-prefix-length": 0,
       "mac-address": "",
       "labels": {
-        "clab-mgmt-net-bridge": "br-efad20fa7f23",
+        "clab-mgmt-net-bridge": "br-e23ff809d07e",
         "clab-node-group": "",
         "clab-node-kind": "bridge",
-        "clab-node-lab-dir": "/root/wcni/calico/2-kind-calico-ipip-crosssubnet/clab-calico-ipip-crosssubnet/br-pool0",
+        "clab-node-lab-dir": "/root/wcni/calico/5-kind-calico-bgp-fullmesh/clab-calico-bgp-fullmesh/br-pool0",
         "clab-node-name": "br-pool0",
         "clab-node-type": "",
-        "clab-topo-file": "/root/wcni/calico/2-kind-calico-ipip-crosssubnet/clab.yaml",
-        "containerlab": "calico-ipip-crosssubnet"
+        "clab-topo-file": "/root/wcni/calico/5-kind-calico-bgp-fullmesh/clab.yaml",
+        "containerlab": "calico-bgp-fullmesh"
       }
     },
     "br-pool1": {
       "index": "1",
       "shortname": "br-pool1",
-      "longname": "clab-calico-ipip-crosssubnet-br-pool1",
-      "fqdn": "br-pool1.calico-ipip-crosssubnet.io",
+      "longname": "clab-calico-bgp-fullmesh-br-pool1",
+      "fqdn": "br-pool1.calico-bgp-fullmesh.io",
       "group": "",
-      "labdir": "/root/wcni/calico/2-kind-calico-ipip-crosssubnet/clab-calico-ipip-crosssubnet/br-pool1",
+      "labdir": "/root/wcni/calico/5-kind-calico-bgp-fullmesh/clab-calico-bgp-fullmesh/br-pool1",
       "kind": "bridge",
       "image": "",
       "mgmt-net": "",
@@ -61,23 +61,23 @@
       "mgmt-ipv6-prefix-length": 0,
       "mac-address": "",
       "labels": {
-        "clab-mgmt-net-bridge": "br-efad20fa7f23",
+        "clab-mgmt-net-bridge": "br-e23ff809d07e",
         "clab-node-group": "",
         "clab-node-kind": "bridge",
-        "clab-node-lab-dir": "/root/wcni/calico/2-kind-calico-ipip-crosssubnet/clab-calico-ipip-crosssubnet/br-pool1",
+        "clab-node-lab-dir": "/root/wcni/calico/5-kind-calico-bgp-fullmesh/clab-calico-bgp-fullmesh/br-pool1",
         "clab-node-name": "br-pool1",
         "clab-node-type": "",
-        "clab-topo-file": "/root/wcni/calico/2-kind-calico-ipip-crosssubnet/clab.yaml",
-        "containerlab": "calico-ipip-crosssubnet"
+        "clab-topo-file": "/root/wcni/calico/5-kind-calico-bgp-fullmesh/clab.yaml",
+        "containerlab": "calico-bgp-fullmesh"
       }
     },
     "gw0": {
       "index": "2",
       "shortname": "gw0",
-      "longname": "clab-calico-ipip-crosssubnet-gw0",
-      "fqdn": "gw0.calico-ipip-crosssubnet.io",
+      "longname": "clab-calico-bgp-fullmesh-gw0",
+      "fqdn": "gw0.calico-bgp-fullmesh.io",
       "group": "",
-      "labdir": "/root/wcni/calico/2-kind-calico-ipip-crosssubnet/clab-calico-ipip-crosssubnet/gw0",
+      "labdir": "/root/wcni/calico/5-kind-calico-bgp-fullmesh/clab-calico-bgp-fullmesh/gw0",
       "kind": "linux",
       "image": "192.168.2.100:5000/vyos/vyos:1.2.8",
       "mgmt-net": "",
@@ -88,23 +88,23 @@
       "mgmt-ipv6-prefix-length": 64,
       "mac-address": "",
       "labels": {
-        "clab-mgmt-net-bridge": "br-efad20fa7f23",
+        "clab-mgmt-net-bridge": "br-e23ff809d07e",
         "clab-node-group": "",
         "clab-node-kind": "linux",
-        "clab-node-lab-dir": "/root/wcni/calico/2-kind-calico-ipip-crosssubnet/clab-calico-ipip-crosssubnet/gw0",
+        "clab-node-lab-dir": "/root/wcni/calico/5-kind-calico-bgp-fullmesh/clab-calico-bgp-fullmesh/gw0",
         "clab-node-name": "gw0",
         "clab-node-type": "",
-        "clab-topo-file": "/root/wcni/calico/2-kind-calico-ipip-crosssubnet/clab.yaml",
-        "containerlab": "calico-ipip-crosssubnet"
+        "clab-topo-file": "/root/wcni/calico/5-kind-calico-bgp-fullmesh/clab.yaml",
+        "containerlab": "calico-bgp-fullmesh"
       }
     },
     "server1": {
       "index": "3",
       "shortname": "server1",
-      "longname": "clab-calico-ipip-crosssubnet-server1",
-      "fqdn": "server1.calico-ipip-crosssubnet.io",
+      "longname": "clab-calico-bgp-fullmesh-server1",
+      "fqdn": "server1.calico-bgp-fullmesh.io",
       "group": "",
-      "labdir": "/root/wcni/calico/2-kind-calico-ipip-crosssubnet/clab-calico-ipip-crosssubnet/server1",
+      "labdir": "/root/wcni/calico/5-kind-calico-bgp-fullmesh/clab-calico-bgp-fullmesh/server1",
       "kind": "linux",
       "image": "192.168.2.100:5000/nettool",
       "mgmt-net": "",
@@ -115,23 +115,23 @@
       "mgmt-ipv6-prefix-length": 0,
       "mac-address": "",
       "labels": {
-        "clab-mgmt-net-bridge": "br-efad20fa7f23",
+        "clab-mgmt-net-bridge": "br-e23ff809d07e",
         "clab-node-group": "",
         "clab-node-kind": "linux",
-        "clab-node-lab-dir": "/root/wcni/calico/2-kind-calico-ipip-crosssubnet/clab-calico-ipip-crosssubnet/server1",
+        "clab-node-lab-dir": "/root/wcni/calico/5-kind-calico-bgp-fullmesh/clab-calico-bgp-fullmesh/server1",
         "clab-node-name": "server1",
         "clab-node-type": "",
-        "clab-topo-file": "/root/wcni/calico/2-kind-calico-ipip-crosssubnet/clab.yaml",
-        "containerlab": "calico-ipip-crosssubnet"
+        "clab-topo-file": "/root/wcni/calico/5-kind-calico-bgp-fullmesh/clab.yaml",
+        "containerlab": "calico-bgp-fullmesh"
       }
     },
     "server2": {
       "index": "4",
       "shortname": "server2",
-      "longname": "clab-calico-ipip-crosssubnet-server2",
-      "fqdn": "server2.calico-ipip-crosssubnet.io",
+      "longname": "clab-calico-bgp-fullmesh-server2",
+      "fqdn": "server2.calico-bgp-fullmesh.io",
       "group": "",
-      "labdir": "/root/wcni/calico/2-kind-calico-ipip-crosssubnet/clab-calico-ipip-crosssubnet/server2",
+      "labdir": "/root/wcni/calico/5-kind-calico-bgp-fullmesh/clab-calico-bgp-fullmesh/server2",
       "kind": "linux",
       "image": "192.168.2.100:5000/nettool",
       "mgmt-net": "",
@@ -142,23 +142,23 @@
       "mgmt-ipv6-prefix-length": 0,
       "mac-address": "",
       "labels": {
-        "clab-mgmt-net-bridge": "br-efad20fa7f23",
+        "clab-mgmt-net-bridge": "br-e23ff809d07e",
         "clab-node-group": "",
         "clab-node-kind": "linux",
-        "clab-node-lab-dir": "/root/wcni/calico/2-kind-calico-ipip-crosssubnet/clab-calico-ipip-crosssubnet/server2",
+        "clab-node-lab-dir": "/root/wcni/calico/5-kind-calico-bgp-fullmesh/clab-calico-bgp-fullmesh/server2",
         "clab-node-name": "server2",
         "clab-node-type": "",
-        "clab-topo-file": "/root/wcni/calico/2-kind-calico-ipip-crosssubnet/clab.yaml",
-        "containerlab": "calico-ipip-crosssubnet"
+        "clab-topo-file": "/root/wcni/calico/5-kind-calico-bgp-fullmesh/clab.yaml",
+        "containerlab": "calico-bgp-fullmesh"
       }
     },
     "server3": {
       "index": "5",
       "shortname": "server3",
-      "longname": "clab-calico-ipip-crosssubnet-server3",
-      "fqdn": "server3.calico-ipip-crosssubnet.io",
+      "longname": "clab-calico-bgp-fullmesh-server3",
+      "fqdn": "server3.calico-bgp-fullmesh.io",
       "group": "",
-      "labdir": "/root/wcni/calico/2-kind-calico-ipip-crosssubnet/clab-calico-ipip-crosssubnet/server3",
+      "labdir": "/root/wcni/calico/5-kind-calico-bgp-fullmesh/clab-calico-bgp-fullmesh/server3",
       "kind": "linux",
       "image": "192.168.2.100:5000/nettool",
       "mgmt-net": "",
@@ -169,23 +169,23 @@
       "mgmt-ipv6-prefix-length": 0,
       "mac-address": "",
       "labels": {
-        "clab-mgmt-net-bridge": "br-efad20fa7f23",
+        "clab-mgmt-net-bridge": "br-e23ff809d07e",
         "clab-node-group": "",
         "clab-node-kind": "linux",
-        "clab-node-lab-dir": "/root/wcni/calico/2-kind-calico-ipip-crosssubnet/clab-calico-ipip-crosssubnet/server3",
+        "clab-node-lab-dir": "/root/wcni/calico/5-kind-calico-bgp-fullmesh/clab-calico-bgp-fullmesh/server3",
         "clab-node-name": "server3",
         "clab-node-type": "",
-        "clab-topo-file": "/root/wcni/calico/2-kind-calico-ipip-crosssubnet/clab.yaml",
-        "containerlab": "calico-ipip-crosssubnet"
+        "clab-topo-file": "/root/wcni/calico/5-kind-calico-bgp-fullmesh/clab.yaml",
+        "containerlab": "calico-bgp-fullmesh"
       }
     },
     "server4": {
       "index": "6",
       "shortname": "server4",
-      "longname": "clab-calico-ipip-crosssubnet-server4",
-      "fqdn": "server4.calico-ipip-crosssubnet.io",
+      "longname": "clab-calico-bgp-fullmesh-server4",
+      "fqdn": "server4.calico-bgp-fullmesh.io",
       "group": "",
-      "labdir": "/root/wcni/calico/2-kind-calico-ipip-crosssubnet/clab-calico-ipip-crosssubnet/server4",
+      "labdir": "/root/wcni/calico/5-kind-calico-bgp-fullmesh/clab-calico-bgp-fullmesh/server4",
       "kind": "linux",
       "image": "192.168.2.100:5000/nettool",
       "mgmt-net": "",
@@ -196,14 +196,14 @@
       "mgmt-ipv6-prefix-length": 0,
       "mac-address": "",
       "labels": {
-        "clab-mgmt-net-bridge": "br-efad20fa7f23",
+        "clab-mgmt-net-bridge": "br-e23ff809d07e",
         "clab-node-group": "",
         "clab-node-kind": "linux",
-        "clab-node-lab-dir": "/root/wcni/calico/2-kind-calico-ipip-crosssubnet/clab-calico-ipip-crosssubnet/server4",
+        "clab-node-lab-dir": "/root/wcni/calico/5-kind-calico-bgp-fullmesh/clab-calico-bgp-fullmesh/server4",
         "clab-node-name": "server4",
         "clab-node-type": "",
-        "clab-topo-file": "/root/wcni/calico/2-kind-calico-ipip-crosssubnet/clab.yaml",
-        "containerlab": "calico-ipip-crosssubnet"
+        "clab-topo-file": "/root/wcni/calico/5-kind-calico-bgp-fullmesh/clab.yaml",
+        "containerlab": "calico-bgp-fullmesh"
       }
     }
   },
@@ -212,13 +212,13 @@
       "a": {
         "node": "br-pool0",
         "interface": "br-pool0-net0",
-        "mac": "aa:c1:ab:b3:e3:43",
+        "mac": "aa:c1:ab:11:80:c4",
         "peer": "z"
       },
       "z": {
         "node": "server1",
         "interface": "net0",
-        "mac": "aa:c1:ab:78:d8:3e",
+        "mac": "aa:c1:ab:b3:44:14",
         "peer": "a"
       }
     },
@@ -226,13 +226,13 @@
       "a": {
         "node": "br-pool0",
         "interface": "br-pool0-net1",
-        "mac": "aa:c1:ab:c0:98:f3",
+        "mac": "aa:c1:ab:79:1d:73",
         "peer": "z"
       },
       "z": {
         "node": "server2",
         "interface": "net0",
-        "mac": "aa:c1:ab:71:ea:96",
+        "mac": "aa:c1:ab:44:f0:2f",
         "peer": "a"
       }
     },
@@ -240,13 +240,13 @@
       "a": {
         "node": "br-pool1",
         "interface": "br-pool1-net0",
-        "mac": "aa:c1:ab:66:40:7d",
+        "mac": "aa:c1:ab:84:93:5d",
         "peer": "z"
       },
       "z": {
         "node": "server3",
         "interface": "net0",
-        "mac": "aa:c1:ab:d4:b1:49",
+        "mac": "aa:c1:ab:86:ff:6c",
         "peer": "a"
       }
     },
@@ -254,13 +254,13 @@
       "a": {
         "node": "br-pool1",
         "interface": "br-pool1-net1",
-        "mac": "aa:c1:ab:50:84:a2",
+        "mac": "aa:c1:ab:f8:67:d7",
         "peer": "z"
       },
       "z": {
         "node": "server4",
         "interface": "net0",
-        "mac": "aa:c1:ab:43:d4:a1",
+        "mac": "aa:c1:ab:13:8c:aa",
         "peer": "a"
       }
     },
@@ -268,13 +268,13 @@
       "a": {
         "node": "gw0",
         "interface": "eth1",
-        "mac": "aa:c1:ab:2b:9e:43",
+        "mac": "aa:c1:ab:7b:f4:93",
         "peer": "z"
       },
       "z": {
         "node": "br-pool0",
         "interface": "br-pool0-net2",
-        "mac": "aa:c1:ab:62:ca:35",
+        "mac": "aa:c1:ab:d2:75:8f",
         "peer": "a"
       }
     },
@@ -282,13 +282,13 @@
       "a": {
         "node": "gw0",
         "interface": "eth2",
-        "mac": "aa:c1:ab:6f:71:97",
+        "mac": "aa:c1:ab:96:f7:3a",
         "peer": "z"
       },
       "z": {
         "node": "br-pool1",
         "interface": "br-pool1-net2",
-        "mac": "aa:c1:ab:4b:26:67",
+        "mac": "aa:c1:ab:75:d5:82",
         "peer": "a"
       }
     }

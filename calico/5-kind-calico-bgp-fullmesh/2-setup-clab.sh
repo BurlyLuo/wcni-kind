@@ -9,7 +9,7 @@ ifconfig br-pool1 up
 
 
 cat <<EOF>clab.yaml | clab deploy -t clab.yaml -
-name: calico-ipip-crosssubnet
+name: calico-bgp-fullmesh
 topology:
   nodes:
     gw0:
@@ -18,8 +18,8 @@ topology:
       cmd: /sbin/init
       binds:
         - /lib/modules:/lib/modules
-        - ./startup-conf/gw0-boot.cfg:/opt/vyatta/etc/config/config.boot
- 
+        - ./startup-confg/gw0-boot.cfg:/opt/vyatta/etc/config/config.boot
+
 
     br-pool0:
       kind: bridge

@@ -1,34 +1,41 @@
 apiVersion: apps/v1
 kind: DaemonSet
+#kind: Deployment
 metadata:
   labels:
-    app: calico-vxlan
-  name: calico-vxlan
+    app: wluo
+  name: wluo
 spec:
+  #replicas: 2
   selector:
     matchLabels:
-      app: calico-vxlan
+      app: wluo
   template:
     metadata:
       labels:
-        app: calico-vxlan
+        app: wluo
     spec:
       containers:
       - image: 192.168.2.100:5000/nettool
         name: nettoolbox
+        env:
+          - name: NETTOOL_NODE_NAME
+            valueFrom:
+              fieldRef:
+                fieldPath: spec.nodeName
         securityContext:
           privileged: true
 ---
 apiVersion: v1
 kind: Service
 metadata:
-  name: serversvc
+  name: wluo
 spec:
   type: NodePort
   selector:
-    app: calico-vxlan
+    app: wluo
   ports:
-  - name: calico-vxlan
+  - name: wluo
     port: 8080
     targetPort: 80
     nodePort: 32000

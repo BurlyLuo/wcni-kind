@@ -1,6 +1,25 @@
 host 192.168.2.66
 
 clab + cilium + bgp control plane enable
+configuration  steps:
+1. setup k8s cluster
+2. setup clab cluster
+3. config leaf switch(only config leaf switch)
+4. enable the cilium BGP Control Plane
+5. config spine switch 
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 Follow the stpes to execute, we should make sure the ds/cilium under running status firstly. If we find the imagePull failure, we need load the configuration into the leaf and spine swtich.
 

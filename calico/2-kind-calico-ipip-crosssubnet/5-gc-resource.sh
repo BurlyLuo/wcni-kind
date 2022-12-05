@@ -1,8 +1,7 @@
 #!/bin/bash
 
 set -v
-kubectl delete ds calico-ipip
-kubectl delete svc serversvc
+kubectl delete -f ./cni.yaml
 
 ifconfig br-pool0 down
 brctl delbr br-pool0
