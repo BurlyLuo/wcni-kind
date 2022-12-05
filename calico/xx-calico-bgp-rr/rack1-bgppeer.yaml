@@ -1,8 +1,0 @@
-apiVersion: projectcalico.org/v3
-kind: BGPPeer
-metadata:
-  name: rack1-to-gw0
-spec:
-  peerIP: 10.1.8.1
-  asNumber: 64512
-  nodeSelector: rack == 'rack1'
