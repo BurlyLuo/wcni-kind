@@ -1,0 +1,20 @@
+all:
+  children:
+    bridge:
+      hosts:
+        clab-calico-bgp-fullmesh-br-pool0:
+          ansible_host: 
+        clab-calico-bgp-fullmesh-br-pool1:
+          ansible_host: 
+    linux:
+      hosts:
+        clab-calico-bgp-fullmesh-gw0:
+          ansible_host: 172.20.20.2
+        clab-calico-bgp-fullmesh-server1:
+          ansible_host: 
+        clab-calico-bgp-fullmesh-server2:
+          ansible_host: 
+        clab-calico-bgp-fullmesh-server3:
+          ansible_host: 
+        clab-calico-bgp-fullmesh-server4:
+          ansible_host: 
