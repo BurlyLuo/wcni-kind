@@ -3,7 +3,7 @@ date
 set -v
 
 # 1.prep noCNI env
-cat <<EOF | kind create cluster --name=clab-calico-bgp-fullmesh --image=kindest/node:v1.23.4 --config=-
+cat <<EOF | kind create cluster --name=clab-calico-bgp-rr --image=kindest/node:v1.23.4 --config=-
 kind: Cluster
 apiVersion: kind.x-k8s.io/v1alpha4
 networking:
@@ -58,7 +58,7 @@ kubectl taint nodes $controller_node node-role.kubernetes.io/master:NoSchedule-
 kubectl get nodes -o wide
 
 #3. install necessary tools
-for i in $(docker ps  -a --format "table {{.Names}}" | grep clab-calico-bgp-fullmesh)
+for i in $(docker ps  -a --format "table {{.Names}}" | grep clab-calico-bgp-rr)
 do 
     echo $i
     docker cp /usr/bin/calicoctl $i:/usr/bin/calicoctl
