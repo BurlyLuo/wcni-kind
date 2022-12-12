@@ -1,0 +1,192 @@
+-----------------------------------------------------------------------------------------------------
+Calico BGP FullMesh ENV:
+-----------------------------------------------------------------------------------------------------
+$ k get node -o wide | grep -E "bpf1|bpf3"
+bpf1   Ready    control-plane,master   8d    v1.23.4   192.168.2.71   <none>        Ubuntu 20.04.5 LTS   5.15.0-52-generic   docker://20.10.21
+bpf3   Ready    <none>                 8d    v1.23.4   192.168.2.72   <none>        Ubuntu 20.04.5 LTS   5.15.0-52-generic   docker://20.10.21
+$ k get pods -o wide | grep -E "bpf1|bpf3"
+calico-bgp-fullmesh-ndn9h   1/1     Running   0          4m38s   10.244.179.130   bpf3   <none>           <none>
+calico-bgp-fullmesh-pwhq4   1/1     Running   0          4m32s   10.244.11.64     bpf1   <none>           <none>
+
+$ k exec -it calico-bgp-fullmesh-pwhq4 -- ping -c 1 10.244.179.130
+
+-----------------------------------------------------------------------------------------------------
+Step1: Pod_$(BPF1) ---> BPF1_Node:
+-----------------------------------------------------------------------------------------------------
+When do the ping at the pod flannel-vxlan-ckftt, it will triger the routing quary logical:
+$ k exec -it calico-bgp-fullmesh-pwhq4 -- bash 
+bash-5.1# route -n 
+Kernel IP routing table
+Destination     Gateway         Genmask         Flags Metric Ref    Use Iface
+0.0.0.0         169.254.1.1     0.0.0.0         UG    0      0        0 eth0 // match this table, the next-hop is 169.254.1.1.
+169.254.1.1     0.0.0.0         255.255.255.255 UH    0      0        0 eth0
+bash-5.1# 
+For this table, it's different with the previous CNI(like flannel).Because we can not find the ip at the whole host. 
+
+FAQ: So, how we send the packet to the next-hop?
+Let's review the packet encap's procedure to the next-hop.
+We need S_IP  S_MAC  D_IP D_MAC.
+Okay, we already with the S_IP S_MAC  D_IP, but don't have the D_MAC. At the L3's network, the D_MAC is the next-hop's MAC, so we need find the 169.254.1.1's MAC.
+We can get some clue from Calico's Offical website.{Calico FAQ: https://projectcalico.docs.tigera.io/reference/faq}
+```
+Why can’t I see the 169.254.1.1 address mentioned above on my host?
+Calico tries hard to avoid interfering with any other configuration on the host. Rather than adding the gateway address to the host side of each workload interface, Calico sets the proxy_arp flag on the interface. This makes the host behave like a gateway, responding to ARPs for 169.254.1.1 without having to actually allocate the IP address to the interface.
+```
+Okay,From the above: we can see that a tech which called proxy_arp. So, there is another question, what's the proxy_arp?
+FAQ: what's the proxy_arp?
+Proxy_ARP which is the ARP Proxy.So,it's used to response the ARP.(But the additional ability always the additional configuration to achieve.)
+```
+Proxy ARP is a technique by which a proxy server on a given network answers the Address Resolution Protocol (ARP) queries for an IP address that is not on that network. The proxy is aware of the location of the traffic's destination and offers its own MAC address as the (ostensibly final) destination.[1] The traffic directed to the proxy address is then typically routed by the proxy to the intended destination via another interface or via a tunnel.
+
+The process, which results in the proxy server responding with its own MAC address to an ARP request for a different IP address for proxying purposes, is sometimes referred to as publishing.
+```
+FAQ: How to enable the Proxy ARP?
+There are 2 level view,one at the global and another at the specifec interface, we can do at the interface view.
+root@bpf1:/proc/sys/net/ipv4/conf/cali4525d2a0b7b# pwd
+/proc/sys/net/ipv4/conf/cali4525d2a0b7b
+root@bpf1:/proc/sys/net/ipv4/conf/cali4525d2a0b7b# cat proxy_arp  // we can enable the it by set the proxy_arp from 0 to 1
+1
+root@bpf1:/proc/sys/net/ipv4/conf/cali4525d2a0b7b# 
+Okay, we are know how to get the DST_MAC. We can encap the patket into the target interface(veth which at the ROOT NS side.)
+We can use tcpdump to capture the packet:
+$ tcpdump -pne -i eth0               
+tcpdump: verbose output suppressed, use -v[v]... for full protocol decode
+listening on eth0, link-type EN10MB (Ethernet), snapshot length 262144 bytes
+12:56:02.015798 52:60:db:25:bc:8a > ff:ff:ff:ff:ff:ff, ethertype ARP (0x0806), length 42: Request who-has 169.254.1.1 tell 10.244.11.65, length 28
+12:56:02.015813 ee:ee:ee:ee:ee:ee > 52:60:db:25:bc:8a, ethertype ARP (0x0806), length 42: Reply 10.1.1.1 is-at ee:ee:ee:ee:ee:ee, length 28 // DST_MAC!!!
+12:56:02.015814 52:60:db:25:bc:8a > ee:ee:ee:ee:ee:ee, ethertype IPv4 (0x0800), length 98: 10.244.11.65 > 10.244.179.129: ICMP echo request, id 155, seq 0, length 64
+12:56:02.016277 ee:ee:ee:ee:ee:ee > 52:60:db:25:bc:8a, ethertype IPv4 (0x0800), length 98: 10.244.179.129 > 10.244.11.65: ICMP echo reply, id 155, seq 0, length 64
+
+From the pacp, we can see that the DST_MAC is 169.254.1.1 is-at ee:ee:ee:ee:ee:ee. we can find the there are others interface which with ee:ee:ee:ee:ee:ee in the ROOT NSat the same time. So,is it cause duplicate?
+FAQ: So,is it cause duplicate?
+FAQ: {Why do all cali* interfaces have the MAC address ee:ee:ee:ee:ee:ee?}[https://projectcalico.docs.tigera.io/reference/faq]
+In some setups the kernel is unable to generate a persistent MAC address and so Calico assigns a MAC address itself. Since Calico uses point-to-point routed interfaces, traffic does not reach the data link layer so the MAC Address is never used and can therefore be the same for all the cali* interfaces.
+
+It's very important. traffic does not reach the data link layer so the MAC Address is never used and can therefore be the same for all the cali* interfaces.{In fact, the MAC address, if it is not duplicate at a boradcast domian, it's will no influence.}
+
+!!!{[But, if the link layer is not prase, can we remove it from the packet and only with the ip header in the patcket. Maybe,it can. but We are always expect the packet  which from the host(pod) should be with ip and mac header. so you can have try.!!]}
+
+And with this mode, all the traffic which from pod to host do the L3's logical. The Flannel CNI which is the L2's logical. 
+Calico  CNI ---  L3 (Routing Mode)
+Flannel CNI ---  L2 (Bridge  Mode)
+
+
+-----------------------------------------------------------------------------------------------------
+Step2: ROOT NS handle the packet: S_IP: 10.244.11.64 D_IP: 10.244.179.130
+-----------------------------------------------------------------------------------------------------
+When the packet send to the ROOT NS. how to deal? Rourting/FDB/netfilter? We are always use the routing logical
+$ route -n 
+Kernel IP routing table
+Destination     Gateway         Genmask         Flags Metric Ref    Use Iface
+0.0.0.0         192.168.2.1     0.0.0.0         UG    100    0        0 ens160
+10.244.11.64    0.0.0.0         255.255.255.255 UH    0      0        0 cali28f40985dd7
+10.244.11.64    0.0.0.0         255.255.255.192 U     0      0        0 *
+10.244.179.128  192.168.2.73    255.255.255.192 UG    0      0        0 ens160  // match this table. The outgoing interface is ens160.
+10.244.230.0    192.168.2.72    255.255.255.192 UG    0      0        0 ens160
+169.254.0.0     0.0.0.0         255.255.0.0     U     1000   0        0 ens160
+172.17.0.0      0.0.0.0         255.255.0.0     U     0      0        0 docker0
+192.168.2.0     0.0.0.0         255.255.255.0   U     100    0        0 ens160
+
+In fact, the BGP RR and BGP Fullmesh mode are based on routing logical. So, This logical is simple for us now, but how the routing table are generated, it should be make clearlly. 
+
+FAQ1: What's BPG?
+边界网关协议BGP（Border Gateway Protocol）是一种实现自治系统AS（Autonomous System）之间的路由可达，并选择最佳路由的距离矢量路由协议。早期发布的三个版本分别是BGP-1、BGP-2和BGP-3，1994年开始使用BGP-4，2006年之后单播IPv4网络使用的版本是BGP-4，其他网络（如IPv6等）使用的版本是MP-BGP。
+
+MP-BGP是对BGP-4进行了扩展，来达到在不同网络中应用的目的，BGP-4原有的消息机制和路由机制并没有改变。MP-BGP在IPv6单播网络上的应用称为BGP4+，在IPv4组播网络上的应用称为MBGP（Multicast BGP）。
+目的
+为方便管理规模不断扩大的网络，网络被分成了不同的自治系统。1982年，外部网关协议EGP（Exterior Gateway Protocol）被用于实现在AS之间动态交换路由信息。但是EGP设计得比较简单，只发布网络可达的路由信息，而不对路由信息进行优选，同时也没有考虑环路避免等问题，很快就无法满足网络管理的要求。
+
+BGP是为取代最初的EGP而设计的另一种外部网关协议。不同于最初的EGP，BGP能够进行路由优选、避免路由环路、更高效率的传递路由和维护大量的路由信息。
+
+虽然BGP用于在AS之间传递路由信息，但并不是所有AS之间传递路由信息都需要运行BGP。比如在数据中心上行的连入Internet的出口上，为了避免Internet海量路由对数据中心内部网络的影响，设备采用静态路由代替BGP与外部网络通信。
+
+
+
+
+
+---------------------------------------------------------------------------------------------------------------
+Step3: Demo the Proxy ARP mode
+---------------------------------------------------------------------------------------------------------------
+--------------  
+|            |      
+| 1.1.1.2/24 |     
+|    ns1     |                     // man ip-route
+|     |      |      
+--------------
+| default gw | gw: 169.254.1.1/24  // man ip-route
+------|-------     
+   ens160           
+      |                   
+      ----------|                  // SNAT
+192.168.2.71    |
+                |
+         114.114.114.114      
+
+$ BPF1
+ip netns a ns1
+ip l a veth type veth peer name c-eth0
+ip l s veth up
+
+ip l s c-eth0 netns ns1
+ip netns exec ns1 ip l s c-eth0 up
+ip netns exec ns1 ip a a 1.1.1.2/24 dev c-eth0
+ip netns exec ns1 ip l s lo up
+ip netns exec ns1 ip r a 169.254.1.1 dev c-eth0 scope link   // Details can be found: firefox ../4-reference/1-路由条目的意义_51CTO博客_路由条目.html
+ip netns exec ns1 ip r a default via 169.254.1.1 dev c-eth0  // Details can be found: firefox ../4-reference/1-路由条目的意义_51CTO博客_路由条目.html
+
+
+ip netns exec ns1 ping -c 1 114.114.114.114
+PING 114.114.114.114 (114.114.114.114) 56(84) bytes of data.
+From 1.1.1.2 icmp_seq=1 Destination Host Unreachable
+Need enable the Proxy_ARP at veth interface at ROOT NS side:
+
+$ echo 1 > /proc/sys/net/ipv4/conf/veth/proxy_arp        // Enable the Proxy_ARP for veth interface
+
+// After enable the Proxy_ARP, it's still can't ping the 114.114.114.114, When capture at the veth interface, we can see the ARP Request,but no Reply.
+$ tcpdump -pne -i veth
+tcpdump: verbose output suppressed, use -v or -vv for full protocol decode
+listening on veth, link-type EN10MB (Ethernet), capture size 262144 bytes
+22:21:16.445413 c6:a8:87:40:6d:6b > ff:ff:ff:ff:ff:ff, ethertype ARP (0x0806), length 42: Request who-has 169.254.1.1 tell 1.1.1.2, length 28
+22:21:17.462047 c6:a8:87:40:6d:6b > ff:ff:ff:ff:ff:ff, ethertype ARP (0x0806), length 42: Request who-has 169.254.1.1 tell 1.1.1.2, length 28
+$ ip r a 1.1.1.2 dev veth scope link                     // Tel the ROOT NS how to reach to the 1.1.1.2/32 
+// Details can be found: firefox ../4-reference/1-路由条目的意义_51CTO博客_路由条目.html
+PING 114.114.114.114 (114.114.114.114) 56(84) bytes of data.
+From 1.1.1.2 icmp_seq=1 Destination Host Unreachable
+
+// Add the SNAT
+$ iptables -t nat -A POSTROUTING -s 1.1.0.0/16  -j MASQUERADE
+
+$ ip netns exec ns1 ping -c 1 114.114.114.114
+PING 114.114.114.114 (114.114.114.114) 56(84) bytes of data.
+64 bytes from 114.114.114.114: icmp_seq=1 ttl=65 time=17.3 ms
+
+
+
+---------------------------------------------------------------------------------------------------------------
+Step4: Demo the IPIP mode
+---------------------------------------------------------------------------------------------------------------
+--------------       --------------
+|            |       |            |
+| 1.1.1.1/24 |       | 1.1.2.1/24 |
+|   ipip0    |       |   ipip0    |
+|     |      |       |     |      |
+|     |      |       |     |      |
+------|-------       ------|-------
+   ens160                ens160
+      |                    |
+      ----------------------
+192.168.2.71          192.168.2.73
+$ BPF1 Node:
+ip l a name ipip0 type ipip local 192.168.2.71 remote 192.168.2.73
+ip l s ipip0 up
+ip a a 1.1.1.1/24 dev ipip0
+ip r a 1.1.2.0/24 dev ipip0
+
+$ BPF3 Node:
+ip l a name ipip0 type ipip local 192.168.2.73 remote 192.168.2.71
+ip l s ipip0 up
+ip a a 1.1.2.1/24 dev ipip0 
+ip r a 1.1.1.0/24 dev ipip0
+
+wireshark ./ipip0-ens160.cap
+
