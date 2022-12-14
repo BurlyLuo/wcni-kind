@@ -1,0 +1,214 @@
+{
+  "name": "calico-ipip",
+  "type": "clab",
+  "clab": {
+    "config": {
+      "prefix": "clab",
+      "mgmt": {
+        "network": "clab",
+        "bridge": "br-5193e33f95a1",
+        "ipv4-subnet": "172.20.20.0/24",
+        "ipv4-gw": "172.20.20.1",
+        "ipv6-subnet": "2001:172:20:20::/64",
+        "ipv6-gw": "2001:172:20:20::1",
+        "mtu": "1500",
+        "external-access": true
+      }
+    }
+  },
+  "nodes": {
+    "br-pool0": {
+      "index": "0",
+      "shortname": "br-pool0",
+      "longname": "clab-calico-ipip-br-pool0",
+      "fqdn": "br-pool0.calico-ipip.io",
+      "group": "",
+      "labdir": "/root/wcni/muticni/2-kind-multus-macvlan-sbr/clab-calico-ipip/br-pool0",
+      "kind": "bridge",
+      "image": "",
+      "mgmt-net": "",
+      "mgmt-intf": "",
+      "mgmt-ipv4-address": "",
+      "mgmt-ipv4-prefix-length": 0,
+      "mgmt-ipv6-address": "",
+      "mgmt-ipv6-prefix-length": 0,
+      "mac-address": "",
+      "labels": {
+        "clab-mgmt-net-bridge": "br-5193e33f95a1",
+        "clab-node-group": "",
+        "clab-node-kind": "bridge",
+        "clab-node-lab-dir": "/root/wcni/muticni/2-kind-multus-macvlan-sbr/clab-calico-ipip/br-pool0",
+        "clab-node-name": "br-pool0",
+        "clab-node-type": "",
+        "clab-topo-file": "/root/wcni/muticni/2-kind-multus-macvlan-sbr/clab.yaml",
+        "containerlab": "calico-ipip"
+      }
+    },
+    "gw0": {
+      "index": "1",
+      "shortname": "gw0",
+      "longname": "clab-calico-ipip-gw0",
+      "fqdn": "gw0.calico-ipip.io",
+      "group": "",
+      "labdir": "/root/wcni/muticni/2-kind-multus-macvlan-sbr/clab-calico-ipip/gw0",
+      "kind": "linux",
+      "image": "192.168.2.100:5000/vyos/vyos:1.2.8",
+      "mgmt-net": "",
+      "mgmt-intf": "",
+      "mgmt-ipv4-address": "172.20.20.2",
+      "mgmt-ipv4-prefix-length": 24,
+      "mgmt-ipv6-address": "2001:172:20:20::2",
+      "mgmt-ipv6-prefix-length": 64,
+      "mac-address": "",
+      "labels": {
+        "clab-mgmt-net-bridge": "br-5193e33f95a1",
+        "clab-node-group": "",
+        "clab-node-kind": "linux",
+        "clab-node-lab-dir": "/root/wcni/muticni/2-kind-multus-macvlan-sbr/clab-calico-ipip/gw0",
+        "clab-node-name": "gw0",
+        "clab-node-type": "",
+        "clab-topo-file": "/root/wcni/muticni/2-kind-multus-macvlan-sbr/clab.yaml",
+        "containerlab": "calico-ipip"
+      }
+    },
+    "server1": {
+      "index": "2",
+      "shortname": "server1",
+      "longname": "clab-calico-ipip-server1",
+      "fqdn": "server1.calico-ipip.io",
+      "group": "",
+      "labdir": "/root/wcni/muticni/2-kind-multus-macvlan-sbr/clab-calico-ipip/server1",
+      "kind": "linux",
+      "image": "192.168.2.100:5000/nettool",
+      "mgmt-net": "",
+      "mgmt-intf": "",
+      "mgmt-ipv4-address": "",
+      "mgmt-ipv4-prefix-length": 0,
+      "mgmt-ipv6-address": "",
+      "mgmt-ipv6-prefix-length": 0,
+      "mac-address": "",
+      "labels": {
+        "clab-mgmt-net-bridge": "br-5193e33f95a1",
+        "clab-node-group": "",
+        "clab-node-kind": "linux",
+        "clab-node-lab-dir": "/root/wcni/muticni/2-kind-multus-macvlan-sbr/clab-calico-ipip/server1",
+        "clab-node-name": "server1",
+        "clab-node-type": "",
+        "clab-topo-file": "/root/wcni/muticni/2-kind-multus-macvlan-sbr/clab.yaml",
+        "containerlab": "calico-ipip"
+      }
+    },
+    "server2": {
+      "index": "3",
+      "shortname": "server2",
+      "longname": "clab-calico-ipip-server2",
+      "fqdn": "server2.calico-ipip.io",
+      "group": "",
+      "labdir": "/root/wcni/muticni/2-kind-multus-macvlan-sbr/clab-calico-ipip/server2",
+      "kind": "linux",
+      "image": "192.168.2.100:5000/nettool",
+      "mgmt-net": "",
+      "mgmt-intf": "",
+      "mgmt-ipv4-address": "",
+      "mgmt-ipv4-prefix-length": 0,
+      "mgmt-ipv6-address": "",
+      "mgmt-ipv6-prefix-length": 0,
+      "mac-address": "",
+      "labels": {
+        "clab-mgmt-net-bridge": "br-5193e33f95a1",
+        "clab-node-group": "",
+        "clab-node-kind": "linux",
+        "clab-node-lab-dir": "/root/wcni/muticni/2-kind-multus-macvlan-sbr/clab-calico-ipip/server2",
+        "clab-node-name": "server2",
+        "clab-node-type": "",
+        "clab-topo-file": "/root/wcni/muticni/2-kind-multus-macvlan-sbr/clab.yaml",
+        "containerlab": "calico-ipip"
+      }
+    },
+    "server3": {
+      "index": "4",
+      "shortname": "server3",
+      "longname": "clab-calico-ipip-server3",
+      "fqdn": "server3.calico-ipip.io",
+      "group": "",
+      "labdir": "/root/wcni/muticni/2-kind-multus-macvlan-sbr/clab-calico-ipip/server3",
+      "kind": "linux",
+      "image": "192.168.2.100:5000/nettool",
+      "mgmt-net": "",
+      "mgmt-intf": "",
+      "mgmt-ipv4-address": "",
+      "mgmt-ipv4-prefix-length": 0,
+      "mgmt-ipv6-address": "",
+      "mgmt-ipv6-prefix-length": 0,
+      "mac-address": "",
+      "labels": {
+        "clab-mgmt-net-bridge": "br-5193e33f95a1",
+        "clab-node-group": "",
+        "clab-node-kind": "linux",
+        "clab-node-lab-dir": "/root/wcni/muticni/2-kind-multus-macvlan-sbr/clab-calico-ipip/server3",
+        "clab-node-name": "server3",
+        "clab-node-type": "",
+        "clab-topo-file": "/root/wcni/muticni/2-kind-multus-macvlan-sbr/clab.yaml",
+        "containerlab": "calico-ipip"
+      }
+    }
+  },
+  "links": [
+    {
+      "a": {
+        "node": "br-pool0",
+        "interface": "br-pool0-net0",
+        "mac": "aa:c1:ab:e5:ce:b2",
+        "peer": "z"
+      },
+      "z": {
+        "node": "server1",
+        "interface": "net0",
+        "mac": "aa:c1:ab:4f:d0:be",
+        "peer": "a"
+      }
+    },
+    {
+      "a": {
+        "node": "br-pool0",
+        "interface": "br-pool0-net1",
+        "mac": "aa:c1:ab:e2:5d:0c",
+        "peer": "z"
+      },
+      "z": {
+        "node": "server2",
+        "interface": "net0",
+        "mac": "aa:c1:ab:66:af:b0",
+        "peer": "a"
+      }
+    },
+    {
+      "a": {
+        "node": "br-pool0",
+        "interface": "br-pool0-net2",
+        "mac": "aa:c1:ab:bf:0c:7d",
+        "peer": "z"
+      },
+      "z": {
+        "node": "server3",
+        "interface": "net0",
+        "mac": "aa:c1:ab:60:6c:60",
+        "peer": "a"
+      }
+    },
+    {
+      "a": {
+        "node": "gw0",
+        "interface": "eth1",
+        "mac": "aa:c1:ab:d2:c2:80",
+        "peer": "z"
+      },
+      "z": {
+        "node": "br-pool0",
+        "interface": "br-pool0-net3",
+        "mac": "aa:c1:ab:14:0b:88",
+        "peer": "a"
+      }
+    }
+  ]
+}
