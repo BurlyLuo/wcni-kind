@@ -1,0 +1,88 @@
+$TTL 10
+$ORIGIN sha-it-core.mavenir.com.
+@         IN      SOA     ns1.sha-it-core.mavenir.com. root.ns1.sha-it-core.mavenir.com. (
+                                203053026  ; serial
+                                3600       ; refresh (1 hour)
+                                900        ; retry (15 minutes)
+                                1209600    ; expire (1 second)
+                                3600       ; minimum (1 hour)
+                                )
+@         IN      NS      ns1
+ns1		  IN	  A		172.16.33.41
+;icscf61  IN      A       10.2.13.24
+;scscf61  IN      A       10.2.13.24
+;scscf    IN      A       10.2.13.24
+
+icscf61   IN      AAAA      fcff:172:16:227::9104
+scscf     IN      AAAA      fcff:172:16:227::9104
+scscf61   IN      AAAA      fcff:172:16:227::9104
+
+;icscf62   IN      A       10.2.155.22
+;icscf63   IN      A       10.2.155.23
+;icscf64   IN      A       10.2.155.24
+;icscf65   IN      A       10.2.155.25
+;icscf66   IN      A       10.2.155.26
+;icscf67   IN      A       10.2.155.27
+;icscf68   IN      A       10.2.155.28
+;icscf69   IN      A       10.2.155.29
+
+;icscf62   IN      A       10.2.154.32
+;icscf63   IN      A       10.2.154.33
+;icscf64   IN      A       10.2.154.34
+;icscf65   IN      A       10.2.154.35
+;icscf66   IN      A       10.2.154.36
+;icscf67   IN      A       10.2.154.37
+;icscf68   IN      A       10.2.154.38
+;icscf69   IN      A       10.2.154.39
+
+pcrf                  IN      A       10.2.10.32
+ibcf-mwmx-104         IN      A       10.2.148.124
+atcf214               IN      A       10.2.26.210
+pravite-e2e324-pcscf  IN      A       10.2.26.210
+ecscf45v              IN      A       10.2.26.210
+eatfvm45              IN      A       10.2.26.212
+ue2                   IN      A       10.2.13.30
+ue2                   IN      AAAA      2008::2068
+simutas               IN      AAAA      fcff:172:16:227::9106
+
+
+_sip._udp        IN  SRV 10 100 5070 icscf61.sha-it-core.mavenir.com.
+;_sip._udp       IN  SRV 20 100 5072 icscf62.sha-it-core.mavenir.com.
+;_sip._udp       IN  SRV 30 100 5073 icscf63.sha-it-core.mavenir.com.
+;_sip._udp       IN  SRV 40 100 5074 icscf64.sha-it-core.mavenir.com.
+;_sip._udp       IN  SRV 50 100 5075 icscf65.sha-it-core.mavenir.com.
+;_sip._udp       IN  SRV 60 100 5076 icscf66.sha-it-core.mavenir.com.
+;_sip._udp       IN  SRV 70 100 5077 icscf67.sha-it-core.mavenir.com.
+;_sip._udp       IN  SRV 80 100 5078 icscf68.sha-it-core.mavenir.com.
+;_sip._udp       IN  SRV 90 100 5079 icscf69.sha-it-core.mavenir.com.
+
+;_sip._tcp       IN  SRV 10 100 5070 icscf61.sha-it-core.mavenir.com.
+;_sip._tcp       IN  SRV 20 100 5072 icscf62.sha-it-core.mavenir.com.
+;_sip._tcp       IN  SRV 30 100 5073 icscf63.sha-it-core.mavenir.com.
+;_sip._tcp       IN  SRV 40 100 5074 icscf64.sha-it-core.mavenir.com.
+;_sip._tcp       IN  SRV 50 100 5075 icscf65.sha-it-core.mavenir.com.
+;_sip._tcp       IN  SRV 60 100 5076 icscf66.sha-it-core.mavenir.com.
+;_sip._tcp       IN  SRV 70 100 5077 icscf67.sha-it-core.mavenir.com.
+;_sip._tcp       IN  SRV 80 100 5078 icscf68.sha-it-core.mavenir.com.
+;_sip._tcp       IN  SRV 90 100 5079 icscf69.sha-it-core.mavenir.com.
+
+
+_sip._udp.scscf61                         IN  SRV 1 1 5080 scscf61.sha-it.mavenir.com.
+_sip._udp.ibcf-mwmx-104                   IN  SRV 1 1 5042 ibcf-mwmx-104.sha-it-core.mavenir.com.
+_sip._udp.atcf214                         IN  SRV 1 1 5755 atcf115.sha-it-core.mavenir.com.
+_sip._udp.pravite-e2e324-pcscf            IN  SRV 1 1 5062 pravite-e2e124-pcscf.sha-it-core.mavenir.com.
+_sip._udp.pravite-e2e324-pcscf            IN  SRV 1 1 5080 ecscf45v.sha-it-core.mavenir.com.
+_sip._udp.eatfvm45                        IN  SRV 1 1 5066 eatfvm45.sha-it-core.mavenir.com.
+_sip._udp.simutas                         IN  SRV 1 1 5060 simutas.sha-it-core.mavenir.com.
+
+sha-it-core.mavenir.com.                  IN  NAPTR 10 100 "s" "SIP+D2U" "" _sip._udp.sha-it-core.mavenir.com.
+sha-it-core.mavenir.com.                  IN  NAPTR 10 100 "s" "SIP+D2T" "" _sip._tcp.sha-it-core.mavenir.com.
+
+
+scscf61.sha-it-core.mavenir.com.          IN  NAPTR 10 100 "s" "SIP+D2U" "" _sip._udp.scscf61.sha-it-core.mavenir.com.
+atcf214.sha-it-core.mavenir.com.          IN  NAPTR 10 100 "s" "SIP+D2U" "" _sip._udp.atcf115.sha-it-core.mavenir.com.
+pravite-e2e324-pcscf.sha-st.mavenir.com.  IN  NAPTR 10 100 "s" "SIP+D2U" "" _sip._udp.pravite-e2e124-pcscf.sha-st.mavenir.com.
+ecscf45v.sha-it-core.mavenir.com.         IN  NAPTR 10 100 "s" "SIP+D2U" "" _sip._udp.ecscf45v.sha-it-core.mavenir.com.
+eatfvm45.sha-it-core.mavenir.com.         IN  NAPTR 10 100 "s" "SIP+D2U" "" _sip._udp.eatfvm45.sha-it-core.mavenir.com.
+simutas.sha-it-core.mavenir.com.          IN  NAPTR 10 100 "s" "SIP+D2U" "" _sip._udp.simutas.sha-it-core.mavenir.com.
+
