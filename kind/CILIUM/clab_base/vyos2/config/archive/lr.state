@@ -1,0 +1,2 @@
+logrotate state -- version 2
+"/opt/vyatta/etc/config/archive/config.boot" 2022-7-25-4:30:15

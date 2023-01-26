@@ -1,0 +1,181 @@
+name: bgp-cplane-demo
+topology:
+  kinds:
+    linux:
+      cmd: bash
+  nodes:
+    spine0:
+      kind: linux
+      image: frrouting/frr:v8.2.2
+      labels:
+        app: frr
+      exec:
+      - iptables -t nat -A POSTROUTING -o eth0 -j MASQUERADE
+      - ip addr add 10.0.0.0/32 dev lo
+      - ip route add blackhole 10.0.0.0/8
+      - ip addr add 10.1.12.1/24 dev net0
+      - ip addr add 10.1.23.1/24 dev net1
+      - touch /etc/frr/vtysh.conf
+      - sed -i -e 's/bgpd=no/bgpd=yes/g' /etc/frr/daemons
+      - usr/lib/frr/frrinit.sh start
+      - >-
+         vtysh -c 'conf t'
+         -c 'router bgp 65000'
+         -c ' bgp router-id 10.0.0.0'
+         -c ' no bgp ebgp-requires-policy'
+         -c ' neighbor ROUTERS peer-group'
+         -c ' neighbor ROUTERS remote-as external'
+         -c ' neighbor ROUTERS default-originate'
+         -c ' neighbor net0 interface peer-group ROUTERS'
+         -c ' neighbor net1 interface peer-group ROUTERS'
+         -c ' address-family ipv4 unicast'
+         -c '   redistribute connected'
+         -c ' exit-address-family'
+         -c '!'
+            
+    spine1:
+      kind: linux
+      image: frrouting/frr:v8.2.2
+      labels:
+        app: frr
+      exec:
+      - iptables -t nat -A POSTROUTING -o eth0 -j MASQUERADE
+      - ip addr add 10.0.0.10/32 dev lo
+      - ip route add blackhole 10.0.0.0/8
+      - ip addr add 10.1.34.1/24 dev net0
+      - ip addr add 10.1.45.1/24 dev net1
+      - touch /etc/frr/vtysh.conf
+      - sed -i -e 's/bgpd=no/bgpd=yes/g' /etc/frr/daemons
+      - usr/lib/frr/frrinit.sh start
+      - >-
+         vtysh -c 'conf t'
+         -c 'router bgp 65001'
+         -c ' bgp router-id 10.0.0.10'
+         -c ' no bgp ebgp-requires-policy'
+         -c ' neighbor ROUTERS peer-group'
+         -c ' neighbor ROUTERS remote-as external'
+         -c ' neighbor ROUTERS default-originate'
+         -c ' neighbor net0 interface peer-group ROUTERS'
+         -c ' neighbor net1 interface peer-group ROUTERS'
+         -c ' address-family ipv4 unicast'
+         -c '   redistribute connected'
+         -c ' exit-address-family'
+         -c '!'
+
+          
+    leaf0:
+      kind: linux
+      image: frrouting/frr:v8.2.2  
+      labels:
+        app: frr
+      exec:
+      - ip link del eth0
+      - ip addr add 10.0.0.1/32 dev lo
+      - ip addr add 10.0.1.1/24 dev net1
+      - ip addr add 10.0.2.1/24 dev net2
+      - ip addr add 10.1.12.2/24 dev net0
+      - ip addr add 10.1.34.2/24 dev net3
+      - touch /etc/frr/vtysh.conf
+      - sed -i -e 's/bgpd=no/bgpd=yes/g' /etc/frr/daemons
+      - /usr/lib/frr/frrinit.sh start
+      - >-
+         vtysh -c 'conf t'
+         -c 'frr defaults datacenter'
+         -c 'router bgp 65010'
+         -c ' bgp router-id 10.0.0.1'
+         -c ' no bgp ebgp-requires-policy'
+         -c ' neighbor ROUTERS peer-group'
+         -c ' neighbor ROUTERS remote-as external'
+         -c ' neighbor SERVERS peer-group'
+         -c ' neighbor SERVERS remote-as internal'
+         -c ' neighbor net0 interface peer-group ROUTERS'
+         -c ' neighbor net3 interface peer-group ROUTERS'
+         -c ' neighbor 10.0.1.2 peer-group SERVERS'
+         -c ' neighbor 10.0.2.2 peer-group SERVERS'
+         -c ' address-family ipv4 unicast'
+         -c '   redistribute connected'
+         -c '  exit-address-family'
+         -c '!'
+          
+    
+
+    leaf1:
+      kind: linux
+      image: frrouting/frr:v8.2.2
+      labels:
+        app: frr
+      exec:
+      - ip link del eth0
+      - ip addr add 10.0.0.2/32 dev lo
+      - ip addr add 10.0.3.1/24 dev net1
+      - ip addr add 10.0.4.1/24 dev net2
+      - ip addr add 10.1.23.2/24 dev net0
+      - ip addr add 10.1.45.2/24 dev net3
+      - touch /etc/frr/vtysh.conf
+      - sed -i -e 's/bgpd=no/bgpd=yes/g' /etc/frr/daemons
+      - /usr/lib/frr/frrinit.sh start
+      - >-
+         vtysh -c 'conf t'
+         -c 'frr defaults datacenter'
+         -c 'router bgp 65011'
+         -c ' bgp router-id 10.0.0.2'
+         -c ' no bgp ebgp-requires-policy'
+         -c ' neighbor ROUTERS peer-group'
+         -c ' neighbor ROUTERS remote-as external'
+         -c ' neighbor SERVERS peer-group'
+         -c ' neighbor SERVERS remote-as internal'
+         -c ' neighbor net0 interface peer-group ROUTERS'
+         -c ' neighbor net3 interface peer-group ROUTERS'
+         -c ' neighbor 10.0.3.2 peer-group SERVERS'
+         -c ' neighbor 10.0.4.2 peer-group SERVERS'
+         -c ' address-family ipv4 unicast'
+         -c '   redistribute connected'
+         -c '  exit-address-family'
+         -c '!'      
+    
+    server0:
+      kind: linux
+      image: burlyluo/nettoolbox:latest
+      network-mode: container:control-plane
+      exec:
+      - ip addr add 10.0.1.2/24 dev net0
+      - ip route replace default via 10.0.1.1
+
+    server1:
+      kind: linux
+      image: burlyluo/nettoolbox:latest
+      network-mode: container:worker
+      exec:
+      - ip addr add 10.0.2.2/24 dev net0
+      - ip route replace default via 10.0.2.1
+
+    server2:
+      kind: linux
+      image: burlyluo/nettoolbox:latest
+      network-mode: container:worker2
+      exec:
+      - ip addr add 10.0.3.2/24 dev net0
+      - ip route replace default via 10.0.3.1
+
+    server3:
+      kind: linux
+      image: burlyluo/nettoolbox:latest
+      network-mode: container:worker3
+      exec:
+      - ip addr add 10.0.4.2/24 dev net0
+      - ip route replace default via 10.0.4.1
+
+
+  links:
+  - endpoints: ["spine0:net0", "leaf0:net0"]
+  - endpoints: ["spine0:net1", "leaf1:net0"]
+  - endpoints: ["spine1:net0", "leaf0:net3"]
+  - endpoints: ["spine1:net1", "leaf1:net3"]
+  - endpoints: ["leaf0:net1", "server0:net0"]
+  - endpoints: ["leaf0:net2", "server1:net0"]
+  - endpoints: ["leaf1:net1", "server2:net0"]
+  - endpoints: ["leaf1:net2", "server3:net0"]
+
+
+   
+

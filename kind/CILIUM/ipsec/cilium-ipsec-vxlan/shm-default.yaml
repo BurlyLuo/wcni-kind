@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  creationTimestamp: null
+  labels:
+    run: shm
+  name: shm
+spec:
+  containers:
+  - image: burlyluo/nettool
+    name: shm
+    securityContext:
+      privileged: true

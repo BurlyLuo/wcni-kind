@@ -1,0 +1,307 @@
+hostnamectl set-hostname k8s-1
+systemctl restart network
+echo "172.12.1.11 k8s-1" >> /etc/hosts
+echo "172.12.1.12 k8s-2" >> /etc/hosts
+ping k8s-1 -c 3
+yum -y install ntp
+systemctl restart ntpd
+systemctl enable ntpd
+cat <<EOF > /etc/yum.repos.d/kubernetes.repo
+[kubernetes]
+name=Kubernetes
+baseurl=https://mirrors.aliyun.com/kubernetes/yum/repos/kubernetes-el7-x86_64/
+enabled=1
+gpgcheck=1
+repo_gpgcheck=1
+gpgkey=https://mirrors.aliyun.com/kubernetes/yum/doc/yum-key.gpg https://mirrors.aliyun.com/kubernetes/yum/doc/rpm-package-key.gpg
+EOF
+
+
+echo "Stop Firewalld"
+systemctl stop firewalld
+systemctl disable firewalld
+ 
+# Set the parameter for selinux
+sed -ie 's/SELINUX=enforcing/SELINUX=disabled/g' /etc/selinux/config
+setenforce 0
+
+# set the system specific parameter
+echo "net.ipv4.ip_forward = 1" >> /etc/sysctl.conf
+echo "net.bridge.bridge-nf-call-ip6tables = 1" >>/etc/sysctl.conf
+echo "net.bridge.bridge-nf-call-iptables = 1" >>/etc/sysctl.conf
+echo "net.bridge.bridge-nf-call-arptables = 1" >>/etc/sysctl.conf
+swapoff -a
+sed -ri 's/.*swap.*/#&/' /etc/fstab
+sysctl  -p
+
+# If network can reach, do this:
+yum install -y yum-utils device-mapper-persistent-data lvm2
+yum-config-manager --add-repo http://mirrors.aliyun.com/docker-ce/linux/centos/docker-ce.repo
+yum -y install docker-ce
+mkdir -p /etc/docker/
+cat <<EOF > /etc/docker/daemon.json
+{
+  "registry-mirrors": ["https://cu2yw19m.mirror.aliyuncs.com"]
+}
+EOF
+
+
+cat <<EOF > /etc/docker/daemon.json
+{
+  "exec-opts": ["native.cgroupdriver=systemd"],
+  "registry-mirrors": ["https://cu2yw19m.mirror.aliyuncs.com"]
+}
+EOF
+
+systemctl daemon-reload;systemctl restart docker;systemctl enable docker
+
+
+
+systemctl daemon-reload
+systemctl restart docker
+systemctl enable docker
+
+# prepare the packages of kubelet-1.xx.0 kubectl-1.xx.0 kubeadm-1.xx.0
+yum install --downloadonly kubelet-1.20.5 --downloaddir=/root/kubelet.zip
+yum install --downloadonly kubeadm-1.20.5 --downloaddir=/root/kubeadm.zip
+yum install --downloadonly kubectl-1.20.5 --downloaddir=/root/kubectl.zip
+yum -y install kubeadm-1.20.5 kubectl-1.20.5 kubelet-1.20.5
+
+systemctl restart network && systemctl enable kubelet && systemctl restart kubelet
+cat /proc/sys/net/bridge/bridge-nf-call-iptables 
+cat /proc/sys/net/bridge/bridge-nf-call-ip6tables 
+
+apt install kubelet=1.20.5-00 kubeadm=1.20.5-00 kubectl=1.20.5-00 -y
+# switch off the swap
+echo "KUBELET_EXTRA_ARGS="--fail-swap-on=false"" > /etc/sysconfig/kubelet
+systemctl restart kubelet
+
+
+kubeadm init  --pod-network-cidr=10.244.0.0/16 --service-cidr=10.96.0.0/16 --ignore-preflight-errors=Swap
+kubeadm init --kubernetes-version=v1.20.0 --pod-network-cidr=10.244.0.0/16 --service-cidr=10.96.0.0/16 --ignore-preflight-errors=Swap
+kubeadm init --kubernetes-version=v1.20.5 --image-repository registry.aliyuncs.com/google_containers --pod-network-cidr=10.244.0.0/16 --service-cidr=10.96.0.0/16 
+kubeadm init --kubernetes-version=v1.20.5 --image-repository registry.aliyuncs.com/google_containers --pod-network-cidr=10.244.0.0/16 --skip-phases=addon/kube-proxy
+
+kubeadm init --kubernetes-version=v1.23.2 --image-repository registry.aliyuncs.com/google_containers --pod-network-cidr=10.244.0.0/16 --service-cidr=10.96.0.0/12 --ignore-preflight-errors=Swap
+
+
+kubeadm init --kubernetes-version=v1.23.2 --image-repository registry.aliyuncs.com/google_containers --pod-network-cidr=10.244.0.0/16 --service-cidr=10.96.0.0/12 --skip-phases=addon/kube-proxy --ignore-preflight-errors=Swap
+
+
+
+kubeadm init --kubernetes-version=v1.23.2 --image-repository registry.aliyuncs.com/google_containers --pod-network-cidr=10.244.0.0/16 --service-cidr=10.96.0.0/12  --ignore-preflight-errors=Swap --apiserver-advertise-address=192.168.21.10
+
+# prepare the kubernetes env
+mkdir -p $HOME/.kube
+sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
+sudo chown $(id -u):$(id -g) $HOME/.kube/config
+
+kubectl taint nodes --all node-role.kubernetes.io/master-
+kubectl apply -f /root/1.16.0/kube-flannel.yml
+
+sleep 90
+kubectl get nodes -o wide 
+kubectl get pods  -o wide -n=kube-system 
+kubectl run nettoolbox --image=burlyluo/nettoolbox:v1 --restart=Never
+kubectl get pods  -o wide  
+
+greeter-show-manual-login=true
+all-guest=false
+
+
+cat <<EOF > /etc/calico/calicoctl.cfg
+apiVersion: projectcalico.org/v3
+kind: CalicoAPIConfig
+metadata:
+spec:
+  datastoreType: "kubernetes"
+  kubeconfig: "/root/.kube/config"
+EOF
+#
+
+
+wget https://get.helm.sh/helm-v3.6.3-linux-amd64.tar.gz
+
+tar xzvf helm-v3.6.3-linux-amd64.tar.gz 
+mv linux-amd64/helm /usr/local/bin/
+helm repo add cilium https://helm.cilium.io/
+#
+
+
+# Cilium：
+helm repo add cilium https://helm.cilium.io/
+
+helm template cilium cilium/cilium --version 1.11.0 --namespace kube-system --set kubeProxyReplacement=strict  --set k8sServiceHost=192.168.2.31   --set hostServices.enabled=true --set k8sServicePort=6443 > hostReachable.yaml
+ helm template cilium cilium/cilium --version 1.12.0 --namespace kube-system --set kubeProxyReplacement=strict  --set k8sServiceHost=192.168.21.10  --set k8sServicePort=6443 > cilium_base.yaml
+
+
+helm template cilium ./cilium \
+  --namespace=kube-system \
+  --set cni.chainingMode=generic-veth \
+  --set cni.customConf=true \
+  --set cni.configMap=cni-configuration \
+  --set tunnel=disabled \
+  --set enableIPv4Masquerade=false \
+  --set enableIdentityMark=false > calico-cilium-chain.yaml
+  
+  
+#
+
+helm template cilium ./cilium \
+  --namespace=kube-system \
+  --set cluster.name=cluster1 \
+  --set cluster.id=1 \
+  --set k8sServiceHost=192.168.2.61 \
+  --set k8sServicePort=6443 \
+  --set ipam.operator.clusterPoolIPv4PodCIDR="172.0.0.0/16" > cluster1_bpf1.yaml
+#
+iptables trace:
+iptables -t raw -I PREROUTING -p tcp --dport 8080 -j LOG --log-prefix "target hit raw.prerouting>"
+iptables -t mangle -I PREROUTING -p tcp --dport 8080 -j LOG --log-prefix "target hit mangle.prerouting>"
+iptables -t nat -I PREROUTING -p tcp --dport 8080 -j LOG --log-prefix "tagert hit nat.prerouting>"
+iptables -t mangle -I INPUT -p tcp --dport 8080 -j LOG --log-prefix "target hit mangle.input>"
+iptables -t filter -I INPUT -p tcp --dport 8080 -j LOG --log-prefix "target hit filter.input>"
+iptables -t raw -I OUTPUT -p tcp --dport 8080 -j LOG --log-prefix "target hit raw.output>"
+iptables -t mangle -I OUTPUT -p tcp --dport 8080 -j LOG --log-prefix "target hit mangle.output>"
+iptables -t nat -I OUTPUT -p tcp --dport 8080 -j LOG  --log-prefix "target hit nat.output>"
+iptables -t filter -I OUTPUT -p tcp --dport 8080 -j LOG --log-prefix "target hit filter.output>"
+iptables -t mangle -I FORWARD -p tcp --dport 8080 -j LOG --log-prefix "target hit mangle.forward>"
+iptables -t filter -I FORWARD -p tcp --dport 8080 -j LOG --log-prefix "target hit filter.forward>"
+iptables -t mangle -I POSTROUTING -p tcp --dport 8080 -j LOG --log-prefix "target hit mangle.postrouting>"
+iptables -t nat -I POSTROUTING -p tcp --dport 8080 -j LOG --log-prefix "target hit nat.postrouting>"
+
+
+
+iptables -t raw -D PREROUTING -p tcp --dport 8080 -j LOG --log-prefix "target hit raw.prerouting>"
+iptables -t mangle -D PREROUTING -p tcp --dport 8080 -j LOG --log-prefix "target hit mangle.prerouting>"
+iptables -t nat -D PREROUTING -p tcp --dport 8080 -j LOG --log-prefix "tagert hit nat.prerouting>"
+iptables -t mangle -D INPUT -p tcp --dport 8080 -j LOG --log-prefix "target hit mangle.input>"
+iptables -t filter -D INPUT -p tcp --dport 8080 -j LOG --log-prefix "target hit filter.input>"
+iptables -t raw -D OUTPUT -p tcp --dport 8080 -j LOG --log-prefix "target hit raw.output>"
+iptables -t mangle -D OUTPUT -p tcp --dport 8080 -j LOG --log-prefix "target hit mangle.output>"
+iptables -t nat -D OUTPUT -p tcp --dport 8080 -j LOG  --log-prefix "target hit nat.output>"
+iptables -t filter -D OUTPUT -p tcp --dport 8080 -j LOG --log-prefix "target hit filter.output>"
+iptables -t mangle -D FORWARD -p tcp --dport 8080 -j LOG --log-prefix "target hit mangle.forward>"
+iptables -t filter -D FORWARD -p tcp --dport 8080 -j LOG --log-prefix "target hit filter.forward>"
+iptables -t mangle -D POSTROUTING -p tcp --dport 8080 -j LOG --log-prefix "target hit mangle.postrouting>"
+iptables -t nat -D POSTROUTING -p tcp --dport 8080 -j LOG --log-prefix "target hit nat.postrouting>"
+
+# 1.case 1:
+cat << EOF | kubectl apply -f -
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: cni
+  name: cni
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: cni
+  template:
+    metadata:
+      labels:
+        app: cni
+    spec:
+      containers:
+      - image: burlyluo/nettool
+        name: nettool
+      affinity:
+        podAntiAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+          - topologyKey: kubernetes.io/hostname
+            labelSelector:
+              matchExpressions:
+              - key: app
+                operator: In
+                values:
+                - cni
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: cnisvc
+spec:
+  type: NodePort
+  selector:
+    app: cni
+  ports:
+  - name: cni
+    port: 9494
+    targetPort: 9494
+    nodePort: 32000
+EOF
+
+kubectl delete deploy cni
+kubectl delete svc cnisvc
+
+
+# case2:
+cat << EOF | kubectl apply -f -
+apiVersion: v1
+kind: Pod
+metadata:
+  labels:
+    run: client
+  name: client
+spec:
+  containers:
+  - image: burlyluo/nettool:9494
+    name: client
+  dnsPolicy: ClusterFirst
+  restartPolicy: Always
+  nodeName: k8s-1
+
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  labels:
+    run: server
+  name: server
+spec:
+  containers:
+  - image: burlyluo/nettool:9495
+    name: server
+  dnsPolicy: ClusterFirst
+  restartPolicy: Always
+  nodeName: k8s-2
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: clientsvc
+spec:
+  type: NodePort
+  selector:
+    run: client
+  ports:
+  - name: cni
+    port: 9656
+    targetPort: 9494
+    nodePort: 32656
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: serversvc
+spec:
+  type: NodePort
+  selector:
+    run: server
+  ports:
+  - name: cni
+    port: 9767
+    targetPort: 9495
+    nodePort: 32767
+---
+EOF
+
+kubectl delete pods client
+kubectl delete pods server
+kubectl delete svc clientsvc
+kubectl delete svc serversvc
+
+# case3:

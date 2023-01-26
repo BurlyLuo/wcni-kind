@@ -1,0 +1,25 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: tls-nginx-ingress
+  namespace: sandbox
+  annotations:
+    kubernetes.io/ingress.class: "nginx"
+
+spec:
+  tls:
+  - hosts:
+      - https-example.foo.com
+    secretName: https-example.foo.com
+  rules:
+  - host: https-example.foo.com
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: nettool
+            port:
+              number: 80
+

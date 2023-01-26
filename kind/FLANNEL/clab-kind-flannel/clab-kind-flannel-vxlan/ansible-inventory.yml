@@ -1,0 +1,26 @@
+all:
+  children:
+    bridge:
+      hosts:
+        clab-kind-flannel-vxlan-br-leaf0:
+          ansible_host: 
+        clab-kind-flannel-vxlan-br-leaf1:
+          ansible_host: 
+    linux:
+      hosts:
+        clab-kind-flannel-vxlan-leaf0:
+          ansible_host: 172.20.20.3
+        clab-kind-flannel-vxlan-leaf1:
+          ansible_host: 172.20.20.4
+        clab-kind-flannel-vxlan-server1:
+          ansible_host: 
+        clab-kind-flannel-vxlan-server2:
+          ansible_host: 
+        clab-kind-flannel-vxlan-server3:
+          ansible_host: 
+        clab-kind-flannel-vxlan-server4:
+          ansible_host: 
+        clab-kind-flannel-vxlan-spine0:
+          ansible_host: 172.20.20.2
+        clab-kind-flannel-vxlan-spine1:
+          ansible_host: 172.20.20.5

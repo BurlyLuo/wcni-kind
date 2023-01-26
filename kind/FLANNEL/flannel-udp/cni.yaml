@@ -1,0 +1,34 @@
+apiVersion: apps/v1
+kind: DaemonSet
+metadata:
+  labels:
+    app: flannel-udp
+  name: flannel-udp
+spec:
+  selector:
+    matchLabels:
+      app: flannel-udp
+  template:
+    metadata:
+      labels:
+        app: flannel-udp
+    spec:
+      containers:
+      - image: burlyluo/nettool
+        name: nettoolbox
+        securityContext:
+          privileged: true
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: serversvc
+spec:
+  type: NodePort
+  selector:
+    app: flannel-udp
+  ports:
+  - name: cni
+    port: 8080
+    targetPort: 80
+    nodePort: 32000

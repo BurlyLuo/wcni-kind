@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: calico-bgp
+  name: calico-bgp
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: calico-bgp
+  template:
+    metadata:
+      labels:
+        app: calico-bgp
+    spec:
+      containers:
+      - image: localhost:5000/nettool
+        name: nettoolbox
+        securityContext:
+          privileged: true
+

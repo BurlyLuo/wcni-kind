@@ -1,0 +1,35 @@
+apiVersion: apps/v1
+kind: DaemonSet
+metadata:
+  labels:
+    app: ipip
+  name: ipip
+spec:
+  selector:
+    matchLabels:
+      app: ipip
+  template:
+    metadata:
+      labels:
+        app: ipip
+    spec:
+      containers:
+      - image: localhost:5000/nettool
+        name: nettoolbox
+        securityContext:
+          privileged: true
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: serversvc
+spec:
+  type: LoadBalancer 
+  selector:
+    app: ipip
+  ports:
+  - name: cni
+    port: 8080
+    targetPort: 80
+    #nodePort: 32000

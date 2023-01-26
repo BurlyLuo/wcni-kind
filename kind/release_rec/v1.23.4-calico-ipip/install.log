@@ -1,0 +1,437 @@
+root@hive:~/wspace/release_rec/v1.23.4-calico-ipip# sh 1-setup-calico-ipip-env.sh 
+date
+Sun 30 Oct 2022 05:27:56 PM CST
+
+# create registry container unless it already exists
+reg_name='kind-registry'
+reg_port='5000'
+if [ "$(docker inspect -f '{{.State.Running}}' "${reg_name}" 2>/dev/null || true)" != 'true' ]; then
+  docker run -d --restart=always -p "127.0.0.1:${reg_port}:5000" --name "${reg_name}" registry:2
+fi
+
+# create a cluster with the local registry enabled in containerd
+cat <<EOF | kind create cluster --name=calico-ipip --image=kindest/node:v1.23.4 --config=-
+kind: Cluster
+apiVersion: kind.x-k8s.io/v1alpha4
+networking:
+        disableDefaultCNI: true
+nodes:
+        - role: control-plane
+        - role: worker
+
+
+containerdConfigPatches:
+- |-
+  [plugins."io.containerd.grpc.v1.cri".registry.mirrors."localhost:${reg_port}"]
+    endpoint = ["http://${reg_name}:5000"]
+EOF
+Creating cluster "calico-ipip" ...
+ ✓ Ensuring node image (kindest/node:v1.23.4) 
+
+ ✓ Preparing nodes    
+ ✓ Writing configuration 
+
+ ✓ Starting control-plane ️ 
+ ✓ Installing StorageClass 
+
+ ✓ Joining worker nodes 
+
+                         Set kubectl context to "kind-calico-ipip"
+You can now use your cluster with:
+
+kubectl cluster-info --context kind-calico-ipip
+
+Have a nice day! 
+
+
+# connect the registry to the cluster network if not already connected
+if [ "$(docker inspect -f='{{json .NetworkSettings.Networks.kind}}' "${reg_name}")" = 'null' ]; then
+  docker network connect "kind" "${reg_name}"
+fi
+
+# Document the local registry
+# https://github.com/kubernetes/enhancements/tree/master/keps/sig-cluster-lifecycle/generic/1755-communicating-a-local-registry
+cat <<EOF | kubectl apply -f -
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: local-registry-hosting
+  namespace: kube-public
+data:
+  localRegistryHosting.v1: |
+    host: "localhost:${reg_port}"
+    help: "https://kind.sigs.k8s.io/docs/user/local-registry/"
+EOF
+configmap/local-registry-hosting created
+
+# prep the environment
+controller_node=$(kubectl get nodes --no-headers  -o custom-columns=NAME:.metadata.name | grep control-plane)
+kubectl taint nodes $controller_node node-role.kubernetes.io/master:NoSchedule-
+node/calico-ipip-control-plane untainted
+kubectl get nodes -owide 
+NAME                        STATUS     ROLES                  AGE   VERSION   INTERNAL-IP   EXTERNAL-IP   OS-IMAGE       KERNEL-VERSION      CONTAINER-RUNTIME
+calico-ipip-control-plane   NotReady   control-plane,master   33s   v1.23.4   172.18.0.3    <none>        Ubuntu 21.10   5.15.0-52-generic   containerd://1.5.10
+calico-ipip-worker          NotReady   <none>                 1s    v1.23.4   172.18.0.2    <none>        Ubuntu 21.10   5.15.0-52-generic   containerd://1.5.10
+
+# install CNI
+kubectl apply -f ./calico.yaml
+configmap/calico-config created
+customresourcedefinition.apiextensions.k8s.io/bgpconfigurations.crd.projectcalico.org created
+customresourcedefinition.apiextensions.k8s.io/bgppeers.crd.projectcalico.org created
+customresourcedefinition.apiextensions.k8s.io/blockaffinities.crd.projectcalico.org created
+customresourcedefinition.apiextensions.k8s.io/caliconodestatuses.crd.projectcalico.org created
+customresourcedefinition.apiextensions.k8s.io/clusterinformations.crd.projectcalico.org created
+customresourcedefinition.apiextensions.k8s.io/felixconfigurations.crd.projectcalico.org created
+customresourcedefinition.apiextensions.k8s.io/globalnetworkpolicies.crd.projectcalico.org created
+customresourcedefinition.apiextensions.k8s.io/globalnetworksets.crd.projectcalico.org created
+customresourcedefinition.apiextensions.k8s.io/hostendpoints.crd.projectcalico.org created
+customresourcedefinition.apiextensions.k8s.io/ipamblocks.crd.projectcalico.org created
+customresourcedefinition.apiextensions.k8s.io/ipamconfigs.crd.projectcalico.org created
+customresourcedefinition.apiextensions.k8s.io/ipamhandles.crd.projectcalico.org created
+customresourcedefinition.apiextensions.k8s.io/ippools.crd.projectcalico.org created
+customresourcedefinition.apiextensions.k8s.io/ipreservations.crd.projectcalico.org created
+customresourcedefinition.apiextensions.k8s.io/kubecontrollersconfigurations.crd.projectcalico.org created
+customresourcedefinition.apiextensions.k8s.io/networkpolicies.crd.projectcalico.org created
+customresourcedefinition.apiextensions.k8s.io/networksets.crd.projectcalico.org created
+clusterrole.rbac.authorization.k8s.io/calico-kube-controllers created
+clusterrolebinding.rbac.authorization.k8s.io/calico-kube-controllers created
+clusterrole.rbac.authorization.k8s.io/calico-node created
+clusterrolebinding.rbac.authorization.k8s.io/calico-node created
+daemonset.apps/calico-node created
+serviceaccount/calico-node created
+deployment.apps/calico-kube-controllers created
+serviceaccount/calico-kube-controllers created
+poddisruptionbudget.policy/calico-kube-controllers created
+
+# prep the necessary tools
+for i in $(docker ps  -a --format "table {{.Names}}" | grep calico-ipip);
+do 
+echo $i;
+docker cp /usr/bin/calicoctl $i:/usr/bin/calicoctl;
+docker cp /usr/bin/ping $i:/usr/bin/ping;
+docker exec -it $i bash -c "sed -i -e 's/jp.archive.ubuntu.com\|archive.ubuntu.com\|security.ubuntu.com/old-releases.ubuntu.com/g' /etc/apt/sources.list";
+docker exec -it $i bash -c "apt-get -y update >/dev/null && apt-get -y install net-tools tcpdump lrzsz >/dev/null";
+done
+calico-ipip-control-plane
+debconf: delaying package configuration, since apt-utils is not installed
+calico-ipip-worker
+debconf: delaying package configuration, since apt-utils is not installed
+
+# deploy test pods
+kubectl apply -f cni.yaml
+daemonset.apps/calico-ipip created
+service/serversvc created
+
+root@hive:~/wspace/release_rec/v1.23.4-calico-ipip# 
+
+
+
+
+NAMESPACE            NAME                                                READY   STATUS    RESTARTS   AGE    IP              NODE                        NOMINATED NODE   READINESS GATES
+default              calico-ipip-24p6z                                   1/1     Running   0          36s    10.244.51.197   calico-ipip-control-plane   <none>           <none>
+default              calico-ipip-fn5w2                                   1/1     Running   0          36s    10.244.79.1     calico-ipip-worker          <none>           <none>
+kube-system          calico-kube-controllers-6765f6f9cd-q8pd4            1/1     Running   0          72s    10.244.51.195   calico-ipip-control-plane   <none>           <none>
+kube-system          calico-node-dm4mr                                   1/1     Running   0          72s    172.18.0.3      calico-ipip-control-plane   <none>           <none>
+kube-system          calico-node-f8cw9                                   1/1     Running   0          72s    172.18.0.2      calico-ipip-worker          <none>           <none>
+kube-system          coredns-64897985d-s59px                             1/1     Running   0          87s    10.244.51.196   calico-ipip-control-plane   <none>           <none>
+kube-system          coredns-64897985d-xdmb4                             1/1     Running   0          87s    10.244.51.194   calico-ipip-control-plane   <none>           <none>
+kube-system          etcd-calico-ipip-control-plane                      1/1     Running   0          103s   172.18.0.3      calico-ipip-control-plane   <none>           <none>
+kube-system          kube-apiserver-calico-ipip-control-plane            1/1     Running   0          103s   172.18.0.3      calico-ipip-control-plane   <none>           <none>
+kube-system          kube-controller-manager-calico-ipip-control-plane   1/1     Running   0          103s   172.18.0.3      calico-ipip-control-plane   <none>           <none>
+kube-system          kube-proxy-bwktz                                    1/1     Running   0          73s    172.18.0.2      calico-ipip-worker          <none>           <none>
+kube-system          kube-proxy-cbs56                                    1/1     Running   0          87s    172.18.0.3      calico-ipip-control-plane   <none>           <none>
+kube-system          kube-scheduler-calico-ipip-control-plane            1/1     Running   0          101s   172.18.0.3      calico-ipip-control-plane   <none>           <none>
+local-path-storage   local-path-provisioner-5ddd94ff66-j2rf8             1/1     Running   0          87s    10.244.51.193   calico-ipip-control-plane   <none>           <none>
+Name:               calico-ipip-control-plane
+Roles:              control-plane,master
+Labels:             beta.kubernetes.io/arch=amd64
+                    beta.kubernetes.io/os=linux
+                    kubernetes.io/arch=amd64
+                    kubernetes.io/hostname=calico-ipip-control-plane
+                    kubernetes.io/os=linux
+                    node-role.kubernetes.io/control-plane=
+                    node-role.kubernetes.io/master=
+                    node.kubernetes.io/exclude-from-external-load-balancers=
+Annotations:        kubeadm.alpha.kubernetes.io/cri-socket: unix:///run/containerd/containerd.sock
+                    node.alpha.kubernetes.io/ttl: 0
+                    projectcalico.org/IPv4Address: 172.18.0.3/16
+                    projectcalico.org/IPv4IPIPTunnelAddr: 10.244.51.192
+                    volumes.kubernetes.io/controller-managed-attach-detach: true
+CreationTimestamp:  Sun, 30 Oct 2022 17:28:28 +0800
+Taints:             <none>
+Unschedulable:      false
+Lease:
+  HolderIdentity:  calico-ipip-control-plane
+  AcquireTime:     <unset>
+  RenewTime:       Sun, 30 Oct 2022 17:30:37 +0800
+Conditions:
+  Type                 Status  LastHeartbeatTime                 LastTransitionTime                Reason                       Message
+  ----                 ------  -----------------                 ------------------                ------                       -------
+  NetworkUnavailable   False   Sun, 30 Oct 2022 17:29:23 +0800   Sun, 30 Oct 2022 17:29:23 +0800   CalicoIsUp                   Calico is running on this node
+  MemoryPressure       False   Sun, 30 Oct 2022 17:30:04 +0800   Sun, 30 Oct 2022 17:28:26 +0800   KubeletHasSufficientMemory   kubelet has sufficient memory available
+  DiskPressure         False   Sun, 30 Oct 2022 17:30:04 +0800   Sun, 30 Oct 2022 17:28:26 +0800   KubeletHasNoDiskPressure     kubelet has no disk pressure
+  PIDPressure          False   Sun, 30 Oct 2022 17:30:04 +0800   Sun, 30 Oct 2022 17:28:26 +0800   KubeletHasSufficientPID      kubelet has sufficient PID available
+  Ready                True    Sun, 30 Oct 2022 17:30:04 +0800   Sun, 30 Oct 2022 17:29:12 +0800   KubeletReady                 kubelet is posting ready status
+Addresses:
+  InternalIP:  172.18.0.3
+  Hostname:    calico-ipip-control-plane
+Capacity:
+  cpu:                12
+  ephemeral-storage:  205320980Ki
+  hugepages-1Gi:      0
+  hugepages-2Mi:      0
+  memory:             16351080Ki
+  pods:               110
+Allocatable:
+  cpu:                12
+  ephemeral-storage:  205320980Ki
+  hugepages-1Gi:      0
+  hugepages-2Mi:      0
+  memory:             16351080Ki
+  pods:               110
+System Info:
+  Machine ID:                 ab13222baf1d4d82bddfc3d283388d70
+  System UUID:                76ff8581-c9c8-4ce6-a593-db2a3f759ad8
+  Boot ID:                    ab9355fc-5faf-429d-a499-596a628ece25
+  Kernel Version:             5.15.0-52-generic
+  OS Image:                   Ubuntu 21.10
+  Operating System:           linux
+  Architecture:               amd64
+  Container Runtime Version:  containerd://1.5.10
+  Kubelet Version:            v1.23.4
+  Kube-Proxy Version:         v1.23.4
+PodCIDR:                      10.244.0.0/24
+PodCIDRs:                     10.244.0.0/24
+ProviderID:                   kind://docker/calico-ipip/calico-ipip-control-plane
+Non-terminated Pods:          (11 in total)
+  Namespace                   Name                                                 CPU Requests  CPU Limits  Memory Requests  Memory Limits  Age
+  ---------                   ----                                                 ------------  ----------  ---------------  -------------  ---
+  default                     calico-ipip-24p6z                                    0 (0%)        0 (0%)      0 (0%)           0 (0%)         67s
+  kube-system                 calico-kube-controllers-6765f6f9cd-q8pd4             0 (0%)        0 (0%)      0 (0%)           0 (0%)         103s
+  kube-system                 calico-node-dm4mr                                    250m (2%)     0 (0%)      0 (0%)           0 (0%)         103s
+  kube-system                 coredns-64897985d-s59px                              100m (0%)     0 (0%)      70Mi (0%)        170Mi (1%)     118s
+  kube-system                 coredns-64897985d-xdmb4                              100m (0%)     0 (0%)      70Mi (0%)        170Mi (1%)     118s
+  kube-system                 etcd-calico-ipip-control-plane                       100m (0%)     0 (0%)      100Mi (0%)       0 (0%)         2m14s
+  kube-system                 kube-apiserver-calico-ipip-control-plane             250m (2%)     0 (0%)      0 (0%)           0 (0%)         2m14s
+  kube-system                 kube-controller-manager-calico-ipip-control-plane    200m (1%)     0 (0%)      0 (0%)           0 (0%)         2m14s
+  kube-system                 kube-proxy-cbs56                                     0 (0%)        0 (0%)      0 (0%)           0 (0%)         118s
+  kube-system                 kube-scheduler-calico-ipip-control-plane             100m (0%)     0 (0%)      0 (0%)           0 (0%)         2m12s
+  local-path-storage          local-path-provisioner-5ddd94ff66-j2rf8              0 (0%)        0 (0%)      0 (0%)           0 (0%)         118s
+Allocated resources:
+  (Total limits may be over 100 percent, i.e., overcommitted.)
+  Resource           Requests    Limits
+  --------           --------    ------
+  cpu                1100m (9%)  0 (0%)
+  memory             240Mi (1%)  340Mi (2%)
+  ephemeral-storage  0 (0%)      0 (0%)
+  hugepages-1Gi      0 (0%)      0 (0%)
+  hugepages-2Mi      0 (0%)      0 (0%)
+Events:
+  Type     Reason                                            Age                    From             Message
+  ----     ------                                            ----                   ----             -------
+  Warning  listen tcp4 :32000: bind: address already in use  67s                    kube-proxy       can't open port "nodePort for default/serversvc:cni" (:32000/tcp4), skipping it
+  Normal   Starting                                          116s                   kube-proxy       
+  Normal   Starting                                          2m19s                  kubelet          Starting kubelet.
+  Normal   NodeHasSufficientMemory                           2m19s (x4 over 2m19s)  kubelet          Node calico-ipip-control-plane status is now: NodeHasSufficientMemory
+  Normal   NodeHasNoDiskPressure                             2m19s (x3 over 2m19s)  kubelet          Node calico-ipip-control-plane status is now: NodeHasNoDiskPressure
+  Normal   NodeHasSufficientPID                              2m19s (x3 over 2m19s)  kubelet          Node calico-ipip-control-plane status is now: NodeHasSufficientPID
+  Normal   NodeAllocatableEnforced                           2m19s                  kubelet          Updated Node Allocatable limit across pods
+  Normal   NodeHasSufficientMemory                           2m12s                  kubelet          Node calico-ipip-control-plane status is now: NodeHasSufficientMemory
+  Normal   NodeHasNoDiskPressure                             2m12s                  kubelet          Node calico-ipip-control-plane status is now: NodeHasNoDiskPressure
+  Normal   NodeHasSufficientPID                              2m12s                  kubelet          Node calico-ipip-control-plane status is now: NodeHasSufficientPID
+  Normal   NodeAllocatableEnforced                           2m12s                  kubelet          Updated Node Allocatable limit across pods
+  Normal   Starting                                          2m12s                  kubelet          Starting kubelet.
+  Normal   RegisteredNode                                    118s                   node-controller  Node calico-ipip-control-plane event: Registered Node calico-ipip-control-plane in Controller
+  Normal   NodeReady                                         92s                    kubelet          Node calico-ipip-control-plane status is now: NodeReady
+
+
+Name:               calico-ipip-worker
+Roles:              <none>
+Labels:             beta.kubernetes.io/arch=amd64
+                    beta.kubernetes.io/os=linux
+                    kubernetes.io/arch=amd64
+                    kubernetes.io/hostname=calico-ipip-worker
+                    kubernetes.io/os=linux
+Annotations:        kubeadm.alpha.kubernetes.io/cri-socket: unix:///run/containerd/containerd.sock
+                    node.alpha.kubernetes.io/ttl: 0
+                    projectcalico.org/IPv4Address: 172.18.0.2/16
+                    projectcalico.org/IPv4IPIPTunnelAddr: 10.244.79.0
+                    volumes.kubernetes.io/controller-managed-attach-detach: true
+CreationTimestamp:  Sun, 30 Oct 2022 17:29:00 +0800
+Taints:             <none>
+Unschedulable:      false
+Lease:
+  HolderIdentity:  calico-ipip-worker
+  AcquireTime:     <unset>
+  RenewTime:       Sun, 30 Oct 2022 17:30:43 +0800
+Conditions:
+  Type                 Status  LastHeartbeatTime                 LastTransitionTime                Reason                       Message
+  ----                 ------  -----------------                 ------------------                ------                       -------
+  NetworkUnavailable   False   Sun, 30 Oct 2022 17:29:34 +0800   Sun, 30 Oct 2022 17:29:34 +0800   CalicoIsUp                   Calico is running on this node
+  MemoryPressure       False   Sun, 30 Oct 2022 17:29:51 +0800   Sun, 30 Oct 2022 17:29:00 +0800   KubeletHasSufficientMemory   kubelet has sufficient memory available
+  DiskPressure         False   Sun, 30 Oct 2022 17:29:51 +0800   Sun, 30 Oct 2022 17:29:00 +0800   KubeletHasNoDiskPressure     kubelet has no disk pressure
+  PIDPressure          False   Sun, 30 Oct 2022 17:29:51 +0800   Sun, 30 Oct 2022 17:29:00 +0800   KubeletHasSufficientPID      kubelet has sufficient PID available
+  Ready                True    Sun, 30 Oct 2022 17:29:51 +0800   Sun, 30 Oct 2022 17:29:31 +0800   KubeletReady                 kubelet is posting ready status
+Addresses:
+  InternalIP:  172.18.0.2
+  Hostname:    calico-ipip-worker
+Capacity:
+  cpu:                12
+  ephemeral-storage:  205320980Ki
+  hugepages-1Gi:      0
+  hugepages-2Mi:      0
+  memory:             16351080Ki
+  pods:               110
+Allocatable:
+  cpu:                12
+  ephemeral-storage:  205320980Ki
+  hugepages-1Gi:      0
+  hugepages-2Mi:      0
+  memory:             16351080Ki
+  pods:               110
+System Info:
+  Machine ID:                 6cf0eb38a1d049fe9811672392ba12ef
+  System UUID:                cf93c025-befb-4e58-856a-c98d3277a0f9
+  Boot ID:                    ab9355fc-5faf-429d-a499-596a628ece25
+  Kernel Version:             5.15.0-52-generic
+  OS Image:                   Ubuntu 21.10
+  Operating System:           linux
+  Architecture:               amd64
+  Container Runtime Version:  containerd://1.5.10
+  Kubelet Version:            v1.23.4
+  Kube-Proxy Version:         v1.23.4
+PodCIDR:                      10.244.1.0/24
+PodCIDRs:                     10.244.1.0/24
+ProviderID:                   kind://docker/calico-ipip/calico-ipip-worker
+Non-terminated Pods:          (3 in total)
+  Namespace                   Name                 CPU Requests  CPU Limits  Memory Requests  Memory Limits  Age
+  ---------                   ----                 ------------  ----------  ---------------  -------------  ---
+  default                     calico-ipip-fn5w2    0 (0%)        0 (0%)      0 (0%)           0 (0%)         67s
+  kube-system                 calico-node-f8cw9    250m (2%)     0 (0%)      0 (0%)           0 (0%)         103s
+  kube-system                 kube-proxy-bwktz     0 (0%)        0 (0%)      0 (0%)           0 (0%)         104s
+Allocated resources:
+  (Total limits may be over 100 percent, i.e., overcommitted.)
+  Resource           Requests   Limits
+  --------           --------   ------
+  cpu                250m (2%)  0 (0%)
+  memory             0 (0%)     0 (0%)
+  ephemeral-storage  0 (0%)     0 (0%)
+  hugepages-1Gi      0 (0%)     0 (0%)
+  hugepages-2Mi      0 (0%)     0 (0%)
+Events:
+  Type     Reason                                            Age                  From             Message
+  ----     ------                                            ----                 ----             -------
+  Normal   Starting                                          95s                  kube-proxy       
+  Warning  listen tcp4 :32000: bind: address already in use  67s                  kube-proxy       can't open port "nodePort for default/serversvc:cni" (:32000/tcp4), skipping it
+  Normal   NodeHasSufficientMemory                           104s (x8 over 117s)  kubelet          Node calico-ipip-worker status is now: NodeHasSufficientMemory
+  Normal   NodeHasNoDiskPressure                             104s (x8 over 117s)  kubelet          Node calico-ipip-worker status is now: NodeHasNoDiskPressure
+  Normal   RegisteredNode                                    103s                 node-controller  Node calico-ipip-worker event: Registered Node calico-ipip-worker in Controller
+NAMESPACE            LAST SEEN   TYPE      REASON                                             OBJECT                                          MESSAGE
+default              76s         Normal    Scheduled                                          pod/calico-ipip-24p6z                           Successfully assigned default/calico-ipip-24p6z to calico-ipip-control-plane
+default              76s         Normal    Pulling                                            pod/calico-ipip-24p6z                           Pulling image "localhost:5000/nettool"
+default              74s         Normal    Pulled                                             pod/calico-ipip-24p6z                           Successfully pulled image "localhost:5000/nettool" in 1.967420116s
+default              74s         Normal    Created                                            pod/calico-ipip-24p6z                           Created container nettoolbox
+default              74s         Normal    Started                                            pod/calico-ipip-24p6z                           Started container nettoolbox
+default              2m28s       Normal    Starting                                           node/calico-ipip-control-plane                  Starting kubelet.
+default              2m28s       Normal    NodeHasSufficientMemory                            node/calico-ipip-control-plane                  Node calico-ipip-control-plane status is now: NodeHasSufficientMemory
+default              2m28s       Normal    NodeHasNoDiskPressure                              node/calico-ipip-control-plane                  Node calico-ipip-control-plane status is now: NodeHasNoDiskPressure
+default              2m28s       Normal    NodeHasSufficientPID                               node/calico-ipip-control-plane                  Node calico-ipip-control-plane status is now: NodeHasSufficientPID
+default              2m28s       Normal    NodeAllocatableEnforced                            node/calico-ipip-control-plane                  Updated Node Allocatable limit across pods
+default              2m21s       Normal    Starting                                           node/calico-ipip-control-plane                  Starting kubelet.
+default              2m21s       Normal    NodeHasSufficientMemory                            node/calico-ipip-control-plane                  Node calico-ipip-control-plane status is now: NodeHasSufficientMemory
+default              2m21s       Normal    NodeHasNoDiskPressure                              node/calico-ipip-control-plane                  Node calico-ipip-control-plane status is now: NodeHasNoDiskPressure
+default              2m21s       Normal    NodeHasSufficientPID                               node/calico-ipip-control-plane                  Node calico-ipip-control-plane status is now: NodeHasSufficientPID
+default              2m21s       Normal    NodeAllocatableEnforced                            node/calico-ipip-control-plane                  Updated Node Allocatable limit across pods
+default              2m7s        Normal    RegisteredNode                                     node/calico-ipip-control-plane                  Node calico-ipip-control-plane event: Registered Node calico-ipip-control-plane in Controller
+default              2m5s        Normal    Starting                                           node/calico-ipip-control-plane                  
+default              101s        Normal    NodeReady                                          node/calico-ipip-control-plane                  Node calico-ipip-control-plane status is now: NodeReady
+default              75s         Warning   listen tcp4 :32000: bind: address already in use   node/calico-ipip-control-plane                  can't open port "nodePort for default/serversvc:cni" (:32000/tcp4), skipping it
+default              76s         Normal    Scheduled                                          pod/calico-ipip-fn5w2                           Successfully assigned default/calico-ipip-fn5w2 to calico-ipip-worker
+default              76s         Normal    Pulling                                            pod/calico-ipip-fn5w2                           Pulling image "localhost:5000/nettool"
+default              74s         Normal    Pulled                                             pod/calico-ipip-fn5w2                           Successfully pulled image "localhost:5000/nettool" in 1.905947075s
+default              74s         Normal    Created                                            pod/calico-ipip-fn5w2                           Created container nettoolbox
+default              74s         Normal    Started                                            pod/calico-ipip-fn5w2                           Started container nettoolbox
+default              113s        Normal    NodeHasSufficientMemory                            node/calico-ipip-worker                         Node calico-ipip-worker status is now: NodeHasSufficientMemory
+default              113s        Normal    NodeHasNoDiskPressure                              node/calico-ipip-worker                         Node calico-ipip-worker status is now: NodeHasNoDiskPressure
+default              112s        Normal    RegisteredNode                                     node/calico-ipip-worker                         Node calico-ipip-worker event: Registered Node calico-ipip-worker in Controller
+default              104s        Normal    Starting                                           node/calico-ipip-worker                         
+default              75s         Warning   listen tcp4 :32000: bind: address already in use   node/calico-ipip-worker                         can't open port "nodePort for default/serversvc:cni" (:32000/tcp4), skipping it
+default              76s         Normal    SuccessfulCreate                                   daemonset/calico-ipip                           Created pod: calico-ipip-24p6z
+default              76s         Normal    SuccessfulCreate                                   daemonset/calico-ipip                           Created pod: calico-ipip-fn5w2
+kube-system          112s        Warning   FailedScheduling                                   pod/calico-kube-controllers-6765f6f9cd-q8pd4    0/2 nodes are available: 2 node(s) had taint {node.kubernetes.io/not-ready: }, that the pod didn't tolerate.
+kube-system          98s         Normal    Scheduled                                          pod/calico-kube-controllers-6765f6f9cd-q8pd4    Successfully assigned kube-system/calico-kube-controllers-6765f6f9cd-q8pd4 to calico-ipip-control-plane
+kube-system          97s         Warning   FailedCreatePodSandBox                             pod/calico-kube-controllers-6765f6f9cd-q8pd4    Failed to create pod sandbox: rpc error: code = Unknown desc = failed to setup network for sandbox "f4a7daad272d911949f3c2e03cedc19b65b0d5a9859edc9cfe7a1e6e9ecac4ab": stat /var/lib/calico/nodename: no such file or directory: check that the calico/node container is running and has mounted /var/lib/calico/
+kube-system          82s         Normal    Pulling                                            pod/calico-kube-controllers-6765f6f9cd-q8pd4    Pulling image "localhost:5000/calico/kube-controllers:v3.23.2"
+kube-system          80s         Normal    Pulled                                             pod/calico-kube-controllers-6765f6f9cd-q8pd4    Successfully pulled image "localhost:5000/calico/kube-controllers:v3.23.2" in 1.828790077s
+kube-system          80s         Normal    Created                                            pod/calico-kube-controllers-6765f6f9cd-q8pd4    Created container calico-kube-controllers
+kube-system          80s         Normal    Started                                            pod/calico-kube-controllers-6765f6f9cd-q8pd4    Started container calico-kube-controllers
+kube-system          112s        Warning   FailedCreate                                       replicaset/calico-kube-controllers-6765f6f9cd   Error creating: pods "calico-kube-controllers-6765f6f9cd-" is forbidden: error looking up service account kube-system/calico-kube-controllers: serviceaccount "calico-kube-controllers" not found
+kube-system          112s        Normal    SuccessfulCreate                                   replicaset/calico-kube-controllers-6765f6f9cd   Created pod: calico-kube-controllers-6765f6f9cd-q8pd4
+kube-system          112s        Normal    ScalingReplicaSet                                  deployment/calico-kube-controllers              Scaled up replica set calico-kube-controllers-6765f6f9cd to 1
+kube-system          112s        Normal    Scheduled                                          pod/calico-node-dm4mr                           Successfully assigned kube-system/calico-node-dm4mr to calico-ipip-control-plane
+kube-system          111s        Normal    Pulling                                            pod/calico-node-dm4mr                           Pulling image "localhost:5000/calico/cni:v3.23.2"
+kube-system          109s        Normal    Pulled                                             pod/calico-node-dm4mr                           Successfully pulled image "localhost:5000/calico/cni:v3.23.2" in 2.276934798s
+kube-system          109s        Normal    Created                                            pod/calico-node-dm4mr                           Created container upgrade-ipam
+kube-system          109s        Normal    Started                                            pod/calico-node-dm4mr                           Started container upgrade-ipam
+kube-system          107s        Normal    Pulled                                             pod/calico-node-dm4mr                           Container image "localhost:5000/calico/cni:v3.23.2" already present on machine
+kube-system          107s        Normal    Created                                            pod/calico-node-dm4mr                           Created container install-cni
+kube-system          107s        Normal    Started                                            pod/calico-node-dm4mr                           Started container install-cni
+kube-system          94s         Normal    Pulling                                            pod/calico-node-dm4mr                           Pulling image "localhost:5000/calico/node:v3.23.2"
+kube-system          90s         Normal    Pulled                                             pod/calico-node-dm4mr                           Successfully pulled image "localhost:5000/calico/node:v3.23.2" in 3.959365487s
+kube-system          90s         Normal    Created                                            pod/calico-node-dm4mr                           Created container calico-node
+kube-system          90s         Normal    Started                                            pod/calico-node-dm4mr                           Started container calico-node
+kube-system          89s         Warning   Unhealthy                                          pod/calico-node-dm4mr                           Readiness probe failed: calico/node is not ready: BIRD is not ready: Error querying BIRD: unable to connect to BIRDv4 socket: dial unix /var/run/bird/bird.ctl: connect: no such file or directory
+kube-system          88s         Warning   Unhealthy                                          pod/calico-node-dm4mr                           Readiness probe failed: calico/node is not ready: BIRD is not ready: Error querying BIRD: unable to connect to BIRDv4 socket: dial unix /var/run/calico/bird.ctl: connect: connection refused
+kube-system          112s        Normal    Scheduled                                          pod/calico-node-f8cw9                           Successfully assigned kube-system/calico-node-f8cw9 to calico-ipip-worker
+kube-system          106s        Normal    Pulling                                            pod/calico-node-f8cw9                           Pulling image "localhost:5000/calico/cni:v3.23.2"
+kube-system          104s        Normal    Pulled                                             pod/calico-node-f8cw9                           Successfully pulled image "localhost:5000/calico/cni:v3.23.2" in 2.374545618s
+kube-system          104s        Normal    Created                                            pod/calico-node-f8cw9                           Created container upgrade-ipam
+kube-system          103s        Normal    Started                                            pod/calico-node-f8cw9                           Started container upgrade-ipam
+kube-system          94s         Normal    Pulled                                             pod/calico-node-f8cw9                           Container image "localhost:5000/calico/cni:v3.23.2" already present on machine
+kube-system          94s         Normal    Created                                            pod/calico-node-f8cw9                           Created container install-cni
+kube-system          94s         Normal    Started                                            pod/calico-node-f8cw9                           Started container install-cni
+kube-system          82s         Normal    Pulling                                            pod/calico-node-f8cw9                           Pulling image "localhost:5000/calico/node:v3.23.2"
+kube-system          79s         Normal    Pulled                                             pod/calico-node-f8cw9                           Successfully pulled image "localhost:5000/calico/node:v3.23.2" in 2.830143858s
+kube-system          79s         Normal    Created                                            pod/calico-node-f8cw9                           Created container calico-node
+kube-system          79s         Normal    Started                                            pod/calico-node-f8cw9                           Started container calico-node
+kube-system          78s         Warning   Unhealthy                                          pod/calico-node-f8cw9                           Readiness probe failed: calico/node is not ready: BIRD is not ready: Error querying BIRD: unable to connect to BIRDv4 socket: dial unix /var/run/bird/bird.ctl: connect: no such file or directory
+kube-system          77s         Warning   Unhealthy                                          pod/calico-node-f8cw9                           Readiness probe failed: calico/node is not ready: BIRD is not ready: Error querying BIRD: unable to connect to BIRDv4 socket: dial unix /var/run/calico/bird.ctl: connect: connection refused
+kube-system          112s        Normal    SuccessfulCreate                                   daemonset/calico-node                           Created pod: calico-node-dm4mr
+kube-system          112s        Normal    SuccessfulCreate                                   daemonset/calico-node                           Created pod: calico-node-f8cw9
+kube-system          2m7s        Warning   FailedScheduling                                   pod/coredns-64897985d-s59px                     0/1 nodes are available: 1 node(s) had taint {node.kubernetes.io/not-ready: }, that the pod didn't tolerate.
+kube-system          98s         Normal    Scheduled                                          pod/coredns-64897985d-s59px                     Successfully assigned kube-system/coredns-64897985d-s59px to calico-ipip-control-plane
+kube-system          97s         Warning   FailedCreatePodSandBox                             pod/coredns-64897985d-s59px                     Failed to create pod sandbox: rpc error: code = Unknown desc = failed to setup network for sandbox "4f0dfb6956f95e47d629d3322f5ae59cf1b2ea88c03aa2b984aeb5505f00864b": stat /var/lib/calico/nodename: no such file or directory: check that the calico/node container is running and has mounted /var/lib/calico/
+kube-system          81s         Normal    Pulled                                             pod/coredns-64897985d-s59px                     Container image "k8s.gcr.io/coredns/coredns:v1.8.6" already present on machine
+kube-system          81s         Normal    Created                                            pod/coredns-64897985d-s59px                     Created container coredns
+kube-system          80s         Normal    Started                                            pod/coredns-64897985d-s59px                     Started container coredns
+kube-system          2m7s        Warning   FailedScheduling                                   pod/coredns-64897985d-xdmb4                     0/1 nodes are available: 1 node(s) had taint {node.kubernetes.io/not-ready: }, that the pod didn't tolerate.
+kube-system          98s         Normal    Scheduled                                          pod/coredns-64897985d-xdmb4                     Successfully assigned kube-system/coredns-64897985d-xdmb4 to calico-ipip-control-plane
+kube-system          97s         Warning   FailedCreatePodSandBox                             pod/coredns-64897985d-xdmb4                     Failed to create pod sandbox: rpc error: code = Unknown desc = failed to setup network for sandbox "ad7583dab85834dd7b8104a12bd679a8d3fdf26ee07459174cfe95c34e2b7b72": stat /var/lib/calico/nodename: no such file or directory: check that the calico/node container is running and has mounted /var/lib/calico/
+kube-system          83s         Normal    Pulled                                             pod/coredns-64897985d-xdmb4                     Container image "k8s.gcr.io/coredns/coredns:v1.8.6" already present on machine
+kube-system          83s         Normal    Created                                            pod/coredns-64897985d-xdmb4                     Created container coredns
+kube-system          82s         Normal    Started                                            pod/coredns-64897985d-xdmb4                     Started container coredns
+kube-system          2m7s        Normal    SuccessfulCreate                                   replicaset/coredns-64897985d                    Created pod: coredns-64897985d-xdmb4
+kube-system          2m7s        Normal    SuccessfulCreate                                   replicaset/coredns-64897985d                    Created pod: coredns-64897985d-s59px
+kube-system          2m7s        Normal    ScalingReplicaSet                                  deployment/coredns                              Scaled up replica set coredns-64897985d to 2
+kube-system          98s         Warning   Unhealthy                                          pod/kube-apiserver-calico-ipip-control-plane    Readiness probe failed: HTTP probe failed with statuscode: 500
+kube-system          2m21s       Normal    LeaderElection                                     lease/kube-controller-manager                   calico-ipip-control-plane_f4f7224c-2842-413d-993e-da34462a33d4 became leader
+kube-system          113s        Normal    Scheduled                                          pod/kube-proxy-bwktz                            Successfully assigned kube-system/kube-proxy-bwktz to calico-ipip-worker
+kube-system          106s        Normal    Pulled                                             pod/kube-proxy-bwktz                            Container image "k8s.gcr.io/kube-proxy:v1.23.4" already present on machine
+kube-system          105s        Normal    Created                                            pod/kube-proxy-bwktz                            Created container kube-proxy
+kube-system          105s        Normal    Started                                            pod/kube-proxy-bwktz                            Started container kube-proxy
+kube-system          2m7s        Normal    Scheduled                                          pod/kube-proxy-cbs56                            Successfully assigned kube-system/kube-proxy-cbs56 to calico-ipip-control-plane
+kube-system          2m6s        Normal    Pulled                                             pod/kube-proxy-cbs56                            Container image "k8s.gcr.io/kube-proxy:v1.23.4" already present on machine
+kube-system          2m6s        Normal    Created                                            pod/kube-proxy-cbs56                            Created container kube-proxy
+kube-system          2m6s        Normal    Started                                            pod/kube-proxy-cbs56                            Started container kube-proxy
+kube-system          2m7s        Normal    SuccessfulCreate                                   daemonset/kube-proxy                            Created pod: kube-proxy-cbs56
+kube-system          113s        Normal    SuccessfulCreate                                   daemonset/kube-proxy                            Created pod: kube-proxy-bwktz
+kube-system          2m21s       Normal    LeaderElection                                     lease/kube-scheduler                            calico-ipip-control-plane_8d488462-8e02-4a4c-a9c8-95d2eaf6f1b4 became leader
+local-path-storage   2m7s        Warning   FailedScheduling                                   pod/local-path-provisioner-5ddd94ff66-j2rf8     0/1 nodes are available: 1 node(s) had taint {node.kubernetes.io/not-ready: }, that the pod didn't tolerate.
+local-path-storage   98s         Normal    Scheduled                                          pod/local-path-provisioner-5ddd94ff66-j2rf8     Successfully assigned local-path-storage/local-path-provisioner-5ddd94ff66-j2rf8 to calico-ipip-control-plane
+local-path-storage   97s         Warning   FailedCreatePodSandBox                             pod/local-path-provisioner-5ddd94ff66-j2rf8     Failed to create pod sandbox: rpc error: code = Unknown desc = failed to setup network for sandbox "b53a38b404f2dd11826f7607555ed6be53ac5b7b5c0f3443211d94f0d5861ae8": stat /var/lib/calico/nodename: no such file or directory: check that the calico/node container is running and has mounted /var/lib/calico/
+local-path-storage   84s         Normal    Pulled                                             pod/local-path-provisioner-5ddd94ff66-j2rf8     Container image "docker.io/rancher/local-path-provisioner:v0.0.14" already present on machine
+local-path-storage   83s         Normal    Created                                            pod/local-path-provisioner-5ddd94ff66-j2rf8     Created container local-path-provisioner
+local-path-storage   83s         Normal    Started                                            pod/local-path-provisioner-5ddd94ff66-j2rf8     Started container local-path-provisioner
+local-path-storage   2m7s        Normal    SuccessfulCreate                                   replicaset/local-path-provisioner-5ddd94ff66    Created pod: local-path-provisioner-5ddd94ff66-j2rf8
+local-path-storage   2m7s        Normal    ScalingReplicaSet                                  deployment/local-path-provisioner               Scaled up replica set local-path-provisioner-5ddd94ff66 to 1
+local-path-storage   83s         Normal    LeaderElection                                     endpoints/rancher.io-local-path                 local-path-provisioner-5ddd94ff66-j2rf8_491a2036-9f62-427e-95bf-85418c42b3d0 became leader

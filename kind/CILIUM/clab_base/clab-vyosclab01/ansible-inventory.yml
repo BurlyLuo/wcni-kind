@@ -1,0 +1,8 @@
+all:
+  children:
+    linux:
+      hosts:
+        clab-vyosclab01-vyos1:
+          ansible_host: 172.20.20.7
+        clab-vyosclab01-vyos2:
+          ansible_host: 172.20.20.8

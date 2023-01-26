@@ -1,0 +1,25 @@
+# a simple topo of two alpine containers connected with each other
+name: vyos
+
+topology:
+  nodes:
+    vyos1:
+      kind: linux
+      # user: vyos
+      image: afla/vyos:1.4
+      cmd: /sbin/init
+      binds:
+        - vyos-config:/opt/vyatta/etc/config/
+        - /lib/modules:/lib/modules
+      exec:
+      - ip addr add 100.1.1.1/24 dev eth1
+      - ip addr add 100.1.2.1/24 dev eth2
+    vyos2:
+      kind: linux
+      image: alpine:latest
+      exec:
+      - ip addr add 100.1.1.2/24 dev eth1
+      - ip addr add 100.1.2.2/24 dev eth2
+  links:
+    - endpoints: ["vyos1:eth1","vyos2:eth1"]
+    - endpoints: ["vyos1:eth2","vyos2:eth2"]

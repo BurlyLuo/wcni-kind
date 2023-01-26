@@ -1,0 +1,104 @@
+{
+  "name": "demo",
+  "type": "clab",
+  "clab": {
+    "config": {
+      "prefix": "clab",
+      "mgmt": {
+        "network": "clab",
+        "bridge": "br-fed422035f53",
+        "ipv4-subnet": "172.20.20.0/24",
+        "ipv4-gw": "172.20.20.1",
+        "ipv6-subnet": "2001:172:20:20::/64",
+        "mtu": "1500",
+        "external-access": true
+      }
+    }
+  },
+  "nodes": {
+    "n1": {
+      "index": "0",
+      "shortname": "n1",
+      "longname": "clab-demo-n1",
+      "fqdn": "n1.demo.io",
+      "group": "",
+      "labdir": "/root/kind/Cilium/clab-demo/n1",
+      "kind": "linux",
+      "image": "alpine:latest",
+      "mgmt-net": "",
+      "mgmt-intf": "",
+      "mgmt-ipv4-address": "172.20.20.6",
+      "mgmt-ipv4-prefix-length": 24,
+      "mgmt-ipv6-address": "2001:172:20:20::6",
+      "mgmt-ipv6-prefix-length": 64,
+      "mac-address": "",
+      "labels": {
+        "clab-mgmt-net-bridge": "br-fed422035f53",
+        "clab-node-group": "",
+        "clab-node-kind": "linux",
+        "clab-node-lab-dir": "/root/kind/Cilium/clab-demo/n1",
+        "clab-node-name": "n1",
+        "clab-node-type": "",
+        "clab-topo-file": "/root/kind/Cilium/demo-clb.yaml",
+        "containerlab": "demo"
+      }
+    },
+    "n2": {
+      "index": "1",
+      "shortname": "n2",
+      "longname": "clab-demo-n2",
+      "fqdn": "n2.demo.io",
+      "group": "",
+      "labdir": "/root/kind/Cilium/clab-demo/n2",
+      "kind": "linux",
+      "image": "alpine:latest",
+      "mgmt-net": "",
+      "mgmt-intf": "",
+      "mgmt-ipv4-address": "172.20.20.5",
+      "mgmt-ipv4-prefix-length": 24,
+      "mgmt-ipv6-address": "2001:172:20:20::5",
+      "mgmt-ipv6-prefix-length": 64,
+      "mac-address": "",
+      "labels": {
+        "clab-mgmt-net-bridge": "br-fed422035f53",
+        "clab-node-group": "",
+        "clab-node-kind": "linux",
+        "clab-node-lab-dir": "/root/kind/Cilium/clab-demo/n2",
+        "clab-node-name": "n2",
+        "clab-node-type": "",
+        "clab-topo-file": "/root/kind/Cilium/demo-clb.yaml",
+        "containerlab": "demo"
+      }
+    }
+  },
+  "links": [
+    {
+      "a": {
+        "node": "n1",
+        "interface": "eth1",
+        "mac": "aa:c1:ab:cd:9f:59",
+        "peer": "z"
+      },
+      "z": {
+        "node": "n2",
+        "interface": "eth1",
+        "mac": "aa:c1:ab:11:3f:11",
+        "peer": "a"
+      }
+    },
+    {
+      "a": {
+        "node": "n1",
+        "interface": "eth2",
+        "mac": "aa:c1:ab:0d:74:4b",
+        "peer": "z"
+      },
+      "z": {
+        "node": "n2",
+        "interface": "eth2",
+        "mac": "aa:c1:ab:0a:35:10",
+        "peer": "a"
+      }
+    }
+  ]
+}

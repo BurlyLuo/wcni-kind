@@ -1,0 +1,90 @@
+{
+  "name": "vyosclab01",
+  "type": "clab",
+  "clab": {
+    "config": {
+      "prefix": "clab",
+      "mgmt": {
+        "network": "clab",
+        "bridge": "br-fed422035f53",
+        "ipv4-subnet": "172.20.20.0/24",
+        "ipv4-gw": "172.20.20.1",
+        "ipv6-subnet": "2001:172:20:20::/64",
+        "mtu": "1500",
+        "external-access": true
+      }
+    }
+  },
+  "nodes": {
+    "vyos1": {
+      "index": "0",
+      "shortname": "vyos1",
+      "longname": "clab-vyosclab01-vyos1",
+      "fqdn": "vyos1.vyosclab01.io",
+      "group": "",
+      "labdir": "/root/kind/Cilium/clab-vyosclab01/vyos1",
+      "kind": "linux",
+      "image": "vyos/vyos:1.2.8",
+      "mgmt-net": "",
+      "mgmt-intf": "",
+      "mgmt-ipv4-address": "172.20.20.7",
+      "mgmt-ipv4-prefix-length": 24,
+      "mgmt-ipv6-address": "2001:172:20:20::7",
+      "mgmt-ipv6-prefix-length": 64,
+      "mac-address": "",
+      "labels": {
+        "clab-mgmt-net-bridge": "br-fed422035f53",
+        "clab-node-group": "",
+        "clab-node-kind": "linux",
+        "clab-node-lab-dir": "/root/kind/Cilium/clab-vyosclab01/vyos1",
+        "clab-node-name": "vyos1",
+        "clab-node-type": "",
+        "clab-topo-file": "/root/kind/Cilium/clab.yaml",
+        "containerlab": "vyosclab01"
+      }
+    },
+    "vyos2": {
+      "index": "1",
+      "shortname": "vyos2",
+      "longname": "clab-vyosclab01-vyos2",
+      "fqdn": "vyos2.vyosclab01.io",
+      "group": "",
+      "labdir": "/root/kind/Cilium/clab-vyosclab01/vyos2",
+      "kind": "linux",
+      "image": "vyos/vyos:1.2.8",
+      "mgmt-net": "",
+      "mgmt-intf": "",
+      "mgmt-ipv4-address": "172.20.20.8",
+      "mgmt-ipv4-prefix-length": 24,
+      "mgmt-ipv6-address": "2001:172:20:20::8",
+      "mgmt-ipv6-prefix-length": 64,
+      "mac-address": "",
+      "labels": {
+        "clab-mgmt-net-bridge": "br-fed422035f53",
+        "clab-node-group": "",
+        "clab-node-kind": "linux",
+        "clab-node-lab-dir": "/root/kind/Cilium/clab-vyosclab01/vyos2",
+        "clab-node-name": "vyos2",
+        "clab-node-type": "",
+        "clab-topo-file": "/root/kind/Cilium/clab.yaml",
+        "containerlab": "vyosclab01"
+      }
+    }
+  },
+  "links": [
+    {
+      "a": {
+        "node": "vyos1",
+        "interface": "eth1",
+        "mac": "aa:c1:ab:8a:50:aa",
+        "peer": "z"
+      },
+      "z": {
+        "node": "vyos2",
+        "interface": "eth1",
+        "mac": "aa:c1:ab:d6:56:c8",
+        "peer": "a"
+      }
+    }
+  ]
+}

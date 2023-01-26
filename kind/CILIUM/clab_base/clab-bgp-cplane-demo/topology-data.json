@@ -1,0 +1,354 @@
+{
+  "name": "bgp-cplane-demo",
+  "type": "clab",
+  "clab": {
+    "config": {
+      "prefix": "clab",
+      "mgmt": {
+        "network": "clab",
+        "bridge": "br-fed422035f53",
+        "ipv4-subnet": "172.20.20.0/24",
+        "ipv4-gw": "172.20.20.1",
+        "ipv6-subnet": "2001:172:20:20::/64",
+        "mtu": "1500",
+        "external-access": true
+      }
+    }
+  },
+  "nodes": {
+    "leaf0": {
+      "index": "0",
+      "shortname": "leaf0",
+      "longname": "clab-bgp-cplane-demo-leaf0",
+      "fqdn": "leaf0.bgp-cplane-demo.io",
+      "group": "",
+      "labdir": "/root/kind/Cilium/clab-bgp-cplane-demo/leaf0",
+      "kind": "linux",
+      "image": "frrouting/frr:v8.2.2",
+      "mgmt-net": "",
+      "mgmt-intf": "",
+      "mgmt-ipv4-address": "172.20.20.3",
+      "mgmt-ipv4-prefix-length": 24,
+      "mgmt-ipv6-address": "2001:172:20:20::3",
+      "mgmt-ipv6-prefix-length": 64,
+      "mac-address": "",
+      "labels": {
+        "app": "frr",
+        "clab-mgmt-net-bridge": "br-fed422035f53",
+        "clab-node-group": "",
+        "clab-node-kind": "linux",
+        "clab-node-lab-dir": "/root/kind/Cilium/clab-bgp-cplane-demo/leaf0",
+        "clab-node-name": "leaf0",
+        "clab-node-type": "",
+        "clab-topo-file": "/root/kind/Cilium/ecmp_topo.yaml",
+        "containerlab": "bgp-cplane-demo"
+      }
+    },
+    "leaf1": {
+      "index": "1",
+      "shortname": "leaf1",
+      "longname": "clab-bgp-cplane-demo-leaf1",
+      "fqdn": "leaf1.bgp-cplane-demo.io",
+      "group": "",
+      "labdir": "/root/kind/Cilium/clab-bgp-cplane-demo/leaf1",
+      "kind": "linux",
+      "image": "frrouting/frr:v8.2.2",
+      "mgmt-net": "",
+      "mgmt-intf": "",
+      "mgmt-ipv4-address": "172.20.20.5",
+      "mgmt-ipv4-prefix-length": 24,
+      "mgmt-ipv6-address": "2001:172:20:20::5",
+      "mgmt-ipv6-prefix-length": 64,
+      "mac-address": "",
+      "labels": {
+        "app": "frr",
+        "clab-mgmt-net-bridge": "br-fed422035f53",
+        "clab-node-group": "",
+        "clab-node-kind": "linux",
+        "clab-node-lab-dir": "/root/kind/Cilium/clab-bgp-cplane-demo/leaf1",
+        "clab-node-name": "leaf1",
+        "clab-node-type": "",
+        "clab-topo-file": "/root/kind/Cilium/ecmp_topo.yaml",
+        "containerlab": "bgp-cplane-demo"
+      }
+    },
+    "server0": {
+      "index": "2",
+      "shortname": "server0",
+      "longname": "clab-bgp-cplane-demo-server0",
+      "fqdn": "server0.bgp-cplane-demo.io",
+      "group": "",
+      "labdir": "/root/kind/Cilium/clab-bgp-cplane-demo/server0",
+      "kind": "linux",
+      "image": "burlyluo/nettoolbox:latest",
+      "mgmt-net": "",
+      "mgmt-intf": "",
+      "mgmt-ipv4-address": "",
+      "mgmt-ipv4-prefix-length": 0,
+      "mgmt-ipv6-address": "",
+      "mgmt-ipv6-prefix-length": 0,
+      "mac-address": "",
+      "labels": {
+        "clab-mgmt-net-bridge": "br-fed422035f53",
+        "clab-node-group": "",
+        "clab-node-kind": "linux",
+        "clab-node-lab-dir": "/root/kind/Cilium/clab-bgp-cplane-demo/server0",
+        "clab-node-name": "server0",
+        "clab-node-type": "",
+        "clab-topo-file": "/root/kind/Cilium/ecmp_topo.yaml",
+        "containerlab": "bgp-cplane-demo"
+      }
+    },
+    "server1": {
+      "index": "3",
+      "shortname": "server1",
+      "longname": "clab-bgp-cplane-demo-server1",
+      "fqdn": "server1.bgp-cplane-demo.io",
+      "group": "",
+      "labdir": "/root/kind/Cilium/clab-bgp-cplane-demo/server1",
+      "kind": "linux",
+      "image": "burlyluo/nettoolbox:latest",
+      "mgmt-net": "",
+      "mgmt-intf": "",
+      "mgmt-ipv4-address": "",
+      "mgmt-ipv4-prefix-length": 0,
+      "mgmt-ipv6-address": "",
+      "mgmt-ipv6-prefix-length": 0,
+      "mac-address": "",
+      "labels": {
+        "clab-mgmt-net-bridge": "br-fed422035f53",
+        "clab-node-group": "",
+        "clab-node-kind": "linux",
+        "clab-node-lab-dir": "/root/kind/Cilium/clab-bgp-cplane-demo/server1",
+        "clab-node-name": "server1",
+        "clab-node-type": "",
+        "clab-topo-file": "/root/kind/Cilium/ecmp_topo.yaml",
+        "containerlab": "bgp-cplane-demo"
+      }
+    },
+    "server2": {
+      "index": "4",
+      "shortname": "server2",
+      "longname": "clab-bgp-cplane-demo-server2",
+      "fqdn": "server2.bgp-cplane-demo.io",
+      "group": "",
+      "labdir": "/root/kind/Cilium/clab-bgp-cplane-demo/server2",
+      "kind": "linux",
+      "image": "burlyluo/nettoolbox:latest",
+      "mgmt-net": "",
+      "mgmt-intf": "",
+      "mgmt-ipv4-address": "",
+      "mgmt-ipv4-prefix-length": 0,
+      "mgmt-ipv6-address": "",
+      "mgmt-ipv6-prefix-length": 0,
+      "mac-address": "",
+      "labels": {
+        "clab-mgmt-net-bridge": "br-fed422035f53",
+        "clab-node-group": "",
+        "clab-node-kind": "linux",
+        "clab-node-lab-dir": "/root/kind/Cilium/clab-bgp-cplane-demo/server2",
+        "clab-node-name": "server2",
+        "clab-node-type": "",
+        "clab-topo-file": "/root/kind/Cilium/ecmp_topo.yaml",
+        "containerlab": "bgp-cplane-demo"
+      }
+    },
+    "server3": {
+      "index": "5",
+      "shortname": "server3",
+      "longname": "clab-bgp-cplane-demo-server3",
+      "fqdn": "server3.bgp-cplane-demo.io",
+      "group": "",
+      "labdir": "/root/kind/Cilium/clab-bgp-cplane-demo/server3",
+      "kind": "linux",
+      "image": "burlyluo/nettoolbox:latest",
+      "mgmt-net": "",
+      "mgmt-intf": "",
+      "mgmt-ipv4-address": "",
+      "mgmt-ipv4-prefix-length": 0,
+      "mgmt-ipv6-address": "",
+      "mgmt-ipv6-prefix-length": 0,
+      "mac-address": "",
+      "labels": {
+        "clab-mgmt-net-bridge": "br-fed422035f53",
+        "clab-node-group": "",
+        "clab-node-kind": "linux",
+        "clab-node-lab-dir": "/root/kind/Cilium/clab-bgp-cplane-demo/server3",
+        "clab-node-name": "server3",
+        "clab-node-type": "",
+        "clab-topo-file": "/root/kind/Cilium/ecmp_topo.yaml",
+        "containerlab": "bgp-cplane-demo"
+      }
+    },
+    "spine0": {
+      "index": "6",
+      "shortname": "spine0",
+      "longname": "clab-bgp-cplane-demo-spine0",
+      "fqdn": "spine0.bgp-cplane-demo.io",
+      "group": "",
+      "labdir": "/root/kind/Cilium/clab-bgp-cplane-demo/spine0",
+      "kind": "linux",
+      "image": "frrouting/frr:v8.2.2",
+      "mgmt-net": "",
+      "mgmt-intf": "",
+      "mgmt-ipv4-address": "172.20.20.4",
+      "mgmt-ipv4-prefix-length": 24,
+      "mgmt-ipv6-address": "2001:172:20:20::4",
+      "mgmt-ipv6-prefix-length": 64,
+      "mac-address": "",
+      "labels": {
+        "app": "frr",
+        "clab-mgmt-net-bridge": "br-fed422035f53",
+        "clab-node-group": "",
+        "clab-node-kind": "linux",
+        "clab-node-lab-dir": "/root/kind/Cilium/clab-bgp-cplane-demo/spine0",
+        "clab-node-name": "spine0",
+        "clab-node-type": "",
+        "clab-topo-file": "/root/kind/Cilium/ecmp_topo.yaml",
+        "containerlab": "bgp-cplane-demo"
+      }
+    },
+    "spine1": {
+      "index": "7",
+      "shortname": "spine1",
+      "longname": "clab-bgp-cplane-demo-spine1",
+      "fqdn": "spine1.bgp-cplane-demo.io",
+      "group": "",
+      "labdir": "/root/kind/Cilium/clab-bgp-cplane-demo/spine1",
+      "kind": "linux",
+      "image": "frrouting/frr:v8.2.2",
+      "mgmt-net": "",
+      "mgmt-intf": "",
+      "mgmt-ipv4-address": "172.20.20.2",
+      "mgmt-ipv4-prefix-length": 24,
+      "mgmt-ipv6-address": "2001:172:20:20::2",
+      "mgmt-ipv6-prefix-length": 64,
+      "mac-address": "",
+      "labels": {
+        "app": "frr",
+        "clab-mgmt-net-bridge": "br-fed422035f53",
+        "clab-node-group": "",
+        "clab-node-kind": "linux",
+        "clab-node-lab-dir": "/root/kind/Cilium/clab-bgp-cplane-demo/spine1",
+        "clab-node-name": "spine1",
+        "clab-node-type": "",
+        "clab-topo-file": "/root/kind/Cilium/ecmp_topo.yaml",
+        "containerlab": "bgp-cplane-demo"
+      }
+    }
+  },
+  "links": [
+    {
+      "a": {
+        "node": "spine0",
+        "interface": "net0",
+        "mac": "aa:c1:ab:c9:6a:96",
+        "peer": "z"
+      },
+      "z": {
+        "node": "leaf0",
+        "interface": "net0",
+        "mac": "aa:c1:ab:78:5a:b0",
+        "peer": "a"
+      }
+    },
+    {
+      "a": {
+        "node": "spine0",
+        "interface": "net1",
+        "mac": "aa:c1:ab:be:8e:a2",
+        "peer": "z"
+      },
+      "z": {
+        "node": "leaf1",
+        "interface": "net0",
+        "mac": "aa:c1:ab:d2:dd:80",
+        "peer": "a"
+      }
+    },
+    {
+      "a": {
+        "node": "spine1",
+        "interface": "net0",
+        "mac": "aa:c1:ab:f6:28:08",
+        "peer": "z"
+      },
+      "z": {
+        "node": "leaf0",
+        "interface": "net3",
+        "mac": "aa:c1:ab:72:a7:6b",
+        "peer": "a"
+      }
+    },
+    {
+      "a": {
+        "node": "spine1",
+        "interface": "net1",
+        "mac": "aa:c1:ab:4a:8b:7a",
+        "peer": "z"
+      },
+      "z": {
+        "node": "leaf1",
+        "interface": "net3",
+        "mac": "aa:c1:ab:7d:28:51",
+        "peer": "a"
+      }
+    },
+    {
+      "a": {
+        "node": "leaf0",
+        "interface": "net1",
+        "mac": "aa:c1:ab:8d:ae:05",
+        "peer": "z"
+      },
+      "z": {
+        "node": "server0",
+        "interface": "net0",
+        "mac": "aa:c1:ab:87:3e:52",
+        "peer": "a"
+      }
+    },
+    {
+      "a": {
+        "node": "leaf0",
+        "interface": "net2",
+        "mac": "aa:c1:ab:01:86:fb",
+        "peer": "z"
+      },
+      "z": {
+        "node": "server1",
+        "interface": "net0",
+        "mac": "aa:c1:ab:17:cf:59",
+        "peer": "a"
+      }
+    },
+    {
+      "a": {
+        "node": "leaf1",
+        "interface": "net1",
+        "mac": "aa:c1:ab:71:a7:23",
+        "peer": "z"
+      },
+      "z": {
+        "node": "server2",
+        "interface": "net0",
+        "mac": "aa:c1:ab:66:17:b1",
+        "peer": "a"
+      }
+    },
+    {
+      "a": {
+        "node": "leaf1",
+        "interface": "net2",
+        "mac": "aa:c1:ab:01:9d:bd",
+        "peer": "z"
+      },
+      "z": {
+        "node": "server3",
+        "interface": "net0",
+        "mac": "aa:c1:ab:a0:32:76",
+        "peer": "a"
+      }
+    }
+  ]
+}

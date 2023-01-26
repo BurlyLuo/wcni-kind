@@ -1,0 +1,38 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: nettool
+  namespace: sandbox
+spec:
+  selector:
+    run: nettool
+  ports:
+  - protocol: TCP
+    port: 80
+    targetPort: 80
+  type: ClusterIP
+  clusterIP: None
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nettool
+  namespace: sandbox
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      run: nettool
+  template: 
+    metadata:
+      labels:
+        run: nettool
+    spec:
+      containers:
+      - name: nettool
+        image: burlyluo/nettool:latest
+        imagePullPolicy: IfNotPresent
+        ports:
+        - containerPort: 80
+

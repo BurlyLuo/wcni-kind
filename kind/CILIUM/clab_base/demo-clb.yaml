@@ -1,0 +1,20 @@
+# a simple topo of two alpine containers connected with each other
+name: demo
+
+topology:
+  nodes:
+    n1:
+      kind: linux
+      image: alpine:latest
+      exec:
+      - ip addr add 1.1.1.1/24 dev eth1
+      - ip addr add 1.1.2.1/24 dev eth2
+    n2:
+      kind: linux
+      image: alpine:latest
+      exec:
+      - ip addr add 1.1.1.2/24 dev eth1
+      - ip addr add 1.1.2.2/24 dev eth2
+  links:
+    - endpoints: ["n1:eth1","n2:eth1"]
+    - endpoints: ["n1:eth2","n2:eth2"]

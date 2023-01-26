@@ -1,0 +1,23 @@
+name: vyosclab01
+
+topology:
+  nodes:
+    vyos1:
+      kind: linux
+      image: vyos/vyos:1.2.8
+      cmd: /sbin/init
+      binds:
+        - /lib/modules:/lib/modules
+        - vyos1/config:/opt/vyatta/etc/config
+    vyos2:
+      kind: linux
+      image: vyos/vyos:1.2.8
+      cmd: /sbin/init
+      binds:
+        - /lib/modules:/lib/modules
+        - vyos2/config:/opt/vyatta/etc/config
+
+  links:
+    - endpoints: ["vyos1:eth1", "vyos2:eth1"]
+
+

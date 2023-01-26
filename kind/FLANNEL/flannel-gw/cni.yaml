@@ -1,0 +1,35 @@
+apiVersion: apps/v1
+kind: DaemonSet
+metadata:
+  labels:
+    app: flannel-hostgw
+  name: flannel-hostgw
+spec:
+  selector:
+    matchLabels:
+      app: flannel-hostgw
+  template:
+    metadata:
+      labels:
+        app: flannel-hostgw
+    spec:
+      containers:
+      - image: localhost:5000/nettool
+        name: nettoolbox
+        securityContext:
+          privileged: true
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: serversvc
+spec:
+  type: LoadBalancer 
+  selector:
+    app: flannel-hostgw
+  ports:
+  - name: cni
+    port: 8080
+    targetPort: 80
+    #nodePort: 32000
