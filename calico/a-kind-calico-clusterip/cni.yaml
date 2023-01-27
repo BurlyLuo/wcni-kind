@@ -25,3 +25,18 @@ spec:
     image: 192.168.2.100:5000/nettool
   restartPolicy: Always
   nodeName: calico-fullmesh-control-plane
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    run: backend
+  name: backend-svc
+spec:
+  ports:
+  - port: 80
+    protocol: TCP
+    targetPort: 80
+  selector:
+    run: backend
