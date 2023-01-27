@@ -3,7 +3,7 @@ date
 set -v
 
 # 1.prep noCNI env
-cat <<EOF | kind create cluster --name=calico-ipip --image=kindest/node:v1.23.4 --config=-
+cat <<EOF | kind create cluster --name=calico-fullmesh --image=kindest/node:v1.23.4 --config=-
 kind: Cluster
 apiVersion: kind.x-k8s.io/v1alpha4
 networking:
@@ -29,7 +29,7 @@ kubectl get nodes -o wide
 kubectl apply -f calico.yaml
 
 # 4. install necessary tools
-for i in $(docker ps  -a --format "table {{.Names}}" | grep calico-ipip)
+for i in $(docker ps  -a --format "table {{.Names}}" | grep calico-fullmesh)
 do 
     echo $i
     docker cp /usr/bin/calicoctl $i:/usr/bin/calicoctl
