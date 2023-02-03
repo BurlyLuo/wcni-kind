@@ -97,4 +97,6 @@ ip netns exec ns1 ip route add default via 1.1.2.1 dev c-eth0
 ip route add 1.1.1.0/24 via 192.168.2.71 dev ens160
 
 $ we can use the docker to create an environment to verify the thoughts.
+$ we also can use tht CONTAINERlab to ready the env:
+Please refer the clab dir in current dir.
 

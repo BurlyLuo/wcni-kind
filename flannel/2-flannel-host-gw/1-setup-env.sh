@@ -3,7 +3,7 @@ date
 set -v
 
 # 1.prep noCNI env
-cat <<EOF | kind create cluster --name=flannel-host-gw --image=kindest/node:v1.23.4 --config=-
+cat <<EOF | kind create cluster --name=flannel-host-gw --image=kindest/node:v1.25.3 --config=-
 kind: Cluster
 apiVersion: kind.x-k8s.io/v1alpha4
 networking:
@@ -32,6 +32,7 @@ kubectl apply -f ./flannel.yaml
 for i in $(docker ps  -a --format "table {{.Names}}" | grep flannel-host-gw)
 do 
     echo $i
+    docker cp ./bridge $i:/opt/cni/bin/ 
     docker cp /usr/bin/calicoctl $i:/usr/bin/calicoctl
     docker cp /usr/bin/ping $i:/usr/bin/ping
     docker exec -it $i bash -c "sed -i -e 's/jp.archive.ubuntu.com\|archive.ubuntu.com\|security.ubuntu.com/old-releases.ubuntu.com/g' /etc/apt/sources.list"

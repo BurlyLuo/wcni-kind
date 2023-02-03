@@ -70,4 +70,3 @@ topology:
     - endpoints: ["gw0:eth2", "br-pool1:br-pool1-net2"]
 
 EOF
-
