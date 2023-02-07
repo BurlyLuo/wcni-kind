@@ -9,9 +9,7 @@ RUN  apk add --no-cache  bind-tools \
      tini \
 	 ethtool \
 	 dhclient \
-	 openssh \
-	 lrzsz
-
+	 openssh 
 	 
 
 EXPOSE 80
