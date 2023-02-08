@@ -23,7 +23,6 @@ k3sup install \
   --cluster \
   --k3s-version=v1.23.4+k3s1 \
   --k3s-extra-args "--flannel-backend=none --cluster-cidr=10.10.0.0/16 --disable-network-policy --disable traefik --disable servicelb --node-ip=$k3s_master0_ip" \
-  --merge \
   --local-path $HOME/.kube/config \
   --context=k3s-ha
 

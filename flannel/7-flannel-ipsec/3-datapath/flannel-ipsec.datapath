@@ -146,19 +146,21 @@ ip netns exec ns1 ip a a 1.1.1.2/24 dev c-eth0
 ip netns exec ns1 ip l s lo up
 ip netns exec ns1 ip r a default via 1.1.1.1 dev c-eth0
 
+# ip route add  1.1.2.0/24 via 192.168.2.73 dev ens160
 
 $ BPF3
 ip netns a ns1
-ip a a veth type veth peer name c-eth0
+ip l a veth type veth peer name c-eth0
 ip l s veth up
-ip a a 1.1.1.2.1/24 dev veth
+ip a a 1.1.2.1/24 dev veth
 
 ip l s c-eth0 netns ns1
 ip netns exec ns1 ip l s c-eth0 up
 ip netns exec ns1 ip a a 1.1.2.2/24 dev c-eth0
-ip netns exec ns1 ip a a 1.1.1.2/24 dev c-eth0
 ip netns exec ns1 ip l s lo up
 ip netns exec ns1 ip r a default via 1.1.2.1 dev c-eth0
+
+# ip route add  1.1.1.0/24 via 192.168.2.71 dev ens160
 
 
 $ create the ip xfrm state and ip xfrm policy:
@@ -167,18 +169,20 @@ spi=0xca623266
 reqid=66
 key=0xb5a9f3848b29d710010364256110c50229b57266
 ip xfrm state add src 192.168.2.71 dst 192.168.2.73 proto esp spi $spi reqid $reqid mode tunnel aead 'rfc4106(gcm(aes))' $key 128
-
-ip xfrm policy add 1.1.1.0/24 dst 1.1.2.0/24 dir out tmpl src 192.168.2.71 dst 192.168.2.73 proto esp reqid $reqid mode tunnel
-ip xfrm policy add 1.1.2.0/24 dst 1.1.1.0/24 dir fwd tmpl src 192.168.2.73 dst 192.168.2.71 proto esp reqid $reqid mode tunnel
-ip xfrm policy add 1.1.2.0/24 dst 1.1.1.0/24 dir in  tmpl src 192.168.2.73 dst 192.168.2.71 proto esp reqid $reqid mode tunnel
-
-$ BPF3
-spi=0xca623277
-reqid=77
-key=0xb5a9f3848b29d710010364256110c50229b57277
 ip xfrm state add src 192.168.2.73 dst 192.168.2.71 proto esp spi $spi reqid $reqid mode tunnel aead 'rfc4106(gcm(aes))' $key 128
 
-ip xfrm policy add 1.1.2.0/24 dst 1.1.1.0/24 dir out tmpl src 192.168.2.73 dst 192.168.2.71 proto esp reqid $reqid mode tunnel
-ip xfrm policy add 1.1.1.0/24 dst 1.1.2.0/24 dir fwd tmpl src 192.168.2.71 dst 192.168.2.73 proto esp reqid $reqid mode tunnel
-ip xfrm policy add 1.1.1.0/24 dst 1.1.2.0/24 dir in  tmpl src 192.168.2.71 dst 192.168.2.73 proto esp reqid $reqid mode tunnel
+ip xfrm policy add src 1.1.1.2/24 dst 1.1.2.2/24 dir out tmpl src 192.168.2.71 dst 192.168.2.73 proto esp reqid $reqid mode tunnel
+ip xfrm policy add src 1.1.2.2/24 dst 1.1.1.2/24 dir fwd tmpl src 192.168.2.73 dst 192.168.2.71 proto esp reqid $reqid mode tunnel
+ip xfrm policy add src 1.1.2.2/24 dst 1.1.1.2/24 dir in  tmpl src 192.168.2.73 dst 192.168.2.71 proto esp reqid $reqid mode tunnel
+
+$ BPF3
+spi=0xca623266
+reqid=66
+key=0xb5a9f3848b29d710010364256110c50229b57266
+ip xfrm state add src 192.168.2.73 dst 192.168.2.71 proto esp spi $spi reqid $reqid mode tunnel aead 'rfc4106(gcm(aes))' $key 128
+ip xfrm state add src 192.168.2.71 dst 192.168.2.73 proto esp spi $spi reqid $reqid mode tunnel aead 'rfc4106(gcm(aes))' $key 128
+
+ip xfrm policy add src 1.1.2.2/24 dst 1.1.1.2/24 dir out tmpl src 192.168.2.73 dst 192.168.2.71 proto esp reqid $reqid mode tunnel
+ip xfrm policy add src 1.1.1.2/24 dst 1.1.2.2/24 dir fwd tmpl src 192.168.2.71 dst 192.168.2.73 proto esp reqid $reqid mode tunnel
+ip xfrm policy add src 1.1.1.2/24 dst 1.1.2.2/24 dir in  tmpl src 192.168.2.71 dst 192.168.2.73 proto esp reqid $reqid mode tunnel
 
