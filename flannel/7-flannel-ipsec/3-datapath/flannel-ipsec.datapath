@@ -173,13 +173,12 @@ KEY=0xfa42aa6bc685beb4d967057134dd8e327ca179a6
 $ BPF1
 ID=0xfe51d978
 KEY=0xfa42aa6bc685beb4d967057134dd8e327ca179a6
-ip xfrm state add src 192.168.2.71 dst 192.168.2.73 proto esp spi $ID reqid $ID mode tunnel aead 'rfc4106(gcm(aes))' $key 128
-ip xfrm state add src 192.168.2.73 dst 192.168.2.71 proto esp spi $ID reqid $ID mode tunnel aead 'rfc4106(gcm(aes))' $key 128
+ip xfrm state add src 192.168.2.71 dst 192.168.2.73 proto esp spi $ID reqid $ID mode tunnel aead 'rfc4106(gcm(aes))' $KEY 128
+ip xfrm state add src 192.168.2.73 dst 192.168.2.71 proto esp spi $ID reqid $ID mode tunnel aead 'rfc4106(gcm(aes))' $KEY 128
 
 ip xfrm policy add src 1.1.1.2/24 dst 1.1.2.2/24 dir out tmpl src 192.168.2.71 dst 192.168.2.73 proto esp reqid $ID mode tunnel
 ip xfrm policy add src 1.1.2.2/24 dst 1.1.1.2/24 dir fwd tmpl src 192.168.2.73 dst 192.168.2.71 proto esp reqid $ID mode tunnel
 ip xfrm policy add src 1.1.2.2/24 dst 1.1.1.2/24 dir in  tmpl src 192.168.2.73 dst 192.168.2.71 proto esp reqid $ID mode tunnel
-
 
 $ BPF3
 ID=0xfe51d978
