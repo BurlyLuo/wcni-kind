@@ -1,35 +1,41 @@
 apiVersion: apps/v1
 kind: DaemonSet
+#kind: Deployment
 metadata:
   labels:
-    app: ipip
-  name: ipip
+    app: wluo
+  name: wluo
 spec:
+  #replicas: 2
   selector:
     matchLabels:
-      app: ipip
+      app: wluo
   template:
     metadata:
       labels:
-        app: ipip
+        app: wluo
     spec:
       containers:
-      - image: burlyluo/nettool
+      - image: 192.168.2.100:5000/nettool
         name: nettoolbox
+        env:
+          - name: NETTOOL_NODE_NAME
+            valueFrom:
+              fieldRef:
+                fieldPath: spec.nodeName
         securityContext:
           privileged: true
-
 ---
 apiVersion: v1
 kind: Service
 metadata:
-  name: serversvc
+  name: wluo
 spec:
-  type: LoadBalancer 
+  type: NodePort
   selector:
-    app: ipip
+    app: wluo
   ports:
-  - name: cni
+  - name: wluo
     port: 8080
     targetPort: 80
-    #nodePort: 32000
+    nodePort: 32000
