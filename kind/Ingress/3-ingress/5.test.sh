@@ -5,5 +5,6 @@ sed -i '/https-example.foo.com/d' /etc/hosts > /dev/null
 
 echo $lb_ip https-example.foo.com >> /etc/hosts
 
-while true;do curl -k https://https-example.foo.com;sleep 1;done
+# while true;do curl -kv https://https-example.foo.com;sleep 1;done
+curl -kv https://https-example.foo.com
 
