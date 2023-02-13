@@ -1,0 +1,16 @@
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: assgin-ca-request-tls
+  namespace: sandbox
+  labels:
+    app: www-example-com
+spec:
+  secretName: https-example.foo.com
+  duration: 8760h
+  issuerRef:
+    name: my-ca-issuer
+  commonName: "https-example.foo.com"
+  dnsNames:
+  - https-example.foo.com
+
