@@ -8,7 +8,7 @@ kind: Cluster
 apiVersion: kind.x-k8s.io/v1alpha4
 networking:
         disableDefaultCNI: true
-        #kubeProxyMode: "none"
+        #kubeProxyMode: "none" # do not comment out this feature! otherwise, it will cause the service abnomal.
 nodes:
         - role: control-plane
         - role: worker

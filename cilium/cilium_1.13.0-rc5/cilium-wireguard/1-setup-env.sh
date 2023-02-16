@@ -8,7 +8,7 @@ kind: Cluster
 apiVersion: kind.x-k8s.io/v1alpha4
 networking:
         disableDefaultCNI: true
-        #kubeProxyMode: "none"
+        #kubeProxyMode: "none" # Do not comment out this feature!
 nodes:
         - role: control-plane
         - role: worker
