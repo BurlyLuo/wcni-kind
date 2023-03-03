@@ -45,4 +45,3 @@ spec:
     backendRefs:
     - name: productpage
       port: 9080
-
