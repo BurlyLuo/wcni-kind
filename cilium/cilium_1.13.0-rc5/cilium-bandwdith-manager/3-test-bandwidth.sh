@@ -7,4 +7,5 @@ echo $NETPERF_SERVER_IP
 
 kubectl exec netperf-client -- netperf -t TCP_MAERTS -H "${NETPERF_SERVER_IP}"
 
-kubectl -nkube-system exec -it ds/cilium -- cilium status --verbose | grep -i BandwidthManager
+kubectl -nkube-system exec -it ds/cilium -- cilium status | grep -i BandwidthManager
+
