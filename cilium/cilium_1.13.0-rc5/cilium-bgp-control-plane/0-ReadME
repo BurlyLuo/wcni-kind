@@ -1,4 +1,4 @@
-host 192.168.2.66
+host 192.168.2.66 - Only with Ubuntu20.04. Issue with Ubuntu22.04!!!
 
 clab + cilium + bgp control plane enable
 configuration  steps:
