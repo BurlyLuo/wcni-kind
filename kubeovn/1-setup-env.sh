@@ -3,7 +3,7 @@ date
 set -v
 
 # 1.prep noCNI env
-cat <<EOF | kind create cluster --name=kube-ovn --image=kindest/node:v1.23.4 --config=-
+cat <<EOF | kind create cluster --name=k8s-osp --image=kindest/node:v1.23.4 --config=-
 kind: Cluster
 apiVersion: kind.x-k8s.io/v1alpha4
 networking:
@@ -21,17 +21,9 @@ containerdConfigPatches:
 EOF
 
 # 2.remove taints
-controller_node=`kubectl get nodes --no-headers  -o custom-columns=NAME:.metadata.name| grep control-plane`
-kubectl taint nodes $controller_node node-role.kubernetes.io/master:NoSchedule-
+controller_node_ip=`kubectl get node -o wide --no-headers | grep -E "control-plane|bpf1" | awk -F " " '{print $6}'`
+kubectl taint nodes $(kubectl get nodes -o name | grep control-plane) node-role.kubernetes.io/master:NoSchedule-
 kubectl get nodes -o wide
 
-# 3. install necessary tools
-for i in $(docker ps  -a --format "table {{.Names}}" | grep kube-ovn)
-do 
-    echo $i
-    docker cp /usr/bin/calicoctl $i:/usr/bin/calicoctl
-    docker cp /usr/bin/ping $i:/usr/bin/ping
-    docker exec -it $i bash -c "sed -i -e 's/jp.archive.ubuntu.com\|archive.ubuntu.com\|security.ubuntu.com/old-releases.ubuntu.com/g' /etc/apt/sources.list"
-    docker exec -it $i bash -c "apt-get -y update >/dev/null && apt-get -y install net-tools tcpdump lrzsz >/dev/null 2>&1"
-done
-
+# 3.install CNI
+bash install.sh

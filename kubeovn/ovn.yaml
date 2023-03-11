@@ -235,7 +235,7 @@ spec:
             - name: ENABLE_SSL
               value: "false"
             - name: NODE_IPS
-              value: 172.18.0.5,
+              value: 192.168.2.71,
             - name: POD_IP
               valueFrom:
                 fieldRef:
@@ -380,7 +380,7 @@ spec:
                 fieldRef:
                   fieldPath: spec.nodeName
             - name: OVN_DB_IPS
-              value: 172.18.0.5,
+              value: 192.168.2.71,
           volumeMounts:
             - mountPath: /var/run/netns
               name: host-ns

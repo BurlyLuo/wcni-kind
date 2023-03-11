@@ -81,7 +81,7 @@ spec:
                 fieldRef:
                   fieldPath: spec.nodeName
             - name: OVN_DB_IPS
-              value: 172.18.0.5,
+              value: 192.168.2.71,
           volumeMounts:
             - mountPath: /etc/localtime
               name: localtime
