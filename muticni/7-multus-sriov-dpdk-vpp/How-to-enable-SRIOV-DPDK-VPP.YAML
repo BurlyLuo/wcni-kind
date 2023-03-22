@@ -1,0 +1,169 @@
+0.All the reference from: https://github.com/k8snetworkplumbingwg
+From intel
+
+1. kubernetes environment.
+$ kubectl get node -o wide 
+NAME                 STATUS   ROLES    AGE    VERSION    INTERNAL-IP   EXTERNAL-IP   OS-IMAGE                KERNEL-VERSION           CONTAINER-RUNTIME
+bpf1                 Ready    master   278d   v1.20.15   10.50.2.111   <none>        CentOS Linux 7 (Core)   3.10.0-1160.el7.x86_64   docker://19.3.11
+
+2.Enable SRIOV Kernel.
+SRIOV WorkerNode Prerequisites
+In order for the cni-sriov-plugin to start reading Virtual Functions resources as well HostNetworkTemplate objects can configure virtual functions you need to perform the following steps.
+
+Enable** VT-D** at BIOS level.
+Enable SRIOV feature globally and/or per nic according to the nic you are working with, for example Intel x710 should be enabled per nic at BIOS level.
+Upgrade Kernel boot line to enable intel_iommu=on and iommu=pt
+
+$ grubby --update-kernel=ALL --args="iommu=pt intel_iommu=on"
+$ reboot
+
+
+3.Config HugePage
+Most network applications use huge pages, so you may want to enable that. Please edit /etc/default/grub and add huge-pages
+$ vi /etc/default/grub
+GRUB_CMDLINE_LINUX="nofb nomodeset vga=normal iommu=pt intel_iommu=on default_hugepagesz=1G hugepagesz=1G hugepages=16"
+#Rebuild grub.cfg
+grub2-mkconfig -o /boot/grub2/grub.cfg && reboot
+
+4.Config SRIOV VF resources list
+# https://github.com/k8snetworkplumbingwg/sriov-network-device-plugin
+#4.1: config 32vfs for the ems1 nic
+echo 0   > /sys/class/net/em1/device/sriov_numvfs
+echo 32  > /sys/class/net/em1/device/sriov_numvfs
+
+#4.2:bind driver for the vf
+modprobe vfio_pci
+for intf in  em1; do
+  for pci_id in `ls -l /sys/class/net/$intf/device/virtfn* | cut -d '/' -f8`; do
+    ./dpdk-devbind.py -u $pci_id
+  done
+done
+
+
+for intf in em1; do
+  for pci_id in `ls -l /sys/class/net/$intf/device/virtfn* | cut -d '/' -f8`; do
+    ./dpdk-devbind.py -b vfio-pci $pci_id
+  done
+done
+
+./dpdk-devbind.py --status
+
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: sriovdp-config
+  namespace: kube-system
+data:
+  config.json: |
+    {
+        "resourceList": [
+            {
+                "resourceName": "intel_sriov_dpdk_a",
+                "selectors": {
+                    "drivers": ["vfio-pci"],
+                    "pfNameis": ["em1#0-7"]
+                }
+            }
+        ]
+    }
+
+
+$ kubectl apply -f sriov-dpdk.yaml
+
+
+# 5.Create NAD(NetworkAttachmentDefinition)
+kind: NetworkAttachmentDefinition
+metadata:
+  name: sriov-net-a
+  annotations:
+    k8s.v1.cni.cncf.io/resourceName: intel.com/intel_sriov_dpdk_a
+spec:
+  config: '{
+  "type": "sriov",
+  "cniVersion": "0.3.1",
+  "name": "sriov-network-a",
+  "vlan": 100,
+  "vlanQoS": 1,
+  "max_tx_rate": 100,
+  "spoofchk": "off",
+  "trust": "on"
+}'
+
+$ kubectl  get net-attach-def
+NAME                      AGE
+sriov-dpdk0               15s
+
+
+# 6.Create Pod
+# cat sriov-pod-2.yaml
+apiVersion: v1
+kind: Pod
+metadata:
+  name: sriov-pod-2
+  annotations:
+    k8s.v1.cni.cncf.io/networks: sriov-net-a
+spec:
+  containers:
+  - name: sriov-example
+    image: rparikh/dpdk-app-centos
+    securityContext:
+      privileged: true
+    volumeMounts:
+    - mountPath: /etc/podnetinfo
+      name: podnetinfo
+      readOnly: false
+    - mountPath: /dev/hugepages
+      name: hugepage
+    resources:
+      requests:
+        memory: 1Gi
+        #cpu: "4"
+        intel.com/intel_sriov_dpdk_a: '1'
+      limits:
+        hugepages-1Gi: 2Gi
+        #cpu: "4"
+        intel.com/intel_sriov_dpdk_a: '1'
+    # Uncomment to control which DPDK App is running in container.
+    # If not provided, l3fwd is default.
+    #   Options: l2fwd l3fwd testpmd
+    env:
+    - name: DPDK_SAMPLE_APP
+      value: "testpmd"
+    #
+    # Uncomment to debug DPDK App or to run manually to change
+    # DPDK command line options.
+    command: ["sleep", "infinity"]
+  volumes:
+  - name: podnetinfo
+    downwardAPI:
+      items:
+        - path: "labels"
+          fieldRef:
+            fieldPath: metadata.labels
+        - path: "annotations"
+          fieldRef:
+            fieldPath: metadata.annotations
+  - name: hugepage
+    emptyDir:
+      medium: HugePages
+
+
+
+
+$ kubectl apply -f sriov-pod-2.yaml
+
+$ kubectl exec -it sriov-pod-2 -- sh
+sh-4.4# dpdk-app
+ENTER dpdk-app:
+ argc=1
+ dpdk-app
+  cpuRsp.CPUSet = 0-31
+  Interface[0]:
+    IfName=""  Name=""  Type=SR-IOV
+    MAC=""  IP="10.143.181.4"
+    PCIAddress=0000:03:10.7
+ myArgc=14
+ dpdk-app -n 4 -l 1 --master-lcore 1 -w 0000:03:10.7 -- -p 0x1 -P --config="(0,0,1)" --parse-ptype
+
+
