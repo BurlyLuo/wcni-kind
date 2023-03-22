@@ -48,6 +48,27 @@ done
 
 ./dpdk-devbind.py --status
 
+$ kubectl describe nodes bpf0
+---
+Capacity:
+  cpu:                     104
+  ephemeral-storage:       5715234Mi
+  hugepages-1Gi:           64Gi
+  intel.com/sriov_1:  32
+  intel.com/sriov_2:  32
+  intel.com/sriov_kern_1:  32
+  memory:                  1583694520Ki
+  pods:                    200
+Allocatable:
+  cpu:                     96
+  ephemeral-storage:       5393571477176
+  hugepages-1Gi:           64Gi
+  intel.com/sriov_1:  32
+  intel.com/sriov_2:  32
+  intel.com/sriov_kern_1:  32
+  memory:                  1516483256Ki
+  pods:                    200
+
 ---
 apiVersion: v1
 kind: ConfigMap
