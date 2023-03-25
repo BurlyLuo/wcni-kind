@@ -1,0 +1,33 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: afxdp-dp-config
+  namespace: kube-system
+data:
+  config.json: |
+    {
+        "logLevel":"debug",
+        "logFile":"afxdp-dp.log",
+        "pools":[
+          {
+             "name":"eastPool",
+             "mode":"cdq",
+             "devices":[
+                {
+                   "name":"ens23",
+                   "secondary":10
+                }
+             ]
+          },
+          {
+             "name":"westPool",
+             "mode":"cdq",
+             "devices":[
+                {
+                   "name":"ens1",
+                   "secondary":10
+                }
+             ]
+          }
+       ]
+    }
