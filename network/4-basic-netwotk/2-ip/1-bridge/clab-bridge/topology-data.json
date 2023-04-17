@@ -6,7 +6,7 @@
       "prefix": "clab",
       "mgmt": {
         "network": "clab",
-        "bridge": "br-ae069563682c",
+        "bridge": "br-0a8feac2aa08",
         "ipv4-subnet": "172.20.20.0/24",
         "ipv4-gw": "172.20.20.1",
         "ipv6-subnet": "2001:172:20:20::/64",
@@ -34,7 +34,7 @@
       "mgmt-ipv6-prefix-length": 0,
       "mac-address": "",
       "labels": {
-        "clab-mgmt-net-bridge": "br-ae069563682c",
+        "clab-mgmt-net-bridge": "br-0a8feac2aa08",
         "clab-node-group": "",
         "clab-node-kind": "bridge",
         "clab-node-lab-dir": "/root/wcni-kind/network/4-basic-netwotk/2-ip/1-bridge/clab-bridge/br-pool0",
@@ -55,13 +55,13 @@
       "image": "192.168.2.100:5000/nettool",
       "mgmt-net": "",
       "mgmt-intf": "",
-      "mgmt-ipv4-address": "172.20.20.7",
+      "mgmt-ipv4-address": "172.20.20.2",
       "mgmt-ipv4-prefix-length": 24,
-      "mgmt-ipv6-address": "2001:172:20:20::7",
+      "mgmt-ipv6-address": "2001:172:20:20::2",
       "mgmt-ipv6-prefix-length": 64,
       "mac-address": "",
       "labels": {
-        "clab-mgmt-net-bridge": "br-ae069563682c",
+        "clab-mgmt-net-bridge": "br-0a8feac2aa08",
         "clab-node-group": "",
         "clab-node-kind": "linux",
         "clab-node-lab-dir": "/root/wcni-kind/network/4-basic-netwotk/2-ip/1-bridge/clab-bridge/server1",
@@ -82,13 +82,13 @@
       "image": "192.168.2.100:5000/nettool",
       "mgmt-net": "",
       "mgmt-intf": "",
-      "mgmt-ipv4-address": "172.20.20.6",
+      "mgmt-ipv4-address": "172.20.20.3",
       "mgmt-ipv4-prefix-length": 24,
-      "mgmt-ipv6-address": "2001:172:20:20::6",
+      "mgmt-ipv6-address": "2001:172:20:20::3",
       "mgmt-ipv6-prefix-length": 64,
       "mac-address": "",
       "labels": {
-        "clab-mgmt-net-bridge": "br-ae069563682c",
+        "clab-mgmt-net-bridge": "br-0a8feac2aa08",
         "clab-node-group": "",
         "clab-node-kind": "linux",
         "clab-node-lab-dir": "/root/wcni-kind/network/4-basic-netwotk/2-ip/1-bridge/clab-bridge/server2",
@@ -104,13 +104,13 @@
       "a": {
         "node": "br-pool0",
         "interface": "eth1",
-        "mac": "aa:c1:ab:e0:3c:b2",
+        "mac": "aa:c1:ab:4d:9b:e4",
         "peer": "z"
       },
       "z": {
         "node": "server1",
         "interface": "net0",
-        "mac": "aa:c1:ab:61:75:db",
+        "mac": "aa:c1:ab:d7:d7:54",
         "peer": "a"
       }
     },
@@ -118,13 +118,13 @@
       "a": {
         "node": "br-pool0",
         "interface": "eth2",
-        "mac": "aa:c1:ab:2c:ce:45",
+        "mac": "aa:c1:ab:60:cb:b8",
         "peer": "z"
       },
       "z": {
         "node": "server2",
         "interface": "net0",
-        "mac": "aa:c1:ab:7a:f7:00",
+        "mac": "aa:c1:ab:ec:68:9f",
         "peer": "a"
       }
     }
