@@ -1,4 +1,8 @@
-name: routing
+#!/bin/bash
+set -v
+
+cat <<EOF>clab.yaml | clab deploy -t clab.yaml -
+name: vxlan
 topology:
   nodes:
     gw0:
@@ -7,7 +11,15 @@ topology:
       cmd: /sbin/init
       binds:
         - /lib/modules:/lib/modules
-        - ./startup-conf/gw0-boot.cfg:/opt/vyatta/etc/config/config.boot
+        - ./startup-conf/gw0.cfg:/opt/vyatta/etc/config/config.boot
+
+    gw1:
+      kind: linux
+      image: 192.168.2.100:5000/vyos/vyos:1.2.8
+      cmd: /sbin/init
+      binds:
+        - /lib/modules:/lib/modules
+        - ./startup-conf/gw1.cfg:/opt/vyatta/etc/config/config.boot
 
     server1:
       kind: linux
@@ -26,5 +38,8 @@ topology:
 
   links:
     - endpoints: ["gw0:eth1", "server1:net0"]
-    - endpoints: ["gw0:eth2", "server2:net0"]
+    - endpoints: ["gw1:eth1", "server2:net0"]
+    - endpoints: ["gw0:eth2", "gw1:eth2"]
+
+EOF
 

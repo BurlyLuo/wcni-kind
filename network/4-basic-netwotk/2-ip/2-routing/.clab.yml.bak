@@ -20,7 +20,7 @@ topology:
       kind: linux
       image: 192.168.2.100:5000/nettool
       exec:
-      - ip addr add 10.1.8.11/24 dev net0
+      - ip addr add 10.1.8.10/24 dev net0
       - ip route replace default via 10.1.8.1
 
 
