@@ -3,17 +3,17 @@ kind: DaemonSet
 #kind: Deployment
 metadata:
   labels:
-    app: cni
-  name: cni
+    app: wluo
+  name: wluo
 spec:
   #replicas: 1
   selector:
     matchLabels:
-      app: cni
+      app: wluo
   template:
     metadata:
       labels:
-        app: cni
+        app: wluo
     spec:
       containers:
       - image: 192.168.2.100:5000/nettool
@@ -29,9 +29,9 @@ metadata:
 spec:
   type: NodePort
   selector:
-    app: cni
+    app: wluo
   ports:
-  - name: cni
+  - name: wluo
     port: 80
     targetPort: 80
     nodePort: 32000
