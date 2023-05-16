@@ -3,7 +3,7 @@ date
 set -v
 
 # 1.prep noCNI env(VM Based Environment)
-cat <<EOF | kind create cluster --name=cilium-socketlb --image=kindest/node:v1.23.4 --config=-
+cat <<EOF | kind create cluster --name=cilium-gwapi --image=kindest/node:v1.23.4 --config=-
 kind: Cluster
 apiVersion: kind.x-k8s.io/v1alpha4
 networking:
