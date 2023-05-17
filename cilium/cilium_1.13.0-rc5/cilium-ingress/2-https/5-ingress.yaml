@@ -1,12 +1,14 @@
+---
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: basic-ingress
+  name: tls-ingress
   namespace: default
 spec:
   ingressClassName: cilium
   rules:
-    - http:
+    - host: bookinfo.cilium.rocks
+      http:
         paths:
           - backend:
               service:
@@ -22,4 +24,8 @@ spec:
                   number: 9080
             path: /
             pathType: Prefix
-
+  tls:
+    - hosts:
+        - bookinfo.cilium.rocks
+        - hipstershop.cilium.rocks
+      secretName: demo-cert
