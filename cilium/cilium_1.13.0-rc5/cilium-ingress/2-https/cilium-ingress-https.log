@@ -1,5 +1,5 @@
 date
-Thu May 18 08:24:11 PM CST 2023
+Thu May 18 09:01:41 PM CST 2023
 # 1.env info
 lsb_release -a
 No LSB modules are available.
@@ -10,9 +10,9 @@ Codename:	jammy
 
 kubectl get nodes -o wide
 NAME                                 STATUS   ROLES                  AGE     VERSION   INTERNAL-IP   EXTERNAL-IP   OS-IMAGE       KERNEL-VERSION      CONTAINER-RUNTIME
-cilium-ingress-https-control-plane   Ready    control-plane,master   6m4s    v1.23.4   172.18.0.3    <none>        Ubuntu 21.10   5.19.0-41-generic   containerd://1.5.10
-cilium-ingress-https-worker          Ready    <none>                 5m27s   v1.23.4   172.18.0.2    <none>        Ubuntu 21.10   5.19.0-41-generic   containerd://1.5.10
-cilium-ingress-https-worker2         Ready    <none>                 5m27s   v1.23.4   172.18.0.4    <none>        Ubuntu 21.10   5.19.0-41-generic   containerd://1.5.10
+cilium-ingress-https-control-plane   Ready    control-plane,master   8m42s   v1.23.4   172.18.0.4    <none>        Ubuntu 21.10   5.19.0-41-generic   containerd://1.5.10
+cilium-ingress-https-worker          Ready    <none>                 8m5s    v1.23.4   172.18.0.3    <none>        Ubuntu 21.10   5.19.0-41-generic   containerd://1.5.10
+cilium-ingress-https-worker2         Ready    <none>                 8m5s    v1.23.4   172.18.0.2    <none>        Ubuntu 21.10   5.19.0-41-generic   containerd://1.5.10
 
 # 2.Cilium ingress http demo
 controller_node=`kubectl get node -o wide --no-headers | grep -E "control-plane|bpf1" | awk -F " " '{print $1}'`
@@ -63,10 +63,10 @@ curl --cacert minica.pem -v https://bookinfo.cilium.rocks/details/1 | jq
 * ALPN, server did not agree to a protocol
 * Server certificate:
 *  subject: CN=*.cilium.rocks
-*  start date: May 18 12:22:55 2023 GMT
-*  expire date: Jun 17 12:22:55 2025 GMT
+*  start date: May 18 12:58:27 2023 GMT
+*  expire date: Jun 17 12:58:27 2025 GMT
 *  subjectAltName: host "bookinfo.cilium.rocks" matched cert's "*.cilium.rocks"
-*  issuer: CN=minica root ca 411c63
+*  issuer: CN=minica root ca 27c58a
 *  SSL certificate verify ok.
 * TLSv1.2 (OUT), TLS header, Supplemental data (23):
 } [5 bytes data]
@@ -88,12 +88,12 @@ curl --cacert minica.pem -v https://bookinfo.cilium.rocks/details/1 | jq
 < HTTP/1.1 200 OK
 < content-type: application/json
 < server: envoy
-< date: Thu, 18 May 2023 12:24:11 GMT
+< date: Thu, 18 May 2023 13:01:41 GMT
 < content-length: 178
-< x-envoy-upstream-service-time: 1
+< x-envoy-upstream-service-time: 4
 < 
 { [178 bytes data]
-100   178  100   178    0     0  16833      0 --:--:-- --:--:-- --:--:-- 17800
+100   178  100   178    0     0   9823      0 --:--:-- --:--:-- --:--:-- 10470
 * Connection #0 to host bookinfo.cilium.rocks left intact
 {
   "id": 1,

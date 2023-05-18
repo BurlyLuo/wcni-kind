@@ -1,5 +1,5 @@
 date
-Thu May 18 08:16:03 PM CST 2023
+Thu May 18 08:51:55 PM CST 2023
 # 1.env info
 lsb_release -a
 No LSB modules are available.
@@ -9,10 +9,10 @@ Release:	22.04
 Codename:	jammy
 
 kubectl get nodes -o wide
-NAME                                STATUS   ROLES                  AGE   VERSION   INTERNAL-IP   EXTERNAL-IP   OS-IMAGE       KERNEL-VERSION      CONTAINER-RUNTIME
-cilium-ingress-http-control-plane   Ready    control-plane,master   19m   v1.23.4   172.18.0.2    <none>        Ubuntu 21.10   5.19.0-41-generic   containerd://1.5.10
-cilium-ingress-http-worker          Ready    <none>                 18m   v1.23.4   172.18.0.3    <none>        Ubuntu 21.10   5.19.0-41-generic   containerd://1.5.10
-cilium-ingress-http-worker2         Ready    <none>                 18m   v1.23.4   172.18.0.4    <none>        Ubuntu 21.10   5.19.0-41-generic   containerd://1.5.10
+NAME                                STATUS   ROLES                  AGE     VERSION   INTERNAL-IP   EXTERNAL-IP   OS-IMAGE       KERNEL-VERSION      CONTAINER-RUNTIME
+cilium-ingress-http-control-plane   Ready    control-plane,master   2m29s   v1.23.4   172.18.0.4    <none>        Ubuntu 21.10   5.19.0-41-generic   containerd://1.5.10
+cilium-ingress-http-worker          Ready    <none>                 112s    v1.23.4   172.18.0.2    <none>        Ubuntu 21.10   5.19.0-41-generic   containerd://1.5.10
+cilium-ingress-http-worker2         Ready    <none>                 112s    v1.23.4   172.18.0.3    <none>        Ubuntu 21.10   5.19.0-41-generic   containerd://1.5.10
 
 # 2.Cilium ingress http demo
 HTTP_INGRESS=$(kubectl get ingress basic-ingress -o jsonpath='{.status.loadBalancer.ingress[0].ip}')
@@ -28,7 +28,7 @@ curl -v --fail -s http://"$HTTP_INGRESS"/details/1 | jq
 < HTTP/1.1 200 OK
 < content-type: application/json
 < server: envoy
-< date: Thu, 18 May 2023 12:16:03 GMT
+< date: Thu, 18 May 2023 12:51:55 GMT
 < content-length: 178
 < x-envoy-upstream-service-time: 1
 < 
