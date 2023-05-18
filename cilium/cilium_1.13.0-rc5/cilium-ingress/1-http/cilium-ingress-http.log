@@ -1,0 +1,33 @@
+
+HTTP_INGRESS=$(kubectl get ingress basic-ingress -o jsonpath='{.status.loadBalancer.ingress[0].ip}')
+curl -v --fail -s http://"$HTTP_INGRESS"/details/1 | jq
+*   Trying 172.18.0.201:80...
+* Connected to 172.18.0.201 (172.18.0.201) port 80 (#0)
+> GET /details/1 HTTP/1.1
+> Host: 172.18.0.201
+> User-Agent: curl/7.81.0
+> Accept: */*
+> 
+* Mark bundle as not supporting multiuse
+< HTTP/1.1 200 OK
+< content-type: application/json
+< server: envoy
+< date: Thu, 18 May 2023 12:11:22 GMT
+< content-length: 178
+< x-envoy-upstream-service-time: 1
+< 
+{ [178 bytes data]
+* Connection #0 to host 172.18.0.201 left intact
+{
+  "id": 1,
+  "author": "William Shakespeare",
+  "year": 1595,
+  "type": "paperback",
+  "pages": 200,
+  "publisher": "PublisherA",
+  "language": "English",
+  "ISBN-10": "1234567890",
+  "ISBN-13": "123-1234567890"
+}
+
+
