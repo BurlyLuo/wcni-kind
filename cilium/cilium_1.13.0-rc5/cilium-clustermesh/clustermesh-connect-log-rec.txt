@@ -1,5 +1,5 @@
 date
-Sun 20 Nov 2022 08:54:53 PM CST
+Thu 18 May 2023 04:53:24 PM CST
 
 cilium clustermesh enable --context kind-cluster1 --service-type NodePort
 ⚠️  Using service type NodePort may fail when nodes are removed from the cluster!
@@ -36,7 +36,7 @@ cilium clustermesh connect --context kind-cluster1 --destination-context kind-cl
 cilium clustermesh status  --context kind-cluster1 --wait
 ⚠️  Service type NodePort detected! Service may fail when nodes are removed from the cluster!
 ✅ Cluster access information is available:
-  - 172.18.0.3:30255
+  - 172.18.0.3:31848
 ✅ Service "clustermesh-apiserver" of type "NodePort" found
 ⌛ [kind-cluster1] Waiting for deployment clustermesh-apiserver to become ready...
 ✅ All 2 nodes are connected to all clusters [min:1 / avg:1.0 / max:1]

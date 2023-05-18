@@ -1,6 +1,6 @@
 #!/bin/bash
 set -v
-exec &>./cluster1-install-log-rec.txt
+# exec &>./cluster1-install-log-rec.txt
 date
 
 # node info: 192.168.2.66

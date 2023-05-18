@@ -1,5 +1,6 @@
 #!/bin/bash
-exec &>./verify-log-rec-2-verify-service-affinity.txt
+set -v
+# exec &>./verify-log-rec-2-verify-service-affinity.txt
 NREQUESTS=10
 
 echo "------------------------------------------------------"
