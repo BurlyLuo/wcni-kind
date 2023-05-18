@@ -1,12 +1,3 @@
-#!/bin/bash
-set -v
-
-brctl addbr br-leaf0
-ifconfig br-leaf0 up
-brctl addbr br-leaf1
-ifconfig br-leaf1 up
-
-cat <<EOF>clab.yaml | clab deploy -t clab.yaml -
 name: bgp
 topology:
   nodes:
@@ -16,6 +7,7 @@ topology:
       cmd: /sbin/init
       binds:
         - /lib/modules:/lib/modules
+        - ./startup-conf/spine0-boot.cfg:/opt/vyatta/etc/config/config.boot
 
 
     spine1:
@@ -24,7 +16,7 @@ topology:
       cmd: /sbin/init
       binds:
         - /lib/modules:/lib/modules
-
+        - ./startup-conf/spine1-boot.cfg:/opt/vyatta/etc/config/config.boot
 
     leaf0:
       kind: linux
@@ -32,7 +24,7 @@ topology:
       cmd: /sbin/init
       binds:
         - /lib/modules:/lib/modules
-
+        - ./startup-conf/leaf0-boot.cfg:/opt/vyatta/etc/config/config.boot
 
     leaf1:
       kind: linux
@@ -40,7 +32,7 @@ topology:
       cmd: /sbin/init
       binds:
         - /lib/modules:/lib/modules
-
+        - ./startup-conf/leaf1-boot.cfg:/opt/vyatta/etc/config/config.boot
 
     br-leaf0:
       kind: bridge
@@ -96,8 +88,4 @@ topology:
     - endpoints: ["leaf1:eth1", "spine0:eth2"]
     - endpoints: ["leaf1:eth2", "spine1:eth2"]
     - endpoints: ["leaf1:eth3", "br-leaf1:br-leaf1-net2"]
-
-EOF
-
-#clab deploy -t ./clab.yaml
 
