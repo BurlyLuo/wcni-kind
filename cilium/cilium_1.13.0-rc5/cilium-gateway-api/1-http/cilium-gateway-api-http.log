@@ -1,0 +1,38 @@
+# case ubuntu 22.04
+GATEWAY=$(kubectl get gateway my-gateway -o jsonpath='{.status.addresses[0].value}')
+curl -v http://"$GATEWAY"/details/1 | jq
+*   Trying 172.18.0.200:80...
+  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0* Connected to 172.18.0.200 (172.18.0.200) port 80 (#0)
+> GET /details/1 HTTP/1.1
+> Host: 172.18.0.200
+> User-Agent: curl/7.81.0
+> Accept: */*
+> 
+* Mark bundle as not supporting multiuse
+< HTTP/1.1 200 OK
+< content-type: application/json
+< server: envoy
+< date: Thu, 18 May 2023 11:33:44 GMT
+< content-length: 178
+< x-envoy-upstream-service-time: 1
+< 
+{ [178 bytes data]
+100   178  100   178    0     0  43099      0 --:--:-- --:--:-- --:--:-- 59333
+* Connection #0 to host 172.18.0.200 left intact
+{
+  "id": 1,
+  "author": "William Shakespeare",
+  "year": 1595,
+  "type": "paperback",
+  "pages": 200,
+  "publisher": "PublisherA",
+  "language": "English",
+  "ISBN-10": "1234567890",
+  "ISBN-13": "123-1234567890"
+}
+
+# case ubuntu 20.04. 192.168.2.10 Chrom
+# $ http://192.168.2.200/details/1
+# $ {"id":1,"author":"William Shakespeare","year":1595,"type":"paperback","pages":200,"publisher":"PublisherA","language":"English","ISBN-10":"1234567890","ISBN-13":"123-1234567890"}

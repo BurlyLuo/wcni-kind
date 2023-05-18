@@ -1,7 +1,6 @@
 #/bin/bash
-set -v
-#/bin/bash
 set -v 
+exec &>./cilium-gateway-api-https.log
 
 controller_node=`kubectl get node -o wide --no-headers | grep -E "control-plane|bpf1" | awk -F " " '{print $1}'`
 docker cp $controller_node:/minica/minica.pem ./minica.pem
