@@ -1,4 +1,20 @@
+date
+Thu May 18 08:40:11 PM CST 2023
+# 1.env info
+lsb_release -a
+No LSB modules are available.
+Distributor ID:	Ubuntu
+Description:	Ubuntu 22.04.2 LTS
+Release:	22.04
+Codename:	jammy
 
+kubectl get nodes -o wide
+NAME                               STATUS   ROLES                  AGE     VERSION   INTERNAL-IP   EXTERNAL-IP   OS-IMAGE       KERNEL-VERSION      CONTAINER-RUNTIME
+cilium-gwapi-https-control-plane   Ready    control-plane,master   9m      v1.23.4   172.18.0.2    <none>        Ubuntu 21.10   5.19.0-41-generic   containerd://1.5.10
+cilium-gwapi-https-worker          Ready    <none>                 8m22s   v1.23.4   172.18.0.4    <none>        Ubuntu 21.10   5.19.0-41-generic   containerd://1.5.10
+cilium-gwapi-https-worker2         Ready    <none>                 8m22s   v1.23.4   172.18.0.3    <none>        Ubuntu 21.10   5.19.0-41-generic   containerd://1.5.10
+
+# 2.Cilium ingress http demo
 controller_node=`kubectl get node -o wide --no-headers | grep -E "control-plane|bpf1" | awk -F " " '{print $1}'`
 docker cp $controller_node:/minica/minica.pem ./minica.pem
 
@@ -47,10 +63,10 @@ curl --cacert minica.pem -v https://bookinfo.cilium.rocks/details/1 | jq
 * ALPN, server did not agree to a protocol
 * Server certificate:
 *  subject: CN=*.cilium.rocks
-*  start date: May 18 11:11:49 2023 GMT
-*  expire date: Jun 17 11:11:49 2025 GMT
+*  start date: May 18 12:35:53 2023 GMT
+*  expire date: Jun 17 12:35:53 2025 GMT
 *  subjectAltName: host "bookinfo.cilium.rocks" matched cert's "*.cilium.rocks"
-*  issuer: CN=minica root ca 59ad50
+*  issuer: CN=minica root ca 552869
 *  SSL certificate verify ok.
 * TLSv1.2 (OUT), TLS header, Supplemental data (23):
 } [5 bytes data]
@@ -72,12 +88,12 @@ curl --cacert minica.pem -v https://bookinfo.cilium.rocks/details/1 | jq
 < HTTP/1.1 200 OK
 < content-type: application/json
 < server: envoy
-< date: Thu, 18 May 2023 11:28:02 GMT
+< date: Thu, 18 May 2023 12:40:11 GMT
 < content-length: 178
 < x-envoy-upstream-service-time: 1
 < 
 { [178 bytes data]
-100   178  100   178    0     0  20753      0 --:--:-- --:--:-- --:--:-- 22250
+100   178  100   178    0     0  17562      0 --:--:-- --:--:-- --:--:-- 17800
 * Connection #0 to host bookinfo.cilium.rocks left intact
 {
   "id": 1,

@@ -1,4 +1,5 @@
 #/bin/bash
+set -v
 controller_node_ip=`kubectl get node -o wide --no-headers | grep -E "control-plane|bpf1" | awk -F " " '{print $6}'`
 
 helm repo add cilium https://helm.cilium.io > /dev/null 2>&1

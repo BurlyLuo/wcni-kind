@@ -1,4 +1,20 @@
-# case ubuntu 22.04
+date
+Thu May 18 08:29:27 PM CST 2023
+# 1.env info
+lsb_release -a
+No LSB modules are available.
+Distributor ID:	Ubuntu
+Description:	Ubuntu 22.04.2 LTS
+Release:	22.04
+Codename:	jammy
+
+kubectl get nodes -o wide
+NAME                         STATUS   ROLES                  AGE     VERSION   INTERNAL-IP   EXTERNAL-IP   OS-IMAGE       KERNEL-VERSION      CONTAINER-RUNTIME
+cilium-gwapi-control-plane   Ready    control-plane,master   3m1s    v1.23.4   172.18.0.3    <none>        Ubuntu 21.10   5.19.0-41-generic   containerd://1.5.10
+cilium-gwapi-worker          Ready    <none>                 2m30s   v1.23.4   172.18.0.2    <none>        Ubuntu 21.10   5.19.0-41-generic   containerd://1.5.10
+cilium-gwapi-worker2         Ready    <none>                 2m42s   v1.23.4   172.18.0.4    <none>        Ubuntu 21.10   5.19.0-41-generic   containerd://1.5.10
+
+# 2.Cilium ingress http demo
 GATEWAY=$(kubectl get gateway my-gateway -o jsonpath='{.status.addresses[0].value}')
 curl -v http://"$GATEWAY"/details/1 | jq
 *   Trying 172.18.0.200:80...
@@ -14,12 +30,12 @@ curl -v http://"$GATEWAY"/details/1 | jq
 < HTTP/1.1 200 OK
 < content-type: application/json
 < server: envoy
-< date: Thu, 18 May 2023 11:33:44 GMT
+< date: Thu, 18 May 2023 12:29:27 GMT
 < content-length: 178
-< x-envoy-upstream-service-time: 1
+< x-envoy-upstream-service-time: 2
 < 
 { [178 bytes data]
-100   178  100   178    0     0  43099      0 --:--:-- --:--:-- --:--:-- 59333
+100   178  100   178    0     0  39758      0 --:--:-- --:--:-- --:--:-- 44500
 * Connection #0 to host 172.18.0.200 left intact
 {
   "id": 1,
@@ -32,7 +48,3 @@ curl -v http://"$GATEWAY"/details/1 | jq
   "ISBN-10": "1234567890",
   "ISBN-13": "123-1234567890"
 }
-
-# case ubuntu 20.04. 192.168.2.10 Chrom
-# $ http://192.168.2.200/details/1
-# $ {"id":1,"author":"William Shakespeare","year":1595,"type":"paperback","pages":200,"publisher":"PublisherA","language":"English","ISBN-10":"1234567890","ISBN-13":"123-1234567890"}
