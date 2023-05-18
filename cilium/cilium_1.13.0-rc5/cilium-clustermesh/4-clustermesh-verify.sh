@@ -14,6 +14,9 @@ kubectl wait --for=condition=Ready=true pods --all --context kind-cluster2
 
 for i in $(seq 1 10);do kubectl --context kind-cluster1 exec -ti deployment/x-wing -- curl rebel-base;done
 
+
+
+
 # Cluster Failover
 sleep 3
 kubectl --context kind-cluster2 scale deployment rebel-base --replicas=0 
