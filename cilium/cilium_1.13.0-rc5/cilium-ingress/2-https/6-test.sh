@@ -1,6 +1,6 @@
 #/bin/bash
 set -v 
-exec &>./cilium-ingress-https.log
+# exec &>./cilium-ingress-https.log
 date
 # 1.env info
 lsb_release -a

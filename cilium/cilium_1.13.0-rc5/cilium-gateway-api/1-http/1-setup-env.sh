@@ -25,3 +25,5 @@ controller_node=`kubectl get nodes --no-headers  -o custom-columns=NAME:.metadat
 kubectl taint nodes $controller_node node-role.kubernetes.io/master:NoSchedule-
 kubectl get nodes -o wide
 
+# 3.wait ds/cilium ready
+kubectl -nkube-system wait --for=condition=Ready=true pods --all

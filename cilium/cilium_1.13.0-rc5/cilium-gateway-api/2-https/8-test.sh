@@ -1,6 +1,6 @@
 #/bin/bash
 set -v 
-exec &>./cilium-gateway-api-https.log
+# exec &>./cilium-gateway-api-https.log
 date
 # 1.env info
 lsb_release -a
