@@ -1,4 +1,4 @@
-kubectl delete ciliumbgppeeringpolicies rack0 rack1
+kubectl delete ciliumbgppeeringpolicies rack0 rack1 > /dev/null 2>&1
 
 cat <<EOF | kubectl apply -f -
 ---

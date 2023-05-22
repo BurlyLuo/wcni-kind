@@ -9,9 +9,9 @@ all:
     linux:
       hosts:
         clab-bgp-leaf0:
-          ansible_host: 172.20.20.4
-        clab-bgp-leaf1:
           ansible_host: 172.20.20.2
+        clab-bgp-leaf1:
+          ansible_host: 172.20.20.4
         clab-bgp-server1:
           ansible_host: 
         clab-bgp-server2:
@@ -21,6 +21,6 @@ all:
         clab-bgp-server4:
           ansible_host: 
         clab-bgp-spine0:
-          ansible_host: 172.20.20.5
-        clab-bgp-spine1:
           ansible_host: 172.20.20.3
+        clab-bgp-spine1:
+          ansible_host: 172.20.20.5
