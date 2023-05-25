@@ -15,7 +15,7 @@ for affinity in local remote none; do
   echo "------------------------------------------------------"
   for i in $(seq 1 $NREQUESTS); do
   Current_Cluster=`kubectl -n service-affinity exec -it ds/netshoot -- curl -q "http://echoserver-service-$affinity.service-affinity.svc.cluster.local?echo_env_body=NODE"` 
-  echo -e Current_Cluster: ${Current_Cluster}
+  echo -e Current_Rsp_From_Cluster: ${Current_Cluster}
   done
 done
 echo "------------------------------------------------------"

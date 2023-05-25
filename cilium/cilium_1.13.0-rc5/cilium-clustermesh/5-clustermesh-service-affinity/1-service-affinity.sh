@@ -13,5 +13,5 @@ cilium clustermesh status --context kind-${NAME}1 --wait
 cilium clustermesh status --context kind-${NAME}2 --wait
 
 
-kubectl --context kind-${NAME}1 -n$NAMESPACE get pods -o wide
-kubectl --context kind-${NAME}2 -n$NAMESPACE get pods -o wide 
+kubectl -n$NAMESPACE wait --for=condition=Ready=true pods --all --context kind-${NAME}1
+kubectl -n$NAMESPACE wait --for=condition=Ready=true pods --all --context kind-${NAME}2
