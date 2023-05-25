@@ -7,7 +7,6 @@ ifconfig br-pool0 up
 brctl addbr br-pool1
 ifconfig br-pool1 up
 
-
 cat <<EOF>clab.yaml | clab deploy -t clab.yaml -
 name: calico-ipip-crosssubnet
 topology:
@@ -20,13 +19,11 @@ topology:
         - /lib/modules:/lib/modules
         - ./startup-conf/gw0-boot.cfg:/opt/vyatta/etc/config/config.boot
  
-
     br-pool0:
       kind: bridge
   
     br-pool1:
       kind: bridge
-
 
     server1:
       kind: linux
