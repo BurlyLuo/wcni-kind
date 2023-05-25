@@ -2,7 +2,8 @@
 set -v
 # 1. install CNI[Calico v3.23.2]
 kubectl apply -f ./calico.yaml
-kubectl wait --timeout=45s --for=condition=Ready=true pods --all -A
+
+kubectl wait --timeout=60s --for=condition=Ready=true pods --all -A
 
 # 1.2. disable bgp fullmesh
 cat <<EOF | calicoctl apply -f - 
