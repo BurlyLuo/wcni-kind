@@ -6,7 +6,7 @@
       "prefix": "clab",
       "mgmt": {
         "network": "clab",
-        "bridge": "br-c284108a4ab9",
+        "bridge": "br-67c43159e438",
         "ipv4-subnet": "172.20.20.0/24",
         "ipv4-gw": "172.20.20.1",
         "ipv6-subnet": "2001:172:20:20::/64",
@@ -23,7 +23,7 @@
       "longname": "clab-calico-bgp-rr-br-leaf0",
       "fqdn": "br-leaf0.calico-bgp-rr.io",
       "group": "",
-      "labdir": "/root/wcni/calico/zz-kind-calico-bgp-fullmesh/clab-calico-bgp-rr/br-leaf0",
+      "labdir": "/root/wcni-kind/calico/6-kind-calico-bgp-rr/clab-calico-bgp-rr/br-leaf0",
       "kind": "bridge",
       "image": "",
       "mgmt-net": "",
@@ -34,13 +34,13 @@
       "mgmt-ipv6-prefix-length": 0,
       "mac-address": "",
       "labels": {
-        "clab-mgmt-net-bridge": "br-c284108a4ab9",
+        "clab-mgmt-net-bridge": "br-67c43159e438",
         "clab-node-group": "",
         "clab-node-kind": "bridge",
-        "clab-node-lab-dir": "/root/wcni/calico/zz-kind-calico-bgp-fullmesh/clab-calico-bgp-rr/br-leaf0",
+        "clab-node-lab-dir": "/root/wcni-kind/calico/6-kind-calico-bgp-rr/clab-calico-bgp-rr/br-leaf0",
         "clab-node-name": "br-leaf0",
         "clab-node-type": "",
-        "clab-topo-file": "/root/wcni/calico/zz-kind-calico-bgp-fullmesh/clab.yaml",
+        "clab-topo-file": "/root/wcni-kind/calico/6-kind-calico-bgp-rr/clab.yaml",
         "containerlab": "calico-bgp-rr"
       }
     },
@@ -50,7 +50,7 @@
       "longname": "clab-calico-bgp-rr-br-leaf1",
       "fqdn": "br-leaf1.calico-bgp-rr.io",
       "group": "",
-      "labdir": "/root/wcni/calico/zz-kind-calico-bgp-fullmesh/clab-calico-bgp-rr/br-leaf1",
+      "labdir": "/root/wcni-kind/calico/6-kind-calico-bgp-rr/clab-calico-bgp-rr/br-leaf1",
       "kind": "bridge",
       "image": "",
       "mgmt-net": "",
@@ -61,13 +61,13 @@
       "mgmt-ipv6-prefix-length": 0,
       "mac-address": "",
       "labels": {
-        "clab-mgmt-net-bridge": "br-c284108a4ab9",
+        "clab-mgmt-net-bridge": "br-67c43159e438",
         "clab-node-group": "",
         "clab-node-kind": "bridge",
-        "clab-node-lab-dir": "/root/wcni/calico/zz-kind-calico-bgp-fullmesh/clab-calico-bgp-rr/br-leaf1",
+        "clab-node-lab-dir": "/root/wcni-kind/calico/6-kind-calico-bgp-rr/clab-calico-bgp-rr/br-leaf1",
         "clab-node-name": "br-leaf1",
         "clab-node-type": "",
-        "clab-topo-file": "/root/wcni/calico/zz-kind-calico-bgp-fullmesh/clab.yaml",
+        "clab-topo-file": "/root/wcni-kind/calico/6-kind-calico-bgp-rr/clab.yaml",
         "containerlab": "calico-bgp-rr"
       }
     },
@@ -77,7 +77,7 @@
       "longname": "clab-calico-bgp-rr-leaf0",
       "fqdn": "leaf0.calico-bgp-rr.io",
       "group": "",
-      "labdir": "/root/wcni/calico/zz-kind-calico-bgp-fullmesh/clab-calico-bgp-rr/leaf0",
+      "labdir": "/root/wcni-kind/calico/6-kind-calico-bgp-rr/clab-calico-bgp-rr/leaf0",
       "kind": "linux",
       "image": "192.168.2.100:5000/vyos/vyos:1.2.8",
       "mgmt-net": "",
@@ -88,13 +88,13 @@
       "mgmt-ipv6-prefix-length": 64,
       "mac-address": "",
       "labels": {
-        "clab-mgmt-net-bridge": "br-c284108a4ab9",
+        "clab-mgmt-net-bridge": "br-67c43159e438",
         "clab-node-group": "",
         "clab-node-kind": "linux",
-        "clab-node-lab-dir": "/root/wcni/calico/zz-kind-calico-bgp-fullmesh/clab-calico-bgp-rr/leaf0",
+        "clab-node-lab-dir": "/root/wcni-kind/calico/6-kind-calico-bgp-rr/clab-calico-bgp-rr/leaf0",
         "clab-node-name": "leaf0",
         "clab-node-type": "",
-        "clab-topo-file": "/root/wcni/calico/zz-kind-calico-bgp-fullmesh/clab.yaml",
+        "clab-topo-file": "/root/wcni-kind/calico/6-kind-calico-bgp-rr/clab.yaml",
         "containerlab": "calico-bgp-rr"
       }
     },
@@ -104,7 +104,7 @@
       "longname": "clab-calico-bgp-rr-leaf1",
       "fqdn": "leaf1.calico-bgp-rr.io",
       "group": "",
-      "labdir": "/root/wcni/calico/zz-kind-calico-bgp-fullmesh/clab-calico-bgp-rr/leaf1",
+      "labdir": "/root/wcni-kind/calico/6-kind-calico-bgp-rr/clab-calico-bgp-rr/leaf1",
       "kind": "linux",
       "image": "192.168.2.100:5000/vyos/vyos:1.2.8",
       "mgmt-net": "",
@@ -115,13 +115,13 @@
       "mgmt-ipv6-prefix-length": 64,
       "mac-address": "",
       "labels": {
-        "clab-mgmt-net-bridge": "br-c284108a4ab9",
+        "clab-mgmt-net-bridge": "br-67c43159e438",
         "clab-node-group": "",
         "clab-node-kind": "linux",
-        "clab-node-lab-dir": "/root/wcni/calico/zz-kind-calico-bgp-fullmesh/clab-calico-bgp-rr/leaf1",
+        "clab-node-lab-dir": "/root/wcni-kind/calico/6-kind-calico-bgp-rr/clab-calico-bgp-rr/leaf1",
         "clab-node-name": "leaf1",
         "clab-node-type": "",
-        "clab-topo-file": "/root/wcni/calico/zz-kind-calico-bgp-fullmesh/clab.yaml",
+        "clab-topo-file": "/root/wcni-kind/calico/6-kind-calico-bgp-rr/clab.yaml",
         "containerlab": "calico-bgp-rr"
       }
     },
@@ -131,7 +131,7 @@
       "longname": "clab-calico-bgp-rr-server1",
       "fqdn": "server1.calico-bgp-rr.io",
       "group": "",
-      "labdir": "/root/wcni/calico/zz-kind-calico-bgp-fullmesh/clab-calico-bgp-rr/server1",
+      "labdir": "/root/wcni-kind/calico/6-kind-calico-bgp-rr/clab-calico-bgp-rr/server1",
       "kind": "linux",
       "image": "192.168.2.100:5000/nettool",
       "mgmt-net": "",
@@ -142,13 +142,13 @@
       "mgmt-ipv6-prefix-length": 0,
       "mac-address": "",
       "labels": {
-        "clab-mgmt-net-bridge": "br-c284108a4ab9",
+        "clab-mgmt-net-bridge": "br-67c43159e438",
         "clab-node-group": "",
         "clab-node-kind": "linux",
-        "clab-node-lab-dir": "/root/wcni/calico/zz-kind-calico-bgp-fullmesh/clab-calico-bgp-rr/server1",
+        "clab-node-lab-dir": "/root/wcni-kind/calico/6-kind-calico-bgp-rr/clab-calico-bgp-rr/server1",
         "clab-node-name": "server1",
         "clab-node-type": "",
-        "clab-topo-file": "/root/wcni/calico/zz-kind-calico-bgp-fullmesh/clab.yaml",
+        "clab-topo-file": "/root/wcni-kind/calico/6-kind-calico-bgp-rr/clab.yaml",
         "containerlab": "calico-bgp-rr"
       }
     },
@@ -158,7 +158,7 @@
       "longname": "clab-calico-bgp-rr-server2",
       "fqdn": "server2.calico-bgp-rr.io",
       "group": "",
-      "labdir": "/root/wcni/calico/zz-kind-calico-bgp-fullmesh/clab-calico-bgp-rr/server2",
+      "labdir": "/root/wcni-kind/calico/6-kind-calico-bgp-rr/clab-calico-bgp-rr/server2",
       "kind": "linux",
       "image": "192.168.2.100:5000/nettool",
       "mgmt-net": "",
@@ -169,13 +169,13 @@
       "mgmt-ipv6-prefix-length": 0,
       "mac-address": "",
       "labels": {
-        "clab-mgmt-net-bridge": "br-c284108a4ab9",
+        "clab-mgmt-net-bridge": "br-67c43159e438",
         "clab-node-group": "",
         "clab-node-kind": "linux",
-        "clab-node-lab-dir": "/root/wcni/calico/zz-kind-calico-bgp-fullmesh/clab-calico-bgp-rr/server2",
+        "clab-node-lab-dir": "/root/wcni-kind/calico/6-kind-calico-bgp-rr/clab-calico-bgp-rr/server2",
         "clab-node-name": "server2",
         "clab-node-type": "",
-        "clab-topo-file": "/root/wcni/calico/zz-kind-calico-bgp-fullmesh/clab.yaml",
+        "clab-topo-file": "/root/wcni-kind/calico/6-kind-calico-bgp-rr/clab.yaml",
         "containerlab": "calico-bgp-rr"
       }
     },
@@ -185,7 +185,7 @@
       "longname": "clab-calico-bgp-rr-server3",
       "fqdn": "server3.calico-bgp-rr.io",
       "group": "",
-      "labdir": "/root/wcni/calico/zz-kind-calico-bgp-fullmesh/clab-calico-bgp-rr/server3",
+      "labdir": "/root/wcni-kind/calico/6-kind-calico-bgp-rr/clab-calico-bgp-rr/server3",
       "kind": "linux",
       "image": "192.168.2.100:5000/nettool",
       "mgmt-net": "",
@@ -196,13 +196,13 @@
       "mgmt-ipv6-prefix-length": 0,
       "mac-address": "",
       "labels": {
-        "clab-mgmt-net-bridge": "br-c284108a4ab9",
+        "clab-mgmt-net-bridge": "br-67c43159e438",
         "clab-node-group": "",
         "clab-node-kind": "linux",
-        "clab-node-lab-dir": "/root/wcni/calico/zz-kind-calico-bgp-fullmesh/clab-calico-bgp-rr/server3",
+        "clab-node-lab-dir": "/root/wcni-kind/calico/6-kind-calico-bgp-rr/clab-calico-bgp-rr/server3",
         "clab-node-name": "server3",
         "clab-node-type": "",
-        "clab-topo-file": "/root/wcni/calico/zz-kind-calico-bgp-fullmesh/clab.yaml",
+        "clab-topo-file": "/root/wcni-kind/calico/6-kind-calico-bgp-rr/clab.yaml",
         "containerlab": "calico-bgp-rr"
       }
     },
@@ -212,7 +212,7 @@
       "longname": "clab-calico-bgp-rr-server4",
       "fqdn": "server4.calico-bgp-rr.io",
       "group": "",
-      "labdir": "/root/wcni/calico/zz-kind-calico-bgp-fullmesh/clab-calico-bgp-rr/server4",
+      "labdir": "/root/wcni-kind/calico/6-kind-calico-bgp-rr/clab-calico-bgp-rr/server4",
       "kind": "linux",
       "image": "192.168.2.100:5000/nettool",
       "mgmt-net": "",
@@ -223,13 +223,13 @@
       "mgmt-ipv6-prefix-length": 0,
       "mac-address": "",
       "labels": {
-        "clab-mgmt-net-bridge": "br-c284108a4ab9",
+        "clab-mgmt-net-bridge": "br-67c43159e438",
         "clab-node-group": "",
         "clab-node-kind": "linux",
-        "clab-node-lab-dir": "/root/wcni/calico/zz-kind-calico-bgp-fullmesh/clab-calico-bgp-rr/server4",
+        "clab-node-lab-dir": "/root/wcni-kind/calico/6-kind-calico-bgp-rr/clab-calico-bgp-rr/server4",
         "clab-node-name": "server4",
         "clab-node-type": "",
-        "clab-topo-file": "/root/wcni/calico/zz-kind-calico-bgp-fullmesh/clab.yaml",
+        "clab-topo-file": "/root/wcni-kind/calico/6-kind-calico-bgp-rr/clab.yaml",
         "containerlab": "calico-bgp-rr"
       }
     },
@@ -239,7 +239,7 @@
       "longname": "clab-calico-bgp-rr-spine0",
       "fqdn": "spine0.calico-bgp-rr.io",
       "group": "",
-      "labdir": "/root/wcni/calico/zz-kind-calico-bgp-fullmesh/clab-calico-bgp-rr/spine0",
+      "labdir": "/root/wcni-kind/calico/6-kind-calico-bgp-rr/clab-calico-bgp-rr/spine0",
       "kind": "linux",
       "image": "192.168.2.100:5000/vyos/vyos:1.2.8",
       "mgmt-net": "",
@@ -250,13 +250,13 @@
       "mgmt-ipv6-prefix-length": 64,
       "mac-address": "",
       "labels": {
-        "clab-mgmt-net-bridge": "br-c284108a4ab9",
+        "clab-mgmt-net-bridge": "br-67c43159e438",
         "clab-node-group": "",
         "clab-node-kind": "linux",
-        "clab-node-lab-dir": "/root/wcni/calico/zz-kind-calico-bgp-fullmesh/clab-calico-bgp-rr/spine0",
+        "clab-node-lab-dir": "/root/wcni-kind/calico/6-kind-calico-bgp-rr/clab-calico-bgp-rr/spine0",
         "clab-node-name": "spine0",
         "clab-node-type": "",
-        "clab-topo-file": "/root/wcni/calico/zz-kind-calico-bgp-fullmesh/clab.yaml",
+        "clab-topo-file": "/root/wcni-kind/calico/6-kind-calico-bgp-rr/clab.yaml",
         "containerlab": "calico-bgp-rr"
       }
     },
@@ -266,7 +266,7 @@
       "longname": "clab-calico-bgp-rr-spine1",
       "fqdn": "spine1.calico-bgp-rr.io",
       "group": "",
-      "labdir": "/root/wcni/calico/zz-kind-calico-bgp-fullmesh/clab-calico-bgp-rr/spine1",
+      "labdir": "/root/wcni-kind/calico/6-kind-calico-bgp-rr/clab-calico-bgp-rr/spine1",
       "kind": "linux",
       "image": "192.168.2.100:5000/vyos/vyos:1.2.8",
       "mgmt-net": "",
@@ -277,13 +277,13 @@
       "mgmt-ipv6-prefix-length": 64,
       "mac-address": "",
       "labels": {
-        "clab-mgmt-net-bridge": "br-c284108a4ab9",
+        "clab-mgmt-net-bridge": "br-67c43159e438",
         "clab-node-group": "",
         "clab-node-kind": "linux",
-        "clab-node-lab-dir": "/root/wcni/calico/zz-kind-calico-bgp-fullmesh/clab-calico-bgp-rr/spine1",
+        "clab-node-lab-dir": "/root/wcni-kind/calico/6-kind-calico-bgp-rr/clab-calico-bgp-rr/spine1",
         "clab-node-name": "spine1",
         "clab-node-type": "",
-        "clab-topo-file": "/root/wcni/calico/zz-kind-calico-bgp-fullmesh/clab.yaml",
+        "clab-topo-file": "/root/wcni-kind/calico/6-kind-calico-bgp-rr/clab.yaml",
         "containerlab": "calico-bgp-rr"
       }
     }
@@ -293,13 +293,13 @@
       "a": {
         "node": "br-leaf0",
         "interface": "br-leaf0-net0",
-        "mac": "aa:c1:ab:63:8d:7a",
+        "mac": "aa:c1:ab:7d:b6:6b",
         "peer": "z"
       },
       "z": {
         "node": "server1",
         "interface": "net0",
-        "mac": "aa:c1:ab:b2:29:65",
+        "mac": "aa:c1:ab:35:f4:12",
         "peer": "a"
       }
     },
@@ -307,13 +307,13 @@
       "a": {
         "node": "br-leaf0",
         "interface": "br-leaf0-net1",
-        "mac": "aa:c1:ab:78:af:f1",
+        "mac": "aa:c1:ab:b1:aa:5e",
         "peer": "z"
       },
       "z": {
         "node": "server2",
         "interface": "net0",
-        "mac": "aa:c1:ab:72:c0:9c",
+        "mac": "aa:c1:ab:99:11:ac",
         "peer": "a"
       }
     },
@@ -321,13 +321,13 @@
       "a": {
         "node": "br-leaf1",
         "interface": "br-leaf1-net0",
-        "mac": "aa:c1:ab:df:67:f5",
+        "mac": "aa:c1:ab:79:22:dd",
         "peer": "z"
       },
       "z": {
         "node": "server3",
         "interface": "net0",
-        "mac": "aa:c1:ab:79:9e:79",
+        "mac": "aa:c1:ab:68:be:56",
         "peer": "a"
       }
     },
@@ -335,13 +335,13 @@
       "a": {
         "node": "br-leaf1",
         "interface": "br-leaf1-net1",
-        "mac": "aa:c1:ab:5b:e5:04",
+        "mac": "aa:c1:ab:3f:85:df",
         "peer": "z"
       },
       "z": {
         "node": "server4",
         "interface": "net0",
-        "mac": "aa:c1:ab:00:39:1f",
+        "mac": "aa:c1:ab:36:4c:30",
         "peer": "a"
       }
     },
@@ -349,13 +349,13 @@
       "a": {
         "node": "leaf0",
         "interface": "eth1",
-        "mac": "aa:c1:ab:af:1f:91",
+        "mac": "aa:c1:ab:13:a1:9f",
         "peer": "z"
       },
       "z": {
         "node": "spine0",
         "interface": "eth1",
-        "mac": "aa:c1:ab:16:8c:ea",
+        "mac": "aa:c1:ab:85:7f:05",
         "peer": "a"
       }
     },
@@ -363,13 +363,13 @@
       "a": {
         "node": "leaf0",
         "interface": "eth2",
-        "mac": "aa:c1:ab:ba:7e:26",
+        "mac": "aa:c1:ab:c8:a3:99",
         "peer": "z"
       },
       "z": {
         "node": "spine1",
         "interface": "eth1",
-        "mac": "aa:c1:ab:9a:ab:e4",
+        "mac": "aa:c1:ab:5c:2d:00",
         "peer": "a"
       }
     },
@@ -377,13 +377,13 @@
       "a": {
         "node": "leaf0",
         "interface": "eth3",
-        "mac": "aa:c1:ab:62:80:1f",
+        "mac": "aa:c1:ab:a7:34:ea",
         "peer": "z"
       },
       "z": {
         "node": "br-leaf0",
         "interface": "br-leaf0-net2",
-        "mac": "aa:c1:ab:d7:82:26",
+        "mac": "aa:c1:ab:69:c2:34",
         "peer": "a"
       }
     },
@@ -391,13 +391,13 @@
       "a": {
         "node": "leaf1",
         "interface": "eth1",
-        "mac": "aa:c1:ab:43:7a:fc",
+        "mac": "aa:c1:ab:db:f4:ac",
         "peer": "z"
       },
       "z": {
         "node": "spine0",
         "interface": "eth2",
-        "mac": "aa:c1:ab:46:b0:8c",
+        "mac": "aa:c1:ab:9b:6f:07",
         "peer": "a"
       }
     },
@@ -405,13 +405,13 @@
       "a": {
         "node": "leaf1",
         "interface": "eth2",
-        "mac": "aa:c1:ab:7d:f7:a5",
+        "mac": "aa:c1:ab:e1:1f:50",
         "peer": "z"
       },
       "z": {
         "node": "spine1",
         "interface": "eth2",
-        "mac": "aa:c1:ab:42:d3:c3",
+        "mac": "aa:c1:ab:c3:cd:24",
         "peer": "a"
       }
     },
@@ -419,13 +419,13 @@
       "a": {
         "node": "leaf1",
         "interface": "eth3",
-        "mac": "aa:c1:ab:8e:fc:59",
+        "mac": "aa:c1:ab:d8:54:b3",
         "peer": "z"
       },
       "z": {
         "node": "br-leaf1",
         "interface": "br-leaf1-net2",
-        "mac": "aa:c1:ab:e2:93:e8",
+        "mac": "aa:c1:ab:bd:54:90",
         "peer": "a"
       }
     }

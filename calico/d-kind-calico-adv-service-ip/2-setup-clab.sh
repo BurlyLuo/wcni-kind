@@ -3,6 +3,7 @@ set -v
 
 brctl addbr br-leaf0
 ifconfig br-leaf0 up
+
 brctl addbr br-leaf1
 ifconfig br-leaf1 up
 
@@ -16,7 +17,7 @@ topology:
       cmd: /sbin/init
       binds:
         - /lib/modules:/lib/modules
-
+        - ./startup-conf/spine0-boot.cfg:/opt/vyatta/etc/config/config.boot
 
     spine1:
       kind: linux
@@ -24,7 +25,7 @@ topology:
       cmd: /sbin/init
       binds:
         - /lib/modules:/lib/modules
-
+        - ./startup-conf/spine1-boot.cfg:/opt/vyatta/etc/config/config.boot
 
     leaf0:
       kind: linux
@@ -32,7 +33,7 @@ topology:
       cmd: /sbin/init
       binds:
         - /lib/modules:/lib/modules
-
+        - ./startup-conf/leaf0-boot.cfg:/opt/vyatta/etc/config/config.boot
 
     leaf1:
       kind: linux
@@ -40,14 +41,13 @@ topology:
       cmd: /sbin/init
       binds:
         - /lib/modules:/lib/modules
-
+        - ./startup-conf/leaf1-boot.cfg:/opt/vyatta/etc/config/config.boot
 
     br-leaf0:
       kind: bridge
   
     br-leaf1:
       kind: bridge
-
 
     server1:
       kind: linux
