@@ -1,8 +1,10 @@
 #!/bin/bash
 set -v
+# 1. install CNI[Calico v3.23.2]
 kubectl apply -f ./calico.yaml
-sleep 30
+kubectl wait --timeout=45s --for=condition=Ready=true pods --all -A
 
+# 1.2. disable bgp fullmesh
 cat <<EOF | calicoctl apply -f - 
 apiVersion: projectcalico.org/v3
 items:
@@ -17,6 +19,7 @@ kind: BGPConfigurationList
 metadata:
 EOF
 
+# 1.3. add() bgp configuration for the nodes
 cat <<EOF | calicoctl apply -f - 
 apiVersion: projectcalico.org/v3
 kind: Node
@@ -111,7 +114,6 @@ status:
 EOF
 
 
-
 cat <<EOF | calicoctl apply -f - 
 apiVersion: projectcalico.org/v3
 kind: Node
@@ -142,7 +144,7 @@ status:
   - 10.244.1.0/24
 EOF
 
-
+# 1.4. peer to leaf0 switch
 cat <<EOF | calicoctl apply -f -
 apiVersion: projectcalico.org/v3
 kind: BGPPeer
@@ -154,6 +156,7 @@ spec:
   nodeSelector: rack == 'rack0'
 EOF
 
+# 1.5. peer to leaf1 switch
 cat <<EOF | calicoctl apply -f -
 apiVersion: projectcalico.org/v3
 kind: BGPPeer

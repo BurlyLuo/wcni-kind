@@ -3,6 +3,7 @@ set -v
 
 brctl addbr br-leaf0
 ifconfig br-leaf0 up
+
 brctl addbr br-leaf1
 ifconfig br-leaf1 up
 
@@ -17,14 +18,12 @@ topology:
       binds:
         - /lib/modules:/lib/modules
 
-
     spine1:
       kind: linux
       image: 192.168.2.100:5000/vyos/vyos:1.2.8
       cmd: /sbin/init
       binds:
         - /lib/modules:/lib/modules
-
 
     leaf0:
       kind: linux
@@ -33,7 +32,6 @@ topology:
       binds:
         - /lib/modules:/lib/modules
 
-
     leaf1:
       kind: linux
       image: 192.168.2.100:5000/vyos/vyos:1.2.8
@@ -41,13 +39,11 @@ topology:
       binds:
         - /lib/modules:/lib/modules
 
-
     br-leaf0:
       kind: bridge
   
     br-leaf1:
       kind: bridge
-
 
     server1:
       kind: linux
