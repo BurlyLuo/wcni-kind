@@ -1,6 +1,6 @@
 #!/bin/bash
 set -v
-exec &>./clustermesh-connect-log-rec.txt
+# exec &>./clustermesh-connect-log-rec.txt
 date
 
 cilium clustermesh enable --context kind-cluster1 --service-type NodePort
