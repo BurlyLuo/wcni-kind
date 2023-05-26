@@ -28,4 +28,4 @@ kubectl get nodes -o wide
 kubectl apply -f calico.yaml
 
 # 4. wait all pods ready
-kubectl wait --timeout=45s --for=condition=Ready=true pods --all -A
+kubectl wait --timeout=60s --for=condition=Ready=true pods --all -A
