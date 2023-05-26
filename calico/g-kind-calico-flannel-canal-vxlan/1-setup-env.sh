@@ -28,5 +28,5 @@ kubectl get nodes -o wide
 kubectl apply -f canal.yaml
 
 # 4. wait all pods ready
-kubectl wait --timeout=60s --for=condition=Ready=true pods --all -A
+kubectl wait --timeout=100s --for=condition=Ready=true pods --all -A
 
