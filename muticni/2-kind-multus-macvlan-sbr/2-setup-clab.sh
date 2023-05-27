@@ -1,5 +1,6 @@
 #!/bin/bash
 set -v
+date
 
 brctl addbr br-pool0
 ifconfig br-pool0 up
