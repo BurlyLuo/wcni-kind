@@ -1,6 +1,7 @@
 #!/bin/bash
-set -v 
 date
+set -v
+
 controller_node=`kubectl get nodes --no-headers  -o custom-columns=NAME:.metadata.name| grep control-plane`
 worker_node=`kubectl get nodes --no-headers  -o custom-columns=NAME:.metadata.name| grep worker2`
 
