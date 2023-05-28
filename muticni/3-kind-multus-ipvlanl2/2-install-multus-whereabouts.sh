@@ -2,11 +2,10 @@
 set -v
 date
 
+# 1. install multus and whereabouts
 kubectl apply -f ./multus-cni/deployments/multus-daemonset.yml
-
 kubectl apply -f ./whereabouts/doc/crds/
 
-kubectl get nodes -o wide
-
-kubectl get pods -o wide -A
+# 2. wait all pods ready
+kubectl wait --timeout=100s --for=condition=Ready=true pods --all -A
 
