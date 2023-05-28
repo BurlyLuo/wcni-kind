@@ -1,6 +1,6 @@
 #!/bin/bash
-set -v
 date
+set -v
 
 # 1. install multus and whereabouts
 kubectl apply -f ./multus-cni/deployments/multus-daemonset.yml
