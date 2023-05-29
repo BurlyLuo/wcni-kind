@@ -1,4 +1,5 @@
 #!/bin/bash
+
 set -v
 #1.Add alias
 if [[ $(cat ~/.bashrc | grep cc | wc -l) -gt 0 ]];then echo "alias already exsits"
