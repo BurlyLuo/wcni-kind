@@ -28,7 +28,7 @@ cat <<EOF | kubectl apply -f -
 apiVersion: v1
 kind: Pod
 metadata:
-  name: ipvlan-pod-sbr
+  name: ipvlan-pod-sbr1
   annotations:
     k8s.v1.cni.cncf.io/networks: ipvlanl2-whereabouts-conf@eth1
 spec:
@@ -42,3 +42,20 @@ spec:
   nodeName: ${controller_node}
 EOF
 
+cat <<EOF | kubectl apply -f -
+apiVersion: v1
+kind: Pod
+metadata:
+  name: ipvlan-pod-sbr2
+  annotations:
+    k8s.v1.cni.cncf.io/networks: ipvlanl2-whereabouts-conf@eth1
+spec:
+  containers:
+  - name: nettool
+    image: 192.168.2.100:5000/nettool
+    securityContext:
+      privileged: false
+      capabilities:
+        add: ["NET_ADMIN"]
+  nodeName: ${worker_node}
+EOF
