@@ -1,4 +1,6 @@
 #!/bin/bash
+set -v 
+
 # 1. install CNI[Calico v3.23.2]
 kubectl apply -f calico.yaml
 
