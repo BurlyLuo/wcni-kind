@@ -13,6 +13,8 @@ level=warning msg="BPF bandwidth manager could not read procfs. Disabling the fe
 due to this, vm based k8s is required!
 "
 # 1.prep noCNI env {VM[Ubuntu 20.04]}
+# https://docs.cilium.io/en/latest/network/kubernetes/bandwidth-manager/#bandwidth-manager
+# https://docs.cilium.io/en/latest/network/kubernetes/bandwidth-manager/#limitations
 cat <<EOF | kind create cluster --name=cilium-bandwidth-manager --image=kindest/node:v1.23.4 --config=-
 kind: Cluster
 apiVersion: kind.x-k8s.io/v1alpha4
