@@ -22,7 +22,7 @@ topology:
     server1:
       kind: linux
       image: 192.168.2.100:5000/nettool
-      network-mode: container:control-plane
+      network-mode: container:cilium-l2-aware-lb-control-plane
       exec:
       - ip addr add 12.1.5.10/24 dev net0
       - ip route add 0.0.0.0/0 via 12.1.5.1 table 100
@@ -31,7 +31,7 @@ topology:
     server2:
       kind: linux
       image: 192.168.2.100:5000/nettool
-      network-mode: container:worker
+      network-mode: container:cilium-l2-aware-lb-worker
       exec:
       - ip addr add 12.1.5.11/24 dev net0
       - ip route add 0.0.0.0/0 via 12.1.5.1 table 100
@@ -40,7 +40,7 @@ topology:
     server3:
       kind: linux
       image: 192.168.2.100:5000/nettool
-      network-mode: container:worker2
+      network-mode: container:cilium-l2-aware-lb-worker2
       exec:
       - ip addr add 12.1.5.12/24 dev net0
       - ip route add 0.0.0.0/0 via 12.1.5.1 table 100
