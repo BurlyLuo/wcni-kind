@@ -10,6 +10,7 @@ helm repo add cilium https://helm.cilium.io/ > /dev/null 2>&1
 help repo update > /dev/null 2>&1
 
 # [Do not set "--set k8sServiceHost=$controller_node_ip --set k8sServicePort=6443" {kk describe ds/cilium to see the rc}]
+# https://github.com/cilium/cilium/issues/23280
 helm install cilium cilium/cilium --version 1.14.0-rc.0 --namespace kube-system --set debug.enabled=true --set debug.verbose=datapath --set monitorAggregation=none --set cluster.name=cilium-bgp --set tunnel=disabled --set ipam.mode=kubernetes --set ipv4NativeRoutingCIDR=10.0.0.0/8 --set bgpControlPlane.enabled=true --set k8s.requireIPv4PodCIDR=true
 
 # 3. wait all pods ready

@@ -1,0 +1,41 @@
+apiVersion: apps/v1
+#kind: Deployment
+kind: DaemonSet  
+metadata:
+  name: wluo
+spec:
+  #replicas: 2
+  selector:
+    matchLabels:
+      app: wluo
+  template:
+    metadata:
+      labels:
+        app: wluo
+    spec:
+      containers:
+      - image: ealen/echo-server:latest
+        imagePullPolicy: IfNotPresent
+        name: wluo
+        ports:
+        - containerPort: 80
+        env:
+        - name: PORT
+          value: "80"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: wluo
+spec:
+  ipFamilyPolicy: PreferDualStack
+  ipFamilies:
+  - IPv6
+  - IPv4
+  ports:
+    - port: 80
+      targetPort: 80
+      protocol: TCP
+  type: ClusterIP
+  selector:
+    app: wluo

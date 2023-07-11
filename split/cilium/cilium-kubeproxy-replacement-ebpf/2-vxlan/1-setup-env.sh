@@ -33,6 +33,10 @@ helm repo update > /dev/null 2>&1
 # VxLAN Options()
 # kubeproxyreplacement Options(--set kubeProxyReplacement=strict)
 # eBPF Host Routing(--set bpf.masquerade=true)
+# https://docs.cilium.io/en/v1.14/network/kubernetes/kubeproxy-free/#kube-proxy-hybrid-modes
+# The following Helm setup below would be equivalent to kubeProxyReplacement=true in a kube-proxy-free environment:
+# helm install cilium cilium/cilium --version 1.14.0-rc.0 --namespace kube-system --set kubeProxyReplacement=false --set socketLB.enabled=true --set nodePort.enabled=true --set externalIPs.enabled=true --set hostPort.enabled=true --set k8sServiceHost=${API_SERVER_IP} --set k8sServicePort=${API_SERVER_PORT}
+
 helm install cilium cilium/cilium --set k8sServiceHost=$controller_node_ip --set k8sServicePort=6443 --version 1.14.0-rc.0 --namespace kube-system --set debug.enabled=true --set debug.verbose=datapath --set monitorAggregation=none --set ipam.mode=cluster-pool --set cluster.name=cilium-kubeproxy-replacement-ebpf-vxlan --set kubeProxyReplacement=strict --set bpf.masquerade=true 
 
 # 4. wait all pods ready
