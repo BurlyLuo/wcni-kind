@@ -19,9 +19,6 @@ spec:
     neighbors:
     - peerAddress: "10.1.5.1/24"
       peerASN: 65005
-      gracefulRestart:
-        enabled: true
-        restartTimeSeconds: 120
 ---
 apiVersion: "cilium.io/v2alpha1"
 kind: CiliumBGPPeeringPolicy
@@ -40,8 +37,5 @@ spec:
     neighbors:
     - peerAddress: "10.1.8.1/24"
       peerASN: 65008
-      gracefulRestart:
-        enabled: true
-        restartTimeSeconds: 120
 EOF
 
