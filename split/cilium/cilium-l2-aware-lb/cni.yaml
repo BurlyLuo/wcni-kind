@@ -33,7 +33,7 @@ spec:
   selector:
     app: wluo
   externalIPs:
-  - 12.1.5.100
+  - 172.18.0.100
   ports:
   - name: wluo
     port: 80
