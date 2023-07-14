@@ -10,6 +10,8 @@ metadata:
     color: red
 spec:
   type: LoadBalancer
+  selector:
+    color: red
   ports:
   - port: 80
 ---
