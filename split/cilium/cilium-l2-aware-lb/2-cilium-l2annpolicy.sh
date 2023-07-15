@@ -1,3 +1,11 @@
+#/bin/bash
+set -v
+date
+
+kubectl apply -f ./cni.yaml
+kubectl wait --timeout=100s --for=condition=Ready=true pods --all
+
+cat <<EOF | kubectl apply -f -
 apiVersion: "cilium.io/v2alpha1"
 kind: CiliumL2AnnouncementPolicy
 metadata:
@@ -14,4 +22,7 @@ spec:
   - eth0
   externalIPs: true
   loadBalancerIPs: true
+EOF
+
+kubectl patch svc wluo --patch '{"metadata": {"labels": {"app": "wluo"}}}'
 
