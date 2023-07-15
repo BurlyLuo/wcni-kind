@@ -47,3 +47,6 @@ kubectl -nkube-system exec -it ds/cilium -- cilium status
 # 6. cgroup v2 verify
 for container in $(docker ps  -a --format "table {{.Names}}" | grep cilium-lb-ipam-kpr);do docker exec $container ls -al /proc/self/ns/cgroup;done
 
+# 7. issue list
+# [DSR with Geneve - Recv failure: Connection reset by peer] https://github.com/cilium/cilium/issues/26723
+
