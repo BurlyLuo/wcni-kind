@@ -18,13 +18,20 @@ topology:
     br-pool0:
       kind: bridge
 
+    client:
+      kind: linux
+      image: 192.168.2.100:5000/nettool
+      exec:
+      - ip addr add 12.1.6.10/24 dev eth1
+      - ip route replace default via 12.1.6.1
+   
     server1:
       kind: linux
       image: 192.168.2.100:5000/nettool
       network-mode: container:cilium-l2-aware-lb-ipam-control-plane
       exec:
       - ip addr add 12.1.5.10/24 dev eth1
-      - ip route add 0.0.0.0/0 via 12.1.5.1 table 100
+      - ip route add 12.1.6.0/24 via 12.1.5.1 table 100
       - ip rule add from 12.1.5.0/24 table 100
 
     server2:
@@ -33,7 +40,7 @@ topology:
       network-mode: container:cilium-l2-aware-lb-ipam-worker
       exec:
       - ip addr add 12.1.5.11/24 dev eth1
-      - ip route add 0.0.0.0/0 via 12.1.5.1 table 100
+      - ip route add 12.1.6.0/24 via 12.1.5.1 table 100
       - ip rule add from 12.1.5.0/24 table 100
 
     server3:
@@ -42,7 +49,7 @@ topology:
       network-mode: container:cilium-l2-aware-lb-ipam-worker2
       exec:
       - ip addr add 12.1.5.12/24 dev eth1
-      - ip route add 0.0.0.0/0 via 12.1.5.1 table 100
+      - ip route add 12.1.6.0/24 via 12.1.5.1 table 100
       - ip rule add from 12.1.5.0/24 table 100
 
 
@@ -52,6 +59,7 @@ topology:
     - endpoints: ["br-pool0:br-pool0-net2", "server3:eth1"]
 
     - endpoints: ["gw0:eth1", "br-pool0:br-pool0-net3"]
+    - endpoints: ["gw0:eth2", "client:eth1"]
 
 EOF
 
