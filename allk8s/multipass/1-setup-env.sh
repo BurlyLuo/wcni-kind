@@ -2,7 +2,7 @@
 set -v
 
 # 1. Deploy multipass vm
-multipass stop --all;multipass delete --all;multipass purge;multipass list;rm -rf /root/.ssh/known_hosts > /dev/null 2>&1
+multipass stop --all;multipass delete --all;multipass purge;multipass list;sed -i '1!d' /root/.ssh/known_hosts > /dev/null 2>&1
 
 multipass launch 22.04 -n k3s-master0 -c 2 -m 2.5G -d 10G --cloud-init - <<EOF
 # cloud-config
