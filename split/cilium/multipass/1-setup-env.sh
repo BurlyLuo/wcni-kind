@@ -9,9 +9,8 @@ do
   multipass launch 22.04 -n $node -c 2 -m 2G -d 10G --cloud-init - <<'EOF'
   # cloud-config
   runcmd:
-    - sudo echo 'ubuntu:hive' | chpasswd
     - sudo sed -i "s/PasswordAuthentication no/PasswordAuthentication yes/g" /etc/ssh/sshd_config
-    - echo "PermitRootLogin yes" >> /etc/ssh/sshd_config
+    - sudo echo "PermitRootLogin yes" >> /etc/ssh/sshd_config
     - echo 'root:hive' | sudo chpasswd
     - sudo systemctl restart sshd
 EOF
@@ -20,7 +19,7 @@ done
 # 2. prep env[ubuntu 22.04]
 mapfile -t ip_addresses < <(multipass list | grep -E 'k3s-master0|k3s-worker1|k3s-worker2' | awk '{print $3}')
 
-for ip in 0 1 2;do sshpass -p hive ssh-copy-id -o StrictHostKeyChecking=no -p 22 root@${ip_addresses[$ip]} > /dev/null 2>&1;done
+for ip_id in 0 1 2;do sshpass -p hive ssh-copy-id -o StrictHostKeyChecking=no -p 22 root@${ip_addresses[$ip_id]} > /dev/null 2>&1;done
 
 k3sup install --ip=${ip_addresses[0]} --user=root --sudo --cluster --k3s-version=v1.27.3+k3s1 --k3s-extra-args "--flannel-backend=none --cluster-cidr=10.10.0.0/16 --disable-network-policy --disable-kube-proxy --disable traefik --disable servicelb --node-ip=${ip_addresses[0]}" --local-path $HOME/.kube/config --context=k3s-ha
 
