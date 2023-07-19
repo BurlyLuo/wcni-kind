@@ -1,44 +1,34 @@
-#!/bin/bash
-date
+#/bin/bash
 set -v
 
-# 0.Notes
-echo "
-***************************************************************************************************************
-$ kk logs ds/cilium | grep -i "BPF bandwidth manager"
-Found 3 pods, using pod/cilium-v4ncj
-level=info msg="  --enable-bandwidth-manager='true'" subsys=daemon
-level=warning msg="BPF bandwidth manager could not read procfs. Disabling the feature." error="Failed to read /host/proc/sys/net/core/default_qdisc: open /host/proc/sys/net/core/default_qdisc: no such file or directory" subsys=bandwidth-manager
-***************************************************************************************************************
-due to this, vm based k8s is required!
-"
-# 1.prep noCNI env {VM[Ubuntu 20.04]}
-# https://docs.cilium.io/en/latest/network/kubernetes/bandwidth-manager/#bandwidth-manager
-# https://docs.cilium.io/en/latest/network/kubernetes/bandwidth-manager/#limitations
-cat <<EOF | kind create cluster --name=cilium-bandwidth-manager --image=kindest/node:v1.23.4 --config=-
-kind: Cluster
-apiVersion: kind.x-k8s.io/v1alpha4
-networking:
-  disableDefaultCNI: true
-  kubeProxyMode: "none"
+# 1. Deploy multipass vm
+multipass stop --all;multipass delete --all;multipass purge;multipass list;sed -i '1!d' /root/.ssh/known_hosts > /dev/null 2>&1
+kubectl config delete-context k3s-ha > /dev/null 2>&1
 
-nodes:
-  - role: control-plane
-  - role: worker
-  - role: worker
-        
-containerdConfigPatches:
-- |-
-  [plugins."io.containerd.grpc.v1.cri".registry.mirrors."192.168.2.100:5000"]
-    endpoint = ["http://192.168.2.100:5000"]
+for node in k3s-master0 k3s-worker1 k3s-worker2
+do
+  multipass launch 22.04 -n $node -c 2 -m 2G -d 10G --cloud-init - <<'EOF'
+  # cloud-config
+  runcmd:
+    - sudo sed -i "s/PasswordAuthentication no/PasswordAuthentication yes/g" /etc/ssh/sshd_config
+    - sudo echo "PermitRootLogin yes" >> /etc/ssh/sshd_config
+    - echo 'root:hive' | sudo chpasswd
+    - sudo systemctl restart sshd
 EOF
+done
 
-# 2.remove taints
-controller_node_ip=`kubectl get node -o wide --no-headers | grep -E "control-plane|bpf1" | awk -F " " '{print $6}'`
-kubectl taint nodes $(kubectl get nodes -o name | grep control-plane) node-role.kubernetes.io/master:NoSchedule-
-kubectl get nodes -o wide
+# 2. prep env[ubuntu 22.04]
+mapfile -t ip_addresses < <(multipass list | grep -E 'k3s-master0|k3s-worker1|k3s-worker2' | awk '{print $3}')
 
-# 3.install cni
+for ip_id in 0 1 2;do sshpass -p hive ssh-copy-id -o StrictHostKeyChecking=no -p 22 root@${ip_addresses[$ip_id]} > /dev/null 2>&1;done
+
+k3sup install --ip=${ip_addresses[0]} --user=root --sudo --cluster --k3s-version=v1.27.3+k3s1 --k3s-extra-args "--flannel-backend=none --cluster-cidr=10.10.0.0/16 --disable-network-policy --disable-kube-proxy --disable traefik --disable servicelb --node-ip=${ip_addresses[0]}" --local-path $HOME/.kube/config --context=k3s-ha
+
+k3sup join --ip ${ip_addresses[1]} --user root --sudo --k3s-version=v1.27.3+k3s1 --server --server-ip ${ip_addresses[0]} --server-user root --k3s-extra-args "--flannel-backend=none --cluster-cidr=10.10.0.0/16 --disable-network-policy --disable-kube-proxy --disable traefik --disable servicelb --node-ip=${ip_addresses[1]}"
+
+k3sup join --ip ${ip_addresses[2]} --user root --sudo --k3s-version=v1.27.3+k3s1 --server --server-ip ${ip_addresses[0]} --server-user root --k3s-extra-args "--flannel-backend=none --cluster-cidr=10.10.0.0/16 --disable-network-policy --disable-kube-proxy --disable traefik --disable servicelb --node-ip=${ip_addresses[2]}"
+
+# 3. install cni
 helm repo add cilium https://helm.cilium.io > /dev/null 2>&1
 helm repo update > /dev/null 2>&1
 
@@ -46,14 +36,11 @@ helm repo update > /dev/null 2>&1
 # kubeproxyreplacement Options(--set kubeProxyReplacement=true)
 # eBPF Host Routing(--set bpf.masquerade=true)
 # bandwidthManager(--set bandwidthManager.enabled=true)
-helm install cilium cilium/cilium --set k8sServiceHost=$controller_node_ip --set k8sServicePort=6443 --version 1.14.0-rc.0 --namespace kube-system --set debug.enabled=true --set debug.verbose=datapath --set monitorAggregation=none --set ipam.mode=cluster-pool --set cluster.name=cilium-bandwidth-manager --set kubeProxyReplacement=true --set tunnel=disabled --set autoDirectNodeRoutes=true --set ipv4NativeRoutingCIDR="10.0.0.0/8" --set bpf.masquerade=true --set bandwidthManager.enabled=true 
+helm install cilium cilium/cilium --set k8sServiceHost=${ip_addresses[0]} --set k8sServicePort=6443 --version 1.14.0-rc.0 --namespace kube-system --set debug.enabled=true --set debug.verbose=datapath --set monitorAggregation=none --set ipam.mode=cluster-pool --set cluster.name=cilium-bandwidth-manager --set kubeProxyReplacement=true --set tunnel=disabled --set autoDirectNodeRoutes=true --set ipv4NativeRoutingCIDR="10.0.0.0/8" --set bandwidthManager.enabled=true 
 
 # 4. wait all pods ready
 kubectl wait --timeout=100s --for=condition=Ready=true pods --all -A
 
 # 5. cilium status
 kubectl -nkube-system exec -it ds/cilium -- cilium status
-
-# 6. cgroup v2 verify
-for container in $(docker ps  -a --format "table {{.Names}}" | grep cilium-bandwidth-manager);do docker exec $container ls -al /proc/self/ns/cgroup;done
 

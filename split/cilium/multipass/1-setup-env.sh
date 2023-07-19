@@ -3,6 +3,7 @@ set -v
 
 # 1. Deploy multipass vm
 multipass stop --all;multipass delete --all;multipass purge;multipass list;sed -i '1!d' /root/.ssh/known_hosts > /dev/null 2>&1
+kubectl config delete-context k3s-ha > /dev/null 2>&1
 
 for node in k3s-master0 k3s-worker1 k3s-worker2
 do
@@ -27,7 +28,7 @@ k3sup join --ip ${ip_addresses[1]} --user root --sudo --k3s-version=v1.27.3+k3s1
 
 k3sup join --ip ${ip_addresses[2]} --user root --sudo --k3s-version=v1.27.3+k3s1 --server --server-ip ${ip_addresses[0]} --server-user root --k3s-extra-args "--flannel-backend=none --cluster-cidr=10.10.0.0/16 --disable-network-policy --disable-kube-proxy --disable traefik --disable servicelb --node-ip=${ip_addresses[2]}"
 
-# 3.install cni
+# 3. install cni
 helm repo add cilium https://helm.cilium.io > /dev/null 2>&1
 helm repo update > /dev/null 2>&1
 
@@ -35,7 +36,7 @@ helm repo update > /dev/null 2>&1
 # kubeproxyreplacement Options(--set kubeProxyReplacement=true)
 # eBPF Host Routing(--set bpf.masquerade=true)
 # bandwidthManager(--set bandwidthManager.enabled=true)
-helm install cilium cilium/cilium --set k8sServiceHost=${ip_addresses[0]} --set k8sServicePort=6443 --version 1.14.0-rc.0 --namespace kube-system --set debug.enabled=true --set debug.verbose=datapath --set monitorAggregation=none --set ipam.mode=cluster-pool --set cluster.name=cilium-bandwidth-manager --set kubeProxyReplacement=true --set tunnel=disabled --set autoDirectNodeRoutes=true --set ipv4NativeRoutingCIDR="10.0.0.0/8" --set bpf.masquerade=true --set bandwidthManager.enabled=true 
+helm install cilium cilium/cilium --set k8sServiceHost=${ip_addresses[0]} --set k8sServicePort=6443 --version 1.14.0-rc.0 --namespace kube-system --set debug.enabled=true --set debug.verbose=datapath --set monitorAggregation=none --set ipam.mode=cluster-pool --set cluster.name=cilium-bandwidth-manager --set kubeProxyReplacement=true --set tunnel=disabled --set autoDirectNodeRoutes=true --set ipv4NativeRoutingCIDR="10.0.0.0/8" --set bandwidthManager.enabled=true 
 
 # 4. wait all pods ready
 kubectl wait --timeout=100s --for=condition=Ready=true pods --all -A
