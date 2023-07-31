@@ -1,7 +1,8 @@
 #!/bin/bash
 set -v
 
-brctl addbr br-leaf0;ifconfig br-leaf0 up;brctl addbr br-leaf1;ifconfig br-leaf1 up
+ip l s br-leaf0 down && brctl delbr br-leaf0 && ip l s br-leaf1 down && brctl delbr br-leaf1 > /dev/null 2>&1
+brctl addbr br-leaf0;ip l s br-leaf0 up;brctl addbr br-leaf1;ip l s br-leaf1 up
 
 cat <<EOF>clab.yaml | clab deploy -t clab.yaml -
 name: cilium-bgp
