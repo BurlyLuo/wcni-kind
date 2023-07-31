@@ -40,5 +40,5 @@ kubectl wait --timeout=100s --for=condition=Ready=true pods --all -A
 kubectl -nkube-system exec -it ds/cilium -- cilium status
 
 # 6. cgroup v2 verify
-for container in $(docker ps  -a --format "table {{.Names}}" | grep cilium-kubeproxy);do docker exec $container ls -al /proc/self/ns/cgroup;done
+for container in $(docker ps -a --format "table {{.Names}}" | grep cilium-kubeproxy);do docker exec $container ls -al /proc/self/ns/cgroup;done
 
