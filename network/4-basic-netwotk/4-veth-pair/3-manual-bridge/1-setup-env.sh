@@ -1,6 +1,8 @@
 #!/bin/bash
-
 set -v
+
+{ ip netns del ns1 && ip netns del ns2; } > /dev/null 2>&1
+
 ip netns add ns1
 ip netns add ns2
 
