@@ -2,7 +2,7 @@
 set -v
 
 # 1. Deploy multipass vm
-multipass stop --all;multipass delete --purge --all;sed -i '1!d' /root/.ssh/known_hosts > /dev/null 2>&1;kubectl config delete-context k3s-ha > /dev/null 2>&1
+multipass stop --all;multipass delete --purge --all;{ sed -i '1!d' /root/.ssh/known_hosts && kubectl config delete-context k3s-ha; } > /dev/null 2>&1
 
 for node in k3s-master0 k3s-worker1 k3s-worker2
 do
