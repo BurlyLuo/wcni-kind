@@ -1,6 +1,8 @@
 #/bin/bash
 set -v
 
+echo Usage: ./1-setup-env.sh 3  [The default value is 1]
+
 # 1. Deploy multipass vm
 multipass stop --all;multipass delete --purge --all;{ sed -i '1!d' /root/.ssh/known_hosts && kubectl config delete-context k3s-ha; } > /dev/null 2>&1
 
