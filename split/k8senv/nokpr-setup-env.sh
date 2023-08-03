@@ -1,12 +1,10 @@
 #/bin/bash
 set -v
 
-# 1. Deploy multipass vm
-multipass stop --all;multipass delete --purge --all;{ sed -i '1!d' /root/.ssh/known_hosts && sed -i '/^10\.241\.245\./d' /etc/hosts; } > /dev/null 2>&1
-
+# 1. Deploy multipass vmn(kubeProxyReplacement=false(default))
 for ((i=0; i<${3:-3}; i++))
 do
-  multipass launch 22.04 -n vm"$i" -c 2 -m 2G -d 10G --cloud-init - <<EOF
+  multipass launch 22.04 -n vmn"$i" -c 2 -m 2G -d 10G --cloud-init - <<EOF
   # cloud-config
   runcmd:
     - sudo sed -i 's/PasswordAuthentication no/PasswordAuthentication yes/g' /etc/ssh/sshd_config
@@ -18,15 +16,20 @@ EOF
 done
 
 # 2. prep env[ubuntu 22.04]
-mapfile -t ip_addresses < <(multipass list | grep -E 'vm' | awk '{print $3}')
+mapfile -t ip_addresses < <(multipass list | grep -E 'vmn' | awk '{print $3}')
 
-for ((ip_id=0; ip_id<${#ip_addresses[@]}; ip_id++));do sshpass -p hive ssh-copy-id -o StrictHostKeyChecking=no -p 22 root@${ip_addresses[$ip_id]} > /dev/null 2>&1;done
+for ((ip_id=0; ip_id<${#ip_addresses[@]}; ip_id++)); do
+    sshpass -p hive ssh-copy-id -o StrictHostKeyChecking=no -p 22 root@${ip_addresses[$ip_id]} > /dev/null 2>&1
 
-multipass list | grep vm | grep "10.241.245." | awk -F " " '{print $3, $1}' >> /etc/hosts >> /etc/hosts
+    echo "${ip_addresses[$ip_id]} vmn$ip_id" >> /etc/hosts
 
-k3sup install --ip=${ip_addresses[0]} --user=root --sudo --cluster --k3s-version=v1.27.3+k3s1 --k3s-extra-args "--flannel-backend=none --cluster-cidr=10.244.0.0/16 --disable-network-policy --disable traefik --disable servicelb --node-ip=${ip_addresses[0]}" --local-path $HOME/.kube/config --context=k3s-ha
+    master_ip=${ip_addresses[0]}
+    k3s_version="v1.27.3+k3s1"
 
-k3sup join --ip ${ip_addresses[1]} --user root --sudo --k3s-version=v1.27.3+k3s1 --server --server-ip ${ip_addresses[0]} --server-user root --k3s-extra-args "--flannel-backend=none --cluster-cidr=10.244.0.0/16 --disable-network-policy --disable traefik --disable servicelb --node-ip=${ip_addresses[1]}"
-
-k3sup join --ip ${ip_addresses[2]} --user root --sudo --k3s-version=v1.27.3+k3s1 --server --server-ip ${ip_addresses[0]} --server-user root --k3s-extra-args "--flannel-backend=none --cluster-cidr=10.244.0.0/16 --disable-network-policy --disable traefik --disable servicelb --node-ip=${ip_addresses[2]}"
+    if [ $ip_id -eq 0 ]; then
+	k3sup install --ip=$master_ip --merge --user=root --sudo --cluster --k3s-version=v1.27.3+k3s1 --k3s-extra-args "--flannel-backend=none --cluster-cidr=10.244.0.0/16 --disable-network-policy --disable traefik --disable servicelb --node-ip=$master_ip" --local-path $HOME/.kube/config --context=nokpr
+    else
+        k3sup join --ip ${ip_addresses[$ip_id]} --user root --sudo --k3s-version=$k3s_version --server-ip $master_ip --server-user root
+    fi
+done
 
