@@ -2,7 +2,7 @@
 set -v
 
 # 1. Deploy multipass vmn(kubeProxyReplacement=false(default))
-for ((i=0; i<${3:-3}; i++))
+for ((i=0; i<${1:-3}; i++))
 do
   multipass launch 22.04 -n vmn"$i" -c 2 -m 2G -d 10G --cloud-init - <<EOF
   # cloud-config
