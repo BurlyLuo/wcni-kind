@@ -6,7 +6,7 @@
       "prefix": "clab",
       "mgmt": {
         "network": "clab",
-        "bridge": "br-38769355a711",
+        "bridge": "br-efaf00c646f8",
         "ipv4-subnet": "172.20.20.0/24",
         "ipv4-gw": "172.20.20.1",
         "ipv6-subnet": "2001:172:20:20::/64",
@@ -34,7 +34,7 @@
       "mgmt-ipv6-prefix-length": 0,
       "mac-address": "",
       "labels": {
-        "clab-mgmt-net-bridge": "br-38769355a711",
+        "clab-mgmt-net-bridge": "br-efaf00c646f8",
         "clab-node-group": "",
         "clab-node-kind": "bridge",
         "clab-node-lab-dir": "/root/wcni-kind/split/multus/9-host-device/clab-cni-multus/br-pool0",
@@ -61,7 +61,7 @@
       "mgmt-ipv6-prefix-length": 64,
       "mac-address": "",
       "labels": {
-        "clab-mgmt-net-bridge": "br-38769355a711",
+        "clab-mgmt-net-bridge": "br-efaf00c646f8",
         "clab-node-group": "",
         "clab-node-kind": "linux",
         "clab-node-lab-dir": "/root/wcni-kind/split/multus/9-host-device/clab-cni-multus/gw0",
@@ -88,7 +88,7 @@
       "mgmt-ipv6-prefix-length": 0,
       "mac-address": "",
       "labels": {
-        "clab-mgmt-net-bridge": "br-38769355a711",
+        "clab-mgmt-net-bridge": "br-efaf00c646f8",
         "clab-node-group": "",
         "clab-node-kind": "linux",
         "clab-node-lab-dir": "/root/wcni-kind/split/multus/9-host-device/clab-cni-multus/server1",
@@ -115,7 +115,7 @@
       "mgmt-ipv6-prefix-length": 0,
       "mac-address": "",
       "labels": {
-        "clab-mgmt-net-bridge": "br-38769355a711",
+        "clab-mgmt-net-bridge": "br-efaf00c646f8",
         "clab-node-group": "",
         "clab-node-kind": "linux",
         "clab-node-lab-dir": "/root/wcni-kind/split/multus/9-host-device/clab-cni-multus/server2",
@@ -142,7 +142,7 @@
       "mgmt-ipv6-prefix-length": 0,
       "mac-address": "",
       "labels": {
-        "clab-mgmt-net-bridge": "br-38769355a711",
+        "clab-mgmt-net-bridge": "br-efaf00c646f8",
         "clab-node-group": "",
         "clab-node-kind": "linux",
         "clab-node-lab-dir": "/root/wcni-kind/split/multus/9-host-device/clab-cni-multus/server3",
@@ -158,13 +158,13 @@
       "a": {
         "node": "br-pool0",
         "interface": "br-pool0-net0",
-        "mac": "aa:c1:ab:b4:5b:a6",
+        "mac": "aa:c1:ab:80:a0:1f",
         "peer": "z"
       },
       "z": {
         "node": "server1",
         "interface": "net0",
-        "mac": "aa:c1:ab:df:25:70",
+        "mac": "aa:c1:ab:26:20:82",
         "peer": "a"
       }
     },
@@ -172,13 +172,13 @@
       "a": {
         "node": "br-pool0",
         "interface": "br-pool0-net1",
-        "mac": "aa:c1:ab:eb:85:cf",
+        "mac": "aa:c1:ab:42:9b:60",
         "peer": "z"
       },
       "z": {
         "node": "server2",
         "interface": "net0",
-        "mac": "aa:c1:ab:63:c7:3b",
+        "mac": "aa:c1:ab:33:c4:14",
         "peer": "a"
       }
     },
@@ -186,13 +186,13 @@
       "a": {
         "node": "br-pool0",
         "interface": "br-pool0-net2",
-        "mac": "aa:c1:ab:3e:2c:b0",
+        "mac": "aa:c1:ab:d7:46:72",
         "peer": "z"
       },
       "z": {
         "node": "server3",
         "interface": "net0",
-        "mac": "aa:c1:ab:fa:4b:a7",
+        "mac": "aa:c1:ab:a4:69:82",
         "peer": "a"
       }
     },
@@ -200,13 +200,13 @@
       "a": {
         "node": "gw0",
         "interface": "eth1",
-        "mac": "aa:c1:ab:80:29:79",
+        "mac": "aa:c1:ab:45:cd:1c",
         "peer": "z"
       },
       "z": {
         "node": "br-pool0",
         "interface": "br-pool0-net3",
-        "mac": "aa:c1:ab:25:74:35",
+        "mac": "aa:c1:ab:65:92:a4",
         "peer": "a"
       }
     }

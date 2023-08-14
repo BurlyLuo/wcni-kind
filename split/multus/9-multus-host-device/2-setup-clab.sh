@@ -1,7 +1,8 @@
 #!/bin/bash
 set -v
 
-{ ip l s br-pool0 down;ip l d br-pool0; } > /dev/null 2>&1 && ip l a br-pool0 type bridge && ip l s br-pool0 up
+{ ip l s br-pool0 down;ip l d br-pool0; } > /dev/null 2>&1
+ip l a br-pool0 type bridge && ip l s br-pool0 up
 
 cat <<EOF>clab.yaml | clab deploy -t clab.yaml -
 name: cni-multus
