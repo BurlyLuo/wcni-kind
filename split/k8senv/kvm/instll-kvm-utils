@@ -1,6 +1,0 @@
-apt install -y qemu-kvm virt-manager libvirt-daemon-system virtinst libvirt-clients bridge-utils
-apt install guestfish
-virt-customize -a /data/CentOS-8-GenericCloud-8.2.2004-20200611.2.x86_64.qcow2 --root-password password:hive
-
-virt-install --name vm0 --memory 2048  --cpu host-model --vcpus=2 --disk /data/centos8.qcow2,device=disk,bus=virtio --disk size=10 --os-type linux --os-variant centos8 --virt-type kvm --graphics none --network=bridge=brnat,model=virtio --import
-

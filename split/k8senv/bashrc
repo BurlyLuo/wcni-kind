@@ -13,8 +13,8 @@ HISTCONTROL=ignoredups:ignorespace
 shopt -s histappend
 
 # for setting history length see HISTSIZE and HISTFILESIZE in bash(1)
-HISTSIZE=1000
-HISTFILESIZE=2000
+HISTSIZE=10000
+HISTFILESIZE=20000
 
 # check the window size after each command and, if necessary,
 # update the values of LINES and COLUMNS.
@@ -82,6 +82,8 @@ alias ll='ls -lF'
 alias la='ls -A'
 alias l='ls -CF'
 alias vi="vim"
+
+
 alias wp="cd /root/wcni-kind/split/"
 alias k="kubectl"
 alias cls="kind get clusters $1"
@@ -94,15 +96,23 @@ alias sc="kubectl config use-context $1"
 alias lo="docker exec -it $1 $2"
 alias all="kubectl get pods -A"
 alias "clabrm"="clab destroy -t clab.yaml"
+
+
 alias ms="kubectl -nmetallb-system"
 alias net="cd /root/wcni-kind/network"
 
 alias is="kubectl -nistio-system"
 alias ii="kubectl -nistio-ingress"
 
+
+
 alias mls="multipass list"
-alias mld="multipass delete --purge --all && kubectl config delete-context k3s-ha > /dev/null 2>&1"
 alias mm="multipass"
+
+alias mldk='set -f; for vm in $(multipass list | grep vmk | awk -F " " "{print \$1}"); do multipass stop $vm; multipass delete --purge $vm; done && { sed -i "1!d" /root/.ssh/known_hosts && kubectl config delete-cluster kpr && kubectl config delete-context kpr && kubectl config delete-user kpr; } > /dev/null 2>&1; set +f'
+
+alias mldk='set -f; for vm in $(multipass list | grep vmn | awk -F " " "{print \$1}"); do multipass stop $vm; multipass delete --purge $vm; done && { sed -i "1!d" /root/.ssh/known_hosts && kubectl config delete-cluster nokpr && kubectl config delete-context nokpr && kubectl config delete-user nokpr; } > /dev/null 2>&1; set +f'
+
 
 # Alias definitions.
 # You may want to put all your additions into a separate file like
@@ -113,12 +123,7 @@ if [ -f ~/.bash_aliases ]; then
     . ~/.bash_aliases
 fi
 
-#if [[ -n $SSH_CONNECTION ]]; then
-#    PS1="\[\e[31m\]Please git clone the latest wcni-kind repo \[\e[m\]\w \$ "
-#fi
-
 if [[ -n $SSH_CONNECTION ]]; then
-   echo ""
    echo "************************************************"
    echo "Pls sure to git clone the latest wcni-kind repos"
    echo "git clone git@gitee.com:rowan-wcni/wcni-kind.git"
