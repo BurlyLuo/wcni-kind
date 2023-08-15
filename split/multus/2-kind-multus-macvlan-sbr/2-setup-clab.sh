@@ -1,17 +1,16 @@
 #!/bin/bash
 set -v
-date
 
-brctl addbr br-pool0
-ifconfig br-pool0 up
+{ ip l s br-pool0 down;ip l d br-pool0; } > /dev/null 2>&1
+ip l a br-pool0 type bridge && ip l s br-pool0 up
 
 cat <<EOF>clab.yaml | clab deploy -t clab.yaml -
-name: calico-ipip
+name: cni-multus
 topology:
   nodes:
     gw0:
       kind: linux
-      image: 192.168.2.100:5000/vyos/vyos:1.2.8
+      image: 192.168.2.100:5000/vyos/vyos:1.4.7
       cmd: /sbin/init
       binds:
         - /lib/modules:/lib/modules
@@ -23,17 +22,17 @@ topology:
     server1:
       kind: linux
       image: 192.168.2.100:5000/nettool
-      network-mode: container:control-plane
+      network-mode: container:cni-multus-control-plane
 
     server2:
       kind: linux
       image: 192.168.2.100:5000/nettool
-      network-mode: container:worker
+      network-mode: container:cni-multus-worker
 
     server3:
       kind: linux
       image: 192.168.2.100:5000/nettool
-      network-mode: container:worker2
+      network-mode: container:cni-multus-worker2
 
 
   links:
