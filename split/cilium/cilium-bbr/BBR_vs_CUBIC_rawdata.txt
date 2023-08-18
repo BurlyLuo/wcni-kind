@@ -1,0 +1,502 @@
+iperf Done.
+bash-5.1# while [ 1 ];do iperf3 -c 23.106.143.33 -t 55 -R -i 5 -O 5;done
+Connecting to host 23.106.143.33, port 5201
+Reverse mode, remote host 23.106.143.33 is sending
+[  5] local 10.0.2.134 port 39462 connected to 23.106.143.33 port 5201
+[ ID] Interval           Transfer     Bitrate
+[  5]   0.00-5.00   sec   141 MBytes   237 Mbits/sec                  (omitted)
+[  5]   0.00-5.00   sec   158 MBytes   265 Mbits/sec                  
+[  5]   5.00-10.00  sec   138 MBytes   231 Mbits/sec                  
+[  5]  10.00-15.00  sec   133 MBytes   224 Mbits/sec                  
+[  5]  15.00-20.00  sec   145 MBytes   243 Mbits/sec                  
+[  5]  20.00-25.00  sec   159 MBytes   267 Mbits/sec                  
+[  5]  25.00-30.00  sec   155 MBytes   261 Mbits/sec                  
+[  5]  30.00-35.00  sec   109 MBytes   182 Mbits/sec                  
+[  5]  35.00-40.07  sec   132 MBytes   218 Mbits/sec                  
+[  5]  40.07-45.00  sec   137 MBytes   232 Mbits/sec                  
+[  5]  45.00-50.00  sec   156 MBytes   261 Mbits/sec                  
+[  5]  50.00-55.00  sec   141 MBytes   237 Mbits/sec                  
+- - - - - - - - - - - - - - - - - - - - - - - - -
+[ ID] Interval           Transfer     Bitrate         Retr
+[  5]   0.00-55.07  sec  1.53 GBytes   238 Mbits/sec  5559             sender
+[  5]   0.00-55.00  sec  1.53 GBytes   238 Mbits/sec                  receiver
+
+iperf Done.
+Connecting to host 23.106.143.33, port 5201
+Reverse mode, remote host 23.106.143.33 is sending
+[  5] local 10.0.2.134 port 51328 connected to 23.106.143.33 port 5201
+[ ID] Interval           Transfer     Bitrate
+[  5]   0.00-5.00   sec   148 MBytes   249 Mbits/sec                  (omitted)
+[  5]   0.00-5.01   sec   154 MBytes   259 Mbits/sec                  
+[  5]   5.01-10.00  sec   142 MBytes   239 Mbits/sec                  
+[  5]  10.00-15.00  sec   112 MBytes   188 Mbits/sec                  
+[  5]  15.00-20.00  sec   146 MBytes   245 Mbits/sec                  
+[  5]  20.00-25.00  sec   137 MBytes   231 Mbits/sec                  
+[  5]  25.00-30.02  sec   160 MBytes   268 Mbits/sec                  
+[  5]  30.02-35.00  sec   145 MBytes   243 Mbits/sec                  
+[  5]  35.00-40.00  sec   116 MBytes   195 Mbits/sec                  
+[  5]  40.00-45.00  sec   136 MBytes   229 Mbits/sec                  
+[  5]  45.00-50.00  sec   144 MBytes   242 Mbits/sec                  
+[  5]  50.00-55.00  sec   156 MBytes   261 Mbits/sec                  
+- - - - - - - - - - - - - - - - - - - - - - - - -
+[ ID] Interval           Transfer     Bitrate         Retr
+[  5]   0.00-55.08  sec  1.51 GBytes   236 Mbits/sec  5041             sender
+[  5]   0.00-55.00  sec  1.51 GBytes   236 Mbits/sec                  receiver
+
+iperf Done.
+Connecting to host 23.106.143.33, port 5201
+Reverse mode, remote host 23.106.143.33 is sending
+[  5] local 10.0.2.134 port 51292 connected to 23.106.143.33 port 5201
+[ ID] Interval           Transfer     Bitrate
+[  5]   0.00-5.01   sec   141 MBytes   236 Mbits/sec                  (omitted)
+[  5]   0.00-5.00   sec   166 MBytes   279 Mbits/sec                  
+[  5]   5.00-10.00  sec   147 MBytes   246 Mbits/sec                  
+[  5]  10.00-15.00  sec   148 MBytes   249 Mbits/sec                  
+[  5]  15.00-20.01  sec   142 MBytes   238 Mbits/sec                  
+[  5]  20.01-25.00  sec   132 MBytes   221 Mbits/sec                  
+[  5]  25.00-30.00  sec   127 MBytes   214 Mbits/sec                  
+[  5]  30.00-35.00  sec   142 MBytes   239 Mbits/sec                  
+[  5]  35.00-40.00  sec   148 MBytes   249 Mbits/sec                  
+[  5]  40.00-45.01  sec   158 MBytes   264 Mbits/sec                  
+[  5]  45.01-50.00  sec   155 MBytes   260 Mbits/sec                  
+[  5]  50.00-55.00  sec   160 MBytes   268 Mbits/sec                  
+- - - - - - - - - - - - - - - - - - - - - - - - -
+[ ID] Interval           Transfer     Bitrate         Retr
+[  5]   0.00-55.07  sec  1.59 GBytes   248 Mbits/sec  269             sender
+[  5]   0.00-55.00  sec  1.59 GBytes   248 Mbits/sec                  receiver
+
+iperf Done.
+Connecting to host 23.106.143.33, port 5201
+Reverse mode, remote host 23.106.143.33 is sending
+[  5] local 10.0.2.134 port 59068 connected to 23.106.143.33 port 5201
+[ ID] Interval           Transfer     Bitrate
+[  5]   0.00-5.00   sec   149 MBytes   250 Mbits/sec                  (omitted)
+[  5]   0.00-5.00   sec   148 MBytes   248 Mbits/sec                  
+[  5]   5.00-10.00  sec   144 MBytes   241 Mbits/sec                  
+[  5]  10.00-15.01  sec   126 MBytes   212 Mbits/sec                  
+[  5]  15.01-20.00  sec   122 MBytes   205 Mbits/sec                  
+[  5]  20.00-25.00  sec   124 MBytes   209 Mbits/sec                  
+[  5]  25.00-30.04  sec   125 MBytes   208 Mbits/sec                  
+[  5]  30.04-35.00  sec   118 MBytes   199 Mbits/sec                  
+[  5]  35.00-40.00  sec   139 MBytes   233 Mbits/sec                  
+[  5]  40.00-45.00  sec   140 MBytes   235 Mbits/sec                  
+[  5]  45.00-50.01  sec   133 MBytes   222 Mbits/sec                  
+[  5]  50.01-55.00  sec   139 MBytes   233 Mbits/sec                  
+- - - - - - - - - - - - - - - - - - - - - - - - -
+[ ID] Interval           Transfer     Bitrate         Retr
+[  5]   0.00-55.07  sec  1.43 GBytes   222 Mbits/sec  893             sender
+[  5]   0.00-55.00  sec  1.42 GBytes   222 Mbits/sec                  receiver
+
+iperf Done.
+Connecting to host 23.106.143.33, port 5201
+Reverse mode, remote host 23.106.143.33 is sending
+[  5] local 10.0.2.134 port 40844 connected to 23.106.143.33 port 5201
+[ ID] Interval           Transfer     Bitrate
+[  5]   0.00-5.00   sec   128 MBytes   215 Mbits/sec                  (omitted)
+[  5]   0.00-5.00   sec   139 MBytes   234 Mbits/sec                  
+[  5]   5.00-10.00  sec   133 MBytes   223 Mbits/sec                  
+[  5]  10.00-15.00  sec   128 MBytes   214 Mbits/sec                  
+[  5]  15.00-20.00  sec   123 MBytes   206 Mbits/sec                  
+[  5]  20.00-25.00  sec   125 MBytes   209 Mbits/sec                  
+[  5]  25.00-30.00  sec   144 MBytes   241 Mbits/sec                  
+[  5]  30.00-35.00  sec   133 MBytes   223 Mbits/sec                  
+[  5]  35.00-40.01  sec   141 MBytes   237 Mbits/sec                  
+[  5]  40.01-45.00  sec   140 MBytes   236 Mbits/sec                  
+[  5]  45.00-50.00  sec   140 MBytes   235 Mbits/sec                  
+[  5]  50.00-55.01  sec   116 MBytes   194 Mbits/sec                  
+- - - - - - - - - - - - - - - - - - - - - - - - -
+[ ID] Interval           Transfer     Bitrate         Retr
+[  5]   0.00-55.09  sec  1.43 GBytes   223 Mbits/sec  2026             sender
+[  5]   0.00-55.01  sec  1.43 GBytes   223 Mbits/sec                  receiver
+
+iperf Done.
+Connecting to host 23.106.143.33, port 5201
+Reverse mode, remote host 23.106.143.33 is sending
+[  5] local 10.0.2.134 port 56092 connected to 23.106.143.33 port 5201
+[ ID] Interval           Transfer     Bitrate
+[  5]   0.00-5.00   sec   124 MBytes   208 Mbits/sec                  (omitted)
+[  5]   0.00-5.00   sec   137 MBytes   230 Mbits/sec                  
+[  5]   5.00-10.00  sec   139 MBytes   234 Mbits/sec                  
+[  5]  10.00-15.00  sec   136 MBytes   227 Mbits/sec                  
+[  5]  15.00-20.04  sec   136 MBytes   226 Mbits/sec                  
+[  5]  20.04-25.00  sec   141 MBytes   239 Mbits/sec                  
+[  5]  25.00-30.00  sec   148 MBytes   249 Mbits/sec                  
+[  5]  30.00-35.00  sec   147 MBytes   246 Mbits/sec                  
+[  5]  35.00-40.00  sec   164 MBytes   276 Mbits/sec                  
+[  5]  40.00-45.00  sec   146 MBytes   245 Mbits/sec                  
+[  5]  45.00-50.02  sec   152 MBytes   254 Mbits/sec                  
+[  5]  50.02-55.00  sec   145 MBytes   245 Mbits/sec                  
+- - - - - - - - - - - - - - - - - - - - - - - - -
+[ ID] Interval           Transfer     Bitrate         Retr
+[  5]   0.00-55.09  sec  1.56 GBytes   243 Mbits/sec  990             sender
+[  5]   0.00-55.00  sec  1.55 GBytes   243 Mbits/sec                  receiver
+
+iperf Done.
+Connecting to host 23.106.143.33, port 5201
+Reverse mode, remote host 23.106.143.33 is sending
+[  5] local 10.0.2.134 port 47406 connected to 23.106.143.33 port 5201
+[ ID] Interval           Transfer     Bitrate
+[  5]   0.00-5.00   sec   141 MBytes   237 Mbits/sec                  (omitted)
+[  5]   0.00-5.00   sec   143 MBytes   241 Mbits/sec                  
+[  5]   5.00-10.01  sec   155 MBytes   260 Mbits/sec                  
+[  5]  10.01-15.00  sec   141 MBytes   236 Mbits/sec                  
+[  5]  15.00-20.00  sec   123 MBytes   207 Mbits/sec                  
+[  5]  20.00-25.00  sec   134 MBytes   224 Mbits/sec                  
+[  5]  25.00-30.01  sec   141 MBytes   236 Mbits/sec                  
+[  5]  30.01-35.00  sec   137 MBytes   230 Mbits/sec                  
+[  5]  35.00-40.00  sec   146 MBytes   246 Mbits/sec                  
+[  5]  40.00-45.00  sec   139 MBytes   233 Mbits/sec                  
+[  5]  45.00-50.00  sec   133 MBytes   223 Mbits/sec                  
+[  5]  50.00-55.00  sec   145 MBytes   244 Mbits/sec                  
+- - - - - - - - - - - - - - - - - - - - - - - - -
+[ ID] Interval           Transfer     Bitrate         Retr
+[  5]   0.00-55.08  sec  1.50 GBytes   235 Mbits/sec  1092             sender
+[  5]   0.00-55.00  sec  1.50 GBytes   235 Mbits/sec                  receiver
+
+iperf Done.
+Connecting to host 23.106.143.33, port 5201
+Reverse mode, remote host 23.106.143.33 is sending
+[  5] local 10.0.2.134 port 50376 connected to 23.106.143.33 port 5201
+[ ID] Interval           Transfer     Bitrate
+[  5]   0.00-5.00   sec   139 MBytes   233 Mbits/sec                  (omitted)
+[  5]   0.00-5.00   sec   115 MBytes   194 Mbits/sec                  
+[  5]   5.00-10.01  sec   111 MBytes   186 Mbits/sec                  
+[  5]  10.01-15.00  sec  72.6 MBytes   122 Mbits/sec                  
+[  5]  15.00-20.00  sec   124 MBytes   208 Mbits/sec                  
+[  5]  20.00-25.00  sec   135 MBytes   226 Mbits/sec                  
+[  5]  25.00-30.00  sec   117 MBytes   196 Mbits/sec                  
+[  5]  30.00-35.00  sec   122 MBytes   205 Mbits/sec                  
+[  5]  35.00-40.00  sec   104 MBytes   175 Mbits/sec                  
+[  5]  40.00-45.01  sec   120 MBytes   201 Mbits/sec                  
+[  5]  45.01-50.00  sec   106 MBytes   178 Mbits/sec                  
+[  5]  50.00-55.00  sec   127 MBytes   212 Mbits/sec                  
+- - - - - - - - - - - - - - - - - - - - - - - - -
+[ ID] Interval           Transfer     Bitrate         Retr
+[  5]   0.00-55.06  sec  1.23 GBytes   191 Mbits/sec  4059             sender
+[  5]   0.00-55.00  sec  1.22 GBytes   191 Mbits/sec                  receiver
+
+iperf Done.
+Connecting to host 23.106.143.33, port 5201
+Reverse mode, remote host 23.106.143.33 is sending
+[  5] local 10.0.2.134 port 51082 connected to 23.106.143.33 port 5201
+[ ID] Interval           Transfer     Bitrate
+[  5]   0.00-5.00   sec   122 MBytes   204 Mbits/sec                  (omitted)
+[  5]   0.00-5.00   sec   139 MBytes   232 Mbits/sec                  
+[  5]   5.00-10.01  sec   128 MBytes   214 Mbits/sec                  
+[  5]  10.01-15.00  sec   137 MBytes   230 Mbits/sec                  
+[  5]  15.00-20.00  sec   124 MBytes   209 Mbits/sec                  
+[  5]  20.00-25.00  sec   128 MBytes   215 Mbits/sec                  
+[  5]  25.00-30.00  sec   129 MBytes   216 Mbits/sec                  
+[  5]  30.00-35.00  sec   138 MBytes   232 Mbits/sec                  
+[  5]  35.00-40.00  sec   129 MBytes   216 Mbits/sec                  
+[  5]  40.00-45.00  sec   129 MBytes   217 Mbits/sec                  
+[  5]  45.00-50.01  sec   130 MBytes   219 Mbits/sec                  
+[  5]  50.01-55.00  sec   130 MBytes   219 Mbits/sec                  
+- - - - - - - - - - - - - - - - - - - - - - - - -
+[ ID] Interval           Transfer     Bitrate         Retr
+[  5]   0.00-55.09  sec  1.41 GBytes   220 Mbits/sec  820             sender
+[  5]   0.00-55.00  sec  1.41 GBytes   220 Mbits/sec                  receiver
+
+iperf Done.
+Connecting to host 23.106.143.33, port 5201
+Reverse mode, remote host 23.106.143.33 is sending
+[  5] local 10.0.2.134 port 53272 connected to 23.106.143.33 port 5201
+[ ID] Interval           Transfer     Bitrate
+[  5]   0.00-5.00   sec   115 MBytes   192 Mbits/sec                  (omitted)
+[  5]   0.00-5.00   sec   151 MBytes   253 Mbits/sec                  
+[  5]   5.00-10.00  sec   138 MBytes   231 Mbits/sec                  
+[  5]  10.00-15.00  sec   128 MBytes   214 Mbits/sec                  
+[  5]  15.00-20.04  sec   140 MBytes   233 Mbits/sec                  
+[  5]  20.04-25.01  sec   126 MBytes   213 Mbits/sec                  
+[  5]  25.01-30.00  sec   138 MBytes   233 Mbits/sec                  
+[  5]  30.00-35.00  sec   133 MBytes   223 Mbits/sec                  
+[  5]  35.00-40.00  sec   152 MBytes   256 Mbits/sec                  
+[  5]  40.00-45.01  sec   140 MBytes   234 Mbits/sec                  
+[  5]  45.01-50.00  sec   155 MBytes   261 Mbits/sec                  
+[  5]  50.00-55.00  sec   165 MBytes   277 Mbits/sec                  
+- - - - - - - - - - - - - - - - - - - - - - - - -
+[ ID] Interval           Transfer     Bitrate         Retr
+[  5]   0.00-55.10  sec  1.53 GBytes   239 Mbits/sec  324             sender
+[  5]   0.00-55.00  sec  1.53 GBytes   239 Mbits/sec                  receiver
+
+iperf Done.
+Connecting to host 23.106.143.33, port 5201
+Reverse mode, remote host 23.106.143.33 is sending
+[  5] local 10.0.2.134 port 34316 connected to 23.106.143.33 port 5201
+[ ID] Interval           Transfer     Bitrate
+[  5]   0.00-5.01   sec   130 MBytes   217 Mbits/sec                  (omitted)
+[  5]   0.00-5.00   sec   148 MBytes   249 Mbits/sec                  
+[  5]   5.00-10.00  sec   130 MBytes   217 Mbits/sec                  
+[  5]  10.00-15.00  sec   134 MBytes   224 Mbits/sec                  
+[  5]  15.00-20.00  sec   136 MBytes   227 Mbits/sec                  
+[  5]  20.00-25.00  sec   132 MBytes   221 Mbits/sec                  
+[  5]  25.00-30.00  sec   150 MBytes   251 Mbits/sec                  
+[  5]  30.00-35.00  sec   147 MBytes   247 Mbits/sec                  
+[  5]  35.00-40.00  sec   164 MBytes   274 Mbits/sec                  
+[  5]  40.00-45.00  sec   167 MBytes   280 Mbits/sec                  
+[  5]  45.00-50.00  sec   149 MBytes   249 Mbits/sec                  
+[  5]  50.00-54.99  sec   153 MBytes   256 Mbits/sec                  
+- - - - - - - - - - - - - - - - - - - - - - - - -
+[ ID] Interval           Transfer     Bitrate         Retr
+[  5]   0.00-55.08  sec  1.57 GBytes   245 Mbits/sec  1651             sender
+[  5]   0.00-54.99  sec  1.57 GBytes   245 Mbits/sec                  receiver
+
+iperf Done.
+Connecting to host 23.106.143.33, port 5201
+Reverse mode, remote host 23.106.143.33 is sending
+[  5] local 10.0.2.134 port 37888 connected to 23.106.143.33 port 5201
+[ ID] Interval           Transfer     Bitrate
+[  5]   0.00-5.00   sec   117 MBytes   197 Mbits/sec                  (omitted)
+[  5]   0.00-5.00   sec   149 MBytes   249 Mbits/sec                  
+[  5]   5.00-10.01  sec   139 MBytes   232 Mbits/sec                  
+[  5]  10.01-15.00  sec   142 MBytes   238 Mbits/sec                  
+[  5]  15.00-20.00  sec   144 MBytes   241 Mbits/sec                  
+[  5]  20.00-25.01  sec   162 MBytes   272 Mbits/sec                  
+[  5]  25.01-30.01  sec  93.0 MBytes   156 Mbits/sec                  
+[  5]  30.01-35.00  sec   133 MBytes   223 Mbits/sec                  
+[  5]  35.00-40.00  sec   135 MBytes   226 Mbits/sec                  
+[  5]  40.00-45.01  sec   154 MBytes   258 Mbits/sec                  
+[  5]  45.01-50.00  sec   125 MBytes   209 Mbits/sec                  
+[  5]  50.00-55.00  sec   112 MBytes   187 Mbits/sec                  
+- - - - - - - - - - - - - - - - - - - - - - - - -
+[ ID] Interval           Transfer     Bitrate         Retr
+[  5]   0.00-55.06  sec  1.45 GBytes   227 Mbits/sec  4376             sender
+[  5]   0.00-55.00  sec  1.45 GBytes   227 Mbits/sec                  receiver
+
+iperf Done.
+Connecting to host 23.106.143.33, port 5201
+Reverse mode, remote host 23.106.143.33 is sending
+[  5] local 10.0.2.134 port 40270 connected to 23.106.143.33 port 5201
+[ ID] Interval           Transfer     Bitrate
+[  5]   0.00-5.00   sec   143 MBytes   240 Mbits/sec                  (omitted)
+[  5]   0.00-5.00   sec   154 MBytes   259 Mbits/sec                  
+[  5]   5.00-10.00  sec   148 MBytes   249 Mbits/sec                  
+[  5]  10.00-15.00  sec   141 MBytes   237 Mbits/sec                  
+[  5]  15.00-20.00  sec   154 MBytes   259 Mbits/sec                  
+[  5]  20.00-25.01  sec   129 MBytes   216 Mbits/sec                  
+[  5]  25.01-30.00  sec   158 MBytes   265 Mbits/sec                  
+[  5]  30.00-35.00  sec   131 MBytes   219 Mbits/sec                  
+[  5]  35.00-40.00  sec   137 MBytes   230 Mbits/sec                  
+[  5]  40.00-45.01  sec   146 MBytes   245 Mbits/sec                  
+[  5]  45.01-50.00  sec   153 MBytes   257 Mbits/sec                  
+[  5]  50.00-55.00  sec   148 MBytes   249 Mbits/sec                  
+- - - - - - - - - - - - - - - - - - - - - - - - -
+[ ID] Interval           Transfer     Bitrate         Retr
+[  5]   0.00-55.08  sec  1.56 GBytes   244 Mbits/sec  4420             sender
+[  5]   0.00-55.00  sec  1.56 GBytes   244 Mbits/sec                  receiver
+
+iperf Done.
+
+
+while [ 1 ];do iperf3 -c 23.106.143.33 -t 55 -R -i 5 -O 5;done
+
+
+
+
+
+kubectl exec [POD] [COMMAND] is DEPRECATED and will be removed in a future version. Use kubectl exec [POD] -- [COMMAND] instead.
+bash-5.1# while [ 1 ];do iperf3 -c 23.106.143.33 -t 55 -R -i 5 -O 5;done
+Connecting to host 23.106.143.33, port 5201
+Reverse mode, remote host 23.106.143.33 is sending
+[  5] local 10.0.2.74 port 37402 connected to 23.106.143.33 port 5201
+[ ID] Interval           Transfer     Bitrate
+[  5]   0.00-5.00   sec  78.1 MBytes   131 Mbits/sec                  (omitted)
+[  5]   0.00-5.01   sec  84.4 MBytes   141 Mbits/sec                  
+[  5]   5.01-10.01  sec   133 MBytes   224 Mbits/sec                  
+[  5]  10.01-15.00  sec  57.1 MBytes  95.8 Mbits/sec                  
+[  5]  15.00-23.35  sec  71.0 MBytes  71.3 Mbits/sec                  
+[  5]  23.35-25.00  sec  4.21 MBytes  21.5 Mbits/sec                  
+[  5]  25.00-30.00  sec  32.6 MBytes  54.7 Mbits/sec                  
+[  5]  30.00-35.00  sec   122 MBytes   205 Mbits/sec                  
+[  5]  35.00-40.00  sec   129 MBytes   216 Mbits/sec                  
+[  5]  40.00-45.00  sec   134 MBytes   225 Mbits/sec                  
+[  5]  45.00-50.00  sec   138 MBytes   232 Mbits/sec                  
+[  5]  50.00-55.00  sec   109 MBytes   182 Mbits/sec                  
+- - - - - - - - - - - - - - - - - - - - - - - - -
+[ ID] Interval           Transfer     Bitrate         Retr
+[  5]   0.00-55.08  sec  1014 MBytes   154 Mbits/sec  15688             sender
+[  5]   0.00-55.00  sec  1014 MBytes   155 Mbits/sec                  receiver
+
+iperf Done.
+Connecting to host 23.106.143.33, port 5201
+Reverse mode, remote host 23.106.143.33 is sending
+[  5] local 10.0.2.74 port 57208 connected to 23.106.143.33 port 5201
+[ ID] Interval           Transfer     Bitrate
+[  5]   0.00-5.00   sec   132 MBytes   222 Mbits/sec                  (omitted)
+[  5]   0.00-5.00   sec   105 MBytes   176 Mbits/sec                  
+[  5]   5.00-10.00  sec   118 MBytes   198 Mbits/sec                  
+[  5]  10.00-15.00  sec   140 MBytes   234 Mbits/sec                  
+[  5]  15.00-20.00  sec  96.6 MBytes   162 Mbits/sec                  
+[  5]  20.00-25.00  sec   120 MBytes   202 Mbits/sec                  
+[  5]  25.00-30.00  sec   129 MBytes   216 Mbits/sec                  
+[  5]  30.00-35.00  sec   156 MBytes   262 Mbits/sec                  
+[  5]  35.00-40.00  sec   115 MBytes   194 Mbits/sec                  
+[  5]  40.00-45.00  sec   133 MBytes   223 Mbits/sec                  
+[  5]  45.00-50.00  sec   105 MBytes   177 Mbits/sec                  
+[  5]  50.00-55.00  sec   143 MBytes   240 Mbits/sec                  
+- - - - - - - - - - - - - - - - - - - - - - - - -
+[ ID] Interval           Transfer     Bitrate         Retr
+[  5]   0.00-55.08  sec  1.33 GBytes   208 Mbits/sec  15388             sender
+[  5]   0.00-55.00  sec  1.33 GBytes   208 Mbits/sec                  receiver
+
+iperf Done.
+Connecting to host 23.106.143.33, port 5201
+Reverse mode, remote host 23.106.143.33 is sending
+[  5] local 10.0.2.74 port 35506 connected to 23.106.143.33 port 5201
+[ ID] Interval           Transfer     Bitrate
+[  5]   0.00-5.00   sec   119 MBytes   200 Mbits/sec                  (omitted)
+[  5]   0.00-5.00   sec   149 MBytes   250 Mbits/sec                  
+[  5]   5.00-10.00  sec   137 MBytes   229 Mbits/sec                  
+[  5]  10.00-15.00  sec   131 MBytes   219 Mbits/sec                  
+[  5]  15.00-20.00  sec   134 MBytes   225 Mbits/sec                  
+[  5]  20.00-25.00  sec   138 MBytes   231 Mbits/sec                  
+[  5]  25.00-30.00  sec  92.3 MBytes   155 Mbits/sec                  
+[  5]  30.00-35.00  sec   119 MBytes   199 Mbits/sec                  
+[  5]  35.00-40.00  sec   114 MBytes   191 Mbits/sec                  
+[  5]  40.00-45.00  sec   165 MBytes   277 Mbits/sec                  
+[  5]  45.00-50.01  sec  91.1 MBytes   153 Mbits/sec                  
+[  5]  50.01-55.00  sec   142 MBytes   239 Mbits/sec                  
+- - - - - - - - - - - - - - - - - - - - - - - - -
+[ ID] Interval           Transfer     Bitrate         Retr
+[  5]   0.00-55.07  sec  1.38 GBytes   215 Mbits/sec  13860             sender
+[  5]   0.00-55.00  sec  1.38 GBytes   215 Mbits/sec                  receiver
+
+iperf Done.
+Connecting to host 23.106.143.33, port 5201
+Reverse mode, remote host 23.106.143.33 is sending
+[  5] local 10.0.2.74 port 56940 connected to 23.106.143.33 port 5201
+[ ID] Interval           Transfer     Bitrate
+[  5]   0.00-5.00   sec   111 MBytes   187 Mbits/sec                  (omitted)
+[  5]   0.00-5.00   sec   154 MBytes   258 Mbits/sec                  
+[  5]   5.00-10.03  sec   119 MBytes   199 Mbits/sec                  
+[  5]  10.03-15.00  sec   128 MBytes   216 Mbits/sec                  
+[  5]  15.00-20.02  sec   121 MBytes   202 Mbits/sec                  
+[  5]  20.02-25.00  sec   130 MBytes   220 Mbits/sec                  
+[  5]  25.00-30.45  sec   106 MBytes   164 Mbits/sec                  
+[  5]  30.45-35.01  sec   104 MBytes   191 Mbits/sec                  
+[  5]  35.01-40.00  sec   118 MBytes   198 Mbits/sec                  
+[  5]  40.00-45.00  sec   135 MBytes   226 Mbits/sec                  
+[  5]  45.00-50.00  sec   109 MBytes   183 Mbits/sec                  
+[  5]  50.00-55.00  sec   120 MBytes   201 Mbits/sec                  
+- - - - - - - - - - - - - - - - - - - - - - - - -
+[ ID] Interval           Transfer     Bitrate         Retr
+[  5]   0.00-55.07  sec  1.32 GBytes   205 Mbits/sec  7934             sender
+[  5]   0.00-55.00  sec  1.31 GBytes   205 Mbits/sec                  receiver
+
+iperf Done.
+Connecting to host 23.106.143.33, port 5201
+Reverse mode, remote host 23.106.143.33 is sending
+[  5] local 10.0.2.74 port 40940 connected to 23.106.143.33 port 5201
+[ ID] Interval           Transfer     Bitrate
+[  5]   0.00-5.00   sec   117 MBytes   197 Mbits/sec                  (omitted)
+[  5]   0.00-5.00   sec   122 MBytes   205 Mbits/sec                  
+[  5]   5.00-10.00  sec   120 MBytes   201 Mbits/sec                  
+[  5]  10.00-15.00  sec   119 MBytes   199 Mbits/sec                  
+[  5]  15.00-20.00  sec   130 MBytes   218 Mbits/sec                  
+[  5]  20.00-25.00  sec   113 MBytes   190 Mbits/sec                  
+[  5]  25.00-30.00  sec   133 MBytes   223 Mbits/sec                  
+[  5]  30.00-35.00  sec   121 MBytes   203 Mbits/sec                  
+[  5]  35.00-40.00  sec   122 MBytes   205 Mbits/sec                  
+[  5]  40.00-45.01  sec   124 MBytes   208 Mbits/sec                  
+[  5]  45.01-50.00  sec   127 MBytes   214 Mbits/sec                  
+[  5]  50.00-55.00  sec   119 MBytes   200 Mbits/sec                  
+- - - - - - - - - - - - - - - - - - - - - - - - -
+[ ID] Interval           Transfer     Bitrate         Retr
+[  5]   0.00-55.10  sec  1.32 GBytes   206 Mbits/sec  7445             sender
+[  5]   0.00-55.00  sec  1.32 GBytes   206 Mbits/sec                  receiver
+
+iperf Done.
+Connecting to host 23.106.143.33, port 5201
+Reverse mode, remote host 23.106.143.33 is sending
+[  5] local 10.0.2.74 port 49676 connected to 23.106.143.33 port 5201
+[ ID] Interval           Transfer     Bitrate
+[  5]   0.00-5.00   sec   107 MBytes   179 Mbits/sec                  (omitted)
+[  5]   0.01-5.00   sec  80.0 MBytes   134 Mbits/sec                  
+[  5]   5.00-10.00  sec   103 MBytes   172 Mbits/sec                  
+[  5]  10.00-15.00  sec   127 MBytes   213 Mbits/sec                  
+[  5]  15.00-20.00  sec   128 MBytes   215 Mbits/sec                  
+[  5]  20.00-25.00  sec   105 MBytes   177 Mbits/sec                  
+[  5]  25.00-30.00  sec   125 MBytes   210 Mbits/sec                  
+[  5]  30.00-35.00  sec   134 MBytes   225 Mbits/sec                  
+[  5]  35.00-40.00  sec   126 MBytes   212 Mbits/sec                  
+[  5]  40.00-45.01  sec   130 MBytes   218 Mbits/sec                  
+[  5]  45.01-50.00  sec   127 MBytes   213 Mbits/sec                  
+[  5]  50.00-55.00  sec   124 MBytes   208 Mbits/sec                  
+- - - - - - - - - - - - - - - - - - - - - - - - -
+[ ID] Interval           Transfer     Bitrate         Retr
+[  5]   0.00-55.08  sec  1.28 GBytes   200 Mbits/sec  1449             sender
+[  5]   0.00-55.00  sec  1.28 GBytes   200 Mbits/sec                  receiver
+
+iperf Done.
+Connecting to host 23.106.143.33, port 5201
+Reverse mode, remote host 23.106.143.33 is sending
+[  5] local 10.0.2.74 port 49822 connected to 23.106.143.33 port 5201
+[ ID] Interval           Transfer     Bitrate
+[  5]   0.00-5.00   sec   114 MBytes   191 Mbits/sec                  (omitted)
+[  5]   0.00-5.00   sec   119 MBytes   199 Mbits/sec                  
+[  5]   5.00-10.00  sec   105 MBytes   175 Mbits/sec                  
+[  5]  10.00-15.00  sec   125 MBytes   210 Mbits/sec                  
+[  5]  15.00-20.00  sec   107 MBytes   179 Mbits/sec                  
+[  5]  20.00-25.00  sec   121 MBytes   202 Mbits/sec                  
+[  5]  25.00-30.00  sec  99.6 MBytes   167 Mbits/sec                  
+[  5]  30.00-35.00  sec   109 MBytes   184 Mbits/sec                  
+[  5]  35.00-40.00  sec  98.9 MBytes   166 Mbits/sec                  
+[  5]  40.00-45.00  sec   119 MBytes   199 Mbits/sec                  
+[  5]  45.00-50.00  sec   106 MBytes   177 Mbits/sec                  
+[  5]  50.00-55.00  sec   116 MBytes   194 Mbits/sec                  
+- - - - - - - - - - - - - - - - - - - - - - - - -
+[ ID] Interval           Transfer     Bitrate         Retr
+[  5]   0.00-55.10  sec  1.20 GBytes   187 Mbits/sec  6846             sender
+[  5]   0.00-55.00  sec  1.19 GBytes   187 Mbits/sec                  receiver
+
+iperf Done.
+Connecting to host 23.106.143.33, port 5201
+Reverse mode, remote host 23.106.143.33 is sending
+[  5] local 10.0.2.74 port 34848 connected to 23.106.143.33 port 5201
+[ ID] Interval           Transfer     Bitrate
+[  5]   0.00-5.00   sec  79.5 MBytes   133 Mbits/sec                  (omitted)
+[  5]   0.00-5.00   sec   120 MBytes   201 Mbits/sec                  
+[  5]   5.00-10.01  sec   116 MBytes   195 Mbits/sec                  
+[  5]  10.01-15.00  sec   110 MBytes   186 Mbits/sec                  
+[  5]  15.00-20.00  sec   110 MBytes   184 Mbits/sec                  
+[  5]  20.00-25.00  sec   107 MBytes   179 Mbits/sec                  
+[  5]  25.00-30.00  sec   126 MBytes   211 Mbits/sec                  
+[  5]  30.00-35.01  sec   109 MBytes   183 Mbits/sec                  
+[  5]  35.01-40.00  sec   108 MBytes   181 Mbits/sec                  
+[  5]  40.00-45.00  sec   119 MBytes   201 Mbits/sec                  
+[  5]  45.00-50.00  sec  95.6 MBytes   160 Mbits/sec                  
+[  5]  50.00-55.00  sec   108 MBytes   182 Mbits/sec                  
+- - - - - - - - - - - - - - - - - - - - - - - - -
+[ ID] Interval           Transfer     Bitrate         Retr
+[  5]   0.00-55.10  sec  1.20 GBytes   187 Mbits/sec  3076             sender
+[  5]   0.00-55.00  sec  1.20 GBytes   187 Mbits/sec                  receiver
+
+iperf Done.
+Connecting to host 23.106.143.33, port 5201
+Reverse mode, remote host 23.106.143.33 is sending
+[  5] local 10.0.2.74 port 59162 connected to 23.106.143.33 port 5201
+[ ID] Interval           Transfer     Bitrate
+[  5]   0.00-5.01   sec  87.0 MBytes   146 Mbits/sec                  (omitted)
+[  5]   0.00-5.00   sec   123 MBytes   207 Mbits/sec                  
+[  5]   5.00-10.00  sec   119 MBytes   199 Mbits/sec                  
+[  5]  10.00-15.00  sec   102 MBytes   171 Mbits/sec                  
+[  5]  15.00-20.00  sec   132 MBytes   221 Mbits/sec                  
+[  5]  20.00-25.01  sec   161 MBytes   270 Mbits/sec                  
+[  5]  25.01-30.00  sec   141 MBytes   236 Mbits/sec                  
+[  5]  30.00-35.00  sec   118 MBytes   198 Mbits/sec                  
+[  5]  35.00-40.00  sec   130 MBytes   218 Mbits/sec                  
+[  5]  40.00-45.00  sec   126 MBytes   211 Mbits/sec                  
+[  5]  45.00-50.00  sec   108 MBytes   181 Mbits/sec                  
+[  5]  50.00-55.00  sec   141 MBytes   237 Mbits/sec                  
+- - - - - - - - - - - - - - - - - - - - - - - - -
+[ ID] Interval           Transfer     Bitrate         Retr
+[  5]   0.00-55.09  sec  1.37 GBytes   214 Mbits/sec  5510             sender
+[  5]   0.00-55.00  sec  1.37 GBytes   214 Mbits/sec                  receiver
+
+iperf Done.
+Connecting to host 23.106.143.33, port 5201
+Reverse mode, remote host 23.106.143.33 is sending
+[  5] local 10.0.2.74 port 43440 connected to 23.106.143.33 port 5201
+^Z
+[1]+  Stopped                 iperf3 -c 23.106.143.33 -t 55 -R -i 5 -O 5
+bash-5.1# 
