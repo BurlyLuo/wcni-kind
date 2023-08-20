@@ -1,7 +1,11 @@
 #/bin/bash
 set -v 
 
-kubectl apply -f ./netperf.yaml
+control_node=$(docker ps -a --format "table {{.Names}}" | grep control-plane)
+docker exec -it $control_node bash -c "cilium config set enable-ipv4-big-tcp true && cilium config set enable-ipv6-big-tcp true"
+kubectl wait --timeout=100s --for=condition=Ready=true pods --all -nkube-system
+
+kubectl delete -f ./netperf.yaml && kubectl apply -f ./netperf.yaml
 kubectl wait --timeout=100s --for=condition=Ready=true pods --all
 
 kubectl exec netperf-server -- ip -d -j link show dev eth0 | jq -c '.[0].gso_max_size'
