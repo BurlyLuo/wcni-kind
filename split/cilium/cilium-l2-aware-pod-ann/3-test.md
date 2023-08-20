@@ -8,7 +8,17 @@ tcpdump: verbose output suppressed, use -v[v]... for full protocol decode
 listening on eth0, link-type EN10MB (Ethernet), snapshot length 262144 bytes
 11:27:58.017491 02:42:ac:12:00:04 > ff:ff:ff:ff:ff:ff, ethertype ARP (0x0806), length 60: Reply 10.0.0.70 is-at 02:42:ac:12:00:04, length 46
 
-3.GARP packet
+3. GARP packet
 11:27:58.017491 02:42:ac:12:00:04 > ff:ff:ff:ff:ff:ff, ethertype ARP (0x0806), length 60: Reply 10.0.0.70 is-at 02:42:ac:12:00:04, length 46
+
+4. if disable the feature. we can see there is no GARP sent
+root@cilium-socket-lb-control-plane:~# tcpdump -pne -i eth0 arp 
+tcpdump: verbose output suppressed, use -v[v]... for full protocol decode
+listening on eth0, link-type EN10MB (Ethernet), snapshot length 262144 bytes
+^C
+0 packets captured
+0 packets received by filter
+0 packets dropped by kernel
+root@cilium-socket-lb-control-plane:~#
 
 
