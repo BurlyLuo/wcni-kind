@@ -109,10 +109,11 @@ alias ii="kubectl -nistio-ingress"
 alias mls="multipass list"
 alias mm="multipass"
 
-alias mldk='set -f; for vm in $(multipass list | grep vmk | awk -F " " "{print \$1}"); do multipass stop $vm; multipass delete --purge $vm; done && { sed -i "1!d" /root/.ssh/known_hosts && kubectl config delete-cluster kpr && kubectl config delete-context kpr && kubectl config delete-user kpr; } > /dev/null 2>&1; set +f'
+alias mldk='set -f;sed -i '/vmk/d' /etc/hosts && for vm in $(multipass list | grep vmk | awk -F " " "{print \$1}"); do multipass delete --purge $vm; done && { sed -i "1!d" /root/.ssh/known_hosts && kubectl config delete-cluster kpr && kubectl config delete-context kpr && kubectl config delete-user kpr; } > /dev/null 2>&1;set +f'
 
-alias mldk='set -f; for vm in $(multipass list | grep vmn | awk -F " " "{print \$1}"); do multipass stop $vm; multipass delete --purge $vm; done && { sed -i "1!d" /root/.ssh/known_hosts && kubectl config delete-cluster nokpr && kubectl config delete-context nokpr && kubectl config delete-user nokpr; } > /dev/null 2>&1; set +f'
+alias mldn='set -f;sed -i '/vmn/d' /etc/hosts && for vm in $(multipass list | grep vmn | awk -F " " "{print \$1}"); do multipass delete --purge $vm; done && { sed -i "1!d" /root/.ssh/known_hosts && kubectl config delete-cluster nokpr && kubectl config delete-context nokpr && kubectl config delete-user nokpr; } > /dev/null 2>&1;set +f'
 
+alias mmd='set -f;sed -i '/vm/d' /etc/hosts && for vm in $(multipass list | grep vm | awk -F " " "{print \$1}"); do multipass delete --purge $vm; done && { sed -i "1!d" /root/.ssh/known_hosts; } > /dev/null 2>&1;set +f'
 
 # Alias definitions.
 # You may want to put all your additions into a separate file like

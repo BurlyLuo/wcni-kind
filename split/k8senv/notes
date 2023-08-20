@@ -1,0 +1,5 @@
+ns=tigera-operator
+kubectl get namespace $ns -o json | tr -d "\n" | sed "s/\"finalizers\": \[[^]]\+\]/\"finalizers\": []/" | kubectl replace --raw /api/v1/namespaces/$ns/finalize -f -
+
+
+
