@@ -26,6 +26,8 @@ controller_node_ip=`kubectl get node -o wide --no-headers | grep -E "control-pla
 kubectl taint nodes $(kubectl get nodes -o name | grep control-plane) node-role.kubernetes.io/control-plane:NoSchedule-
 kubectl get nodes -o wide
 
+./2-setup-clab.sh
+
 # 3.install cni
 helm repo add cilium https://helm.cilium.io > /dev/null 2>&1
 helm repo update > /dev/null 2>&1
@@ -47,3 +49,8 @@ for container in $(docker ps -a --format "table {{.Names}}" | grep cilium-l2-awa
 
 # 7. issue list
 # [Thinking about the design of Cilium L2 Aware LB feature] https://github.com/cilium/cilium/issues/26849
+
+# 8. deploy test pods
+cat ./cni.yaml
+kubectl apply -f ./cni.yaml
+

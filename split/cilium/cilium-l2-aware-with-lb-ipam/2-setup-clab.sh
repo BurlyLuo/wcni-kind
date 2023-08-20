@@ -31,8 +31,7 @@ topology:
       network-mode: container:cilium-l2-aware-lb-ipam-control-plane
       exec:
       - ip addr add 12.1.5.10/24 dev eth1
-      - ip route add 12.1.6.0/24 via 12.1.5.1 table 100
-      - ip rule add from 12.1.5.0/24 table 100
+      - ip route add 12.1.6.0/24 via 12.1.5.1 dev eth1
 
     server2:
       kind: linux
@@ -40,8 +39,7 @@ topology:
       network-mode: container:cilium-l2-aware-lb-ipam-worker
       exec:
       - ip addr add 12.1.5.11/24 dev eth1
-      - ip route add 12.1.6.0/24 via 12.1.5.1 table 100
-      - ip rule add from 12.1.5.0/24 table 100
+      - ip route add 12.1.6.0/24 via 12.1.5.1 dev eth1
 
     server3:
       kind: linux
@@ -49,8 +47,7 @@ topology:
       network-mode: container:cilium-l2-aware-lb-ipam-worker2
       exec:
       - ip addr add 12.1.5.12/24 dev eth1
-      - ip route add 12.1.6.0/24 via 12.1.5.1 table 100
-      - ip rule add from 12.1.5.0/24 table 100
+      - ip route add 12.1.6.0/24 via 12.1.5.1 dev eth1
 
 
   links:
