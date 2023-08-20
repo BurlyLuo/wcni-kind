@@ -30,6 +30,7 @@ kubectl taint node cilium-egress-gateway-worker3 egress-gw:NoSchedule
 kubectl label nodes cilium-egress-gateway-worker2 egress-gw=true
 kubectl label nodes cilium-egress-gateway-worker3 egress-gw=true
 kubectl get nodes -o wide
+
 ./2-setup-clab.sh
 
 # 3.install cni
