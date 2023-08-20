@@ -51,4 +51,5 @@ for container in $(docker ps -a --format "table {{.Names}}" | grep cilium-l2-awa
 # [L2 announcement] https://github.com/cilium/cilium/pull/25471
 # [L2 announcements stop working after a time] https://github.com/cilium/cilium/issues/26586
 # [CFP: Support PROXY Protocol from L2 Aware LB and CNI] https://github.com/cilium/cilium/issues/26530
+# [garp: Announce Pods with Gratuitous ARP] https://github.com/cilium/cilium/pull/25482
 
