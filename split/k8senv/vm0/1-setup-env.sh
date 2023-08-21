@@ -25,7 +25,7 @@ do
 EOF
 done
 
-ip_host=$(multipass list | grep vm | grep -Ev 'vmk|vmn' | awk -F " " '{print $3,$1}')
+ip_host=$(multipass list | grep vm[0-9] | awk -F " " '{print $3,$1}')
 echo $ip_host >> /etc/hosts
 sshpass -p hive ssh-copy-id -o StrictHostKeyChecking=no -p 22 root@$(echo $ip_host | awk -F " " '{print $1}') > /dev/null 2>&1
 scp -r ./kindenv root@$(echo $ip_host | awk -F " " '{print $1}'):/root/
