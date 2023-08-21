@@ -1,3 +1,7 @@
+
+
+
+
 1. pod ip root@2204:~/wcni-kind/split/cilium/cilium-ipv46-big-tcp/kindenv# k get pods -owide 
 NAME         READY   STATUS    RESTARTS   AGE   IP           NODE                                       NOMINATED NODE   READINESS GATES
 wluo-lt65f   1/1     Running   0          4s    10.0.0.70    cilium-l2-aware-lb-pod-ann-control-plane   <none>           <none>
