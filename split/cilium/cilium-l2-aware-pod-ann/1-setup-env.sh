@@ -37,7 +37,7 @@ helm repo update > /dev/null 2>&1
 # eBPF Host Routing(--set bpf.masquerade=true)
 # L2 Aware LB(--set l2announcements.enabled=true --set devices='{eth0}' --set externalIPs.enabled=true)
 # L2 Pod Announcements Options(--set l2podAnnouncements.enabled=true --set l2podAnnouncements.interface=eth+[which include eth0,eth1,eth2,etc.])
-helm install cilium cilium/cilium --set k8sServiceHost=$controller_node_ip --set k8sServicePort=6443 --version 1.14.0-rc.0 --namespace kube-system --set debug.enabled=true --set debug.verbose=datapath --set monitorAggregation=none --set ipam.mode=cluster-pool --set cluster.name=cilium-l2-aware-lb-pod-ann --set kubeProxyReplacement=true --set tunnel=disabled --set autoDirectNodeRoutes=true --set ipv4NativeRoutingCIDR="10.0.0.0/8" --set l2announcements.enabled=true --set devices='{eth0}' --set externalIPs.enabled=true --set l2podAnnouncements.enabled=true --set l2podAnnouncements.interface=eth1
+helm install cilium cilium/cilium --set k8sServiceHost=$controller_node_ip --set k8sServicePort=6443 --version 1.14.0-rc.0 --namespace kube-system --set debug.enabled=true --set debug.verbose=datapath --set monitorAggregation=none --set ipam.mode=cluster-pool --set cluster.name=cilium-l2-aware-lb-pod-ann --set kubeProxyReplacement=true --set tunnel=disabled --set autoDirectNodeRoutes=true --set ipv4NativeRoutingCIDR="10.0.0.0/8" --set l2announcements.enabled=true --set devices='{eth0,eth1}' --set externalIPs.enabled=true --set l2podAnnouncements.enabled=true --set l2podAnnouncements.interface=eth1
 
 # 4. wait all pods ready
 kubectl wait --timeout=100s --for=condition=Ready=true pods --all -A
