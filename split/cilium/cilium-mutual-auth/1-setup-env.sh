@@ -12,6 +12,9 @@ networking:
 
 nodes:
   - role: control-plane
+    extraPortMappings:
+    - containerPort: 4245
+      hostPort: 4245
   - role: worker
   - role: worker
         
