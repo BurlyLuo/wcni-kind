@@ -9,7 +9,7 @@ metadata:
 spec:
   containers:
   - name: netperf
-    image: cilium/netperf
+    image: 192.168.2.100:5000/cilium/netperf
     ports:
     - containerPort: 12865
 ---
@@ -38,4 +38,4 @@ spec:
     args:
     - sleep
     - infinity
-    image: cilium/netperf
+    image: 192.168.2.100:5000/cilium/netperf
