@@ -26,18 +26,18 @@ apiVersion: projectcalico.org/v3
 kind: Node
 metadata:
   annotations:
-    projectcalico.org/kube-labels: '{"beta.kubernetes.io/arch":"amd64","beta.kubernetes.io/os":"linux","kubernetes.io/arch":"amd64","kubernetes.io/hostname":"clab-calico-bgp-rr-control-plane","kubernetes.io/os":"linux","node-role.kubernetes.io/control-plane":"","node-role.kubernetes.io/master":"","node.kubernetes.io/exclude-from-external-load-balancers":"","rack":"rack0"}'
+    projectcalico.org/kube-labels: '{"beta.kubernetes.io/arch":"amd64","beta.kubernetes.io/os":"linux","kubernetes.io/arch":"amd64","kubernetes.io/hostname":"calico-bgp-rr-control-plane","kubernetes.io/os":"linux","node-role.kubernetes.io/control-plane":"","node-role.kubernetes.io/master":"","node.kubernetes.io/exclude-from-external-load-balancers":"","rack":"rack0"}'
   labels:
     beta.kubernetes.io/arch: amd64
     beta.kubernetes.io/os: linux
     kubernetes.io/arch: amd64
-    kubernetes.io/hostname: clab-calico-bgp-rr-control-plane
+    kubernetes.io/hostname: calico-bgp-rr-control-plane
     kubernetes.io/os: linux
     node-role.kubernetes.io/control-plane: ""
     node-role.kubernetes.io/master: ""
     node.kubernetes.io/exclude-from-external-load-balancers: ""
     rack: rack0
-  name: clab-calico-bgp-rr-control-plane
+  name: calico-bgp-rr-control-plane
 spec:
   addresses:
   - address: 10.1.5.10
@@ -46,7 +46,7 @@ spec:
     asNumber: 65005
     ipv4Address: 10.1.5.10/24
   orchRefs:
-  - nodeName: clab-calico-bgp-rr-control-plane
+  - nodeName: calico-bgp-rr-control-plane
     orchestrator: k8s
 status:
   podCIDRs:
@@ -58,16 +58,16 @@ apiVersion: projectcalico.org/v3
 kind: Node
 metadata:
   annotations:
-    projectcalico.org/kube-labels: '{"beta.kubernetes.io/arch":"amd64","beta.kubernetes.io/os":"linux","kubernetes.io/arch":"amd64","kubernetes.io/hostname":"clab-calico-bgp-rr-worker","kubernetes.io/os":"linux","rack":"rack0"}'
+    projectcalico.org/kube-labels: '{"beta.kubernetes.io/arch":"amd64","beta.kubernetes.io/os":"linux","kubernetes.io/arch":"amd64","kubernetes.io/hostname":"calico-bgp-rr-worker","kubernetes.io/os":"linux","rack":"rack0"}'
   creationTimestamp: "2022-12-05T08:40:29Z"
   labels:
     beta.kubernetes.io/arch: amd64
     beta.kubernetes.io/os: linux
     kubernetes.io/arch: amd64
-    kubernetes.io/hostname: clab-calico-bgp-rr-worker
+    kubernetes.io/hostname: calico-bgp-rr-worker
     kubernetes.io/os: linux
     rack: rack0
-  name: clab-calico-bgp-rr-worker
+  name: calico-bgp-rr-worker
 spec:
   addresses:
   - address: 10.1.5.11
@@ -76,7 +76,38 @@ spec:
     asNumber: 65005
     ipv4Address: 10.1.5.11/24  
   orchRefs:
-  - nodeName: clab-calico-bgp-rr-worker
+  - nodeName: calico-bgp-rr-worker
+    orchestrator: k8s
+status:
+  podCIDRs:
+  - 10.244.1.0/24
+EOF
+
+
+cat <<EOF | calicoctl apply -f - 
+apiVersion: projectcalico.org/v3
+kind: Node
+metadata:
+  annotations:
+    projectcalico.org/kube-labels: '{"beta.kubernetes.io/arch":"amd64","beta.kubernetes.io/os":"linux","kubernetes.io/arch":"amd64","kubernetes.io/hostname":"calico-bgp-rr-worker2","kubernetes.io/os":"linux","rack":"rack1"}'
+  creationTimestamp: "2022-12-05T08:40:29Z"
+  labels:
+    beta.kubernetes.io/arch: amd64
+    beta.kubernetes.io/os: linux
+    kubernetes.io/arch: amd64
+    kubernetes.io/hostname: calico-bgp-rr-worker2
+    kubernetes.io/os: linux
+    rack: rack1
+  name: calico-bgp-rr-worker2
+spec:
+  addresses:
+  - address: 10.1.8.10
+    type: InternalIP
+  bgp:
+    asNumber: 65008
+    ipv4Address: 10.1.8.10/24
+  orchRefs:
+  - nodeName: calico-bgp-rr-worker2
     orchestrator: k8s
 status:
   podCIDRs:
@@ -89,47 +120,16 @@ apiVersion: projectcalico.org/v3
 kind: Node
 metadata:
   annotations:
-    projectcalico.org/kube-labels: '{"beta.kubernetes.io/arch":"amd64","beta.kubernetes.io/os":"linux","kubernetes.io/arch":"amd64","kubernetes.io/hostname":"clab-calico-bgp-rr-worker2","kubernetes.io/os":"linux","rack":"rack1"}'
+    projectcalico.org/kube-labels: '{"beta.kubernetes.io/arch":"amd64","beta.kubernetes.io/os":"linux","kubernetes.io/arch":"amd64","kubernetes.io/hostname":"calico-bgp-rr-worker3","kubernetes.io/os":"linux","rack":"rack1"}'
   creationTimestamp: "2022-12-05T08:40:29Z"
   labels:
     beta.kubernetes.io/arch: amd64
     beta.kubernetes.io/os: linux
     kubernetes.io/arch: amd64
-    kubernetes.io/hostname: clab-calico-bgp-rr-worker2
+    kubernetes.io/hostname: calico-bgp-rr-worker3
     kubernetes.io/os: linux
     rack: rack1
-  name: clab-calico-bgp-rr-worker2
-spec:
-  addresses:
-  - address: 10.1.8.10
-    type: InternalIP
-  bgp:
-    asNumber: 65008
-    ipv4Address: 10.1.8.10/24
-  orchRefs:
-  - nodeName: clab-calico-bgp-rr-worker2
-    orchestrator: k8s
-status:
-  podCIDRs:
-  - 10.244.3.0/24
-EOF
-
-
-cat <<EOF | calicoctl apply -f - 
-apiVersion: projectcalico.org/v3
-kind: Node
-metadata:
-  annotations:
-    projectcalico.org/kube-labels: '{"beta.kubernetes.io/arch":"amd64","beta.kubernetes.io/os":"linux","kubernetes.io/arch":"amd64","kubernetes.io/hostname":"clab-calico-bgp-rr-worker3","kubernetes.io/os":"linux","rack":"rack1"}'
-  creationTimestamp: "2022-12-05T08:40:29Z"
-  labels:
-    beta.kubernetes.io/arch: amd64
-    beta.kubernetes.io/os: linux
-    kubernetes.io/arch: amd64
-    kubernetes.io/hostname: clab-calico-bgp-rr-worker3
-    kubernetes.io/os: linux
-    rack: rack1
-  name: clab-calico-bgp-rr-worker3
+  name: calico-bgp-rr-worker3
 spec:
   addresses:
   - address: 10.1.8.11
@@ -138,11 +138,11 @@ spec:
     asNumber: 65008
     ipv4Address: 10.1.8.11/24
   orchRefs:
-  - nodeName: clab-calico-bgp-rr-worker3
+  - nodeName: calico-bgp-rr-worker3
     orchestrator: k8s
 status:
   podCIDRs:
-  - 10.244.1.0/24
+  - 10.244.3.0/24
 EOF
 
 # 1.4. peer to leaf0 switch

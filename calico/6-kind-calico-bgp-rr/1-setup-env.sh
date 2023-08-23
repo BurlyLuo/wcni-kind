@@ -3,7 +3,7 @@ date
 set -v
 
 # 1.prep noCNI env
-cat <<EOF | kind create cluster --name=clab-calico-bgp-rr --image=kindest/node:v1.23.4 --config=-
+cat <<EOF | kind create cluster --name=calico-bgp-rr --image=kindest/node:v1.27.3 --config=-
 kind: Cluster
 apiVersion: kind.x-k8s.io/v1alpha4
 networking:
@@ -54,5 +54,5 @@ EOF
 
 # 2.remove taints
 controller_node_ip=`kubectl get node -o wide --no-headers | grep -E "control-plane|bpf1" | awk -F " " '{print $6}'`
-kubectl taint nodes $(kubectl get nodes -o name | grep control-plane) node-role.kubernetes.io/master:NoSchedule-
+kubectl taint nodes $(kubectl get nodes -o name | grep control-plane) node-role.kubernetes.io/control-plane:NoSchedule-
 kubectl get nodes -o wide

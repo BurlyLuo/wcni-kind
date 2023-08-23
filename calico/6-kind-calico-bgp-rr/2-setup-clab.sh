@@ -13,7 +13,7 @@ topology:
   nodes:
     spine0:
       kind: linux
-      image: 192.168.2.100:5000/vyos/vyos:1.2.8
+      image: 192.168.2.100:5000/vyos/vyos:1.4.7
       cmd: /sbin/init
       binds:
         - /lib/modules:/lib/modules
@@ -21,7 +21,7 @@ topology:
 
     spine1:
       kind: linux
-      image: 192.168.2.100:5000/vyos/vyos:1.2.8
+      image: 192.168.2.100:5000/vyos/vyos:1.4.7
       cmd: /sbin/init
       binds:
         - /lib/modules:/lib/modules
@@ -29,7 +29,7 @@ topology:
 
     leaf0:
       kind: linux
-      image: 192.168.2.100:5000/vyos/vyos:1.2.8
+      image: 192.168.2.100:5000/vyos/vyos:1.4.7
       cmd: /sbin/init
       binds:
         - /lib/modules:/lib/modules
@@ -37,7 +37,7 @@ topology:
 
     leaf1:
       kind: linux
-      image: 192.168.2.100:5000/vyos/vyos:1.2.8
+      image: 192.168.2.100:5000/vyos/vyos:1.4.7
       cmd: /sbin/init
       binds:
         - /lib/modules:/lib/modules
@@ -52,7 +52,7 @@ topology:
     server1:
       kind: linux
       image: 192.168.2.100:5000/nettool
-      network-mode: container:control-plane
+      network-mode: container:calico-bgp-rr-control-plane
       exec:
       - ip addr add 10.1.5.10/24 dev net0
       - ip route replace default via 10.1.5.1
@@ -60,7 +60,7 @@ topology:
     server2:
       kind: linux
       image: 192.168.2.100:5000/nettool
-      network-mode: container:worker
+      network-mode: container:calico-bgp-rr-worker
       exec:
       - ip addr add 10.1.5.11/24 dev net0
       - ip route replace default via 10.1.5.1
@@ -68,7 +68,7 @@ topology:
     server3:
       kind: linux
       image: 192.168.2.100:5000/nettool
-      network-mode: container:worker2
+      network-mode: container:calico-bgp-rr-worker2
       exec:
       - ip addr add 10.1.8.10/24 dev net0
       - ip route replace default via 10.1.8.1
@@ -76,7 +76,7 @@ topology:
     server4:
       kind: linux
       image: 192.168.2.100:5000/nettool
-      network-mode: container:worker3
+      network-mode: container:calico-bgp-rr-worker3
       exec:
       - ip addr add 10.1.8.11/24 dev net0
       - ip route replace default via 10.1.8.1
