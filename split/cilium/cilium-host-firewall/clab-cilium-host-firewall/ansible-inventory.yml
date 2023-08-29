@@ -1,0 +1,18 @@
+all:
+  children:
+    bridge:
+      hosts:
+        clab-cilium-host-firewall-br-pool0:
+          ansible_host: 
+    linux:
+      hosts:
+        clab-cilium-host-firewall-client:
+          ansible_host: 172.20.20.3
+        clab-cilium-host-firewall-gw0:
+          ansible_host: 172.20.20.2
+        clab-cilium-host-firewall-server1:
+          ansible_host: 
+        clab-cilium-host-firewall-server2:
+          ansible_host: 
+        clab-cilium-host-firewall-server3:
+          ansible_host: 

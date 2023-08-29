@@ -1,5 +1,4 @@
 #!/bin/bash
-date
 set -v
 
 # 1.prep noCNI env[Ubuntu 22.04][https://docs.cilium.io/en/v1.14/installation/kind/#install-cilium]
@@ -26,6 +25,8 @@ controller_node_ip=`kubectl get node -o wide --no-headers | grep -E "control-pla
 kubectl taint nodes $(kubectl get nodes -o name | grep control-plane) node-role.kubernetes.io/control-plane:NoSchedule-
 kubectl get nodes -o wide
 
+./2-setup-clab.sh
+
 # 3.install cni
 helm repo add cilium https://helm.cilium.io > /dev/null 2>&1
 helm repo update > /dev/null 2>&1
@@ -36,8 +37,8 @@ helm repo update > /dev/null 2>&1
 # https://docs.cilium.io/en/v1.14/network/kubernetes/kubeproxy-free/#kube-proxy-hybrid-modes
 # The following Helm setup below would be equivalent to kubeProxyReplacement=true in a kube-proxy-free environment:
 # helm install cilium cilium/cilium --version 1.14.0-rc.0 --namespace kube-system --set kubeProxyReplacement=false --set socketLB.enabled=true --set nodePort.enabled=true --set externalIPs.enabled=true --set hostPort.enabled=true --set k8sServiceHost=${API_SERVER_IP} --set k8sServicePort=${API_SERVER_PORT}
-
-helm install cilium cilium/cilium --set k8sServiceHost=$controller_node_ip --set k8sServicePort=6443 --version 1.14.0-rc.0 --namespace kube-system --set debug.enabled=true --set debug.verbose=datapath --set monitorAggregation=none --set ipam.mode=cluster-pool --set cluster.name=cilium-host-firewall --set kubeProxyReplacement=strict --set tunnel=disabled --set autoDirectNodeRoutes=true --set ipv4NativeRoutingCIDR="10.0.0.0/8" --set bpf.masquerade=true 
+# host firewall Options(--set hostFirewall.enabled=true --set devices='{ethX,ethY}'[--set devices=eth+{if with k8s-node network interface, permit 6443 firstly}])
+helm install cilium cilium/cilium --set k8sServiceHost=$controller_node_ip --set k8sServicePort=6443 --version 1.14.0-rc.0 --namespace kube-system --set debug.enabled=true --set debug.verbose=datapath --set monitorAggregation=none --set ipam.mode=cluster-pool --set cluster.name=cilium-host-firewall --set kubeProxyReplacement=strict --set tunnel=disabled --set autoDirectNodeRoutes=true --set ipv4NativeRoutingCIDR="10.0.0.0/8" --set bpf.masquerade=true --set hostFirewall.enabled=true --set devices=eth1 
 
 # 4. wait all pods ready
 kubectl wait --timeout=100s --for=condition=Ready=true pods --all -A
