@@ -57,3 +57,4 @@ EOF
 
 echo "permit eth1 port 80 | test port 80:"
 docker exec -it clab-cilium-host-firewall-client curl -m 1 -v 12.1.5.11
+
