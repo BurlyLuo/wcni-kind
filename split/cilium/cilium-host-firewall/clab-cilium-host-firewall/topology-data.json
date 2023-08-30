@@ -6,7 +6,7 @@
       "prefix": "clab",
       "mgmt": {
         "network": "clab",
-        "bridge": "br-272d144bd619",
+        "bridge": "br-423e9ae70834",
         "ipv4-subnet": "172.20.20.0/24",
         "ipv4-gw": "172.20.20.1",
         "ipv6-subnet": "2001:172:20:20::/64",
@@ -34,7 +34,7 @@
       "mgmt-ipv6-prefix-length": 0,
       "mac-address": "",
       "labels": {
-        "clab-mgmt-net-bridge": "br-272d144bd619",
+        "clab-mgmt-net-bridge": "br-423e9ae70834",
         "clab-node-group": "",
         "clab-node-kind": "bridge",
         "clab-node-lab-dir": "/root/wcni-kind/split/cilium/cilium-host-firewall/clab-cilium-host-firewall/br-pool0",
@@ -61,7 +61,7 @@
       "mgmt-ipv6-prefix-length": 64,
       "mac-address": "",
       "labels": {
-        "clab-mgmt-net-bridge": "br-272d144bd619",
+        "clab-mgmt-net-bridge": "br-423e9ae70834",
         "clab-node-group": "",
         "clab-node-kind": "linux",
         "clab-node-lab-dir": "/root/wcni-kind/split/cilium/cilium-host-firewall/clab-cilium-host-firewall/client",
@@ -88,7 +88,7 @@
       "mgmt-ipv6-prefix-length": 64,
       "mac-address": "",
       "labels": {
-        "clab-mgmt-net-bridge": "br-272d144bd619",
+        "clab-mgmt-net-bridge": "br-423e9ae70834",
         "clab-node-group": "",
         "clab-node-kind": "linux",
         "clab-node-lab-dir": "/root/wcni-kind/split/cilium/cilium-host-firewall/clab-cilium-host-firewall/gw0",
@@ -115,7 +115,7 @@
       "mgmt-ipv6-prefix-length": 0,
       "mac-address": "",
       "labels": {
-        "clab-mgmt-net-bridge": "br-272d144bd619",
+        "clab-mgmt-net-bridge": "br-423e9ae70834",
         "clab-node-group": "",
         "clab-node-kind": "linux",
         "clab-node-lab-dir": "/root/wcni-kind/split/cilium/cilium-host-firewall/clab-cilium-host-firewall/server1",
@@ -142,7 +142,7 @@
       "mgmt-ipv6-prefix-length": 0,
       "mac-address": "",
       "labels": {
-        "clab-mgmt-net-bridge": "br-272d144bd619",
+        "clab-mgmt-net-bridge": "br-423e9ae70834",
         "clab-node-group": "",
         "clab-node-kind": "linux",
         "clab-node-lab-dir": "/root/wcni-kind/split/cilium/cilium-host-firewall/clab-cilium-host-firewall/server2",
@@ -169,7 +169,7 @@
       "mgmt-ipv6-prefix-length": 0,
       "mac-address": "",
       "labels": {
-        "clab-mgmt-net-bridge": "br-272d144bd619",
+        "clab-mgmt-net-bridge": "br-423e9ae70834",
         "clab-node-group": "",
         "clab-node-kind": "linux",
         "clab-node-lab-dir": "/root/wcni-kind/split/cilium/cilium-host-firewall/clab-cilium-host-firewall/server3",
@@ -185,13 +185,13 @@
       "a": {
         "node": "br-pool0",
         "interface": "br-pool0-net0",
-        "mac": "aa:c1:ab:d7:a4:b1",
+        "mac": "aa:c1:ab:d8:ea:1c",
         "peer": "z"
       },
       "z": {
         "node": "server1",
         "interface": "eth1",
-        "mac": "aa:c1:ab:f0:20:e5",
+        "mac": "aa:c1:ab:79:e8:1d",
         "peer": "a"
       }
     },
@@ -199,13 +199,13 @@
       "a": {
         "node": "br-pool0",
         "interface": "br-pool0-net1",
-        "mac": "aa:c1:ab:b3:1b:21",
+        "mac": "aa:c1:ab:8a:ff:5a",
         "peer": "z"
       },
       "z": {
         "node": "server2",
         "interface": "eth1",
-        "mac": "aa:c1:ab:5e:2c:8f",
+        "mac": "aa:c1:ab:9b:aa:ea",
         "peer": "a"
       }
     },
@@ -213,13 +213,13 @@
       "a": {
         "node": "br-pool0",
         "interface": "br-pool0-net2",
-        "mac": "aa:c1:ab:59:d5:79",
+        "mac": "aa:c1:ab:02:7f:10",
         "peer": "z"
       },
       "z": {
         "node": "server3",
         "interface": "eth1",
-        "mac": "aa:c1:ab:2d:43:da",
+        "mac": "aa:c1:ab:0c:37:da",
         "peer": "a"
       }
     },
@@ -227,13 +227,13 @@
       "a": {
         "node": "gw0",
         "interface": "eth1",
-        "mac": "aa:c1:ab:f8:91:1f",
+        "mac": "aa:c1:ab:29:88:10",
         "peer": "z"
       },
       "z": {
         "node": "br-pool0",
         "interface": "br-pool0-net3",
-        "mac": "aa:c1:ab:15:7a:d5",
+        "mac": "aa:c1:ab:30:3a:42",
         "peer": "a"
       }
     },
@@ -241,13 +241,13 @@
       "a": {
         "node": "gw0",
         "interface": "eth2",
-        "mac": "aa:c1:ab:13:18:fb",
+        "mac": "aa:c1:ab:24:d9:9c",
         "peer": "z"
       },
       "z": {
         "node": "client",
         "interface": "eth1",
-        "mac": "aa:c1:ab:3f:f3:4b",
+        "mac": "aa:c1:ab:63:18:82",
         "peer": "a"
       }
     }
