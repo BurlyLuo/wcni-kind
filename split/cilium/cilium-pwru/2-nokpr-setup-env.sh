@@ -1,6 +1,5 @@
 #/bin/bash
 set -v
-
 # 1. Deploy multipass vmn(kubeProxyReplacement=false(default))
 for ((i=0; i<${1:-3}; i++))
 do
@@ -12,7 +11,7 @@ do
     - sudo mkdir -p /etc/rancher/k3s/ && wget http://192.168.2.100/k3s/registries.yaml -P /etc/rancher/k3s/
     - sudo wget -r -np -nH --cut-dirs=3 --directory-prefix=/opt/cni/bin/ http://192.168.2.100/k3s/cni/bin/ && find /opt/cni/bin/ -type f | xargs chmod +x
     - sudo bash -c '{ echo "alias all=\"kubectl get pods -A\""; echo "alias k=\"kubectl\""; echo "alias kk=\"kubectl -nkube-system\"" ; } >> ~/.bashrc'
-    - sudo wget -r -np -nH --cut-dirs=3 --directory-prefix=/root/ http://192.168.2.100/k3s/cilium-related/pwru/
+    - sudo mkdir -p /root/pwru && wget -r -np -nH --cut-dirs=3 --directory-prefix=/root/pwru/ http://192.168.2.100/k3s/cilium-related/pwru/
 EOF
 done
 
@@ -34,7 +33,7 @@ for ((ip_id=0; ip_id<${#ip_addresses[@]}; ip_id++)); do
     fi
 done
 
-controller_node_ip=`kubectl get node -o wide --no-headers | grep -E "control-plane|bpf1" | awk -F " " '{print $6}'`
+until controller_node_ip=$(kubectl get node -o wide --no-headers | grep -E "control-plane|bpf1" | awk -F " " '{print $6}');[ -n "$controller_node_ip" ];do sleep 1;done
 kubectl taint nodes $(kubectl get nodes -o name | grep control-plane) node-role.kubernetes.io/control-plane:NoSchedule- > /dev/null 2>&1
 kubectl get nodes -o wide
 
@@ -43,9 +42,10 @@ helm repo add cilium https://helm.cilium.io > /dev/null 2>&1
 helm repo update > /dev/null 2>&1
 
 # Direct Routing Options(--set tunnel=disabled --set autoDirectNodeRoutes=true --set ipv4NativeRoutingCIDR="10.0.0.0/8")
-helm install cilium cilium/cilium --set k8sServiceHost=$controller_node_ip --set k8sServicePort=6443 --version 1.14.0-rc.0 --namespace kube-system --set debug.enabled=true --set debug.verbose=datapath --set monitorAggregation=none --set ipam.mode=cluster-pool --set cluster.name=cilium-kubeproxy --set tunnel=disabled --set autoDirectNodeRoutes=true --set ipv4NativeRoutingCIDR="10.0.0.0/8"
+helm install cilium cilium/cilium --set k8sServiceHost=$controller_node_ip --set k8sServicePort=6443 --version 1.14.0-rc.0 --namespace kube-system --set debug.enabled=true --set debug.verbose=datapath --set monitorAggregation=none --set ipam.mode=cluster-pool --set operator.replicas=1 --set cluster.name=cilium-kubeproxy --set tunnel=disabled --set autoDirectNodeRoutes=true --set ipv4NativeRoutingCIDR="10.0.0.0/8"
 
 # 4. wait all pods ready
+until pod_list=$(kubectl get pods -o wide -A --no-headers);[ -n "$pod_list" ];do sleep 1;done
 kubectl wait --timeout=100s --for=condition=Ready=true pods --all -A
 
 # 5. cilium status
