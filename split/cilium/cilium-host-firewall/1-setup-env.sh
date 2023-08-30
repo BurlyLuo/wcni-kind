@@ -49,3 +49,5 @@ kubectl -nkube-system exec -it ds/cilium -- cilium status
 # 6. cgroup v2 verify
 for container in $(docker ps -a --format "table {{.Names}}" | grep cilium-host-firewall);do docker exec $container ls -al /proc/self/ns/cgroup;done
 
+# issue list
+# [Cilium(1.14.0-rc.0) host firewall feature-set wrong Host firewall interface] https://github.com/cilium/cilium/issues/27810
