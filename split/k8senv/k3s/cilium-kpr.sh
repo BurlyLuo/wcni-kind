@@ -4,7 +4,7 @@ set -v
 
 # 1.remove taints
 controller_node_ip=`kubectl get node -o wide --no-headers | grep -E "control-plane|bpf1" | awk -F " " '{print $6}'`
-kubectl taint nodes $(kubectl get nodes -o name | grep control-plane) node-role.kubernetes.io/control-plane:NoSchedule- > /dev/null 2>&1
+kubectl taint nodes $(kubectl get nodes -o wide | grep control-plane | awk -F " " '{print $1}') node-role.kubernetes.io/control-plane:NoSchedule- > /dev/null 2>&1
 kubectl get nodes -o wide
 
 # 2.install cni

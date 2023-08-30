@@ -82,7 +82,6 @@ alias ll='ls -lF'
 alias la='ls -A'
 alias l='ls -CF'
 alias vi="vim"
-export TERM='xterm-256color'
 
 alias wp="cd /root/wcni-kind/split/"
 alias k="kubectl"
@@ -114,6 +113,8 @@ alias mldk='set -f;sed -i '/vmk/d' /etc/hosts && for vm in $(multipass list | gr
 alias mldn='set -f;sed -i '/vmn/d' /etc/hosts && for vm in $(multipass list | grep vmn | awk -F " " "{print \$1}"); do multipass delete --purge $vm; done && { sed -i "1!d" /root/.ssh/known_hosts && kubectl config delete-cluster nokpr && kubectl config delete-context nokpr && kubectl config delete-user nokpr && kubectl config unset current-context; } > /dev/null 2>&1;set +f'
 
 alias mmd='set -f;sed -i '/vm/d' /etc/hosts && for vm in $(multipass list | grep vm[0-9] | awk -F " " "{print \$1}"); do multipass delete --purge $vm; done && { sed -i "1!d" /root/.ssh/known_hosts; } > /dev/null 2>&1;set +f'
+
+alias mmrs="systemctl stop snap.multipass.multipassd.service && systemctl start snap.multipass.multipassd.service && systemctl status snap.multipass.multipassd.service"
 
 # Alias definitions.
 # You may want to put all your additions into a separate file like
