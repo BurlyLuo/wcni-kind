@@ -11,7 +11,7 @@ do
     - sudo mkdir -p /etc/rancher/k3s/ && wget http://192.168.2.100/k3s/registries.yaml -P /etc/rancher/k3s/
     - sudo wget -r -np -nH --cut-dirs=3 --directory-prefix=/opt/cni/bin/ http://192.168.2.100/k3s/cni/bin/ && find /opt/cni/bin/ -type f | xargs chmod +x
     - sudo bash -c '{ echo "alias all=\"kubectl get pods -A\""; echo "alias k=\"kubectl\""; echo "alias kk=\"kubectl -nkube-system\"" ; } >> ~/.bashrc'
-    - sudo mkdir -p /root/pwru && wget -r -np -nH --cut-dirs=3 --directory-prefix=/root/pwru/ http://192.168.2.100/k3s/cilium-related/pwru/
+    - sudo mkdir -p /root/pwru && wget -r -np -nH --cut-dirs=3 --directory-prefix=/root/pwru http://192.168.2.100/k3s/cilium-related/pwru/ chmod +x /root/pwru/pwru.sh
 EOF
 done
 
