@@ -29,6 +29,3 @@ kubectl apply -f calico.yaml
 # 4. wait all pods ready
 kubectl wait --timeout=100s --for=condition=Ready=true pods --all -A
 
-# 5. clusterip service
-kubectl apply -f cni.yaml
-
