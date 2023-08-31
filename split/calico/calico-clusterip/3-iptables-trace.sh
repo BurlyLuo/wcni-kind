@@ -1,8 +1,9 @@
 #!/bin/bash
 if [ -z "$1" ]; then
-    echo "Usage: ./3-iptables-trace.sh I sport 9494 tcp"
+    echo 'Usage: docker exec -it calico-clusterip-control-plane bash -c "3-iptables-trace.sh I sport 9494 tcp"'
     exit
 fi
+
 iptables -t raw     -$1 PREROUTING  -p ${4:-'tcp'}  --$2 $3 -j LOG --log-prefix "wluo-cni target hit raw.prerouting>"
 iptables -t mangle  -$1 PREROUTING  -p ${4:-'tcp'}  --$2 $3 -j LOG --log-prefix "wluo-cni target hit mangle.prerouting>"
 iptables -t nat     -$1 PREROUTING  -p ${4:-'tcp'}  --$2 $3 -j LOG --log-prefix "wluo-cni tagert hit nat.prerouting>"
