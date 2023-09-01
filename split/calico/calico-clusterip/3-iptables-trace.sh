@@ -1,22 +1,22 @@
 #!/bin/bash
 if [ -z "$1" ]; then
-    echo 'Usage: docker exec -it calico-clusterip-control-plane bash -c "3-iptables-trace.sh I sport 9494 tcp"'
+    echo 'Usage: ./3-iptables-trace.sh I sport 9494 tcp'
     exit
 fi
 
-iptables -t raw     -$1 PREROUTING  -p ${4:-'tcp'}  --$2 $3 -j LOG --log-prefix "wluo-cni target hit raw.prerouting>"
-iptables -t mangle  -$1 PREROUTING  -p ${4:-'tcp'}  --$2 $3 -j LOG --log-prefix "wluo-cni target hit mangle.prerouting>"
-iptables -t nat     -$1 PREROUTING  -p ${4:-'tcp'}  --$2 $3 -j LOG --log-prefix "wluo-cni tagert hit nat.prerouting>"
-iptables -t mangle  -$1 INPUT       -p ${4:-'tcp'}  --$2 $3 -j LOG --log-prefix "wluo-cni target hit mangle.input>"
-iptables -t filter  -$1 INPUT       -p ${4:-'tcp'}  --$2 $3 -j LOG --log-prefix "wluo-cni target hit filter.input>"
-iptables -t raw     -$1 OUTPUT      -p ${4:-'tcp'}  --$2 $3 -j LOG --log-prefix "wluo-cni target hit raw.output>"
-iptables -t mangle  -$1 OUTPUT      -p ${4:-'tcp'}  --$2 $3 -j LOG --log-prefix "wluo-cni target hit mangle.output>"
-iptables -t nat     -$1 OUTPUT      -p ${4:-'tcp'}  --$2 $3 -j LOG --log-prefix "wluo-cni target hit nat.output>"
-iptables -t filter  -$1 OUTPUT      -p ${4:-'tcp'}  --$2 $3 -j LOG --log-prefix "wluo-cni target hit filter.output>"
-iptables -t mangle  -$1 FORWARD     -p ${4:-'tcp'}  --$2 $3 -j LOG --log-prefix "wluo-cni target hit mangle.forward>"
-iptables -t filter  -$1 FORWARD     -p ${4:-'tcp'}  --$2 $3 -j LOG --log-prefix "wluo-cni target hit filter.forward>"
-iptables -t mangle  -$1 POSTROUTING -p ${4:-'tcp'}  --$2 $3 -j LOG --log-prefix "wluo-cni target hit mangle.postrouting>"
-iptables -t nat     -$1 POSTROUTING -p ${4:-'tcp'}  --$2 $3 -j LOG --log-prefix "wluo-cni target hit nat.postrouting>"
+iptables -t raw     -$1 PREROUTING  -p ${4:-'tcp'}  --$2 $3 -j LOG --log-prefix "Thit raw.prerouting>"
+iptables -t mangle  -$1 PREROUTING  -p ${4:-'tcp'}  --$2 $3 -j LOG --log-prefix "Thit mangle.prerouting>"
+iptables -t nat     -$1 PREROUTING  -p ${4:-'tcp'}  --$2 $3 -j LOG --log-prefix "Thit nat.prerouting>"
+iptables -t mangle  -$1 INPUT       -p ${4:-'tcp'}  --$2 $3 -j LOG --log-prefix "Thit mangle.input>"
+iptables -t filter  -$1 INPUT       -p ${4:-'tcp'}  --$2 $3 -j LOG --log-prefix "Thit filter.input>"
+iptables -t raw     -$1 OUTPUT      -p ${4:-'tcp'}  --$2 $3 -j LOG --log-prefix "Thit raw.output>"
+iptables -t mangle  -$1 OUTPUT      -p ${4:-'tcp'}  --$2 $3 -j LOG --log-prefix "Thit mangle.output>"
+iptables -t nat     -$1 OUTPUT      -p ${4:-'tcp'}  --$2 $3 -j LOG --log-prefix "Thit nat.output>"
+iptables -t filter  -$1 OUTPUT      -p ${4:-'tcp'}  --$2 $3 -j LOG --log-prefix "Thit filter.output>"
+iptables -t mangle  -$1 FORWARD     -p ${4:-'tcp'}  --$2 $3 -j LOG --log-prefix "Thit mangle.forward>"
+iptables -t filter  -$1 FORWARD     -p ${4:-'tcp'}  --$2 $3 -j LOG --log-prefix "Thit filter.forward>"
+iptables -t mangle  -$1 POSTROUTING -p ${4:-'tcp'}  --$2 $3 -j LOG --log-prefix "Thit mangle.postrouting>"
+iptables -t nat     -$1 POSTROUTING -p ${4:-'tcp'}  --$2 $3 -j LOG --log-prefix "Thit nat.postrouting>"
 
 if [ $1 == D ];then iptables-save | grep hit;fi
 

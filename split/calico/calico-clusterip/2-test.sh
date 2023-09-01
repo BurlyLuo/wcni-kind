@@ -1,7 +1,7 @@
 #!/bin/bash
 set -v 
-controller_node=`kubectl get nodes --no-headers  -o custom-columns=NAME:.metadata.name | grep control-plane`
-worker_node=`kubectl get nodes --no-headers  -o custom-columns=NAME:.metadata.name | grep worker2`
+controller_node=vmn0
+worker_node=vmn2
 
 # client pod and service
 cat <<EOF | kubectl apply -f -
@@ -27,7 +27,7 @@ kind: Service
 metadata:
   labels:
     run: client
-  name: client-svc
+  name: clientsvc
 spec:
   ports:
   - port: 9494
@@ -42,11 +42,11 @@ apiVersion: v1
 kind: Pod
 metadata:
   labels:
-    run: backend
-  name: backend
+    run: server
+  name: server
 spec:
   containers:
-  - name: backend
+  - name: server
     image: 192.168.2.100:5000/nettool:9495
     imagePullPolicy: Always
   restartPolicy: Always
@@ -59,14 +59,14 @@ apiVersion: v1
 kind: Service
 metadata:
   labels:
-    run: backend
-  name: backend-svc
+    run: server
+  name: serversvc
 spec:
   ports:
   - port: 9495
     protocol: TCP
     targetPort: 9495
   selector:
-    run: backend
+    run: server
 EOF
 
