@@ -14,9 +14,13 @@ docker pull burlyluo/kindest:v1.27.3
 or
 docker pull quay.io/weiluo/kindest/node:v1.27.3
 
-3. nettool
+3. nettool image
 docker pull burlyluo/nettool:latest
 or
 docker pull quay.io/weiluo/nettool
 
+4. vyos image
+docker pull burlyluo/vyos:1.4.7
+or 
+docker pull quay.io/weiluo/vyos:1.4.7
 
