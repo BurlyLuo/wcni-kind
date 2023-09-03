@@ -24,3 +24,4 @@ docker pull burlyluo/vyos:1.4.7
 or 
 docker pull quay.io/weiluo/vyos:1.4.7
 
+5. 
