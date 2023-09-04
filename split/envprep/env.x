@@ -24,4 +24,7 @@ docker pull burlyluo/vyos:1.4.7
 or 
 docker pull quay.io/weiluo/vyos:1.4.7
 
-5. 
+5. if install docker. the FORWARD will be set -j DROP. and the basical test will failure.
+Like eth0--ns1--bridge[br0]--ns2--eth2 
+
+
