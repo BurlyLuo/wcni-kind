@@ -27,8 +27,8 @@ spec:
     pod: {}
   volumes:
   - containerDisk:
-    #image: ovaleanu/centos:latest
-    image: 192.168.2.100:5000/ovaleanu/centos:latest
+      #image: ovaleanu/centos:latest
+      image: 192.168.2.100:5000/ovaleanu/centos:latest
     name: containerdisk
   - cloudInitNoCloud:
       userData: |-
