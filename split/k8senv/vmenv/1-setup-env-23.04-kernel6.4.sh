@@ -18,11 +18,15 @@ do
     - sudo wget http://192.168.2.100/k3s/cilium-related/kubectl -P /usr/bin/ && chmod +x /usr/bin/kubectl
     - sudo wget http://192.168.2.100/k3s/cilium-related/kind -P /usr/bin/ && chmod +x /usr/bin/kind
     - sudo wget http://192.168.2.100/k3s/rzsz/rz -P /usr/bin/ && wget http://192.168.2.100/k3s/rzsz/sz -P /usr/bin/ && chmod +x /usr/bin/rz /usr/bin/sz
+    - sudo mkdir -p /root/env/kernel/ && wget -r -np -nH --cut-dirs=3 --directory-prefix=/root/env/kernel/ http://192.168.2.100/k3s/cilium-related/6.4-kernel/
+    - sudo dpkg -i /root/env/kernel/*.deb
     - sudo mkdir -p /root/env/docker/ && wget -r -np -nH --cut-dirs=3 --directory-prefix=/root/env/docker/ http://192.168.2.100/k3s/cilium-related/docker/
     - sudo dpkg -i /root/env/docker/*.deb
     - sudo wget http://192.168.2.100/k3s/cilium-related/daemon.json -P /etc/docker/
     - sudo systemctl daemon-reload && systemctl restart docker && systemctl enable docker
     - sudo docker pull 192.168.2.100:5000/kindest:v1.27.3 && docker tag 192.168.2.100:5000/kindest:v1.27.3 kindest/node:v1.27.3
+    - sudo wget -r -np -nH --cut-dirs=3 --directory-prefix="/root/" http://192.168.2.100/k3s/vmenv/mmenv/ubuntu2304/ && chmod +x "/root/ubuntu2304/pwru.sh" 
+    - sudo reboot
 EOF
 done
 
@@ -31,6 +35,5 @@ mapfile -t ip_addresses < <(multipass list | grep vm[0-9] | awk '{print $3}')
 for ((ip_id=0; ip_id<${#ip_addresses[@]}; ip_id++)); do
     sshpass -p hive ssh-copy-id -o StrictHostKeyChecking=no -p 22 root@${ip_addresses[$ip_id]} > /dev/null 2>&1
     echo "${ip_addresses[$ip_id]} vm$ip_id" >> /etc/hosts
-    scp -r ./kindenv root@${ip_addresses[$ip_id]}:/root/
 done
 
