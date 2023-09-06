@@ -23,15 +23,20 @@ do
     - sudo wget http://192.168.2.100/k3s/cilium-related/daemon.json -P /etc/docker/
     - sudo systemctl daemon-reload && systemctl restart docker && systemctl enable docker
     - sudo docker pull 192.168.2.100:5000/kindest:v1.27.3 && docker tag 192.168.2.100:5000/kindest:v1.27.3 kindest/node:v1.27.3
-    - sudo wget -r -np -nH --cut-dirs=3 --directory-prefix="/root/" http://192.168.2.100/k3s/vmenv/mmenv/ubuntu2204/ && chmod +x "/root/ubuntu2204/pwru.sh" 
-    - sudo find /root/ubuntu2204/ -name index.html -exec rm {} \;
+    - sudo wget -r -np -nH --cut-dirs=1 --directory-prefix="/root/" http://192.168.2.100/k3s/go/ && chmod +x "/root/go/install.sh" 
+    - sudo find /root/go/ -name index.html -exec rm {} \;
 EOF
 done
+
+openssl genrsa -out server.key 2048
+openssl req -nodes -new -key server.key -subj '/CN=vm22040' -out server.csr
+openssl x509 -req -sha256 -days 365 -in server.csr -signkey server.key -out server.crt
 
 mapfile -t ip_addresses < <(multipass list | grep vm2204[0-9] | awk '{print $3}')
 
 for ((ip_id=0; ip_id<${#ip_addresses[@]}; ip_id++)); do
     sshpass -p hive ssh-copy-id -o StrictHostKeyChecking=no -p 22 root@${ip_addresses[$ip_id]} > /dev/null 2>&1
+    scp -r server.crt server.key  https-server.go root@${ip_addresses[$ip_id]}:/root/ 
     echo "${ip_addresses[$ip_id]} vm2204$ip_id" >> /etc/hosts
 done
 
