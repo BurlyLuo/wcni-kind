@@ -1,6 +1,6 @@
 iptables trace log:
 
-[这里有一点需要注意，就是我们的包是发生在SRC出来以后，然后进DST的时候，是需要经过FORWARD的。所以这里看到的是：prerouting]
+[这里有需要注意，我们看到的是prerouting在第一个，具体参考：http://192.168.2.100/http/Netfilter-packet-flow-iptables.pdf{这个包是要进bridge，是一个二层设备，link layer}]
 
 1. default FORWARD DROP iptables
 root@vm23040:~# dmesg -T
