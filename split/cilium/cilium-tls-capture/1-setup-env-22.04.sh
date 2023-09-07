@@ -23,7 +23,7 @@ do
     - sudo wget http://192.168.2.100/k3s/cilium-related/daemon.json -P /etc/docker/
     - sudo systemctl daemon-reload && systemctl restart docker && systemctl enable docker
     - sudo docker pull 192.168.2.100:5000/kindest:v1.27.3 && docker tag 192.168.2.100:5000/kindest:v1.27.3 kindest/node:v1.27.3
-    - sudo wget -r -np -nH --cut-dirs=1 --directory-prefix="/root/" http://192.168.2.100/k3s/go/ && chmod +x "/root/go/install.sh" 
+    - sudo wget -r -np -nH --cut-dirs=1 --directory-prefix="/root/" http://192.168.2.100/k3s/go/ && chmod +x "/root/go/install.sh" && /root/go/install.sh 
     - sudo find /root/go/ -name index.html -exec rm {} \;
 EOF
 done
