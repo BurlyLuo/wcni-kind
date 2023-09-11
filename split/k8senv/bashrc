@@ -103,7 +103,7 @@ alias net="cd /root/wcni-kind/network"
 alias is="kubectl -nistio-system"
 alias ii="kubectl -nistio-ingress"
 
-
+alias kv="kubectl-ko"
 
 alias mls="multipass list"
 alias mm="multipass"
