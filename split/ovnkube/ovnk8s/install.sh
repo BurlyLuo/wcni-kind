@@ -1,3 +1,4 @@
+
 tar -xzvf /root/go1.21.1.linux-amd64.tar.gz
 mv go /usr/local/
 echo "export PATH=$PATH:/usr/local/go/bin" >> ~/.profile
