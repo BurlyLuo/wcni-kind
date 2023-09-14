@@ -52,4 +52,10 @@ root@2204:~/wcni-kind/split/weiluo# clab version
  rel. notes: https://containerlab.dev/rn/0.42/
 
 
+6.Cilium clustermesh deploy muti-cluster faliure:
+cat <<EOF>>/etc/sysctl.conf
+fs.inotify.max_user_watches = 524288
+fs.inotify.max_user_instances = 512
+EOF
+sysctl -p
 
