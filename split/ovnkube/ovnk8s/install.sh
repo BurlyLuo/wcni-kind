@@ -4,8 +4,9 @@ mv go /usr/local/
 echo "export PATH=$PATH:/usr/local/go/bin" >> ~/.profile
 source ~/.profile > /dev/null 2>&1
 
-apt install python3-pip
-apt install make
+apt update
+apt -y install python3-pip
+apt -y install make
 
 go env -w GO111MODULE=auto
 go get github.com/ovn-org/ovn-kubernetes && cd $(go env GOPATH)/src/github.com/ovn-org/ovn-kubernetes
@@ -21,7 +22,9 @@ popd
 
 
 pushd contrib
-echo 'export KUBECONFIG=${HOME}/ovn.conf' >> ~/.bashrc
+apt -y install jq
+echo 'export KUBECONFIG=/root/ovn.conf' >> ~/.bashrc
+source ~/.bashrc
 ./kind.sh
 popd
 
