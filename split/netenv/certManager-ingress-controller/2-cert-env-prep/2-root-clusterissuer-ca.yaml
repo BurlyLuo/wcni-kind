@@ -26,15 +26,3 @@ spec:
     name: selfsigned-issuer
     kind: ClusterIssuer
     group: cert-manager.io
-
-# above is the root issuer and root cert
-# below is the app issuer and app certrequest
----
-apiVersion: cert-manager.io/v1
-kind: Issuer
-metadata:
-  name: my-ca-issuer
-  namespace: sandbox
-spec:
-  ca:
-    secretName: root-secret
