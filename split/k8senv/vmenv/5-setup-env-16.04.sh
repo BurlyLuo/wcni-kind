@@ -23,16 +23,17 @@ do
     - sudo wget -r -np -nH --cut-dirs=6 --directory-prefix="/var/lib/minikube/binaries/v1.20.15/" http://192.168.2.100/k3s/vmenv/mmenv/ubuntu1604/minikube/kubeinit/
     - sudo find /var/lib/minikube/binaries/v1.20.15/ -type f -exec chmod +x {} \;
     - sudo wget -r -np -nH --cut-dirs=3 --directory-prefix="/root/" http://192.168.2.100/k3s/vmenv/mmenv/ubuntu1604/
-    - sudo dpkg -i /root/ubuntu1604/minikube/docker/*.deb
-    - sudo dpkg -i /root/ubuntu1604/minikube/tools/conntrack/*.deb
+    - sudo dpkg -i /root/ubuntu1604/minikube/docker/*.deb && dpkg -i /root/ubuntu1604/minikube/tools/conntrack/*.deb
     - sudo rm -rf /etc/docker/daemon.json > /dev/null 2>&1 && wget http://192.168.2.100/k3s/vmenv/mmenv/ubuntu1604/minikube/docker/daemon.json -P /etc/docker/
     - sudo systemctl daemon-reload && systemctl restart docker && systemctl enable docker
     - sudo docker pull 192.168.2.100:5000/kindest:v1.27.3 && docker tag 192.168.2.100:5000/kindest:v1.27.3 kindest/node:v1.27.3
     - sudo find /root/ubuntu1604/ -name index.html -exec rm {} \;
-    - sudo mkdir -p /etc/cni/net.d && minikube start --image-mirror-country='cn' --kubernetes-version=v1.20.15 --vm-driver=none --force 
-    - sudo rm -rf /etc/docker/daemon.json && wget http://192.168.2.100/k3s/vmenv/mmenv/ubuntu1604/minikube/docker/daemon.json -P /etc/docker/
-    - sudo systemctl daemon-reload && systemctl restart docker && systemctl enable docker && sleep 10
+    - sudo docker load -i /root/ubuntu1604/minikube/kubeinit/metrics-server.tgz
+    - sudo mkdir -p /etc/cni/net.d && minikube start --image-mirror-country='cn' --kubernetes-version=v1.20.15 --vm-driver=none --force && sleep 15
     - sudo bash -c 'echo "export KUBECONFIG=/etc/kubernetes/admin.conf" >> $HOME/.bashrc'
+    - sudo bash -c "export KUBECONFIG=/etc/kubernetes/admin.conf && kubectl apply -f /root/ubuntu1604/minikube/kubeinit/metrics-server.yaml"
+    - sudo rm -rf /etc/docker/daemon.json && wget http://192.168.2.100/k3s/vmenv/mmenv/ubuntu1604/minikube/docker/daemon.json -P /etc/docker/
+    - sudo systemctl daemon-reload && systemctl restart docker && systemctl enable docker
     - sudo wget http://192.168.2.100/k3s/vmenv/mmenv/ubuntu1604/minikube/cni.yaml -P /root/
 EOF
 done
