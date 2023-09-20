@@ -113,6 +113,9 @@ alias mldk='set -f;sed -i '/vmk/d' /etc/hosts && for vm in $(multipass list | gr
 
 alias mldn='set -f;sed -i '/vmn/d' /etc/hosts && for vm in $(multipass list | grep vmn | awk -F " " "{print \$1}"); do multipass delete --purge $vm; done && { sed -i "1!d" /root/.ssh/known_hosts && kubectl config delete-cluster nokpr && kubectl config delete-context nokpr && kubectl config delete-user nokpr && kubectl config unset current-context; } > /dev/null 2>&1;set +f'
 
+alias 1604d='set -f;sed -i '/vm1604/d' /etc/hosts && for vm in $(multipass list | grep vm1604[0-9] | awk -F " " "{print \$1}"); do multipass delete --purge $vm; done && { sed -i "1!d" /root/.ssh/known_hosts; } > /dev/null 2>&1;set +f'
+alias 1604='ip=$(cat /etc/hosts | grep 1604 | awk -F " " '\''{print $1}'\'') && ssh root@$ip'
+
 alias 2004d='set -f;sed -i '/vm2004/d' /etc/hosts && for vm in $(multipass list | grep vm2004[0-9] | awk -F " " "{print \$1}"); do multipass delete --purge $vm; done && { sed -i "1!d" /root/.ssh/known_hosts; } > /dev/null 2>&1;set +f'
 alias 2004='ip=$(cat /etc/hosts | grep 2004 | awk -F " " '\''{print $1}'\'') && ssh root@$ip'
 
