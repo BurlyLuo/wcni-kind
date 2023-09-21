@@ -14,7 +14,7 @@ spec:
         app: wluo
     spec:
       containers:
-      - image: 192.168.2.100:5000/nettool
+      - image: 192.168.2.100:5000/xcni
         name: nettoolbox
         env:
           - name: NETTOOL_NODE_NAME
@@ -25,8 +25,8 @@ spec:
           privileged: true
         resources:
           limits:
-            cpu: 200m
-            memory: 500Mi
+            cpu: 300m
+            memory: 800Mi
           requests:
             cpu: 200m
             memory: 500Mi
