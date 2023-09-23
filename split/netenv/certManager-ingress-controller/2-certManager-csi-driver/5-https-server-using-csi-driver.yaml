@@ -3,7 +3,7 @@ kind: Deployment
 metadata:
   labels:
     app: sample-api
-  name: sample-api
+  name: sample-api-server
   namespace: sandbox
 spec:
   replicas: 1
