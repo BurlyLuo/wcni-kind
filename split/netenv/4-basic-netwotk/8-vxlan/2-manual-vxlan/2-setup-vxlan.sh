@@ -1,3 +1,7 @@
+#!/bin/bash
+set -v
+
+cat <<EOF>clab.yaml | clab deploy -t clab.yaml -
 name: vxlan
 topology:
   nodes:
@@ -50,4 +54,6 @@ topology:
     - endpoints: ["linux1:eth1", "server1:net0"]
     - endpoints: ["linux2:eth1", "server2:net0"]
     - endpoints: ["linux1:eth2", "linux2:eth2"]
+
+EOF
 

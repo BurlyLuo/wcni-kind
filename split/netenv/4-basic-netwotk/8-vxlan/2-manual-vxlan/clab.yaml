@@ -12,7 +12,7 @@ topology:
       - ip a a 10.1.5.0/32 dev vxlan0
       - ip l s vxlan0 up
 
-      - ip r a 10.1.8.0/24 via 10.1.8.0 dev vxlan0 onlink
+      - ip r a 10.1.8.0/24 via 172.12.1.11 dev vxlan0 onlink
  
       #- bridge fdb add cc:2f:0f:6f:72:12 dev vxlan0 dst 172.12.1.11 self permanent
 
@@ -27,7 +27,7 @@ topology:
       - ip a a 10.1.8.0/32 dev vxlan0
       - ip l s vxlan0 up
 
-      - ip r a 10.1.5.0/24 via 10.1.5.0 dev vxlan0 onlink
+      - ip r a 10.1.5.0/24 via 172.12.1.10 dev vxlan0 onlink
        
       #- bridge fdb add ae:1f:0f:6f:72:b5 dev vxlan0 dst 172.12.1.10 self permanent
 
