@@ -1,0 +1,173 @@
+{
+  "name": "gre",
+  "type": "clab",
+  "clab": {
+    "config": {
+      "prefix": "clab",
+      "mgmt": {
+        "network": "clab",
+        "bridge": "br-5f4206ea651d",
+        "ipv4-subnet": "172.20.20.0/24",
+        "ipv4-gw": "172.20.20.1",
+        "ipv6-subnet": "2001:172:20:20::/64",
+        "ipv6-gw": "2001:172:20:20::1",
+        "mtu": "1500",
+        "external-access": true
+      }
+    }
+  },
+  "nodes": {
+    "linux1": {
+      "index": "0",
+      "shortname": "linux1",
+      "longname": "clab-gre-linux1",
+      "fqdn": "linux1.gre.io",
+      "group": "",
+      "labdir": "/root/wcni-kind/split/netenv/4-basic-netwotk/a-gre/2-manual-gre/clab-gre/linux1",
+      "kind": "linux",
+      "image": "192.168.2.100:5000/nettool",
+      "mgmt-net": "",
+      "mgmt-intf": "",
+      "mgmt-ipv4-address": "172.20.20.5",
+      "mgmt-ipv4-prefix-length": 24,
+      "mgmt-ipv6-address": "2001:172:20:20::5",
+      "mgmt-ipv6-prefix-length": 64,
+      "mac-address": "",
+      "labels": {
+        "clab-mgmt-net-bridge": "br-5f4206ea651d",
+        "clab-node-group": "",
+        "clab-node-kind": "linux",
+        "clab-node-lab-dir": "/root/wcni-kind/split/netenv/4-basic-netwotk/a-gre/2-manual-gre/clab-gre/linux1",
+        "clab-node-name": "linux1",
+        "clab-node-type": "",
+        "clab-topo-file": "/root/wcni-kind/split/netenv/4-basic-netwotk/a-gre/2-manual-gre/clab.yaml",
+        "containerlab": "gre"
+      }
+    },
+    "linux2": {
+      "index": "1",
+      "shortname": "linux2",
+      "longname": "clab-gre-linux2",
+      "fqdn": "linux2.gre.io",
+      "group": "",
+      "labdir": "/root/wcni-kind/split/netenv/4-basic-netwotk/a-gre/2-manual-gre/clab-gre/linux2",
+      "kind": "linux",
+      "image": "192.168.2.100:5000/nettool",
+      "mgmt-net": "",
+      "mgmt-intf": "",
+      "mgmt-ipv4-address": "172.20.20.2",
+      "mgmt-ipv4-prefix-length": 24,
+      "mgmt-ipv6-address": "2001:172:20:20::2",
+      "mgmt-ipv6-prefix-length": 64,
+      "mac-address": "",
+      "labels": {
+        "clab-mgmt-net-bridge": "br-5f4206ea651d",
+        "clab-node-group": "",
+        "clab-node-kind": "linux",
+        "clab-node-lab-dir": "/root/wcni-kind/split/netenv/4-basic-netwotk/a-gre/2-manual-gre/clab-gre/linux2",
+        "clab-node-name": "linux2",
+        "clab-node-type": "",
+        "clab-topo-file": "/root/wcni-kind/split/netenv/4-basic-netwotk/a-gre/2-manual-gre/clab.yaml",
+        "containerlab": "gre"
+      }
+    },
+    "server1": {
+      "index": "2",
+      "shortname": "server1",
+      "longname": "clab-gre-server1",
+      "fqdn": "server1.gre.io",
+      "group": "",
+      "labdir": "/root/wcni-kind/split/netenv/4-basic-netwotk/a-gre/2-manual-gre/clab-gre/server1",
+      "kind": "linux",
+      "image": "192.168.2.100:5000/nettool",
+      "mgmt-net": "",
+      "mgmt-intf": "",
+      "mgmt-ipv4-address": "172.20.20.3",
+      "mgmt-ipv4-prefix-length": 24,
+      "mgmt-ipv6-address": "2001:172:20:20::3",
+      "mgmt-ipv6-prefix-length": 64,
+      "mac-address": "",
+      "labels": {
+        "clab-mgmt-net-bridge": "br-5f4206ea651d",
+        "clab-node-group": "",
+        "clab-node-kind": "linux",
+        "clab-node-lab-dir": "/root/wcni-kind/split/netenv/4-basic-netwotk/a-gre/2-manual-gre/clab-gre/server1",
+        "clab-node-name": "server1",
+        "clab-node-type": "",
+        "clab-topo-file": "/root/wcni-kind/split/netenv/4-basic-netwotk/a-gre/2-manual-gre/clab.yaml",
+        "containerlab": "gre"
+      }
+    },
+    "server2": {
+      "index": "3",
+      "shortname": "server2",
+      "longname": "clab-gre-server2",
+      "fqdn": "server2.gre.io",
+      "group": "",
+      "labdir": "/root/wcni-kind/split/netenv/4-basic-netwotk/a-gre/2-manual-gre/clab-gre/server2",
+      "kind": "linux",
+      "image": "192.168.2.100:5000/nettool",
+      "mgmt-net": "",
+      "mgmt-intf": "",
+      "mgmt-ipv4-address": "172.20.20.4",
+      "mgmt-ipv4-prefix-length": 24,
+      "mgmt-ipv6-address": "2001:172:20:20::4",
+      "mgmt-ipv6-prefix-length": 64,
+      "mac-address": "",
+      "labels": {
+        "clab-mgmt-net-bridge": "br-5f4206ea651d",
+        "clab-node-group": "",
+        "clab-node-kind": "linux",
+        "clab-node-lab-dir": "/root/wcni-kind/split/netenv/4-basic-netwotk/a-gre/2-manual-gre/clab-gre/server2",
+        "clab-node-name": "server2",
+        "clab-node-type": "",
+        "clab-topo-file": "/root/wcni-kind/split/netenv/4-basic-netwotk/a-gre/2-manual-gre/clab.yaml",
+        "containerlab": "gre"
+      }
+    }
+  },
+  "links": [
+    {
+      "a": {
+        "node": "linux1",
+        "interface": "eth1",
+        "mac": "aa:c1:ab:ec:3d:d7",
+        "peer": "z"
+      },
+      "z": {
+        "node": "server1",
+        "interface": "net0",
+        "mac": "aa:c1:ab:1d:21:40",
+        "peer": "a"
+      }
+    },
+    {
+      "a": {
+        "node": "linux2",
+        "interface": "eth1",
+        "mac": "aa:c1:ab:02:5e:b0",
+        "peer": "z"
+      },
+      "z": {
+        "node": "server2",
+        "interface": "net0",
+        "mac": "aa:c1:ab:47:60:b7",
+        "peer": "a"
+      }
+    },
+    {
+      "a": {
+        "node": "linux1",
+        "interface": "eth2",
+        "mac": "aa:c1:ab:51:d2:a9",
+        "peer": "z"
+      },
+      "z": {
+        "node": "linux2",
+        "interface": "eth2",
+        "mac": "aa:c1:ab:d1:92:c1",
+        "peer": "a"
+      }
+    }
+  ]
+}
