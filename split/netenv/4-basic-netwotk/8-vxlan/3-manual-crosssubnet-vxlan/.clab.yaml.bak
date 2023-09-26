@@ -17,19 +17,19 @@ topology:
 
       - ip addr add 10.1.5.10/24 dev eth2
       - ip l a vxlan0 type vxlan id 5 dstport 4789 local 10.1.5.10 dev eth2
-      - ip a a 10.244.1.0/32 dev vxlan0
+      #- ip a a 10.244.1.0/32 dev vxlan0
       - ip l s vxlan0 up
-      - ip link set dev vxlan0 address 02:42:8f:11:22:10
+      #- ip link set dev vxlan0 address 02:42:8f:11:22:10
 
       - ip route replace default via 10.1.5.1 dev eth2 
 
-      - ip r a 10.244.2.0/24 via 10.244.2.0 dev vxlan0 onlink
-      - ip r a 10.244.3.0/24 via 10.244.3.0 dev vxlan0 onlink
-      - arp -s 10.244.2.0 02:42:8f:11:22:20 -i vxlan0
-      - arp -s 10.244.3.0 02:42:8f:11:22:30 -i vxlan0  
+      - ip r a 10.244.2.0/24 via 10.1.8.10 dev vxlan0 onlink
+      - ip r a 10.244.3.0/24 via 10.1.9.10 dev vxlan0 onlink
+      #- arp -s 10.244.2.0 02:42:8f:11:22:20 -i vxlan0
+      #- arp -s 10.244.3.0 02:42:8f:11:22:30 -i vxlan0  
 
-      - bridge fdb add 02:42:8f:11:22:20 dev vxlan0 dst 10.1.8.10 self permanent
-      - bridge fdb add 02:42:8f:11:22:30 dev vxlan0 dst 10.1.9.10 self permanent
+      #- bridge fdb add 02:42:8f:11:22:20 dev vxlan0 dst 10.1.8.10 self permanent
+      #- bridge fdb add 02:42:8f:11:22:30 dev vxlan0 dst 10.1.9.10 self permanent
 
     vtep2:
       kind: linux
@@ -39,19 +39,19 @@ topology:
 
       - ip addr add 10.1.8.10/24 dev eth2
       - ip l a vxlan0 type vxlan id 5 dstport 4789 local 10.1.8.10 dev eth2
-      - ip a a 10.244.2.0/32 dev vxlan0
+      #- ip a a 10.244.2.0/32 dev vxlan0
       - ip l s vxlan0 up
-      - ip link set dev vxlan0 address 02:42:8f:11:22:20
+      #- ip link set dev vxlan0 address 02:42:8f:11:22:20
 
       - ip route replace default via 10.1.8.1 dev eth2
 
-      - ip r a 10.244.1.0/24 via 10.244.1.0 dev vxlan0 onlink
-      - ip r a 10.244.3.0/24 via 10.244.3.0 dev vxlan0 onlink
-      - arp -s 10.244.1.0 02:42:8f:11:22:10 -i vxlan0
-      - arp -s 10.244.3.0 02:42:8f:11:22:30 -i vxlan0
+      - ip r a 10.244.1.0/24 via 10.244.5.0 dev vxlan0 onlink
+      - ip r a 10.244.3.0/24 via 10.244.9.0 dev vxlan0 onlink
+      #- arp -s 10.244.1.0 02:42:8f:11:22:10 -i vxlan0
+      #- arp -s 10.244.3.0 02:42:8f:11:22:30 -i vxlan0
        
-      - bridge fdb add 02:42:8f:11:22:10 dev vxlan0 dst 10.1.5.10 self permanent
-      - bridge fdb add 02:42:8f:11:22:30 dev vxlan0 dst 10.1.9.10 self permanent
+      #- bridge fdb add 02:42:8f:11:22:10 dev vxlan0 dst 10.1.5.10 self permanent
+      #- bridge fdb add 02:42:8f:11:22:30 dev vxlan0 dst 10.1.9.10 self permanent
 
     vtep3:
       kind: linux

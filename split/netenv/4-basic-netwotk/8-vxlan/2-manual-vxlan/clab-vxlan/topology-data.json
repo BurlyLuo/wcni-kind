@@ -6,7 +6,7 @@
       "prefix": "clab",
       "mgmt": {
         "network": "clab",
-        "bridge": "br-b170b28d4490",
+        "bridge": "br-585906bf8fd7",
         "ipv4-subnet": "172.20.20.0/24",
         "ipv4-gw": "172.20.20.1",
         "ipv6-subnet": "2001:172:20:20::/64",
@@ -34,7 +34,7 @@
       "mgmt-ipv6-prefix-length": 64,
       "mac-address": "",
       "labels": {
-        "clab-mgmt-net-bridge": "br-b170b28d4490",
+        "clab-mgmt-net-bridge": "br-585906bf8fd7",
         "clab-node-group": "",
         "clab-node-kind": "linux",
         "clab-node-lab-dir": "/root/wcni-kind/split/netenv/4-basic-netwotk/8-vxlan/2-manual-vxlan/clab-vxlan/linux1",
@@ -61,7 +61,7 @@
       "mgmt-ipv6-prefix-length": 64,
       "mac-address": "",
       "labels": {
-        "clab-mgmt-net-bridge": "br-b170b28d4490",
+        "clab-mgmt-net-bridge": "br-585906bf8fd7",
         "clab-node-group": "",
         "clab-node-kind": "linux",
         "clab-node-lab-dir": "/root/wcni-kind/split/netenv/4-basic-netwotk/8-vxlan/2-manual-vxlan/clab-vxlan/linux2",
@@ -82,13 +82,13 @@
       "image": "192.168.2.100:5000/nettool",
       "mgmt-net": "",
       "mgmt-intf": "",
-      "mgmt-ipv4-address": "172.20.20.3",
+      "mgmt-ipv4-address": "172.20.20.2",
       "mgmt-ipv4-prefix-length": 24,
-      "mgmt-ipv6-address": "2001:172:20:20::3",
+      "mgmt-ipv6-address": "2001:172:20:20::2",
       "mgmt-ipv6-prefix-length": 64,
       "mac-address": "",
       "labels": {
-        "clab-mgmt-net-bridge": "br-b170b28d4490",
+        "clab-mgmt-net-bridge": "br-585906bf8fd7",
         "clab-node-group": "",
         "clab-node-kind": "linux",
         "clab-node-lab-dir": "/root/wcni-kind/split/netenv/4-basic-netwotk/8-vxlan/2-manual-vxlan/clab-vxlan/server1",
@@ -109,13 +109,13 @@
       "image": "192.168.2.100:5000/nettool",
       "mgmt-net": "",
       "mgmt-intf": "",
-      "mgmt-ipv4-address": "172.20.20.2",
+      "mgmt-ipv4-address": "172.20.20.3",
       "mgmt-ipv4-prefix-length": 24,
-      "mgmt-ipv6-address": "2001:172:20:20::2",
+      "mgmt-ipv6-address": "2001:172:20:20::3",
       "mgmt-ipv6-prefix-length": 64,
       "mac-address": "",
       "labels": {
-        "clab-mgmt-net-bridge": "br-b170b28d4490",
+        "clab-mgmt-net-bridge": "br-585906bf8fd7",
         "clab-node-group": "",
         "clab-node-kind": "linux",
         "clab-node-lab-dir": "/root/wcni-kind/split/netenv/4-basic-netwotk/8-vxlan/2-manual-vxlan/clab-vxlan/server2",
@@ -131,13 +131,13 @@
       "a": {
         "node": "linux1",
         "interface": "eth1",
-        "mac": "aa:c1:ab:b6:08:e4",
+        "mac": "aa:c1:ab:84:02:d5",
         "peer": "z"
       },
       "z": {
         "node": "server1",
         "interface": "net0",
-        "mac": "aa:c1:ab:68:53:2d",
+        "mac": "aa:c1:ab:ec:12:32",
         "peer": "a"
       }
     },
@@ -145,13 +145,13 @@
       "a": {
         "node": "linux2",
         "interface": "eth1",
-        "mac": "aa:c1:ab:50:c5:50",
+        "mac": "aa:c1:ab:17:c7:10",
         "peer": "z"
       },
       "z": {
         "node": "server2",
         "interface": "net0",
-        "mac": "aa:c1:ab:9c:77:c5",
+        "mac": "aa:c1:ab:bd:53:83",
         "peer": "a"
       }
     },
@@ -159,13 +159,13 @@
       "a": {
         "node": "linux1",
         "interface": "eth2",
-        "mac": "aa:c1:ab:fc:55:e5",
+        "mac": "aa:c1:ab:5d:4f:6d",
         "peer": "z"
       },
       "z": {
         "node": "linux2",
         "interface": "eth2",
-        "mac": "aa:c1:ab:17:67:20",
+        "mac": "aa:c1:ab:da:c6:c4",
         "peer": "a"
       }
     }
