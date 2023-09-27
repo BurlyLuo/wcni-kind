@@ -1,3 +1,7 @@
+#!/bin/bash
+set -v
+
+cat <<EOF>clab.yaml | clab deploy -t clab.yaml -
 name: vxlan
 topology:
   nodes:
@@ -25,6 +29,7 @@ topology:
 
       - ip r a 10.244.2.0/24 via 10.1.8.10 dev vxlan0 onlink
       - ip r a 10.244.3.0/24 via 10.1.9.10 dev vxlan0 onlink
+      # [vxlan based on mac, but ipip based on ip. that's the key.]
       #- arp -s 10.244.2.0 02:42:8f:11:22:20 -i vxlan0
       #- arp -s 10.244.3.0 02:42:8f:11:22:30 -i vxlan0  
 
@@ -105,3 +110,5 @@ topology:
     - endpoints: ["vtep2:eth2", "gwx:net2"]
     - endpoints: ["vtep3:eth2", "gwx:net3"]
     
+EOF
+
