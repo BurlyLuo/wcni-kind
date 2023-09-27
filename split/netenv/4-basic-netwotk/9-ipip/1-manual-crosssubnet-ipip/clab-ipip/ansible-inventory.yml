@@ -1,0 +1,18 @@
+all:
+  children:
+    linux:
+      hosts:
+        clab-ipip-gwx:
+          ansible_host: 172.20.20.4
+        clab-ipip-ipip1:
+          ansible_host: 172.20.20.8
+        clab-ipip-ipip2:
+          ansible_host: 172.20.20.9
+        clab-ipip-ipip3:
+          ansible_host: 172.20.20.7
+        clab-ipip-server1:
+          ansible_host: 172.20.20.6
+        clab-ipip-server2:
+          ansible_host: 172.20.20.5
+        clab-ipip-server3:
+          ansible_host: 172.20.20.3
