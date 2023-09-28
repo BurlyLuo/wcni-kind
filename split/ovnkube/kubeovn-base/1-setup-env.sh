@@ -25,7 +25,7 @@ kubectl get nodes -o wide
 # 3.install CNI
 kubectl label node -lbeta.kubernetes.io/os=linux kubernetes.io/os=linux --overwrite
 kubectl label node -lnode-role.kubernetes.io/control-plane kube-ovn/role=master --overwrite
-helm repo add kubeovn https://kubeovn.github.io/kube-ovn/
+helm repo add kubeovn https://kubeovn.github.io/kube-ovn/ > /dev/null 2>&1
 
 helm install kube-ovn kubeovn/kube-ovn --version=0.1.0 --set MASTER_NODES=$controller_node_ip --set global.registry.address=192.168.2.100:5000/kubeovn --set global.images.kubeovn.repository=kube-ovn --set global.images.kubeovn.tag=v1.12.0 --set networking.NET_STACK=ipv4 --set networking.NETWORK_TYPE=geneve --set networking.TUNNEL_TYPE=vxlan --set debug.ENABLE_MIRROR=true
 
