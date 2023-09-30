@@ -106,6 +106,9 @@ alias ii="kubectl -nistio-ingress"
 
 alias kv="kubectl-ko"
 
+alias sk="kubectl -nsubmariner-operator"
+
+
 alias mls="multipass list"
 alias mm="multipass"
 
@@ -157,3 +160,4 @@ export PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/ga
 export PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/root/bin
 export PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/root/bin
 export PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/root/bin:/root/bin
+export PATH=$PATH:/root/.local/bin
