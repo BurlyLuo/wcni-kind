@@ -77,8 +77,6 @@ kubectl --context=kind-c1 wait --timeout=100s --for=condition=Ready=true pods --
 subctl --context=kind-c2 join broker-info.subm --natt=false --clusterid kind-c2
 kubectl --context=kind-c2 wait --timeout=100s --for=condition=Ready=true pods --all -A
 
-subctl show gateways
-subctl show connections
 
 kubectl --context=kind-c2 run c2 --image=192.168.2.100:5000/nettool
 kubectl --context=kind-c2 expose pod c2 --port=80
@@ -89,3 +87,7 @@ kubectl --context=kind-c1 run c1 --image=192.168.2.100:5000/nettool
 kubectl --context=kind-c1 expose pod c1 --port=80
 subctl --context=kind-c1 export service --namespace default c1
 kubectl --context=kind-c1 wait --timeout=100s --for=condition=Ready=true pods --all -A
+
+subctl show gateways
+subctl show connections
+
