@@ -1,7 +1,6 @@
 # ~/.bashrc: executed by bash(1) for non-login shells.
 # see /usr/share/doc/bash/examples/startup-files (in the package bash-doc)
 # for examples
-
 # If not running interactively, don't do anything
 [ -z "$PS1" ] && return
 
@@ -141,10 +140,9 @@ fi
 
 if [[ -n $SSH_CONNECTION ]]; then
    echo "************************************************"
-   echo "Pls sure to git clone the latest wcni-kind repos"
    echo "git clone git@gitee.com:rowan-wcni/wcni-kind.git"
-   echo "************************************************"
-   lsb_release -a
+   echo "Website: www.yuque.com/wei.luo|youdianzhishi.com"
+   echo "WeChat: clabernetes"
    echo "************************************************"
 fi
 
@@ -161,3 +159,6 @@ export PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/ga
 export PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/root/bin
 export PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/root/bin:/root/bin
 export PATH=$PATH:/root/.local/bin
+
+PS1="[\u@\h \W]\$ "
+
