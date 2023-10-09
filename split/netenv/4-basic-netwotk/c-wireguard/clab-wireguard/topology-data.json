@@ -28,9 +28,9 @@
       "image": "192.168.2.100:5000/nettool",
       "mgmt-net": "",
       "mgmt-intf": "",
-      "mgmt-ipv4-address": "172.20.20.6",
+      "mgmt-ipv4-address": "172.20.20.4",
       "mgmt-ipv4-prefix-length": 24,
-      "mgmt-ipv6-address": "2001:172:20:20::6",
+      "mgmt-ipv6-address": "2001:172:20:20::4",
       "mgmt-ipv6-prefix-length": 64,
       "mac-address": "",
       "labels": {
@@ -55,9 +55,9 @@
       "image": "192.168.2.100:5000/nettool",
       "mgmt-net": "",
       "mgmt-intf": "",
-      "mgmt-ipv4-address": "172.20.20.2",
+      "mgmt-ipv4-address": "172.20.20.7",
       "mgmt-ipv4-prefix-length": 24,
-      "mgmt-ipv6-address": "2001:172:20:20::2",
+      "mgmt-ipv6-address": "2001:172:20:20::7",
       "mgmt-ipv6-prefix-length": 64,
       "mac-address": "",
       "labels": {
@@ -109,9 +109,9 @@
       "image": "192.168.2.100:5000/nettool",
       "mgmt-net": "",
       "mgmt-intf": "",
-      "mgmt-ipv4-address": "172.20.20.7",
+      "mgmt-ipv4-address": "172.20.20.6",
       "mgmt-ipv4-prefix-length": 24,
-      "mgmt-ipv6-address": "2001:172:20:20::7",
+      "mgmt-ipv6-address": "2001:172:20:20::6",
       "mgmt-ipv6-prefix-length": 64,
       "mac-address": "",
       "labels": {
@@ -163,9 +163,9 @@
       "image": "192.168.2.100:5000/nettool",
       "mgmt-net": "",
       "mgmt-intf": "",
-      "mgmt-ipv4-address": "172.20.20.3",
+      "mgmt-ipv4-address": "172.20.20.2",
       "mgmt-ipv4-prefix-length": 24,
-      "mgmt-ipv6-address": "2001:172:20:20::3",
+      "mgmt-ipv6-address": "2001:172:20:20::2",
       "mgmt-ipv6-prefix-length": 64,
       "mac-address": "",
       "labels": {
@@ -190,9 +190,9 @@
       "image": "192.168.2.100:5000/nettool",
       "mgmt-net": "",
       "mgmt-intf": "",
-      "mgmt-ipv4-address": "172.20.20.4",
+      "mgmt-ipv4-address": "172.20.20.3",
       "mgmt-ipv4-prefix-length": 24,
-      "mgmt-ipv6-address": "2001:172:20:20::4",
+      "mgmt-ipv6-address": "2001:172:20:20::3",
       "mgmt-ipv6-prefix-length": 64,
       "mac-address": "",
       "labels": {
@@ -212,13 +212,13 @@
       "a": {
         "node": "wireguard1",
         "interface": "eth1",
-        "mac": "aa:c1:ab:40:f7:c4",
+        "mac": "aa:c1:ab:79:2f:87",
         "peer": "z"
       },
       "z": {
         "node": "server1",
         "interface": "net0",
-        "mac": "aa:c1:ab:be:a7:8d",
+        "mac": "aa:c1:ab:35:7f:8e",
         "peer": "a"
       }
     },
@@ -226,13 +226,13 @@
       "a": {
         "node": "wireguard2",
         "interface": "eth1",
-        "mac": "aa:c1:ab:ad:27:43",
+        "mac": "aa:c1:ab:a1:fd:99",
         "peer": "z"
       },
       "z": {
         "node": "server2",
         "interface": "net0",
-        "mac": "aa:c1:ab:5b:c7:b6",
+        "mac": "aa:c1:ab:19:7c:39",
         "peer": "a"
       }
     },
@@ -240,13 +240,13 @@
       "a": {
         "node": "wireguard3",
         "interface": "eth1",
-        "mac": "aa:c1:ab:8d:54:22",
+        "mac": "aa:c1:ab:7f:32:15",
         "peer": "z"
       },
       "z": {
         "node": "server3",
         "interface": "net0",
-        "mac": "aa:c1:ab:7e:8b:eb",
+        "mac": "aa:c1:ab:7b:bd:a3",
         "peer": "a"
       }
     },
@@ -254,13 +254,13 @@
       "a": {
         "node": "wireguard1",
         "interface": "eth2",
-        "mac": "aa:c1:ab:e7:03:d7",
+        "mac": "aa:c1:ab:bc:db:de",
         "peer": "z"
       },
       "z": {
         "node": "gwx",
         "interface": "net1",
-        "mac": "aa:c1:ab:ab:46:08",
+        "mac": "aa:c1:ab:23:57:4e",
         "peer": "a"
       }
     },
@@ -268,13 +268,13 @@
       "a": {
         "node": "wireguard2",
         "interface": "eth2",
-        "mac": "aa:c1:ab:87:2f:e4",
+        "mac": "aa:c1:ab:2a:51:63",
         "peer": "z"
       },
       "z": {
         "node": "gwx",
         "interface": "net2",
-        "mac": "aa:c1:ab:85:a4:bd",
+        "mac": "aa:c1:ab:98:ae:76",
         "peer": "a"
       }
     },
@@ -282,13 +282,13 @@
       "a": {
         "node": "wireguard3",
         "interface": "eth2",
-        "mac": "aa:c1:ab:3d:56:45",
+        "mac": "aa:c1:ab:2e:ce:d1",
         "peer": "z"
       },
       "z": {
         "node": "gwx",
         "interface": "net3",
-        "mac": "aa:c1:ab:34:8e:cd",
+        "mac": "aa:c1:ab:fb:3b:ab",
         "peer": "a"
       }
     }
