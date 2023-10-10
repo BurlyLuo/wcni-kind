@@ -3,7 +3,7 @@ set -v
 
 # 1.prep noCNI env
 docker network list
-cat <<EOF | KIND_EXPERIMENTAL_DOCKER_NETWORK=kind kind create cluster --name=flannel-host-gw --image=kindest/node:v1.27.3 --config=-
+cat <<EOF | KIND_EXPERIMENTAL_DOCKER_NETWORK=kind kind create cluster -v=9 --name=flannel-host-gw --image=kindest/node:v1.27.3 --config=-
 kind: Cluster
 apiVersion: kind.x-k8s.io/v1alpha4
 networking:

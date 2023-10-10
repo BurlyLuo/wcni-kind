@@ -82,6 +82,7 @@ alias la='ls -A'
 alias l='ls -CF'
 alias vi="vim"
 
+
 alias wp="cd /root/wcni-kind/split/"
 alias k="kubectl"
 alias cls="kind get clusters $1"

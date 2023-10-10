@@ -3,9 +3,9 @@ all:
     linux:
       hosts:
         clab-ovs-server1:
-          ansible_host: 172.20.20.2
-        clab-ovs-server2:
           ansible_host: 172.20.20.3
+        clab-ovs-server2:
+          ansible_host: 172.20.20.2
     ovs-bridge:
       hosts:
         clab-ovs-br-ovs0:

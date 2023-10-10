@@ -61,4 +61,24 @@ sysctl -p
 
 
 
+7. DinD:
+ docker run \
+        --hostname wluo-control-plane \
+        --name wluo-control-plane \
+        --label io.x-k8s.kind.role=control-plane \
+        --privileged \
+        --security-opt seccomp=unconfined \
+        --rm \
+        --tmpfs /tmp \
+        --tmpfs /run \
+        --volume /var \
+        --volume /lib/modules:/lib/modules:ro \
+        --detach \
+        --tty \
+        --label io.x-k8s.kind.cluster=crossplane \
+        --publish=80:80/TCP \
+        --publish=443:443/TCP \
+        --publish=127.0.0.1:0:6443/TCP \
+        192.168.2.100:5000/kindest/node:v1.27.3
+
 

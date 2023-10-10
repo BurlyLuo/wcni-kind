@@ -1,0 +1,8 @@
+all:
+  children:
+    linux:
+      hosts:
+        clab-vm-r1:
+          ansible_host: 172.20.20.2
+        clab-vm-r2:
+          ansible_host: 172.20.20.3

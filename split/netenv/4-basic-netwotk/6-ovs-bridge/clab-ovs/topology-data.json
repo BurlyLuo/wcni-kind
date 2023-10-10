@@ -6,7 +6,7 @@
       "prefix": "clab",
       "mgmt": {
         "network": "clab",
-        "bridge": "br-9683040c7ea7",
+        "bridge": "br-acc21f0acae4",
         "ipv4-subnet": "172.20.20.0/24",
         "ipv4-gw": "172.20.20.1",
         "ipv6-subnet": "2001:172:20:20::/64",
@@ -34,7 +34,7 @@
       "mgmt-ipv6-prefix-length": 0,
       "mac-address": "",
       "labels": {
-        "clab-mgmt-net-bridge": "br-9683040c7ea7",
+        "clab-mgmt-net-bridge": "br-acc21f0acae4",
         "clab-node-group": "",
         "clab-node-kind": "ovs-bridge",
         "clab-node-lab-dir": "/root/wcni-kind/split/netenv/4-basic-netwotk/6-ovs-bridge/clab-ovs/br-ovs0",
@@ -55,13 +55,13 @@
       "image": "192.168.2.100:5000/nettool",
       "mgmt-net": "",
       "mgmt-intf": "",
-      "mgmt-ipv4-address": "172.20.20.2",
+      "mgmt-ipv4-address": "172.20.20.3",
       "mgmt-ipv4-prefix-length": 24,
-      "mgmt-ipv6-address": "2001:172:20:20::2",
+      "mgmt-ipv6-address": "2001:172:20:20::3",
       "mgmt-ipv6-prefix-length": 64,
       "mac-address": "",
       "labels": {
-        "clab-mgmt-net-bridge": "br-9683040c7ea7",
+        "clab-mgmt-net-bridge": "br-acc21f0acae4",
         "clab-node-group": "",
         "clab-node-kind": "linux",
         "clab-node-lab-dir": "/root/wcni-kind/split/netenv/4-basic-netwotk/6-ovs-bridge/clab-ovs/server1",
@@ -82,13 +82,13 @@
       "image": "192.168.2.100:5000/nettool",
       "mgmt-net": "",
       "mgmt-intf": "",
-      "mgmt-ipv4-address": "172.20.20.3",
+      "mgmt-ipv4-address": "172.20.20.2",
       "mgmt-ipv4-prefix-length": 24,
-      "mgmt-ipv6-address": "2001:172:20:20::3",
+      "mgmt-ipv6-address": "2001:172:20:20::2",
       "mgmt-ipv6-prefix-length": 64,
       "mac-address": "",
       "labels": {
-        "clab-mgmt-net-bridge": "br-9683040c7ea7",
+        "clab-mgmt-net-bridge": "br-acc21f0acae4",
         "clab-node-group": "",
         "clab-node-kind": "linux",
         "clab-node-lab-dir": "/root/wcni-kind/split/netenv/4-basic-netwotk/6-ovs-bridge/clab-ovs/server2",
@@ -104,13 +104,13 @@
       "a": {
         "node": "br-ovs0",
         "interface": "eth1",
-        "mac": "aa:c1:ab:52:c1:04",
+        "mac": "aa:c1:ab:52:a2:98",
         "peer": "z"
       },
       "z": {
         "node": "server1",
         "interface": "net0",
-        "mac": "aa:c1:ab:4a:bc:31",
+        "mac": "aa:c1:ab:f3:d5:e8",
         "peer": "a"
       }
     },
@@ -118,13 +118,13 @@
       "a": {
         "node": "br-ovs0",
         "interface": "eth2",
-        "mac": "aa:c1:ab:69:8c:bd",
+        "mac": "aa:c1:ab:a0:52:95",
         "peer": "z"
       },
       "z": {
         "node": "server2",
         "interface": "net0",
-        "mac": "aa:c1:ab:56:e6:44",
+        "mac": "aa:c1:ab:39:07:e2",
         "peer": "a"
       }
     }

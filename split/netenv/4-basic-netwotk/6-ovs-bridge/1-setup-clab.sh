@@ -1,7 +1,7 @@
 #!/bin/bash
 set -v
 
-{ ip l s br-ovs0 down && brctl delbr br-ovs0; } > /dev/null 2>&1
+{ ip l s br-ovs0 down && ovs-vsctl del-br br-ovs0; } > /dev/null 2>&1
 ovs-vsctl add-br br-ovs0;ip l s br-ovs0 up
 
 cat <<EOF>clab.yaml | clab deploy -t clab.yaml -
