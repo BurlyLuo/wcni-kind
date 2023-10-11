@@ -1,7 +1,6 @@
 #!/bin/bash
 set -v
-
-cat <<EOF>clab.yaml | clab deploy -t clab.yaml -
+cat <<EOF>clab.yaml | clab deploy -d -t clab.yaml -
 name: veth
 topology:
   nodes:

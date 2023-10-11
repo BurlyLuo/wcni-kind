@@ -26,7 +26,7 @@ do
     - sudo dpkg -i /root/ubuntu1604/minikube/docker/*.deb && dpkg -i /root/ubuntu1604/minikube/tools/conntrack/*.deb
     - sudo rm -rf /etc/docker/daemon.json > /dev/null 2>&1 && wget http://192.168.2.100/k3s/vmenv/mmenv/ubuntu1604/minikube/docker/daemon.json -P /etc/docker/
     - sudo systemctl daemon-reload && systemctl restart docker && systemctl enable docker
-    - sudo docker pull 192.168.2.100:5000/kindest:v1.27.3 && docker tag 192.168.2.100:5000/kindest:v1.27.3 kindest/node:v1.27.3
+    - sudo docker pull 192.168.2.100:5000/kindest/node:v1.27.3 && docker tag 192.168.2.100:5000/kindest/node:v1.27.3 kindest/node:v1.27.3
     - sudo find /root/ubuntu1604/ -name index.html -exec rm {} \;
     - sudo docker load -i /root/ubuntu1604/minikube/kubeinit/metrics-server.tgz && mkdir -p /opt/cni/bin/
     - sudo wget -r -np -nH --cut-dirs=3 --directory-prefix=/opt/cni/bin/ http://192.168.2.100/k3s/cni/bin/ && find /opt/cni/bin/ -type f | xargs chmod +x

@@ -22,7 +22,7 @@ do
     - sudo dpkg -i /root/env/docker/*.deb
     - sudo wget http://192.168.2.100/k3s/cilium-related/daemon.json -P /etc/docker/
     - sudo systemctl daemon-reload && systemctl restart docker && systemctl enable docker
-    - sudo docker pull 192.168.2.100:5000/kindest:v1.27.3 && docker tag 192.168.2.100:5000/kindest:v1.27.3 kindest/node:v1.27.3
+    - sudo docker pull 192.168.2.100:5000/kindest/node:v1.27.3 && docker tag 192.168.2.100:5000/kindest/node:v1.27.3 kindest/node:v1.27.3
     - sudo wget -r -np -nH --cut-dirs=3 --directory-prefix="/root/" http://192.168.2.100/k3s/vmenv/mmenv/ubuntu2204/ && chmod +x "/root/ubuntu2204/pwru.sh" 
     - sudo find /root/ubuntu2204/ -name index.html -exec rm {} \;
 EOF

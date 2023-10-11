@@ -6,7 +6,7 @@
       "prefix": "clab",
       "mgmt": {
         "network": "clab",
-        "bridge": "br-131d780f303c",
+        "bridge": "br-48da8ff8f430",
         "ipv4-subnet": "172.20.20.0/24",
         "ipv4-gw": "172.20.20.1",
         "ipv6-subnet": "2001:172:20:20::/64",
@@ -23,7 +23,7 @@
       "longname": "clab-veth-server1",
       "fqdn": "server1.veth.io",
       "group": "",
-      "labdir": "/root/wcni-kind/network/4-basic-netwotk/4-veth-pair/1-clab-veth-pair/clab-veth/server1",
+      "labdir": "/root/wcni-kind/split/netenv/4-basic-netwotk/4-veth-pair/1-clab-veth-pair/clab-veth/server1",
       "kind": "linux",
       "image": "192.168.2.100:5000/nettool",
       "mgmt-net": "",
@@ -34,13 +34,13 @@
       "mgmt-ipv6-prefix-length": 64,
       "mac-address": "",
       "labels": {
-        "clab-mgmt-net-bridge": "br-131d780f303c",
+        "clab-mgmt-net-bridge": "br-48da8ff8f430",
         "clab-node-group": "",
         "clab-node-kind": "linux",
-        "clab-node-lab-dir": "/root/wcni-kind/network/4-basic-netwotk/4-veth-pair/1-clab-veth-pair/clab-veth/server1",
+        "clab-node-lab-dir": "/root/wcni-kind/split/netenv/4-basic-netwotk/4-veth-pair/1-clab-veth-pair/clab-veth/server1",
         "clab-node-name": "server1",
         "clab-node-type": "",
-        "clab-topo-file": "/root/wcni-kind/network/4-basic-netwotk/4-veth-pair/1-clab-veth-pair/clab.yaml",
+        "clab-topo-file": "/root/wcni-kind/split/netenv/4-basic-netwotk/4-veth-pair/1-clab-veth-pair/clab.yaml",
         "containerlab": "veth"
       }
     },
@@ -50,7 +50,7 @@
       "longname": "clab-veth-server2",
       "fqdn": "server2.veth.io",
       "group": "",
-      "labdir": "/root/wcni-kind/network/4-basic-netwotk/4-veth-pair/1-clab-veth-pair/clab-veth/server2",
+      "labdir": "/root/wcni-kind/split/netenv/4-basic-netwotk/4-veth-pair/1-clab-veth-pair/clab-veth/server2",
       "kind": "linux",
       "image": "192.168.2.100:5000/nettool",
       "mgmt-net": "",
@@ -61,13 +61,13 @@
       "mgmt-ipv6-prefix-length": 64,
       "mac-address": "",
       "labels": {
-        "clab-mgmt-net-bridge": "br-131d780f303c",
+        "clab-mgmt-net-bridge": "br-48da8ff8f430",
         "clab-node-group": "",
         "clab-node-kind": "linux",
-        "clab-node-lab-dir": "/root/wcni-kind/network/4-basic-netwotk/4-veth-pair/1-clab-veth-pair/clab-veth/server2",
+        "clab-node-lab-dir": "/root/wcni-kind/split/netenv/4-basic-netwotk/4-veth-pair/1-clab-veth-pair/clab-veth/server2",
         "clab-node-name": "server2",
         "clab-node-type": "",
-        "clab-topo-file": "/root/wcni-kind/network/4-basic-netwotk/4-veth-pair/1-clab-veth-pair/clab.yaml",
+        "clab-topo-file": "/root/wcni-kind/split/netenv/4-basic-netwotk/4-veth-pair/1-clab-veth-pair/clab.yaml",
         "containerlab": "veth"
       }
     }
@@ -77,13 +77,13 @@
       "a": {
         "node": "server1",
         "interface": "net0",
-        "mac": "aa:c1:ab:06:9c:65",
+        "mac": "aa:c1:ab:aa:82:b6",
         "peer": "z"
       },
       "z": {
         "node": "server2",
         "interface": "net0",
-        "mac": "aa:c1:ab:fc:f4:0f",
+        "mac": "aa:c1:ab:4f:b3:3c",
         "peer": "a"
       }
     }

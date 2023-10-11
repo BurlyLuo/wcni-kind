@@ -95,8 +95,8 @@ alias cc="kubectl config get-contexts"
 alias sc="kubectl config use-context $1" 
 alias lo="docker exec -it $1 $2"
 alias all="kubectl get pods -A"
-alias "clabrm"="clab destroy -t clab.yaml"
-
+alias clabrm="clab destroy -t clab.yaml"
+alias clabrma="containerlab destroy -a"
 
 alias ms="kubectl -nmetallb-system"
 alias net="cd /root/wcni-kind/network"
