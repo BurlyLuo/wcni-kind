@@ -1,8 +1,8 @@
 #!/bin/bash
 set -v
-docker run --hostname c1 --name c1 --privileged --security-opt seccomp=unconfined -td --tmpfs /tmp --tmpfs /run --volume /var --volume /lib/modules:/lib/modules:ro 192.168.2.100:5000/kindest/node:v1.27.3
+docker run --hostname c1 --name c1 --privileged --security-opt seccomp=unconfined --rm -td --tmpfs /tmp --tmpfs /run --volume /var --volume /lib/modules:/lib/modules:ro 192.168.2.100:5000/kindest/node:v1.27.3
 
-docker run --hostname c2 --name c2 --privileged --security-opt seccomp=unconfined -td --tmpfs /tmp --tmpfs /run --volume /var --volume /lib/modules:/lib/modules:ro 192.168.2.100:5000/kindest/node:v1.27.3
+docker run --hostname c2 --name c2 --privileged --security-opt seccomp=unconfined --rm -td --tmpfs /tmp --tmpfs /run --volume /var --volume /lib/modules:/lib/modules:ro 192.168.2.100:5000/kindest/node:v1.27.3
 
 containerlab tools veth create -a c1:eth1 -b c2:eth1
 

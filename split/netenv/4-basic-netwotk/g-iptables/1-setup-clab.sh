@@ -1,3 +1,6 @@
+#!/bin/bash
+set -v
+cat <<EOF>clab.yaml | clab deploy -t clab.yaml -
 name: veth
 topology:
   nodes:
@@ -13,7 +16,8 @@ topology:
       exec:
       - ip addr add 10.1.5.11/24 dev net0
 
-
   links:
     - endpoints: ["server1:net0", "server2:net0"]
+
+EOF
 
