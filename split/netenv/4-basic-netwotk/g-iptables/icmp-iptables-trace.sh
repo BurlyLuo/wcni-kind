@@ -1,7 +1,7 @@
 #!/bin/bash
 if [[ $# -lt 2 ]];then echo "./icmp-iptables-trace.sh I icmp"$'\n'"./icmp-iptables-trace.sh D icmp";exit 1;fi
 
-iptables -t raw     -$1 PREROUTING  -p ${2:-'icmp'} -j LOG --log-prefix "t_hitprerouting>"
+iptables -t raw     -$1 PREROUTING  -p ${2:-'icmp'} -j LOG --log-prefix "t_hit prerouting>"
 iptables -t mangle  -$1 PREROUTING  -p ${2:-'icmp'} -j LOG --log-prefix "t_hit mangle.prerouting>"
 iptables -t nat     -$1 PREROUTING  -p ${2:-'icmp'} -j LOG --log-prefix "t_hit nat.prerouting>"
 iptables -t mangle  -$1 INPUT       -p ${2:-'icmp'} -j LOG --log-prefix "t_hit mangle.input>"
