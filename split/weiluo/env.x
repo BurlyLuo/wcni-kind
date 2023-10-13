@@ -82,3 +82,16 @@ sysctl -p
         192.168.2.100:5000/kindest/node:v1.27.3
 
 
+#!/bin/bash
+img=$(docker images --format {{.Repository}}:{{.Tag}})
+for i in ${img}
+do        
+if [ -n "$(docker ps -q --filter ancestor=${i})" ] ;then                
+  echo "running Docker:${i}"
+else
+  echo "not runnig Docker:${i}"
+  docker rmi ${i}
+fi
+done
+
+
