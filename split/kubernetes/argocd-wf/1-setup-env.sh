@@ -29,6 +29,16 @@ kubectl apply -f http://192.168.2.100/http/cni/calico.yaml
 # 4. wait all pods ready
 kubectl wait --timeout=100s --for=condition=Ready=true pods --all -A
 
-# 5. deploy argocd
-kubectl create ns argocd && kubectl -nargocd apply -f install.yaml
+# 5. deploy argocd and argowf
+kubectl create ns argocd && kubectl -nargocd apply -f install-argocd.yaml
+
+kubectl create ns argo && kubectl -nargo apply -f install-argowf.yaml
+kubectl patch deployment \
+	  argo-server \
+	    --namespace argo \
+	      --type='json' \
+	        -p='[{"op": "replace", "path": "/spec/template/spec/containers/0/args", "value": [
+  "server",
+    "--auth-mode=server"
+    ]}]'
 
