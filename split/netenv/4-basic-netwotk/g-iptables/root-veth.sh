@@ -12,6 +12,7 @@ ip link set eth1 netns $container_pid
 
 docker exec -it c1 ip a a 10.1.5.10/24 dev eth1
 docker exec -it c1 ip l s eth1 up
+docker exec -it c1 ip r r default via 10.1.5.1 dev eth1
 
 iptables -t nat -A POSTROUTING -s 10.1.5.10 -o brroot -j SNAT --to-source 192.168.2.99
 
