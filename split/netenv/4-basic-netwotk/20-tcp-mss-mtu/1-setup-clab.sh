@@ -2,15 +2,27 @@
 set -v
 cat <<EOF>clab.yaml | clab deploy -t clab.yaml -
 name: routing
+mgmt:
+  ipv6-subnet: ""
+  ipv4-subnet: 172.20.20.0/24
+
 topology:
   nodes:
-    gw0:
+    gw1:
       kind: linux
       image: 192.168.2.100:5000/vyos/vyos:1.4.7
       cmd: /sbin/init
       binds:
         - /lib/modules:/lib/modules
-        - ./startup-conf/gw0-boot.cfg:/opt/vyatta/etc/config/config.boot
+        - ./startup-conf/gw1-boot.cfg:/opt/vyatta/etc/config/config.boot
+
+    gw2:
+      kind: linux
+      image: 192.168.2.100:5000/vyos/vyos:1.4.7
+      cmd: /sbin/init
+      binds:
+        - /lib/modules:/lib/modules
+        - ./startup-conf/gw2-boot.cfg:/opt/vyatta/etc/config/config.boot
 
     server1:
       kind: linux
@@ -28,8 +40,9 @@ topology:
 
 
   links:
-    - endpoints: ["gw0:eth1", "server1:net0"]
-    - endpoints: ["gw0:eth2", "server2:net0"]
+    - endpoints: ["gw1:eth1", "server1:net0"]
+    - endpoints: ["gw2:eth1", "server2:net0"]
+    - endpoints: ["gw1:eth2", "gw2:eth2"]
 
 EOF
 
