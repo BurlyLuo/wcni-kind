@@ -27,7 +27,6 @@ topology:
       exec:
       - ip addr add 10.1.5.10/24 dev net0
       - ip r a 10.1.8.0/24 via 10.1.5.1 dev net0
-      - yum -y install nmap &&
 
     server2:
       kind: linux
@@ -35,7 +34,6 @@ topology:
       exec:
       - ip addr add 10.1.8.10/24 dev net0
       - ip r a 10.1.5.0/24 via 10.1.8.1 dev net0
-      - yum -y install nmap &&
 
   links:
     - endpoints: ["gw1:eth1", "server1:net0"]

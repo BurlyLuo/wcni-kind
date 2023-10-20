@@ -1,7 +1,7 @@
 #!/bin/bash
 set -v
 cat <<EOF>clab.yaml | clab deploy -t clab.yaml -
-name: routing
+name: ping-mtu
 mgmt:
   ipv6-subnet: ""
   ipv4-subnet: 172.20.20.0/24
