@@ -1,0 +1,9 @@
+clab-tcp-retransmission-server1:
+telnet 10.1.8.10 12345
+
+lo clab-tcp-retransmission-gw1 ip l s eth2 down
+lo clab-tcp-retransmission-gw1 tcpdump -pne -i eth1 -w tcp-retransmission-gw1-eth1.cap
+
+clab-tcp-retransmission-server2
+nc -l 12345
+
