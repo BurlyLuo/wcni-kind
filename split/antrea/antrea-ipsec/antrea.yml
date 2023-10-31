@@ -5463,6 +5463,19 @@ metadata:
   labels:
     app: antrea
 ---
+# Source: antrea/templates/agent/ipsec-secret.yaml
+apiVersion: v1
+kind: Secret
+metadata:
+  name: antrea-ipsec
+  namespace: kube-system
+  labels:
+    app: antrea
+type: Opaque
+stringData:
+  # Preshared Key used by IKE for authentication with peers.
+  psk: "9e1a65753ebdba428f4838f1d701ef6c80e54f8be478a705629c500067ed1a80064469d1a7b741a624f610ee49dffc47"
+---
 # Source: antrea/templates/agent/secret.yaml
 apiVersion: v1
 kind: Secret
@@ -5612,7 +5625,7 @@ data:
     # - gre
     # - stt
     # Note that "gre" is not supported for IPv6 clusters (IPv6-only or dual-stack clusters).
-    tunnelType: "geneve"
+    tunnelType: "gre"
 
     # TunnelPort is the destination port for UDP and TCP based tunnel protocols (Geneve, VXLAN, and STT).
     # If zero, it will use the assigned IANA port for the protocol, i.e. 6081 for Geneve, 4789 for VXLAN,
@@ -6866,7 +6879,8 @@ spec:
         kubectl.kubernetes.io/default-container: antrea-agent
         # Automatically restart Pods with a RollingUpdate if the ConfigMap changes
         # See https://helm.sh/docs/howto/charts_tips_and_tricks/#automatically-roll-deployments
-        checksum/config: aa947bf5c403412b9c8cfcbcc335659992f19bd428886e80f43bafa052bac1e6
+        checksum/config: a34de3efa658ac40c9bde28e08832dd897259fdcf639beab9d4e47531d7da948
+        checksum/ipsec-secret: d0eb9c52d0cd4311b6d252a951126bf9bea27ec05590bed8a394f0f792dcb2a4
       labels:
         app: antrea
         component: antrea-agent
@@ -6944,6 +6958,12 @@ spec:
               valueFrom:
                 fieldRef:
                   fieldPath: spec.nodeName
+            # Pre-shared key for IPsec IKE.
+            - name: ANTREA_IPSEC_PSK
+              valueFrom:
+                secretKeyRef:
+                  name: antrea-ipsec
+                  key: psk
           resources:
             requests:
               cpu: 200m
@@ -6988,6 +7008,9 @@ spec:
           - name: host-var-run-antrea
             mountPath: /var/run/openvswitch
             subPath: openvswitch
+          - name: antrea-ipsec-ca
+            mountPath: /var/run/openvswitch/ca
+            readOnly: true
           # host-local IPAM stores allocated IP addresses as files in /var/lib/cni/networks/$NETWORK_NAME.
           # Mount a sub-directory of host-var-run-antrea to it for persistence of IP allocation.
           - name: host-var-run-antrea
@@ -7047,6 +7070,38 @@ spec:
           - name: host-var-log-antrea
             mountPath: /var/log/openvswitch
             subPath: openvswitch
+        - name: antrea-ipsec
+          image: "192.168.2.100:5000/projects.registry.vmware.com/antrea/antrea-ubuntu:v1.14.0"
+          imagePullPolicy: IfNotPresent
+          resources:
+            requests:
+              cpu: 50m
+          command: ["start_ovs_ipsec"]
+          livenessProbe:
+            exec:
+              command:
+                - /bin/sh
+                - -c
+                - timeout 5 container_liveness_probe ovs-ipsec
+            initialDelaySeconds: 5
+            periodSeconds: 5
+          securityContext:
+            capabilities:
+              add:
+              - NET_ADMIN
+          volumeMounts:
+          - name: host-var-run-antrea
+            mountPath: /var/run/openvswitch
+            subPath: openvswitch
+          - name: host-var-log-antrea
+            mountPath: /var/log/openvswitch
+            subPath: openvswitch
+          - name: host-var-log-antrea
+            mountPath: /var/log/strongswan
+            subPath: strongswan
+          - mountPath: /etc/ipsec.d/cacerts
+            name: antrea-ipsec-ca
+            readOnly: true
       volumes:
         - name: antrea-config
           configMap:
@@ -7063,6 +7118,10 @@ spec:
         - name: host-var-run-netns
           hostPath:
             path: /var/run/netns
+        - name: antrea-ipsec-ca
+          configMap:
+            name: antrea-ipsec-ca
+            optional: true
         - name: host-var-run-antrea
           hostPath:
             path: /var/run/antrea
@@ -7105,7 +7164,7 @@ spec:
       annotations:
         # Automatically restart Pod if the ConfigMap changes
         # See https://helm.sh/docs/howto/charts_tips_and_tricks/#automatically-roll-deployments
-        checksum/config: aa947bf5c403412b9c8cfcbcc335659992f19bd428886e80f43bafa052bac1e6
+        checksum/config: a34de3efa658ac40c9bde28e08832dd897259fdcf639beab9d4e47531d7da948
       labels:
         app: antrea
         component: antrea-controller
