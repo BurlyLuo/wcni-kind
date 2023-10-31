@@ -1,0 +1,165 @@
+之前线上运行的K8S集群出现了一个Pod IP无法访问问题，调查了一下，发现和CalicoIP地址的分配策略相关，具体表现为一个/26的IP Block192.168.100.0/26分配给了A机器之后，在另外一台B机器上又出现了该IP Block内的一个IP 192.168.100.10，同时因为A机器上有该IP Block的blackhole路由blackhole 192.168.100.0/26 proto bird，所以导致A机器上所有的Pod访问192.168.100.10时因为黑洞路由原因直接失败
+
+
+
+func (c ipamClient) autoAssign(ctx context.Context, num int, handleID *string, attrs map[string]string, requestedPools []net.IPNet, version int, host string, maxNumBlocks int) ([]net.IPNet, error) {
+	...
+	// 根据当前的节点获取可用的所有IP池
+	pools, allPools, err := c.determinePools(requestedPools, version, *v3n)
+	if err != nil {
+		return nil, err
+	}
+
+	// 没有可用的池子就直接返回了
+	if len(pools) == 0 {
+		return nil, fmt.Errorf("no configured Calico pools for node %v", host)
+	}
+	...
+	ips := []net.IPNet{}
+	newIPs := []net.IPNet{}
+
+	// Record how many blocks we own so we can check against the limit later.
+	numBlocksOwned := len(affBlocks)
+
+	for len(ips) < num {
+		// 所有的可用Block已经尝试完了
+		if len(affBlocks) == 0 {
+			logCtx.Infof("Ran out of existing affine blocks for host")
+			break
+        }
+		// 选取当前Block列表第一个Block作为当前Block
+        cidr := affBlocks[0]
+		// 把第一个Block去除
+		affBlocks = affBlocks[1:]
+
+		for i := 0; i < datastoreRetries; i++ {
+            ...
+			// 尝试从当前的Block里分配一个可用的IP
+			newIPs, err = c.assignFromExistingBlock(ctx, b, num, handleID, attrs, host, true)
+			if err != nil {
+				if _, ok := err.(cerrors.ErrorResourceUpdateConflict); ok {
+					logCtx.WithError(err).Debug("CAS error assigning from affine block - retry")
+					continue
+				}
+				logCtx.WithError(err).Warn("Couldn't assign from affine block, try next one")
+				break
+            }
+			// 成功则添加到IP列表
+			ips = append(ips, newIPs...)
+			break
+		}
+		logCtx.Infof("Block '%s' provided addresses: %v", cidr.String(), newIPs)
+	}
+
+	// 获取 Calico IPAM 的配置
+	// Calico IPAM 有两个全局配置项目（二者之中只能有一个为 true）：
+	// StrictAffinity: 严格的一个 host 对应一个地址块，如果地址块耗尽不再分配新的地址
+	// AutoAllocateBlocks: 自动分配地址块，如果基于 host affine 的地址块耗尽，将分配新的地址块
+	// 这部分配置没有对外暴露，只能通过人工配置对应 etcd key 值或者编程调用相关接口来进行配置
+	// 相关讨论可参考 issue： https://github.com/projectcalico/calico/issues/1577
+	// 直接设置 etcd key：/calico/ipam/v2/config/ => "{\"strict_affinity\":true}"
+	config, err := c.GetIPAMConfig(ctx)
+	if err != nil {
+		return ips, err
+    }
+	// 如果自动分配Block选项打开并且当前IP还不够
+	if config.AutoAllocateBlocks == true {
+		rem := num - len(ips)
+		retries := datastoreRetries
+		for rem > 0 && retries > 0 {
+			...
+			// 先看看还有没有没有被绑定到节点的Block
+			subnet, err := c.blockReaderWriter.findUnclaimedBlock(ctx, host, version, pools, *config)
+			if err != nil {
+				if _, ok := err.(noFreeBlocksError); ok {
+					// 没有就中断了
+					logCtx.Info("No free blocks available for allocation")
+					break
+				}
+				log.WithError(err).Error("Failed to find an unclaimed block")
+				return ips, err
+			}
+			logCtx := log.WithFields(log.Fields{"host": host, "subnet": subnet})
+			logCtx.Info("Found unclaimed block")
+
+			for i := 0; i < datastoreRetries; i++ {
+				// 有的话，就绑定到当前节点
+				pa, err := c.blockReaderWriter.getPendingAffinity(ctx, host, *subnet)
+				if err != nil {
+					if _, ok := err.(cerrors.ErrorResourceUpdateConflict); ok {
+						logCtx.WithError(err).Debug("CAS error claiming pending affinity, retry")
+						continue
+					}
+					logCtx.WithError(err).Errorf("Error claiming pending affinity")
+					return ips, err
+				}
+
+				// 新绑定了Block，尝试在新Block里分配IP
+				b, err := c.getBlockFromAffinity(ctx, pa)
+				...
+				newIPs, err := c.assignFromExistingBlock(ctx, b, rem, handleID, attrs, host, config.StrictAffinity)
+				...
+				// 分配成功
+				ips = append(ips, newIPs...)
+				rem = num - len(ips)
+				break
+			}
+		}
+
+		if retries == 0 {
+			return ips, errors.New("Max retries hit - excessive concurrent IPAM requests")
+		}
+	}
+
+	// 如果IP分配还不够（也就是说已绑定的Block里的IP都分完了，并且也没有没有可绑定的新IPBlock了）并且IP还没分完，
+	// 并且StrictAffinity为false
+	rem := num - len(ips)
+	if config.StrictAffinity != true && rem != 0 {
+		logCtx.Infof("Attempting to assign %d more addresses from non-affine blocks", rem)
+
+		// Iterate over pools and assign addresses until we either run out of pools,
+		// or the request has been satisfied.
+		logCtx.Info("Looking for blocks with free IP addresses")
+		for _, p := range pools {
+			// 在所有的Pool里，随机选一个Block，在这个Block里找可用的IP地址
+			newBlock := randomBlockGenerator(p, host)
+			for rem > 0 {
+				// Grab a new random block.
+				blockCIDR := newBlock()
+				if blockCIDR == nil {
+					logCtx.Warningf("All addresses exhausted in pool %s", p.Spec.CIDR)
+					break
+				}
+
+				for i := 0; i < datastoreRetries; i++ {
+                    b, err := c.blockReaderWriter.queryBlock(ctx, *blockCIDR, "")
+					...
+                    newIPs, err := c.assignFromExistingBlock(ctx, b, rem, handleID, attrs, host, false)
+					...
+					// 分配成功
+					ips = append(ips, newIPs...)
+					rem = num - len(ips)
+					break
+				}
+			}
+		}
+	}
+	// 最后，如果执行到这里，意味着根据配置，无法再分配IP或者干脆全局都没有IP可用了
+	logCtx.Infof("Auto-assigned %d out of %d IPv%ds: %v", len(ips), num, version, ips)
+	return ips, nil
+}
+
+
+
+
+
+
+
+如果节点有已绑定的IP Block，则从这些IP Block中分配IP
+如果第1步失败（没有已绑定的IP Block，或者这些绑定的Block里IP耗尽），判断AutoAllocateBlocks为true，则寻找一个没有被绑定的IP Block，并绑定到当前节点，再执行分配逻辑
+如果第2步失败（AutoAllocateBlocks为false或者没有空闲的IP Block），判断StrictAffinity为false，则从所有IP Blocks中寻找未使用的IP
+经历前1-3步依然没有分配好IP，则失败.
+
+默认配置(StrictAffinity: true, AutoAllocateBlocks: false)下，当节点已有IP Block中没有空闲IP并且也没有空闲IP Block时，就会发生之前所说的情况，而恰好Calico在利用BIRD进行BGP路由广播时，针对每个已绑定的IP Block会设置blackhole路由，从而会导致Pod IP无法访问的问题.
+
+
