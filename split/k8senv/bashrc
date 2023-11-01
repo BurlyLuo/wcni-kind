@@ -166,3 +166,4 @@ export PATH=$HOME/.istioctl/bin:$PATH
 
 PS1="[\u@\h \W]\$ "
 
+source <(kubectl completion bash)
