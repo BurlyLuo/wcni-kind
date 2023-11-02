@@ -33,3 +33,8 @@ for ((ip_id=0; ip_id<${#ip_addresses[@]}; ip_id++)); do
     fi
 done
 
+# 3. install CNI
+kubectl apply -f ./calico.yaml
+
+# 4. tools
+scp ./tcp-iptables-trace.sh vmn0:/root/

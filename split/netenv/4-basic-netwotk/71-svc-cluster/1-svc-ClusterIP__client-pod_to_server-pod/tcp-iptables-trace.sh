@@ -1,5 +1,12 @@
 #!/bin/bash
-if [[ $# -lt 4 ]];then echo "Usage:"$'\n'"./tcp-iptables-trace.sh I sport 9495 tcp"$'\n'"./tcp-iptables-trace.sh I dport 54321 tcp";exit 1;fi
+if [[ $# -lt 4 ]];then
+  echo "Usage:"
+  echo "./tcp-iptables-trace.sh I sport 9495 tcp"
+  echo "./tcp-iptables-trace.sh I dport 9495 tcp"
+  echo "./tcp-iptables-trace.sh I sport 54321 tcp"
+  echo "./tcp-iptables-trace.sh I dport 54321 tcp"
+  exit
+fi
 
 iptables -t raw     -$1 PREROUTING  -p ${4:-'tcp'}  --$2 $3 -j LOG --log-prefix "t_hit raw.prerouting>"
 iptables -t mangle  -$1 PREROUTING  -p ${4:-'tcp'}  --$2 $3 -j LOG --log-prefix "t_hit mangle.prerouting>"

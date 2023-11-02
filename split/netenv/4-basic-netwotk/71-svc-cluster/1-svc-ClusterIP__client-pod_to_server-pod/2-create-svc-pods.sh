@@ -29,6 +29,7 @@ metadata:
     run: client
   name: clientsvc
 spec:
+  clusterIP: 10.43.94.94
   ports:
   - port: 9494
     protocol: TCP
@@ -62,6 +63,7 @@ metadata:
     run: server
   name: serversvc
 spec:
+  clusterIP: 10.43.94.95
   ports:
   - port: 9495
     protocol: TCP
