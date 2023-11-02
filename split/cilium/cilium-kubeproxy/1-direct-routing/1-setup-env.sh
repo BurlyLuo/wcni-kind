@@ -26,7 +26,7 @@ controller_node_ip=`kubectl get node -o wide --no-headers | grep -E "control-pla
 kubectl taint nodes $(kubectl get nodes -o name | grep control-plane) node-role.kubernetes.io/control-plane:NoSchedule-
 kubectl get nodes -o wide
 
-# 3.install cni[Cilium 1.13.0-rc5]
+# 3.install cni[Cilium 1.14.0-rc.0]
 helm repo add cilium https://helm.cilium.io > /dev/null 2>&1
 helm repo update > /dev/null 2>&1
 
