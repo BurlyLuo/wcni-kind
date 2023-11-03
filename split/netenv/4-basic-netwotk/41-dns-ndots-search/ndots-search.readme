@@ -1,0 +1,19 @@
+# kubectl exec -it client  bash    
+client~$cat /etc/resolv.conf 
+search default.svc.cluster.local svc.cluster.local cluster.local
+nameserver 10.96.0.10
+options ndots:5
+
+1. if count(FQDN(like: www.baidu.com)[.]) < ${options ndots} then
+   nslookup www.baidu.com ---> will do:
+   lookup # 1: www.baidu.com.default.svc.cluster.local
+          # 2: www.baidu.com.svc.cluster.local
+          # 3: www.baidu.com.cluster.local
+          # 4. www.baidu.com
+
+2. if count(FQDN(like: www.baidu.com)[.]) >= ${options ndots} then
+   nslookup a.b.c.e.yp14.cn
+   lookup # 1: a.b.c.e.yp14.cn
+
+docker exec -it dns-ndots-search-control-plane bash -c "tcpdump -pne -i eth0 port 53"
+
