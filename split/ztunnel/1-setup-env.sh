@@ -50,3 +50,74 @@ kubectl exec deploy/sleep -- curl -s http://172.18.0.200/productpage | head -n1
 kubectl exec deploy/sleep -- curl -s http://productpage:9080/ | head -n1
 kubectl exec deploy/notsleep -- curl -s http://productpage:9080/ | head -n1
 
+# 8. enable ambient mode l7 func
+kubectl apply -f - <<EOF
+apiVersion: gateway.networking.k8s.io/v1alpha2
+kind: Gateway
+metadata:
+ name: productpage
+ annotations:
+   istio.io/service-account: bookinfo-productpage
+spec:
+ gatewayClassName: istio-mesh
+EOF
+
+# 9. review app l7 proxy
+kubectl apply -f - <<EOF
+apiVersion: gateway.networking.k8s.io/v1alpha2
+kind: Gateway
+metadata:
+ name: reviews
+ annotations:
+   istio.io/service-account: bookinfo-reviews
+spec:
+ gatewayClassName: istio-mesh
+EOF
+
+# 9.1. Create DR
+kubectl apply -f - <<EOF
+apiVersion: networking.istio.io/v1alpha3
+kind: DestinationRule
+metadata:
+  name: reviews
+spec:
+  host: reviews
+  trafficPolicy:
+    loadBalancer:
+      simple: RANDOM
+  subsets:
+  - name: v1
+    labels:
+      version: v1
+  - name: v2
+    labels:
+      version: v2
+  - name: v3
+    labels:
+      version: v3
+EOF
+
+# 9.2. Create VS
+kubectl apply -f - <<EOF
+apiVersion: networking.istio.io/v1alpha3
+kind: VirtualService
+metadata:
+  name: reviews
+spec:
+  hosts:
+    - reviews
+  http:
+  - route:
+    - destination:
+        host: reviews
+        subset: v1
+      weight: 90
+    - destination:
+        host: reviews
+        subset: v2
+      weight: 10
+EOF
+
+# 10. Test review app
+kubectl exec -it deploy/sleep -- sh -c 'for i in $(seq 1 100); do curl -s http://istio-ingressgateway.istio-system/productpage | grep reviews-v.-; done' | sort | uniq -c
+
