@@ -2,15 +2,13 @@
 set -v
 
 # 1.prep noCNI env
-cat <<EOF | kind create cluster --name=flannel-host-gw --image=kindest/node:v1.27.3 --config=-
+cat <<EOF | kind create cluster --name=l4lb --image=kindest/node:v1.27.3 --config=-
 kind: Cluster
 apiVersion: kind.x-k8s.io/v1alpha4
 networking:
   disableDefaultCNI: true
   podSubnet: "10.244.0.0/16"
 nodes:
-- role: control-plane
-- role: control-plane
 - role: control-plane
 - role: worker
 
@@ -28,3 +26,8 @@ kubectl get nodes -o wide
 # 3.install CNI
 kubectl apply -f ./flannel.yaml
 
+# 4.install metallb
+kubectl apply -f ./metallb/
+
+# 5. wait all pods ready
+kubectl wait --timeout=100s --for=condition=Ready=true pods --all -A
