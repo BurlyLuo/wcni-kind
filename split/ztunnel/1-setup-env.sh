@@ -25,3 +25,28 @@ kubectl get nodes -o wide
 # 3. wait all pods ready
 kubectl wait --timeout=100s --for=condition=Ready=true pods --all -A
 
+# 4. install istio with ambient profile
+/usr/bin/istioctl-0.0.0-ambient install --set profile=ambient <<< 'y'
+
+kubectl apply -f istio-0.0.0-ambient.191fe680b52c1754ee72a06b3e0d3f9d116f2e82/metallb/
+
+# 5. deploy demo app
+kubectl apply -f istio-0.0.0-ambient.191fe680b52c1754ee72a06b3e0d3f9d116f2e82/samples/bookinfo/platform/kube/bookinfo.yaml
+kubectl apply -f istio-0.0.0-ambient.191fe680b52c1754ee72a06b3e0d3f9d116f2e82/samples/bookinfo/networking/bookinfo-gateway.yaml
+kubectl apply -f https://raw.githubusercontent.com/linsun/sample-apps/main/sleep/sleep.yaml
+kubectl apply -f https://raw.githubusercontent.com/linsun/sample-apps/main/sleep/notsleep.yaml
+kubectl wait --timeout=100s --for=condition=Ready=true pods --all -A
+
+# 6. test non-ztunnel func
+kubectl exec deploy/sleep -- curl -s http://istio-ingressgateway.istio-system/productpage | head -n1
+kubectl exec deploy/sleep -- curl -s http://172.18.0.200/productpage | head -n1
+kubectl exec deploy/sleep -- curl -s http://productpage:9080/ | head -n1
+kubectl exec deploy/notsleep -- curl -s http://productpage:9080/ | head -n1
+
+# 7. test enabel ztunnel func
+kubectl label namespace default istio.io/dataplane-mode=ambient
+kubectl exec deploy/sleep -- curl -s http://istio-ingressgateway.istio-system/productpage | head -n1
+kubectl exec deploy/sleep -- curl -s http://172.18.0.200/productpage | head -n1
+kubectl exec deploy/sleep -- curl -s http://productpage:9080/ | head -n1
+kubectl exec deploy/notsleep -- curl -s http://productpage:9080/ | head -n1
+
