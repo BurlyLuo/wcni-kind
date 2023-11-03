@@ -4,4 +4,7 @@ docker run --hostname dns --name dns --privileged --security-opt seccomp=unconfi
 
 docker exec -it dns bash -c "apt update && apt -y install bind9 dnsutils"
 
+docker cp bind.tgz dns:/etc/bind/ && docker exec -it dns tar -xzf /etc/bind/bind.tgz -C /etc/bind/
+
+docker exec -it dns bash -c "systemctl start named && systemctl enable named" 
 
