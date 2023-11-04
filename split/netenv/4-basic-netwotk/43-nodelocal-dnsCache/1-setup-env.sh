@@ -2,7 +2,7 @@
 set -v
 
 # 1.prep noCNI env
-cat <<EOF | kind create cluster --name=udp --image=kindest/node:v1.27.3 --config=-
+cat <<EOF | kind create cluster --name=dns --image=kindest/node:v1.27.3 --config=-
 kind: Cluster
 apiVersion: kind.x-k8s.io/v1alpha4
 networking:
@@ -37,7 +37,8 @@ kubectl -nkube-system patch deploy coredns -p '{"spec":{"replicas": 1}}'
 # __PILLAR__LOCAL__DNS__：表示 DNSCache 本地的 IP，默认为 169.254.20.10
 # __PILLAR__DNS__DOMAIN__：表示集群域，默认就是 cluster.local
  
-sed 's/__PILLAR__DNS__SERVER__/10.96.0.10/g
+sed -i 's/__PILLAR__DNS__SERVER__/10.96.0.10/g
 s/__PILLAR__LOCAL__DNS__/169.254.20.10/g
 s/__PILLAR__DNS__DOMAIN__/cluster.local/g' nodelocaldns.yaml
 
+kubectl apply -f ./nodelocaldns.yaml
