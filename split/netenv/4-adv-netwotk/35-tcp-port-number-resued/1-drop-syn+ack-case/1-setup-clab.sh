@@ -45,3 +45,7 @@ topology:
 
 EOF
 
+# cmd:
+# [root@2204]$ lo clab-port-num-resued-server1 bash 
+# [root@server1 /]# curl 10.1.8.10 
+# ...  waiting...
