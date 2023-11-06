@@ -2,7 +2,7 @@
 set -v
 
 # 1.prep noCNI env
-cat <<EOF | kind create cluster --name=calico-bgp-fullmesh --image=kindest/node:v1.25.3 --config=-
+cat <<EOF | kind create cluster --name=calico-shm --image=kindest/node:v1.25.3 --config=-
 kind: Cluster
 apiVersion: kind.x-k8s.io/v1alpha4
 networking:
