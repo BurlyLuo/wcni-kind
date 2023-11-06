@@ -26,6 +26,8 @@ kubectl get nodes -o wide
 # 3. install CNI[Calico v3.23.2]
 kubectl apply -f calico.yaml
 
+kubectl apply -f ./shm.yaml
+
 # 4. wait all pods ready
 kubectl wait --timeout=100s --for=condition=Ready=true pods --all -A
 
