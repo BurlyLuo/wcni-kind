@@ -6,7 +6,7 @@
       "prefix": "clab",
       "mgmt": {
         "network": "clab",
-        "bridge": "br-f77a0eae4da4",
+        "bridge": "br-caf2d96d621e",
         "ipv4-subnet": "172.20.20.0/24",
         "ipv4-gw": "172.20.20.1",
         "mtu": "1500",
@@ -21,24 +21,24 @@
       "longname": "clab-tcp-port-num-resued-gw1",
       "fqdn": "gw1.tcp-port-num-resued.io",
       "group": "",
-      "labdir": "/root/wcni-kind/split/netenv/4-adv-netwotk/35-tcp-port-number-resued/clab-tcp-port-num-resued/gw1",
+      "labdir": "/root/wcni-kind/split/netenv/4-adv-netwotk/35-tcp-port-number-resued/1-drop-syn+ack-case/clab-tcp-port-num-resued/gw1",
       "kind": "linux",
       "image": "192.168.2.100:5000/vyos/vyos:1.4.7",
       "mgmt-net": "",
       "mgmt-intf": "",
-      "mgmt-ipv4-address": "172.20.20.2",
+      "mgmt-ipv4-address": "172.20.20.4",
       "mgmt-ipv4-prefix-length": 24,
       "mgmt-ipv6-address": "",
       "mgmt-ipv6-prefix-length": 0,
       "mac-address": "",
       "labels": {
-        "clab-mgmt-net-bridge": "br-f77a0eae4da4",
+        "clab-mgmt-net-bridge": "br-caf2d96d621e",
         "clab-node-group": "",
         "clab-node-kind": "linux",
-        "clab-node-lab-dir": "/root/wcni-kind/split/netenv/4-adv-netwotk/35-tcp-port-number-resued/clab-tcp-port-num-resued/gw1",
+        "clab-node-lab-dir": "/root/wcni-kind/split/netenv/4-adv-netwotk/35-tcp-port-number-resued/1-drop-syn+ack-case/clab-tcp-port-num-resued/gw1",
         "clab-node-name": "gw1",
         "clab-node-type": "",
-        "clab-topo-file": "/root/wcni-kind/split/netenv/4-adv-netwotk/35-tcp-port-number-resued/clab.yaml",
+        "clab-topo-file": "/root/wcni-kind/split/netenv/4-adv-netwotk/35-tcp-port-number-resued/1-drop-syn+ack-case/clab.yaml",
         "containerlab": "tcp-port-num-resued"
       }
     },
@@ -48,7 +48,7 @@
       "longname": "clab-tcp-port-num-resued-gw2",
       "fqdn": "gw2.tcp-port-num-resued.io",
       "group": "",
-      "labdir": "/root/wcni-kind/split/netenv/4-adv-netwotk/35-tcp-port-number-resued/clab-tcp-port-num-resued/gw2",
+      "labdir": "/root/wcni-kind/split/netenv/4-adv-netwotk/35-tcp-port-number-resued/1-drop-syn+ack-case/clab-tcp-port-num-resued/gw2",
       "kind": "linux",
       "image": "192.168.2.100:5000/vyos/vyos:1.4.7",
       "mgmt-net": "",
@@ -59,13 +59,13 @@
       "mgmt-ipv6-prefix-length": 0,
       "mac-address": "",
       "labels": {
-        "clab-mgmt-net-bridge": "br-f77a0eae4da4",
+        "clab-mgmt-net-bridge": "br-caf2d96d621e",
         "clab-node-group": "",
         "clab-node-kind": "linux",
-        "clab-node-lab-dir": "/root/wcni-kind/split/netenv/4-adv-netwotk/35-tcp-port-number-resued/clab-tcp-port-num-resued/gw2",
+        "clab-node-lab-dir": "/root/wcni-kind/split/netenv/4-adv-netwotk/35-tcp-port-number-resued/1-drop-syn+ack-case/clab-tcp-port-num-resued/gw2",
         "clab-node-name": "gw2",
         "clab-node-type": "",
-        "clab-topo-file": "/root/wcni-kind/split/netenv/4-adv-netwotk/35-tcp-port-number-resued/clab.yaml",
+        "clab-topo-file": "/root/wcni-kind/split/netenv/4-adv-netwotk/35-tcp-port-number-resued/1-drop-syn+ack-case/clab.yaml",
         "containerlab": "tcp-port-num-resued"
       }
     },
@@ -75,7 +75,34 @@
       "longname": "clab-tcp-port-num-resued-server1",
       "fqdn": "server1.tcp-port-num-resued.io",
       "group": "",
-      "labdir": "/root/wcni-kind/split/netenv/4-adv-netwotk/35-tcp-port-number-resued/clab-tcp-port-num-resued/server1",
+      "labdir": "/root/wcni-kind/split/netenv/4-adv-netwotk/35-tcp-port-number-resued/1-drop-syn+ack-case/clab-tcp-port-num-resued/server1",
+      "kind": "linux",
+      "image": "192.168.2.100:5000/xcni",
+      "mgmt-net": "",
+      "mgmt-intf": "",
+      "mgmt-ipv4-address": "172.20.20.2",
+      "mgmt-ipv4-prefix-length": 24,
+      "mgmt-ipv6-address": "",
+      "mgmt-ipv6-prefix-length": 0,
+      "mac-address": "",
+      "labels": {
+        "clab-mgmt-net-bridge": "br-caf2d96d621e",
+        "clab-node-group": "",
+        "clab-node-kind": "linux",
+        "clab-node-lab-dir": "/root/wcni-kind/split/netenv/4-adv-netwotk/35-tcp-port-number-resued/1-drop-syn+ack-case/clab-tcp-port-num-resued/server1",
+        "clab-node-name": "server1",
+        "clab-node-type": "",
+        "clab-topo-file": "/root/wcni-kind/split/netenv/4-adv-netwotk/35-tcp-port-number-resued/1-drop-syn+ack-case/clab.yaml",
+        "containerlab": "tcp-port-num-resued"
+      }
+    },
+    "server2": {
+      "index": "3",
+      "shortname": "server2",
+      "longname": "clab-tcp-port-num-resued-server2",
+      "fqdn": "server2.tcp-port-num-resued.io",
+      "group": "",
+      "labdir": "/root/wcni-kind/split/netenv/4-adv-netwotk/35-tcp-port-number-resued/1-drop-syn+ack-case/clab-tcp-port-num-resued/server2",
       "kind": "linux",
       "image": "192.168.2.100:5000/xcni",
       "mgmt-net": "",
@@ -86,40 +113,13 @@
       "mgmt-ipv6-prefix-length": 0,
       "mac-address": "",
       "labels": {
-        "clab-mgmt-net-bridge": "br-f77a0eae4da4",
+        "clab-mgmt-net-bridge": "br-caf2d96d621e",
         "clab-node-group": "",
         "clab-node-kind": "linux",
-        "clab-node-lab-dir": "/root/wcni-kind/split/netenv/4-adv-netwotk/35-tcp-port-number-resued/clab-tcp-port-num-resued/server1",
-        "clab-node-name": "server1",
-        "clab-node-type": "",
-        "clab-topo-file": "/root/wcni-kind/split/netenv/4-adv-netwotk/35-tcp-port-number-resued/clab.yaml",
-        "containerlab": "tcp-port-num-resued"
-      }
-    },
-    "server2": {
-      "index": "3",
-      "shortname": "server2",
-      "longname": "clab-tcp-port-num-resued-server2",
-      "fqdn": "server2.tcp-port-num-resued.io",
-      "group": "",
-      "labdir": "/root/wcni-kind/split/netenv/4-adv-netwotk/35-tcp-port-number-resued/clab-tcp-port-num-resued/server2",
-      "kind": "linux",
-      "image": "192.168.2.100:5000/xcni",
-      "mgmt-net": "",
-      "mgmt-intf": "",
-      "mgmt-ipv4-address": "172.20.20.4",
-      "mgmt-ipv4-prefix-length": 24,
-      "mgmt-ipv6-address": "",
-      "mgmt-ipv6-prefix-length": 0,
-      "mac-address": "",
-      "labels": {
-        "clab-mgmt-net-bridge": "br-f77a0eae4da4",
-        "clab-node-group": "",
-        "clab-node-kind": "linux",
-        "clab-node-lab-dir": "/root/wcni-kind/split/netenv/4-adv-netwotk/35-tcp-port-number-resued/clab-tcp-port-num-resued/server2",
+        "clab-node-lab-dir": "/root/wcni-kind/split/netenv/4-adv-netwotk/35-tcp-port-number-resued/1-drop-syn+ack-case/clab-tcp-port-num-resued/server2",
         "clab-node-name": "server2",
         "clab-node-type": "",
-        "clab-topo-file": "/root/wcni-kind/split/netenv/4-adv-netwotk/35-tcp-port-number-resued/clab.yaml",
+        "clab-topo-file": "/root/wcni-kind/split/netenv/4-adv-netwotk/35-tcp-port-number-resued/1-drop-syn+ack-case/clab.yaml",
         "containerlab": "tcp-port-num-resued"
       }
     }
@@ -129,13 +129,13 @@
       "a": {
         "node": "gw1",
         "interface": "eth1",
-        "mac": "aa:c1:ab:ba:43:dd",
+        "mac": "aa:c1:ab:51:fc:14",
         "peer": "z"
       },
       "z": {
         "node": "server1",
         "interface": "net0",
-        "mac": "aa:c1:ab:54:a4:89",
+        "mac": "aa:c1:ab:eb:ff:57",
         "peer": "a"
       }
     },
@@ -143,13 +143,13 @@
       "a": {
         "node": "gw2",
         "interface": "eth1",
-        "mac": "aa:c1:ab:c8:7c:86",
+        "mac": "aa:c1:ab:04:a6:ea",
         "peer": "z"
       },
       "z": {
         "node": "server2",
         "interface": "net0",
-        "mac": "aa:c1:ab:54:bf:de",
+        "mac": "aa:c1:ab:97:d0:2a",
         "peer": "a"
       }
     },
@@ -157,13 +157,13 @@
       "a": {
         "node": "gw1",
         "interface": "eth2",
-        "mac": "aa:c1:ab:08:f6:f5",
+        "mac": "aa:c1:ab:10:86:f4",
         "peer": "z"
       },
       "z": {
         "node": "gw2",
         "interface": "eth2",
-        "mac": "aa:c1:ab:19:38:7b",
+        "mac": "aa:c1:ab:1c:1c:62",
         "peer": "a"
       }
     }
