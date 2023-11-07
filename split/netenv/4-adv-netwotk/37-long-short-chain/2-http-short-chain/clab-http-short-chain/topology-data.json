@@ -6,10 +6,9 @@
       "prefix": "clab",
       "mgmt": {
         "network": "clab",
-        "bridge": "br-26632c7fd7c4",
+        "bridge": "br-8c0067e55333",
         "ipv4-subnet": "172.20.20.0/24",
         "ipv4-gw": "172.20.20.1",
-        "ipv6-gw": "fe80::42:48ff:fe96:234f",
         "mtu": "1500",
         "external-access": true
       }
@@ -33,7 +32,7 @@
       "mgmt-ipv6-prefix-length": 0,
       "mac-address": "",
       "labels": {
-        "clab-mgmt-net-bridge": "br-26632c7fd7c4",
+        "clab-mgmt-net-bridge": "br-8c0067e55333",
         "clab-node-group": "",
         "clab-node-kind": "linux",
         "clab-node-lab-dir": "/root/wcni-kind/split/netenv/4-adv-netwotk/37-long-short-chain/2-http-short-chain/clab-http-short-chain/gw1",
@@ -60,7 +59,7 @@
       "mgmt-ipv6-prefix-length": 0,
       "mac-address": "",
       "labels": {
-        "clab-mgmt-net-bridge": "br-26632c7fd7c4",
+        "clab-mgmt-net-bridge": "br-8c0067e55333",
         "clab-node-group": "",
         "clab-node-kind": "linux",
         "clab-node-lab-dir": "/root/wcni-kind/split/netenv/4-adv-netwotk/37-long-short-chain/2-http-short-chain/clab-http-short-chain/server1",
@@ -87,7 +86,7 @@
       "mgmt-ipv6-prefix-length": 0,
       "mac-address": "",
       "labels": {
-        "clab-mgmt-net-bridge": "br-26632c7fd7c4",
+        "clab-mgmt-net-bridge": "br-8c0067e55333",
         "clab-node-group": "",
         "clab-node-kind": "linux",
         "clab-node-lab-dir": "/root/wcni-kind/split/netenv/4-adv-netwotk/37-long-short-chain/2-http-short-chain/clab-http-short-chain/server2",
@@ -103,13 +102,13 @@
       "a": {
         "node": "gw1",
         "interface": "eth1",
-        "mac": "aa:c1:ab:5e:b5:72",
+        "mac": "aa:c1:ab:5b:2a:bb",
         "peer": "z"
       },
       "z": {
         "node": "server1",
         "interface": "net0",
-        "mac": "aa:c1:ab:38:df:3c",
+        "mac": "aa:c1:ab:ea:23:92",
         "peer": "a"
       }
     },
@@ -117,13 +116,13 @@
       "a": {
         "node": "gw1",
         "interface": "eth2",
-        "mac": "aa:c1:ab:cf:f4:6c",
+        "mac": "aa:c1:ab:58:e4:e6",
         "peer": "z"
       },
       "z": {
         "node": "server2",
         "interface": "net0",
-        "mac": "aa:c1:ab:c0:78:aa",
+        "mac": "aa:c1:ab:03:19:66",
         "peer": "a"
       }
     }
