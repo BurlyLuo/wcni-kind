@@ -10,42 +10,35 @@ topology:
   nodes:
     gw1:
       kind: linux
-      image: 192.168.2.100:5000/vyos/vyos:1.4.7
-      cmd: /sbin/init
-      binds:
-        - /lib/modules:/lib/modules
-        - ./startup-conf/gw1-boot.cfg:/opt/vyatta/etc/config/config.boot
-
-    gw2:
-      kind: linux
-      image: 192.168.2.100:5000/vyos/vyos:1.4.7
-      cmd: /sbin/init
-      binds:
-        - /lib/modules:/lib/modules
-        - ./startup-conf/gw2-boot.cfg:/opt/vyatta/etc/config/config.boot
+      image: 192.168.2.100:5000/xcni
+      exec:
+      - ip a a 10.1.5.1/24 dev eth1
+      - ip a a 10.1.8.1/24 dev eth2
 
     server1:
       kind: linux
       image: 192.168.2.100:5000/xcni
       exec:
       - ip addr add 10.1.5.10/24 dev net0
-      - ip r a 10.1.8.0/24 via 10.1.5.1 dev net0
+      - ip r r default via 10.1.5.1 dev net0
 
     server2:
       kind: linux
       image: 192.168.2.100:5000/xcni
       exec:
       - ip addr add 10.1.8.10/24 dev net0
-      - ip r a 10.1.5.0/24 via 10.1.8.1 dev net0
+      - ip r r default via 10.1.8.1 dev net0
 
   links:
     - endpoints: ["gw1:eth1", "server1:net0"]
-    - endpoints: ["gw2:eth1", "server2:net0"]
-    - endpoints: ["gw1:eth2", "gw2:eth2"]
+    - endpoints: ["gw1:eth2", "server2:net0"]
 
 EOF
 
 # cmd:
+
+# iptables -A FORWARD -s 10.1.8.10 -d 10.1.5.10 -p tcp --tcp-flags SYN,ACK SYN,ACK -j DROP
+
 # [root@2204]$ lo clab-port-num-resued-server1 bash 
 # [root@server1 /]# curl 10.1.8.10 
 # ...  waiting...

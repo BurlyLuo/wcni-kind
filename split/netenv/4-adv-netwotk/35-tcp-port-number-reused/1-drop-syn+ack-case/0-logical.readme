@@ -1,14 +1,5 @@
-# lo clab-port-num-resued-server1 bash
+lo clab-tcp-port-num-resued-gw1 bash 
 
-root@gw1:~#  nft list ruleset | grep -i tcp
-# Warning: table ip nat is managed by iptables-nft, do not touch!
-                meta l4proto tcp ip daddr 127.0.0.11 tcp dport 53 counter packets 0 bytes 0 dnat to 127.0.0.11:46721
-                meta l4proto tcp ip saddr 127.0.0.11 tcp sport 46721 counter packets 0 bytes 0 snat to :53
-        ct helper rpc_tcp {
-                type "rpc" protocol tcp
-        ct helper tns_tcp {
-                type "tns" protocol tcp
-        chain VYOS_TCP_MSS {
-        chain VYOS_TCP_MSS {
-                tcp flags syn,ack / syn,ack counter packets 0 bytes 0 drop comment "drop-syn-ack-100"
-root@gw1:~# 
+iptables -A FORWARD -s 10.1.8.10 -d 10.1.5.10 -p tcp --tcp-flags SYN,ACK SYN,ACK -j DROP
+
+
