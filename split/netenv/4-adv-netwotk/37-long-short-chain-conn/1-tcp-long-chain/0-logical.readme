@@ -1,0 +1,21 @@
+lo clab-tcp-long-chain-gw1 bash 
+add below iptables based on topo:
+server1 ---[eth1]gw1[eth2] --- server2
+
+iptables -A FORWARD -s 10.1.5.10 -d 10.1.8.10 -p tcp --tcp-flags FIN,ACK FIN,ACK -j DROP
+
+当我们在eth1 和 eth2 上抓包的时候，会有不同的现象，这也是expect的。
+eth1: 我们会看到FIN ACK的重传：
+12:14:09.717621 aa:c1:ab:63:ba:68 > aa:c1:ab:38:c6:60, ethertype IPv4 (0x0800), length 66: 10.1.5.10.48298 > 10.1.8.10.http: Flags [.], ack 283, win 443, options [nop,nop,TS val 4216480485 ecr 3946693475], length 0
+12:14:09.717755 aa:c1:ab:63:ba:68 > aa:c1:ab:38:c6:60, ethertype IPv4 (0x0800), length 66: 10.1.5.10.48298 > 10.1.8.10.http: Flags [F.], seq 74, ack 283, win 443, options [nop,nop,TS val 4216480486 ecr 3946693475], length 0
+12:14:09.926294 aa:c1:ab:63:ba:68 > aa:c1:ab:38:c6:60, ethertype IPv4 (0x0800), length 66: 10.1.5.10.48298 > 10.1.8.10.http: Flags [F.], seq 74, ack 283, win 443, options [nop,nop,TS val 4216480694 ecr 3946693475], length 0
+12:14:10.134645 aa:c1:ab:63:ba:68 > aa:c1:ab:38:c6:60, ethertype IPv4 (0x0800), length 66: 10.1.5.10.48298 > 10.1.8.10.http: Flags [F.], seq 74, ack 283, win 443, options [nop,nop,TS val 4216480902 ecr 3946693475], length 0
+12:14:10.557880 aa:c1:ab:63:ba:68 > aa:c1:ab:38:c6:60, ethertype IPv4 (0x0800), length 66: 10.1.5.10.48298 > 10.1.8.10.http: Flags [F.], seq 74, ack 283, win 443, options [nop,nop,TS val 4216481326 ecr 3946693475], length 0
+12:14:11.385928 aa:c1:ab:63:ba:68 > aa:c1:ab:38:c6:60, ethertype IPv4 (0x0800), length 66: 10.1.5.10.48298 > 10.1.8.10.http: Flags [F.], seq 74, ack 283, win 443, options [nop,nop,TS val 4216482154 ecr 3946693475], length 0
+12:14:13.049774 aa:c1:ab:63:ba:68 > aa:c1:ab:38:c6:60, ethertype IPv4 (0x0800), length 66: 10.1.5.10.48298 > 10.1.8.10.http: Flags [F.], seq 74, ack 283, win 443, options [nop,nop,TS val 4216483818 ecr 3946693475], length 0
+12:14:16.442594 aa:c1:ab:63:ba:68 > aa:c1:ab:38:c6:60, ethertype IPv4 (0x0800), length 66: 10.1.5.10.48298 > 10.1.8.10.http: Flags [F.], seq 74, ack 283, win 443, options [nop,nop,TS val 4216487210 ecr 3946693475], length 0
+12:14:21.561909 aa:c1:ab:63:ba:68 > aa:c1:ab:38:c6:60, ethertype IPv4 (0x0800), length 66: 10.1.5.10.49374 > 10.1.8.10.http: Flags [F.], seq 0, ack 1, win 443, options [nop,nop,TS val 4216492330 ecr 3946678542], length 0
+12:14:23.098124 aa:c1:ab:63:ba:68 > aa:c1:ab:38:c6:60, ethertype IPv4 (0x0800), length 66: 10.1.5.10.48298 > 10.1.8.10.http: Flags [F.], seq 74, ack 283, win 443, options [nop,nop,TS val 4216493866 ecr 3946693475], length 0
+^C
+
+而：eth2上是没有FIN  ACK包的，是被iptables丢掉了。
