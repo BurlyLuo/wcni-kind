@@ -35,3 +35,22 @@ tcp        0      0 10.1.8.10:80            10.1.5.10:34706         ESTABLISHED 
 tcp        0      0 10.1.8.10:80            10.1.5.10:34728         ESTABLISHED 15/nginx: worker pr 
 [root@server2 ~]# 
 
+
+HTTP long chain:
+Hypertext Transfer Protocol
+    HTTP/1.1 200 OK\r\n
+    Server: nginx/1.14.0\r\n
+    Date: Tue, 07 Nov 2023 12:19:27 GMT\r\n
+    Content-Type: text/html\r\n
+    Content-Length: 46\r\n
+    Last-Modified: Tue, 07 Nov 2023 12:18:05 GMT\r\n
+    Connection: keep-alive\r\n  # HTTP Long Chain.
+    ETag: "654a2afd-2e"\r\n
+    Accept-Ranges: bytes\r\n
+    \r\n
+    [HTTP response 1/1]
+    [Time since request: 0.000288000 seconds]
+    [Request in frame: 8]
+    [Request URI: http://10.1.8.10/]
+    File Data: 46 bytes
+
