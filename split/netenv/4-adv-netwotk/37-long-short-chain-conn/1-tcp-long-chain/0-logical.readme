@@ -25,3 +25,13 @@ tcp        0      0 10.1.8.10:80            10.1.5.10:47624         ESTABLISHED 
 [root@server2 ~]# 
 
 
+多个没有拆掉的tcp链接：
+[root@server2 ~]# netstat -anp | grep 80
+tcp        0      0 0.0.0.0:80              0.0.0.0:*               LISTEN      14/nginx: master pr 
+tcp        0      0 10.1.8.10:80            10.1.5.10:50624         ESTABLISHED 15/nginx: worker pr 
+tcp        0      0 10.1.8.10:80            10.1.5.10:34714         ESTABLISHED 15/nginx: worker pr 
+tcp        0      0 10.1.8.10:80            10.1.5.10:34730         ESTABLISHED 15/nginx: worker pr 
+tcp        0      0 10.1.8.10:80            10.1.5.10:34706         ESTABLISHED 15/nginx: worker pr 
+tcp        0      0 10.1.8.10:80            10.1.5.10:34728         ESTABLISHED 15/nginx: worker pr 
+[root@server2 ~]# 
+
