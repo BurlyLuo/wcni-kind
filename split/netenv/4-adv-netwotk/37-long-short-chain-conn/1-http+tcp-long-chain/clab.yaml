@@ -1,7 +1,4 @@
-#!/bin/bash
-set -v
-cat <<EOF>clab.yaml | clab deploy -t clab.yaml -
-name: tcp-long-chain
+name: http-tcp-long-chain
 mgmt:
   ipv6-subnet: ""
   ipv4-subnet: 172.20.20.0/24
@@ -33,9 +30,3 @@ topology:
     - endpoints: ["gw1:eth1", "server1:net0"]
     - endpoints: ["gw1:eth2", "server2:net0"]
 
-EOF
-
-# cmd:
-# [root@2204]$ lo clab-long-chain-server1 bash 
-# [root@server1 /]# curl 10.1.8.10 
-# ...  waiting...
