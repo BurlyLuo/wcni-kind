@@ -34,5 +34,6 @@ for ((ip_id=0; ip_id<${#ip_addresses[@]}; ip_id++)); do
     sshpass -p hive ssh-copy-id -o StrictHostKeyChecking=no -p 22 root@${ip_addresses[$ip_id]} > /dev/null 2>&1
     echo "${ip_addresses[$ip_id]} vm2204$ip_id" >> /etc/hosts
 done
-yes | scp -r ./docker-lvs vm22040:/root/
+
+echo "yes" | scp -r -o StrictHostKeyChecking=no ./docker-lvs vm22040:/root/
 
