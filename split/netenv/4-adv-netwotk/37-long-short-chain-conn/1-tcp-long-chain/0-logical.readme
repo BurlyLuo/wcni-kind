@@ -1,6 +1,6 @@
 lo clab-tcp-long-chain-gw1 bash 
 add below iptables based on topo:
-server1 ---[eth1]gw1[eth2] --- server2
+server1 ---[eth1]gw1[eth2] --- server2 
 
 iptables -A FORWARD -s 10.1.5.10 -d 10.1.8.10 -p tcp --tcp-flags FIN,ACK FIN,ACK -j DROP
 
@@ -18,4 +18,10 @@ eth1: 我们会看到FIN ACK的重传：
 12:14:23.098124 aa:c1:ab:63:ba:68 > aa:c1:ab:38:c6:60, ethertype IPv4 (0x0800), length 66: 10.1.5.10.48298 > 10.1.8.10.http: Flags [F.], seq 74, ack 283, win 443, options [nop,nop,TS val 4216493866 ecr 3946693475], length 0
 ^C
 
-而：eth2上是没有FIN  ACK包的，是被iptables丢掉了。
+而：eth2上是没有FIN  ACK包的，是被iptables丢掉了。那么server2上的tcp链接就没拆掉。
+[root@server2 ~]# netstat -anp | grep 80
+tcp        0      0 0.0.0.0:80              0.0.0.0:*               LISTEN      14/nginx: master pr 
+tcp        0      0 10.1.8.10:80            10.1.5.10:47624         ESTABLISHED 15/nginx: worker pr 
+[root@server2 ~]# 
+
+
