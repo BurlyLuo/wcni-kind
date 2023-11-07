@@ -17,14 +17,14 @@ topology:
 
     server1:
       kind: linux
-      image: 192.168.2.100:5000/xcni
+      image: 192.168.2.100:5000/xcni-short-chain
       exec:
       - ip addr add 10.1.5.10/24 dev net0
       - ip r a 10.1.8.0/24 via 10.1.5.1 dev net0
 
     server2:
       kind: linux
-      image: 192.168.2.100:5000/xcni
+      image: 192.168.2.100:5000/xcni-short-chain
       exec:
       - ip addr add 10.1.8.10/24 dev net0
       - ip r a 10.1.5.0/24 via 10.1.8.1 dev net0

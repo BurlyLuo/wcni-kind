@@ -1,0 +1,131 @@
+{
+  "name": "http-short-chain",
+  "type": "clab",
+  "clab": {
+    "config": {
+      "prefix": "clab",
+      "mgmt": {
+        "network": "clab",
+        "bridge": "br-26632c7fd7c4",
+        "ipv4-subnet": "172.20.20.0/24",
+        "ipv4-gw": "172.20.20.1",
+        "ipv6-gw": "fe80::42:48ff:fe96:234f",
+        "mtu": "1500",
+        "external-access": true
+      }
+    }
+  },
+  "nodes": {
+    "gw1": {
+      "index": "0",
+      "shortname": "gw1",
+      "longname": "clab-http-short-chain-gw1",
+      "fqdn": "gw1.http-short-chain.io",
+      "group": "",
+      "labdir": "/root/wcni-kind/split/netenv/4-adv-netwotk/37-long-short-chain/2-http-short-chain/clab-http-short-chain/gw1",
+      "kind": "linux",
+      "image": "192.168.2.100:5000/xcni",
+      "mgmt-net": "",
+      "mgmt-intf": "",
+      "mgmt-ipv4-address": "172.20.20.3",
+      "mgmt-ipv4-prefix-length": 24,
+      "mgmt-ipv6-address": "",
+      "mgmt-ipv6-prefix-length": 0,
+      "mac-address": "",
+      "labels": {
+        "clab-mgmt-net-bridge": "br-26632c7fd7c4",
+        "clab-node-group": "",
+        "clab-node-kind": "linux",
+        "clab-node-lab-dir": "/root/wcni-kind/split/netenv/4-adv-netwotk/37-long-short-chain/2-http-short-chain/clab-http-short-chain/gw1",
+        "clab-node-name": "gw1",
+        "clab-node-type": "",
+        "clab-topo-file": "/root/wcni-kind/split/netenv/4-adv-netwotk/37-long-short-chain/2-http-short-chain/clab.yaml",
+        "containerlab": "http-short-chain"
+      }
+    },
+    "server1": {
+      "index": "1",
+      "shortname": "server1",
+      "longname": "clab-http-short-chain-server1",
+      "fqdn": "server1.http-short-chain.io",
+      "group": "",
+      "labdir": "/root/wcni-kind/split/netenv/4-adv-netwotk/37-long-short-chain/2-http-short-chain/clab-http-short-chain/server1",
+      "kind": "linux",
+      "image": "192.168.2.100:5000/xcni-short-chain",
+      "mgmt-net": "",
+      "mgmt-intf": "",
+      "mgmt-ipv4-address": "172.20.20.2",
+      "mgmt-ipv4-prefix-length": 24,
+      "mgmt-ipv6-address": "",
+      "mgmt-ipv6-prefix-length": 0,
+      "mac-address": "",
+      "labels": {
+        "clab-mgmt-net-bridge": "br-26632c7fd7c4",
+        "clab-node-group": "",
+        "clab-node-kind": "linux",
+        "clab-node-lab-dir": "/root/wcni-kind/split/netenv/4-adv-netwotk/37-long-short-chain/2-http-short-chain/clab-http-short-chain/server1",
+        "clab-node-name": "server1",
+        "clab-node-type": "",
+        "clab-topo-file": "/root/wcni-kind/split/netenv/4-adv-netwotk/37-long-short-chain/2-http-short-chain/clab.yaml",
+        "containerlab": "http-short-chain"
+      }
+    },
+    "server2": {
+      "index": "2",
+      "shortname": "server2",
+      "longname": "clab-http-short-chain-server2",
+      "fqdn": "server2.http-short-chain.io",
+      "group": "",
+      "labdir": "/root/wcni-kind/split/netenv/4-adv-netwotk/37-long-short-chain/2-http-short-chain/clab-http-short-chain/server2",
+      "kind": "linux",
+      "image": "192.168.2.100:5000/xcni-short-chain",
+      "mgmt-net": "",
+      "mgmt-intf": "",
+      "mgmt-ipv4-address": "172.20.20.4",
+      "mgmt-ipv4-prefix-length": 24,
+      "mgmt-ipv6-address": "",
+      "mgmt-ipv6-prefix-length": 0,
+      "mac-address": "",
+      "labels": {
+        "clab-mgmt-net-bridge": "br-26632c7fd7c4",
+        "clab-node-group": "",
+        "clab-node-kind": "linux",
+        "clab-node-lab-dir": "/root/wcni-kind/split/netenv/4-adv-netwotk/37-long-short-chain/2-http-short-chain/clab-http-short-chain/server2",
+        "clab-node-name": "server2",
+        "clab-node-type": "",
+        "clab-topo-file": "/root/wcni-kind/split/netenv/4-adv-netwotk/37-long-short-chain/2-http-short-chain/clab.yaml",
+        "containerlab": "http-short-chain"
+      }
+    }
+  },
+  "links": [
+    {
+      "a": {
+        "node": "gw1",
+        "interface": "eth1",
+        "mac": "aa:c1:ab:5e:b5:72",
+        "peer": "z"
+      },
+      "z": {
+        "node": "server1",
+        "interface": "net0",
+        "mac": "aa:c1:ab:38:df:3c",
+        "peer": "a"
+      }
+    },
+    {
+      "a": {
+        "node": "gw1",
+        "interface": "eth2",
+        "mac": "aa:c1:ab:cf:f4:6c",
+        "peer": "z"
+      },
+      "z": {
+        "node": "server2",
+        "interface": "net0",
+        "mac": "aa:c1:ab:c0:78:aa",
+        "peer": "a"
+      }
+    }
+  ]
+}
