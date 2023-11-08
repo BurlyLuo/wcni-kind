@@ -1,12 +1,16 @@
+# server1 上使用telnet测试：
 clab-tcp-retransmission-server1:
 telnet 10.1.8.10 12345
 
+# down掉gw1的eth2 接口，此时再发数据，push ack就会传送失败。
 lo clab-tcp-retransmission-gw1 ip l s eth2 down
 lo clab-tcp-retransmission-gw1 tcpdump -pne -i eth1 -w tcp-retransmission-gw1-eth1.cap
 
+# server2上使用nc来模拟：
 clab-tcp-retransmission-server2
 nc -l 12345
 
+[当然这里也可以直接使用：iptables 来过滤到syn等消息来模拟不同的消息类型的重传，这里是push ack的重传。]
 
 [root@server1 ~]# netstat -anp | grep 12345
 Active Internet connections (servers and established)
