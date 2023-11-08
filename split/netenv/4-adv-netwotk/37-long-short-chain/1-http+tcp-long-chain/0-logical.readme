@@ -54,3 +54,57 @@ Hypertext Transfer Protocol
     [Request URI: http://10.1.8.10/]
     File Data: 46 bytes
 
+
+# ! 但是后边我们发现server2上还是会断开，这是为啥呢？
+我们找了一下nginx的配置文件：
+[root@server2 /]# cat /etc/nginx/nginx.conf 
+
+user  nginx;
+worker_processes  1;
+
+error_log  /var/log/nginx/error.log warn;
+pid        /var/run/nginx.pid;
+
+
+events {
+    worker_connections  1024;
+}
+
+
+http {
+    include       /etc/nginx/mime.types;
+    default_type  application/octet-stream;
+
+    log_format  main  '$remote_addr - $remote_user [$time_local] "$request" '
+                      '$status $body_bytes_sent "$http_referer" '
+                      '"$http_user_agent" "$http_x_forwarded_for"';
+
+    access_log  /var/log/nginx/access.log  main;
+
+    sendfile        on;
+    #tcp_nopush     on;
+
+    keepalive_timeout  65; # 这里的配置文件中timer是：65s。
+
+    #gzip  on;
+
+    include /etc/nginx/conf.d/*.conf;
+}
+[root@server2 /]# 
+
+# 我们是从20开始的：20+65=85s.
+Wed Nov  8 01:29:20 UTC 2023
+tcp        0      0 0.0.0.0:80              0.0.0.0:*               LISTEN      14/nginx: master pr 
+tcp        0      0 10.1.8.10:80            10.1.5.10:47184         ESTABLISHED 15/nginx: worker pr 
+unix  3      [ ]         STREAM     CONNECTED     990480   14/nginx: master pr  
+# 断开是：30:25[85s].此时发的消息：
+1	0.000000	10.1.8.10	10.1.5.10	TCP	66	80 → 48856 [FIN, ACK] Seq=1 Ack=1 Win=443 Len=0 TSval=3993853319 TSecr=4263575263
+2	0.000053	10.1.5.10	10.1.8.10	TCP	66	48856 → 80 [ACK] Seq=2 Ack=2 Win=443 Len=0 TSval=4263640329 TSecr=3993853319
+Wed Nov  8 01:30:25 UTC 2023
+tcp        0      0 0.0.0.0:80              0.0.0.0:*               LISTEN      14/nginx: master pr 
+tcp        0      0 10.1.8.10:80            10.1.5.10:47184         ESTABLISHED 15/nginx: worker pr 
+unix  3      [ ]         STREAM     CONNECTED     990480   14/nginx: master pr  
+Wed Nov  8 01:30:26 UTC 2023
+tcp        0      0 0.0.0.0:80              0.0.0.0:*               LISTEN      14/nginx: master pr 
+tcp        0      0 10.1.8.10:80            10.1.5.10:47184         FIN_WAIT2   -                   
+unix  3      [ ]         STREAM     CONNECTED     990480   14/nginx: master pr  
