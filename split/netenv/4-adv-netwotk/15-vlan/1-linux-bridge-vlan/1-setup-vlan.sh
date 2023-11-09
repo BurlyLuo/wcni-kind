@@ -62,9 +62,9 @@ topology:
 
 
   links:
-    - endpoints: ["vlan1:net1", "br-vlan:eth1"]
-    - endpoints: ["vlan2:net1", "br-vlan:eth2"]
-    - endpoints: ["vlan3:net1", "br-vlan:eth3"]
+    - endpoints: ["vlan1:net1", "br-vlan:eth2"]
+    - endpoints: ["vlan2:net1", "br-vlan:eth3"]
+    - endpoints: ["vlan3:net1", "br-vlan:eth4"]
     - endpoints: ["br-vlan:net0", "gwx:eth1"]
 
 EOF
