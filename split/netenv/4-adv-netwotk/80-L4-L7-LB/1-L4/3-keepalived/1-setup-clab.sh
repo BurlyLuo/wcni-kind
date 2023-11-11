@@ -4,8 +4,14 @@ set -v
 { ip l s brl4 down && brctl delbr brl4; } > /dev/null 2>&1
 brctl addbr brl4;ip l s brl4 up
 
+{ ip l s brl4l7 down && brctl delbr brl4l7; } > /dev/null 2>&1
+brctl addbr brl4l7;ip l s brl4l7 up
+
+{ ip l s brl7 down && brctl delbr brl7; } > /dev/null 2>&1
+brctl addbr brl7;ip l s brl7 up
+
 cat <<EOF>clab.yaml | clab deploy -t clab.yaml -
-name: l4lb
+name: l4l7lb
 mgmt:
   ipv6-subnet: ""
   ipv4-subnet: 172.20.20.0/24
@@ -16,6 +22,9 @@ topology:
       kind: bridge
 
     brl4l7:
+      kind: bridge
+
+    brl7:
       kind: bridge
 
     keepalived1:
@@ -43,7 +52,7 @@ topology:
       image: 192.168.2.100:5000/haproxy:1.5.18
       cmd: sleep infinity
       exec:
-      - ip a a 10.1.5.200/24 dev net1
+      - ip a a 10.1.5.199/24 dev net1
       - haproxy -f /etc/haproxy/haproxy.cfg
       binds:
         - ./haproxy/haproxy1/haproxy.cfg:/etc/haproxy/haproxy.cfg
