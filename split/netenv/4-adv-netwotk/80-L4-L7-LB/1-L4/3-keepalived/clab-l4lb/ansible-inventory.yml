@@ -1,0 +1,16 @@
+all:
+  children:
+    bridge:
+      hosts:
+        clab-l4lb-brl4:
+          ansible_host: 
+    linux:
+      hosts:
+        clab-l4lb-keepalived1:
+          ansible_host: 172.20.20.4
+        clab-l4lb-keepalived2:
+          ansible_host: 172.20.20.3
+        clab-l4lb-server1:
+          ansible_host: 172.20.20.2
+        clab-l4lb-server2:
+          ansible_host: 172.20.20.5
