@@ -28,6 +28,7 @@ topology:
       binds:
         - ./keepalived/keepalived2/keepalived.conf:/etc/keepalived/keepalived.conf
 
+
     server1:
       kind: linux
       image: 192.168.2.100:5000/xcni

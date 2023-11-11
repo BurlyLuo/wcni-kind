@@ -6,7 +6,7 @@
       "prefix": "clab",
       "mgmt": {
         "network": "clab",
-        "bridge": "br-7eeedf5d993f",
+        "bridge": "br-4a5fd68a733d",
         "ipv4-subnet": "172.20.20.0/24",
         "ipv4-gw": "172.20.20.1",
         "mtu": "1500",
@@ -32,7 +32,7 @@
       "mgmt-ipv6-prefix-length": 0,
       "mac-address": "",
       "labels": {
-        "clab-mgmt-net-bridge": "br-7eeedf5d993f",
+        "clab-mgmt-net-bridge": "br-4a5fd68a733d",
         "clab-node-group": "",
         "clab-node-kind": "bridge",
         "clab-node-lab-dir": "/root/wcni-kind/split/netenv/4-adv-netwotk/80-L4-L7-LB/1-L4/3-keepalived/clab-l4lb/brl4",
@@ -53,13 +53,13 @@
       "image": "192.168.2.100:5000/keepalived:2.0.8",
       "mgmt-net": "",
       "mgmt-intf": "",
-      "mgmt-ipv4-address": "172.20.20.4",
+      "mgmt-ipv4-address": "172.20.20.3",
       "mgmt-ipv4-prefix-length": 24,
       "mgmt-ipv6-address": "",
       "mgmt-ipv6-prefix-length": 0,
       "mac-address": "",
       "labels": {
-        "clab-mgmt-net-bridge": "br-7eeedf5d993f",
+        "clab-mgmt-net-bridge": "br-4a5fd68a733d",
         "clab-node-group": "",
         "clab-node-kind": "linux",
         "clab-node-lab-dir": "/root/wcni-kind/split/netenv/4-adv-netwotk/80-L4-L7-LB/1-L4/3-keepalived/clab-l4lb/keepalived1",
@@ -80,13 +80,13 @@
       "image": "192.168.2.100:5000/keepalived:2.0.8",
       "mgmt-net": "",
       "mgmt-intf": "",
-      "mgmt-ipv4-address": "172.20.20.3",
+      "mgmt-ipv4-address": "172.20.20.4",
       "mgmt-ipv4-prefix-length": 24,
       "mgmt-ipv6-address": "",
       "mgmt-ipv6-prefix-length": 0,
       "mac-address": "",
       "labels": {
-        "clab-mgmt-net-bridge": "br-7eeedf5d993f",
+        "clab-mgmt-net-bridge": "br-4a5fd68a733d",
         "clab-node-group": "",
         "clab-node-kind": "linux",
         "clab-node-lab-dir": "/root/wcni-kind/split/netenv/4-adv-netwotk/80-L4-L7-LB/1-L4/3-keepalived/clab-l4lb/keepalived2",
@@ -113,7 +113,7 @@
       "mgmt-ipv6-prefix-length": 0,
       "mac-address": "",
       "labels": {
-        "clab-mgmt-net-bridge": "br-7eeedf5d993f",
+        "clab-mgmt-net-bridge": "br-4a5fd68a733d",
         "clab-node-group": "",
         "clab-node-kind": "linux",
         "clab-node-lab-dir": "/root/wcni-kind/split/netenv/4-adv-netwotk/80-L4-L7-LB/1-L4/3-keepalived/clab-l4lb/server1",
@@ -140,7 +140,7 @@
       "mgmt-ipv6-prefix-length": 0,
       "mac-address": "",
       "labels": {
-        "clab-mgmt-net-bridge": "br-7eeedf5d993f",
+        "clab-mgmt-net-bridge": "br-4a5fd68a733d",
         "clab-node-group": "",
         "clab-node-kind": "linux",
         "clab-node-lab-dir": "/root/wcni-kind/split/netenv/4-adv-netwotk/80-L4-L7-LB/1-L4/3-keepalived/clab-l4lb/server2",
@@ -156,13 +156,13 @@
       "a": {
         "node": "server1",
         "interface": "net0",
-        "mac": "aa:c1:ab:f8:ec:10",
+        "mac": "aa:c1:ab:fe:d5:59",
         "peer": "z"
       },
       "z": {
         "node": "brl4",
         "interface": "net1",
-        "mac": "aa:c1:ab:b4:78:eb",
+        "mac": "aa:c1:ab:76:da:40",
         "peer": "a"
       }
     },
@@ -170,13 +170,13 @@
       "a": {
         "node": "server2",
         "interface": "net0",
-        "mac": "aa:c1:ab:1b:07:7c",
+        "mac": "aa:c1:ab:f3:b5:92",
         "peer": "z"
       },
       "z": {
         "node": "brl4",
         "interface": "net2",
-        "mac": "aa:c1:ab:2d:88:57",
+        "mac": "aa:c1:ab:90:8c:29",
         "peer": "a"
       }
     },
@@ -184,13 +184,13 @@
       "a": {
         "node": "keepalived1",
         "interface": "net1",
-        "mac": "aa:c1:ab:80:34:b0",
+        "mac": "aa:c1:ab:2a:e8:ba",
         "peer": "z"
       },
       "z": {
         "node": "brl4",
         "interface": "net3",
-        "mac": "aa:c1:ab:61:8d:7d",
+        "mac": "aa:c1:ab:90:05:96",
         "peer": "a"
       }
     },
@@ -198,13 +198,13 @@
       "a": {
         "node": "keepalived2",
         "interface": "net1",
-        "mac": "aa:c1:ab:48:30:2f",
+        "mac": "aa:c1:ab:35:7e:c3",
         "peer": "z"
       },
       "z": {
         "node": "brl4",
         "interface": "net4",
-        "mac": "aa:c1:ab:fb:a0:6e",
+        "mac": "aa:c1:ab:69:30:eb",
         "peer": "a"
       }
     }

@@ -15,6 +15,9 @@ topology:
     brl4:
       kind: bridge
 
+    brl4l7:
+      kind: bridge
+
     keepalived1:
       kind: linux
       image: 192.168.2.100:5000/keepalived:2.0.8
@@ -34,6 +37,27 @@ topology:
       - keepalived -D  -f /etc/keepalived/keepalived.conf
       binds:
         - ./keepalived/keepalived2/keepalived.conf:/etc/keepalived/keepalived.conf
+
+    haproxy1:
+      kind: linux
+      image: 192.168.2.100:5000/haproxy:1.5.18
+      cmd: sleep infinity
+      exec:
+      - ip a a 10.1.5.200/24 dev net1
+      - haproxy -f /etc/haproxy/haproxy.cfg
+      binds:
+        - ./haproxy/haproxy1/haproxy.cfg:/etc/haproxy/haproxy.cfg
+
+    haproxy2:
+      kind: linux
+      image: 192.168.2.100:5000/haproxy:1.5.18
+      cmd: sleep infinity
+      exec:
+      - ip a a 10.1.5.201/24 dev net1
+      - haproxy -f /etc/haproxy/haproxy.cfg
+      binds:
+        - ./haproxy/haproxy2/haproxy.cfg:/etc/haproxy/haproxy.cfg
+
 
     server1:
       kind: linux
