@@ -1,6 +1,13 @@
 #!/bin/bash
 set -v
 
+# topo:
+#          ---10.1.5.99/24-------------10.1.5.199
+#          |                         /
+# client---| keepalived 10.1.5.100/24                 nginx
+#          |                         \
+#          ---10.1.5.98/24-------------10.1.5.198
+
 { ip l s brl4 down && brctl delbr brl4; } > /dev/null 2>&1
 brctl addbr brl4;ip l s brl4 up
 
