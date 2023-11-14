@@ -34,7 +34,7 @@ topology:
 
     nginx1:
       kind: linux
-      image: nginx:1.7.9
+      image: 192.168.2.100:5000/nginx:1.7.9
       exec:
       - ip addr add 10.1.5.80/24 dev net0
       - ip route replace default via 10.1.5.1
@@ -43,7 +43,7 @@ topology:
 
     nginx2:
       kind: linux
-      image: nginx:1.7.9
+      image: 192.168.2.100:5000/nginx:1.7.9
       exec:
       - ip addr add 10.1.5.90/24 dev net0
       - ip route replace default via 10.1.5.1
@@ -70,7 +70,7 @@ topology:
       exec:
       - ip addr add 10.1.5.5/24 dev net0
       - ip route replace default via 10.1.5.1
-
+      - sh -c 'echo "10.1.5.100 www.wluo.com" >> /etc/hosts'
 
   links:
     - endpoints: ["nginx1:net0", "brl4l7:net1"]
