@@ -1,0 +1,54 @@
+#!/bin/bash
+
+# This scripts expects the following variables to be set:
+# CLUSTER_NUMBER        -> the number of liqo clusters
+# K8S_VERSION           -> the Kubernetes version
+# CNI                   -> the CNI plugin used
+# TMPDIR                -> the directory where the test-related files are stored
+# BINDIR                -> the directory where the test-related binaries are stored
+# TEMPLATE_DIR          -> the directory where to read the cluster templates
+# NAMESPACE             -> the namespace where liqo is running
+# KUBECONFIGDIR         -> the directory where the kubeconfigs are stored
+# LIQO_VERSION          -> the liqo version to test
+# INFRA                 -> the Kubernetes provider for the infrastructure
+# LIQOCTL               -> the path where liqoctl is stored
+# POD_CIDR_OVERLAPPING  -> the pod CIDR of the clusters is overlapping
+# CLUSTER_TEMPLATE_FILE -> the file where the cluster template is stored
+
+set -e           # Fail in case of error
+set -o nounset   # Fail if undefined variables are used
+set -o pipefail  # Fail if one of the piped commands fails
+
+error() {
+   local sourcefile=$1
+   local lineno=$2
+   echo "An error occurred at $sourcefile:$lineno."
+}
+trap 'error "${BASH_SOURCE}" "${LINENO}"' ERR
+
+CLUSTER_NAME=cluster
+
+export SERVICE_CIDR=10.100.0.0/16
+export POD_CIDR=10.200.0.0/16
+export POD_CIDR_OVERLAPPING=${POD_CIDR_OVERLAPPING:-"false"}
+
+for i in $(seq 1 "${CLUSTER_NUMBER}");
+do
+	if [[ ${POD_CIDR_OVERLAPPING} != "true" ]]; then
+		# this should avoid the ipam to reserve a pod CIDR of another cluster as local external CIDR causing remapping
+		export POD_CIDR="10.$((i * 10)).0.0/16"
+	fi
+	echo "Creating cluster ${CLUSTER_NAME}${i}"
+  ${K3D} cluster create "${CLUSTER_NAME}${i}" \
+    --k3s-arg "--cluster-cidr=${POD_CIDR}@server:*" \
+    --k3s-arg "--service-cidr=${SERVICE_CIDR}@server:*" \
+    --no-lb \
+    --network k3d \
+    --verbose
+  ${K3D} node create "${CLUSTER_NAME}${i}-agent" \
+    --cluster "${CLUSTER_NAME}${i}" \
+    --role agent \
+    --verbose
+  ${K3D} kubeconfig write "${CLUSTER_NAME}${i}" \
+    --output "${TMPDIR}/kubeconfigs/liqo_kubeconf_${i}"
+done
