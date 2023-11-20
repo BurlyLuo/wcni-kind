@@ -5,5 +5,8 @@
 
 +0 < S 0:0(0) win 100
 +0 > S. 0:0(0) ack 1 <...>
++0 `netstat -anp |grep 8080`
 +0 < . 1:1(0) ack 1 win 100
++0 `netstat -anp |grep 8080`
 +0 accept(3, ..., ...) = 4
++0 `netstat -anp |grep 8080`
