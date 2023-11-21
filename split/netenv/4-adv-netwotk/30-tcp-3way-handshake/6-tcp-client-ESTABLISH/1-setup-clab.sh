@@ -1,4 +1,7 @@
-name: tcp-port-num-resued
+#!/bin/bash
+set -v
+cat <<EOF>clab.yaml | clab deploy -t clab.yaml -
+name: tcp-client-establish
 mgmt:
   ipv6-subnet: ""
   ipv4-subnet: 172.20.20.0/24
@@ -11,7 +14,7 @@ topology:
       exec:
       - ip a a 10.1.5.1/24 dev eth1
       - ip a a 10.1.8.1/24 dev eth2
-      - iptables -A FORWARD -s 10.1.8.10 -d 10.1.5.10 -p tcp --tcp-flags SYN,ACK SYN,ACK -j DROP
+      - iptables -A FORWARD -s 10.1.5.10 -d 10.1.8.10 -p tcp --tcp-flags ALL ACK -j DROP
 
     server1:
       kind: linux
@@ -31,3 +34,9 @@ topology:
     - endpoints: ["gw1:eth1", "server1:net0"]
     - endpoints: ["gw1:eth2", "server2:net0"]
 
+EOF
+
+# cmd:
+
+# [root@server1 /]# curl 10.1.8.10 
+# ...  waiting...

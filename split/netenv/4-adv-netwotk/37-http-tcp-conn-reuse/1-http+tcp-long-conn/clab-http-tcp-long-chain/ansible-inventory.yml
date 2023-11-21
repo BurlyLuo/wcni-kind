@@ -5,6 +5,6 @@ all:
         clab-http-tcp-long-chain-gw1:
           ansible_host: 172.20.20.4
         clab-http-tcp-long-chain-server1:
-          ansible_host: 172.20.20.3
+          ansible_host: 172.20.20.5
         clab-http-tcp-long-chain-server2:
-          ansible_host: 172.20.20.2
+          ansible_host: 172.20.20.3

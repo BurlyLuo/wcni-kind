@@ -1,5 +1,5 @@
 {
-  "name": "tcp-port-num-resued",
+  "name": "tcp-syn-sent",
   "type": "clab",
   "clab": {
     "config": {
@@ -9,6 +9,7 @@
         "bridge": "br-c192f2637868",
         "ipv4-subnet": "172.20.20.0/24",
         "ipv4-gw": "172.20.20.1",
+        "ipv6-gw": "fe80::42:a6ff:fe0a:93a",
         "mtu": "1500",
         "external-access": true
       }
@@ -18,15 +19,15 @@
     "gw1": {
       "index": "0",
       "shortname": "gw1",
-      "longname": "clab-tcp-port-num-resued-gw1",
-      "fqdn": "gw1.tcp-port-num-resued.io",
+      "longname": "clab-tcp-syn-sent-gw1",
+      "fqdn": "gw1.tcp-syn-sent.io",
       "group": "",
-      "labdir": "/root/wcni-kind/split/netenv/4-adv-netwotk/35-tcp-port-number-reused/1-drop-syn+ack-case/clab-tcp-port-num-resued/gw1",
+      "labdir": "/root/wcni-kind/split/netenv/4-adv-netwotk/30-tcp-3way-handshake/4-tcp-SYN_SENT/clab-tcp-syn-sent/gw1",
       "kind": "linux",
       "image": "192.168.2.100:5000/xcni",
       "mgmt-net": "",
       "mgmt-intf": "",
-      "mgmt-ipv4-address": "172.20.20.3",
+      "mgmt-ipv4-address": "172.20.20.5",
       "mgmt-ipv4-prefix-length": 24,
       "mgmt-ipv6-address": "",
       "mgmt-ipv6-prefix-length": 0,
@@ -35,25 +36,25 @@
         "clab-mgmt-net-bridge": "br-c192f2637868",
         "clab-node-group": "",
         "clab-node-kind": "linux",
-        "clab-node-lab-dir": "/root/wcni-kind/split/netenv/4-adv-netwotk/35-tcp-port-number-reused/1-drop-syn+ack-case/clab-tcp-port-num-resued/gw1",
+        "clab-node-lab-dir": "/root/wcni-kind/split/netenv/4-adv-netwotk/30-tcp-3way-handshake/4-tcp-SYN_SENT/clab-tcp-syn-sent/gw1",
         "clab-node-name": "gw1",
         "clab-node-type": "",
-        "clab-topo-file": "/root/wcni-kind/split/netenv/4-adv-netwotk/35-tcp-port-number-reused/1-drop-syn+ack-case/clab.yaml",
-        "containerlab": "tcp-port-num-resued"
+        "clab-topo-file": "/root/wcni-kind/split/netenv/4-adv-netwotk/30-tcp-3way-handshake/4-tcp-SYN_SENT/clab.yaml",
+        "containerlab": "tcp-syn-sent"
       }
     },
     "server1": {
       "index": "1",
       "shortname": "server1",
-      "longname": "clab-tcp-port-num-resued-server1",
-      "fqdn": "server1.tcp-port-num-resued.io",
+      "longname": "clab-tcp-syn-sent-server1",
+      "fqdn": "server1.tcp-syn-sent.io",
       "group": "",
-      "labdir": "/root/wcni-kind/split/netenv/4-adv-netwotk/35-tcp-port-number-reused/1-drop-syn+ack-case/clab-tcp-port-num-resued/server1",
+      "labdir": "/root/wcni-kind/split/netenv/4-adv-netwotk/30-tcp-3way-handshake/4-tcp-SYN_SENT/clab-tcp-syn-sent/server1",
       "kind": "linux",
       "image": "192.168.2.100:5000/xcni",
       "mgmt-net": "",
       "mgmt-intf": "",
-      "mgmt-ipv4-address": "172.20.20.2",
+      "mgmt-ipv4-address": "172.20.20.6",
       "mgmt-ipv4-prefix-length": 24,
       "mgmt-ipv6-address": "",
       "mgmt-ipv6-prefix-length": 0,
@@ -62,25 +63,25 @@
         "clab-mgmt-net-bridge": "br-c192f2637868",
         "clab-node-group": "",
         "clab-node-kind": "linux",
-        "clab-node-lab-dir": "/root/wcni-kind/split/netenv/4-adv-netwotk/35-tcp-port-number-reused/1-drop-syn+ack-case/clab-tcp-port-num-resued/server1",
+        "clab-node-lab-dir": "/root/wcni-kind/split/netenv/4-adv-netwotk/30-tcp-3way-handshake/4-tcp-SYN_SENT/clab-tcp-syn-sent/server1",
         "clab-node-name": "server1",
         "clab-node-type": "",
-        "clab-topo-file": "/root/wcni-kind/split/netenv/4-adv-netwotk/35-tcp-port-number-reused/1-drop-syn+ack-case/clab.yaml",
-        "containerlab": "tcp-port-num-resued"
+        "clab-topo-file": "/root/wcni-kind/split/netenv/4-adv-netwotk/30-tcp-3way-handshake/4-tcp-SYN_SENT/clab.yaml",
+        "containerlab": "tcp-syn-sent"
       }
     },
     "server2": {
       "index": "2",
       "shortname": "server2",
-      "longname": "clab-tcp-port-num-resued-server2",
-      "fqdn": "server2.tcp-port-num-resued.io",
+      "longname": "clab-tcp-syn-sent-server2",
+      "fqdn": "server2.tcp-syn-sent.io",
       "group": "",
-      "labdir": "/root/wcni-kind/split/netenv/4-adv-netwotk/35-tcp-port-number-reused/1-drop-syn+ack-case/clab-tcp-port-num-resued/server2",
+      "labdir": "/root/wcni-kind/split/netenv/4-adv-netwotk/30-tcp-3way-handshake/4-tcp-SYN_SENT/clab-tcp-syn-sent/server2",
       "kind": "linux",
       "image": "192.168.2.100:5000/xcni",
       "mgmt-net": "",
       "mgmt-intf": "",
-      "mgmt-ipv4-address": "172.20.20.4",
+      "mgmt-ipv4-address": "172.20.20.7",
       "mgmt-ipv4-prefix-length": 24,
       "mgmt-ipv6-address": "",
       "mgmt-ipv6-prefix-length": 0,
@@ -89,11 +90,11 @@
         "clab-mgmt-net-bridge": "br-c192f2637868",
         "clab-node-group": "",
         "clab-node-kind": "linux",
-        "clab-node-lab-dir": "/root/wcni-kind/split/netenv/4-adv-netwotk/35-tcp-port-number-reused/1-drop-syn+ack-case/clab-tcp-port-num-resued/server2",
+        "clab-node-lab-dir": "/root/wcni-kind/split/netenv/4-adv-netwotk/30-tcp-3way-handshake/4-tcp-SYN_SENT/clab-tcp-syn-sent/server2",
         "clab-node-name": "server2",
         "clab-node-type": "",
-        "clab-topo-file": "/root/wcni-kind/split/netenv/4-adv-netwotk/35-tcp-port-number-reused/1-drop-syn+ack-case/clab.yaml",
-        "containerlab": "tcp-port-num-resued"
+        "clab-topo-file": "/root/wcni-kind/split/netenv/4-adv-netwotk/30-tcp-3way-handshake/4-tcp-SYN_SENT/clab.yaml",
+        "containerlab": "tcp-syn-sent"
       }
     }
   },
@@ -102,13 +103,13 @@
       "a": {
         "node": "gw1",
         "interface": "eth1",
-        "mac": "aa:c1:ab:f5:46:d1",
+        "mac": "aa:c1:ab:e7:57:23",
         "peer": "z"
       },
       "z": {
         "node": "server1",
         "interface": "net0",
-        "mac": "aa:c1:ab:37:e5:88",
+        "mac": "aa:c1:ab:b1:d0:3e",
         "peer": "a"
       }
     },
@@ -116,13 +117,13 @@
       "a": {
         "node": "gw1",
         "interface": "eth2",
-        "mac": "aa:c1:ab:01:fc:2d",
+        "mac": "aa:c1:ab:2d:9f:7b",
         "peer": "z"
       },
       "z": {
         "node": "server2",
         "interface": "net0",
-        "mac": "aa:c1:ab:84:4a:23",
+        "mac": "aa:c1:ab:16:49:f3",
         "peer": "a"
       }
     }

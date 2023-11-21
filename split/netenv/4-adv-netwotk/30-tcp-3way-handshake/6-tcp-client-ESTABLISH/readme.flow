@@ -1,0 +1,5 @@
+为了弄清楚tcp的三次握手中，对于client端，当它发完SYN和收到SYN+ACK以后，此时client是否是直接进入ESTABLISH状态。
+我们做了一个小的实验：当client收到SYNA+ACK的以后，我们在client-gw-server这样的拓扑中在gw上用iptables来把这个client到server的ACK给丢弃。
+iptables -A FORWARD -s 10.1.5.10 -d 10.1.8.10 -p tcp --tcp-flags ALL ACK -j DROP
+那么我们的server就收不到最后一个ACK，这样server就无法进入ESTABLISH的状态。
+但是我们在部分的测试中发现: 
