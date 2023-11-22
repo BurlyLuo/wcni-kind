@@ -1,7 +1,7 @@
 #!/bin/bash
 set -v
 cat <<EOF>clab.yaml | clab deploy -t clab.yaml -
-name: tcp-syn-sent
+name: tcp-syn-recv
 mgmt:
   ipv6-subnet: ""
   ipv4-subnet: 172.20.20.0/24
@@ -43,11 +43,12 @@ EOF
 # [root@server1 /]# curl 10.1.8.10 
 # ...  waiting...
 
-# 3. monitor the netstat outputs[server1]
+# 3. monitor the netstat outputs[server2]
 # while true;do netstat -apn | grep SYN;done
-# tcp        0      1 10.1.5.10:37580         10.1.8.10:80            SYN_SENT    79888/curl          
-# tcp        0      1 10.1.5.10:37580         10.1.8.10:80            SYN_SENT    79888/curl          
-# tcp        0      1 10.1.5.10:37580         10.1.8.10:80            SYN_SENT    79888/curl          
-# tcp        0      1 10.1.5.10:37580         10.1.8.10:80            SYN_SENT    79888/curl          
-# tcp        0      1 10.1.5.10:37580         10.1.8.10:80            SYN_SENT    79888/curl
+# tcp        0      0 10.1.8.10:80            10.1.5.10:37552         SYN_RECV    -                   
+# tcp        0      0 10.1.8.10:80            10.1.5.10:37552         SYN_RECV    -                   
+# tcp        0      0 10.1.8.10:80            10.1.5.10:37552         SYN_RECV    -                   
+# tcp        0      0 10.1.8.10:80            10.1.5.10:37552         SYN_RECV    -                   
+# tcp        0      0 10.1.8.10:80            10.1.5.10:37552         SYN_RECV    -                   
+# tcp        0      0 10.1.8.10:80            10.1.5.10:37552         SYN_RECV    -   
 
