@@ -14,7 +14,7 @@ topology:
       exec:
       - ip a a 10.1.5.1/24 dev eth1
       - ip a a 10.1.8.1/24 dev eth2
-      - iptables -A FORWARD -s 10.1.5.10 -d 10.1.8.10 -p tcp --tcp-flags ALL ACK -j DROP
+      - iptables -A FORWARD -s 10.1.5.10 -d 10.1.8.10 -p tcp --tcp-flags ACK ACK -j DROP
 
     server1:
       kind: linux
@@ -36,7 +36,26 @@ topology:
 
 EOF
 
-# cmd:
+# 1.cmd:
+# iptables -A FORWARD -s 10.1.5.10 -d 10.1.8.10 -p tcp --tcp-flags ACK ACK -j DROP
 
+# 2.test
 # [root@server1 /]# curl 10.1.8.10 
 # ...  waiting...
+
+# 3. monitor netstat outputs[server1]
+# tcp        0     73 10.1.5.10:60142         10.1.8.10:80            ESTABLISHED 17400/curl          
+# tcp        0     73 10.1.5.10:60142         10.1.8.10:80            ESTABLISHED 17400/curl          
+# tcp        0     73 10.1.5.10:60142         10.1.8.10:80            ESTABLISHED 17400/curl          
+# tcp        0     73 10.1.5.10:60142         10.1.8.10:80            ESTABLISHED 17400/curl          
+# tcp        0     73 10.1.5.10:60142         10.1.8.10:80            ESTABLISHED 17400/curl          
+# tcp        0     73 10.1.5.10:60142         10.1.8.10:80            ESTABLISHED 17400/curl          
+
+# 3.1 monitor netstat outputs[server2]{not come into ESTABLISH status}
+# tcp        0      0 10.1.8.10:80            10.1.5.10:53248         SYN_RECV    -                   
+# tcp        0      0 10.1.8.10:80            10.1.5.10:53248         SYN_RECV    -                   
+# tcp        0      0 10.1.8.10:80            10.1.5.10:53248         SYN_RECV    -                   
+# tcp        0      0 10.1.8.10:80            10.1.5.10:53248         SYN_RECV    -                   
+# tcp        0      0 10.1.8.10:80            10.1.5.10:53248         SYN_RECV    -                   
+# tcp        0      0 10.1.8.10:80            10.1.5.10:53248         SYN_RECV    -  
+
