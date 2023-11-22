@@ -14,7 +14,7 @@ topology:
       exec:
       - ip a a 10.1.5.1/24 dev eth1
       - ip a a 10.1.8.1/24 dev eth2
-      - iptables -A FORWARD -s 10.1.5.10 -d 10.1.8.10 -p tcp --tcp-flags ALL ACK -j DROP
+      - iptables -A FORWARD -s 10.1.5.10 -d 10.1.8.10 -p tcp --tcp-flags SYN,ACK SYN,ACK -j DROP
 
     server1:
       kind: linux
@@ -36,9 +36,18 @@ topology:
 
 EOF
 
-# cmd:
-
+# 1. cmd:
 # iptables -A FORWARD -s 10.1.8.10 -d 10.1.5.10 -p tcp --tcp-flags SYN,ACK SYN,ACK -j DROP
 
+# 2. curl the dst ip:port
 # [root@server1 /]# curl 10.1.8.10 
 # ...  waiting...
+
+# 3. monitor the netstat outputs
+# while true;do netstat -apn | grep SYN;done
+# tcp        0      1 10.1.5.10:37580         10.1.8.10:80            SYN_SENT    79888/curl          
+# tcp        0      1 10.1.5.10:37580         10.1.8.10:80            SYN_SENT    79888/curl          
+# tcp        0      1 10.1.5.10:37580         10.1.8.10:80            SYN_SENT    79888/curl          
+# tcp        0      1 10.1.5.10:37580         10.1.8.10:80            SYN_SENT    79888/curl          
+# tcp        0      1 10.1.5.10:37580         10.1.8.10:80            SYN_SENT    79888/curl
+

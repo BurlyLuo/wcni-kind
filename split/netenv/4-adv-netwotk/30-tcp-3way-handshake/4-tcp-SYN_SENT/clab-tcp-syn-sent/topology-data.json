@@ -6,10 +6,9 @@
       "prefix": "clab",
       "mgmt": {
         "network": "clab",
-        "bridge": "br-c192f2637868",
+        "bridge": "br-8287fa278233",
         "ipv4-subnet": "172.20.20.0/24",
         "ipv4-gw": "172.20.20.1",
-        "ipv6-gw": "fe80::42:a6ff:fe0a:93a",
         "mtu": "1500",
         "external-access": true
       }
@@ -27,13 +26,13 @@
       "image": "192.168.2.100:5000/xcni",
       "mgmt-net": "",
       "mgmt-intf": "",
-      "mgmt-ipv4-address": "172.20.20.5",
+      "mgmt-ipv4-address": "172.20.20.4",
       "mgmt-ipv4-prefix-length": 24,
       "mgmt-ipv6-address": "",
       "mgmt-ipv6-prefix-length": 0,
       "mac-address": "",
       "labels": {
-        "clab-mgmt-net-bridge": "br-c192f2637868",
+        "clab-mgmt-net-bridge": "br-8287fa278233",
         "clab-node-group": "",
         "clab-node-kind": "linux",
         "clab-node-lab-dir": "/root/wcni-kind/split/netenv/4-adv-netwotk/30-tcp-3way-handshake/4-tcp-SYN_SENT/clab-tcp-syn-sent/gw1",
@@ -54,13 +53,13 @@
       "image": "192.168.2.100:5000/xcni",
       "mgmt-net": "",
       "mgmt-intf": "",
-      "mgmt-ipv4-address": "172.20.20.6",
+      "mgmt-ipv4-address": "172.20.20.2",
       "mgmt-ipv4-prefix-length": 24,
       "mgmt-ipv6-address": "",
       "mgmt-ipv6-prefix-length": 0,
       "mac-address": "",
       "labels": {
-        "clab-mgmt-net-bridge": "br-c192f2637868",
+        "clab-mgmt-net-bridge": "br-8287fa278233",
         "clab-node-group": "",
         "clab-node-kind": "linux",
         "clab-node-lab-dir": "/root/wcni-kind/split/netenv/4-adv-netwotk/30-tcp-3way-handshake/4-tcp-SYN_SENT/clab-tcp-syn-sent/server1",
@@ -81,13 +80,13 @@
       "image": "192.168.2.100:5000/xcni",
       "mgmt-net": "",
       "mgmt-intf": "",
-      "mgmt-ipv4-address": "172.20.20.7",
+      "mgmt-ipv4-address": "172.20.20.3",
       "mgmt-ipv4-prefix-length": 24,
       "mgmt-ipv6-address": "",
       "mgmt-ipv6-prefix-length": 0,
       "mac-address": "",
       "labels": {
-        "clab-mgmt-net-bridge": "br-c192f2637868",
+        "clab-mgmt-net-bridge": "br-8287fa278233",
         "clab-node-group": "",
         "clab-node-kind": "linux",
         "clab-node-lab-dir": "/root/wcni-kind/split/netenv/4-adv-netwotk/30-tcp-3way-handshake/4-tcp-SYN_SENT/clab-tcp-syn-sent/server2",
@@ -103,13 +102,13 @@
       "a": {
         "node": "gw1",
         "interface": "eth1",
-        "mac": "aa:c1:ab:e7:57:23",
+        "mac": "aa:c1:ab:61:35:8e",
         "peer": "z"
       },
       "z": {
         "node": "server1",
         "interface": "net0",
-        "mac": "aa:c1:ab:b1:d0:3e",
+        "mac": "aa:c1:ab:63:f7:4a",
         "peer": "a"
       }
     },
@@ -117,13 +116,13 @@
       "a": {
         "node": "gw1",
         "interface": "eth2",
-        "mac": "aa:c1:ab:2d:9f:7b",
+        "mac": "aa:c1:ab:be:96:cb",
         "peer": "z"
       },
       "z": {
         "node": "server2",
         "interface": "net0",
-        "mac": "aa:c1:ab:16:49:f3",
+        "mac": "aa:c1:ab:9d:1a:82",
         "peer": "a"
       }
     }
