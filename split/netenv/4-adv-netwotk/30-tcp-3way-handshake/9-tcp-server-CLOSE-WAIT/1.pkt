@@ -7,7 +7,9 @@
 // syn 
 +0 < S 0:0(0) win 100
 +0 > S. 0:0(0) ack 1 <...>
++0 `netstat -anp | grep 192.0.2.1`
 +0.1 < . 1:1(0) ack 1 win 100
++0 `netstat -anp | grep 192.0.2.1`
 +0 accept(3, ..., ...) = 4
 
 // server push 15 bytes data
