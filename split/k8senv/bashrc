@@ -82,7 +82,7 @@ alias la='ls -A'
 alias l='ls -CF'
 alias vi="vim"
 
-alias push='function custom_push() { git add . && git commit -m "$1" && git push; }; custom_push'
+alias push='function custom_push() { git add . && git commit -m "${1:-"'"Adjust/Rename the Directory/File"'"}" && git push; }; custom_push'
 
 alias pp=packetdrill
 alias cap1="tcpdump -pne -i any -w previous-packetdrill.cap"
