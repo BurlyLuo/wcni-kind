@@ -8,6 +8,6 @@ topo:
     |          10.1.5.1/24                  |           [eth13]                     |
     -----------------[eth40]:[gw4]:[eth43]--|--[eth43]:[gw3]:[eth23]-----------------
                                  4.4.4.1/24 |  4.4.4.2/24          3.3.3.1/24
-                                            |                         
+                                            |                      -> Advertisement route 10.1.5.0/24 to gw2 need mod next-hop-self rather than with 4.4.4.1   
                  BGP[AS 500]                |         BGP[AS 800]
 			                    |
