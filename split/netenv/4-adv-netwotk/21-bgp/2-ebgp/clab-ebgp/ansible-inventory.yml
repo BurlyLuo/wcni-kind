@@ -1,0 +1,12 @@
+all:
+  children:
+    linux:
+      hosts:
+        clab-ebgp-gw1:
+          ansible_host: 172.20.20.8
+        clab-ebgp-gw2:
+          ansible_host: 172.20.20.10
+        clab-ebgp-server1:
+          ansible_host: 172.20.20.9
+        clab-ebgp-server2:
+          ansible_host: 172.20.20.11
