@@ -3,10 +3,10 @@ all:
     linux:
       hosts:
         clab-ebgp-gw1:
-          ansible_host: 172.20.20.8
+          ansible_host: 172.20.20.3
         clab-ebgp-gw2:
-          ansible_host: 172.20.20.10
+          ansible_host: 172.20.20.2
         clab-ebgp-server1:
-          ansible_host: 172.20.20.9
+          ansible_host: 172.20.20.5
         clab-ebgp-server2:
-          ansible_host: 172.20.20.11
+          ansible_host: 172.20.20.4

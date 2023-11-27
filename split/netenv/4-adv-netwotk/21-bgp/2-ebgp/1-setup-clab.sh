@@ -17,6 +17,8 @@ topology:
       kind: linux
       image: 192.168.2.100:5000/vyos/vyos:1.4.7
       cmd: /sbin/init
+      exec:
+      - sh -c 'tcpdump -pne -i eth12 -w eth12.cap &'
       binds:
         - /lib/modules:/lib/modules
         - ./startup-conf/gw2.cfg:/opt/vyatta/etc/config/config.boot
