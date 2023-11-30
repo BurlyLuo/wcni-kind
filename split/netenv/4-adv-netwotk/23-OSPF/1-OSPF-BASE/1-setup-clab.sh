@@ -11,17 +11,17 @@ topology:
       cmd: /sbin/init
       binds:
         - /lib/modules:/lib/modules
-        - ./startup-conf/gw0.cfg:/opt/vyatta/etc/config/config.boot
+        - ./startup-conf/gw1.cfg:/opt/vyatta/etc/config/config.boot
 
     gw2:
       kind: linux
       image: 192.168.2.100:5000/vyos/vyos:1.4.7
       cmd: /sbin/init
-      #exec:
-      #- sh -c 'tcpdump -pne -i eth2 -w eth2.cap &'
+      exec:
+      - sh -c 'tcpdump -pne -i eth2 -w eth2.cap &'
       binds:
         - /lib/modules:/lib/modules
-        - ./startup-conf/gw1.cfg:/opt/vyatta/etc/config/config.boot
+        - ./startup-conf/gw2.cfg:/opt/vyatta/etc/config/config.boot
 
     server1:
       kind: linux

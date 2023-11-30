@@ -3,9 +3,9 @@ all:
     linux:
       hosts:
         clab-ospf-base-gw1:
-          ansible_host: 172.20.20.2
-        clab-ospf-base-gw2:
           ansible_host: 172.20.20.3
+        clab-ospf-base-gw2:
+          ansible_host: 172.20.20.2
         clab-ospf-base-server1:
           ansible_host: 172.20.20.5
         clab-ospf-base-server2:
