@@ -94,4 +94,6 @@ else
 fi
 done
 
+8. vpp 
+lshw -class network -businfo
 

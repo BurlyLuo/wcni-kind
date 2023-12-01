@@ -6,7 +6,7 @@
       "prefix": "clab",
       "mgmt": {
         "network": "clab",
-        "bridge": "br-cb7154aaa190",
+        "bridge": "br-0fa2936239a5",
         "ipv4-subnet": "172.20.20.0/24",
         "ipv4-gw": "172.20.20.1",
         "mtu": "1500",
@@ -21,7 +21,7 @@
       "longname": "clab-vyos-bridge-br1",
       "fqdn": "br1.vyos-bridge.io",
       "group": "",
-      "labdir": "/root/wcni-kind/split/netenv/4-adv-netwotk/21-L2-NETWORK/1-VLAN/clab-vyos-bridge/br1",
+      "labdir": "/root/wcni-kind/split/netenv/4-adv-netwotk/21-L2-NETWORK/1-VLAN/1-Access-mode/clab-vyos-bridge/br1",
       "kind": "linux",
       "image": "192.168.2.100:5000/vyos/vyos:1.4.7",
       "mgmt-net": "",
@@ -32,13 +32,13 @@
       "mgmt-ipv6-prefix-length": 0,
       "mac-address": "",
       "labels": {
-        "clab-mgmt-net-bridge": "br-cb7154aaa190",
+        "clab-mgmt-net-bridge": "br-0fa2936239a5",
         "clab-node-group": "",
         "clab-node-kind": "linux",
-        "clab-node-lab-dir": "/root/wcni-kind/split/netenv/4-adv-netwotk/21-L2-NETWORK/1-VLAN/clab-vyos-bridge/br1",
+        "clab-node-lab-dir": "/root/wcni-kind/split/netenv/4-adv-netwotk/21-L2-NETWORK/1-VLAN/1-Access-mode/clab-vyos-bridge/br1",
         "clab-node-name": "br1",
         "clab-node-type": "",
-        "clab-topo-file": "/root/wcni-kind/split/netenv/4-adv-netwotk/21-L2-NETWORK/1-VLAN/clab.yaml",
+        "clab-topo-file": "/root/wcni-kind/split/netenv/4-adv-netwotk/21-L2-NETWORK/1-VLAN/1-Access-mode/clab.yaml",
         "containerlab": "vyos-bridge"
       }
     },
@@ -48,34 +48,7 @@
       "longname": "clab-vyos-bridge-server1",
       "fqdn": "server1.vyos-bridge.io",
       "group": "",
-      "labdir": "/root/wcni-kind/split/netenv/4-adv-netwotk/21-L2-NETWORK/1-VLAN/clab-vyos-bridge/server1",
-      "kind": "linux",
-      "image": "192.168.2.100:5000/xcni",
-      "mgmt-net": "",
-      "mgmt-intf": "",
-      "mgmt-ipv4-address": "172.20.20.4",
-      "mgmt-ipv4-prefix-length": 24,
-      "mgmt-ipv6-address": "",
-      "mgmt-ipv6-prefix-length": 0,
-      "mac-address": "",
-      "labels": {
-        "clab-mgmt-net-bridge": "br-cb7154aaa190",
-        "clab-node-group": "",
-        "clab-node-kind": "linux",
-        "clab-node-lab-dir": "/root/wcni-kind/split/netenv/4-adv-netwotk/21-L2-NETWORK/1-VLAN/clab-vyos-bridge/server1",
-        "clab-node-name": "server1",
-        "clab-node-type": "",
-        "clab-topo-file": "/root/wcni-kind/split/netenv/4-adv-netwotk/21-L2-NETWORK/1-VLAN/clab.yaml",
-        "containerlab": "vyos-bridge"
-      }
-    },
-    "server2": {
-      "index": "2",
-      "shortname": "server2",
-      "longname": "clab-vyos-bridge-server2",
-      "fqdn": "server2.vyos-bridge.io",
-      "group": "",
-      "labdir": "/root/wcni-kind/split/netenv/4-adv-netwotk/21-L2-NETWORK/1-VLAN/clab-vyos-bridge/server2",
+      "labdir": "/root/wcni-kind/split/netenv/4-adv-netwotk/21-L2-NETWORK/1-VLAN/1-Access-mode/clab-vyos-bridge/server1",
       "kind": "linux",
       "image": "192.168.2.100:5000/xcni",
       "mgmt-net": "",
@@ -86,13 +59,40 @@
       "mgmt-ipv6-prefix-length": 0,
       "mac-address": "",
       "labels": {
-        "clab-mgmt-net-bridge": "br-cb7154aaa190",
+        "clab-mgmt-net-bridge": "br-0fa2936239a5",
         "clab-node-group": "",
         "clab-node-kind": "linux",
-        "clab-node-lab-dir": "/root/wcni-kind/split/netenv/4-adv-netwotk/21-L2-NETWORK/1-VLAN/clab-vyos-bridge/server2",
+        "clab-node-lab-dir": "/root/wcni-kind/split/netenv/4-adv-netwotk/21-L2-NETWORK/1-VLAN/1-Access-mode/clab-vyos-bridge/server1",
+        "clab-node-name": "server1",
+        "clab-node-type": "",
+        "clab-topo-file": "/root/wcni-kind/split/netenv/4-adv-netwotk/21-L2-NETWORK/1-VLAN/1-Access-mode/clab.yaml",
+        "containerlab": "vyos-bridge"
+      }
+    },
+    "server2": {
+      "index": "2",
+      "shortname": "server2",
+      "longname": "clab-vyos-bridge-server2",
+      "fqdn": "server2.vyos-bridge.io",
+      "group": "",
+      "labdir": "/root/wcni-kind/split/netenv/4-adv-netwotk/21-L2-NETWORK/1-VLAN/1-Access-mode/clab-vyos-bridge/server2",
+      "kind": "linux",
+      "image": "192.168.2.100:5000/xcni",
+      "mgmt-net": "",
+      "mgmt-intf": "",
+      "mgmt-ipv4-address": "172.20.20.4",
+      "mgmt-ipv4-prefix-length": 24,
+      "mgmt-ipv6-address": "",
+      "mgmt-ipv6-prefix-length": 0,
+      "mac-address": "",
+      "labels": {
+        "clab-mgmt-net-bridge": "br-0fa2936239a5",
+        "clab-node-group": "",
+        "clab-node-kind": "linux",
+        "clab-node-lab-dir": "/root/wcni-kind/split/netenv/4-adv-netwotk/21-L2-NETWORK/1-VLAN/1-Access-mode/clab-vyos-bridge/server2",
         "clab-node-name": "server2",
         "clab-node-type": "",
-        "clab-topo-file": "/root/wcni-kind/split/netenv/4-adv-netwotk/21-L2-NETWORK/1-VLAN/clab.yaml",
+        "clab-topo-file": "/root/wcni-kind/split/netenv/4-adv-netwotk/21-L2-NETWORK/1-VLAN/1-Access-mode/clab.yaml",
         "containerlab": "vyos-bridge"
       }
     }
@@ -102,13 +102,13 @@
       "a": {
         "node": "br1",
         "interface": "eth1",
-        "mac": "aa:c1:ab:4e:5c:b4",
+        "mac": "aa:c1:ab:f7:bf:43",
         "peer": "z"
       },
       "z": {
         "node": "server1",
         "interface": "net0",
-        "mac": "aa:c1:ab:95:e5:dc",
+        "mac": "aa:c1:ab:52:1f:59",
         "peer": "a"
       }
     },
@@ -116,13 +116,13 @@
       "a": {
         "node": "br1",
         "interface": "eth2",
-        "mac": "aa:c1:ab:17:8f:2f",
+        "mac": "aa:c1:ab:be:30:76",
         "peer": "z"
       },
       "z": {
         "node": "server2",
         "interface": "net0",
-        "mac": "aa:c1:ab:70:95:03",
+        "mac": "aa:c1:ab:98:8f:a2",
         "peer": "a"
       }
     }
