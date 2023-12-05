@@ -14,8 +14,10 @@ metadata:
 spec:
   containers:
   - name: client
-    image: 192.168.2.100:5000/nettool:9494
+    image: 192.168.2.100:5000/xcni:9494
     imagePullPolicy: Always
+    securityContext:
+      privileged: true
   restartPolicy: Always
   nodeName: ${controller_node}
 
@@ -48,8 +50,10 @@ metadata:
 spec:
   containers:
   - name: server
-    image: 192.168.2.100:5000/nettool:9495
+    image: 192.168.2.100:5000/xcni:9495
     imagePullPolicy: Always
+    securityContext:
+      privileged: true
   restartPolicy: Always
   nodeName: ${worker_node}
 
