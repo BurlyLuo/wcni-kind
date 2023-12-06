@@ -1,7 +1,7 @@
 #!/bin/bash
 set -v 
-controller_node=vmn0
-worker_node=vmn1
+controller_node=vmnc0
+worker_node=vmnc1
 
 # client pod and service
 cat <<EOF | kubectl apply -f -

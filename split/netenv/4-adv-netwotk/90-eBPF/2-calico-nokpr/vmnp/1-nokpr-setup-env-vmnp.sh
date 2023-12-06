@@ -12,6 +12,7 @@ do
     - sudo mkdir -p /etc/rancher/k3s/ && wget http://192.168.2.100/k3s/registries.yaml -P /etc/rancher/k3s/
     - sudo wget -r -np -nH --cut-dirs=3 --directory-prefix=/opt/cni/bin/ http://192.168.2.100/k3s/cni/bin/ && find /opt/cni/bin/ -type f | xargs chmod +x
     - sudo bash -c '{ echo "alias all=\"kubectl get pods -A\""; echo "alias k=\"kubectl\""; echo "alias kk=\"kubectl -nkube-system\"" ; } >> ~/.bashrc'
+    - sudo bash -c '{ echo "export KUBECONFIG=\"/etc/rancher/k3s/k3s.yaml\"" ; } >> ~/.bashrc'
     - sudo wget http://192.168.2.100/k3s/rzsz/rz -P /usr/bin/ && wget http://192.168.2.100/k3s/rzsz/sz -P /usr/bin/ && chmod +x /usr/bin/rz /usr/bin/sz
     - sudo wget http://192.168.2.100/k3s/cilium-related/helm -P /usr/bin/ && chmod +x /usr/bin/helm
 EOF
@@ -24,6 +25,7 @@ for ((ip_id=0; ip_id<${#ip_addresses[@]}; ip_id++)); do
     sshpass -p hive ssh-copy-id -o StrictHostKeyChecking=no -p 22 root@${ip_addresses[$ip_id]} > /dev/null 2>&1
 
     echo "${ip_addresses[$ip_id]} vmnp$ip_id" >> /etc/hosts
+    scp tcp-iptables-trace.sh calico.yaml 3-create-svc-pods.sh ${ip_addresses[$ip_id]}:/root/
 
     master_ip=${ip_addresses[0]}
     k3s_version="v1.27.3+k3s1"
