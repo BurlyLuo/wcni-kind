@@ -2,9 +2,9 @@
 set -v
 
 # 1. Deploy multipass vmnp(kubeProxyReplacement=false(default))
-for ((i=0; i<${1:-3}; i++))
+for ((i=0; i<${1:-2}; i++))
 do
-  multipass launch 22.04 -n vmnp"$i" -c 2 -m 2G -d 30G --cloud-init - <<EOF
+  multipass launch 22.04 -n vmnp"$i" -c 3 -m 3G -d 30G --cloud-init - <<EOF
   # cloud-config
   runcmd:
     - sudo sed -i 's/PasswordAuthentication no/PasswordAuthentication yes/g' /etc/ssh/sshd_config
