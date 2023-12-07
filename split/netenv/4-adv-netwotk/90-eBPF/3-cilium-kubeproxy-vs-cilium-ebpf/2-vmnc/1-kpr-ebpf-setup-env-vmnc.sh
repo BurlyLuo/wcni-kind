@@ -25,7 +25,7 @@ for ((ip_id=0; ip_id<${#ip_addresses[@]}; ip_id++)); do
     sshpass -p hive ssh-copy-id -o StrictHostKeyChecking=no -p 22 root@${ip_addresses[$ip_id]} > /dev/null 2>&1
 
     echo "${ip_addresses[$ip_id]} vmnc$ip_id" >> /etc/hosts
-    scp tcp-iptables-trace.sh 2-cilium-kpr.sh 3-create-svc-pods.sh ${ip_addresses[$ip_id]}:/root/
+    scp tcp-iptables-trace.sh 2-cilium-kpr-ebpf.sh 3-create-svc-pods.sh ${ip_addresses[$ip_id]}:/root/
 
     master_ip=${ip_addresses[0]}
     k3s_version="v1.27.3+k3s1"
