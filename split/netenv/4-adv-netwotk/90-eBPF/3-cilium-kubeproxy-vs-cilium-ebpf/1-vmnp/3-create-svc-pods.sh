@@ -1,7 +1,7 @@
 #!/bin/bash
 set -v 
-controller_node=vmnp0
-worker_node=vmnp1
+controller_node=bpf1
+worker_node=bpf2
 
 # client pod and service
 cat <<EOF | kubectl apply -f -
@@ -31,7 +31,7 @@ metadata:
     run: client
   name: clientsvc
 spec:
-  clusterIP: 10.43.94.94
+  clusterIP: 10.96.94.94
   ports:
   - port: 9494
     protocol: TCP
@@ -67,7 +67,7 @@ metadata:
     run: server
   name: serversvc
 spec:
-  clusterIP: 10.43.94.95
+  clusterIP: 10.96.94.95
   ports:
   - port: 9495
     protocol: TCP
