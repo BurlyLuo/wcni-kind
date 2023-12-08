@@ -23,6 +23,4 @@ $ iptables-save | grep -v KUBE | iptables-restore
 
 # kubectl -nkube-system patch ds/kube-proxy -p '{"spec": {"template": {"spec": {"nodeSelector": {"kubernetes.io/os": "linux"}}}}}'
 kubectl -nkube-system patch ds/kube-proxy -p '{"spec": {"template": {"spec": {"nodeSelector": {"kubernetes.io/os": "cilium-kpr"}}}}}'
-
-
-
+iptables-save | grep -v KUBE | iptables-restore
