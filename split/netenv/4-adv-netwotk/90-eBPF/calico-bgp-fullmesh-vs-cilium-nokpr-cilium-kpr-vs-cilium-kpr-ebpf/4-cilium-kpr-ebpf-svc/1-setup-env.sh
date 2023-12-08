@@ -9,6 +9,7 @@ kubeadm config images pull --image-repository=registry.aliyuncs.com/google_conta
 kubeadm init --kubernetes-version=v1.27.3 --image-repository registry.aliyuncs.com/google_containers --pod-network-cidr=10.244.0.0/16 --service-cidr=10.96.0.0/12 --ignore-preflight-errors=Swap
 
 2. set private registry
+containerd config default > /etc/containerd/config.toml
 cat /etc/containerd/config.toml;cat ./config.toml
 
 # For existing installations with kube-proxy running as a DaemonSet, remove it by using the following commands below.Be aware that removing kube-proxy will break existing service connections. It will also stop service related traffic until the Cilium replacement has been installed.
