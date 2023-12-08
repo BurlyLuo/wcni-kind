@@ -21,3 +21,8 @@ $ kubectl -n kube-system delete cm kube-proxy
 $ # Run on each node with root permissions:
 $ iptables-save | grep -v KUBE | iptables-restore
 
+kubectl -nkube-system patch ds/kube-proxy -p '{"spec": {"template": {"spec": {"nodeSelector": {"kubernetes.io/os": "linux"}}}}}'
+kubectl -nkube-system patch ds/kube-proxy -p '{"spec": {"template": {"spec": {"nodeSelector": {"kubernetes.io/os": "cilium-kpr"}}}}}'
+
+
+
