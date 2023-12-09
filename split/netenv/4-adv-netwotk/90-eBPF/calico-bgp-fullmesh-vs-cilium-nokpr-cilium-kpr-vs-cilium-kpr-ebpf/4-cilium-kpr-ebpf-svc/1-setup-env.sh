@@ -1,4 +1,4 @@
-$ Logical Flow
+# Logical Flow
 0. mv config.toml from /etc/containerd/
 mv /etc/containerd/config.toml /root/config.toml.bak
 
