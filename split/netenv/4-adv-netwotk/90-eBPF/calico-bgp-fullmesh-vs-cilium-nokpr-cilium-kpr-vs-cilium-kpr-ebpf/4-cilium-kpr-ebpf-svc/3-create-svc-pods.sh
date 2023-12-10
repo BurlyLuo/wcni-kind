@@ -75,4 +75,3 @@ spec:
   selector:
     run: server
 EOF
-
