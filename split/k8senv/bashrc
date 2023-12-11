@@ -3,7 +3,6 @@
 # for examples
 # If not running interactively, don't do anything
 [ -z "$PS1" ] && return
-
 # don't put duplicate lines in the history. See bash(1) for more options
 # ... or force ignoredups and ignorespace
 HISTCONTROL=ignoredups:ignorespace
@@ -83,6 +82,7 @@ alias l='ls -CF'
 alias vi="vim"
 
 alias push='function custom_push() { git add . && git commit -m "${1:-"'"Adjust/Rename the Directory/File"'"}" && git push; }; custom_push'
+alias svcd='kubectl delete pods client server && kubectl delete svc clientsvc serversvc'
 
 alias pp=packetdrill
 alias cap1="tcpdump -pne -i any -w previous-packetdrill.cap"
