@@ -13,14 +13,22 @@ spec:
       labels:
         app: wluo
     spec:
+      volumes:
+      - name: sys-kernel-debug
+        hostPath:
+          path: /sys/kernel/debug
+          type: DirectoryOrCreate
       containers:
-      - image: 192.168.2.100:5000/nettool
+      - image: 192.168.2.100:5000/xcni
         name: nettoolbox
         env:
           - name: NETTOOL_NODE_NAME
             valueFrom:
               fieldRef:
                 fieldPath: spec.nodeName
+        volumeMounts:
+        - name: sys-kernel-debug
+          mountPath: /sys/kernel/debug
         securityContext:
           privileged: true
 ---
