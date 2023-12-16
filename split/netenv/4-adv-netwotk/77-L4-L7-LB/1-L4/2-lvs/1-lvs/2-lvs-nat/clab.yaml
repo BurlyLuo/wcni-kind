@@ -17,10 +17,10 @@ topology:
           ip a a 10.1.5.1/24 dev net1 &&
           ip a a 10.1.8.1/24 dev net2 &&
           bash -c "echo 1 > /proc/sys/net/ipv4/ip_forward" &&
-          ipvsadm -A -t 10.1.5.1:80 -s rr &&
-          ipvsadm -a -t 10.1.5.1:80 -r 10.1.8.10:80 -m &&
-          ipvsadm -a -t 10.1.5.1:80 -r 10.1.8.11:80 -m &&
-          ipvsadm -a -t 10.1.5.1:80 -r 10.1.8.12:80 -m &&
+          ipvsadm -A -t 10.1.5.1:8080 -s rr &&
+          ipvsadm -a -t 10.1.5.1:8080 -r 10.1.8.10:80 -m &&
+          ipvsadm -a -t 10.1.5.1:8080 -r 10.1.8.11:80 -m &&
+          ipvsadm -a -t 10.1.5.1:8080 -r 10.1.8.12:80 -m &&
           ipvsadm-save'
 
     nat-rs1:
