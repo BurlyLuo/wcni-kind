@@ -9,12 +9,12 @@ all:
         clab-lvs-tunnel-client:
           ansible_host: 172.20.20.4
         clab-lvs-tunnel-lvs-tunnel-lb:
-          ansible_host: 172.20.20.3
-        clab-lvs-tunnel-router:
           ansible_host: 172.20.20.2
+        clab-lvs-tunnel-router:
+          ansible_host: 172.20.20.3
         clab-lvs-tunnel-tunnel-rs1:
-          ansible_host: 172.20.20.6
-        clab-lvs-tunnel-tunnel-rs2:
           ansible_host: 172.20.20.5
-        clab-lvs-tunnel-tunnel-rs3:
+        clab-lvs-tunnel-tunnel-rs2:
           ansible_host: 172.20.20.7
+        clab-lvs-tunnel-tunnel-rs3:
+          ansible_host: 172.20.20.6

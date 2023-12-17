@@ -39,6 +39,7 @@ topology:
       kind: linux
       image: 192.168.2.100:5000/xcni
       exec:
+      # VIP:10.1.8.254/32 DIP:10.1.8.253/24
         - >
           bash -c '
           ip a a 10.1.8.253/24 dev net1 &&
