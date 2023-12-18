@@ -11,7 +11,7 @@ set -v
 { ip l s brl4lb down && brctl delbr brl4lb; } > /dev/null 2>&1
 brctl addbr brl4lb;ip l s brl4lb up
 
-modprobe iptable_nat
+modprobe ipip
 modprobe tun
 lsmod | grep ip_vs
 lsmod | grep ipip
@@ -51,7 +51,6 @@ topology:
           ipvsadm -a -t 10.1.8.254:80 -r 10.1.8.11:80 -i &&
           ipvsadm -a -t 10.1.8.254:80 -r 10.1.8.12:80 -i &&
           ipvsadm-save'
-
 
     tunnel-rs1:
       kind: linux
