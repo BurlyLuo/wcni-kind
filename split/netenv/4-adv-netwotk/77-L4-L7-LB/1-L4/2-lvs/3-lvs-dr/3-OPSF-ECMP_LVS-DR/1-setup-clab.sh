@@ -10,9 +10,6 @@ set -v
 { ip l s brl4lb down && brctl delbr brl4lb; } > /dev/null 2>&1
 brctl addbr brl4lb;ip l s brl4lb up
 
-{ ip l s ospf-br down && brctl delbr ospf-br; } > /dev/null 2>&1
-brctl addbr ospf-br;ip l s ospf-br up
-
 cat <<EOF>clab.yaml | clab deploy -t clab.yaml -
 name: lvs-dr-ospf-keepalived
 mgmt:
@@ -24,8 +21,6 @@ topology:
     brl4lb:
       kind: bridge
 
-    ospf-br:
-      kind: bridge
     # 10.1.5.1-eth1 10.1.8.1/24-eth2
     router:
       kind: linux
