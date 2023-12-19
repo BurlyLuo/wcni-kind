@@ -25,7 +25,7 @@ calico-bgp-fullmesh-worker2         Ready    <none>          23m   v1.27.3   172
 [root@wluo 6-k8s-deploy-sts-dns-rec]$ 
 
 
-2. SRV and A/AAAA rec:
+2. SRV and A/AAAA rec: [Deployment]
 # https://kubernetes.io/zh-cn/docs/concepts/services-networking/dns-pod-service/#srv-records
 # https://kubernetes.io/zh-cn/docs/concepts/services-networking/dns-pod-service/#a-aaaa-records
 
@@ -43,3 +43,41 @@ Name:   wluo.default.svc.cluster.local
 Address: 10.96.43.95
 
 wluo-55c988885f-mxbvv~$
+
+
+3. SRV and A/AAAA rec: [Statefulset]
+"0-k8s-svc-dns.readme" 78L, 5797B written                                                                                                              
+[root@wluo 6-k8s-deploy-sts-dns-rec]$ k get pods -owide | grep web
+web-0                   1/1     Running   0          3m17s   10.244.73.67    calico-bgp-fullmesh-worker2   <none>           <none>
+web-1                   1/1     Running   0          3m16s   10.244.83.131   calico-bgp-fullmesh-worker    <none>           <none>
+[root@wluo 6-k8s-deploy-sts-dns-rec]$ k get svc -o wide 
+NAME         TYPE        CLUSTER-IP    EXTERNAL-IP   PORT(S)        AGE     SELECTOR
+kubernetes   ClusterIP   10.96.0.1     <none>        443/TCP        13h     <none>
+nginx        ClusterIP   None          <none>        80/TCP         3m23s   app=nginx
+wluo         NodePort    10.96.43.95   <none>        80:32000/TCP   13h     app=wluo
+[root@wluo 6-k8s-deploy-sts-dns-rec]$ 
+
+# https://kubernetes.io/zh-cn/docs/concepts/services-networking/dns-pod-service/#srv-records
+# https://kubernetes.io/zh-cn/docs/concepts/services-networking/dns-pod-service/#a-aaaa-records
+web-0~$nslookup -type=SRV _web._tcp.nginx.default.svc.cluster.local  
+Server:         10.96.0.10
+Address:        10.96.0.10#53
+
+_web._tcp.nginx.default.svc.cluster.local       service = 0 50 80 web-0.nginx.default.svc.cluster.local.
+_web._tcp.nginx.default.svc.cluster.local       service = 0 50 80 web-1.nginx.default.svc.cluster.local.
+
+web-0~$nslookup -type=A web-0.nginx.default.svc.cluster.local.
+Server:         10.96.0.10
+Address:        10.96.0.10#53
+
+Name:   web-0.nginx.default.svc.cluster.local
+Address: 10.244.73.67
+
+web-0~$nslookup -type=A web-1.nginx.default.svc.cluster.local.
+Server:         10.96.0.10
+Address:        10.96.0.10#53
+
+Name:   web-1.nginx.default.svc.cluster.local
+Address: 10.244.83.131
+
+web-0~$
