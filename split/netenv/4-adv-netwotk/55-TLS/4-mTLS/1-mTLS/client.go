@@ -41,13 +41,13 @@ func main() {
 		},
 	}
 
-	// Request /hello over port 8443 via the GET method
+	// Request /hello over port 443 via the GET method
 	// Using curl the verfiy it :
 	// curl --trace trace.log -k \
 	//   --cacert ./ca.crt  --cert ./client.b.crt --key ./client.b.key  \
-	//     https://localhost:8443/hello
+	//     https://10.242.254.83:443/hello
 
-	r, err := client.Get("https://localhost:8443/hello")
+	r, err := client.Get("https://10.242.254.83:443/hello")
 	if err != nil {
 		log.Fatalf("error making get request: %v", err)
 	}

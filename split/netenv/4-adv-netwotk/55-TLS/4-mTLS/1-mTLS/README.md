@@ -55,7 +55,7 @@ This source code only uses the Go Standard Library - the x509 package
 There are two functions - `makeCA()` and `makeCert()`
 
 - In `makeCA()`, we need to set the `IsCA` flag to `true`
-- In `makeCert()`, we set the `DNSNames` as `localhost`
+- In `makeCert()`, we set the `DNSNames` as `10.242.254.83`
 
 #### 3.1.2 Using OpenSSL generate the Certs and Keys
 
@@ -69,7 +69,7 @@ The completed script is [key.sh](key.sh)
         -days ${DAYS} \
         -out ca.crt \
         -keyout ca.key \
-        -subj "/C=SO/ST=Earth/L=Mountain/O=MegaEase/OU=MegaCloud/CN=localhost" 
+        -subj "/C=SO/ST=Earth/L=Mountain/O=MegaEase/OU=MegaCloud/CN=10.242.254.83" 
     ```
 
 2. **Generate the Server Certificate**
@@ -80,11 +80,11 @@ The completed script is [key.sh](key.sh)
     
     #generate the Certificate Signing Request 
     openssl req -new -key server.key -days ${DAYS} -out server.csr \
-        -subj "/C=SO/ST=Earth/L=Mountain/O=MegaEase/OU=MegaCloud/CN=localhost" 
+        -subj "/C=SO/ST=Earth/L=Mountain/O=MegaEase/OU=MegaCloud/CN=10.242.254.83" 
     
     #sign it with Root CA
     openssl x509  -req -in server.csr \
-        -extfile <(printf "subjectAltName=DNS:localhost") \ 
+        -extfile <(printf "subjectAltName=DNS:10.242.254.83") \ 
         -CA ca.crt -CAkey ca.key  \
         -days ${DAYS} -sha256 -CAcreateserial \
         -out server.crt 
@@ -103,10 +103,10 @@ The completed script is [key.sh](key.sh)
     openssl genrsa -out ${CLIENT}.key 2048
 
     openssl req -new -key ${CLIENT}.key -days ${DAYS} -out ${CLIENT}.csr \
-        -subj "/C=SO/ST=Earth/L=Mountain/O=$O/OU=$OU/CN=localhost"
+        -subj "/C=SO/ST=Earth/L=Mountain/O=$O/OU=$OU/CN=10.242.254.83"
 
     openssl x509  -req -in ${CLIENT}.csr \
-        -extfile <(printf "subjectAltName=DNS:localhost") \ 
+        -extfile <(printf "subjectAltName=DNS:10.242.254.83") \ 
         -CA ca.crt -CAkey ca.key -out ${CLIENT}.crt -days ${DAYS} -sha256 -CAcreateserial
     ```
 
@@ -115,7 +115,7 @@ The completed script is [key.sh](key.sh)
 
 The [server.go](server.go) has the following works.
 
-- Listen on both HTTP(`8080`) and HTTPS(`8443`). For mTLS, we only consider the HTTPS.
+- Listen on both HTTP(`8080`) and HTTPS(`443`). For mTLS, we only consider the HTTPS.
 - It needs the three files 
     - CA Root certificate `ca.crt`
     - Server's certificate `servier.crt` and its private key `server.key`
@@ -146,7 +146,7 @@ When the client successfully sent the request. It would output the header and TL
 
 ```log
 (HTTP) Listen on :8080
-(HTTPS) Listen on :8443
+(HTTPS) Listen on :443
 2021/12/31 14:47:13 >>>>>>>>>>>>>>>> Header <<<<<<<<<<<<<<<<
 2021/12/31 14:47:13 User-Agent:curl/7.77.0
 2021/12/31 14:47:13 Accept:*/*
@@ -158,10 +158,10 @@ When the client successfully sent the request. It would output the header and TL
 2021/12/31 14:47:13 NegotiatedProtocol: h2
 2021/12/31 14:47:13 NegotiatedProtocolIsMutual: true
 2021/12/31 14:47:13 Certificate chain:
-2021/12/31 14:47:13  0 s:/C=[SO]/ST=[Earth]/L=[Mountain]/O=[Client-B]/OU=[Client-B-OU]/CN=localhost
-2021/12/31 14:47:13    i:/C=[SO]/ST=[Earth]/L=[Mountain]/O=[MegaEase]/OU=[MegaCloud]/CN=localhost
-2021/12/31 14:47:13  1 s:/C=[SO]/ST=[Earth]/L=[Mountain]/O=[MegaEase]/OU=[MegaCloud]/CN=localhost
-2021/12/31 14:47:13    i:/C=[SO]/ST=[Earth]/L=[Mountain]/O=[MegaEase]/OU=[MegaCloud]/CN=localhost
+2021/12/31 14:47:13  0 s:/C=[SO]/ST=[Earth]/L=[Mountain]/O=[Client-B]/OU=[Client-B-OU]/CN=10.242.254.83
+2021/12/31 14:47:13    i:/C=[SO]/ST=[Earth]/L=[Mountain]/O=[MegaEase]/OU=[MegaCloud]/CN=10.242.254.83
+2021/12/31 14:47:13  1 s:/C=[SO]/ST=[Earth]/L=[Mountain]/O=[MegaEase]/OU=[MegaCloud]/CN=10.242.254.83
+2021/12/31 14:47:13    i:/C=[SO]/ST=[Earth]/L=[Mountain]/O=[MegaEase]/OU=[MegaCloud]/CN=10.242.254.83
 2021/12/31 14:47:13 >>>>>>>>>>>>>>>>> End <<<<<<<<<<<<<<<<<<
 ``` 
 
@@ -184,12 +184,12 @@ curl --trace trace.log -k \
 	--cacert ./certs/ca.crt \
 	--cert ./certs/client.b.crt \
 	--key ./certs/client.b.key \
-	https://localhost:8443/hello
+	https://10.242.254.83:443/hello
 ```
 
 - `--trace trace.log` would record the network details of how the client communicates to the server.
 - `-k` because we use a self-signed certificate, so we need to add this.
 
 
-
+curl -v -k --cacert ./certs/ca.crt --cert ./certs/client.b.crt --key ./certs/client.b.key https://10.241.245.83:443/hello
 

@@ -20,19 +20,19 @@ openssl req -newkey rsa:2048 \
   -days ${DAYS} \
   -out ca.crt \
   -keyout ca.key \
-  -subj "/C=SO/ST=Earth/L=Mountain/O=MegaEase/OU=MegaCloud/CN=localhost"
+  -subj "/C=SO/ST=Earth/L=Mountain/O=MegaEase/OU=MegaCloud/CN=10.242.254.83"
 
 #create a key for server
 openssl genrsa -out server.key 2048
 
 #generate the Certificate Signing Request
 openssl req -new -key server.key -days ${DAYS} -out server.csr \
-  -subj "/C=SO/ST=Earth/L=Mountain/O=MegaEase/OU=MegaCloud/CN=localhost"
+  -subj "/C=SO/ST=Earth/L=Mountain/O=MegaEase/OU=MegaCloud/CN=10.242.254.83"
 
 #sign it with Root CA
 # https://stackoverflow.com/questions/64814173/how-do-i-use-sans-with-openssl-instead-of-common-name
 openssl x509  -req -in server.csr \
-  -extfile <(printf "subjectAltName=DNS:localhost") \
+  -extfile <(printf "subjectAltName=DNS:10.242.254.83") \
   -CA ca.crt -CAkey ca.key  \
   -days ${DAYS} -sha256 -CAcreateserial \
   -out server.crt
@@ -45,9 +45,9 @@ function generate_client() {
   OU=$3
   openssl genrsa -out ${CLIENT}.key 2048
   openssl req -new -key ${CLIENT}.key -days ${DAYS} -out ${CLIENT}.csr \
-    -subj "/C=SO/ST=Earth/L=Mountain/O=$O/OU=$OU/CN=localhost"
+    -subj "/C=SO/ST=Earth/L=Mountain/O=$O/OU=$OU/CN=10.242.254.83"
   openssl x509  -req -in ${CLIENT}.csr \
-    -extfile <(printf "subjectAltName=DNS:localhost") \
+    -extfile <(printf "subjectAltName=DNS:10.242.254.83") \
     -CA ca.crt -CAkey ca.key -out ${CLIENT}.crt -days ${DAYS} -sha256 -CAcreateserial
   cat ${CLIENT}.crt ${CLIENT}.key > ${CLIENT}.pem
 }

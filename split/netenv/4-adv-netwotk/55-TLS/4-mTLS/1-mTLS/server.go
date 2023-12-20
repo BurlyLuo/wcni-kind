@@ -53,7 +53,7 @@ func helloHandler(w http.ResponseWriter, r *http.Request) {
 
 func main() {
 	port := 8080
-	sslPort := 8443
+	sslPort := 443
 
 	// Set up a /hello resource handler
 	handler := http.NewServeMux()
@@ -98,7 +98,7 @@ func main() {
 	}
 	tlsConfig.BuildNameToCertificate()
 
-	// serve on port 8443 of local host
+	// serve on port 443 of local host
 	server := http.Server{
 		Addr:      fmt.Sprintf(":%d", sslPort),
 		Handler:   handler,
