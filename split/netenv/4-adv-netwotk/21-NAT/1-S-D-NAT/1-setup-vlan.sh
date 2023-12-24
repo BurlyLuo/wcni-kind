@@ -28,9 +28,7 @@ topology:
           vconfig add net1 5 &&
           ip l s net1.5 up &&
           ip a a 10.1.5.10/24 dev net1.5 &&
-          
-          ip route add 0.0.0.0/0 via 10.1.5.1 table 5 &&
-          ip rule add from 10.1.5.0/24 table 5'
+          ip r r default via 10.1.5.1 dev net1.5'
  
     vlan2:
       kind: linux
@@ -42,9 +40,7 @@ topology:
           vconfig add net1 8 &&
           ip l s net1.8 up &&
           ip a a 10.1.8.10/24 dev net1.8 &&
-          
-          ip route add 0.0.0.0/0 via 10.1.8.1 table 8 &&
-          ip rule add from 10.1.8.0/24 table 8'
+          ip r r default via 10.1.8.1 dev net1.8'
 
     vlan3:
       kind: linux
@@ -56,16 +52,13 @@ topology:
           vconfig add net1 9 &&
           ip l s net1.9 up &&
           ip a a 10.1.9.10/24 dev net1.9 &&
-          
-          ip route add 0.0.0.0/0 via 10.1.9.1 table 9 &&
-          ip rule add from 10.1.9.0/24 table 9'
+          ip r r default via 10.1.9.1 dev net1.9'
 
 
   links:
-    - endpoints: ["vlan1:net1", "br-vlan:eth2"]
-    - endpoints: ["vlan2:net1", "br-vlan:eth3"]
-    - endpoints: ["vlan3:net1", "br-vlan:eth4"]
-    - endpoints: ["br-vlan:net0", "gwx:eth1"]
+    - endpoints: ["vlan1:net1", "br-vlan:net2"]
+    - endpoints: ["vlan2:net1", "br-vlan:net3"]
+    - endpoints: ["vlan3:net1", "br-vlan:net4"]
+    - endpoints: ["br-vlan:net1", "gwx:eth1"]
 
 EOF
-

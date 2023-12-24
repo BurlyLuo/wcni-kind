@@ -6,7 +6,7 @@
       "prefix": "clab",
       "mgmt": {
         "network": "clab",
-        "bridge": "br-a6f44384e607",
+        "bridge": "br-20ee703b1926",
         "ipv4-subnet": "172.20.20.0/24",
         "ipv4-gw": "172.20.20.1",
         "ipv6-subnet": "2001:172:20:20::/64",
@@ -34,7 +34,7 @@
       "mgmt-ipv6-prefix-length": 0,
       "mac-address": "",
       "labels": {
-        "clab-mgmt-net-bridge": "br-a6f44384e607",
+        "clab-mgmt-net-bridge": "br-20ee703b1926",
         "clab-node-group": "",
         "clab-node-kind": "bridge",
         "clab-node-lab-dir": "/root/wcni-kind/split/netenv/4-adv-netwotk/21-NAT/1-S-D-NAT/clab-nat/br-vlan",
@@ -61,7 +61,7 @@
       "mgmt-ipv6-prefix-length": 64,
       "mac-address": "",
       "labels": {
-        "clab-mgmt-net-bridge": "br-a6f44384e607",
+        "clab-mgmt-net-bridge": "br-20ee703b1926",
         "clab-node-group": "",
         "clab-node-kind": "linux",
         "clab-node-lab-dir": "/root/wcni-kind/split/netenv/4-adv-netwotk/21-NAT/1-S-D-NAT/clab-nat/gwx",
@@ -88,7 +88,7 @@
       "mgmt-ipv6-prefix-length": 64,
       "mac-address": "",
       "labels": {
-        "clab-mgmt-net-bridge": "br-a6f44384e607",
+        "clab-mgmt-net-bridge": "br-20ee703b1926",
         "clab-node-group": "",
         "clab-node-kind": "linux",
         "clab-node-lab-dir": "/root/wcni-kind/split/netenv/4-adv-netwotk/21-NAT/1-S-D-NAT/clab-nat/vlan1",
@@ -115,7 +115,7 @@
       "mgmt-ipv6-prefix-length": 64,
       "mac-address": "",
       "labels": {
-        "clab-mgmt-net-bridge": "br-a6f44384e607",
+        "clab-mgmt-net-bridge": "br-20ee703b1926",
         "clab-node-group": "",
         "clab-node-kind": "linux",
         "clab-node-lab-dir": "/root/wcni-kind/split/netenv/4-adv-netwotk/21-NAT/1-S-D-NAT/clab-nat/vlan2",
@@ -142,7 +142,7 @@
       "mgmt-ipv6-prefix-length": 64,
       "mac-address": "",
       "labels": {
-        "clab-mgmt-net-bridge": "br-a6f44384e607",
+        "clab-mgmt-net-bridge": "br-20ee703b1926",
         "clab-node-group": "",
         "clab-node-kind": "linux",
         "clab-node-lab-dir": "/root/wcni-kind/split/netenv/4-adv-netwotk/21-NAT/1-S-D-NAT/clab-nat/vlan3",
@@ -158,13 +158,13 @@
       "a": {
         "node": "vlan1",
         "interface": "net1",
-        "mac": "aa:c1:ab:7d:5c:5d",
+        "mac": "aa:c1:ab:4b:40:e7",
         "peer": "z"
       },
       "z": {
         "node": "br-vlan",
-        "interface": "eth2",
-        "mac": "aa:c1:ab:12:63:a9",
+        "interface": "net2",
+        "mac": "aa:c1:ab:81:21:5e",
         "peer": "a"
       }
     },
@@ -172,13 +172,13 @@
       "a": {
         "node": "vlan2",
         "interface": "net1",
-        "mac": "aa:c1:ab:cd:a4:95",
+        "mac": "aa:c1:ab:81:d3:70",
         "peer": "z"
       },
       "z": {
         "node": "br-vlan",
-        "interface": "eth3",
-        "mac": "aa:c1:ab:3d:67:7f",
+        "interface": "net3",
+        "mac": "aa:c1:ab:ee:38:08",
         "peer": "a"
       }
     },
@@ -186,27 +186,27 @@
       "a": {
         "node": "vlan3",
         "interface": "net1",
-        "mac": "aa:c1:ab:72:cc:d3",
+        "mac": "aa:c1:ab:7c:87:ab",
         "peer": "z"
       },
       "z": {
         "node": "br-vlan",
-        "interface": "eth4",
-        "mac": "aa:c1:ab:5d:c4:3f",
+        "interface": "net4",
+        "mac": "aa:c1:ab:3f:50:da",
         "peer": "a"
       }
     },
     {
       "a": {
         "node": "br-vlan",
-        "interface": "net0",
-        "mac": "aa:c1:ab:bc:55:e1",
+        "interface": "net1",
+        "mac": "aa:c1:ab:7b:a4:8d",
         "peer": "z"
       },
       "z": {
         "node": "gwx",
         "interface": "eth1",
-        "mac": "aa:c1:ab:b3:9a:b3",
+        "mac": "aa:c1:ab:83:91:f3",
         "peer": "a"
       }
     }
