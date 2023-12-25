@@ -146,6 +146,8 @@ alias 22041='ip=$(cat /etc/hosts | grep 22041 | awk -F " " '\''{print $1}'\'') &
 alias 2304d='set -f;sed -i '/vm2304/d' /etc/hosts && for vm in $(multipass list | grep vm2304[0-9] | awk -F " " "{print \$1}"); do multipass delete --purge $vm; done && { sed -i "1!d" /root/.ssh/known_hosts; } > /dev/null 2>&1;set +f'
 alias 2304='ip=$(cat /etc/hosts | grep 2304 | awk -F " " '\''{print $1}'\'') && ssh root@$ip'
 
+alias dkc='set -f;{ kubectl config delete-cluster $1 && kubectl config delete-context $1 && kubectl config delete-user $1 && kubectl config unset current-context; } > /dev/null 2>&1;set +f'
+
 alias mmrs="systemctl stop snap.multipass.multipassd.service && systemctl start snap.multipass.multipassd.service && systemctl status snap.multipass.multipassd.service"
 
 # Alias definitions.
