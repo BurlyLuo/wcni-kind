@@ -41,14 +41,14 @@ ip l set dev $LB_VETH_HOST xdp obj bpf_xdp_veth_host.o
 
 ethtool -K $LB_VETH_HOST rx off tx off
 
-LB_IP=$(docker exec -ti kind-control-plane ip -o -4 a s eth0 | awk '{print $4}' | cut -d/ -f1)
+LB_IP=$(docker exec -ti kind-control-plane ip -o -4 a s eth0 | awk '{print $4}' | cut -d/ -f1 | grep 172.18.0.)
 echo "LB_IP": $LB_IP
 
 # 3. kind-worker2 node
 docker exec -ti kind-worker2 /bin/sh -c \
 'apt-get update && apt-get install -y nginx && echo Current_Backend_Host: $(hostname) > /var/www/html/index.nginx-debian.html && systemctl start nginx'
 
-WORKER2_IP=$(docker exec -ti kind-worker2 ip -o -4 a s eth0 | awk '{print $4}' | cut -d/ -f1)
+WORKER2_IP=$(docker exec -ti kind-worker2 ip -o -4 a s eth0 | awk '{print $4}' | cut -d/ -f1 | grep 172.18.0.)
 echo "WORKER2_IP": $WORKER2_IP
 
 nsenter -t $(docker inspect kind-worker2 -f '{{ .State.Pid }}') -n /bin/sh -c \
@@ -58,14 +58,14 @@ nsenter -t $(docker inspect kind-worker2 -f '{{ .State.Pid }}') -n /bin/sh -c \
 docker exec -ti kind-worker3 /bin/sh -c \
 'apt-get update && apt-get install -y nginx && echo Current_Backend_Host: $(hostname) > /var/www/html/index.nginx-debian.html && systemctl start nginx'
 
-WORKER3_IP=$(docker exec -ti kind-worker3 ip -o -4 a s eth0 | awk '{print $4}' | cut -d/ -f1)
+WORKER3_IP=$(docker exec -ti kind-worker3 ip -o -4 a s eth0 | awk '{print $4}' | cut -d/ -f1 | grep 172.18.0.)
 echo "WORKER3_IP": $WORKER2_IP
 
 nsenter -t $(docker inspect kind-worker3 -f '{{ .State.Pid }}') -n /bin/sh -c \
     'tc qdisc add dev eth0 clsact && tc filter add dev eth0 ingress bpf direct-action object-file ./test_tc_tunnel.o section decap && ip a a dev eth0 2.2.2.2/32'
 
 # 5. update service backend
-CILIUM_POD_NAME=$(kubectl -n kube-system get pod -l k8s-app=cilium -o=jsonpath='{.items[0].metadata.name}')
+CILIUM_POD_NAME=$(kubectl -nkube-system get pods --no-headers --selector=k8s-app=cilium -owide --field-selector spec.nodeName=kind-control-plane|awk -F " " '{print $1}')
 kubectl -n kube-system wait --timeout=300s --for=condition=Ready pod "$CILIUM_POD_NAME"
 
 kubectl -n kube-system exec -ti $CILIUM_POD_NAME -- \
