@@ -1,0 +1,308 @@
+{
+  "name": "vlan-to-router-bond",
+  "type": "clab",
+  "clab": {
+    "config": {
+      "prefix": "clab",
+      "mgmt": {
+        "network": "clab",
+        "bridge": "br-f43b6887ac4f",
+        "ipv4-subnet": "172.20.20.0/24",
+        "ipv4-gw": "172.20.20.1",
+        "mtu": "1500",
+        "external-access": true
+      }
+    }
+  },
+  "nodes": {
+    "br1": {
+      "index": "0",
+      "shortname": "br1",
+      "longname": "clab-vlan-to-router-bond-br1",
+      "fqdn": "br1.vlan-to-router-bond.io",
+      "group": "",
+      "labdir": "/root/wcni-kind/split/netenv/4-adv-netwotk/25-L2-NETWORK/1-VLAN/7-VLAN-to-Router-single-arm-routing-bond/clab-vlan-to-router-bond/br1",
+      "kind": "linux",
+      "image": "192.168.2.100:5000/vyos/vyos:1.4.7",
+      "mgmt-net": "",
+      "mgmt-intf": "",
+      "mgmt-ipv4-address": "172.20.20.3",
+      "mgmt-ipv4-prefix-length": 24,
+      "mgmt-ipv6-address": "",
+      "mgmt-ipv6-prefix-length": 0,
+      "mac-address": "",
+      "labels": {
+        "clab-mgmt-net-bridge": "br-f43b6887ac4f",
+        "clab-node-group": "",
+        "clab-node-kind": "linux",
+        "clab-node-lab-dir": "/root/wcni-kind/split/netenv/4-adv-netwotk/25-L2-NETWORK/1-VLAN/7-VLAN-to-Router-single-arm-routing-bond/clab-vlan-to-router-bond/br1",
+        "clab-node-name": "br1",
+        "clab-node-type": "",
+        "clab-topo-file": "/root/wcni-kind/split/netenv/4-adv-netwotk/25-L2-NETWORK/1-VLAN/7-VLAN-to-Router-single-arm-routing-bond/clab.yaml",
+        "containerlab": "vlan-to-router-bond"
+      }
+    },
+    "br2": {
+      "index": "1",
+      "shortname": "br2",
+      "longname": "clab-vlan-to-router-bond-br2",
+      "fqdn": "br2.vlan-to-router-bond.io",
+      "group": "",
+      "labdir": "/root/wcni-kind/split/netenv/4-adv-netwotk/25-L2-NETWORK/1-VLAN/7-VLAN-to-Router-single-arm-routing-bond/clab-vlan-to-router-bond/br2",
+      "kind": "linux",
+      "image": "192.168.2.100:5000/vyos/vyos:1.4.7",
+      "mgmt-net": "",
+      "mgmt-intf": "",
+      "mgmt-ipv4-address": "172.20.20.5",
+      "mgmt-ipv4-prefix-length": 24,
+      "mgmt-ipv6-address": "",
+      "mgmt-ipv6-prefix-length": 0,
+      "mac-address": "",
+      "labels": {
+        "clab-mgmt-net-bridge": "br-f43b6887ac4f",
+        "clab-node-group": "",
+        "clab-node-kind": "linux",
+        "clab-node-lab-dir": "/root/wcni-kind/split/netenv/4-adv-netwotk/25-L2-NETWORK/1-VLAN/7-VLAN-to-Router-single-arm-routing-bond/clab-vlan-to-router-bond/br2",
+        "clab-node-name": "br2",
+        "clab-node-type": "",
+        "clab-topo-file": "/root/wcni-kind/split/netenv/4-adv-netwotk/25-L2-NETWORK/1-VLAN/7-VLAN-to-Router-single-arm-routing-bond/clab.yaml",
+        "containerlab": "vlan-to-router-bond"
+      }
+    },
+    "gwx": {
+      "index": "2",
+      "shortname": "gwx",
+      "longname": "clab-vlan-to-router-bond-gwx",
+      "fqdn": "gwx.vlan-to-router-bond.io",
+      "group": "",
+      "labdir": "/root/wcni-kind/split/netenv/4-adv-netwotk/25-L2-NETWORK/1-VLAN/7-VLAN-to-Router-single-arm-routing-bond/clab-vlan-to-router-bond/gwx",
+      "kind": "linux",
+      "image": "192.168.2.100:5000/vyos/vyos:1.4.7",
+      "mgmt-net": "",
+      "mgmt-intf": "",
+      "mgmt-ipv4-address": "172.20.20.2",
+      "mgmt-ipv4-prefix-length": 24,
+      "mgmt-ipv6-address": "",
+      "mgmt-ipv6-prefix-length": 0,
+      "mac-address": "",
+      "labels": {
+        "clab-mgmt-net-bridge": "br-f43b6887ac4f",
+        "clab-node-group": "",
+        "clab-node-kind": "linux",
+        "clab-node-lab-dir": "/root/wcni-kind/split/netenv/4-adv-netwotk/25-L2-NETWORK/1-VLAN/7-VLAN-to-Router-single-arm-routing-bond/clab-vlan-to-router-bond/gwx",
+        "clab-node-name": "gwx",
+        "clab-node-type": "",
+        "clab-topo-file": "/root/wcni-kind/split/netenv/4-adv-netwotk/25-L2-NETWORK/1-VLAN/7-VLAN-to-Router-single-arm-routing-bond/clab.yaml",
+        "containerlab": "vlan-to-router-bond"
+      }
+    },
+    "server1": {
+      "index": "3",
+      "shortname": "server1",
+      "longname": "clab-vlan-to-router-bond-server1",
+      "fqdn": "server1.vlan-to-router-bond.io",
+      "group": "",
+      "labdir": "/root/wcni-kind/split/netenv/4-adv-netwotk/25-L2-NETWORK/1-VLAN/7-VLAN-to-Router-single-arm-routing-bond/clab-vlan-to-router-bond/server1",
+      "kind": "linux",
+      "image": "192.168.2.100:5000/xcni",
+      "mgmt-net": "",
+      "mgmt-intf": "",
+      "mgmt-ipv4-address": "172.20.20.7",
+      "mgmt-ipv4-prefix-length": 24,
+      "mgmt-ipv6-address": "",
+      "mgmt-ipv6-prefix-length": 0,
+      "mac-address": "",
+      "labels": {
+        "clab-mgmt-net-bridge": "br-f43b6887ac4f",
+        "clab-node-group": "",
+        "clab-node-kind": "linux",
+        "clab-node-lab-dir": "/root/wcni-kind/split/netenv/4-adv-netwotk/25-L2-NETWORK/1-VLAN/7-VLAN-to-Router-single-arm-routing-bond/clab-vlan-to-router-bond/server1",
+        "clab-node-name": "server1",
+        "clab-node-type": "",
+        "clab-topo-file": "/root/wcni-kind/split/netenv/4-adv-netwotk/25-L2-NETWORK/1-VLAN/7-VLAN-to-Router-single-arm-routing-bond/clab.yaml",
+        "containerlab": "vlan-to-router-bond"
+      }
+    },
+    "server2": {
+      "index": "4",
+      "shortname": "server2",
+      "longname": "clab-vlan-to-router-bond-server2",
+      "fqdn": "server2.vlan-to-router-bond.io",
+      "group": "",
+      "labdir": "/root/wcni-kind/split/netenv/4-adv-netwotk/25-L2-NETWORK/1-VLAN/7-VLAN-to-Router-single-arm-routing-bond/clab-vlan-to-router-bond/server2",
+      "kind": "linux",
+      "image": "192.168.2.100:5000/xcni",
+      "mgmt-net": "",
+      "mgmt-intf": "",
+      "mgmt-ipv4-address": "172.20.20.4",
+      "mgmt-ipv4-prefix-length": 24,
+      "mgmt-ipv6-address": "",
+      "mgmt-ipv6-prefix-length": 0,
+      "mac-address": "",
+      "labels": {
+        "clab-mgmt-net-bridge": "br-f43b6887ac4f",
+        "clab-node-group": "",
+        "clab-node-kind": "linux",
+        "clab-node-lab-dir": "/root/wcni-kind/split/netenv/4-adv-netwotk/25-L2-NETWORK/1-VLAN/7-VLAN-to-Router-single-arm-routing-bond/clab-vlan-to-router-bond/server2",
+        "clab-node-name": "server2",
+        "clab-node-type": "",
+        "clab-topo-file": "/root/wcni-kind/split/netenv/4-adv-netwotk/25-L2-NETWORK/1-VLAN/7-VLAN-to-Router-single-arm-routing-bond/clab.yaml",
+        "containerlab": "vlan-to-router-bond"
+      }
+    },
+    "server3": {
+      "index": "5",
+      "shortname": "server3",
+      "longname": "clab-vlan-to-router-bond-server3",
+      "fqdn": "server3.vlan-to-router-bond.io",
+      "group": "",
+      "labdir": "/root/wcni-kind/split/netenv/4-adv-netwotk/25-L2-NETWORK/1-VLAN/7-VLAN-to-Router-single-arm-routing-bond/clab-vlan-to-router-bond/server3",
+      "kind": "linux",
+      "image": "192.168.2.100:5000/xcni",
+      "mgmt-net": "",
+      "mgmt-intf": "",
+      "mgmt-ipv4-address": "172.20.20.8",
+      "mgmt-ipv4-prefix-length": 24,
+      "mgmt-ipv6-address": "",
+      "mgmt-ipv6-prefix-length": 0,
+      "mac-address": "",
+      "labels": {
+        "clab-mgmt-net-bridge": "br-f43b6887ac4f",
+        "clab-node-group": "",
+        "clab-node-kind": "linux",
+        "clab-node-lab-dir": "/root/wcni-kind/split/netenv/4-adv-netwotk/25-L2-NETWORK/1-VLAN/7-VLAN-to-Router-single-arm-routing-bond/clab-vlan-to-router-bond/server3",
+        "clab-node-name": "server3",
+        "clab-node-type": "",
+        "clab-topo-file": "/root/wcni-kind/split/netenv/4-adv-netwotk/25-L2-NETWORK/1-VLAN/7-VLAN-to-Router-single-arm-routing-bond/clab.yaml",
+        "containerlab": "vlan-to-router-bond"
+      }
+    },
+    "server4": {
+      "index": "6",
+      "shortname": "server4",
+      "longname": "clab-vlan-to-router-bond-server4",
+      "fqdn": "server4.vlan-to-router-bond.io",
+      "group": "",
+      "labdir": "/root/wcni-kind/split/netenv/4-adv-netwotk/25-L2-NETWORK/1-VLAN/7-VLAN-to-Router-single-arm-routing-bond/clab-vlan-to-router-bond/server4",
+      "kind": "linux",
+      "image": "192.168.2.100:5000/xcni",
+      "mgmt-net": "",
+      "mgmt-intf": "",
+      "mgmt-ipv4-address": "172.20.20.6",
+      "mgmt-ipv4-prefix-length": 24,
+      "mgmt-ipv6-address": "",
+      "mgmt-ipv6-prefix-length": 0,
+      "mac-address": "",
+      "labels": {
+        "clab-mgmt-net-bridge": "br-f43b6887ac4f",
+        "clab-node-group": "",
+        "clab-node-kind": "linux",
+        "clab-node-lab-dir": "/root/wcni-kind/split/netenv/4-adv-netwotk/25-L2-NETWORK/1-VLAN/7-VLAN-to-Router-single-arm-routing-bond/clab-vlan-to-router-bond/server4",
+        "clab-node-name": "server4",
+        "clab-node-type": "",
+        "clab-topo-file": "/root/wcni-kind/split/netenv/4-adv-netwotk/25-L2-NETWORK/1-VLAN/7-VLAN-to-Router-single-arm-routing-bond/clab.yaml",
+        "containerlab": "vlan-to-router-bond"
+      }
+    }
+  },
+  "links": [
+    {
+      "a": {
+        "node": "br1",
+        "interface": "eth1",
+        "mac": "aa:c1:ab:c4:fa:82",
+        "peer": "z"
+      },
+      "z": {
+        "node": "server1",
+        "interface": "net0",
+        "mac": "aa:c1:ab:e1:e8:f3",
+        "peer": "a"
+      }
+    },
+    {
+      "a": {
+        "node": "br1",
+        "interface": "eth2",
+        "mac": "aa:c1:ab:8b:7b:1e",
+        "peer": "z"
+      },
+      "z": {
+        "node": "server2",
+        "interface": "net0",
+        "mac": "aa:c1:ab:c9:66:41",
+        "peer": "a"
+      }
+    },
+    {
+      "a": {
+        "node": "br1",
+        "interface": "eth3",
+        "mac": "aa:c1:ab:42:a6:45",
+        "peer": "z"
+      },
+      "z": {
+        "node": "br2",
+        "interface": "eth3",
+        "mac": "aa:c1:ab:f1:38:be",
+        "peer": "a"
+      }
+    },
+    {
+      "a": {
+        "node": "br2",
+        "interface": "eth1",
+        "mac": "aa:c1:ab:de:43:87",
+        "peer": "z"
+      },
+      "z": {
+        "node": "server3",
+        "interface": "net0",
+        "mac": "aa:c1:ab:0d:16:2d",
+        "peer": "a"
+      }
+    },
+    {
+      "a": {
+        "node": "br2",
+        "interface": "eth2",
+        "mac": "aa:c1:ab:86:6f:fc",
+        "peer": "z"
+      },
+      "z": {
+        "node": "server4",
+        "interface": "net0",
+        "mac": "aa:c1:ab:92:d8:e1",
+        "peer": "a"
+      }
+    },
+    {
+      "a": {
+        "node": "gwx",
+        "interface": "eth1",
+        "mac": "aa:c1:ab:48:49:ee",
+        "peer": "z"
+      },
+      "z": {
+        "node": "br1",
+        "interface": "eth4",
+        "mac": "aa:c1:ab:34:f5:ac",
+        "peer": "a"
+      }
+    },
+    {
+      "a": {
+        "node": "gwx",
+        "interface": "eth2",
+        "mac": "aa:c1:ab:15:f0:5b",
+        "peer": "z"
+      },
+      "z": {
+        "node": "br1",
+        "interface": "eth5",
+        "mac": "aa:c1:ab:ce:c0:01",
+        "peer": "a"
+      }
+    }
+  ]
+}
