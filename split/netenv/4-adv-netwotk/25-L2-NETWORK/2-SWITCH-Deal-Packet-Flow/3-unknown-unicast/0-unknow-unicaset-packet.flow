@@ -1,0 +1,38 @@
+1. env details
+vyos@br1# run show bridge br1 fdb [the fdb table without aa:c1:ab:c5:ab:71]
+Interface    Mac address        State      Flags
+-----------  -----------------  ---------  -------
+br1          33:33:00:00:00:01  permanent  self
+br1          33:33:00:00:00:02  permanent  self
+br1          33:33:ff:43:1f:39  permanent  self
+br1          01:00:5e:00:00:01  permanent  self
+br1          01:80:c2:00:00:21  permanent  self
+br1          33:33:ff:00:00:00  permanent  self
+br1          aa:c1:ab:43:1f:39  permanent
+br1          aa:c1:ab:43:1f:39  permanent
+eth2         aa:c1:ab:d4:5b:ab  permanent
+eth2         aa:c1:ab:d4:5b:ab  permanent
+eth2         33:33:00:00:00:01  permanent  self
+eth2         01:00:5e:00:00:01  permanent  self
+eth2         33:33:00:00:00:02  permanent  self
+eth3         aa:c1:ab:be:eb:f8  permanent
+eth3         aa:c1:ab:be:eb:f8  permanent
+eth3         33:33:00:00:00:01  permanent  self
+eth3         33:33:00:00:00:02  permanent  self
+eth3         01:00:5e:00:00:01  permanent  self
+eth1         aa:c1:ab:43:1f:39  permanent
+eth1         33:33:00:00:00:01  permanent  self
+eth1         33:33:00:00:00:02  permanent  self
+eth1         01:00:5e:00:00:01  permanent  self
+vyos@br1# sudo tcpdump -pne -i eth3 [and when recv the unknown unicast frame, will flooding to all the same vlan interface!!!. so we capture the ICMP request.]
+tcpdump: verbose output suppressed, use -v[v]... for full protocol decode
+listening on eth3, link-type EN10MB (Ethernet), snapshot length 262144 bytes
+05:59:06.967319 aa:c1:ab:19:4d:17 > aa:c1:ab:c5:ab:71, ethertype IPv4 (0x0800), length 98: 10.1.5.10 > 10.1.5.11: ICMP echo request, id 75, seq 1, length 64
+^C
+1 packet captured
+1 packet received by filter
+0 packets dropped by kernel
+[edit]
+vyos@br1# 
+
+
