@@ -5,6 +5,6 @@ all:
         clab-broadcast-packet-br1:
           ansible_host: 172.20.20.2
         clab-broadcast-packet-server1:
-          ansible_host: 172.20.20.4
-        clab-broadcast-packet-server2:
           ansible_host: 172.20.20.3
+        clab-broadcast-packet-server2:
+          ansible_host: 172.20.20.4
