@@ -13,7 +13,9 @@ virt-install --os-variant list
 
 setfacl -m u:libvirt-qemu:--x /root
 
-virt-install --name vpp --memory 10240  --cpu host-model --vcpus=8 --disk /root/kvm/vpp1.qcow2,device=disk,bus=virtio --disk size=30 --os-variant centos7.0 --virt-type kvm --graphics none --network=bridge=brnet,model=virtio --network=bridge=vppdpdk,model=virtio --import
+virt-install --name vpp1 --memory 10240  --cpu host-model --vcpus=8 --disk /root/kvm/vpp1.qcow2,device=disk,bus=virtio --disk size=30 --os-variant centos7.0 --virt-type kvm --graphics none --network=bridge=brnet,model=virtio --network=bridge=vppdpdk,model=virtio --import
+
+virt-install --name vpp2 --memory 10240  --cpu host-model --vcpus=8 --disk /root/kvm/vpp2.qcow2,device=disk,bus=virtio --disk size=30 --os-variant centos7.0 --virt-type kvm --graphics none --network=bridge=brnet,model=virtio --network=bridge=vppdpdk,model=virtio --import
 
 virsh destroy vpp1
 virsh undefine vpp1
