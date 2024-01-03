@@ -4,7 +4,7 @@ set -v
 docker run -td -h xdpdsrlb --privileged --name xdpdsrlb 192.168.2.100:5000/ebpf-xdp:v03
 docker exec xdpdsrlb bash -c "git clone https://github.com/snpsuen/XDP_LBDSR_Enhance && cd XDP_LBDSR_Enhance && make"
 
-tail -f  /sys/kernel/debug/tracing/trace_pipe > xdpdsrlb.trace >/dev/null 2>&1 &
+tail -f /sys/kernel/debug/tracing/trace_pipe > xdpdsrlb.trace >/dev/null 2>&1 &
 
 docker run -td --privileged --name backend_a -h backend-A 192.168.2.100:5000/nettool
 docker run -td --privileged --name backend_b -h backend-B 192.168.2.100:5000/nettool
