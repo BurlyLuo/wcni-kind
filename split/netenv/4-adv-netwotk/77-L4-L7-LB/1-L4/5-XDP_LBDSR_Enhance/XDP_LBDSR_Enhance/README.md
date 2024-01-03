@@ -6,7 +6,7 @@ The load balancer is implemented by a bpf program running in the kernel space to
 * xdp_lbdsr.bpf.c (Data plane in the kernel space)
 * xdp_lbdsr.c (Control plane in the user space)
 
-![Load Balancer Architecture Based on eBPF/XDP](XDP_DSR_LoadBalancer01_p2.png)
+![Load Balancer Architecture Based on eBPF/XDP](images/XDP_DSR_LoadBalancer01_p2.png)
 
 ### Use Case Example
 
@@ -14,7 +14,7 @@ The load balancer is tyically used for the so-called one-armed deployment, where
 
 It is worthwhile to note that only the MAC addresses of network packets are required to change in the process. There is no need to modify any parts of the L3 headers and beyond all along.
 
-![Delivery Of Workloads Through Direct Server Return](XDP_DSR_LoadBalancer01_p1.png)
+![Delivery Of Workloads Through Direct Server Return](images/XDP_DSR_LoadBalancer01_p1.png)
 
 ### Setup and Experimentation
 
@@ -33,7 +33,7 @@ docker exec -it lbdsr0a bash
 ```
 2. Download this repo and build the load balancer on both the control and data planes.
 ```
-git clone https://github.com/snpsuen/XDP-LoadBalancer-Revamp
+git clone https://github.com/snpsuen/XDP_LBDSR_Enhance
 cd XDP*
 make
 ```
@@ -70,59 +70,23 @@ ip route add 192.168.25.10/32 via 172.17.0.2
 More realistically, say in a production environment, it is necessary to arrange for the VIP host route to be originated as a stub link for advertisement by routing protocols like OSPF and BGP throughout an autonmous system and beyond.
 
 #### 4  Test it out
-1. Issue a curl command from the curl client to the service VIP in a loop.
+
+1. Enter the load balancer container and run the control plane ./xdp_lbdsr where the attached NIC and ring buffer poll interval are set to eth0 and 1000 ms respectively.
 ```
-while true
-do
-curl -s http://192.168.25.10
-sleep 3
-echo ""
-done
+docker exec -it lbdsr0a bash
+cd XDP_LBDSR*
+./xdp_lbdsr
 ```
-Expect to receive replies randomly from backend-A or backend-B.
-```
-/home/curl_user # while true
-> do
-> curl -s http://192.168.25.10
-> sleep 3
-> echo ""
-> done
-Server address: 192.168.25.10:80
-Server name: backend-a
-Date: 15/Jun/2023:09:03:44 +0000
-URI: /
-Request ID: 5821794b6313f1d4770201d5e79abad6
+![demo_screen01](images/xdp_lbdsr_screen01.PNG)
 
-Server address: 192.168.25.10:80
-Server name: backend-a
-Date: 15/Jun/2023:09:03:47 +0000
-URI: /
-Request ID: d6ab760758ef93462a422bac5ce2a0cb
+2. Select option 2 from the main menu to specify the VIP together with the MAC of the load balancer.
 
-Server address: 192.168.25.10:80
-Server name: backend-a
-Date: 15/Jun/2023:09:03:50 +0000
-URI: /
-Request ID: aa3c365b30261d13726738c231b6d9f2
+![demo_screen02](images/xdp_lbdsr_screen02.PNG)
 
-Server address: 192.168.25.10:80
-Server name: backend-b
-Date: 15/Jun/2023:09:03:53 +0000
-URI: /
-Request ID: 774487b5e3e01967e0bfb5fe86752d16
+3. Select option 2 from the main menu, followed by 1 from the submenu to register the backend servers backend-A and backend-B.
 
-Server address: 192.168.25.10:80
-Server name: backend-a
-Date: 15/Jun/2023:09:03:56 +0000
-URI: /
-Request ID: 616153625c060cde7be942b234ed22a7
+![demo_screen03](images/xdp_lbdsr_screen03.PNG)
 
-Server address: 192.168.25.10:80
-Server name: backend-b
-Date: 15/Jun/2023:09:03:59 +0000
-URI: /
-Request ID: d37c0af522469a2e4de74798d0166079
-```
+4. Enter the curl client container and access the backend nginx servers through the VIP in a loop. The http requests are observed to be dispatched randomly between backend-A and backend-B.
 
-
-
+![demo_screen05](images/xdp_lbdsr_screen05.PNG)
