@@ -36,12 +36,25 @@ echo 1 > /sys/module/vfio/parameters/enable_unsafe_noiommu_mode
 vi /etc/vpp/startup.conf
 
 add:
+cpu {
+    main-core 0
+    corelist-workers 1,2,3
+}
+
 dpdk {
   dev 0000:02:00.0 {
       name fpeth1  
+      num-rx-queues 3
+      num-tx-queues 4
+      num-rx-desc 1024
+      num-tx-desc 1024
   }
   dev 0000:03:00.0 {
       name fpeth2
+      num-rx-queues 3
+      num-tx-queues 4
+      num-rx-desc 1024
+      num-tx-desc 1024
   }
 }
 
