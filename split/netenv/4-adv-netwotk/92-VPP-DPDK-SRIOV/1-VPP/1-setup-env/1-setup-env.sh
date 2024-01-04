@@ -59,11 +59,13 @@ dpdk {
 }
 
 systemctl start vpp
+cat <<EOF>>/etc/rc.d/rc.local
 vppctl set interface ip address fpeth1 10.1.8.10/24
 vppctl set interface state fpeth1 up
-
 vppctl set interface ip address fpeth2 10.1.1.10/24
 vppctl set interface state fpeth2 up
+EOF
+chmod +x /etc/rc.d/rc.local
 
 vppctl show pci
 vppctl show hard
