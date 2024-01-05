@@ -1,6 +1,12 @@
 #!/bin/bash
 
-virt-install --name vpp1 --memory 10240  --cpu host-model --vcpus=8 --disk /root/kvm/vpp1.qcow2,device=disk,bus=virtio --disk size=30 --os-variant centos7.0 --virt-type kvm --graphics none --network=bridge=brnet,model=virtio --network=bridge=vppdpdk1,model=virtio --network=bridge=vppdpdk2,model=virtio --import
+virt-install --name vpp1 --memory 10240  --cpu host-model --vcpus=8 --disk /root/kvm/vpp1.qcow2,device=disk,bus=virtio --disk size=30 --os-variant centos7.0 --virt-type kvm --graphics none --network=bridge=brnet,model=virtio --network=bridge=vppdpdk1,model=virtio --network=bridge=vppdpdk8,model=virtio --import
+
+virt-install --name client1 --memory 2048  --cpu host-model --vcpus=4 --disk /root/kvm/client1.qcow2,device=disk,bus=virtio --disk size=30 --os-variant centos7.0 --virt-type kvm --graphics none --network=bridge=brnet,model=virtio --network=bridge=vppdpdk1,model=virtio --import
+
+virt-install --name client2 --memory 2048  --cpu host-model --vcpus=4 --disk /root/kvm/client2.qcow2,device=disk,bus=virtio --disk size=30 --os-variant centos7.0 --virt-type kvm --graphics none --network=bridge=brnet,model=virtio --network=bridge=vppdpdk8,model=virtio --import
+
+virt install --name router --memory 2048  --cpu host-model --vcpus=4 --disk /root/kvm/router.qcow2,device=disk,bus=virtio --disk size=30 --os-variant centos7.0 --virt-type kvm --graphics none --network=bridge=brnet,model=virtio --network=bridge=vppdpdk1,model=virtio --network=bridge=vppdpdk8,model=virtio --import
 
 ssh root@$vpp1_ip_eth0
 
@@ -60,9 +66,9 @@ dpdk {
 
 systemctl start vpp
 cat <<EOF>>/etc/rc.d/rc.local
-vppctl set interface ip address fpeth1 10.1.8.10/24
+vppctl set interface ip address fpeth1 10.1.1.10/24
 vppctl set interface state fpeth1 up
-vppctl set interface ip address fpeth2 10.1.1.10/24
+vppctl set interface ip address fpeth2 10.1.8.10/24
 vppctl set interface state fpeth2 up
 EOF
 chmod +x /etc/rc.d/rc.local
