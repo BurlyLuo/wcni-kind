@@ -1,0 +1,45 @@
+1. create bridge
+   1.1: with network/netplan method
+   1.2: with kvm method
+
+2.
+wget https://cloud.centos.org/centos/8/x86_64/images/CentOS-8-GenericCloud-8.2.2004-20200611.2.x86_64.qcow2
+wget https://cloud.centos.org/centos/7/images/CentOS-7-x86_64-GenericCloud-2009.qcow2
+
+apt install -y qemu-kvm virt-manager libvirt-daemon-system virtinst libvirt-clients bridge-utils
+apt install guestfish
+virt-customize -a /data/centos8.qcow2 --root-password password:hive
+virt-install --os-variant list
+
+setfacl -m u:libvirt-qemu:--x /root
+
+virt-customize -a ./CentOS-8-GenericCloud-8.4.2105-20210603.0.x86_64.qcow2 --root-password password:hive
+cp -r CentOS-8-GenericCloud-8.4.2105-20210603.0.x86_64.qcow2 centos8.qcow2
+virt-filesystems --long --parts --blkdevs -h -a centos8.qcow2 
+mv centos8.qcow2 centos8.qcow2.bak
+qemu-img create -f qcow2 centos8.qcow2 50G
+virt-resize --expand /dev/sda1 centos8.qcow2.bak centos8.qcow2
+virt-filesystems --long --parts --blkdevs -h -a centos8.qcow2
+virt-install --name c8 --memory 2048  --cpu host-model --vcpus=4 --disk /root/kvm/centos8.qcow2,device=disk,bus=virtio --disk size=50 --os-variant centos8 --virt-type kvm --graphics none --network=bridge=brnet,model=virtio --import
+
+virt-customize -a ./CentOS-7-x86_64-GenericCloud-2009.qcow2 --root-password password:hive
+cp -r CentOS-7-x86_64-GenericCloud-2009.qcow2 centos7.qcow2
+virt-filesystems --long --parts --blkdevs -h -a centos7.qcow2 
+mv centos7.qcow2 centos7.qcow2.bak
+qemu-img create -f qcow2 centos7.qcow2 50G
+virt-resize --expand /dev/sda1 centos7.qcow2.bak centos7.qcow2
+virt-filesystems --long --parts --blkdevs -h -a centos7.qcow2
+virt-install --name c7 --memory 2048  --cpu host-model --vcpus=4 --disk /root/kvm/centos7.qcow2,device=disk,bus=virtio --disk size=50 --os-variant centos7.0 --virt-type kvm --graphics none --network=bridge=brnet,model=virtio --import
+
+
+virt-install --name vpp1 --memory 10240  --cpu host-model --vcpus=8 --disk /root/kvm/vpp1.qcow2,device=disk,bus=virtio --disk size=30 --os-variant centos7.0 --virt-type kvm --graphics none --network=bridge=brnet,model=virtio --network=bridge=vppdpdk,model=virtio --import
+
+virt-install --name vpp2 --memory 10240  --cpu host-model --vcpus=8 --disk /root/kvm/vpp2.qcow2,device=disk,bus=virtio --disk size=30 --os-variant centos7.0 --virt-type kvm --graphics none --network=bridge=brnet,model=virtio --network=bridge=vppdpdk,model=virtio --import
+
+virsh destroy vpp1
+virsh undefine vpp1
+virsh shutdown vpp1
+virsh start vpp1
+
+cd /var/lib/libvirt/images && ls -lrth 
+
