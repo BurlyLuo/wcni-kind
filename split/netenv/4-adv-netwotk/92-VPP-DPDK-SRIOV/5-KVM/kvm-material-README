@@ -13,6 +13,8 @@ virt-install --os-variant list
 
 setfacl -m u:libvirt-qemu:--x /root
 
+osinfo-query os
+
 virt-customize -a ./CentOS-8-GenericCloud-8.4.2105-20210603.0.x86_64.qcow2 --root-password password:hive
 cp -r CentOS-8-GenericCloud-8.4.2105-20210603.0.x86_64.qcow2 centos8.qcow2
 virt-filesystems --long --parts --blkdevs -h -a centos8.qcow2 
