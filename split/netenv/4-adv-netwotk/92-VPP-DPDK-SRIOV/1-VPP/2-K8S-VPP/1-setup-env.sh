@@ -1,4 +1,6 @@
 # 0.env perp:
+virt-install --name vpp1 --memory 10240  --cpu host-model --vcpus=8 --disk /root/kvm/vpp1.qcow2,device=disk,bus=virtio --disk size=30 --os-variant centos7.0 --virt-type kvm --graphics none --network=bridge=brnet,model=virtio --network=bridge=vppdpdk5,model=virtio --network=bridge=vppdpdk8,model=virtio --import
+
 sshpass -p hive ssh-copy-id -o StrictHostKeyChecking=no -p 22 root@192.168.2.98 > /dev/null 2>&1
 master_ip=192.168.2.98
 k3sup install --ip=$master_ip --user=root --merge --sudo --cluster --k3s-version=v1.27.3+k3s1 --k3s-extra-args "--flannel-backend=none --cluster-cidr=10.244.0.0/16 --disable-network-policy --disable traefik --disable servicelb --node-ip=$master_ip" --local-path $HOME/.kube/config --context=vpp
@@ -116,7 +118,6 @@ sslverify=1
 sslcacert=/etc/pki/tls/certs/ca-bundle.crt
 metadata_expire=300
 EOF
-
 
 ip l s eth1 down && ip l s eth2 down 
 lshw -class network -businfo
