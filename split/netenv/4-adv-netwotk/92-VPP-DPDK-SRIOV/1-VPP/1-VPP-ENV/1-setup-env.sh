@@ -10,10 +10,11 @@ virt install --name router --memory 2048  --cpu host-model --vcpus=4 --disk /roo
 
 ssh root@$vpp1_ip_eth0
 
+yum -y install epel-release
 yum list && yum update -y 
 yum install -y epel-release mbedtls python36
 
-cat <<EOF | >/etc/yum.repos.d/fdio-release.repo
+cat <<EOF>/etc/yum.repos.d/fdio-release.repo
 [fdio_release]
 name=fdio_release
 baseurl=https://packagecloud.io/fdio/release/el/7/$basearch
