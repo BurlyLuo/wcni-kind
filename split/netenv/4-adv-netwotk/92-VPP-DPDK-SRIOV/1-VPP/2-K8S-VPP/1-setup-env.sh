@@ -71,6 +71,7 @@ spec:
   containers:
   - name: vpp
     image: centos/tools 
+    #image: 192.168.2.100:5000/centos/tools
     imagePullPolicy: IfNotPresent
     volumeMounts:
     - name: hugepage
