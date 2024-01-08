@@ -150,6 +150,11 @@ alias dkc='set -f;{ kubectl config delete-cluster $1 && kubectl config delete-co
 
 alias mmrs="systemctl stop snap.multipass.multipassd.service && systemctl start snap.multipass.multipassd.service && systemctl status snap.multipass.multipassd.service"
 
+
+#kvm
+alias ks="virsh list --all"
+
+
 # Alias definitions.
 # You may want to put all your additions into a separate file like
 # ~/.bash_aliases, instead of adding them here directly.
