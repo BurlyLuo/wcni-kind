@@ -144,6 +144,7 @@ set interface ip address GigabitEthernet2/0/0 10.1.5.10/24
 set interface state GigabitEthernet2/0/0 up
 set interface ip address GigabitEthernet3/0/0 10.1.8.10/24
 set interface state GigabitEthernet3/0/0 up
+ip route add 0.0.0.0/0 via 10.1.5.254 fpeth1
 
 systemctl start vpp && systemctl enable vpp
 
