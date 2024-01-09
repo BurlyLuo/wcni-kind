@@ -7,12 +7,16 @@ metadata:
 spec:
   containers:
   - name: vpp
-    image: centos/tools 
+    image: soelvkaer/vppcontainer:latest
     imagePullPolicy: IfNotPresent
     volumeMounts:
     - name: hugepage
       mountPath: /hugepages
-    command: [ "/sbin/init" ]
+    - name: vppconfig
+      mountPath: /etc/vpp/
+    - name: startupconfig
+      mountPath: /root/
+    #command: [ "/sbin/init" ]
     #command: [ "/bin/bash", "-c", "--" ]
     #args: [ "while true; do sleep 300000; done;" ]
     securityContext:
@@ -34,3 +38,53 @@ spec:
   - name: hugepage
     emptyDir:
       medium: HugePages
+  - name: vppconfig
+    configMap:
+      name: vppconfig
+  - name: startupconfig
+    configMap:
+      name: startupconfig
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: vppconfig
+data:
+  startup.conf: |
+    unix {
+      nodaemon
+      log /var/log/vpp/vpp.log
+      full-coredump
+      cli-listen /run/vpp/cli.sock
+      gid vpp
+      startup-config /root/startupconfig
+    }
+    api-trace {
+      on
+    }
+    api-segment {
+      gid vpp
+    }
+    cpu { 
+        main-core 0
+        corelist-workers 1,2
+    }
+    dpdk {
+      dev 0000:02:00.0 {
+          name fpeth1
+      }
+      dev 0000:03:00.0 {
+          name fpeth2
+    }
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: startupconfig
+data:
+  startupconfig: |
+    set interface ip address fpeth1 10.1.5.10/24
+    set interface state fpeth1 up
+    set interface ip address fpeth2 10.1.8.10/24
+    set interface state fpeth2 up
+    ip route add 0.0.0.0/0 via 10.1.5.254 fpeth1
