@@ -154,6 +154,8 @@ alias mmrs="systemctl stop snap.multipass.multipassd.service && systemctl start 
 #kvm
 alias ks="virsh list --all"
 
+#key reference
+alias key="cat /root/wcni-kind/split/weiluo/env.x"
 
 # Alias definitions.
 # You may want to put all your additions into a separate file like
