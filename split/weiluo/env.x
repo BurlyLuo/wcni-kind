@@ -94,6 +94,12 @@ else
 fi
 done
 
-8. vpp 
+8. vpp+dpdk
 lshw -class network -businfo
+for intf in  eth1 eth2 eth3; do
+  for pci_id in `ls -l /sys/class/net/$intf/device/virtfn* | cut -d '/' -f8`; do
+      echo $intf $pci_id
+  done
+done
+
 
