@@ -152,7 +152,7 @@ or
 /usr/bin/vpp -c /etc/vpp/startup.conf & 
 
 
-Docekrfile:
+# Docekrfile:
 FROM ubuntu:18.04
 
 ENV VPP_VER "20.01"
@@ -173,5 +173,4 @@ RUN apt-get --no-install-recommends install -y \
     libvppinfra=${VPP_VER}-release
 
 CMD ["/usr/bin/vpp", "-c", "/etc/vpp/startup.conf"]
-
 
