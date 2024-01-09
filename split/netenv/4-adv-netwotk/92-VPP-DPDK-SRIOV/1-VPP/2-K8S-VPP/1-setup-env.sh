@@ -137,7 +137,30 @@ unix {
   cli-listen /run/vpp/cli.sock
   exec /etc/vpp/exec
   gid vpp
+
+cpu {
+    main-core 0
+    corelist-workers 1,2,3
 }
+
+dpdk {
+  dev 0000:02:00.0 {
+      name fpeth1  
+      num-rx-queues 3
+      num-tx-queues 4
+      num-rx-desc 1024
+      num-tx-desc 1024
+  }
+  dev 0000:03:00.0 {
+      name fpeth2
+      num-rx-queues 3
+      num-tx-queues 4
+      num-rx-desc 1024
+      num-tx-desc 1024
+  }
+}
+}
+
 
 # cat /etc/vpp/exec 
 set interface ip address GigabitEthernet2/0/0 10.1.5.10/24
