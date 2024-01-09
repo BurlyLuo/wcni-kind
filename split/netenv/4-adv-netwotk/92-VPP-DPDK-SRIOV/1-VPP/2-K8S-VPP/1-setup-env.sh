@@ -147,4 +147,31 @@ set interface state GigabitEthernet3/0/0 up
 ip route add 0.0.0.0/0 via 10.1.5.254 fpeth1
 
 systemctl start vpp && systemctl enable vpp
+or
+# CMD ["/usr/bin/vpp", "-c", "/etc/vpp/startup.conf"]
+/usr/bin/vpp -c /etc/vpp/startup.conf & 
+
+
+Docekrfile:
+FROM ubuntu:18.04
+
+ENV VPP_VER "20.01"
+
+RUN apt-get update && apt-get --no-install-recommends install -y \
+    gnupg \
+    apt-transport-https \
+    curl \
+    ca-certificates
+
+RUN curl -s https://packagecloud.io/install/repositories/fdio/release/script.deb.sh | bash
+
+RUN apt-get --no-install-recommends install -y \
+    dpdk \
+    vpp=${VPP_VER}-release \
+    vpp-plugin-core=${VPP_VER}-release \
+    vpp-plugin-dpdk=${VPP_VER}-release \
+    libvppinfra=${VPP_VER}-release
+
+CMD ["/usr/bin/vpp", "-c", "/etc/vpp/startup.conf"]
+
 
