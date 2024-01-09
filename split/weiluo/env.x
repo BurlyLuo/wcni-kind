@@ -102,4 +102,12 @@ for intf in  eth1 eth2 eth3; do
   done
 done
 
+9. k8s
+while true;do ns=ns1;unit_sts_name=sts-unit;if [[ $(kubectl -n$ns get statefulset $unit_sts_name -o jsonpath='{.status.readyReplicas}') -eq $(kubectl -n$ns get statefulset $unit_sts_name -o jsonpath='{.spec.replicas}') ]]; then break;else sleep 1;fi;done
+
+until controller_node_ip=$(kubectl get node -o wide --no-headers | grep -E "control-plane|bpf1" | awk -F " " '{print $6}');[ -n "$controller_node_ip" ];do sleep 1;done
+until pod_list=$(kubectl get pods -o wide -A --no-headers);[ -n "$pod_list" ];do sleep 1;done
+
+kubectl wait --timeout=100s --for=condition=Ready=true pods --all -A
+kubectl -nkube-system wait --timeout=60s --for=condition=Ready=true pod -l k8s-app=calico-node
 
