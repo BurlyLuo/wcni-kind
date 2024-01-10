@@ -305,3 +305,32 @@ RUN apt-get --no-install-recommends install -y \
 
 CMD ["/usr/bin/vpp", "-c", "/etc/vpp/startup.conf"]
 
+
+
+
+# env:
+[root@localhost ~]# kubectl exec -it vpp bash 
+kubectl exec [POD] [COMMAND] is DEPRECATED and will be removed in a future version. Use kubectl exec [POD] -- [COMMAND] instead.
+eroot@vpp:/# env
+HOSTNAME=vpp
+PCIDEVICE_INTEL_COM_SRIOV_VPPDPDK5_INFO={"0000:02:00.0":{"generic":{"deviceID":"0000:02:00.0"},"vfio":{"dev-mount":"/dev/vfio/0","mount":"/dev/vfio/vfio"}}}
+VPP_VER=20.01
+PCIDEVICE_INTEL_COM_SRIOV_VPPDPDK5=0000:02:00.0
+PCIDEVICE_INTEL_COM_SRIOV_VPPDPDK8=0000:03:00.0
+KUBERNETES_PORT_443_TCP_PROTO=tcp
+KUBERNETES_PORT_443_TCP_ADDR=10.43.0.1
+PCIDEVICE_INTEL_COM_SRIOV_VPPDPDK8_INFO={"0000:03:00.0":{"generic":{"deviceID":"0000:03:00.0"},"vfio":{"dev-mount":"/dev/vfio/1","mount":"/dev/vfio/vfio"}}}
+KUBERNETES_PORT=tcp://10.43.0.1:443
+PWD=/
+HOME=/root
+KUBERNETES_SERVICE_PORT_HTTPS=443
+KUBERNETES_PORT_443_TCP_PORT=443
+KUBERNETES_PORT_443_TCP=tcp://10.43.0.1:443
+TERM=xterm
+SHLVL=1
+KUBERNETES_SERVICE_PORT=443
+PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+KUBERNETES_SERVICE_HOST=10.43.0.1
+_=/usr/bin/env
+root@vpp:/# 
+
