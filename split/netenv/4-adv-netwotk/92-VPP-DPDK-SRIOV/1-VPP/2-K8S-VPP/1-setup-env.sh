@@ -333,4 +333,3 @@ PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
 KUBERNETES_SERVICE_HOST=10.43.0.1
 _=/usr/bin/env
 root@vpp:/# 
-
