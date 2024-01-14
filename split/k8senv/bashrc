@@ -139,6 +139,8 @@ alias 2004='ip=$(cat /etc/hosts | grep 2004 | awk -F " " '\''{print $1}'\'') && 
 
 alias 2204d='set -f;sed -i '/vm2204/d' /etc/hosts && for vm in $(multipass list | grep vm2204[0-9] | awk -F " " "{print \$1}"); do multipass delete --purge $vm; done && { sed -i "1!d" /root/.ssh/known_hosts; } > /dev/null 2>&1;set +f'
 
+alias 1804d='set -f;sed -i '/vm1804/d' /etc/hosts && for vm in $(multipass list | grep vm1804[0-9] | awk -F " " "{print \$1}"); do multipass delete --purge $vm; done && { sed -i "1!d" /root/.ssh/known_hosts; } > /dev/null 2>&1;set +f'
+
 alias 2204='ip=$(cat /etc/hosts | grep 2204 | awk -F " " '\''{print $1}'\'') && ssh root@$ip'
 alias 22040='ip=$(cat /etc/hosts | grep 22040 | awk -F " " '\''{print $1}'\'') && ssh root@$ip'
 alias 22041='ip=$(cat /etc/hosts | grep 22041 | awk -F " " '\''{print $1}'\'') && ssh root@$ip'
@@ -156,6 +158,12 @@ alias ks="virsh list --all"
 
 #key reference
 alias key="cat /root/wcni-kind/split/weiluo/env.x"
+
+#vpp
+alias vpp="cd /root/wcni-kind/split/netenv/4-adv-netwotk/92-VPP-DPDK-SRIOV-RDMA/2-VPP"
+
+
+
 
 # Alias definitions.
 # You may want to put all your additions into a separate file like

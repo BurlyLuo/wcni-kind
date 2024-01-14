@@ -306,8 +306,6 @@ RUN apt-get --no-install-recommends install -y \
 CMD ["/usr/bin/vpp", "-c", "/etc/vpp/startup.conf"]
 
 
-
-
 # env:
 [root@localhost ~]# kubectl exec -it vpp bash 
 kubectl exec [POD] [COMMAND] is DEPRECATED and will be removed in a future version. Use kubectl exec [POD] -- [COMMAND] instead.
