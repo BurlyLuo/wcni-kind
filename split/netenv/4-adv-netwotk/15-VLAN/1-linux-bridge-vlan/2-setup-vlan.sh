@@ -1,3 +1,9 @@
+#!/bin/bash
+set -v
+{ ip l s br-vlan down && brctl delbr br-vlan; } > /dev/null 2>&1
+brctl addbr br-vlan;ip l s br-vlan up
+
+cat <<EOF>clab.yaml | clab deploy -t clab.yaml -
 name: vlan
 topology:
   nodes:
@@ -68,3 +74,4 @@ topology:
     - endpoints: ["vlan4:net1", "br-vlan:net5"]
     - endpoints: ["br-vlan:net1", "gwx:eth1"]
 
+EOF
