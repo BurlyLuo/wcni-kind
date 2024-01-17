@@ -41,3 +41,8 @@ ip r a 114.114.114.114 via 10.1.5.254 dev fpeth1
 # switch back to vpp side:
 vppctl show ip fib | grep 114.114.114.114 -C 5
 
+# SBR:
+ip route add 0.0.0.0/0 via 10.1.5.254 table 100
+ip rule add from 10.1.5.0/24 table 100
+
+
