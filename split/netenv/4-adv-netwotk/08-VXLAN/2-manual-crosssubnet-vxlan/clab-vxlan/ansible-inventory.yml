@@ -2,17 +2,17 @@ all:
   children:
     linux:
       hosts:
-        clab-vxlan-gwx:
-          ansible_host: 172.20.20.9
-        clab-vxlan-server1:
+        clab-vxlan-gw0:
           ansible_host: 172.20.20.8
-        clab-vxlan-server2:
+        clab-vxlan-server1:
           ansible_host: 172.20.20.4
-        clab-vxlan-server3:
+        clab-vxlan-server2:
           ansible_host: 172.20.20.3
+        clab-vxlan-server3:
+          ansible_host: 172.20.20.2
         clab-vxlan-vtep1:
           ansible_host: 172.20.20.7
         clab-vxlan-vtep2:
-          ansible_host: 172.20.20.5
-        clab-vxlan-vtep3:
           ansible_host: 172.20.20.6
+        clab-vxlan-vtep3:
+          ansible_host: 172.20.20.5
