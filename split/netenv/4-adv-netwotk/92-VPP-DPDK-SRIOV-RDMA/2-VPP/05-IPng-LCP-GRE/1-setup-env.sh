@@ -22,28 +22,28 @@ vppctl lcp create fpeth1 host-if fpeth1
 ip a a 172.12.1.11/24 dev fpeth1
 ip l s fpeth1 up 
 
-create tap id 5 host-ip4-addr 10.1.5.11/24 host-ip4-gw 10.1.5.1
-set interface state tap5 up
-set interface ip address tap5 10.1.5.1/24
+vppctl create tap id 5 host-ip4-addr 10.1.5.11/24 host-ip4-gw 10.1.5.1
+vppctl set interface state tap5 up
+vppctl set interface ip address tap5 10.1.5.1/24
 
-create gre tunnel src 172.12.1.11 dst 172.12.1.12 instance 256
-set interface state gre256 up
-set interface unnumbered gre256 use fpeth1
-ip route add 10.1.8.0/24 via gre256
+vppclt create gre tunnel src 172.12.1.11 dst 172.12.1.12 instance 256
+vppctl set interface state gre256 up
+vppctl set interface unnumbered gre256 use fpeth1
+vppctl ip route add 10.1.8.0/24 via gre256
 
 4.2: ipng2
 vppctl lcp create fpeth1 host-if fpeth1
 ip a a 172.12.1.12/24 fpeth1
 ip l s fpeth1 up 
 
-create tap id 8 host-ip4-addr 10.1.8.12/24 host-ip4-gw 10.1.8.1
-set interface state tap8 up
-set interface ip address tap8 10.1.8.1/24
+vppctl create tap id 8 host-ip4-addr 10.1.8.12/24 host-ip4-gw 10.1.8.1
+vppctl set interface state tap8 up
+vppctl set interface ip address tap8 10.1.8.1/24
 
-create gre tunnel src 172.12.1.12 dst 172.12.1.11 instance 256
-set interface state gre256 up
-set interface unnumbered gre256 use fpeth1
-ip route add 10.1.5.0/24 via gre256
+vppctl create gre tunnel src 172.12.1.12 dst 172.12.1.11 instance 256
+vppctl set interface state gre256 up
+vppctl set interface unnumbered gre256 use fpeth1
+vppctl ip route add 10.1.5.0/24 via gre256
 
 5. Capture the pcap
 
