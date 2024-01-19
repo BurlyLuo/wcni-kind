@@ -65,14 +65,6 @@ vppctl pcap dispatch trace off
 
 
 
-
-
-
-
-
-
-
-
 **********************************************************************************
 if with real vm: [there is no need to add simu tap interface]
 $ ipng1:
@@ -95,3 +87,4 @@ vppctl set interface state gre256 up
 vppctl set interface unnumbered gre256 use fpeth9
 vppctl ip route add 10.1.5.0/24 via gre256
 
+**********************************************************************************
