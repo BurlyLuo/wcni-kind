@@ -92,5 +92,29 @@ vppctl create gre tunnel src 10.1.9.12 dst 10.1.9.11 instance 256
 vppctl set interface state ipip256 up
 vppctl set interface unnumbered ipip256 use fpeth9
 vppctl ip route add 10.1.5.0/24 via ipip256
-
 **********************************************************************************
+
+Frame 8: 5265 bytes on wire (42120 bits), 5265 bytes captured (42120 bits)
+VPP Dispatch Trace
+NodeName: fpeth9-tx
+VPP Buffer Metadata
+VPP Buffer Opaque
+VPP Buffer Opaque2
+VPP Buffer Trace
+Ethernet II, Src: RealtekU_6a:18:88 (52:54:00:6a:18:88), Dst: RealtekU_04:fb:2c (52:54:00:04:fb:2c)
+Internet Protocol Version 4, Src: 10.1.9.11, Dst: 10.1.9.12
+Internet Protocol Version 4, Src: 10.1.5.11, Dst: 10.1.8.12
+Internet Control Message Protocol
+
+Frame 9: 2883 bytes on wire (23064 bits), 2883 bytes captured (23064 bits)
+VPP Dispatch Trace
+NodeName: ethernet-input
+VPP Buffer Metadata
+VPP Buffer Opaque
+VPP Buffer Opaque2
+VPP Buffer Trace
+Ethernet II, Src: RealtekU_04:fb:2c (52:54:00:04:fb:2c), Dst: RealtekU_6a:18:88 (52:54:00:6a:18:88)
+Internet Protocol Version 4, Src: 10.1.9.12, Dst: 10.1.9.11
+Internet Protocol Version 4, Src: 10.1.8.12, Dst: 10.1.5.11
+Internet Control Message Protocol
+
