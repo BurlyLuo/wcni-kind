@@ -12,9 +12,20 @@ wget -m --no-parent https://ipng.ch/media/vpp/bookworm/24.02-rc0~175-g31d4891cf/
 dpkg -i ipng.ch/media/vpp/bookworm/24.02-rc0~175-g31d4891cf/*.deb
 useradd -m pim && echo "pim:hive" | sudo chpasswd
 adduser pim vpp
-vppctl show version
+vppctl show version verbose
 
-3. case topo
+3. case topo 
+vppctl create gre tunnel src 172.12.1.11 dst 172.12.1.12 instance 256
+vppctl set interface state gre256 up
+vppctl set interface unnumbered gre256 use fpeth1
+vppctl ip route add 10.1.8.0/24 via gre256  $ via route to introduce traffic to GRE tunnel.
+
+                   gre256-interface    gre256-interface 
+                    172.12.1.11/24 ---  172.12.1.12/24
+                           |                  |
+10.1.5.11/24---10.1.5.1/24-|       GRE        |-10.1.8.1/24---10.1.8.12/24
+                         ipng1              ipng2 
+
 
 4. GRE case scripts
 4.1: ipng1
