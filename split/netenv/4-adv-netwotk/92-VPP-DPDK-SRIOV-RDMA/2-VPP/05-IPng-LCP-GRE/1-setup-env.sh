@@ -63,3 +63,35 @@ vppctl pcap dispatch trace on max 1000 file ipng1.cap buffer-trace dpdk-input 10
 sleep 5
 vppctl pcap dispatch trace off
 
+
+
+
+
+
+
+
+
+
+
+**********************************************************************************
+if with real vm: [there is no need to add simu tap interface]
+$ ipng1:
+vppctl lcp create fpeth9 host-if fpeth9
+ip a a 10.1.9.11/24 dev fpeth9
+ip l s fpeth9 up
+
+vppctl create gre tunnel src 10.1.9.11 dst 10.1.9.12 instance 256
+vppctl set interface state gre256 up
+vppctl set interface unnumbered gre256 use fpeth9
+vppctl ip route add 10.1.8.0/24 via gre256
+
+$ ipng2:
+vppctl lcp create fpeth9 host-if fpeth9
+ip a a 10.1.9.12/24 dev fpeth9
+ip l s fpeth9 up
+
+vppctl create gre tunnel src 10.1.9.12 dst 10.1.9.11 instance 256
+vppctl set interface state gre256 up
+vppctl set interface unnumbered gre256 use fpeth9
+vppctl ip route add 10.1.5.0/24 via gre256
+
