@@ -22,7 +22,8 @@ vppctl show version verbose
                     |     ipng1              ipng2  |
                   loop0                           loop0
 
-4. GRE case scripts
+
+4. GRE case scripts [https://zhuanlan.zhihu.com/p/540447990]
 4.1: ipng1
 vppctl set interface state fpeth9 up
 vppctl set interface ip address fpeth9 10.1.9.11/24
