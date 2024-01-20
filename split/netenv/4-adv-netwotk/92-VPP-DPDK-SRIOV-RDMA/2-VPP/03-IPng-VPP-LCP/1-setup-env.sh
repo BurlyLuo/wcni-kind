@@ -1,5 +1,5 @@
 1. Install kvm vm:
-virt-install --name vppx --memory 10240  --cpu host-model --vcpus=8 --disk /root/kvm/debian/debian12.qcow2,device=disk,bus=virtio --disk size=50 --os-variant debian12 --virt-type kvm --graphics none --network=bridge=brnet,model=virtio --network=bridge=vppdpdk5,model=virtio --network=bridge=vppdpdk8,model=virtio --import
+virt-install --name vppx --memory 10240  --cpu host-model --vcpus=8 --disk /root/kvm/debian/debian12.qcow2,device=disk,bus=virtio --disk size=50 --os-variant debian12 --virt-type kvm --graphics none --network=bridge=brnet,model=virtio --network=bridge=vppdpdk5,model=virtio --network=bridge=vppdpdk8,model=virtio --network=bridge=vppdpdk9,model=virtio --import
 
 2. Ipng install vpp
 apt update
