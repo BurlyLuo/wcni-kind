@@ -72,6 +72,9 @@ vppctl lcp create fpeth9 host-if fpeth9
 ip a a 10.1.9.11/24 dev fpeth9
 ip l s fpeth9 up
 
+vppctl set interface state fpeth5 up
+vppctl set interface ip address fpeth5 10.1.5.1/24
+
 vppctl create gre tunnel src 10.1.9.11 dst 10.1.9.12 instance 256
 vppctl set interface state gre256 up
 vppctl set interface unnumbered gre256 use fpeth9
@@ -81,6 +84,9 @@ $ ipng2:
 vppctl lcp create fpeth9 host-if fpeth9
 ip a a 10.1.9.12/24 dev fpeth9
 ip l s fpeth9 up
+
+vppctl set interface state fpeth8 up
+vppctl set interface ip address fpeth8 10.1.8.1/24
 
 vppctl create gre tunnel src 10.1.9.12 dst 10.1.9.11 instance 256
 vppctl set interface state gre256 up
