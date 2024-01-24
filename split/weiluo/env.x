@@ -96,6 +96,7 @@ done
 
 8. vpp+dpdk
 lshw -class network -businfo
+echo 1 > /sys/module/vfio/parameters/enable_unsafe_noiommu_mode
 for intf in  eth1 eth2 eth3; do
   for pci_id in `ls -l /sys/class/net/$intf/device/virtfn* | cut -d '/' -f8`; do
       echo $intf $pci_id
