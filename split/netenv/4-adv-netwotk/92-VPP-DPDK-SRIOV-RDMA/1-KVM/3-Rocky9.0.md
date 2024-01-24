@@ -27,3 +27,15 @@ virsh console r8
 
 6. setup vm
 virt-install --name r8 --memory 2048  --cpu host-model --vcpus=4 --disk /root/kvm/rocky/r8.qcow2,device=disk,bus=virtio --disk size=20 --os-variant rocky8 --virt-type kvm --graphics none --network=bridge=brnet,model=virtio --network=bridge=vppdpdk5,model=virtio --network=bridge=vppdpdk8,model=virtio --network=bridge=vppdpdk9,model=virtio --import
+
+cat <<EOF>/etc/environment
+LANG=en_US.UTF-8
+EOF
+
+cat <<EOF>>~/.bashrc
+export LC_ALL=en_US.UTF-8
+EOF
+
+cat <<EOF>/etc/locale.conf
+LANG=en_US.UTF-8
+EOF
