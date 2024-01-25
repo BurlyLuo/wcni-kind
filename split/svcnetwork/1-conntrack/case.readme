@@ -7,3 +7,15 @@ Kubernetes 的 Service 本质是个反向代理，访问 Service 时会进行 DN
 启用 bridge-nf-call-iptables 这个内核参数 (置为 1)，表示 bridge 设备在二层转发时也去调用 iptables 配置的三层规则 (包含 conntrack)，所以开启这个参数就能够解决上述 Service 同节点通信问题。
 
 这也是为什么在 Kubernetes 环境中，大多都要求开启 bridge-nf-call-iptables 的原因。
+
+
+https://arthurchiao.art/blog/conntrack-design-and-implementation-zh/
+连接跟踪是一个非常基础且重要的网络模块，但只有在少数场景下才会引起普通开发者的注意。
+
+例如，L4LB 短时高并发场景下，LB 节点每秒接受大量并发短连接，可能导致 conntrack table 被打爆。此时的现象是：
+
+客户端和 L4LB 建连失败，失败可能是随机的，也可能是集中在某些时间点。
+客户端重试可能会成功，也可能会失败。
+在 L4LB 节点抓包看，客户端过来的 TCP SYNC 包 L4LB 收到了，但没有回 ACK。即，包 被静默丢弃了（silently dropped）。
+
+
