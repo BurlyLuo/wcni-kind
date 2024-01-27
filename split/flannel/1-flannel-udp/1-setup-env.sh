@@ -26,4 +26,3 @@ kubectl get nodes -o wide
 
 # 3.install CNI
 kubectl apply -f ./flannel.yaml
-
