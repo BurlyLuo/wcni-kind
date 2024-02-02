@@ -1,0 +1,47 @@
+apiVersion: apps/v1
+kind: DaemonSet
+metadata:
+  labels:
+    app: wluo
+  name: wluo
+spec:
+  selector:
+    matchLabels:
+      app: wluo
+  template:
+    metadata:
+      labels:
+        app: wluo
+    spec:
+      containers:
+      - image: 192.168.2.100:5000/xcni
+        name: nettoolbox
+        env:
+          - name: NETTOOL_NODE_NAME
+            valueFrom:
+              fieldRef:
+                fieldPath: spec.nodeName
+        securityContext:
+          privileged: true
+        resources:
+          limits:
+            cpu: 300m
+            memory: 800Mi
+          requests:
+            cpu: 200m
+            memory: 500Mi
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: wluo
+spec:
+  type: NodePort
+  selector:
+    app: wluo
+  ports:
+  - name: wluo
+    port: 80
+    targetPort: 80
+    nodePort: 32000

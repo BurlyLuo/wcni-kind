@@ -1,0 +1,10 @@
+all:
+  children:
+    linux:
+      hosts:
+        clab-unknown-unicast-packet-br1:
+          ansible_host: 172.20.20.2
+        clab-unknown-unicast-packet-server1:
+          ansible_host: 172.20.20.4
+        clab-unknown-unicast-packet-server2:
+          ansible_host: 172.20.20.3

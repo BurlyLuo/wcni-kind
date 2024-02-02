@@ -1,0 +1,114 @@
+root@gw1:~# tcpdump -npeXXSS -i eth1 
+tcpdump: verbose output suppressed, use -v[v]... for full protocol decode
+listening on eth1, link-type EN10MB (Ethernet), snapshot length 262144 bytes
+06:46:04.102995 aa:c1:ab:ba:22:8a > ff:ff:ff:ff:ff:ff, ethertype ARP (0x0806), length 42: Request who-has 10.1.5.1 tell 10.1.5.10, length 28
+        0x0000:  ffff ffff ffff aac1 abba 228a 0806 0001  ..........".....
+        0x0010:  0800 0604 0001 aac1 abba 228a 0a01 050a  ..........".....
+        0x0020:  0000 0000 0000 0a01 0501                 ..........
+06:46:04.103067 aa:c1:ab:81:e4:54 > aa:c1:ab:ba:22:8a, ethertype ARP (0x0806), length 42: Reply 10.1.5.1 is-at aa:c1:ab:81:e4:54, length 28
+        0x0000:  aac1 abba 228a aac1 ab81 e454 0806 0001  ...."......T....
+        0x0010:  0800 0604 0002 aac1 ab81 e454 0a01 0501  ...........T....
+        0x0020:  aac1 abba 228a 0a01 050a                 ....".....
+06:46:04.103075 aa:c1:ab:ba:22:8a > aa:c1:ab:81:e4:54, ethertype IPv4 (0x0800), length 74: 10.1.5.10.56606 > 10.1.8.10.80: Flags [S], seq 964061265, win 56760, options [mss 9460,sackOK,TS val 925237841 ecr 0,nop,wscale 7], length 0
+        0x0000:  aac1 ab81 e454 aac1 abba 228a 0800 4500  .....T...."...E.
+        0x0010:  003c 3e97 4000 4006 db0f 0a01 050a 0a01  .<>.@.@.........
+        0x0020:  080a dd1e 0050 3976 6851 0000 0000 a002  .....P9vhQ......
+        0x0030:  ddb8 7144 0000 0204 24f4 0402 080a 3726  ..qD....$.....7&
+        0x0040:  0251 0000 0000 0103 0307                 .Q........
+06:46:04.103237 aa:c1:ab:81:e4:54 > aa:c1:ab:ba:22:8a, ethertype IPv4 (0x0800), length 74: 10.1.8.10.80 > 10.1.5.10.56606: Flags [S.], seq 1828904566, ack 964061266, win 56688, options [mss 9460,sackOK,TS val 1672338983 ecr 925237841,nop,wscale 7], length 0
+        0x0000:  aac1 abba 228a aac1 ab81 e454 0800 4500  ...."......T..E.
+        0x0010:  003c 0000 4000 3e06 1ba7 0a01 080a 0a01  .<..@.>.........
+        0x0020:  050a 0050 dd1e 6d02 de76 3976 6852 a012  ...P..m..v9vhR..
+        0x0030:  dd70 e42c 0000 0204 24f4 0402 080a 63ad  .p.,....$.....c.
+        0x0040:  de27 3726 0251 0103 0307                 .'7&.Q....
+06:46:04.103255 aa:c1:ab:ba:22:8a > aa:c1:ab:81:e4:54, ethertype IPv4 (0x0800), length 66: 10.1.5.10.56606 > 10.1.8.10.80: Flags [.], ack 1828904567, win 444, options [nop,nop,TS val 925237841 ecr 1672338983], length 0
+        0x0000:  aac1 ab81 e454 aac1 abba 228a 0800 4500  .....T...."...E.
+        0x0010:  0034 3e98 4000 4006 db16 0a01 050a 0a01  .4>.@.@.........
+        0x0020:  080a dd1e 0050 3976 6852 6d02 de77 8010  .....P9vhRm..w..
+        0x0030:  01bc 0dee 0000 0101 080a 3726 0251 63ad  ..........7&.Qc.
+        0x0040:  de27                                     .'
+06:46:04.103341 aa:c1:ab:ba:22:8a > aa:c1:ab:81:e4:54, ethertype IPv4 (0x0800), length 139: 10.1.5.10.56606 > 10.1.8.10.80: Flags [P.], seq 964061266:964061339, ack 1828904567, win 444, options [nop,nop,TS val 925237841 ecr 1672338983], length 73: HTTP: GET / HTTP/1.1
+        0x0000:  aac1 ab81 e454 aac1 abba 228a 0800 4500  .....T...."...E.
+        0x0010:  007d 3e99 4000 4006 dacc 0a01 050a 0a01  .}>.@.@.........
+        0x0020:  080a dd1e 0050 3976 6852 6d02 de77 8018  .....P9vhRm..w..
+        0x0030:  01bc 09cc 0000 0101 080a 3726 0251 63ad  ..........7&.Qc.
+        0x0040:  de27 4745 5420 2f20 4854 5450 2f31 2e31  .'GET./.HTTP/1.1
+        0x0050:  0d0a 5573 6572 2d41 6765 6e74 3a20 6375  ..User-Agent:.cu
+        0x0060:  726c 2f37 2e32 392e 300d 0a48 6f73 743a  rl/7.29.0..Host:
+        0x0070:  2031 302e 312e 382e 3130 0d0a 4163 6365  .10.1.8.10..Acce
+        0x0080:  7074 3a20 2a2f 2a0d 0a0d 0a              pt:.*/*....
+06:46:04.103356 aa:c1:ab:81:e4:54 > aa:c1:ab:ba:22:8a, ethertype IPv4 (0x0800), length 66: 10.1.8.10.80 > 10.1.5.10.56606: Flags [.], ack 964061339, win 443, options [nop,nop,TS val 1672338983 ecr 925237841], length 0
+        0x0000:  aac1 abba 228a aac1 ab81 e454 0800 4500  ...."......T..E.
+        0x0010:  0034 2a82 4000 3e06 f12c 0a01 080a 0a01  .4*.@.>..,......
+        0x0020:  050a 0050 dd1e 6d02 de77 3976 689b 8010  ...P..m..w9vh...
+        0x0030:  01bb 0da6 0000 0101 080a 63ad de27 3726  ..........c..'7&
+        0x0040:  0251                                     .Q
+06:46:04.103544 aa:c1:ab:81:e4:54 > aa:c1:ab:ba:22:8a, ethertype IPv4 (0x0800), length 302: 10.1.8.10.80 > 10.1.5.10.56606: Flags [P.], seq 1828904567:1828904803, ack 964061339, win 443, options [nop,nop,TS val 1672338983 ecr 925237841], length 236: HTTP: HTTP/1.1 200 OK
+        0x0000:  aac1 abba 228a aac1 ab81 e454 0800 4500  ...."......T..E.
+        0x0010:  0120 2a83 4000 3e06 f03f 0a01 080a 0a01  ..*.@.>..?......
+        0x0020:  050a 0050 dd1e 6d02 de77 3976 689b 8018  ...P..m..w9vh...
+        0x0030:  01bb e144 0000 0101 080a 63ad de27 3726  ...D......c..'7&
+        0x0040:  0251 4854 5450 2f31 2e31 2032 3030 204f  .QHTTP/1.1.200.O
+        0x0050:  4b0d 0a53 6572 7665 723a 206e 6769 6e78  K..Server:.nginx
+        0x0060:  2f31 2e31 342e 300d 0a44 6174 653a 2046  /1.14.0..Date:.F
+        0x0070:  7269 2c20 3230 204f 6374 2032 3032 3320  ri,.20.Oct.2023.
+        0x0080:  3036 3a34 363a 3034 2047 4d54 0d0a 436f  06:46:04.GMT..Co
+        0x0090:  6e74 656e 742d 5479 7065 3a20 7465 7874  ntent-Type:.text
+        0x00a0:  2f68 746d 6c0d 0a43 6f6e 7465 6e74 2d4c  /html..Content-L
+        0x00b0:  656e 6774 683a 2034 360d 0a4c 6173 742d  ength:.46..Last-
+        0x00c0:  4d6f 6469 6669 6564 3a20 4672 692c 2032  Modified:.Fri,.2
+        0x00d0:  3020 4f63 7420 3230 3233 2030 363a 3433  0.Oct.2023.06:43
+        0x00e0:  3a35 3120 474d 540d 0a43 6f6e 6e65 6374  :51.GMT..Connect
+        0x00f0:  696f 6e3a 206b 6565 702d 616c 6976 650d  ion:.keep-alive.
+        0x0100:  0a45 5461 673a 2022 3635 3332 3231 6137  .ETag:."653221a7
+        0x0110:  2d32 6522 0d0a 4163 6365 7074 2d52 616e  -2e"..Accept-Ran
+        0x0120:  6765 733a 2062 7974 6573 0d0a 0d0a       ges:.bytes....
+06:46:04.103581 aa:c1:ab:ba:22:8a > aa:c1:ab:81:e4:54, ethertype IPv4 (0x0800), length 66: 10.1.5.10.56606 > 10.1.8.10.80: Flags [.], ack 1828904803, win 443, options [nop,nop,TS val 925237842 ecr 1672338983], length 0
+        0x0000:  aac1 ab81 e454 aac1 abba 228a 0800 4500  .....T...."...E.
+        0x0010:  0034 3e9a 4000 4006 db14 0a01 050a 0a01  .4>.@.@.........
+        0x0020:  080a dd1e 0050 3976 689b 6d02 df63 8010  .....P9vh.m..c..
+        0x0030:  01bb 0cb9 0000 0101 080a 3726 0252 63ad  ..........7&.Rc.
+        0x0040:  de27                                     .'
+06:46:04.103616 aa:c1:ab:81:e4:54 > aa:c1:ab:ba:22:8a, ethertype IPv4 (0x0800), length 112: 10.1.8.10.80 > 10.1.5.10.56606: Flags [P.], seq 1828904803:1828904849, ack 964061339, win 443, options [nop,nop,TS val 1672338984 ecr 925237842], length 46: HTTP
+        0x0000:  aac1 abba 228a aac1 ab81 e454 0800 4500  ...."......T..E.
+        0x0010:  0062 2a84 4000 3e06 f0fc 0a01 080a 0a01  .b*.@.>.........
+        0x0020:  050a 0050 dd1e 6d02 df63 3976 689b 8018  ...P..m..c9vh...
+        0x0030:  01bb a7f5 0000 0101 080a 63ad de28 3726  ..........c..(7&
+        0x0040:  0252 506f 644e 616d 653a 2073 6572 7665  .RPodName:.serve
+        0x0050:  7232 207c 2050 6f64 4950 3a20 6574 6830  r2.|.PodIP:.eth0
+        0x0060:  2031 3732 2e32 302e 3230 2e33 2f32 340a  .172.20.20.3/24.
+06:46:04.103620 aa:c1:ab:ba:22:8a > aa:c1:ab:81:e4:54, ethertype IPv4 (0x0800), length 66: 10.1.5.10.56606 > 10.1.8.10.80: Flags [.], ack 1828904849, win 443, options [nop,nop,TS val 925237842 ecr 1672338984], length 0
+        0x0000:  aac1 ab81 e454 aac1 abba 228a 0800 4500  .....T...."...E.
+        0x0010:  0034 3e9b 4000 4006 db13 0a01 050a 0a01  .4>.@.@.........
+        0x0020:  080a dd1e 0050 3976 689b 6d02 df91 8010  .....P9vh.m.....
+        0x0030:  01bb 0c8a 0000 0101 080a 3726 0252 63ad  ..........7&.Rc.
+        0x0040:  de28                                     .(
+06:46:04.103752 aa:c1:ab:ba:22:8a > aa:c1:ab:81:e4:54, ethertype IPv4 (0x0800), length 66: 10.1.5.10.56606 > 10.1.8.10.80: Flags [F.], seq 964061339, ack 1828904849, win 443, options [nop,nop,TS val 925237842 ecr 1672338984], length 0
+        0x0000:  aac1 ab81 e454 aac1 abba 228a 0800 4500  .....T...."...E.
+        0x0010:  0034 3e9c 4000 4006 db12 0a01 050a 0a01  .4>.@.@.........
+        0x0020:  080a dd1e 0050 3976 689b 6d02 df91 8011  .....P9vh.m.....
+        0x0030:  01bb 0c89 0000 0101 080a 3726 0252 63ad  ..........7&.Rc.
+        0x0040:  de28                                     .(
+06:46:04.103856 aa:c1:ab:81:e4:54 > aa:c1:ab:ba:22:8a, ethertype IPv4 (0x0800), length 66: 10.1.8.10.80 > 10.1.5.10.56606: Flags [F.], seq 1828904849, ack 964061340, win 443, options [nop,nop,TS val 1672338984 ecr 925237842], length 0
+        0x0000:  aac1 abba 228a aac1 ab81 e454 0800 4500  ...."......T..E.
+        0x0010:  0034 2a85 4000 3e06 f129 0a01 080a 0a01  .4*.@.>..)......
+        0x0020:  050a 0050 dd1e 6d02 df91 3976 689c 8011  ...P..m...9vh...
+        0x0030:  01bb 0c88 0000 0101 080a 63ad de28 3726  ..........c..(7&
+        0x0040:  0252                                     .R
+06:46:04.103883 aa:c1:ab:ba:22:8a > aa:c1:ab:81:e4:54, ethertype IPv4 (0x0800), length 66: 10.1.5.10.56606 > 10.1.8.10.80: Flags [.], ack 1828904850, win 443, options [nop,nop,TS val 925237842 ecr 1672338984], length 0
+        0x0000:  aac1 ab81 e454 aac1 abba 228a 0800 4500  .....T...."...E.
+        0x0010:  0034 3e9d 4000 4006 db11 0a01 050a 0a01  .4>.@.@.........
+        0x0020:  080a dd1e 0050 3976 689c 6d02 df92 8010  .....P9vh.m.....
+        0x0030:  01bb 0c88 0000 0101 080a 3726 0252 63ad  ..........7&.Rc.
+        0x0040:  de28                                     .(
+06:46:05.403324 aa:c1:ab:ba:22:8a > 33:33:00:00:00:02, ethertype IPv6 (0x86dd), length 70: fe80::a8c1:abff:feba:228a > ff02::2: ICMP6, router solicitation, length 16
+        0x0000:  3333 0000 0002 aac1 abba 228a 86dd 6000  33........"...`.
+        0x0010:  0000 0010 3aff fe80 0000 0000 0000 a8c1  ....:...........
+        0x0020:  abff feba 228a ff02 0000 0000 0000 0000  ...."...........
+        0x0030:  0000 0000 0002 8500 8d21 0000 0000 0101  .........!......
+        0x0040:  aac1 abba 228a                           ....".
+^C
+15 packets captured
+15 packets received by filter
+0 packets dropped by kernel
+root@gw1:~# 

@@ -1,0 +1,58 @@
+# https://github.com/mjschmidt/kubevirt-examples/tree/master/example-vms/no-storage/centos7
+# https://www.juniper.net/documentation/en_US/contrail20/topics/task/installation/how-to-enable-kubevirt-kubernetes.html
+apiVersion: kubevirt.io/v1
+kind: VirtualMachineInstance
+metadata:
+  labels:
+    special: vmi-centos7
+  name: centos7
+spec:
+  domain:
+    devices:
+      disks:
+      - disk:
+          bus: virtio
+        name: containerdisk
+      - disk:
+          bus: virtio
+        name: cloudinitdisk
+      interfaces:
+      - name: default
+        bridge: {}
+    resources:
+      requests:
+        memory: 1024M
+  networks:
+  - name: default
+    pod: {}
+  volumes:
+  - containerDisk:
+      #image: ovaleanu/centos:latest
+      image: 192.168.2.100:5000/ovaleanu/centos:latest
+    name: containerdisk
+  - cloudInitNoCloud:
+      userData: |-
+        #cloud-config
+        name: root
+        password: hive
+        ssh_pwauth: True
+        chpasswd: { expire: False }
+    name: cloudinitdisk
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: centos-ssh-svc
+spec:
+  ports:
+  - name: centos-ssh-svc
+    nodePort: 30000
+    port: 27017
+    protocol: TCP
+    targetPort: 22
+  selector:
+    special: vmi-centos7
+  type: NodePort
+---
+

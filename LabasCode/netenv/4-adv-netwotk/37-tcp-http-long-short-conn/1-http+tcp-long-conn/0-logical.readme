@@ -1,0 +1,110 @@
+lo clab-http-tcp-long-chain-gw1 bash 
+add below iptables based on topo:
+server1 ---[eth1]gw1[eth2] --- server2 
+
+iptables -A FORWARD -s 10.1.5.10 -d 10.1.8.10 -p tcp --tcp-flags FIN,ACK FIN,ACK -j DROP
+
+当我们在eth1 和 eth2 上抓包的时候，会有不同的现象，这也是expect的。
+eth1: 我们会看到FIN ACK的重传：
+12:14:09.717621 aa:c1:ab:63:ba:68 > aa:c1:ab:38:c6:60, ethertype IPv4 (0x0800), length 66: 10.1.5.10.48298 > 10.1.8.10.http: Flags [.], ack 283, win 443, options [nop,nop,TS val 4216480485 ecr 3946693475], length 0
+12:14:09.717755 aa:c1:ab:63:ba:68 > aa:c1:ab:38:c6:60, ethertype IPv4 (0x0800), length 66: 10.1.5.10.48298 > 10.1.8.10.http: Flags [F.], seq 74, ack 283, win 443, options [nop,nop,TS val 4216480486 ecr 3946693475], length 0
+12:14:09.926294 aa:c1:ab:63:ba:68 > aa:c1:ab:38:c6:60, ethertype IPv4 (0x0800), length 66: 10.1.5.10.48298 > 10.1.8.10.http: Flags [F.], seq 74, ack 283, win 443, options [nop,nop,TS val 4216480694 ecr 3946693475], length 0
+12:14:10.134645 aa:c1:ab:63:ba:68 > aa:c1:ab:38:c6:60, ethertype IPv4 (0x0800), length 66: 10.1.5.10.48298 > 10.1.8.10.http: Flags [F.], seq 74, ack 283, win 443, options [nop,nop,TS val 4216480902 ecr 3946693475], length 0
+12:14:10.557880 aa:c1:ab:63:ba:68 > aa:c1:ab:38:c6:60, ethertype IPv4 (0x0800), length 66: 10.1.5.10.48298 > 10.1.8.10.http: Flags [F.], seq 74, ack 283, win 443, options [nop,nop,TS val 4216481326 ecr 3946693475], length 0
+12:14:11.385928 aa:c1:ab:63:ba:68 > aa:c1:ab:38:c6:60, ethertype IPv4 (0x0800), length 66: 10.1.5.10.48298 > 10.1.8.10.http: Flags [F.], seq 74, ack 283, win 443, options [nop,nop,TS val 4216482154 ecr 3946693475], length 0
+12:14:13.049774 aa:c1:ab:63:ba:68 > aa:c1:ab:38:c6:60, ethertype IPv4 (0x0800), length 66: 10.1.5.10.48298 > 10.1.8.10.http: Flags [F.], seq 74, ack 283, win 443, options [nop,nop,TS val 4216483818 ecr 3946693475], length 0
+12:14:16.442594 aa:c1:ab:63:ba:68 > aa:c1:ab:38:c6:60, ethertype IPv4 (0x0800), length 66: 10.1.5.10.48298 > 10.1.8.10.http: Flags [F.], seq 74, ack 283, win 443, options [nop,nop,TS val 4216487210 ecr 3946693475], length 0
+12:14:21.561909 aa:c1:ab:63:ba:68 > aa:c1:ab:38:c6:60, ethertype IPv4 (0x0800), length 66: 10.1.5.10.49374 > 10.1.8.10.http: Flags [F.], seq 0, ack 1, win 443, options [nop,nop,TS val 4216492330 ecr 3946678542], length 0
+12:14:23.098124 aa:c1:ab:63:ba:68 > aa:c1:ab:38:c6:60, ethertype IPv4 (0x0800), length 66: 10.1.5.10.48298 > 10.1.8.10.http: Flags [F.], seq 74, ack 283, win 443, options [nop,nop,TS val 4216493866 ecr 3946693475], length 0
+^C
+
+而：eth2上是没有FIN  ACK包的，是被iptables丢掉了。那么server2上的tcp链接就没拆掉。
+[root@server2 ~]# netstat -anp | grep 80
+tcp        0      0 0.0.0.0:80              0.0.0.0:*               LISTEN      14/nginx: master pr 
+tcp        0      0 10.1.8.10:80            10.1.5.10:47624         ESTABLISHED 15/nginx: worker pr 
+[root@server2 ~]# 
+
+
+多个没有拆掉的tcp链接：
+[root@server2 ~]# netstat -anp | grep 80
+tcp        0      0 0.0.0.0:80              0.0.0.0:*               LISTEN      14/nginx: master pr 
+tcp        0      0 10.1.8.10:80            10.1.5.10:50624         ESTABLISHED 15/nginx: worker pr 
+tcp        0      0 10.1.8.10:80            10.1.5.10:34714         ESTABLISHED 15/nginx: worker pr 
+tcp        0      0 10.1.8.10:80            10.1.5.10:34730         ESTABLISHED 15/nginx: worker pr 
+tcp        0      0 10.1.8.10:80            10.1.5.10:34706         ESTABLISHED 15/nginx: worker pr 
+tcp        0      0 10.1.8.10:80            10.1.5.10:34728         ESTABLISHED 15/nginx: worker pr 
+[root@server2 ~]# 
+
+
+HTTP long chain:
+Hypertext Transfer Protocol
+    HTTP/1.1 200 OK\r\n
+    Server: nginx/1.14.0\r\n
+    Date: Tue, 07 Nov 2023 12:19:27 GMT\r\n
+    Content-Type: text/html\r\n
+    Content-Length: 46\r\n
+    Last-Modified: Tue, 07 Nov 2023 12:18:05 GMT\r\n
+    Connection: keep-alive\r\n  # HTTP Long Chain.
+    ETag: "654a2afd-2e"\r\n
+    Accept-Ranges: bytes\r\n
+    \r\n
+    [HTTP response 1/1]
+    [Time since request: 0.000288000 seconds]
+    [Request in frame: 8]
+    [Request URI: http://10.1.8.10/]
+    File Data: 46 bytes
+
+
+# ! 但是后边我们发现server2上还是会断开，这是为啥呢？
+我们找了一下nginx的配置文件：
+[root@server2 /]# cat /etc/nginx/nginx.conf 
+
+user  nginx;
+worker_processes  1;
+
+error_log  /var/log/nginx/error.log warn;
+pid        /var/run/nginx.pid;
+
+
+events {
+    worker_connections  1024;
+}
+
+
+http {
+    include       /etc/nginx/mime.types;
+    default_type  application/octet-stream;
+
+    log_format  main  '$remote_addr - $remote_user [$time_local] "$request" '
+                      '$status $body_bytes_sent "$http_referer" '
+                      '"$http_user_agent" "$http_x_forwarded_for"';
+
+    access_log  /var/log/nginx/access.log  main;
+
+    sendfile        on;
+    #tcp_nopush     on;
+
+    keepalive_timeout  65; # 这里的配置文件中timer是：65s。
+
+    #gzip  on;
+
+    include /etc/nginx/conf.d/*.conf;
+}
+[root@server2 /]# 
+
+# 我们是从20开始的：20+65=85s.
+Wed Nov  8 01:29:20 UTC 2023
+tcp        0      0 0.0.0.0:80              0.0.0.0:*               LISTEN      14/nginx: master pr 
+tcp        0      0 10.1.8.10:80            10.1.5.10:47184         ESTABLISHED 15/nginx: worker pr 
+unix  3      [ ]         STREAM     CONNECTED     990480   14/nginx: master pr  
+# 断开是：30:25[85s].此时发的消息：
+1	0.000000	10.1.8.10	10.1.5.10	TCP	66	80 → 48856 [FIN, ACK] Seq=1 Ack=1 Win=443 Len=0 TSval=3993853319 TSecr=4263575263
+2	0.000053	10.1.5.10	10.1.8.10	TCP	66	48856 → 80 [ACK] Seq=2 Ack=2 Win=443 Len=0 TSval=4263640329 TSecr=3993853319
+Wed Nov  8 01:30:25 UTC 2023
+tcp        0      0 0.0.0.0:80              0.0.0.0:*               LISTEN      14/nginx: master pr 
+tcp        0      0 10.1.8.10:80            10.1.5.10:47184         ESTABLISHED 15/nginx: worker pr 
+unix  3      [ ]         STREAM     CONNECTED     990480   14/nginx: master pr  
+Wed Nov  8 01:30:26 UTC 2023
+tcp        0      0 0.0.0.0:80              0.0.0.0:*               LISTEN      14/nginx: master pr 
+tcp        0      0 10.1.8.10:80            10.1.5.10:47184         FIN_WAIT2   -                   
+unix  3      [ ]         STREAM     CONNECTED     990480   14/nginx: master pr  

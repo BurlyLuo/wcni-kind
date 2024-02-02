@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  annotations:
+    cni.cilium.io/mac-address: e2:9c:30:38:52:61
+  labels:
+    app: busybox
+  name: busybox
+  namespace: default
+

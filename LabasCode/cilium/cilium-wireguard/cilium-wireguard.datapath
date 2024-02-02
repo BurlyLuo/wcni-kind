@@ -1,0 +1,76 @@
+# BPF71
+
+apt install wireguard-tools
+wg genkey > private
+ip l a wg0 type wireguard
+ip a a 20.0.0.1/24 dev wg0 
+wg set wg0 private-key ./private
+ip l s wg0 up
+wg set wg0 listen-port 51820
+
+
+
+# BPF73
+apt install wireguard-tools
+wg genkey > private
+ip l a wg0 type wireguard
+ip a a 20.0.0.2/24 dev wg0
+wg set wg0 private-key ./private
+ip l s wg0 up
+wg set wg0 listen-port 51820
+
+# ADD wg Tunnel
+BPF71:
+ssh-keygen(if sshpass failed! use this cmd)
+sshpass -p hive ssh-copy-id -o StrictHostKeyChecking=no root@192.168.2.73 -p 22 >/dev/null 2>&1
+peer_public_key=$(ssh root@192.168.2.73 "wg show wg0 public-key")
+wg set wg0 peer $peer_public_key allowed-ips 20.0.0.2/32 endpoint 192.168.2.73:51820
+
+BPF73:
+ssh-keygen(if sshpass failed! use this cmd)
+sshpass -p hive ssh-copy-id -o StrictHostKeyChecking=no root@192.168.2.71 -p 22 >/dev/null 2>&1
+peer_public_key=$(ssh root@192.168.2.71 "wg show wg0 public-key")
+wg set wg0 peer $peer_public_key allowed-ips 20.0.0.1/32 endpoint 192.168.2.71:51820
+
+
+
+
+apt install wireguard-tools
+
+该命令使用 apt 包管理器安装 WireGuard 工具，以便在系统中使用 WireGuard 协议。
+
+wg genkey > private
+
+该命令使用 wg 命令生成一个新的私钥，并将其保存到名为 private 的文件中。私钥用于加密和解密网络数据。
+
+ip l a wg0 type wireguard
+
+该命令使用 ip 命令创建一个新的网络接口 wg0，并指定其类型为 WireGuard。
+
+ip a a 20.0.0.1/24 dev wg0
+
+该命令使用 ip 命令为 wg0 接口分配 IP 地址 20.0.0.1/24，其中 /24 表示子网掩码为 255.255.255.0。
+
+wg set wg0 private-key ./private
+
+该命令使用 wg 命令设置 wg0 接口的私钥为 private 文件中存储的私钥。
+
+ip l s wg0 up
+
+该命令使用 ip 命令将 wg0 接口启动，以便开始使用 WireGuard 协议。
+
+wg set wg0 listen-port 51820
+
+该命令使用 wg 命令设置 wg0 接口的监听端口为 51820。
+
+sshpass -p hive ssh-copy-id -o StrictHostKeyChecking=no root@192.168.2.73 -p 22 >/dev/null 2>&1
+
+该命令使用 sshpass 和 ssh-copy-id 命令将本机的公钥复制到远程主机 192.168.2.73 上，以便进行 SSH 免密码登录。如果 sshpass 命令执行失败，可以手动使用 ssh-keygen 和 ssh-copy-id 命令来完成相同的任务。
+
+peer_public_key=$(ssh root@192.168.2.73 "wg show wg0 public-key")
+
+该命令使用 ssh 命令在远程主机上运行 wg show wg0 public-key 命令，并将输出结果保存到 peer_public_key 变量中。该命令用于获取远程主机的公钥，以便进行 WireGuard 的密钥交换。
+
+wg set wg0 peer $peer_public_key allowed-ips 20.0.0.2/32 endpoint 192.168.2.73:51820
+
+该命令使用 wg 命令为 wg0 接口添加一个新的对等端，其公钥为 $peer_public_key，允许 IP 地址为 20.0.0.2/32 的数据包通过，并且其终止点为 192.168.2.73:51820。该命令用于配置 WireGuard 对等端之间的连接。

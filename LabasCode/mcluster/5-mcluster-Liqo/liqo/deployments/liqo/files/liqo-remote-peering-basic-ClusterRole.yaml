@@ -1,0 +1,27 @@
+rules:
+- apiGroups:
+  - discovery.liqo.io
+  resources:
+  - resourcerequests
+  verbs:
+  - create
+  - delete
+  - deletecollection
+  - get
+  - list
+  - patch
+  - update
+  - watch
+- apiGroups:
+  - discovery.liqo.io
+  resources:
+  - resourcerequests/status
+  verbs:
+  - create
+  - delete
+  - deletecollection
+  - get
+  - list
+  - patch
+  - update
+  - watch

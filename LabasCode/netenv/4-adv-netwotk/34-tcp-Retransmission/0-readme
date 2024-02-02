@@ -1,0 +1,28 @@
+# server1 上使用telnet测试：
+clab-tcp-retransmission-server1:
+telnet 10.1.8.10 12345
+
+# down掉gw1的eth2 接口，此时再发数据，push ack就会传送失败。
+lo clab-tcp-retransmission-gw1 ip l s eth2 down
+lo clab-tcp-retransmission-gw1 tcpdump -pne -i eth1 -w tcp-retransmission-gw1-eth1.cap
+
+# server2上使用nc来模拟：
+clab-tcp-retransmission-server2
+nc -l 12345
+
+[当然这里也可以直接使用：iptables 来过滤到syn等消息来模拟不同的消息类型的重传，这里是push ack的重传。]
+
+[root@server1 ~]# netstat -anp | grep 12345
+Active Internet connections (servers and established)
+Proto Recv-Q Send-Q Local Address           Foreign Address         State       PID/Program name  
+tcp        0      5 10.1.5.10:60806         10.1.8.10:12345         ESTABLISHED 88/telnet           
+[root@server1 ~]# 
+
+
+这三个参数是TCP keepalive相关的参数。
+net.ipv4.tcp_keepalive_intvl表示TCP keepalive探测之间的时间间隔，单位为秒。默认值为75秒，表示在两次探测之间等待的时间。
+
+net.ipv4.tcp_keepalive_probes表示TCP keepalive探测失败后进行重试的次数。默认值为9次，即在探测失败后会进行最多9次的重试。
+
+net.ipv4.tcp_keepalive_time表示TCP keepalive开始发送探测报文前的空闲时间阈值，单位为秒。默认值为7200秒（2小时），表示连接在空闲时间超过2小时后开始发送TCP keepalive探测报文。
+

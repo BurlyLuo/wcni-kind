@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: echoserver-1-deployment
+  labels:
+    app: echoserver-1
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: echoserver-1
+  template:
+    metadata:
+      labels:
+        app: echoserver-1
+    spec:
+      containers:
+      - name: echoserver-1
+        image: mendhak/http-https-echo
+        ports:
+        - containerPort: 8080
+        - containerPort: 8443

@@ -1,0 +1,6 @@
+all:
+  children:
+    linux:
+      hosts:
+        clab-tcp-fin:
+          ansible_host: 172.20.20.2
