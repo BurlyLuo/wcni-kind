@@ -1,0 +1,148 @@
+0.All the reference from: https://github.com/k8snetworkplumbingwg
+From intel
+
+1. kubernetes environment.
+$ kubectl get node -o wide 
+NAME                 STATUS   ROLES    AGE    VERSION    INTERNAL-IP   EXTERNAL-IP   OS-IMAGE                KERNEL-VERSION           CONTAINER-RUNTIME
+bpf1                 Ready    master   278d   v1.20.15   10.50.2.111   <none>        CentOS Linux 7 (Core)   3.10.0-1160.el7.x86_64   docker://19.3.11
+
+2.Enable SRIOV Kernel.
+SRIOV WorkerNode Prerequisites
+In order for the cni-sriov-plugin to start reading Virtual Functions resources as well HostNetworkTemplate objects can configure virtual functions you need to perform the following steps.
+
+Enable** VT-D** at BIOS level.
+Enable SRIOV feature globally and/or per nic according to the nic you are working with, for example Intel x710 should be enabled per nic at BIOS level.
+Upgrade Kernel boot line to enable intel_iommu=on and iommu=pt
+
+$ grubby --update-kernel=ALL --args="iommu=pt intel_iommu=on"
+$ reboot
+
+
+3.Config HugePage
+Most network applications use huge pages, so you may want to enable that. Please edit /etc/default/grub and add huge-pages
+$ vi /etc/default/grub
+GRUB_CMDLINE_LINUX="nofb nomodeset vga=normal iommu=pt intel_iommu=on default_hugepagesz=1G hugepagesz=1G hugepages=16"
+#Rebuild grub.cfg
+grub2-mkconfig -o /boot/grub2/grub.cfg && reboot
+
+4.Config SRIOV VF Resource list
+# https://github.com/k8snetworkplumbingwg/sriov-network-device-plugin
+#4.1: config 32vfs for the ems1 nic
+echo 0   > /sys/class/net/em1/device/sriov_numvfs
+echo 32  > /sys/class/net/em1/device/sriov_numvfs
+
+# https://github.com/k8snetworkplumbingwg/sriov-network-device-plugin
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: sriovdp-config
+  namespace: default
+data:
+  config.json: |
+    {
+    	"resourceList": [{
+    			"resourceName": "intel_sriov_kernel0",
+    			"selectors": {
+    				"pfNames": ["em1#0-6"], # https://github.com/k8snetworkplumbingwg/sriov-network-device-plugin
+    				"drivers": ["igbvf"]    # https://github.com/k8snetworkplumbingwg/sriov-network-device-plugin
+    			}
+    		}
+    	]
+    }
+---
+#
+5.Create the NAD(NetworkAttachmentDefinition)
+apiVersion: "k8s.cni.cncf.io/v1"
+kind: NetworkAttachmentDefinition
+metadata:
+  name: sriov-kernelnet0
+  annotations:
+    k8s.v1.cni.cncf.io/resourceName: intel.com/intel_sriov_kernel0
+spec: # https://github.com/k8snetworkplumbingwg/sriov-cni/blob/master/docs/configuration-reference.md 
+  config: '{
+  "type": "sriov",
+  "cniVersion": "0.3.1",
+  "name": "sriov-kernelnet0",
+  "spoofchk": "off",
+  "type": "sriov",
+  "vlan": 80,
+  "ipam": {
+    "type": "whereabouts",  # https://github.com/k8snetworkplumbingwg/whereabouts
+    "range": "192.168.80.0/24",
+    "range_start": "192.168.80.20",
+    "range_end": "192.168.80.50",
+    "gateway": "192.168.80.1"
+  }
+}'
+
+$ kubectl apply -f networkattachdefinition-sriov.yaml
+$ kubectl get net-attach-def
+NAME          AGE
+sriov-net-a   5d21h
+
+
+6.Create the test pods
+$ cat pod0-case3.yaml
+apiVersion: v1
+kind: Pod
+metadata:
+  name: pod0-case-03-sriov-kernel
+  annotations:
+    k8s.v1.cni.cncf.io/networks: sriov-kernelnet0
+spec:
+  containers:
+  - name: pod0-case-03
+    image: docker.io/centos/tools:latest
+    command:
+    - /sbin/init
+    resources:
+      requests:
+        intel.com/intel_sriov_kernel0: '1'
+      limits:
+        intel.com/intel_sriov_kernel0: '1'
+
+
+$ kubectl apply -f pod0-case3.yaml
+
+$ kubectl exec -it pod0-case-02 -- ip -d address
+1: lo: <LOOPBACK,UP,LOWER_UP> mtu 65536 qdisc noqueue state UNKNOWN group default qlen 1
+    link/loopback 00:00:00:00:00:00 brd 00:00:00:00:00:00 promiscuity 0 numtxqueues 1 numrxqueues 1
+    inet 127.0.0.1/8 scope host lo
+       valid_lft forever preferred_lft forever
+3: eth0@if25: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1472 qdisc noqueue state UP group default
+    link/ether de:ff:c2:57:c6:e7 brd ff:ff:ff:ff:ff:ff link-netnsid 0 promiscuity 0
+    veth numtxqueues 1 numrxqueues 1
+    inet 10.135.1.147/24 brd 10.135.1.255 scope global eth0
+       valid_lft forever preferred_lft forever
+4: net1: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc noqueue state UNKNOWN group default
+    link/ether fa:16:3e:10:31:25 brd ff:ff:ff:ff:ff:ff promiscuity 0
+    ipvlan  mode l2 numtxqueues 1 numrxqueues 1
+    inet 192.168.80.20/24 brd 192.168.70.255 scope global net1
+       valid_lft forever preferred_lft forever
+
+$ kubectl exec -it pod1-case-02 -- ip -d address
+1: lo: <LOOPBACK,UP,LOWER_UP> mtu 65536 qdisc noqueue state UNKNOWN group default qlen 1
+    link/loopback 00:00:00:00:00:00 brd 00:00:00:00:00:00 promiscuity 0 numtxqueues 1 numrxqueues 1
+    inet 127.0.0.1/8 scope host lo
+       valid_lft forever preferred_lft forever
+3: eth0@if26: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1472 qdisc noqueue state UP group default
+    link/ether aa:2d:2e:e8:5e:19 brd ff:ff:ff:ff:ff:ff link-netnsid 0 promiscuity 0
+    veth numtxqueues 1 numrxqueues 1
+    inet 10.135.1.148/24 brd 10.135.1.255 scope global eth0
+       valid_lft forever preferred_lft forever
+4: net1: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc noqueue state UNKNOWN group default
+    link/ether fa:16:3e:10:31:25 brd ff:ff:ff:ff:ff:ff promiscuity 0
+    ipvlan  mode l2 numtxqueues 1 numrxqueues 1
+    inet 192.168.80.21/24 brd 192.168.70.255 scope global net1
+       valid_lft forever preferred_lft forever
+
+
+
+
+
+
+
+
+
+

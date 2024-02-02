@@ -1,0 +1,30 @@
+// socket listen
+ 0 socket(AF_INET, SOCK_STREAM, IPPROTO_TCP) = 3
++0 setsockopt(3, SOL_SOCKET, SO_REUSEADDR, [1], 4 ) = 0
++0 bind(3, ..., ...) = 0
++0 listen(3, 1) = 0
+
+// syn 
++0 < S 0:0(0) win 100
++0 > S. 0:0(0) ack 1 <...>
++0 `netstat -anp | grep 192.0.2.1`
++0.1 < . 1:1(0) ack 1 win 100
++0 `netstat -anp | grep 192.0.2.1`
++0 accept(3, ..., ...) = 4
+
+// server push 15 bytes data
++0 write(4, ..., 15) = 15
++0 > P. 1:16(15) ack 1 <...>
++0.01 < . 1:1(0) ack 16 win 100
+
+// fin
++0 < F. 1:1(0) ack 16 win 100
++0 > .  16:16(0) ack 2 <...>
++0 `netstat -anp | grep 192.0.2.1`
++0 `sleep 100`
+//+0 > F. 16:16(0) ack 2 <...>
+//+0 < . 2:2(0) ack 17 win 100
+
+// test outputs:
+// tcp        1      0 192.168.140.248:8080    192.0.2.1:34827         CLOSE_WAIT  370867/packetdrill
+// 

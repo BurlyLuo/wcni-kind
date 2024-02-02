@@ -1,0 +1,74 @@
+1. HOST environment
+[root@wluo ~]$ uname -r 
+6.2.0-39-generic
+[root@wluo ~]$ lsb_release -a 
+No LSB modules are available.
+Distributor ID: Ubuntu
+Description:    Ubuntu 22.04.3 LTS
+Release:        22.04
+Codename:       jammy
+[root@wluo ~]$ 
+
+2. kind version
+[root@wluo ~]$ kind version 
+kind v0.20.0 go1.20.4 linux/amd64
+[root@wluo ~]$ 
+
+3. containerlab version
+[root@wluo ~]$ containerlab version 
+
+                           _                   _       _     
+                 _        (_)                 | |     | |    
+ ____ ___  ____ | |_  ____ _ ____   ____  ____| | ____| | _  
+/ ___) _ \|  _ \|  _)/ _  | |  _ \ / _  )/ ___) |/ _  | || \ 
+( (__| |_|| | | | |_( ( | | | | | ( (/ /| |   | ( ( | | |_) )
+\____)___/|_| |_|\___)_||_|_|_| |_|\____)_|   |_|\_||_|____/ 
+
+    version: 0.42.0
+     commit: 27689089
+       date: 2023-06-17T12:45:12Z
+     source: https://github.com/srl-labs/containerlab
+ rel. notes: https://containerlab.dev/rn/0.42/
+[root@wluo ~]$ 
+
+4. docker version
+[root@wluo ~]$ docker version 
+Client: Docker Engine - Community
+ Version:           23.0.1
+ API version:       1.42
+ Go version:        go1.19.5
+ Git commit:        a5ee5b1
+ Built:             Thu Feb  9 19:46:56 2023
+ OS/Arch:           linux/amd64
+ Context:           default
+
+Server: Docker Engine - Community
+ Engine:
+  Version:          23.0.1
+  API version:      1.42 (minimum version 1.12)
+  Go version:       go1.19.5
+  Git commit:       bc3805a
+  Built:            Thu Feb  9 19:46:56 2023
+  OS/Arch:          linux/amd64
+  Experimental:     false
+ containerd:
+  Version:          1.6.18
+  GitCommit:        2456e983eb9e37e47538f59ea18f2043c9a73640
+ runc:
+  Version:          1.1.4
+  GitCommit:        v1.1.4-0-g5fd4c4d
+ docker-init:
+  Version:          0.19.0
+  GitCommit:        de40ad0
+[root@wluo ~]$ 
+
+5. vyos image
+docker pull burlyluo/vyos:1.4.7
+
+6. nettool image
+docker pull burlyluo/nettool:latest
+
+7. kind image
+docker tag 192.168.2.100:5000/kindest:v1.27.3 burlyluo/kindest:v1.27.3
+docker push burlyluo/kindest:v1.27.3
+

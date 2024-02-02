@@ -1,0 +1,45 @@
+1. ticket id: https://forum.vyos.io/t/bridge-l2-behiavor-abnormal/13205
+
+2. env details:
+[root@wluo ~]$ lo clab-broadcast-packet-server1 ip a s net0
+1203: net0@if1204: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 9500 qdisc noqueue state UP group default 
+    link/ether aa:c1:ab:18:fa:d0 brd ff:ff:ff:ff:ff:ff link-netnsid 1
+    inet 10.1.5.10/24 scope global net0
+       valid_lft forever preferred_lft forever
+    inet6 fe80::a8c1:abff:fe18:fad0/64 scope link 
+       valid_lft forever preferred_lft forever
+[root@wluo ~]$ lo clab-broadcast-packet-server2 ip a s net0
+1207: net0@if1208: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 9500 qdisc noqueue state UP group default 
+    link/ether aa:c1:ab:a6:68:c0 brd ff:ff:ff:ff:ff:ff link-netnsid 1
+    inet 10.1.5.11/24 scope global net0
+       valid_lft forever preferred_lft forever
+    inet6 fe80::a8c1:abff:fea6:68c0/64 scope link 
+       valid_lft forever preferred_lft forever
+[root@wluo ~]$ 
+[root@wluo 1-broadcast]$ ds
+CONTAINER ID   IMAGE                                COMMAND                  CREATED          STATUS          PORTS     NAMES
+b5b391f68a07   192.168.2.100:5000/xcni              "/sbin/tini -g -- /e…"   36 seconds ago   Up 35 seconds   80/tcp    clab-broadcast-packet-server1
+1089ea1672c6   192.168.2.100:5000/xcni              "/sbin/tini -g -- /e…"   36 seconds ago   Up 35 seconds   80/tcp    clab-broadcast-packet-server2
+a71464023b12   192.168.2.100:5000/vyos/vyos:1.4.7   "/sbin/init"             36 seconds ago   Up 35 seconds             clab-broadcast-packet-br1
+[root@wluo 1-broadcast]$ lo clab-broadcast-packet-server1 ping 10.1.5.11 -c 1 
+PING 10.1.5.11 (10.1.5.11) 56(84) bytes of data.
+64 bytes from 10.1.5.11: icmp_seq=1 ttl=64 time=0.140 ms
+
+--- 10.1.5.11 ping statistics ---
+1 packets transmitted, 1 received, 0% packet loss, time 0ms
+rtt min/avg/max/mdev = 0.140/0.140/0.140/0.000 ms
+[root@wluo 1-broadcast]$ 
+
+3. for the same vlan eth3. only arp request recv.[the packet behavior!]
+root@br1:~# tcpdump -pne -i eth3 
+tcpdump: verbose output suppressed, use -v[v]... for full protocol decode
+listening on eth3, link-type EN10MB (Ethernet), snapshot length 262144 bytes
+05:32:29.608267 aa:c1:ab:18:fa:d0 > ff:ff:ff:ff:ff:ff, ethertype ARP (0x0806), length 42: Request who-has 10.1.5.11 tell 10.1.5.10, length 28
+05:32:39.557947 aa:c1:ab:a6:68:c0 > 33:33:00:00:00:02, ethertype IPv6 (0x86dd), length 70: fe80::a8c1:abff:fea6:68c0 > ff02::2: ICMP6, router solicitation, length 16
+05:32:41.606195 aa:c1:ab:29:8d:21 > 33:33:00:00:00:02, ethertype IPv6 (0x86dd), length 70: fe80::a8c1:abff:fe29:8d21 > ff02::2: ICMP6, router solicitation, length 16
+05:32:43.653824 aa:c1:ab:18:fa:d0 > 33:33:00:00:00:02, ethertype IPv6 (0x86dd), length 70: fe80::a8c1:abff:fe18:fad0 > ff02::2: ICMP6, router solicitation, length 16
+^C
+4 packets captured
+4 packets received by filter
+0 packets dropped by kernel
+root@br1:~# 

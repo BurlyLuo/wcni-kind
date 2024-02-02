@@ -1,0 +1,33 @@
+GENERATION OF CERTIFICATES:
+Total of 2 certificates needs to be created
+
+1)	Certificate of Authority(Trusted Certificate):
+?	Creation of CA.key which should be used in CA certificate generation:
+openssl genrsa -out CA.key 2048 
+?	Creation of CA.cert using CA.key:
+openssl req -new -x509 -days 36500 -key CA.key -out CA.crt
+
+2)	Certificate of Client: (Product Specific)
+?	Command to create IWF.key which has to be used in creating template:
+openssl genrsa -out IWF.key 2048
+?	Command to create IWF.rc template:
+openssl req -new -key IWF.key -out IWF.rc
+?	Command to create IWF.crt using created template and Key:
+openssl x509 -req -days 3650 -sha1 -extensions v3_req -CA CA.crt -CAkey CA.key -CAcreateserial -in IWF.rc -out IWF.crt
+Now this Certificate Authority (CA.cert and CA.key) has to be sent to server so that it stores them in database for verification of Client
+sipp:
+IWF.crt-----cert.crt
+IWF.key-----privatekey.key
+
+CONFIGURATIONS TO BE DONE:
+1)	sslTls table:
+?	oid_index - should be int
+?	name - name of your choice
+?	version - TLS_v1_ONLY
+?	cipher_list - ALL
+?	privateKey - <IWF.key>
+?	cert - <IWF.cert>
+?	ca_cert - <CA.cert>
+?	keypass - <one which you have given during the creation of certs. Normally it should be ¡®mavenir¡¯>
+?	tlsVerifyClient - If set as TRUE, then server will verify Client. If FALSE, then mutual authentication won¡¯t happen. Only Client will verify Server
+

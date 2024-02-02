@@ -1,0 +1,43 @@
+global_defs {
+    router_id 10.1.8.10
+    script_user root
+    enable_script_security
+}
+
+virtual_server 10.1.8.254 80 {  #此处是VIP
+    delay_loop 5  #定义健康检查的时间间隔，单位为秒。
+    lb_algo rr    #后端的负载均衡算法，rr为round-robin
+    lb_kind DR    #lvs的调度类型，DR/TUN/NAT
+    #persistence_timeout 60  #保持客户端的请求在<INT>时间段内全部发到同一个真实服务器。适用于动态网页session共享的环境。默认六分钟。
+    persistence_granularity 255.255.255.255  #会话保持粒度，配合persistence_timeout使用，通过子网掩码来定义会话保持对一个IP生效还是对一组IP生效。默认值为255.255.255.255>，表示单个客户端分配到一个RS上；255.255.255.0表示客户端IP所在的整个网段的请求都会分配给同一台RS
+    protocol TCP   # 使用协议，TCP|UDP|SCTP
+    inhibit_on_failure on #配置该项，在检测到后端RS节点故障后将weight值改为0，而不是从IPVS中删除
+    ha_suspend    # 在LB节点状态从Master切换到Backup时，不启用对RS节点的健康检查
+    sorry_server 127.0.0.1 80
+    real_server 10.1.8.10 80 {
+        weight 10
+        HTTP_GET {
+            url {
+                path /
+                status_code 200
+            }
+        connect_port 80
+        connect_timeout 2
+        retry 1
+        delay_before_retry 1
+        }
+    }
+    real_server 10.1.8.11 80 {
+        weight 10
+    HTTP_GET {
+            url {
+                path /
+                status_code 200
+            }
+        connect_port 80
+        connect_timeout 2
+        retry 1
+        delay_before_retry 1
+        }
+    }
+}

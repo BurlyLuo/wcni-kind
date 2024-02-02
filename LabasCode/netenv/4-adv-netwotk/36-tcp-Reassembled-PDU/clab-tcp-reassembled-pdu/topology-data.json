@@ -1,0 +1,171 @@
+{
+  "name": "tcp-reassembled-pdu",
+  "type": "clab",
+  "clab": {
+    "config": {
+      "prefix": "clab",
+      "mgmt": {
+        "network": "clab",
+        "bridge": "br-ccd984fcbfad",
+        "ipv4-subnet": "172.20.20.0/24",
+        "ipv4-gw": "172.20.20.1",
+        "mtu": "1500",
+        "external-access": true
+      }
+    }
+  },
+  "nodes": {
+    "gw1": {
+      "index": "0",
+      "shortname": "gw1",
+      "longname": "clab-tcp-reassembled-pdu-gw1",
+      "fqdn": "gw1.tcp-reassembled-pdu.io",
+      "group": "",
+      "labdir": "/root/wcni-kind/split/netenv/4-adv-netwotk/36-tcp-reassembled-PDU/clab-tcp-reassembled-pdu/gw1",
+      "kind": "linux",
+      "image": "192.168.2.100:5000/vyos/vyos:1.4.7",
+      "mgmt-net": "",
+      "mgmt-intf": "",
+      "mgmt-ipv4-address": "172.20.20.5",
+      "mgmt-ipv4-prefix-length": 24,
+      "mgmt-ipv6-address": "",
+      "mgmt-ipv6-prefix-length": 0,
+      "mac-address": "",
+      "labels": {
+        "clab-mgmt-net-bridge": "br-ccd984fcbfad",
+        "clab-node-group": "",
+        "clab-node-kind": "linux",
+        "clab-node-lab-dir": "/root/wcni-kind/split/netenv/4-adv-netwotk/36-tcp-reassembled-PDU/clab-tcp-reassembled-pdu/gw1",
+        "clab-node-name": "gw1",
+        "clab-node-type": "",
+        "clab-topo-file": "/root/wcni-kind/split/netenv/4-adv-netwotk/36-tcp-reassembled-PDU/clab.yaml",
+        "containerlab": "tcp-reassembled-pdu"
+      }
+    },
+    "gw2": {
+      "index": "1",
+      "shortname": "gw2",
+      "longname": "clab-tcp-reassembled-pdu-gw2",
+      "fqdn": "gw2.tcp-reassembled-pdu.io",
+      "group": "",
+      "labdir": "/root/wcni-kind/split/netenv/4-adv-netwotk/36-tcp-reassembled-PDU/clab-tcp-reassembled-pdu/gw2",
+      "kind": "linux",
+      "image": "192.168.2.100:5000/vyos/vyos:1.4.7",
+      "mgmt-net": "",
+      "mgmt-intf": "",
+      "mgmt-ipv4-address": "172.20.20.3",
+      "mgmt-ipv4-prefix-length": 24,
+      "mgmt-ipv6-address": "",
+      "mgmt-ipv6-prefix-length": 0,
+      "mac-address": "",
+      "labels": {
+        "clab-mgmt-net-bridge": "br-ccd984fcbfad",
+        "clab-node-group": "",
+        "clab-node-kind": "linux",
+        "clab-node-lab-dir": "/root/wcni-kind/split/netenv/4-adv-netwotk/36-tcp-reassembled-PDU/clab-tcp-reassembled-pdu/gw2",
+        "clab-node-name": "gw2",
+        "clab-node-type": "",
+        "clab-topo-file": "/root/wcni-kind/split/netenv/4-adv-netwotk/36-tcp-reassembled-PDU/clab.yaml",
+        "containerlab": "tcp-reassembled-pdu"
+      }
+    },
+    "server1": {
+      "index": "2",
+      "shortname": "server1",
+      "longname": "clab-tcp-reassembled-pdu-server1",
+      "fqdn": "server1.tcp-reassembled-pdu.io",
+      "group": "",
+      "labdir": "/root/wcni-kind/split/netenv/4-adv-netwotk/36-tcp-reassembled-PDU/clab-tcp-reassembled-pdu/server1",
+      "kind": "linux",
+      "image": "192.168.2.100:5000/xcni",
+      "mgmt-net": "",
+      "mgmt-intf": "",
+      "mgmt-ipv4-address": "172.20.20.2",
+      "mgmt-ipv4-prefix-length": 24,
+      "mgmt-ipv6-address": "",
+      "mgmt-ipv6-prefix-length": 0,
+      "mac-address": "",
+      "labels": {
+        "clab-mgmt-net-bridge": "br-ccd984fcbfad",
+        "clab-node-group": "",
+        "clab-node-kind": "linux",
+        "clab-node-lab-dir": "/root/wcni-kind/split/netenv/4-adv-netwotk/36-tcp-reassembled-PDU/clab-tcp-reassembled-pdu/server1",
+        "clab-node-name": "server1",
+        "clab-node-type": "",
+        "clab-topo-file": "/root/wcni-kind/split/netenv/4-adv-netwotk/36-tcp-reassembled-PDU/clab.yaml",
+        "containerlab": "tcp-reassembled-pdu"
+      }
+    },
+    "server2": {
+      "index": "3",
+      "shortname": "server2",
+      "longname": "clab-tcp-reassembled-pdu-server2",
+      "fqdn": "server2.tcp-reassembled-pdu.io",
+      "group": "",
+      "labdir": "/root/wcni-kind/split/netenv/4-adv-netwotk/36-tcp-reassembled-PDU/clab-tcp-reassembled-pdu/server2",
+      "kind": "linux",
+      "image": "192.168.2.100:5000/xcni",
+      "mgmt-net": "",
+      "mgmt-intf": "",
+      "mgmt-ipv4-address": "172.20.20.4",
+      "mgmt-ipv4-prefix-length": 24,
+      "mgmt-ipv6-address": "",
+      "mgmt-ipv6-prefix-length": 0,
+      "mac-address": "",
+      "labels": {
+        "clab-mgmt-net-bridge": "br-ccd984fcbfad",
+        "clab-node-group": "",
+        "clab-node-kind": "linux",
+        "clab-node-lab-dir": "/root/wcni-kind/split/netenv/4-adv-netwotk/36-tcp-reassembled-PDU/clab-tcp-reassembled-pdu/server2",
+        "clab-node-name": "server2",
+        "clab-node-type": "",
+        "clab-topo-file": "/root/wcni-kind/split/netenv/4-adv-netwotk/36-tcp-reassembled-PDU/clab.yaml",
+        "containerlab": "tcp-reassembled-pdu"
+      }
+    }
+  },
+  "links": [
+    {
+      "a": {
+        "node": "gw1",
+        "interface": "eth1",
+        "mac": "aa:c1:ab:48:f4:b4",
+        "peer": "z"
+      },
+      "z": {
+        "node": "server1",
+        "interface": "net0",
+        "mac": "aa:c1:ab:8c:d9:26",
+        "peer": "a"
+      }
+    },
+    {
+      "a": {
+        "node": "gw2",
+        "interface": "eth1",
+        "mac": "aa:c1:ab:c6:66:1c",
+        "peer": "z"
+      },
+      "z": {
+        "node": "server2",
+        "interface": "net0",
+        "mac": "aa:c1:ab:20:b8:74",
+        "peer": "a"
+      }
+    },
+    {
+      "a": {
+        "node": "gw1",
+        "interface": "eth2",
+        "mac": "aa:c1:ab:9a:63:7c",
+        "peer": "z"
+      },
+      "z": {
+        "node": "gw2",
+        "interface": "eth2",
+        "mac": "aa:c1:ab:83:21:15",
+        "peer": "a"
+      }
+    }
+  ]
+}

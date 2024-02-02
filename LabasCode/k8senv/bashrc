@@ -1,0 +1,204 @@
+# ~/.bashrc: executed by bash(1) for non-login shells.
+# see /usr/share/doc/bash/examples/startup-files (in the package bash-doc)
+# for examples
+# If not running interactively, don't do anything
+[ -z "$PS1" ] && return
+# don't put duplicate lines in the history. See bash(1) for more options
+# ... or force ignoredups and ignorespace
+HISTCONTROL=ignoredups:ignorespace
+
+# append to the history file, don't overwrite it
+shopt -s histappend
+
+# for setting history length see HISTSIZE and HISTFILESIZE in bash(1)
+HISTSIZE=10000
+HISTFILESIZE=20000
+
+# check the window size after each command and, if necessary,
+# update the values of LINES and COLUMNS.
+shopt -s checkwinsize
+
+# make less more friendly for non-text input files, see lesspipe(1)
+[ -x /usr/bin/lesspipe ] && eval "$(SHELL=/bin/sh lesspipe)"
+
+# set variable identifying the chroot you work in (used in the prompt below)
+if [ -z "$debian_chroot" ] && [ -r /etc/debian_chroot ]; then
+    debian_chroot=$(cat /etc/debian_chroot)
+fi
+
+# set a fancy prompt (non-color, unless we know we "want" color)
+case "$TERM" in
+    xterm-color) color_prompt=yes;;
+esac
+
+# uncomment for a colored prompt, if the terminal has the capability; turned
+# off by default to not distract the user: the focus in a terminal window
+# should be on the output of commands, not on the prompt
+#force_color_prompt=yes
+
+if [ -n "$force_color_prompt" ]; then
+    if [ -x /usr/bin/tput ] && tput setaf 1 >&/dev/null; then
+	# We have color support; assume it's compliant with Ecma-48
+	# (ISO/IEC-6429). (Lack of such support is extremely rare, and such
+	# a case would tend to support setf rather than setaf.)
+	color_prompt=yes
+    else
+	color_prompt=
+    fi
+fi
+
+if [ "$color_prompt" = yes ]; then
+    PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ '
+else
+    PS1='${debian_chroot:+($debian_chroot)}\u@\h:\w\$ '
+fi
+unset color_prompt force_color_prompt
+
+# If this is an xterm set the title to user@host:dir
+case "$TERM" in
+xterm*|rxvt*)
+    PS1="\[\e]0;${debian_chroot:+($debian_chroot)}\u@\h: \w\a\]$PS1"
+    ;;
+*)
+    ;;
+esac
+
+# enable color support of ls and also add handy aliases
+if [ -x /usr/bin/dircolors ]; then
+    test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
+    alias ls='ls --color=auto'
+    #alias dir='dir --color=auto'
+    #alias vdir='vdir --color=auto'
+
+    alias grep='grep --color=auto'
+    alias fgrep='fgrep --color=auto'
+    alias egrep='egrep --color=auto'
+fi
+
+# some more ls aliases
+alias ll='ls -lF'
+alias la='ls -A'
+alias l='ls -CF'
+alias vi="vim"
+
+alias push='function custom_push() { git add . && git commit -m "${1:-"'"Adjust/Rename the Directory/File"'"}" && git push; }; custom_push'
+alias svcd='kubectl delete pods client server && kubectl delete svc clientsvc serversvc'
+
+alias pp=packetdrill
+alias cap1="tcpdump -pne -i any -w previous-packetdrill.cap"
+alias cap2="tcpdump -pne -i any -w current-packetdrill.cap"
+alias 8080="netstat -anp | grep 8080"
+alias tcp="cd /root/wcni-kind/split/netenv/4-adv-netwotk/"
+
+alias wp="cd /root/wcni-kind/split/"
+alias k="kubectl"
+alias cls="kind get clusters $1"
+alias cld="kind delete clusters $1"
+alias clda="kind delete clusters -A"
+alias dip="kubectl get node -o wide"
+alias kk="kubectl -nkube-system"
+alias ds="docker ps| grep -v registry"
+alias cc="kubectl config get-contexts" 
+alias sc="kubectl config use-context $1" 
+alias lo="docker exec -it $1 $2"
+alias all="kubectl get pods -A"
+alias clabrm="clab destroy -t clab.yaml"
+alias clabrma="containerlab destroy -a"
+
+alias ms="kubectl -nmetallb-system"
+alias net="cd /root/wcni-kind/network"
+
+alias is="kubectl -nistio-system"
+alias ii="kubectl -nistio-ingress"
+
+alias kv="kubectl-ko"
+
+alias sk="kubectl -nsubmariner-operator"
+
+
+alias mls="multipass list"
+alias mm="multipass"
+
+alias mldk='set -f;sed -i '/vmk/d' /etc/hosts && for vm in $(multipass list | grep vmk | awk -F " " "{print \$1}"); do multipass delete --purge $vm; done && { sed -i "1!d" /root/.ssh/known_hosts && kubectl config delete-cluster kprp && kubectl config delete-context kprp && kubectl config delete-user kprp && kubectl config unset current-context && kubectl config delete-cluster kprc && kubectl config delete-context kprc && kubectl config delete-user kprc && kubectl config unset current-context; } > /dev/null 2>&1;set +f'
+
+alias mldn='set -f;sed -i '/vmn/d' /etc/hosts && for vm in $(multipass list | grep vmn | awk -F " " "{print \$1}"); do multipass delete --purge $vm; done && { sed -i "1!d" /root/.ssh/known_hosts && kubectl config delete-cluster nokprp && kubectl config delete-context nokprp && kubectl config delete-user nokprp && kubectl config unset current-context && kubectl config delete-cluster nokprc && kubectl config delete-context nokprc && kubectl config delete-user nokprc && kubectl config unset current-context; } > /dev/null 2>&1;set +f'
+
+alias vmnp0='ip=$(cat /etc/hosts | grep vmnp0 | awk -F " " '\''{print $1}'\'') && ssh root@$ip'
+alias vmnp1='ip=$(cat /etc/hosts | grep vmnp1 | awk -F " " '\''{print $1}'\'') && ssh root@$ip'
+alias vmnp2='ip=$(cat /etc/hosts | grep vmnp2 | awk -F " " '\''{print $1}'\'') && ssh root@$ip'
+
+alias vmnc0='ip=$(cat /etc/hosts | grep vmnc0 | awk -F " " '\''{print $1}'\'') && ssh root@$ip'
+alias vmnc1='ip=$(cat /etc/hosts | grep vmnc1 | awk -F " " '\''{print $1}'\'') && ssh root@$ip'
+alias vmnc2='ip=$(cat /etc/hosts | grep vmnc2 | awk -F " " '\''{print $1}'\'') && ssh root@$ip'
+
+alias 1604d='set -f;sed -i '/vm1604/d' /etc/hosts && for vm in $(multipass list | grep vm1604[0-9] | awk -F " " "{print \$1}"); do multipass delete --purge $vm; done && { sed -i "1!d" /root/.ssh/known_hosts; } > /dev/null 2>&1;set +f'
+alias 1604='ip=$(cat /etc/hosts | grep 1604 | awk -F " " '\''{print $1}'\'') && ssh root@$ip'
+
+alias 2004d='set -f;sed -i '/vm2004/d' /etc/hosts && for vm in $(multipass list | grep vm2004[0-9] | awk -F " " "{print \$1}"); do multipass delete --purge $vm; done && { sed -i "1!d" /root/.ssh/known_hosts; } > /dev/null 2>&1;set +f'
+alias 2004='ip=$(cat /etc/hosts | grep 2004 | awk -F " " '\''{print $1}'\'') && ssh root@$ip'
+
+alias 2204d='set -f;sed -i '/vm2204/d' /etc/hosts && for vm in $(multipass list | grep vm2204[0-9] | awk -F " " "{print \$1}"); do multipass delete --purge $vm; done && { sed -i "1!d" /root/.ssh/known_hosts; } > /dev/null 2>&1;set +f'
+
+alias 1804d='set -f;sed -i '/vm1804/d' /etc/hosts && for vm in $(multipass list | grep vm1804[0-9] | awk -F " " "{print \$1}"); do multipass delete --purge $vm; done && { sed -i "1!d" /root/.ssh/known_hosts; } > /dev/null 2>&1;set +f'
+
+alias 2310d='set -f;sed -i /vm2310/d /etc/hosts && for vm in $(multipass list | grep vm2310[0-9] | awk -F " " "{print \$1}"); do multipass delete --purge $vm; done && { sed -i "1!d" /root/.ssh/known_hosts; } > /dev/null 2>&1;set +f'
+
+alias 2204='ip=$(cat /etc/hosts | grep 2204 | awk -F " " '\''{print $1}'\'') && ssh root@$ip'
+alias 22040='ip=$(cat /etc/hosts | grep 22040 | awk -F " " '\''{print $1}'\'') && ssh root@$ip'
+alias 22041='ip=$(cat /etc/hosts | grep 22041 | awk -F " " '\''{print $1}'\'') && ssh root@$ip'
+
+alias 2304d='set -f;sed -i '/vm2304/d' /etc/hosts && for vm in $(multipass list | grep vm2304[0-9] | awk -F " " "{print \$1}"); do multipass delete --purge $vm; done && { sed -i "1!d" /root/.ssh/known_hosts; } > /dev/null 2>&1;set +f'
+alias 2304='ip=$(cat /etc/hosts | grep 2304 | awk -F " " '\''{print $1}'\'') && ssh root@$ip'
+
+alias dkc='set -f;{ kubectl config delete-cluster $1 && kubectl config delete-context $1 && kubectl config delete-user $1 && kubectl config unset current-context; } > /dev/null 2>&1;set +f'
+
+alias mmrs="systemctl stop snap.multipass.multipassd.service && systemctl start snap.multipass.multipassd.service && systemctl status snap.multipass.multipassd.service"
+
+
+#kvm
+alias ks="virsh list --all"
+
+#key reference
+alias key="cat /root/wcni-kind/split/weiluo/env.x"
+
+#vpp
+alias vpp="cd /root/wcni-kind/split/netenv/4-adv-netwotk/92-VPP-DPDK-SRIOV-RDMA/2-VPP"
+
+
+
+
+# Alias definitions.
+# You may want to put all your additions into a separate file like
+# ~/.bash_aliases, instead of adding them here directly.
+# See /usr/share/doc/bash-doc/examples in the bash-doc package.
+
+if [ -f ~/.bash_aliases ]; then
+    . ~/.bash_aliases
+fi
+
+if [[ -n $SSH_CONNECTION ]]; then
+   echo "************************************************"
+   echo "git clone git@gitee.com:rowan-wcni/wcni-kind.git"
+   echo "Website: www.yuque.com/wei.luo|youdianzhishi.com"
+   echo -e "\033[1m+\033[0m""WeChat: clabernetes"
+   echo "************************************************"
+fi
+
+# enable programmable completion features (you don't need to enable
+# this, if it's already enabled in /etc/bash.bashrc and /etc/profile
+# sources /etc/bash.bashrc).
+#if [ -f /etc/bash_completion ] && ! shopt -oq posix; then
+#    . /etc/bash_completion
+#fi
+export PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/root/bin
+export PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/root/bin
+export PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/root/bin
+export PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/root/bin
+export PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/root/bin
+export PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/root/bin:/root/bin
+export PATH=$PATH:/root/.local/bin
+export PATH=$HOME/.istioctl/bin:$PATH
+export PATH=$PATH:/root/packetdrill/gtests/net/packetdrill
+PS1="[\u@\h \W]\$ "
+
+source <(kubectl completion bash)

@@ -1,0 +1,10 @@
+all:
+  children:
+    linux:
+      hosts:
+        clab-tcp-keepalive-gw1:
+          ansible_host: 172.20.20.4
+        clab-tcp-keepalive-server1:
+          ansible_host: 172.20.20.2
+        clab-tcp-keepalive-server2:
+          ansible_host: 172.20.20.3

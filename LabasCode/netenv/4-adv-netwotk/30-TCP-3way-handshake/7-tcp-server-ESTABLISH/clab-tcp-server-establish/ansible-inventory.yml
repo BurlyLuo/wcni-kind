@@ -1,0 +1,10 @@
+all:
+  children:
+    linux:
+      hosts:
+        clab-tcp-server-establish-gw1:
+          ansible_host: 172.20.20.4
+        clab-tcp-server-establish-server1:
+          ansible_host: 172.20.20.3
+        clab-tcp-server-establish-server2:
+          ansible_host: 172.20.20.2

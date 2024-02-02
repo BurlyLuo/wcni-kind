@@ -1,0 +1,18 @@
+all:
+  children:
+    linux:
+      hosts:
+        clab-vlan-to-router-br1:
+          ansible_host: 172.20.20.16
+        clab-vlan-to-router-br2:
+          ansible_host: 172.20.20.21
+        clab-vlan-to-router-gwx:
+          ansible_host: 172.20.20.17
+        clab-vlan-to-router-server1:
+          ansible_host: 172.20.20.20
+        clab-vlan-to-router-server2:
+          ansible_host: 172.20.20.22
+        clab-vlan-to-router-server3:
+          ansible_host: 172.20.20.19
+        clab-vlan-to-router-server4:
+          ansible_host: 172.20.20.18

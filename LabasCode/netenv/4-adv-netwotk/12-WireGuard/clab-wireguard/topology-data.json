@@ -1,0 +1,296 @@
+{
+  "name": "wireguard",
+  "type": "clab",
+  "clab": {
+    "config": {
+      "prefix": "clab",
+      "mgmt": {
+        "network": "clab",
+        "bridge": "br-bee29f28e6f3",
+        "ipv4-subnet": "172.20.20.0/24",
+        "ipv4-gw": "172.20.20.1",
+        "ipv6-subnet": "2001:172:20:20::/64",
+        "ipv6-gw": "2001:172:20:20::1",
+        "mtu": "1500",
+        "external-access": true
+      }
+    }
+  },
+  "nodes": {
+    "gwx": {
+      "index": "0",
+      "shortname": "gwx",
+      "longname": "clab-wireguard-gwx",
+      "fqdn": "gwx.wireguard.io",
+      "group": "",
+      "labdir": "/root/wcni-kind/split/netenv/4-basic-netwotk/c-wireguard/clab-wireguard/gwx",
+      "kind": "linux",
+      "image": "192.168.2.100:5000/nettool",
+      "mgmt-net": "",
+      "mgmt-intf": "",
+      "mgmt-ipv4-address": "172.20.20.4",
+      "mgmt-ipv4-prefix-length": 24,
+      "mgmt-ipv6-address": "2001:172:20:20::4",
+      "mgmt-ipv6-prefix-length": 64,
+      "mac-address": "",
+      "labels": {
+        "clab-mgmt-net-bridge": "br-bee29f28e6f3",
+        "clab-node-group": "",
+        "clab-node-kind": "linux",
+        "clab-node-lab-dir": "/root/wcni-kind/split/netenv/4-basic-netwotk/c-wireguard/clab-wireguard/gwx",
+        "clab-node-name": "gwx",
+        "clab-node-type": "",
+        "clab-topo-file": "/root/wcni-kind/split/netenv/4-basic-netwotk/c-wireguard/clab.yaml",
+        "containerlab": "wireguard"
+      }
+    },
+    "server1": {
+      "index": "1",
+      "shortname": "server1",
+      "longname": "clab-wireguard-server1",
+      "fqdn": "server1.wireguard.io",
+      "group": "",
+      "labdir": "/root/wcni-kind/split/netenv/4-basic-netwotk/c-wireguard/clab-wireguard/server1",
+      "kind": "linux",
+      "image": "192.168.2.100:5000/nettool",
+      "mgmt-net": "",
+      "mgmt-intf": "",
+      "mgmt-ipv4-address": "172.20.20.7",
+      "mgmt-ipv4-prefix-length": 24,
+      "mgmt-ipv6-address": "2001:172:20:20::7",
+      "mgmt-ipv6-prefix-length": 64,
+      "mac-address": "",
+      "labels": {
+        "clab-mgmt-net-bridge": "br-bee29f28e6f3",
+        "clab-node-group": "",
+        "clab-node-kind": "linux",
+        "clab-node-lab-dir": "/root/wcni-kind/split/netenv/4-basic-netwotk/c-wireguard/clab-wireguard/server1",
+        "clab-node-name": "server1",
+        "clab-node-type": "",
+        "clab-topo-file": "/root/wcni-kind/split/netenv/4-basic-netwotk/c-wireguard/clab.yaml",
+        "containerlab": "wireguard"
+      }
+    },
+    "server2": {
+      "index": "2",
+      "shortname": "server2",
+      "longname": "clab-wireguard-server2",
+      "fqdn": "server2.wireguard.io",
+      "group": "",
+      "labdir": "/root/wcni-kind/split/netenv/4-basic-netwotk/c-wireguard/clab-wireguard/server2",
+      "kind": "linux",
+      "image": "192.168.2.100:5000/nettool",
+      "mgmt-net": "",
+      "mgmt-intf": "",
+      "mgmt-ipv4-address": "172.20.20.8",
+      "mgmt-ipv4-prefix-length": 24,
+      "mgmt-ipv6-address": "2001:172:20:20::8",
+      "mgmt-ipv6-prefix-length": 64,
+      "mac-address": "",
+      "labels": {
+        "clab-mgmt-net-bridge": "br-bee29f28e6f3",
+        "clab-node-group": "",
+        "clab-node-kind": "linux",
+        "clab-node-lab-dir": "/root/wcni-kind/split/netenv/4-basic-netwotk/c-wireguard/clab-wireguard/server2",
+        "clab-node-name": "server2",
+        "clab-node-type": "",
+        "clab-topo-file": "/root/wcni-kind/split/netenv/4-basic-netwotk/c-wireguard/clab.yaml",
+        "containerlab": "wireguard"
+      }
+    },
+    "server3": {
+      "index": "3",
+      "shortname": "server3",
+      "longname": "clab-wireguard-server3",
+      "fqdn": "server3.wireguard.io",
+      "group": "",
+      "labdir": "/root/wcni-kind/split/netenv/4-basic-netwotk/c-wireguard/clab-wireguard/server3",
+      "kind": "linux",
+      "image": "192.168.2.100:5000/nettool",
+      "mgmt-net": "",
+      "mgmt-intf": "",
+      "mgmt-ipv4-address": "172.20.20.6",
+      "mgmt-ipv4-prefix-length": 24,
+      "mgmt-ipv6-address": "2001:172:20:20::6",
+      "mgmt-ipv6-prefix-length": 64,
+      "mac-address": "",
+      "labels": {
+        "clab-mgmt-net-bridge": "br-bee29f28e6f3",
+        "clab-node-group": "",
+        "clab-node-kind": "linux",
+        "clab-node-lab-dir": "/root/wcni-kind/split/netenv/4-basic-netwotk/c-wireguard/clab-wireguard/server3",
+        "clab-node-name": "server3",
+        "clab-node-type": "",
+        "clab-topo-file": "/root/wcni-kind/split/netenv/4-basic-netwotk/c-wireguard/clab.yaml",
+        "containerlab": "wireguard"
+      }
+    },
+    "wireguard1": {
+      "index": "4",
+      "shortname": "wireguard1",
+      "longname": "clab-wireguard-wireguard1",
+      "fqdn": "wireguard1.wireguard.io",
+      "group": "",
+      "labdir": "/root/wcni-kind/split/netenv/4-basic-netwotk/c-wireguard/clab-wireguard/wireguard1",
+      "kind": "linux",
+      "image": "192.168.2.100:5000/nettool",
+      "mgmt-net": "",
+      "mgmt-intf": "",
+      "mgmt-ipv4-address": "172.20.20.5",
+      "mgmt-ipv4-prefix-length": 24,
+      "mgmt-ipv6-address": "2001:172:20:20::5",
+      "mgmt-ipv6-prefix-length": 64,
+      "mac-address": "",
+      "labels": {
+        "clab-mgmt-net-bridge": "br-bee29f28e6f3",
+        "clab-node-group": "",
+        "clab-node-kind": "linux",
+        "clab-node-lab-dir": "/root/wcni-kind/split/netenv/4-basic-netwotk/c-wireguard/clab-wireguard/wireguard1",
+        "clab-node-name": "wireguard1",
+        "clab-node-type": "",
+        "clab-topo-file": "/root/wcni-kind/split/netenv/4-basic-netwotk/c-wireguard/clab.yaml",
+        "containerlab": "wireguard"
+      }
+    },
+    "wireguard2": {
+      "index": "5",
+      "shortname": "wireguard2",
+      "longname": "clab-wireguard-wireguard2",
+      "fqdn": "wireguard2.wireguard.io",
+      "group": "",
+      "labdir": "/root/wcni-kind/split/netenv/4-basic-netwotk/c-wireguard/clab-wireguard/wireguard2",
+      "kind": "linux",
+      "image": "192.168.2.100:5000/nettool",
+      "mgmt-net": "",
+      "mgmt-intf": "",
+      "mgmt-ipv4-address": "172.20.20.2",
+      "mgmt-ipv4-prefix-length": 24,
+      "mgmt-ipv6-address": "2001:172:20:20::2",
+      "mgmt-ipv6-prefix-length": 64,
+      "mac-address": "",
+      "labels": {
+        "clab-mgmt-net-bridge": "br-bee29f28e6f3",
+        "clab-node-group": "",
+        "clab-node-kind": "linux",
+        "clab-node-lab-dir": "/root/wcni-kind/split/netenv/4-basic-netwotk/c-wireguard/clab-wireguard/wireguard2",
+        "clab-node-name": "wireguard2",
+        "clab-node-type": "",
+        "clab-topo-file": "/root/wcni-kind/split/netenv/4-basic-netwotk/c-wireguard/clab.yaml",
+        "containerlab": "wireguard"
+      }
+    },
+    "wireguard3": {
+      "index": "6",
+      "shortname": "wireguard3",
+      "longname": "clab-wireguard-wireguard3",
+      "fqdn": "wireguard3.wireguard.io",
+      "group": "",
+      "labdir": "/root/wcni-kind/split/netenv/4-basic-netwotk/c-wireguard/clab-wireguard/wireguard3",
+      "kind": "linux",
+      "image": "192.168.2.100:5000/nettool",
+      "mgmt-net": "",
+      "mgmt-intf": "",
+      "mgmt-ipv4-address": "172.20.20.3",
+      "mgmt-ipv4-prefix-length": 24,
+      "mgmt-ipv6-address": "2001:172:20:20::3",
+      "mgmt-ipv6-prefix-length": 64,
+      "mac-address": "",
+      "labels": {
+        "clab-mgmt-net-bridge": "br-bee29f28e6f3",
+        "clab-node-group": "",
+        "clab-node-kind": "linux",
+        "clab-node-lab-dir": "/root/wcni-kind/split/netenv/4-basic-netwotk/c-wireguard/clab-wireguard/wireguard3",
+        "clab-node-name": "wireguard3",
+        "clab-node-type": "",
+        "clab-topo-file": "/root/wcni-kind/split/netenv/4-basic-netwotk/c-wireguard/clab.yaml",
+        "containerlab": "wireguard"
+      }
+    }
+  },
+  "links": [
+    {
+      "a": {
+        "node": "wireguard1",
+        "interface": "eth1",
+        "mac": "aa:c1:ab:79:2f:87",
+        "peer": "z"
+      },
+      "z": {
+        "node": "server1",
+        "interface": "net0",
+        "mac": "aa:c1:ab:35:7f:8e",
+        "peer": "a"
+      }
+    },
+    {
+      "a": {
+        "node": "wireguard2",
+        "interface": "eth1",
+        "mac": "aa:c1:ab:a1:fd:99",
+        "peer": "z"
+      },
+      "z": {
+        "node": "server2",
+        "interface": "net0",
+        "mac": "aa:c1:ab:19:7c:39",
+        "peer": "a"
+      }
+    },
+    {
+      "a": {
+        "node": "wireguard3",
+        "interface": "eth1",
+        "mac": "aa:c1:ab:7f:32:15",
+        "peer": "z"
+      },
+      "z": {
+        "node": "server3",
+        "interface": "net0",
+        "mac": "aa:c1:ab:7b:bd:a3",
+        "peer": "a"
+      }
+    },
+    {
+      "a": {
+        "node": "wireguard1",
+        "interface": "eth2",
+        "mac": "aa:c1:ab:bc:db:de",
+        "peer": "z"
+      },
+      "z": {
+        "node": "gwx",
+        "interface": "net1",
+        "mac": "aa:c1:ab:23:57:4e",
+        "peer": "a"
+      }
+    },
+    {
+      "a": {
+        "node": "wireguard2",
+        "interface": "eth2",
+        "mac": "aa:c1:ab:2a:51:63",
+        "peer": "z"
+      },
+      "z": {
+        "node": "gwx",
+        "interface": "net2",
+        "mac": "aa:c1:ab:98:ae:76",
+        "peer": "a"
+      }
+    },
+    {
+      "a": {
+        "node": "wireguard3",
+        "interface": "eth2",
+        "mac": "aa:c1:ab:2e:ce:d1",
+        "peer": "z"
+      },
+      "z": {
+        "node": "gwx",
+        "interface": "net3",
+        "mac": "aa:c1:ab:fb:3b:ab",
+        "peer": "a"
+      }
+    }
+  ]
+}

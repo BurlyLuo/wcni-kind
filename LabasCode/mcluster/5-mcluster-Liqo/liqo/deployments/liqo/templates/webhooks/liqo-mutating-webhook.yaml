@@ -1,0 +1,64 @@
+{{- $ctrlManagerConfig := (merge (dict "name" "controller-manager" "module" "controller-manager") .) -}}
+{{- $webhookConfig := (merge (dict "name" "webhook" "module" "webhook") .) -}}
+
+apiVersion: admissionregistration.k8s.io/v1
+kind: MutatingWebhookConfiguration
+metadata:
+  name: {{ include "liqo.prefixedName" $webhookConfig }}
+  labels:
+    {{- include "liqo.labels" $webhookConfig | nindent 4 }}
+webhooks:
+  - name: pod.mutate.liqo.io
+    admissionReviewVersions:
+      - v1
+      - v1beta1
+    clientConfig:
+      service:
+        name: {{ include "liqo.prefixedName" $ctrlManagerConfig }}
+        namespace: {{ .Release.Namespace }}
+        path: "/mutate/pod"
+        port: {{ .Values.webhook.port }}
+    rules:
+      - operations: ["CREATE"]
+        apiGroups: [""]
+        apiVersions: ["v1"]
+        resources: ["pods"]
+    sideEffects: None
+    failurePolicy: {{ .Values.webhook.failurePolicy }}
+    namespaceSelector:
+      matchLabels:
+        liqo.io/scheduling-enabled: "true"
+  - name: fc.mutate.liqo.io
+    admissionReviewVersions:
+      - v1
+      - v1beta1
+    clientConfig:
+      service:
+        name: {{ include "liqo.prefixedName" $ctrlManagerConfig }}
+        namespace: {{ .Release.Namespace }}
+        path: "/mutate/foreign-cluster"
+        port: {{ .Values.webhook.port }}
+    rules:
+      - operations: ["CREATE","UPDATE"]
+        apiGroups: ["discovery.liqo.io"]
+        apiVersions: ["v1alpha1"]
+        resources: ["foreignclusters"]
+    sideEffects: None
+    failurePolicy: {{ .Values.webhook.failurePolicy }}
+  - name: virtualnode.mutate.liqo.io
+    admissionReviewVersions:
+      - v1
+      - v1beta1
+    clientConfig:
+      service:
+        name: {{ include "liqo.prefixedName" $ctrlManagerConfig }}
+        namespace: {{ .Release.Namespace }}
+        path: "/mutate/virtualnodes"
+        port: {{ .Values.webhook.port }}
+    rules:
+      - operations: ["CREATE","UPDATE"]
+        apiGroups: ["virtualkubelet.liqo.io"]
+        apiVersions: ["v1alpha1"]
+        resources: ["virtualnodes"]
+    sideEffects: None
+    failurePolicy: {{ .Values.webhook.failurePolicy }}

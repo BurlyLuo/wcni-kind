@@ -1,0 +1,33 @@
+# nft list ruleset
+
+table ip vyos_nat {
+        chain PREROUTING {
+                type nat hook prerouting priority dstnat; policy accept;
+                counter packets 3 bytes 376 jump VYOS_PRE_DNAT_HOOK
+                iifname "eth1.5" tcp dport 8080 counter packets 1 bytes 60 dnat to 10.1.8.10:80 comment "DST-NAT-101"
+        }
+
+        chain POSTROUTING {
+                type nat hook postrouting priority srcnat; policy accept;
+                counter packets 7 bytes 420 jump VYOS_PRE_SNAT_HOOK
+                oifname "eth0" ip saddr 10.1.0.0/16 counter packets 0 bytes 0 masquerade comment "SRC-NAT-100"
+        }
+
+        chain VYOS_PRE_DNAT_HOOK {
+                return
+        }
+
+        chain VYOS_PRE_SNAT_HOOK {
+                return
+        }
+}
+table ip vyos_static_nat {
+        chain PREROUTING {
+                type nat hook prerouting priority dstnat; policy accept;
+        }
+
+        chain POSTROUTING {
+                type nat hook postrouting priority srcnat; policy accept;
+        }
+}
+root@gwx:~# nft list ruleset

@@ -1,0 +1,102 @@
+---------------------------------------------------------------------------------------------------------------
+Flannel host-gw ENV:
+$ kubectl get node -owide | grep -E "bpf1|bpf3"
+bpf1   Ready    control-plane,master   3d20h   v1.23.4   192.168.2.71   <none>        Ubuntu 20.04.5 LTS   5.15.0-52-generic   docker://20.10.21
+bpf3   Ready    <none>                 3d20h   v1.23.4   192.168.2.73   <none>        Ubuntu 20.04.5 LTS   5.15.0-52-generic   docker://20.10.21
+
+$ k get pods -owide | grep -E "bpf1|bpf3"
+flannel-host-gw-9hzrc   1/1     Running   0          80s   10.244.0.10   bpf1   <none>           <none>
+flannel-host-gw-kl2xp   1/1     Running   0          79s   10.244.2.11   bpf3   <none>           <none>
+ 
+$ k exec -it flannel-host-gw-9hzrc -- ping -c 1 10.244.2.11
+
+---------------------------------------------------------------------------------------------------------------
+Step1: Pod_$(BPF1) ---> BPF1_Node:
+---------------------------------------------------------------------------------------------------------------
+When do the ping at the pod flannel-host-gw-9hzrc, it will triger the routing quary logical:
+$ kubectl exec -it flannel-host-gw-9hzrc -- route -n 
+Kernel IP routing table
+Destination     Gateway         Genmask         Flags Metric Ref    Use Iface
+0.0.0.0         10.244.0.1      0.0.0.0         UG    0      0        0 eth0
+10.244.0.0      0.0.0.0         255.255.255.0   U     0      0        0 eth0
+10.244.0.0      10.244.0.1      255.255.0.0     UG    0      0        0 eth0  // it will match this table.and the next-hop is the 10.244.0.1 which at the ROOT NS.
+So we need get the MAC_$(10.244.0.1).It's a basical routing quary.
+We can capture this with tcpdump!
+bash-5.1# arp -n 
+bash-5.1# // it's empty now.
+
+If we do the ping to 10.244.2.10, (In order to get the MAC_$(10.244.0.1,it need arp protcol))we can see:
+$ arp -n 
+Address                  HWtype  HWaddress           Flags Mask            Iface
+10.244.0.1               ether   f6:c8:0b:ba:1b:0b   C                     eth0
+We can encap the packet and send to the ROOT NS. The next-step will use the ROOT NS's logical to deal the packet.
+
+
+---------------------------------------------------------------------------------------------------------------
+Step2: ROOT NS handle the packet: S_IP: 10.244.0.10 D_IP: 10.244.2.11
+---------------------------------------------------------------------------------------------------------------
+When the ROOT NS recv the packet. how to deal? Rougint/FDB/netfilter?. Yes, we are always consider the Routing fitstly.
+$ route -n 
+Kernel IP routing table
+Destination     Gateway         Genmask         Flags Metric Ref    Use Iface
+0.0.0.0         192.168.2.1     0.0.0.0         UG    100    0        0 ens160
+10.244.0.0      0.0.0.0         255.255.255.0   U     0      0        0 cni0
+10.244.1.0      192.168.2.72    255.255.255.0   UG    0      0        0 ens160
+10.244.2.0      192.168.2.73    255.255.255.0   UG    0      0        0 ens160   // will match this table.the nex-hop is 192.168.2.73.
+169.254.0.0     0.0.0.0         255.255.0.0     U     1000   0        0 ens160
+172.17.0.0      0.0.0.0         255.255.0.0     U     0      0        0 docker0
+192.168.2.0     0.0.0.0         255.255.255.0   U     100    0        0 ens160
+At the L3 network, it's simple, we just need think about the S_MAC and the Next_Hop_MAC, if we understand this logical, it's will know how to continue.
+
+From the Routing Table: We need find out the MAC_192.168.2.73 as the Dst_MAC,and the Src_MAC is the ens160 of 192.168.2.71
+
+Frame 19: 98 bytes on wire (784 bits), 98 bytes captured (784 bits)
+Ethernet II, Src: VMware_67:92:63 (00:0c:29:67:92:63), Dst: VMware_dd:24:3a (00:0c:29:dd:24:3a)  // MAC_192.168.2.71 MAC_192.168.2.73
+Internet Protocol Version 4, Src: 10.244.0.11, Dst: 10.244.2.11                                  // Src_IP  and  Dst_IP
+Internet Control Message Protocol
+
+---------------------------------------------------------------------------------------------------------------
+Can we make the logical manually? of course.
+
+------------------     ------------------
+|   1.1.1.2/24   |     |   1.1.2.2/24   |
+|   container1   |     |   container2   |
+|       |        |     |       |        |
+|   1.1.1.1/24   |     |   1.1.2.1/24   |
+|-------|--------|     |-------|--------|
+     ens160                 ens160
+  192.168.2.71           192.168.2.73
+        |----------------------|
+
+$ node bpf1:
+ip netns a ns1
+ip l a veth type veth peer name c-eth0
+ip l s veth up
+ip a a 1.1.1.1/24 dev veth
+
+ip l s c-eth0 netns ns1
+ip netns exec ns1 ip l s c-eth0 up
+ip netns exec ns1 ip a a 1.1.1.2/24 dev c-eth0
+ip netns exec ns1 ip l s lo up
+ip netns exec ns1 ip route add default via 1.1.1.1 dev c-eth0
+ip route add 1.1.2.0/24 via 192.168.2.73 dev ens160
+
+
+$ node bpf3:
+
+ip netns a ns1
+ip l a veth type veth peer name c-eth0
+ip l s veth up
+ip a a 1.1.2.1/24 dev veth
+
+ip l s c-eth0 netns ns1
+ip netns exec ns1 ip l s c-eth0 up
+ip netns exec ns1 ip a a 1.1.2.2/24 dev c-eth0
+ip netns exec ns1 ip l s lo up
+ip netns exec ns1 ip route add default via 1.1.2.1 dev c-eth0
+ip route add 1.1.1.0/24 via 192.168.2.71 dev ens160
+
+$ we can use the docker to create an environment to verify the thoughts.
+$ we also can use tht CONTAINERlab to ready the env:
+Please refer the clab dir in current dir.
+

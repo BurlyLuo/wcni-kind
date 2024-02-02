@@ -1,0 +1,22 @@
+all:
+  children:
+    bridge:
+      hosts:
+        clab-lvs-dr-ospf-keepalived-brl4lb:
+          ansible_host: 
+    linux:
+      hosts:
+        clab-lvs-dr-ospf-keepalived-client1:
+          ansible_host: 172.20.20.5
+        clab-lvs-dr-ospf-keepalived-client2:
+          ansible_host: 172.20.20.7
+        clab-lvs-dr-ospf-keepalived-dr-rs1:
+          ansible_host: 172.20.20.8
+        clab-lvs-dr-ospf-keepalived-dr-rs2:
+          ansible_host: 172.20.20.3
+        clab-lvs-dr-ospf-keepalived-lvs-dr-lb1:
+          ansible_host: 172.20.20.4
+        clab-lvs-dr-ospf-keepalived-lvs-dr-lb2:
+          ansible_host: 172.20.20.6
+        clab-lvs-dr-ospf-keepalived-router:
+          ansible_host: 172.20.20.2

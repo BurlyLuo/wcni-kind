@@ -1,0 +1,24 @@
+root@dns:/etc/bind# nslookup -type=NAPTR cnipool.wluo.com 127.0.0.1       
+Server:         127.0.0.1
+Address:        127.0.0.1#53
+
+cnipool.wluo.com        naptr = 50 50 "s" "SIP+D2U" "" _sip._tcp.cni01.wluo.com.
+cnipool.wluo.com        naptr = 50 50 "s" "SIP+D2U" "" _sip._udp.cni01.wluo.com.
+cnipool.wluo.com        naptr = 50 50 "s" "SIP+D2U" "" _sip._tcp.cni02.wluo.com.
+cnipool.wluo.com        naptr = 50 50 "s" "SIP+D2U" "" _sip._udp.cni02.wluo.com.
+
+root@dns:/etc/bind# nslookup -type=SRV _sip._udp.cni01.wluo.com 127.0.0.1 
+Server:         127.0.0.1
+Address:        127.0.0.1#53
+
+_sip._udp.cni01.wluo.com        service = 0 0 5070 cni01.wluo.com.
+
+root@dns:/etc/bind# nslookup -type=A cni01.wluo.com 127.0.0.1                             
+Server:         127.0.0.1
+Address:        127.0.0.1#53
+
+Name:   cni01.wluo.com
+Address: 1.1.1.1
+
+root@dns:/etc/bind# 
+

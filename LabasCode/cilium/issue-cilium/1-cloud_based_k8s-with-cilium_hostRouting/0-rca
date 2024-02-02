@@ -1,0 +1,31 @@
+# RCA：
+# 1. k8S env:
+shenxz-01     v1.24.16    10.0.171.103   CentOS Linux 7(Core)    6.5.10-1.el7.elrepo.x84_64   containerd://1.7.8
+shenxz-02     v1.24.16    10.0.168.123   CentOS Linux 7(Core)    6.5.10-1.el7.elrepo.x84_64   containerd://1.7.8
+shenxz-03     v1.24.16    10.0.168.111   CentOS Linux 7(Core)    6.5.10-1.el7.elrepo.x84_64   containerd://1.7.8
+
+# 2. case 1:
+NOK:
+helm upgrade --install cilium cilium/cilium --version 1.14.3 --namespace kube-system \
+    --set tunnel=disabled \
+    --set autoDirectNodeRoutes=true \
+    --set ipv4NativeRoutingCIDR="100.244.0.0/16" \
+    --set kubeProxyReplacement=true \
+    --set k8sServiceHost=10.0.171.103 \
+    --set k8sServicePort=6443 \
+    --set bpf.masquerade=true \
+    --set ipam.mode=cluster-pool
+
+节点不在一个L2的网络中，所以使用Native Routing的方式直接用是不OK的。这里相当于CrosSubenet的方式。要想用的话，需要借助于三层路由发现的机制。比如BGP。
+
+# 3. case 2:
+但是后边:
+OK:
+helm install cilium cilium/cilium --version 1.14.3 --namespace kube-system \
+    --set kubeProxyReplacement=true \
+    --set k8sServiceHost=10.0.171.103 \
+    --set k8sServicePort=6443 \
+    --set bpf.masquerade=true \
+    --set ipam.mode=cluster-pool
+
+这里实际上使用的是VxLAN的模式，能CrossSubnet的，所以是OK的。

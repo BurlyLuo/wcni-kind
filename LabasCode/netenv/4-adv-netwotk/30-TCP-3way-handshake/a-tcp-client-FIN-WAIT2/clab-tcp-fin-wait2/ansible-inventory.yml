@@ -1,0 +1,10 @@
+all:
+  children:
+    linux:
+      hosts:
+        clab-tcp-fin-wait2-gw1:
+          ansible_host: 172.20.20.4
+        clab-tcp-fin-wait2-server1:
+          ansible_host: 172.20.20.3
+        clab-tcp-fin-wait2-server2:
+          ansible_host: 172.20.20.2

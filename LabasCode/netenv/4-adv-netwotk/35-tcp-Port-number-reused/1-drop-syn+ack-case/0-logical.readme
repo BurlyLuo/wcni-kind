@@ -1,0 +1,5 @@
+lo clab-tcp-port-num-resued-gw1 bash 
+
+iptables -A FORWARD -s 10.1.8.10 -d 10.1.5.10 -p tcp --tcp-flags SYN,ACK SYN,ACK -j DROP
+
+

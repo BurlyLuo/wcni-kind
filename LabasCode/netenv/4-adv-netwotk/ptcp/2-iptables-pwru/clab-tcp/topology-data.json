@@ -1,0 +1,48 @@
+{
+  "name": "tcp",
+  "type": "clab",
+  "clab": {
+    "config": {
+      "prefix": "clab",
+      "mgmt": {
+        "network": "clab",
+        "bridge": "br-7c8d5e12d3d4",
+        "ipv4-subnet": "172.20.20.0/24",
+        "ipv4-gw": "172.20.20.1",
+        "mtu": "1500",
+        "external-access": true
+      }
+    }
+  },
+  "nodes": {
+    "fin": {
+      "index": "0",
+      "shortname": "fin",
+      "longname": "clab-tcp-fin",
+      "fqdn": "fin.tcp.io",
+      "group": "",
+      "labdir": "/root/wcni-kind/split/netenv/4-adv-netwotk/ptcp/2-iptables-pwru/clab-tcp/fin",
+      "kind": "linux",
+      "image": "192.168.2.100:5000/packetdrill:v1",
+      "mgmt-net": "",
+      "mgmt-intf": "",
+      "mgmt-ipv4-address": "172.20.20.2",
+      "mgmt-ipv4-prefix-length": 24,
+      "mgmt-ipv6-address": "",
+      "mgmt-ipv6-prefix-length": 0,
+      "mac-address": "",
+      "labels": {
+        "clab-mgmt-net-bridge": "br-7c8d5e12d3d4",
+        "clab-node-group": "",
+        "clab-node-kind": "linux",
+        "clab-node-lab-dir": "/root/wcni-kind/split/netenv/4-adv-netwotk/ptcp/2-iptables-pwru/clab-tcp/fin",
+        "clab-node-name": "fin",
+        "clab-node-type": "",
+        "clab-topo-file": "/root/wcni-kind/split/netenv/4-adv-netwotk/ptcp/2-iptables-pwru/clab.yaml",
+        "containerlab": "tcp"
+      }
+    }
+  },
+  "links": [
+  ]
+}

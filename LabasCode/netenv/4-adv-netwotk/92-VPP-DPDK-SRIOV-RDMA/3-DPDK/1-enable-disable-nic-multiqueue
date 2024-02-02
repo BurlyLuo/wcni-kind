@@ -1,0 +1,26 @@
+libvirt API driver
+hw_vif_multiqueue_enabled
+If true, this enables the virtio-netmultiqueue feature. In this case, the driver sets the number of queues equal to the number of guest vCPUs. This makes the network performance scale across a number of vCPUs.
+true / false
+
+glance image-update --property hw_vif_multiqueue_enabled=**true** ${IMAGE_ID}  
+
+这里需要注意的是对镜像属性的修改并不会影响到已经使用该镜像创建的虚拟机。用户需要重建原有使用该镜像的虚拟机或者新建使用该镜像的虚拟机，对应属性才会生效。
+
+如果用户需要修改已经处于运行状态的虚拟机，可以通过virsh edit 虚拟机的xml文件实现虚拟机支持网卡多队列。
+
+docker **exec** -it -uroot nova_libvirt bash  
+virsh list   
+virsh  edit  instance-xxx  
+ 
+###这里将队列数修改为8  
+<interface type='network'>  
+     <source network='default'/>  
+     <model type='virtio'/>  
+     <driver name='vhost' queues='8'/>  
+ </interface>  
+   
+ virtsh shutdown instance-xxx  
+ virtsh start instance-xxx  
+
+

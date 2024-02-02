@@ -1,0 +1,294 @@
+{
+  "name": "lvs-dr",
+  "type": "clab",
+  "clab": {
+    "config": {
+      "prefix": "clab",
+      "mgmt": {
+        "network": "clab",
+        "bridge": "br-cd4f30b18877",
+        "ipv4-subnet": "172.20.20.0/24",
+        "ipv4-gw": "172.20.20.1",
+        "mtu": "1500",
+        "external-access": true
+      }
+    }
+  },
+  "nodes": {
+    "brl4lb": {
+      "index": "0",
+      "shortname": "brl4lb",
+      "longname": "clab-lvs-dr-brl4lb",
+      "fqdn": "brl4lb.lvs-dr.io",
+      "group": "",
+      "labdir": "/root/wcni-kind/split/netenv/4-adv-netwotk/77-L4-L7-LB/1-L4/2-lvs/1-lvs/3-lvs-dr/1-lvs-dr-samesubnet/clab-lvs-dr/brl4lb",
+      "kind": "bridge",
+      "image": "",
+      "mgmt-net": "",
+      "mgmt-intf": "",
+      "mgmt-ipv4-address": "",
+      "mgmt-ipv4-prefix-length": 0,
+      "mgmt-ipv6-address": "",
+      "mgmt-ipv6-prefix-length": 0,
+      "mac-address": "",
+      "labels": {
+        "clab-mgmt-net-bridge": "br-cd4f30b18877",
+        "clab-node-group": "",
+        "clab-node-kind": "bridge",
+        "clab-node-lab-dir": "/root/wcni-kind/split/netenv/4-adv-netwotk/77-L4-L7-LB/1-L4/2-lvs/1-lvs/3-lvs-dr/1-lvs-dr-samesubnet/clab-lvs-dr/brl4lb",
+        "clab-node-name": "brl4lb",
+        "clab-node-type": "",
+        "clab-topo-file": "/root/wcni-kind/split/netenv/4-adv-netwotk/77-L4-L7-LB/1-L4/2-lvs/1-lvs/3-lvs-dr/1-lvs-dr-samesubnet/clab.yaml",
+        "containerlab": "lvs-dr"
+      }
+    },
+    "client": {
+      "index": "1",
+      "shortname": "client",
+      "longname": "clab-lvs-dr-client",
+      "fqdn": "client.lvs-dr.io",
+      "group": "",
+      "labdir": "/root/wcni-kind/split/netenv/4-adv-netwotk/77-L4-L7-LB/1-L4/2-lvs/1-lvs/3-lvs-dr/1-lvs-dr-samesubnet/clab-lvs-dr/client",
+      "kind": "linux",
+      "image": "192.168.2.100:5000/nettool",
+      "mgmt-net": "",
+      "mgmt-intf": "",
+      "mgmt-ipv4-address": "172.20.20.5",
+      "mgmt-ipv4-prefix-length": 24,
+      "mgmt-ipv6-address": "",
+      "mgmt-ipv6-prefix-length": 0,
+      "mac-address": "",
+      "labels": {
+        "clab-mgmt-net-bridge": "br-cd4f30b18877",
+        "clab-node-group": "",
+        "clab-node-kind": "linux",
+        "clab-node-lab-dir": "/root/wcni-kind/split/netenv/4-adv-netwotk/77-L4-L7-LB/1-L4/2-lvs/1-lvs/3-lvs-dr/1-lvs-dr-samesubnet/clab-lvs-dr/client",
+        "clab-node-name": "client",
+        "clab-node-type": "",
+        "clab-topo-file": "/root/wcni-kind/split/netenv/4-adv-netwotk/77-L4-L7-LB/1-L4/2-lvs/1-lvs/3-lvs-dr/1-lvs-dr-samesubnet/clab.yaml",
+        "containerlab": "lvs-dr"
+      }
+    },
+    "dr-rs1": {
+      "index": "2",
+      "shortname": "dr-rs1",
+      "longname": "clab-lvs-dr-dr-rs1",
+      "fqdn": "dr-rs1.lvs-dr.io",
+      "group": "",
+      "labdir": "/root/wcni-kind/split/netenv/4-adv-netwotk/77-L4-L7-LB/1-L4/2-lvs/1-lvs/3-lvs-dr/1-lvs-dr-samesubnet/clab-lvs-dr/dr-rs1",
+      "kind": "linux",
+      "image": "192.168.2.100:5000/nettool",
+      "mgmt-net": "",
+      "mgmt-intf": "",
+      "mgmt-ipv4-address": "172.20.20.7",
+      "mgmt-ipv4-prefix-length": 24,
+      "mgmt-ipv6-address": "",
+      "mgmt-ipv6-prefix-length": 0,
+      "mac-address": "",
+      "labels": {
+        "clab-mgmt-net-bridge": "br-cd4f30b18877",
+        "clab-node-group": "",
+        "clab-node-kind": "linux",
+        "clab-node-lab-dir": "/root/wcni-kind/split/netenv/4-adv-netwotk/77-L4-L7-LB/1-L4/2-lvs/1-lvs/3-lvs-dr/1-lvs-dr-samesubnet/clab-lvs-dr/dr-rs1",
+        "clab-node-name": "dr-rs1",
+        "clab-node-type": "",
+        "clab-topo-file": "/root/wcni-kind/split/netenv/4-adv-netwotk/77-L4-L7-LB/1-L4/2-lvs/1-lvs/3-lvs-dr/1-lvs-dr-samesubnet/clab.yaml",
+        "containerlab": "lvs-dr"
+      }
+    },
+    "dr-rs2": {
+      "index": "3",
+      "shortname": "dr-rs2",
+      "longname": "clab-lvs-dr-dr-rs2",
+      "fqdn": "dr-rs2.lvs-dr.io",
+      "group": "",
+      "labdir": "/root/wcni-kind/split/netenv/4-adv-netwotk/77-L4-L7-LB/1-L4/2-lvs/1-lvs/3-lvs-dr/1-lvs-dr-samesubnet/clab-lvs-dr/dr-rs2",
+      "kind": "linux",
+      "image": "192.168.2.100:5000/nettool",
+      "mgmt-net": "",
+      "mgmt-intf": "",
+      "mgmt-ipv4-address": "172.20.20.6",
+      "mgmt-ipv4-prefix-length": 24,
+      "mgmt-ipv6-address": "",
+      "mgmt-ipv6-prefix-length": 0,
+      "mac-address": "",
+      "labels": {
+        "clab-mgmt-net-bridge": "br-cd4f30b18877",
+        "clab-node-group": "",
+        "clab-node-kind": "linux",
+        "clab-node-lab-dir": "/root/wcni-kind/split/netenv/4-adv-netwotk/77-L4-L7-LB/1-L4/2-lvs/1-lvs/3-lvs-dr/1-lvs-dr-samesubnet/clab-lvs-dr/dr-rs2",
+        "clab-node-name": "dr-rs2",
+        "clab-node-type": "",
+        "clab-topo-file": "/root/wcni-kind/split/netenv/4-adv-netwotk/77-L4-L7-LB/1-L4/2-lvs/1-lvs/3-lvs-dr/1-lvs-dr-samesubnet/clab.yaml",
+        "containerlab": "lvs-dr"
+      }
+    },
+    "dr-rs3": {
+      "index": "4",
+      "shortname": "dr-rs3",
+      "longname": "clab-lvs-dr-dr-rs3",
+      "fqdn": "dr-rs3.lvs-dr.io",
+      "group": "",
+      "labdir": "/root/wcni-kind/split/netenv/4-adv-netwotk/77-L4-L7-LB/1-L4/2-lvs/1-lvs/3-lvs-dr/1-lvs-dr-samesubnet/clab-lvs-dr/dr-rs3",
+      "kind": "linux",
+      "image": "192.168.2.100:5000/nettool",
+      "mgmt-net": "",
+      "mgmt-intf": "",
+      "mgmt-ipv4-address": "172.20.20.4",
+      "mgmt-ipv4-prefix-length": 24,
+      "mgmt-ipv6-address": "",
+      "mgmt-ipv6-prefix-length": 0,
+      "mac-address": "",
+      "labels": {
+        "clab-mgmt-net-bridge": "br-cd4f30b18877",
+        "clab-node-group": "",
+        "clab-node-kind": "linux",
+        "clab-node-lab-dir": "/root/wcni-kind/split/netenv/4-adv-netwotk/77-L4-L7-LB/1-L4/2-lvs/1-lvs/3-lvs-dr/1-lvs-dr-samesubnet/clab-lvs-dr/dr-rs3",
+        "clab-node-name": "dr-rs3",
+        "clab-node-type": "",
+        "clab-topo-file": "/root/wcni-kind/split/netenv/4-adv-netwotk/77-L4-L7-LB/1-L4/2-lvs/1-lvs/3-lvs-dr/1-lvs-dr-samesubnet/clab.yaml",
+        "containerlab": "lvs-dr"
+      }
+    },
+    "lvs-dr-lb": {
+      "index": "5",
+      "shortname": "lvs-dr-lb",
+      "longname": "clab-lvs-dr-lvs-dr-lb",
+      "fqdn": "lvs-dr-lb.lvs-dr.io",
+      "group": "",
+      "labdir": "/root/wcni-kind/split/netenv/4-adv-netwotk/77-L4-L7-LB/1-L4/2-lvs/1-lvs/3-lvs-dr/1-lvs-dr-samesubnet/clab-lvs-dr/lvs-dr-lb",
+      "kind": "linux",
+      "image": "192.168.2.100:5000/xcni",
+      "mgmt-net": "",
+      "mgmt-intf": "",
+      "mgmt-ipv4-address": "172.20.20.2",
+      "mgmt-ipv4-prefix-length": 24,
+      "mgmt-ipv6-address": "",
+      "mgmt-ipv6-prefix-length": 0,
+      "mac-address": "",
+      "labels": {
+        "clab-mgmt-net-bridge": "br-cd4f30b18877",
+        "clab-node-group": "",
+        "clab-node-kind": "linux",
+        "clab-node-lab-dir": "/root/wcni-kind/split/netenv/4-adv-netwotk/77-L4-L7-LB/1-L4/2-lvs/1-lvs/3-lvs-dr/1-lvs-dr-samesubnet/clab-lvs-dr/lvs-dr-lb",
+        "clab-node-name": "lvs-dr-lb",
+        "clab-node-type": "",
+        "clab-topo-file": "/root/wcni-kind/split/netenv/4-adv-netwotk/77-L4-L7-LB/1-L4/2-lvs/1-lvs/3-lvs-dr/1-lvs-dr-samesubnet/clab.yaml",
+        "containerlab": "lvs-dr"
+      }
+    },
+    "router": {
+      "index": "6",
+      "shortname": "router",
+      "longname": "clab-lvs-dr-router",
+      "fqdn": "router.lvs-dr.io",
+      "group": "",
+      "labdir": "/root/wcni-kind/split/netenv/4-adv-netwotk/77-L4-L7-LB/1-L4/2-lvs/1-lvs/3-lvs-dr/1-lvs-dr-samesubnet/clab-lvs-dr/router",
+      "kind": "linux",
+      "image": "192.168.2.100:5000/xcni",
+      "mgmt-net": "",
+      "mgmt-intf": "",
+      "mgmt-ipv4-address": "172.20.20.3",
+      "mgmt-ipv4-prefix-length": 24,
+      "mgmt-ipv6-address": "",
+      "mgmt-ipv6-prefix-length": 0,
+      "mac-address": "",
+      "labels": {
+        "clab-mgmt-net-bridge": "br-cd4f30b18877",
+        "clab-node-group": "",
+        "clab-node-kind": "linux",
+        "clab-node-lab-dir": "/root/wcni-kind/split/netenv/4-adv-netwotk/77-L4-L7-LB/1-L4/2-lvs/1-lvs/3-lvs-dr/1-lvs-dr-samesubnet/clab-lvs-dr/router",
+        "clab-node-name": "router",
+        "clab-node-type": "",
+        "clab-topo-file": "/root/wcni-kind/split/netenv/4-adv-netwotk/77-L4-L7-LB/1-L4/2-lvs/1-lvs/3-lvs-dr/1-lvs-dr-samesubnet/clab.yaml",
+        "containerlab": "lvs-dr"
+      }
+    }
+  },
+  "links": [
+    {
+      "a": {
+        "node": "router",
+        "interface": "net2",
+        "mac": "aa:c1:ab:3f:86:89",
+        "peer": "z"
+      },
+      "z": {
+        "node": "brl4lb",
+        "interface": "net1",
+        "mac": "aa:c1:ab:fd:ad:f6",
+        "peer": "a"
+      }
+    },
+    {
+      "a": {
+        "node": "lvs-dr-lb",
+        "interface": "net1",
+        "mac": "aa:c1:ab:44:4f:54",
+        "peer": "z"
+      },
+      "z": {
+        "node": "brl4lb",
+        "interface": "net2",
+        "mac": "aa:c1:ab:ec:22:19",
+        "peer": "a"
+      }
+    },
+    {
+      "a": {
+        "node": "dr-rs1",
+        "interface": "net1",
+        "mac": "aa:c1:ab:42:a5:c7",
+        "peer": "z"
+      },
+      "z": {
+        "node": "brl4lb",
+        "interface": "net3",
+        "mac": "aa:c1:ab:33:a7:70",
+        "peer": "a"
+      }
+    },
+    {
+      "a": {
+        "node": "dr-rs2",
+        "interface": "net1",
+        "mac": "aa:c1:ab:cd:be:98",
+        "peer": "z"
+      },
+      "z": {
+        "node": "brl4lb",
+        "interface": "net4",
+        "mac": "aa:c1:ab:51:ef:dd",
+        "peer": "a"
+      }
+    },
+    {
+      "a": {
+        "node": "dr-rs3",
+        "interface": "net1",
+        "mac": "aa:c1:ab:99:22:ad",
+        "peer": "z"
+      },
+      "z": {
+        "node": "brl4lb",
+        "interface": "net5",
+        "mac": "aa:c1:ab:c7:3a:e8",
+        "peer": "a"
+      }
+    },
+    {
+      "a": {
+        "node": "client",
+        "interface": "net1",
+        "mac": "aa:c1:ab:bc:28:84",
+        "peer": "z"
+      },
+      "z": {
+        "node": "router",
+        "interface": "net1",
+        "mac": "aa:c1:ab:01:60:15",
+        "peer": "a"
+      }
+    }
+  ]
+}

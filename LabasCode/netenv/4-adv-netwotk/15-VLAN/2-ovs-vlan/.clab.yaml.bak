@@ -1,0 +1,42 @@
+name: vlan
+topology:
+  nodes:
+    vswitch0:
+      kind: ovs-bridge
+
+    vswitch1:
+      kind: ovs-bridge
+
+    gwx:
+      kind: linux
+      image: 192.168.2.100:5000/vyos/vyos:1.4.7
+      cmd: /sbin/init
+      binds:
+        - /lib/modules:/lib/modules
+        - ./startup-conf/gwx-boot.cfg:/opt/vyatta/etc/config/config.boot
+
+    vlan1:
+      kind: linux
+      image: 192.168.2.100:5000/nettool
+
+    vlan2:
+      kind: linux
+      image: 192.168.2.100:5000/nettool
+    
+    vlan3:
+      kind: linux
+      image: 192.168.2.100:5000/nettool
+
+    vlan4:
+      kind: linux
+      image: 192.168.2.100:5000/nettool
+
+  links:
+    #- endpoints: ["vlan1:net1", "vswitch0:vlan-ovs-5-1"]
+    #- endpoints: ["vlan2:net1", "vswitch1:vlan-ovs-5-2"]
+    #- endpoints: ["vlan3:net1", "vswitch0:vlan-ovs-8-1"]
+    #- endpoints: ["vlan4:net1", "vswitch1:vlan-ovs-8-2"]
+
+    - endpoints: ["vswitch0:net1", "gwx:eth1"]
+    - endpoints: ["vswitch0:net2", "gwx:eth2"]
+

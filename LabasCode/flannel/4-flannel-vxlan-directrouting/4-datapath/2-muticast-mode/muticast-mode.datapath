@@ -1,0 +1,23 @@
+
+  1.1.1.1/24       1.1.1.2/24
+|-----------|    |-----------|
+|  vxlan0   |    |   vxlan1  |
+|    |      |    |     |     |
+|  ens160   |    |   ens160  |
+|----|------|    |-----|-----|  
+     |-muticast--group-|
+     |                 |
+192.168.2.71      192.168.2.73
+
+
+$ bpf1
+ip link add vxlan0 type vxlan id 6 dstport 4789 group 239.1.1.1 dev ens33
+ip addr add 1.1.1.1/24 dev vxlan0
+ip link set vxlan0 up
+
+$ bpf3
+ip link add vxlan1 type vxlan id 6 dstport 4789 group 239.1.1.1 dev ens33
+ip addr add 1.1.1.2/24 dev vxlan1
+ip link set vxlan1 up
+
+

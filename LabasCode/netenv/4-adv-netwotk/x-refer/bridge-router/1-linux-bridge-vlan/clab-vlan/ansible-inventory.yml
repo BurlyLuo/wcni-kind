@@ -1,0 +1,16 @@
+all:
+  children:
+    bridge:
+      hosts:
+        clab-vlan-br-vlan:
+          ansible_host: 
+    linux:
+      hosts:
+        clab-vlan-gwx:
+          ansible_host: 172.20.20.3
+        clab-vlan-vlan1:
+          ansible_host: 172.20.20.5
+        clab-vlan-vlan2:
+          ansible_host: 172.20.20.4
+        clab-vlan-vlan3:
+          ansible_host: 172.20.20.2

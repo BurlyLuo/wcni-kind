@@ -1,0 +1,132 @@
+{
+  "name": "ovs",
+  "type": "clab",
+  "clab": {
+    "config": {
+      "prefix": "clab",
+      "mgmt": {
+        "network": "clab",
+        "bridge": "br-363343fbc6b3",
+        "ipv4-subnet": "172.20.20.0/24",
+        "ipv4-gw": "172.20.20.1",
+        "ipv6-subnet": "2001:172:20:20::/64",
+        "ipv6-gw": "2001:172:20:20::1",
+        "mtu": "1500",
+        "external-access": true
+      }
+    }
+  },
+  "nodes": {
+    "br-ovs0": {
+      "index": "0",
+      "shortname": "br-ovs0",
+      "longname": "clab-ovs-br-ovs0",
+      "fqdn": "br-ovs0.ovs.io",
+      "group": "",
+      "labdir": "/root/wcni-kind/split/netenv/4-basic-netwotk/6-ovs-bridge/clab-ovs/br-ovs0",
+      "kind": "ovs-bridge",
+      "image": "",
+      "mgmt-net": "",
+      "mgmt-intf": "",
+      "mgmt-ipv4-address": "",
+      "mgmt-ipv4-prefix-length": 0,
+      "mgmt-ipv6-address": "",
+      "mgmt-ipv6-prefix-length": 0,
+      "mac-address": "",
+      "labels": {
+        "clab-mgmt-net-bridge": "br-363343fbc6b3",
+        "clab-node-group": "",
+        "clab-node-kind": "ovs-bridge",
+        "clab-node-lab-dir": "/root/wcni-kind/split/netenv/4-basic-netwotk/6-ovs-bridge/clab-ovs/br-ovs0",
+        "clab-node-name": "br-ovs0",
+        "clab-node-type": "",
+        "clab-topo-file": "/root/wcni-kind/split/netenv/4-basic-netwotk/6-ovs-bridge/clab.yaml",
+        "containerlab": "ovs"
+      }
+    },
+    "server1": {
+      "index": "1",
+      "shortname": "server1",
+      "longname": "clab-ovs-server1",
+      "fqdn": "server1.ovs.io",
+      "group": "",
+      "labdir": "/root/wcni-kind/split/netenv/4-basic-netwotk/6-ovs-bridge/clab-ovs/server1",
+      "kind": "linux",
+      "image": "192.168.2.100:5000/nettool",
+      "mgmt-net": "",
+      "mgmt-intf": "",
+      "mgmt-ipv4-address": "172.20.20.2",
+      "mgmt-ipv4-prefix-length": 24,
+      "mgmt-ipv6-address": "2001:172:20:20::2",
+      "mgmt-ipv6-prefix-length": 64,
+      "mac-address": "",
+      "labels": {
+        "clab-mgmt-net-bridge": "br-363343fbc6b3",
+        "clab-node-group": "",
+        "clab-node-kind": "linux",
+        "clab-node-lab-dir": "/root/wcni-kind/split/netenv/4-basic-netwotk/6-ovs-bridge/clab-ovs/server1",
+        "clab-node-name": "server1",
+        "clab-node-type": "",
+        "clab-topo-file": "/root/wcni-kind/split/netenv/4-basic-netwotk/6-ovs-bridge/clab.yaml",
+        "containerlab": "ovs"
+      }
+    },
+    "server2": {
+      "index": "2",
+      "shortname": "server2",
+      "longname": "clab-ovs-server2",
+      "fqdn": "server2.ovs.io",
+      "group": "",
+      "labdir": "/root/wcni-kind/split/netenv/4-basic-netwotk/6-ovs-bridge/clab-ovs/server2",
+      "kind": "linux",
+      "image": "192.168.2.100:5000/nettool",
+      "mgmt-net": "",
+      "mgmt-intf": "",
+      "mgmt-ipv4-address": "172.20.20.3",
+      "mgmt-ipv4-prefix-length": 24,
+      "mgmt-ipv6-address": "2001:172:20:20::3",
+      "mgmt-ipv6-prefix-length": 64,
+      "mac-address": "",
+      "labels": {
+        "clab-mgmt-net-bridge": "br-363343fbc6b3",
+        "clab-node-group": "",
+        "clab-node-kind": "linux",
+        "clab-node-lab-dir": "/root/wcni-kind/split/netenv/4-basic-netwotk/6-ovs-bridge/clab-ovs/server2",
+        "clab-node-name": "server2",
+        "clab-node-type": "",
+        "clab-topo-file": "/root/wcni-kind/split/netenv/4-basic-netwotk/6-ovs-bridge/clab.yaml",
+        "containerlab": "ovs"
+      }
+    }
+  },
+  "links": [
+    {
+      "a": {
+        "node": "br-ovs0",
+        "interface": "eth1",
+        "mac": "aa:c1:ab:51:58:1b",
+        "peer": "z"
+      },
+      "z": {
+        "node": "server1",
+        "interface": "net0",
+        "mac": "aa:c1:ab:ee:9b:81",
+        "peer": "a"
+      }
+    },
+    {
+      "a": {
+        "node": "br-ovs0",
+        "interface": "eth2",
+        "mac": "aa:c1:ab:af:a9:59",
+        "peer": "z"
+      },
+      "z": {
+        "node": "server2",
+        "interface": "net0",
+        "mac": "aa:c1:ab:8a:0d:07",
+        "peer": "a"
+      }
+    }
+  ]
+}

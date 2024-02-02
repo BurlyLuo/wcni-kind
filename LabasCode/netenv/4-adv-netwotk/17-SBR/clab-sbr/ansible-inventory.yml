@@ -1,0 +1,12 @@
+all:
+  children:
+    linux:
+      hosts:
+        clab-sbr-gwx:
+          ansible_host: 172.20.20.4
+        clab-sbr-sbr1:
+          ansible_host: 172.20.20.2
+        clab-sbr-sbr2:
+          ansible_host: 172.20.20.5
+        clab-sbr-sbr3:
+          ansible_host: 172.20.20.3
