@@ -72,4 +72,3 @@ docker pull burlyluo/nettool:latest
 docker tag 192.168.2.100:5000/kindest:v1.27.3 burlyluo/kindest:v1.27.3
 docker push burlyluo/kindest:v1.27.3
 
-
