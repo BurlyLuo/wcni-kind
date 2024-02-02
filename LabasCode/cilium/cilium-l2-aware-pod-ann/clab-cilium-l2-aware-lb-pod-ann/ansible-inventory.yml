@@ -1,0 +1,16 @@
+all:
+  children:
+    bridge:
+      hosts:
+        clab-cilium-l2-aware-lb-pod-ann-br-pool0:
+          ansible_host: 
+    linux:
+      hosts:
+        clab-cilium-l2-aware-lb-pod-ann-client:
+          ansible_host: 172.20.20.2
+        clab-cilium-l2-aware-lb-pod-ann-server1:
+          ansible_host: 
+        clab-cilium-l2-aware-lb-pod-ann-server2:
+          ansible_host: 
+        clab-cilium-l2-aware-lb-pod-ann-server3:
+          ansible_host: 

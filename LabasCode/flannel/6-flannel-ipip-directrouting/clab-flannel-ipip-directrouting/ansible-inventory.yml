@@ -1,0 +1,20 @@
+all:
+  children:
+    bridge:
+      hosts:
+        clab-flannel-ipip-directrouting-br-pool0:
+          ansible_host: 
+        clab-flannel-ipip-directrouting-br-pool1:
+          ansible_host: 
+    linux:
+      hosts:
+        clab-flannel-ipip-directrouting-gw0:
+          ansible_host: 172.20.20.2
+        clab-flannel-ipip-directrouting-server1:
+          ansible_host: 
+        clab-flannel-ipip-directrouting-server2:
+          ansible_host: 
+        clab-flannel-ipip-directrouting-server3:
+          ansible_host: 
+        clab-flannel-ipip-directrouting-server4:
+          ansible_host: 

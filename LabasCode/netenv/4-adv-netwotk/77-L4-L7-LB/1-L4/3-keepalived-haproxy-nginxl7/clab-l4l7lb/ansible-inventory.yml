@@ -1,0 +1,22 @@
+all:
+  children:
+    bridge:
+      hosts:
+        clab-l4l7lb-brl4l7:
+          ansible_host: 
+    linux:
+      hosts:
+        clab-l4l7lb-client:
+          ansible_host: 172.20.20.5
+        clab-l4l7lb-keepalived1-haproxy1:
+          ansible_host: 172.20.20.6
+        clab-l4l7lb-keepalived2-haproxy2:
+          ansible_host: 172.20.20.2
+        clab-l4l7lb-nginx1:
+          ansible_host: 172.20.20.7
+        clab-l4l7lb-nginx2:
+          ansible_host: 172.20.20.8
+        clab-l4l7lb-web1:
+          ansible_host: 172.20.20.4
+        clab-l4l7lb-web2:
+          ansible_host: 172.20.20.3

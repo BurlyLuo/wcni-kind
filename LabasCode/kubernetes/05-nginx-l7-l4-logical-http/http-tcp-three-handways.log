@@ -1,0 +1,88 @@
+47	2023-05-24 08:22:03.389914	172.18.0.4	10.244.204.3	TCP	74	80	3		59636 → 80 [SYN] Seq=0 Win=64240 Len=0 MSS=1460 SACK_PERM=1 TSval=2528153792 TSecr=0 WS=128
+48	2023-05-24 08:22:03.389933	10.244.204.3	172.18.0.4	TCP	74	59636	3		80 → 59636 [SYN, ACK] Seq=0 Ack=1 Win=64308 Len=0 MSS=1410 SACK_PERM=1 TSval=2685176034 TSecr=2528153792 WS=128
+49	2023-05-24 08:22:03.389962	172.18.0.4	10.244.204.3	TCP	66	80	3		59636 → 80 [ACK] Seq=1 Ack=1 Win=64256 Len=0 TSval=2528153793 TSecr=2685176034
+50	2023-05-24 08:22:03.390019	172.18.0.4	10.244.204.3	HTTP	150	80	3		GET / HTTP/1.1 
+51	2023-05-24 08:22:03.390022	10.244.204.3	172.18.0.4	TCP	66	59636	3		80 → 59636 [ACK] Seq=1 Ack=85 Win=64256 Len=0 TSval=2685176034 TSecr=2528153793
+52	2023-05-24 08:22:03.390459	10.244.204.3	10.244.43.69	TCP	74	80	4		59046 → 80 [SYN] Seq=0 Win=64860 Len=0 MSS=1410 SACK_PERM=1 TSval=595072079 TSecr=0 WS=128
+53	2023-05-24 08:22:03.390713	10.244.43.69	10.244.204.3	TCP	74	59046	4		80 → 59046 [SYN, ACK] Seq=0 Ack=1 Win=64308 Len=0 MSS=1410 SACK_PERM=1 TSval=1279515626 TSecr=595072079 WS=128
+54	2023-05-24 08:22:03.390723	10.244.204.3	10.244.43.69	TCP	66	80	4		59046 → 80 [ACK] Seq=1 Ack=1 Win=64896 Len=0 TSval=595072079 TSecr=1279515626
+55	2023-05-24 08:22:03.390782	10.244.204.3	10.244.43.69	HTTP	379	80	4		GET / HTTP/1.1 
+56	2023-05-24 08:22:03.390822	10.244.43.69	10.244.204.3	TCP	66	59046	4		80 → 59046 [ACK] Seq=1 Ack=314 Win=64128 Len=0 TSval=1279515626 TSecr=595072079
+57	2023-05-24 08:22:03.391018	10.244.43.69	10.244.204.3	TCP	302	59046	4		80 → 59046 [PSH, ACK] Seq=1 Ack=314 Win=64128 Len=236 TSval=1279515627 TSecr=595072079 [TCP segment of a reassembled PDU]
+58	2023-05-24 08:22:03.391048	10.244.204.3	10.244.43.69	TCP	66	80	4		59046 → 80 [ACK] Seq=314 Ack=237 Win=64768 Len=0 TSval=595072080 TSecr=1279515627
+59	2023-05-24 08:22:03.391121	10.244.43.69	10.244.204.3	HTTP	130	59046	4		HTTP/1.1 200 OK  (text/html)
+60	2023-05-24 08:22:03.391123	10.244.204.3	10.244.43.69	TCP	66	80	4		59046 → 80 [ACK] Seq=314 Ack=301 Win=64768 Len=0 TSval=595072080 TSecr=1279515627
+61	2023-05-24 08:22:03.391139	10.244.204.3	172.18.0.4	TCP	280	59636	3		80 → 59636 [PSH, ACK] Seq=1 Ack=85 Win=64256 Len=214 TSval=2685176035 TSecr=2528153793 [TCP segment of a reassembled PDU]
+62	2023-05-24 08:22:03.391187	172.18.0.4	10.244.204.3	TCP	66	80	3		59636 → 80 [ACK] Seq=85 Ack=215 Win=64128 Len=0 TSval=2528153794 TSecr=2685176035
+63	2023-05-24 08:22:03.391205	10.244.204.3	172.18.0.4	HTTP	130	59636	3		HTTP/1.1 200 OK  (text/html)
+64	2023-05-24 08:22:03.391218	172.18.0.4	10.244.204.3	TCP	66	80	3		59636 → 80 [ACK] Seq=85 Ack=279 Win=64128 Len=0 TSval=2528153794 TSecr=2685176035
+65	2023-05-24 08:22:03.391491	172.18.0.4	10.244.204.3	TCP	66	80	3		59636 → 80 [FIN, ACK] Seq=85 Ack=279 Win=64128 Len=0 TSval=2528153794 TSecr=2685176035
+66	2023-05-24 08:22:03.391593	10.244.204.3	172.18.0.4	TCP	66	59636	3		80 → 59636 [FIN, ACK] Seq=279 Ack=86 Win=64256 Len=0 TSval=2685176035 TSecr=2528153794
+67	2023-05-24 08:22:03.391667	172.18.0.4	10.244.204.3	TCP	66	80	3		59636 → 80 [ACK] Seq=86 Ack=280 Win=64128 Len=0 TSval=2528153794 TSecr=2685176035
+
+
+
+
+root@2204:~/wcni-kind/kindenv/ingress-controller/1-http# all -o wide 
+NAMESPACE            NAME                                                         READY   STATUS      RESTARTS   AGE    IP              NODE                                 NOMINATED NODE   READINESS GATES
+kube-system          calico-kube-controllers-c55c48989-76qw2                      1/1     Running     0          108m   10.244.43.68    ingress-control-http-control-plane   <none>           <none>
+kube-system          calico-node-895jd                                            1/1     Running     0          108m   172.18.0.4      ingress-control-http-worker          <none>           <none>
+kube-system          calico-node-9sdrl                                            1/1     Running     0          108m   172.18.0.2      ingress-control-http-worker2         <none>           <none>
+kube-system          calico-node-mbd6s                                            1/1     Running     0          108m   172.18.0.3      ingress-control-http-control-plane   <none>           <none>
+kube-system          coredns-64897985d-8xxgk                                      1/1     Running     0          108m   10.244.43.67    ingress-control-http-control-plane   <none>           <none>
+kube-system          coredns-64897985d-dgl6x                                      1/1     Running     0          108m   10.244.43.65    ingress-control-http-control-plane   <none>           <none>
+kube-system          etcd-ingress-control-http-control-plane                      1/1     Running     0          108m   172.18.0.3      ingress-control-http-control-plane   <none>           <none>
+kube-system          kube-apiserver-ingress-control-http-control-plane            1/1     Running     0          108m   172.18.0.3      ingress-control-http-control-plane   <none>           <none>
+kube-system          kube-controller-manager-ingress-control-http-control-plane   1/1     Running     0          108m   172.18.0.3      ingress-control-http-control-plane   <none>           <none>
+kube-system          kube-proxy-ghlm5                                             1/1     Running     0          108m   172.18.0.3      ingress-control-http-control-plane   <none>           <none>
+kube-system          kube-proxy-sq7m4                                             1/1     Running     0          108m   172.18.0.2      ingress-control-http-worker2         <none>           <none>
+kube-system          kube-proxy-t64wt                                             1/1     Running     0          108m   172.18.0.4      ingress-control-http-worker          <none>           <none>
+kube-system          kube-scheduler-ingress-control-http-control-plane            1/1     Running     0          108m   172.18.0.3      ingress-control-http-control-plane   <none>           <none>
+local-path-storage   local-path-provisioner-5ddd94ff66-b4bzw                      1/1     Running     0          108m   10.244.43.66    ingress-control-http-control-plane   <none>           <none>
+metallb-system       controller-f54fbc6f9-s6n7n                                   1/1     Running     0          106m   10.244.223.65   ingress-control-http-worker2         <none>           <none>
+metallb-system       speaker-9wbw8                                                1/1     Running     0          106m   172.18.0.4      ingress-control-http-worker          <none>           <none>
+metallb-system       speaker-f9b6z                                                1/1     Running     0          106m   172.18.0.3      ingress-control-http-control-plane   <none>           <none>
+metallb-system       speaker-xtbtq                                                1/1     Running     0          106m   172.18.0.2      ingress-control-http-worker2         <none>           <none>
+sandbox              ingress-nginx-admission-create-jl95l                         0/1     Completed   0          106m   10.244.204.1    ingress-control-http-worker          <none>           <none>
+sandbox              ingress-nginx-admission-patch-rrmg9                          0/1     Completed   1          106m   10.244.204.2    ingress-control-http-worker          <none>           <none>
+sandbox              ingress-nginx-controller-cfd648d8-628n5                      1/1     Running     0          106m   10.244.204.3    ingress-control-http-worker          <none>           <none>
+sandbox              nettool-799d775c76-9w46k                                     1/1     Running     0          105m   10.244.43.69    ingress-control-http-control-plane   <none>           <none>
+sandbox              nettool-799d775c76-lxplx                                     1/1     Running     0          105m   10.244.223.66   ingress-control-http-worker2         <none>           <none>
+sandbox              nettool-799d775c76-rzxhm                                     1/1     Running     0          105m   10.244.204.4    ingress-control-http-worker          <none>           <none>
+root@2204:~/wcni-kind/kindenv/ingress-controller/1-http# 
+
+
+
+root@2204:~/wcni-kind/kindenv/ingress-controller/1-http# k get svc -o wide -A 
+NAMESPACE     NAME                                 TYPE           CLUSTER-IP     EXTERNAL-IP    PORT(S)                      AGE    SELECTOR
+default       kubernetes                           ClusterIP      10.96.0.1      <none>         443/TCP                      109m   <none>
+kube-system   kube-dns                             ClusterIP      10.96.0.10     <none>         53/UDP,53/TCP,9153/TCP       109m   k8s-app=kube-dns
+sandbox       ingress-nginx-controller             LoadBalancer   10.96.24.254   172.18.0.200   80:30181/TCP,443:31902/TCP   106m   app.kubernetes.io/component=controller,app.kubernetes.io/instance=ingress-nginx,app.kubernetes.io/name=ingress-nginx
+sandbox       ingress-nginx-controller-admission   ClusterIP      10.96.71.130   <none>         443/TCP                      106m   app.kubernetes.io/component=controller,app.kubernetes.io/instance=ingress-nginx,app.kubernetes.io/name=ingress-nginx
+sandbox       nettool                              LoadBalancer   10.96.21.35    172.18.0.201   80:32152/TCP                 106m   run=nettool
+root@2204:~/wcni-kind/kindenv/ingress-controller/1-http# k get ingress -A 
+NAMESPACE   NAME                 CLASS   HOSTS                  ADDRESS      PORTS   AGE
+sandbox     http-nginx-ingress   nginx   http-example.foo.com   172.18.0.4   80      106m
+root@2204:~/wcni-kind/kindenv/ingress-controller/1-http# 
+
+
+
+root@2204:~/wcni-kind/kindenv/ingress-controller/1-http/3-ingress# ./6-test.sh 
+lb_ip=`kubectl -nsandbox get svc --no-headers | grep ingress-nginx-controller | grep LoadBalancer | awk -F  " " '{print $4}'`
+sed -i '/http-example.foo.com/d' /etc/hosts > /dev/null
+
+echo $lb_ip http-example.foo.com >> /etc/hosts
+
+# while true;do curl -kv https://https-example.foo.com;sleep 1;done
+
+
+curl -k http://http-example.foo.com
+PodName: nettool-799d775c76-9w46k | PodIP: eth0 10.244.43.69/32
+
+root@2204:~/wcni-kind/kindenv/ingress-controller/1-http/3-ingress# 
+
+
+
+
+
+

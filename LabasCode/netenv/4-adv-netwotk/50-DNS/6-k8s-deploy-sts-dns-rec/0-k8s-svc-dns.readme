@@ -1,0 +1,83 @@
+1. env:
+[root@wluo 6-k8s-deploy-sts-dns-rec]$ all -o wide 
+NAMESPACE            NAME                                                        READY   STATUS    RESTARTS   AGE   IP               NODE                                NOMINATED NODE   READINESS GATES
+default              wluo-55c988885f-mxbvv                                       1/1     Running   0          22m   10.244.73.64     calico-bgp-fullmesh-worker2         <none>           <none>
+default              wluo-55c988885f-xfdtt                                       1/1     Running   0          22m   10.244.83.128    calico-bgp-fullmesh-worker          <none>           <none>
+kube-system          calico-kube-controllers-67bc66bd66-4q7br                    1/1     Running   0          23m   10.244.140.129   calico-bgp-fullmesh-control-plane   <none>           <none>
+kube-system          calico-node-dwnkp                                           1/1     Running   0          23m   172.18.0.4       calico-bgp-fullmesh-worker          <none>           <none>
+kube-system          calico-node-t5jvs                                           1/1     Running   0          23m   172.18.0.3       calico-bgp-fullmesh-control-plane   <none>           <none>
+kube-system          calico-node-t8vkc                                           1/1     Running   0          23m   172.18.0.2       calico-bgp-fullmesh-worker2         <none>           <none>
+kube-system          coredns-5d78c9869d-27lvn                                    1/1     Running   0          23m   10.244.140.130   calico-bgp-fullmesh-control-plane   <none>           <none>
+kube-system          coredns-5d78c9869d-nmpz5                                    1/1     Running   0          23m   10.244.140.131   calico-bgp-fullmesh-control-plane   <none>           <none>
+kube-system          etcd-calico-bgp-fullmesh-control-plane                      1/1     Running   0          23m   172.18.0.3       calico-bgp-fullmesh-control-plane   <none>           <none>
+kube-system          kube-apiserver-calico-bgp-fullmesh-control-plane            1/1     Running   0          23m   172.18.0.3       calico-bgp-fullmesh-control-plane   <none>           <none>
+kube-system          kube-controller-manager-calico-bgp-fullmesh-control-plane   1/1     Running   0          23m   172.18.0.3       calico-bgp-fullmesh-control-plane   <none>           <none>
+kube-system          kube-proxy-96hp8                                            1/1     Running   0          23m   172.18.0.2       calico-bgp-fullmesh-worker2         <none>           <none>
+kube-system          kube-proxy-gzj4x                                            1/1     Running   0          23m   172.18.0.3       calico-bgp-fullmesh-control-plane   <none>           <none>
+kube-system          kube-proxy-ww284                                            1/1     Running   0          23m   172.18.0.4       calico-bgp-fullmesh-worker          <none>           <none>
+kube-system          kube-scheduler-calico-bgp-fullmesh-control-plane            1/1     Running   0          23m   172.18.0.3       calico-bgp-fullmesh-control-plane   <none>           <none>
+local-path-storage   local-path-provisioner-6bc4bddd6b-gtbs4                     1/1     Running   0          23m   10.244.140.128   calico-bgp-fullmesh-control-plane   <none>           <none>
+[root@wluo 6-k8s-deploy-sts-dns-rec]$ kk get nodes -owide 
+NAME                                STATUS   ROLES           AGE   VERSION   INTERNAL-IP   EXTERNAL-IP   OS-IMAGE                         KERNEL-VERSION     CONTAINER-RUNTIME
+calico-bgp-fullmesh-control-plane   Ready    control-plane   23m   v1.27.3   172.18.0.3    <none>        Debian GNU/Linux 11 (bullseye)   6.2.0-39-generic   containerd://1.7.1
+calico-bgp-fullmesh-worker          Ready    <none>          23m   v1.27.3   172.18.0.4    <none>        Debian GNU/Linux 11 (bullseye)   6.2.0-39-generic   containerd://1.7.1
+calico-bgp-fullmesh-worker2         Ready    <none>          23m   v1.27.3   172.18.0.2    <none>        Debian GNU/Linux 11 (bullseye)   6.2.0-39-generic   containerd://1.7.1
+[root@wluo 6-k8s-deploy-sts-dns-rec]$ 
+
+
+2. SRV and A/AAAA rec: [Deployment]
+# https://kubernetes.io/zh-cn/docs/concepts/services-networking/dns-pod-service/#srv-records
+# https://kubernetes.io/zh-cn/docs/concepts/services-networking/dns-pod-service/#a-aaaa-records
+
+wluo-55c988885f-mxbvv~$nslookup -type=SRV _wluo._tcp.wluo.default.svc.cluster.local
+Server:         10.96.0.10
+Address:        10.96.0.10#53
+
+_wluo._tcp.wluo.default.svc.cluster.local       service = 0 100 80 wluo.default.svc.cluster.local.
+
+wluo-55c988885f-mxbvv~$nslookup -type=A wluo.default.svc.cluster.local.
+Server:         10.96.0.10
+Address:        10.96.0.10#53
+
+Name:   wluo.default.svc.cluster.local
+Address: 10.96.43.95
+
+wluo-55c988885f-mxbvv~$
+
+
+3. SRV and A/AAAA rec: [Statefulset]
+"0-k8s-svc-dns.readme" 78L, 5797B written                                                                                                              
+[root@wluo 6-k8s-deploy-sts-dns-rec]$ k get pods -owide | grep web
+web-0                   1/1     Running   0          3m17s   10.244.73.67    calico-bgp-fullmesh-worker2   <none>           <none>
+web-1                   1/1     Running   0          3m16s   10.244.83.131   calico-bgp-fullmesh-worker    <none>           <none>
+[root@wluo 6-k8s-deploy-sts-dns-rec]$ k get svc -o wide 
+NAME         TYPE        CLUSTER-IP    EXTERNAL-IP   PORT(S)        AGE     SELECTOR
+kubernetes   ClusterIP   10.96.0.1     <none>        443/TCP        13h     <none>
+nginx        ClusterIP   None          <none>        80/TCP         3m23s   app=nginx
+wluo         NodePort    10.96.43.95   <none>        80:32000/TCP   13h     app=wluo
+[root@wluo 6-k8s-deploy-sts-dns-rec]$ 
+
+# https://kubernetes.io/zh-cn/docs/concepts/services-networking/dns-pod-service/#srv-records
+# https://kubernetes.io/zh-cn/docs/concepts/services-networking/dns-pod-service/#a-aaaa-records
+web-0~$nslookup -type=SRV _web._tcp.nginx.default.svc.cluster.local  
+Server:         10.96.0.10
+Address:        10.96.0.10#53
+
+_web._tcp.nginx.default.svc.cluster.local       service = 0 50 80 web-0.nginx.default.svc.cluster.local.
+_web._tcp.nginx.default.svc.cluster.local       service = 0 50 80 web-1.nginx.default.svc.cluster.local.
+
+web-0~$nslookup -type=A web-0.nginx.default.svc.cluster.local.
+Server:         10.96.0.10
+Address:        10.96.0.10#53
+
+Name:   web-0.nginx.default.svc.cluster.local
+Address: 10.244.73.67
+
+web-0~$nslookup -type=A web-1.nginx.default.svc.cluster.local.
+Server:         10.96.0.10
+Address:        10.96.0.10#53
+
+Name:   web-1.nginx.default.svc.cluster.local
+Address: 10.244.83.131
+
+web-0~$

@@ -1,0 +1,34 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: siege-deployment
+  labels:
+    app: siege
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: siege
+  template:
+    metadata:
+      labels:
+        app: siege
+        stress: siege
+    spec:
+      containers:
+      - name: siege
+        image: dockersec/siege
+        command: ["siege"]
+        args: ["http://zone1/app1", "-c 1"]
+      - name: siege2
+        image: dockersec/siege
+        command: ["siege"]
+        args: ["http://zone1/app2", "-c 1"]
+      - name: siege3
+        image: dockersec/siege
+        command: ["siege"]
+        args: ["http://zone1/app3", "-c 1"]
+      - name: siege4
+        image: dockersec/siege
+        command: ["siege"]
+        args: ["http://zone1/app4", "-c 1"]

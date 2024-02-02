@@ -1,0 +1,10 @@
+all:
+  children:
+    linux:
+      hosts:
+        clab-http-short-chain-gw1:
+          ansible_host: 172.20.20.3
+        clab-http-short-chain-server1:
+          ansible_host: 172.20.20.2
+        clab-http-short-chain-server2:
+          ansible_host: 172.20.20.4

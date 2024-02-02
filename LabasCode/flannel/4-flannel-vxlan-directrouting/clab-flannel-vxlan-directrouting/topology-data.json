@@ -1,0 +1,296 @@
+{
+  "name": "flannel-vxlan-directrouting",
+  "type": "clab",
+  "clab": {
+    "config": {
+      "prefix": "clab",
+      "mgmt": {
+        "network": "clab",
+        "bridge": "br-99bba9eb8660",
+        "ipv4-subnet": "172.20.20.0/24",
+        "ipv4-gw": "172.20.20.1",
+        "ipv6-subnet": "2001:172:20:20::/64",
+        "ipv6-gw": "2001:172:20:20::1",
+        "mtu": "1500",
+        "external-access": true
+      }
+    }
+  },
+  "nodes": {
+    "br-pool0": {
+      "index": "0",
+      "shortname": "br-pool0",
+      "longname": "clab-flannel-vxlan-directrouting-br-pool0",
+      "fqdn": "br-pool0.flannel-vxlan-directrouting.io",
+      "group": "",
+      "labdir": "/root/wcni-kind/split/flannel/4-flannel-vxlan-directrouting/clab-flannel-vxlan-directrouting/br-pool0",
+      "kind": "bridge",
+      "image": "",
+      "mgmt-net": "",
+      "mgmt-intf": "",
+      "mgmt-ipv4-address": "",
+      "mgmt-ipv4-prefix-length": 0,
+      "mgmt-ipv6-address": "",
+      "mgmt-ipv6-prefix-length": 0,
+      "mac-address": "",
+      "labels": {
+        "clab-mgmt-net-bridge": "br-99bba9eb8660",
+        "clab-node-group": "",
+        "clab-node-kind": "bridge",
+        "clab-node-lab-dir": "/root/wcni-kind/split/flannel/4-flannel-vxlan-directrouting/clab-flannel-vxlan-directrouting/br-pool0",
+        "clab-node-name": "br-pool0",
+        "clab-node-type": "",
+        "clab-topo-file": "/root/wcni-kind/split/flannel/4-flannel-vxlan-directrouting/clab.yaml",
+        "containerlab": "flannel-vxlan-directrouting"
+      }
+    },
+    "br-pool1": {
+      "index": "1",
+      "shortname": "br-pool1",
+      "longname": "clab-flannel-vxlan-directrouting-br-pool1",
+      "fqdn": "br-pool1.flannel-vxlan-directrouting.io",
+      "group": "",
+      "labdir": "/root/wcni-kind/split/flannel/4-flannel-vxlan-directrouting/clab-flannel-vxlan-directrouting/br-pool1",
+      "kind": "bridge",
+      "image": "",
+      "mgmt-net": "",
+      "mgmt-intf": "",
+      "mgmt-ipv4-address": "",
+      "mgmt-ipv4-prefix-length": 0,
+      "mgmt-ipv6-address": "",
+      "mgmt-ipv6-prefix-length": 0,
+      "mac-address": "",
+      "labels": {
+        "clab-mgmt-net-bridge": "br-99bba9eb8660",
+        "clab-node-group": "",
+        "clab-node-kind": "bridge",
+        "clab-node-lab-dir": "/root/wcni-kind/split/flannel/4-flannel-vxlan-directrouting/clab-flannel-vxlan-directrouting/br-pool1",
+        "clab-node-name": "br-pool1",
+        "clab-node-type": "",
+        "clab-topo-file": "/root/wcni-kind/split/flannel/4-flannel-vxlan-directrouting/clab.yaml",
+        "containerlab": "flannel-vxlan-directrouting"
+      }
+    },
+    "gw0": {
+      "index": "2",
+      "shortname": "gw0",
+      "longname": "clab-flannel-vxlan-directrouting-gw0",
+      "fqdn": "gw0.flannel-vxlan-directrouting.io",
+      "group": "",
+      "labdir": "/root/wcni-kind/split/flannel/4-flannel-vxlan-directrouting/clab-flannel-vxlan-directrouting/gw0",
+      "kind": "linux",
+      "image": "192.168.2.100:5000/vyos/vyos:1.4.7",
+      "mgmt-net": "",
+      "mgmt-intf": "",
+      "mgmt-ipv4-address": "172.20.20.4",
+      "mgmt-ipv4-prefix-length": 24,
+      "mgmt-ipv6-address": "2001:172:20:20::4",
+      "mgmt-ipv6-prefix-length": 64,
+      "mac-address": "",
+      "labels": {
+        "clab-mgmt-net-bridge": "br-99bba9eb8660",
+        "clab-node-group": "",
+        "clab-node-kind": "linux",
+        "clab-node-lab-dir": "/root/wcni-kind/split/flannel/4-flannel-vxlan-directrouting/clab-flannel-vxlan-directrouting/gw0",
+        "clab-node-name": "gw0",
+        "clab-node-type": "",
+        "clab-topo-file": "/root/wcni-kind/split/flannel/4-flannel-vxlan-directrouting/clab.yaml",
+        "containerlab": "flannel-vxlan-directrouting"
+      }
+    },
+    "server1": {
+      "index": "3",
+      "shortname": "server1",
+      "longname": "clab-flannel-vxlan-directrouting-server1",
+      "fqdn": "server1.flannel-vxlan-directrouting.io",
+      "group": "",
+      "labdir": "/root/wcni-kind/split/flannel/4-flannel-vxlan-directrouting/clab-flannel-vxlan-directrouting/server1",
+      "kind": "linux",
+      "image": "192.168.2.100:5000/nettool",
+      "mgmt-net": "",
+      "mgmt-intf": "",
+      "mgmt-ipv4-address": "",
+      "mgmt-ipv4-prefix-length": 0,
+      "mgmt-ipv6-address": "",
+      "mgmt-ipv6-prefix-length": 0,
+      "mac-address": "",
+      "labels": {
+        "clab-mgmt-net-bridge": "br-99bba9eb8660",
+        "clab-node-group": "",
+        "clab-node-kind": "linux",
+        "clab-node-lab-dir": "/root/wcni-kind/split/flannel/4-flannel-vxlan-directrouting/clab-flannel-vxlan-directrouting/server1",
+        "clab-node-name": "server1",
+        "clab-node-type": "",
+        "clab-topo-file": "/root/wcni-kind/split/flannel/4-flannel-vxlan-directrouting/clab.yaml",
+        "containerlab": "flannel-vxlan-directrouting"
+      }
+    },
+    "server2": {
+      "index": "4",
+      "shortname": "server2",
+      "longname": "clab-flannel-vxlan-directrouting-server2",
+      "fqdn": "server2.flannel-vxlan-directrouting.io",
+      "group": "",
+      "labdir": "/root/wcni-kind/split/flannel/4-flannel-vxlan-directrouting/clab-flannel-vxlan-directrouting/server2",
+      "kind": "linux",
+      "image": "192.168.2.100:5000/nettool",
+      "mgmt-net": "",
+      "mgmt-intf": "",
+      "mgmt-ipv4-address": "",
+      "mgmt-ipv4-prefix-length": 0,
+      "mgmt-ipv6-address": "",
+      "mgmt-ipv6-prefix-length": 0,
+      "mac-address": "",
+      "labels": {
+        "clab-mgmt-net-bridge": "br-99bba9eb8660",
+        "clab-node-group": "",
+        "clab-node-kind": "linux",
+        "clab-node-lab-dir": "/root/wcni-kind/split/flannel/4-flannel-vxlan-directrouting/clab-flannel-vxlan-directrouting/server2",
+        "clab-node-name": "server2",
+        "clab-node-type": "",
+        "clab-topo-file": "/root/wcni-kind/split/flannel/4-flannel-vxlan-directrouting/clab.yaml",
+        "containerlab": "flannel-vxlan-directrouting"
+      }
+    },
+    "server3": {
+      "index": "5",
+      "shortname": "server3",
+      "longname": "clab-flannel-vxlan-directrouting-server3",
+      "fqdn": "server3.flannel-vxlan-directrouting.io",
+      "group": "",
+      "labdir": "/root/wcni-kind/split/flannel/4-flannel-vxlan-directrouting/clab-flannel-vxlan-directrouting/server3",
+      "kind": "linux",
+      "image": "192.168.2.100:5000/nettool",
+      "mgmt-net": "",
+      "mgmt-intf": "",
+      "mgmt-ipv4-address": "",
+      "mgmt-ipv4-prefix-length": 0,
+      "mgmt-ipv6-address": "",
+      "mgmt-ipv6-prefix-length": 0,
+      "mac-address": "",
+      "labels": {
+        "clab-mgmt-net-bridge": "br-99bba9eb8660",
+        "clab-node-group": "",
+        "clab-node-kind": "linux",
+        "clab-node-lab-dir": "/root/wcni-kind/split/flannel/4-flannel-vxlan-directrouting/clab-flannel-vxlan-directrouting/server3",
+        "clab-node-name": "server3",
+        "clab-node-type": "",
+        "clab-topo-file": "/root/wcni-kind/split/flannel/4-flannel-vxlan-directrouting/clab.yaml",
+        "containerlab": "flannel-vxlan-directrouting"
+      }
+    },
+    "server4": {
+      "index": "6",
+      "shortname": "server4",
+      "longname": "clab-flannel-vxlan-directrouting-server4",
+      "fqdn": "server4.flannel-vxlan-directrouting.io",
+      "group": "",
+      "labdir": "/root/wcni-kind/split/flannel/4-flannel-vxlan-directrouting/clab-flannel-vxlan-directrouting/server4",
+      "kind": "linux",
+      "image": "192.168.2.100:5000/nettool",
+      "mgmt-net": "",
+      "mgmt-intf": "",
+      "mgmt-ipv4-address": "",
+      "mgmt-ipv4-prefix-length": 0,
+      "mgmt-ipv6-address": "",
+      "mgmt-ipv6-prefix-length": 0,
+      "mac-address": "",
+      "labels": {
+        "clab-mgmt-net-bridge": "br-99bba9eb8660",
+        "clab-node-group": "",
+        "clab-node-kind": "linux",
+        "clab-node-lab-dir": "/root/wcni-kind/split/flannel/4-flannel-vxlan-directrouting/clab-flannel-vxlan-directrouting/server4",
+        "clab-node-name": "server4",
+        "clab-node-type": "",
+        "clab-topo-file": "/root/wcni-kind/split/flannel/4-flannel-vxlan-directrouting/clab.yaml",
+        "containerlab": "flannel-vxlan-directrouting"
+      }
+    }
+  },
+  "links": [
+    {
+      "a": {
+        "node": "br-pool0",
+        "interface": "br-pool0-net0",
+        "mac": "aa:c1:ab:85:a6:52",
+        "peer": "z"
+      },
+      "z": {
+        "node": "server1",
+        "interface": "net0",
+        "mac": "aa:c1:ab:61:b0:d0",
+        "peer": "a"
+      }
+    },
+    {
+      "a": {
+        "node": "br-pool0",
+        "interface": "br-pool0-net1",
+        "mac": "aa:c1:ab:85:d7:51",
+        "peer": "z"
+      },
+      "z": {
+        "node": "server2",
+        "interface": "net0",
+        "mac": "aa:c1:ab:24:c0:02",
+        "peer": "a"
+      }
+    },
+    {
+      "a": {
+        "node": "br-pool1",
+        "interface": "br-pool1-net0",
+        "mac": "aa:c1:ab:cc:64:f2",
+        "peer": "z"
+      },
+      "z": {
+        "node": "server3",
+        "interface": "net0",
+        "mac": "aa:c1:ab:17:5e:36",
+        "peer": "a"
+      }
+    },
+    {
+      "a": {
+        "node": "br-pool1",
+        "interface": "br-pool1-net1",
+        "mac": "aa:c1:ab:02:fb:1e",
+        "peer": "z"
+      },
+      "z": {
+        "node": "server4",
+        "interface": "net0",
+        "mac": "aa:c1:ab:93:fa:4f",
+        "peer": "a"
+      }
+    },
+    {
+      "a": {
+        "node": "gw0",
+        "interface": "eth1",
+        "mac": "aa:c1:ab:5b:ee:0d",
+        "peer": "z"
+      },
+      "z": {
+        "node": "br-pool0",
+        "interface": "br-pool0-net2",
+        "mac": "aa:c1:ab:a6:56:91",
+        "peer": "a"
+      }
+    },
+    {
+      "a": {
+        "node": "gw0",
+        "interface": "eth2",
+        "mac": "aa:c1:ab:bf:61:13",
+        "peer": "z"
+      },
+      "z": {
+        "node": "br-pool1",
+        "interface": "br-pool1-net2",
+        "mac": "aa:c1:ab:03:29:dc",
+        "peer": "a"
+      }
+    }
+  ]
+}

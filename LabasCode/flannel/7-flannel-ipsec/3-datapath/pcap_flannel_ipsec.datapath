@@ -1,0 +1,26 @@
+// we can see the ip xfrm info as blow:
+$ root@bpf1:~# ip xfrm s 
+src 192.168.2.71 dst 192.168.2.73
+        proto esp spi 0xc2b2283f reqid 11 mode tunnel
+        replay-window 0 flag af-unspec
+        aead rfc4106(gcm(aes)) 0xb42f788e8aa3b3bbd2d95aaa5996a70c9b25fe17 128
+        anti-replay context: seq 0x0, oseq 0x1, bitmap 0x00000000
+src 192.168.2.73 dst 192.168.2.71
+        proto esp spi 0xcb1d73bd reqid 11 mode tunnel
+        replay-window 32 flag af-unspec
+        aead rfc4106(gcm(aes)) 0x82d858bb1b39c1b0514211a21ca77b37648924b4 128
+        anti-replay context: seq 0x1, oseq 0x0, bitmap 0x00000001
+
+and the pcap can be find: wireshark ./flannel_ipsec_ens160_interface.cap
+
+We can get the Protocol Src IP Dest IP SPI Encryption  Encryption Key 
+
+Protocol Src IP Dest IP SPI             Encryption      Encryption Key
+  IPv4     *      *      0xc2b2283f  rfc4106(gcm(aes))  0xb42f788e8aa3b3bbd2d95aaa5996a70c9b25fe17
+
+We can de-cap the esp packet into plain format. 
+
+The snap can be found: eog ./pcap_flannel_ipsec_ens160.png
+
+
+

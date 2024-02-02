@@ -1,0 +1,21 @@
+// 如果后一个包的Seq大于前一个包的Seq加Len，就可以清楚中间缺失了一段数据。如果在整个网络包中排除乱序，就会提示“TCP Previous segment not captured”。
+// socket listen
+ 0 socket(AF_INET, SOCK_STREAM, IPPROTO_TCP) = 3
++0 setsockopt(3, SOL_SOCKET, SO_REUSEADDR, [1], 4 ) = 0
++0 bind(3, ..., ...) = 0
++0 listen(3, 1) = 0
+
+// syn 
++0 < S 0:0(0) win 100
++0 > S. 0:0(0) ack 1 <...>
++0.1 < . 1:1(0) ack 1 win 100
++0 accept(3, ..., ...) = 4
+
+// server push 15 bytes data
++0 write(4, ..., 15) = 15
++0 > P. 1:16(15) ack 1 <...>
++0.1 < . 1:1(0) ack 16 win 100
+
++0 write(4, ..., 10) = 10
++0 > P. 16:26(10) ack 1 <...>
++0.1 < . 200:200(0) ack 26 win 100

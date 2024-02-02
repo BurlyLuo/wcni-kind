@@ -1,0 +1,10 @@
+all:
+  children:
+    linux:
+      hosts:
+        clab-tcp-client-time-wait-gw1:
+          ansible_host: 172.20.20.4
+        clab-tcp-client-time-wait-server1:
+          ansible_host: 172.20.20.3
+        clab-tcp-client-time-wait-server2:
+          ansible_host: 172.20.20.2

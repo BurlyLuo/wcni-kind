@@ -1,0 +1,20 @@
+all:
+  children:
+    bridge:
+      hosts:
+        clab-lvs-tunnel-brl4lb:
+          ansible_host: 
+    linux:
+      hosts:
+        clab-lvs-tunnel-client:
+          ansible_host: 172.20.20.12
+        clab-lvs-tunnel-lvs-tunnel-lb:
+          ansible_host: 172.20.20.8
+        clab-lvs-tunnel-router:
+          ansible_host: 172.20.20.11
+        clab-lvs-tunnel-tunnel-rs1:
+          ansible_host: 172.20.20.9
+        clab-lvs-tunnel-tunnel-rs2:
+          ansible_host: 172.20.20.7
+        clab-lvs-tunnel-tunnel-rs3:
+          ansible_host: 172.20.20.10

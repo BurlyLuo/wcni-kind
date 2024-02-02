@@ -1,0 +1,125 @@
+namespace/kube-flannel created
+clusterrole.rbac.authorization.k8s.io/flannel created
+clusterrolebinding.rbac.authorization.k8s.io/flannel created
+serviceaccount/flannel created
+configmap/kube-flannel-cfg created
+daemonset.apps/kube-flannel-ds created
+pod/coredns-5d78c9869d-wlsg6 condition met
+pod/coredns-5d78c9869d-xtnmb condition met
+pod/etcd-c1-control-plane condition met
+pod/kube-apiserver-c1-control-plane condition met
+pod/kube-controller-manager-c1-control-plane condition met
+pod/kube-flannel-ds-4q5z6 condition met
+pod/kube-flannel-ds-dkmhf condition met
+pod/kube-proxy-kvhj8 condition met
+pod/kube-proxy-q54kx condition met
+pod/kube-scheduler-c1-control-plane condition met
+pod/local-path-provisioner-6bc4bddd6b-9xhnx condition met
+namespace/kube-flannel created
+clusterrole.rbac.authorization.k8s.io/flannel created
+clusterrolebinding.rbac.authorization.k8s.io/flannel created
+serviceaccount/flannel created
+configmap/kube-flannel-cfg created
+daemonset.apps/kube-flannel-ds created
+pod/coredns-5d78c9869d-92zql condition met
+pod/coredns-5d78c9869d-nct6j condition met
+pod/etcd-c2-control-plane condition met
+pod/kube-apiserver-c2-control-plane condition met
+pod/kube-controller-manager-c2-control-plane condition met
+pod/kube-flannel-ds-258h9 condition met
+pod/kube-flannel-ds-rdsgc condition met
+pod/kube-proxy-bc4fd condition met
+pod/kube-proxy-mrr7j condition met
+pod/kube-scheduler-c2-control-plane condition met
+pod/local-path-provisioner-6bc4bddd6b-6js6n condition met
+node/c1-worker labeled
+node/c2-worker labeled
+        Network plugin:  flannel
+        Service CIDRs:   [10.77.0.0/16]
+        Cluster CIDRs:   [10.22.0.0/16]
+   There are 1 node(s) labeled as gateways:
+    - c1-worker
+pod/coredns-5d78c9869d-wlsg6 condition met
+pod/coredns-5d78c9869d-xtnmb condition met
+pod/etcd-c1-control-plane condition met
+pod/kube-apiserver-c1-control-plane condition met
+pod/kube-controller-manager-c1-control-plane condition met
+pod/kube-flannel-ds-4q5z6 condition met
+pod/kube-flannel-ds-dkmhf condition met
+pod/kube-proxy-kvhj8 condition met
+pod/kube-proxy-q54kx condition met
+pod/kube-scheduler-c1-control-plane condition met
+pod/local-path-provisioner-6bc4bddd6b-9xhnx condition met
+pod/submariner-operator-6bd479d489-shj7l condition met
+        Network plugin:  flannel
+        Service CIDRs:   [10.88.0.0/16]
+        Cluster CIDRs:   [10.33.0.0/16]
+   There are 1 node(s) labeled as gateways:
+    - c2-worker
+pod/coredns-5d78c9869d-92zql condition met
+pod/coredns-5d78c9869d-nct6j condition met
+pod/etcd-c2-control-plane condition met
+pod/kube-apiserver-c2-control-plane condition met
+pod/kube-controller-manager-c2-control-plane condition met
+pod/kube-flannel-ds-258h9 condition met
+pod/kube-flannel-ds-rdsgc condition met
+pod/kube-proxy-bc4fd condition met
+pod/kube-proxy-mrr7j condition met
+pod/kube-scheduler-c2-control-plane condition met
+pod/local-path-provisioner-6bc4bddd6b-6js6n condition met
+pod/submariner-operator-6bd479d489-xdbqn condition met
+Cluster "kind-flannel-wireguard-crosssubnet"
+
+Cluster "kind-c1"
+NODE        HA STATUS   SUMMARY                                                                                    
+c1-worker   active      Error retrieving driver connections: error waiting for whack to complete: exit status 33   
+
+Cluster "kind-c2"
+Cluster "kind-flannel-wireguard-crosssubnet"
+
+Cluster "kind-c1"
+Cluster "kind-c2"
+pod/c2 created
+service/c2 exposed
+pod/c2 condition met
+pod/coredns-5d78c9869d-92zql condition met
+pod/coredns-5d78c9869d-nct6j condition met
+pod/etcd-c2-control-plane condition met
+pod/kube-apiserver-c2-control-plane condition met
+pod/kube-controller-manager-c2-control-plane condition met
+pod/kube-flannel-ds-258h9 condition met
+pod/kube-flannel-ds-rdsgc condition met
+pod/kube-proxy-bc4fd condition met
+pod/kube-proxy-mrr7j condition met
+pod/kube-scheduler-c2-control-plane condition met
+pod/local-path-provisioner-6bc4bddd6b-6js6n condition met
+pod/submariner-gateway-ds6kr condition met
+pod/submariner-lighthouse-agent-68467cd65f-vn5pl condition met
+pod/submariner-lighthouse-coredns-6494cc9df8-cb2ns condition met
+pod/submariner-lighthouse-coredns-6494cc9df8-lpxkk condition met
+pod/submariner-metrics-proxy-2pk4v condition met
+pod/submariner-operator-6bd479d489-xdbqn condition met
+pod/submariner-routeagent-5v85b condition met
+pod/submariner-routeagent-9np8d condition met
+pod/c1 created
+service/c1 exposed
+pod/c1 condition met
+pod/coredns-5d78c9869d-wlsg6 condition met
+pod/coredns-5d78c9869d-xtnmb condition met
+pod/etcd-c1-control-plane condition met
+pod/kube-apiserver-c1-control-plane condition met
+pod/kube-controller-manager-c1-control-plane condition met
+pod/kube-flannel-ds-4q5z6 condition met
+pod/kube-flannel-ds-dkmhf condition met
+pod/kube-proxy-kvhj8 condition met
+pod/kube-proxy-q54kx condition met
+pod/kube-scheduler-c1-control-plane condition met
+pod/local-path-provisioner-6bc4bddd6b-9xhnx condition met
+pod/submariner-gateway-hz6tl condition met
+pod/submariner-lighthouse-agent-5875f59494-z475r condition met
+pod/submariner-lighthouse-coredns-7567869b57-v48jl condition met
+pod/submariner-lighthouse-coredns-7567869b57-xm2vq condition met
+pod/submariner-metrics-proxy-fshkp condition met
+pod/submariner-operator-6bd479d489-shj7l condition met
+pod/submariner-routeagent-96hgc condition met
+pod/submariner-routeagent-9ghsl condition met

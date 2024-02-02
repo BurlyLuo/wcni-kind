@@ -1,0 +1,25 @@
+[root@2204 1-tc-delay]$ lo clab-tc-delay-server1 ping 10.1.8.10 -c 1 
+PING 10.1.8.10 (10.1.8.10) 56(84) bytes of data.
+64 bytes from 10.1.8.10: icmp_seq=1 ttl=62 time=1000 ms // 这里是1000ms.
+
+--- 10.1.8.10 ping statistics ---
+1 packets transmitted, 1 received, 0% packet loss, time 0ms
+rtt min/avg/max/mdev = 1000.434/1000.434/1000.434/0.000 ms
+[root@2204 1-tc-delay]$ 
+
+
+[root@gw1 ~]# tcpdump -pne -i eth1
+tcpdump: verbose output suppressed, use -v or -vv for full protocol decode
+listening on eth1, link-type EN10MB (Ethernet), capture size 262144 bytes
+06:04:14.040564 aa:c1:ab:22:88:6a > Broadcast, ethertype ARP (0x0806), length 42: Request who-has 10.1.5.1 tell 10.1.5.10, length 28
+06:04:14.540696 aa:c1:ab:46:9d:db > aa:c1:ab:22:88:6a, ethertype ARP (0x0806), length 42: Reply 10.1.5.1 is-at aa:c1:ab:46:9d:db, length 28
+06:04:14.540733 aa:c1:ab:22:88:6a > aa:c1:ab:46:9d:db, ethertype IPv4 (0x0800), length 98: 10.1.5.10 > 10.1.8.10: ICMP echo request, id 26, seq 1, length 64
+06:04:15.040889 aa:c1:ab:46:9d:db > aa:c1:ab:22:88:6a, ethertype IPv4 (0x0800), length 98: 10.1.8.10 > 10.1.5.10: ICMP echo reply, id 26, seq 1, length 64
+^C
+4 packets captured
+4 packets received by filter
+0 packets dropped by kernel
+[root@gw1 ~]# 
+
+# install TC tools
+yum -y install iproute

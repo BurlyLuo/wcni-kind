@@ -1,0 +1,3 @@
+lo clab-tcp-long-chain-gw1 bash 
+add below iptables based on topo:
+server1 ---[eth1]gw1[eth2] --- server2 

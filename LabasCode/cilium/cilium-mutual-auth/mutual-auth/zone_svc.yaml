@@ -1,0 +1,109 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: zone1
+spec:
+  ports:
+  - name: echo-http
+    port: 80
+    protocol: TCP
+  - name: echo-https
+    port: 443
+    protocol: TCP
+  selector:
+    app: nginx-zone1
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: zone2
+spec:
+  ports:
+  - name: echo-http
+    port: 80
+    protocol: TCP
+  - name: echo-https
+    port: 443
+    protocol: TCP
+  selector:
+    app: nginx-zone2
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: zone3
+spec:
+  ports:
+  - name: echo-http
+    port: 80
+    protocol: TCP
+  - name: echo-https
+    port: 443
+    protocol: TCP
+  selector:
+    app: nginx-zone3
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: zone4
+spec:
+  ports:
+  - name: echo-http
+    port: 80
+    protocol: TCP
+  - name: echo-https
+    port: 443
+    protocol: TCP
+  selector:
+    app: nginx-zone4
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: zone5
+spec:
+  ports:
+  - name: echo-http
+    port: 80
+    protocol: TCP
+  - name: echo-https
+    port: 443
+    protocol: TCP
+  selector:
+    app: nginx-zone5
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: zone6
+spec:
+  ports:
+  - name: echo-http
+    port: 80
+    protocol: TCP
+    targetPort: 8080
+  - name: echo-https
+    port: 443
+    protocol: TCP
+    targetPort: 8443
+  selector:
+    app: echoserver-1
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: zone7
+spec:
+  ports:
+  - name: echo-http
+    port: 80
+    protocol: TCP
+    targetPort: 8080
+  - name: echo-https
+    port: 443
+    protocol: TCP
+    targetPort: 8443
+  selector:
+    app: echoserver-2
+

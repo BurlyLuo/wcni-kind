@@ -1,0 +1,294 @@
+{
+  "name": "l3-vlan-switch",
+  "type": "clab",
+  "clab": {
+    "config": {
+      "prefix": "clab",
+      "mgmt": {
+        "network": "clab",
+        "bridge": "br-099e3033c20b",
+        "ipv4-subnet": "172.20.20.0/24",
+        "ipv4-gw": "172.20.20.1",
+        "mtu": "1500",
+        "external-access": true
+      }
+    }
+  },
+  "nodes": {
+    "br0": {
+      "index": "0",
+      "shortname": "br0",
+      "longname": "clab-l3-vlan-switch-br0",
+      "fqdn": "br0.l3-vlan-switch.io",
+      "group": "",
+      "labdir": "/root/wcni-kind/split/netenv/4-adv-netwotk/25-L2-NETWORK/1-VLAN/5-L3-VLAN-SWITCH/clab-l3-vlan-switch/br0",
+      "kind": "linux",
+      "image": "192.168.2.100:5000/vyos/vyos:1.4.7",
+      "mgmt-net": "",
+      "mgmt-intf": "",
+      "mgmt-ipv4-address": "172.20.20.6",
+      "mgmt-ipv4-prefix-length": 24,
+      "mgmt-ipv6-address": "",
+      "mgmt-ipv6-prefix-length": 0,
+      "mac-address": "",
+      "labels": {
+        "clab-mgmt-net-bridge": "br-099e3033c20b",
+        "clab-node-group": "",
+        "clab-node-kind": "linux",
+        "clab-node-lab-dir": "/root/wcni-kind/split/netenv/4-adv-netwotk/25-L2-NETWORK/1-VLAN/5-L3-VLAN-SWITCH/clab-l3-vlan-switch/br0",
+        "clab-node-name": "br0",
+        "clab-node-type": "",
+        "clab-topo-file": "/root/wcni-kind/split/netenv/4-adv-netwotk/25-L2-NETWORK/1-VLAN/5-L3-VLAN-SWITCH/clab.yaml",
+        "containerlab": "l3-vlan-switch"
+      }
+    },
+    "br1": {
+      "index": "1",
+      "shortname": "br1",
+      "longname": "clab-l3-vlan-switch-br1",
+      "fqdn": "br1.l3-vlan-switch.io",
+      "group": "",
+      "labdir": "/root/wcni-kind/split/netenv/4-adv-netwotk/25-L2-NETWORK/1-VLAN/5-L3-VLAN-SWITCH/clab-l3-vlan-switch/br1",
+      "kind": "linux",
+      "image": "192.168.2.100:5000/vyos/vyos:1.4.7",
+      "mgmt-net": "",
+      "mgmt-intf": "",
+      "mgmt-ipv4-address": "172.20.20.7",
+      "mgmt-ipv4-prefix-length": 24,
+      "mgmt-ipv6-address": "",
+      "mgmt-ipv6-prefix-length": 0,
+      "mac-address": "",
+      "labels": {
+        "clab-mgmt-net-bridge": "br-099e3033c20b",
+        "clab-node-group": "",
+        "clab-node-kind": "linux",
+        "clab-node-lab-dir": "/root/wcni-kind/split/netenv/4-adv-netwotk/25-L2-NETWORK/1-VLAN/5-L3-VLAN-SWITCH/clab-l3-vlan-switch/br1",
+        "clab-node-name": "br1",
+        "clab-node-type": "",
+        "clab-topo-file": "/root/wcni-kind/split/netenv/4-adv-netwotk/25-L2-NETWORK/1-VLAN/5-L3-VLAN-SWITCH/clab.yaml",
+        "containerlab": "l3-vlan-switch"
+      }
+    },
+    "br2": {
+      "index": "2",
+      "shortname": "br2",
+      "longname": "clab-l3-vlan-switch-br2",
+      "fqdn": "br2.l3-vlan-switch.io",
+      "group": "",
+      "labdir": "/root/wcni-kind/split/netenv/4-adv-netwotk/25-L2-NETWORK/1-VLAN/5-L3-VLAN-SWITCH/clab-l3-vlan-switch/br2",
+      "kind": "linux",
+      "image": "192.168.2.100:5000/vyos/vyos:1.4.7",
+      "mgmt-net": "",
+      "mgmt-intf": "",
+      "mgmt-ipv4-address": "172.20.20.2",
+      "mgmt-ipv4-prefix-length": 24,
+      "mgmt-ipv6-address": "",
+      "mgmt-ipv6-prefix-length": 0,
+      "mac-address": "",
+      "labels": {
+        "clab-mgmt-net-bridge": "br-099e3033c20b",
+        "clab-node-group": "",
+        "clab-node-kind": "linux",
+        "clab-node-lab-dir": "/root/wcni-kind/split/netenv/4-adv-netwotk/25-L2-NETWORK/1-VLAN/5-L3-VLAN-SWITCH/clab-l3-vlan-switch/br2",
+        "clab-node-name": "br2",
+        "clab-node-type": "",
+        "clab-topo-file": "/root/wcni-kind/split/netenv/4-adv-netwotk/25-L2-NETWORK/1-VLAN/5-L3-VLAN-SWITCH/clab.yaml",
+        "containerlab": "l3-vlan-switch"
+      }
+    },
+    "server1": {
+      "index": "3",
+      "shortname": "server1",
+      "longname": "clab-l3-vlan-switch-server1",
+      "fqdn": "server1.l3-vlan-switch.io",
+      "group": "",
+      "labdir": "/root/wcni-kind/split/netenv/4-adv-netwotk/25-L2-NETWORK/1-VLAN/5-L3-VLAN-SWITCH/clab-l3-vlan-switch/server1",
+      "kind": "linux",
+      "image": "192.168.2.100:5000/xcni",
+      "mgmt-net": "",
+      "mgmt-intf": "",
+      "mgmt-ipv4-address": "172.20.20.8",
+      "mgmt-ipv4-prefix-length": 24,
+      "mgmt-ipv6-address": "",
+      "mgmt-ipv6-prefix-length": 0,
+      "mac-address": "",
+      "labels": {
+        "clab-mgmt-net-bridge": "br-099e3033c20b",
+        "clab-node-group": "",
+        "clab-node-kind": "linux",
+        "clab-node-lab-dir": "/root/wcni-kind/split/netenv/4-adv-netwotk/25-L2-NETWORK/1-VLAN/5-L3-VLAN-SWITCH/clab-l3-vlan-switch/server1",
+        "clab-node-name": "server1",
+        "clab-node-type": "",
+        "clab-topo-file": "/root/wcni-kind/split/netenv/4-adv-netwotk/25-L2-NETWORK/1-VLAN/5-L3-VLAN-SWITCH/clab.yaml",
+        "containerlab": "l3-vlan-switch"
+      }
+    },
+    "server2": {
+      "index": "4",
+      "shortname": "server2",
+      "longname": "clab-l3-vlan-switch-server2",
+      "fqdn": "server2.l3-vlan-switch.io",
+      "group": "",
+      "labdir": "/root/wcni-kind/split/netenv/4-adv-netwotk/25-L2-NETWORK/1-VLAN/5-L3-VLAN-SWITCH/clab-l3-vlan-switch/server2",
+      "kind": "linux",
+      "image": "192.168.2.100:5000/xcni",
+      "mgmt-net": "",
+      "mgmt-intf": "",
+      "mgmt-ipv4-address": "172.20.20.3",
+      "mgmt-ipv4-prefix-length": 24,
+      "mgmt-ipv6-address": "",
+      "mgmt-ipv6-prefix-length": 0,
+      "mac-address": "",
+      "labels": {
+        "clab-mgmt-net-bridge": "br-099e3033c20b",
+        "clab-node-group": "",
+        "clab-node-kind": "linux",
+        "clab-node-lab-dir": "/root/wcni-kind/split/netenv/4-adv-netwotk/25-L2-NETWORK/1-VLAN/5-L3-VLAN-SWITCH/clab-l3-vlan-switch/server2",
+        "clab-node-name": "server2",
+        "clab-node-type": "",
+        "clab-topo-file": "/root/wcni-kind/split/netenv/4-adv-netwotk/25-L2-NETWORK/1-VLAN/5-L3-VLAN-SWITCH/clab.yaml",
+        "containerlab": "l3-vlan-switch"
+      }
+    },
+    "server3": {
+      "index": "5",
+      "shortname": "server3",
+      "longname": "clab-l3-vlan-switch-server3",
+      "fqdn": "server3.l3-vlan-switch.io",
+      "group": "",
+      "labdir": "/root/wcni-kind/split/netenv/4-adv-netwotk/25-L2-NETWORK/1-VLAN/5-L3-VLAN-SWITCH/clab-l3-vlan-switch/server3",
+      "kind": "linux",
+      "image": "192.168.2.100:5000/xcni",
+      "mgmt-net": "",
+      "mgmt-intf": "",
+      "mgmt-ipv4-address": "172.20.20.4",
+      "mgmt-ipv4-prefix-length": 24,
+      "mgmt-ipv6-address": "",
+      "mgmt-ipv6-prefix-length": 0,
+      "mac-address": "",
+      "labels": {
+        "clab-mgmt-net-bridge": "br-099e3033c20b",
+        "clab-node-group": "",
+        "clab-node-kind": "linux",
+        "clab-node-lab-dir": "/root/wcni-kind/split/netenv/4-adv-netwotk/25-L2-NETWORK/1-VLAN/5-L3-VLAN-SWITCH/clab-l3-vlan-switch/server3",
+        "clab-node-name": "server3",
+        "clab-node-type": "",
+        "clab-topo-file": "/root/wcni-kind/split/netenv/4-adv-netwotk/25-L2-NETWORK/1-VLAN/5-L3-VLAN-SWITCH/clab.yaml",
+        "containerlab": "l3-vlan-switch"
+      }
+    },
+    "server4": {
+      "index": "6",
+      "shortname": "server4",
+      "longname": "clab-l3-vlan-switch-server4",
+      "fqdn": "server4.l3-vlan-switch.io",
+      "group": "",
+      "labdir": "/root/wcni-kind/split/netenv/4-adv-netwotk/25-L2-NETWORK/1-VLAN/5-L3-VLAN-SWITCH/clab-l3-vlan-switch/server4",
+      "kind": "linux",
+      "image": "192.168.2.100:5000/xcni",
+      "mgmt-net": "",
+      "mgmt-intf": "",
+      "mgmt-ipv4-address": "172.20.20.5",
+      "mgmt-ipv4-prefix-length": 24,
+      "mgmt-ipv6-address": "",
+      "mgmt-ipv6-prefix-length": 0,
+      "mac-address": "",
+      "labels": {
+        "clab-mgmt-net-bridge": "br-099e3033c20b",
+        "clab-node-group": "",
+        "clab-node-kind": "linux",
+        "clab-node-lab-dir": "/root/wcni-kind/split/netenv/4-adv-netwotk/25-L2-NETWORK/1-VLAN/5-L3-VLAN-SWITCH/clab-l3-vlan-switch/server4",
+        "clab-node-name": "server4",
+        "clab-node-type": "",
+        "clab-topo-file": "/root/wcni-kind/split/netenv/4-adv-netwotk/25-L2-NETWORK/1-VLAN/5-L3-VLAN-SWITCH/clab.yaml",
+        "containerlab": "l3-vlan-switch"
+      }
+    }
+  },
+  "links": [
+    {
+      "a": {
+        "node": "br1",
+        "interface": "eth1",
+        "mac": "aa:c1:ab:7c:55:4e",
+        "peer": "z"
+      },
+      "z": {
+        "node": "server1",
+        "interface": "net0",
+        "mac": "aa:c1:ab:22:25:1a",
+        "peer": "a"
+      }
+    },
+    {
+      "a": {
+        "node": "br1",
+        "interface": "eth2",
+        "mac": "aa:c1:ab:c9:eb:89",
+        "peer": "z"
+      },
+      "z": {
+        "node": "server2",
+        "interface": "net0",
+        "mac": "aa:c1:ab:44:b6:78",
+        "peer": "a"
+      }
+    },
+    {
+      "a": {
+        "node": "br2",
+        "interface": "eth1",
+        "mac": "aa:c1:ab:8e:46:9b",
+        "peer": "z"
+      },
+      "z": {
+        "node": "server3",
+        "interface": "net0",
+        "mac": "aa:c1:ab:20:f2:bc",
+        "peer": "a"
+      }
+    },
+    {
+      "a": {
+        "node": "br2",
+        "interface": "eth2",
+        "mac": "aa:c1:ab:15:0c:e0",
+        "peer": "z"
+      },
+      "z": {
+        "node": "server4",
+        "interface": "net0",
+        "mac": "aa:c1:ab:e7:d1:8a",
+        "peer": "a"
+      }
+    },
+    {
+      "a": {
+        "node": "br0",
+        "interface": "eth1",
+        "mac": "aa:c1:ab:f5:0a:b3",
+        "peer": "z"
+      },
+      "z": {
+        "node": "br1",
+        "interface": "eth3",
+        "mac": "aa:c1:ab:76:2c:d0",
+        "peer": "a"
+      }
+    },
+    {
+      "a": {
+        "node": "br0",
+        "interface": "eth2",
+        "mac": "aa:c1:ab:00:4b:74",
+        "peer": "z"
+      },
+      "z": {
+        "node": "br2",
+        "interface": "eth3",
+        "mac": "aa:c1:ab:94:d6:f8",
+        "peer": "a"
+      }
+    }
+  ]
+}
