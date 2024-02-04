@@ -49,6 +49,8 @@ kubectl wait --timeout=100s --for=condition=Ready=true pods --all -A
 # 6. cilium status
 kubectl -nkube-system exec -it ds/cilium -- cilium status
 
-# 7. cgroup v2 verify
+# 7. separate namesapce and cgroup v2 verify [https://github.com/cilium/cilium/pull/16259 && https://docs.cilium.io/en/stable/installation/kind/#install-cilium]
 for container in $(docker ps -a --format "table {{.Names}}" | grep cilium-gwapi-http);do docker exec $container ls -al /proc/self/ns/cgroup;done
+mount -l | grep cgroup && docker info | grep "Cgroup Version" | awk '$1=$1'
+
 
