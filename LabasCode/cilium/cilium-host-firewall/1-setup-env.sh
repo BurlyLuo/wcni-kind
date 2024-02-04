@@ -47,8 +47,9 @@ kubectl wait --timeout=100s --for=condition=Ready=true pods --all -A
 # 5. cilium status
 kubectl -nkube-system exec -it ds/cilium -- cilium status
 
-# 6. cgroup v2 verify
+# 6. separate namesapce and cgroup v2 verify [https://github.com/cilium/cilium/pull/16259 && https://docs.cilium.io/en/stable/installation/kind/#install-cilium]
 for container in $(docker ps -a --format "table {{.Names}}" | grep cilium-host-firewall);do docker exec $container ls -al /proc/self/ns/cgroup;done
+mount -l | grep cgroup && docker info | grep "Cgroup Version" | awk '$1=$1'
 
 # issue list
 # [Cilium(1.14.0-rc.0) host firewall feature-set wrong Host firewall interface] https://github.com/cilium/cilium/issues/27810
