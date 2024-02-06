@@ -39,17 +39,33 @@ helm repo update > /dev/null 2>&1
        # 10.Required KernelVersions for AdvancedFeatures(https://docs.cilium.io/en/v1.15/operations/system_requirements/#required-kernel-versions-for-advanced-features)
        # 11.Mounted eBPF filesystem(https://docs.cilium.io/en/v1.15/operations/system_requirements/#mounted-ebpf-filesystem) If the eBPF filesystem is not mounted in the            host filesystem, Cilium will automatically mount the filesystem.
        # 12.Privileges(https://docs.cilium.io/en/v1.15/operations/system_requirements/#privileges)
-# 3.1: Direct Routing Options(--set routingMode=native --set autoDirectNodeRoutes=true --set ipv4NativeRoutingCIDR="10.0.0.0/8")
-# 3.2: [The following Helm setup below would be equivalent to kubeProxyReplacement=true in a kube-proxy-free environment]:[helm install cilium cilium/cilium --version 1.15.0 --namespace kube-system --set kubeProxyReplacement=false --set socketLB.enabled=true --set nodePort.enabled=true --set externalIPs.enabled=true --set hostPort.enabled=true --set k8sServiceHost=${API_SERVER_IP} --set k8sServicePort=${API_SERVER_PORT}]
+
+# 3.1: Native Routing Options(--set routingMode=native --set autoDirectNodeRoutes=true --set ipv4NativeRoutingCIDR="10.0.0.0/8")
+       # The Linux kernel on the node must be aware on how to forward packets of pods or other workloads of all nodes running Cilium.This can be achieved in 2 ways:
+       # 3.1.1: The node itself does not know how to route all pod IPs but a router exists on the network that knows how to reach all other pods. In this scenario, 
+       #       the Linux node is configured to contain a default route to point to such a router.
+       # 3.1.2: Each individual node is made aware of all pod IPs of all other nodes and routes are inserted into the Linux kernel routing table to represent this. 
+       #       If all nodes share a single L2 network, then this can be taken care of by enabling the option auto-direct-node-routes: true. 
+       #       Otherwise, an additional system component such as a BGP daemon must be run to distribute the routes. See the guide Using Kube-Router to Run BGP on 
+       #       how to achieve this using the kube-router project.
+                     
+# 3.2: [The following Helm setup below would be equivalent to kubeProxyReplacement=true in a kube-proxy-free environment:]:[helm install cilium cilium/cilium --version 1.15.0 --namespace kube-system --set kubeProxyReplacement=false --set socketLB.enabled=true --set nodePort.enabled=true --set externalIPs.enabled=true --set hostPort.enabled=true --set k8sServiceHost=${API_SERVER_IP} --set k8sServicePort=${API_SERVER_PORT}]
+
 # 3.3: kubeproxyreplacement Options(--set kubeProxyReplacement=true)
+
 # 3.4: https://docs.cilium.io/en/v1.14/network/kubernetes/kubeproxy-free/#kube-proxy-hybrid-modes
+
 # 3.5: [https://docs.cilium.io/en/v1.15/network/kubernetes/kubeproxy-free/#kubernetes-without-kube-proxy]: Cilium’s kube-proxy replacement depends on the [{"socket-LB"}] feature, which requires a v4.19.57, v5.1.16, v5.2.0 or more recent Linux kernel. Linux kernels v5.3 and v5.8 add additional features that Cilium can use to further optimize the kube-proxy replacement implementation.Note that v5.0.y kernels do not have the fix required to run the kube-proxy replacement since at this point in time the v5.0.y stable kernel is end-of-life (EOL) and not maintained anymore on kernel.org. For individual distribution maintained kernels, the situation could differ. Therefore, please check with your distribution. Cilium’s eBPF kube-proxy replacement is supported in direct routing as well as in tunneling mode.
+
 # 3.6: For existing installations with kube-proxy running as a DaemonSet, remove it by using the following commands: [Be aware that removing kube-proxy will break existing service connections. It will also stop service related traffic until the Cilium replacement has been installed. $ kubectl -n kube-system delete ds kube-proxy $ kubectl -n kube-system delete cm kube-proxy $ iptables-save | grep -v KUBE | iptables-restore]
+
 # 3.7: Cgroup V2 [Cilium will automatically mount cgroup v2 filesystem required to attach BPF cgroup programs by default at the path /run/cilium/cgroupv2. To do that, it needs to mount the host /proc inside an init container launched by the DaemonSet temporarily. If you need to disable the auto-mount, specify --set cgroup.autoMount.enabled=false, and set the host mount point where cgroup v2 filesystem is already mounted by using --set cgroup.hostRoot. For example, if not already mounted, you can mount cgroup v2 filesystem by running the below command on the host, and specify --set cgroup.hostRoot=/sys/fs/cgroup]
+
 # 3.8: Cilium kubeProxyReplacement Limitations: [https://docs.cilium.io/en/v1.15/network/kubernetes/kubeproxy-free/#limitations]
+
 # 3.9: eBPF Host Routing(--set bpf.masquerade=true)
 
-helm install cilium cilium/cilium --set k8sServiceHost=$controller_node_ip --set k8sServicePort=6443 --version 1.15.0-rc.1 --namespace kube-system --set debug.enabled=true --set debug.verbose="datapath flow kvstore envoy policy" --set bpf.monitorAggregation=none --set monitor.enabled=true --set nodeinit.enabled=true --set ipam.mode=cluster-pool --set cluster.name=cilium-kpr-ebpf --set kubeProxyReplacement=true --set routingMode=native --set autoDirectNodeRoutes=true --set ipv4NativeRoutingCIDR="10.0.0.0/8" --set bpf.masquerade=true
+helm install cilium cilium/cilium --set k8sServiceHost=$controller_node_ip --set k8sServicePort=6443 --version 1.15.0-rc.1 --namespace kube-system --set debug.enabled=true --set debug.verbose="datapath flow kvstore envoy policy" --set bpf.monitorAggregation=none --set monitor.enabled=true --set ipam.mode=cluster-pool --set cluster.name=cilium-kpr-ebpf --set kubeProxyReplacement=true --set routingMode=native --set autoDirectNodeRoutes=true --set ipv4NativeRoutingCIDR="10.0.0.0/8" --set bpf.masquerade=true
 
 # 4. Wait all pods ready
 kubectl wait --timeout=100s --for=condition=Ready=true pods --all -A
