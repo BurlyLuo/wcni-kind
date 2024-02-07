@@ -82,3 +82,4 @@ mount -l | grep cgroup && docker info | grep "Cgroup Version" | awk '$1=$1'
 # 7. Hubble UI
 # cilium hubble ui &
 kubectl -nkube-system  patch svc hubble-ui -p '{"spec": {"type": "NodePort"}}' 
+
