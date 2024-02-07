@@ -41,10 +41,10 @@ helm repo update > /dev/null 2>&1
        # 12.Privileges(https://docs.cilium.io/en/v1.15/operations/system_requirements/#privileges)
 
 # 3.1: Native Routing Options(--set routingMode=native --set autoDirectNodeRoutes=true --set ipv4NativeRoutingCIDR="10.0.0.0/8")
-       #The Linux kernel on the node must be aware on how to forward packets of pods or other workloads of all nodes running Cilium.This can be achieved in 2 ways:
-       #3.1.1: The node itself does not know how to route all pod IPs but a router exists on the network that knows how to reach all other pods. In this scenario, 
+       # The Linux kernel on the node must be aware on how to forward packets of pods or other workloads of all nodes running Cilium.This can be achieved in 2 ways:
+       # 3.1.1: The node itself does not know how to route all pod IPs but a router exists on the network that knows how to reach all other pods. In this scenario, 
        #       the Linux node is configured to contain a default route to point to such a router.
-       #3.1.2: Each individual node is made aware of all pod IPs of all other nodes and routes are inserted into the Linux kernel routing table to represent this. 
+       # 3.1.2: Each individual node is made aware of all pod IPs of all other nodes and routes are inserted into the Linux kernel routing table to represent this. 
        #       If all nodes share a single L2 network, then this can be taken care of by enabling the option auto-direct-node-routes: true. 
        #       Otherwise, an additional system component such as a BGP daemon must be run to distribute the routes. See the guide Using Kube-Router to Run BGP on 
        #       how to achieve this using the kube-router project.
