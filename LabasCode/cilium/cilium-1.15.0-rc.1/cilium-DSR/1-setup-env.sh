@@ -1,7 +1,7 @@
 #!/bin/bash
 set -v
 # 1. Prepare NoCNI kubernetes environment
-cat <<EOF | kind create cluster --name=cilium-kpr-geneve --image=kindest/node:v1.27.3 --config=-
+cat <<EOF | kind create cluster --name=cilium-kpr-ebpf-dsr --image=kindest/node:v1.27.3 --config=-
 kind: Cluster
 apiVersion: kind.x-k8s.io/v1alpha4
 networking:
@@ -24,8 +24,8 @@ kubectl get nodes -o wide
 
 # 3. Install CNI[Cilium 1.15.0-rc.1]
 cilium_version=v1.15.0-rc.1
-docker pull quay.io/cilium/cilium:$cilium_version && docker pull quay.io/cilium/operator-generic:$cilium_version
-kind load docker-image quay.io/cilium/cilium:$cilium_version quay.io/cilium/operator-generic:$cilium_version --name cilium-kpr-geneve
+{ docker pull quay.io/cilium/cilium:$cilium_version && docker pull quay.io/cilium/operator-generic:$cilium_version; } > /dev/null 2>&1
+kind load docker-image quay.io/cilium/cilium:$cilium_version quay.io/cilium/operator-generic:$cilium_version --name cilium-kpr-ebpf-dsr > /dev/null 2>&1
 { helm repo add cilium https://helm.cilium.io ; helm repo update; } > /dev/null 2>&1
 
 # 3.0: https://docs.cilium.io/en/v1.15/operations/system_requirements/#admin-system-reqs
@@ -42,7 +42,7 @@ kind load docker-image quay.io/cilium/cilium:$cilium_version quay.io/cilium/oper
        # 11.Mounted eBPF filesystem(https://docs.cilium.io/en/v1.15/operations/system_requirements/#mounted-ebpf-filesystem) If the eBPF filesystem is not mounted in the            host filesystem, Cilium will automatically mount the filesystem.
        # 12.Privileges(https://docs.cilium.io/en/v1.15/operations/system_requirements/#privileges)
 
-# 3.1: Tunnel GENEVE Options(--set routingMode=tunnel --set tunnelProtocol=geneve --set ipv4NativeRoutingCIDR="10.0.0.0/8")
+# 3.1: Native Routing Options(--set routingMode=native --set autoDirectNodeRoutes=true --set ipv4NativeRoutingCIDR="10.0.0.0/8")
        # The Linux kernel on the node must be aware on how to forward packets of pods or other workloads of all nodes running Cilium.This can be achieved in 2 ways:
        # 3.1.1: The node itself does not know how to route all pod IPs but a router exists on the network that knows how to reach all other pods. In this scenario, 
        #       the Linux node is configured to contain a default route to point to such a router.
@@ -65,8 +65,12 @@ kind load docker-image quay.io/cilium/cilium:$cilium_version quay.io/cilium/oper
 
 # 3.8: Cilium kubeProxyReplacement Limitations: [https://docs.cilium.io/en/v1.15/network/kubernetes/kubeproxy-free/#limitations]
 
+# 3.9: eBPF Host Routing(--set bpf.masquerade=true)
 
-helm install cilium cilium/cilium --set k8sServiceHost=$controller_node_ip --set k8sServicePort=6443 --version 1.15.0-rc.1 --namespace kube-system --set image.pullPolicy=IfNotPresent --set debug.enabled=true --set debug.verbose="datapath flow kvstore envoy policy" --set bpf.monitorAggregation=none --set monitor.enabled=true --set ipam.mode=cluster-pool --set cluster.name=cilium-kpr-geneve --set kubeProxyReplacement=true --set routingMode=tunnel --set tunnelProtocol=geneve --set ipv4NativeRoutingCIDR="10.0.0.0/8"
+
+# 1.0: Direct Server Return (DSR)[--set loadBalancer.mode=dsr --set loadBalancer.dsrDispatch=opt]
+# https://docs.cilium.io/en/v1.15/network/kubernetes/kubeproxy-free/#direct-server-return-dsr
+helm install cilium cilium/cilium --set k8sServiceHost=$controller_node_ip --set k8sServicePort=6443 --version 1.15.0-rc.1 --namespace kube-system --set image.pullPolicy=IfNotPresent --set debug.enabled=true --set debug.verbose="datapath flow kvstore envoy policy" --set bpf.monitorAggregation=none --set monitor.enabled=true --set ipam.mode=cluster-pool --set cluster.name=cilium-kpr-ebpf-dsr --set kubeProxyReplacement=true --set routingMode=native --set autoDirectNodeRoutes=true --set ipv4NativeRoutingCIDR="10.0.0.0/8" --set bpf.masquerade=true --set loadBalancer.mode=dsr --set loadBalancer.dsrDispatch=opt
 
 # 4. Wait all pods ready
 kubectl wait --timeout=100s --for=condition=Ready=true pods --all -A
@@ -75,6 +79,6 @@ kubectl wait --timeout=100s --for=condition=Ready=true pods --all -A
 kubectl -nkube-system exec -it ds/cilium -- cilium status
 
 # 6. Separate namesapce and cgroup v2 verify [https://github.com/cilium/cilium/pull/16259 && https://docs.cilium.io/en/stable/installation/kind/#install-cilium]
-for container in $(docker ps -a --format "table {{.Names}}" | grep cilium-kpr-geneve);do docker exec $container ls -al /proc/self/ns/cgroup;done
+for container in $(docker ps -a --format "table {{.Names}}" | grep cilium-kpr-ebpf-dsr);do docker exec $container ls -al /proc/self/ns/cgroup;done
 mount -l | grep cgroup && docker info | grep "Cgroup Version" | awk '$1=$1'
 
