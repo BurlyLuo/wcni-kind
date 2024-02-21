@@ -18,6 +18,7 @@ kind load docker-image quay.io/cilium/cilium:$cilium_version quay.io/cilium/oper
 # --set k8sServiceHost=$controller_node_ip --set k8sServicePort=6443
 controller_node_ip=`docker exec -it $(docker ps -a --format "table {{.Names}}" | grep control) ip a s eth0 | awk -F "inet " '{print $2}' | grep 172.18.0. | awk -F "/16" '{print $1}'`
 # --set k8sServiceHost=$controller_node_ip --set k8sServicePort=6443
+
 helm install cilium cilium/cilium --set k8sServiceHost=$controller_node_ip --set k8sServicePort=6443 --version 1.15.0-rc.1 --namespace kube-system --set image.pullPolicy=IfNotPresent --set debug.enabled=true --set debug.verbose="datapath flow kvstore envoy policy" --set bpf.monitorAggregation=none --set monitor.enabled=true --set ipam.mode=kubernetes --set routingMode=native --set ipv4NativeRoutingCIDR=10.0.0.0/8 --set bgpControlPlane.enabled=true --set k8s.requireIPv4PodCIDR=true
 
 # 3. Wait all pods ready
