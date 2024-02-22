@@ -12,6 +12,7 @@ spec:
   serviceSelector:
     matchLabels:
       app: wluo 
+  # indentify which node can take the traffic(usually exclude control/master node)
   nodeSelector:
     matchExpressions:
       - key: wluo

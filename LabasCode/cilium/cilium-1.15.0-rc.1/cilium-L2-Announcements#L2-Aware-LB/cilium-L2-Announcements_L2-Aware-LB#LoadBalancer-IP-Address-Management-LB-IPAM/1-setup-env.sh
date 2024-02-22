@@ -1,7 +1,7 @@
 #!/bin/bash
 set -v
 # 1. Prepare NoCNI kubernetes environment
-cat <<EOF | kind create cluster --name=cilium-kpr-ebpf --image=kindest/node:v1.27.3 --config=-
+cat <<EOF | kind create cluster --name=cilium-l2-announcements-l2lb-lbipam --image=kindest/node:v1.27.3 --config=-
 kind: Cluster
 apiVersion: kind.x-k8s.io/v1alpha4
 networking:
@@ -25,7 +25,7 @@ kubectl get nodes -o wide
 # 3. Install CNI[Cilium 1.15.0-rc.1]
 cilium_version=v1.15.0-rc.1
 docker pull quay.io/cilium/cilium:$cilium_version && docker pull quay.io/cilium/operator-generic:$cilium_version
-kind load docker-image quay.io/cilium/cilium:$cilium_version quay.io/cilium/operator-generic:$cilium_version --name cilium-kpr-ebpf
+kind load docker-image quay.io/cilium/cilium:$cilium_version quay.io/cilium/operator-generic:$cilium_version --name cilium-l2-announcements-l2lb-lbipam
 { helm repo add cilium https://helm.cilium.io ; helm repo update; } > /dev/null 2>&1
 
 # 3.0: https://docs.cilium.io/en/v1.15/operations/system_requirements/#admin-system-reqs
@@ -73,7 +73,7 @@ kind load docker-image quay.io/cilium/cilium:$cilium_version quay.io/cilium/oper
 # 1.1: L2 Announcements is a feature which makes services visible and reachable on the local area network. This feature is primarily intended for on-premises deployments within networks without BGP based routing such as office or campus networks.
 # 1.2: When used, this feature will respond to ARP queries for ExternalIPs and/or LoadBalancer IPs. These IPs are Virtual IPs (not installed on network devices) on multiple nodes, so for each service one node at a time will respond to the ARP queries and respond with its MAC address. This node will perform load balancing with the service load balancing feature, thus acting as a north/south load balancer.
 
-helm install cilium cilium/cilium --set k8sServiceHost=$controller_node_ip --set k8sServicePort=6443 --version 1.15.0-rc.1 --namespace kube-system --set image.pullPolicy=IfNotPresent --set debug.enabled=true --set debug.verbose="datapath flow kvstore envoy policy" --set bpf.monitorAggregation=none --set monitor.enabled=true --set ipam.mode=cluster-pool --set cluster.name=cilium-kpr-ebpf --set kubeProxyReplacement=true --set routingMode=native --set autoDirectNodeRoutes=true --set ipv4NativeRoutingCIDR="10.0.0.0/8" --set bpf.masquerade=true --set l2announcements.enabled=true --set devices='{eth0}' --set externalIPs.enabled=true
+helm install cilium cilium/cilium --set k8sServiceHost=$controller_node_ip --set k8sServicePort=6443 --version 1.15.0-rc.1 --namespace kube-system --set image.pullPolicy=IfNotPresent --set debug.enabled=true --set debug.verbose="datapath flow kvstore envoy policy" --set bpf.monitorAggregation=none --set monitor.enabled=true --set ipam.mode=cluster-pool --set cluster.name=cilium-l2-announcements-l2lb-lbipam --set kubeProxyReplacement=true --set routingMode=native --set autoDirectNodeRoutes=true --set ipv4NativeRoutingCIDR="10.0.0.0/8" --set bpf.masquerade=true --set l2announcements.enabled=true --set devices='{eth0}' --set externalIPs.enabled=true
 
 # 4. Wait all pods ready
 kubectl wait --timeout=100s --for=condition=Ready=true pods --all -A
@@ -82,6 +82,6 @@ kubectl wait --timeout=100s --for=condition=Ready=true pods --all -A
 kubectl -nkube-system exec -it ds/cilium -- cilium status
 
 # 6. Separate namesapce and cgroup v2 verify [https://github.com/cilium/cilium/pull/16259 && https://docs.cilium.io/en/stable/installation/kind/#install-cilium]
-for container in $(docker ps -a --format "table {{.Names}}" | grep cilium-kpr-ebpf);do docker exec $container ls -al /proc/self/ns/cgroup;done
+for container in $(docker ps -a --format "table {{.Names}}" | grep cilium-l2-announcements-l2lb-lbipam);do docker exec $container ls -al /proc/self/ns/cgroup;done
 mount -l | grep cgroup && docker info | grep "Cgroup Version" | awk '$1=$1'
 
