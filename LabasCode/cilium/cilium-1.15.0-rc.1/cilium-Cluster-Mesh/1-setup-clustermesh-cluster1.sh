@@ -24,6 +24,7 @@ kubectl taint nodes $(kubectl get nodes -o name | grep control-plane) node-role.
 kubectl get nodes -o wide
 
 # 3. Install CNI[Cilium 1.15.0-rc.1]
+# https://docs.cilium.io/en/stable/network/clustermesh/clustermesh/#gs-clustermesh
 cilium_version=v1.15.0-rc.1
 docker pull quay.io/cilium/cilium:$cilium_version && docker pull quay.io/cilium/operator-generic:$cilium_version
 kind load docker-image quay.io/cilium/cilium:$cilium_version quay.io/cilium/operator-generic:$cilium_version --name cluster1
