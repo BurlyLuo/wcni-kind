@@ -27,6 +27,7 @@ kubectl get nodes -o wide
 kubectl --context=kind-cluster1 get secret -n kube-system cilium-ca -o yaml | kubectl --context kind-cluster2 create -f -
 
 # 4. Install CNI[Cilium 1.15.0-rc.1]
+# https://docs.cilium.io/en/stable/network/clustermesh/clustermesh/#gs-clustermesh
 cilium_version=v1.15.0-rc.1
 docker pull quay.io/cilium/cilium:$cilium_version && docker pull quay.io/cilium/operator-generic:$cilium_version
 kind load docker-image quay.io/cilium/cilium:$cilium_version quay.io/cilium/operator-generic:$cilium_version --name cluster2
