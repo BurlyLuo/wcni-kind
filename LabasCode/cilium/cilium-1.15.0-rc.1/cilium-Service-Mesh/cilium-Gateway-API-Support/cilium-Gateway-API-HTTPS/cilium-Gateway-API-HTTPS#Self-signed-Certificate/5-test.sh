@@ -1,6 +1,5 @@
 #/bin/bash
 set -v 
-
 # Cilium ingress https
 controller_node=`kubectl get node -o wide --no-headers | grep -E "control-plane|bpf1" | awk -F " " '{print $1}'`
 sed -i '/bookinfo\.cilium\.rocks\|hipstershop\.cilium\.rocks/d' /etc/hosts
