@@ -1,0 +1,20 @@
+all:
+  children:
+    bridge:
+      hosts:
+        clab-cilium-egress-gateway-br-pool0:
+          ansible_host: 
+    linux:
+      hosts:
+        clab-cilium-egress-gateway-ext-client:
+          ansible_host: 172.20.20.3
+        clab-cilium-egress-gateway-firewall:
+          ansible_host: 172.20.20.2
+        clab-cilium-egress-gateway-server1:
+          ansible_host: 
+        clab-cilium-egress-gateway-server2:
+          ansible_host: 
+        clab-cilium-egress-gateway-server3:
+          ansible_host: 
+        clab-cilium-egress-gateway-server4:
+          ansible_host: 
