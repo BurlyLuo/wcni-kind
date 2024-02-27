@@ -32,7 +32,7 @@ kind load docker-image quay.io/cilium/cilium:$cilium_version quay.io/cilium/oper
 
 
 # 1.0: IPSec Options(--set encryption.enabled=true --set encryption.type=ipsec --set encryption.ipsec.interface=eth0)
-# 1.1: IPsec encryption does not work when using kube-proxy replacement. Be aware that other features may require a kube-proxy free environment in which case they are mutual exclusive.
+# 1.1: ""[IPsec encryption does not work when using kube-proxy replacement.]"" Be aware that other features may require a kube-proxy free environment in which case they are mutual exclusive.
 
 kubectl create -n kube-system secret generic cilium-ipsec-keys --from-literal=keys="3 rfc4106(gcm(aes)) $(echo $(dd if=/dev/urandom count=20 bs=1 2> /dev/null | xxd -p -c 64)) 128"
  
