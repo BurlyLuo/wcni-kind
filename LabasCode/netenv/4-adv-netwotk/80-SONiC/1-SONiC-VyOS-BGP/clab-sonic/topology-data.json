@@ -6,7 +6,7 @@
       "prefix": "clab",
       "mgmt": {
         "network": "clab",
-        "bridge": "br-97d14166e0d7",
+        "bridge": "br-25b759ce97fa",
         "ipv4-subnet": "172.20.20.0/24",
         "ipv4-gw": "172.20.20.1",
         "ipv6-subnet": "2001:172:20:20::/64",
@@ -24,7 +24,7 @@
       "fqdn": "sonic.sonic.io",
       "group": "",
       "labdir": "/root/wcni-kind/LabasCode/netenv/4-adv-netwotk/80-SONiC/1-SONiC-VyOS-BGP/clab-sonic/sonic",
-      "kind": "sonic-vs",
+      "kind": "linux",
       "image": "192.168.2.100:5000/docker-sonic-vs:2020-11-12",
       "mgmt-net": "",
       "mgmt-intf": "",
@@ -34,9 +34,9 @@
       "mgmt-ipv6-prefix-length": 64,
       "mac-address": "",
       "labels": {
-        "clab-mgmt-net-bridge": "br-97d14166e0d7",
+        "clab-mgmt-net-bridge": "br-25b759ce97fa",
         "clab-node-group": "",
-        "clab-node-kind": "sonic-vs",
+        "clab-node-kind": "linux",
         "clab-node-lab-dir": "/root/wcni-kind/LabasCode/netenv/4-adv-netwotk/80-SONiC/1-SONiC-VyOS-BGP/clab-sonic/sonic",
         "clab-node-name": "sonic",
         "clab-node-type": "",
@@ -61,7 +61,7 @@
       "mgmt-ipv6-prefix-length": 64,
       "mac-address": "",
       "labels": {
-        "clab-mgmt-net-bridge": "br-97d14166e0d7",
+        "clab-mgmt-net-bridge": "br-25b759ce97fa",
         "clab-node-group": "",
         "clab-node-kind": "linux",
         "clab-node-lab-dir": "/root/wcni-kind/LabasCode/netenv/4-adv-netwotk/80-SONiC/1-SONiC-VyOS-BGP/clab-sonic/vyos",
@@ -77,13 +77,13 @@
       "a": {
         "node": "vyos",
         "interface": "eth1",
-        "mac": "aa:c1:ab:6c:ed:64",
+        "mac": "aa:c1:ab:d9:0a:95",
         "peer": "z"
       },
       "z": {
         "node": "sonic",
         "interface": "eth1",
-        "mac": "aa:c1:ab:b0:bc:06",
+        "mac": "aa:c1:ab:1a:04:32",
         "peer": "a"
       }
     }
