@@ -21,15 +21,15 @@ ripd=no
 ripngd=no
 isisd=no
 pimd=no
-ldpd=no
-nhrpd=no
+ldpd=yes
+nhrpd=yes
 eigrpd=no
 babeld=no
 sharpd=no
 pbrd=no
-bfdd=no
+bfdd=yes
 fabricd=no
-vrrpd=no
+vrrpd=yes
 
 #
 # If this option is set the /etc/init.d/frr script automatically loads
