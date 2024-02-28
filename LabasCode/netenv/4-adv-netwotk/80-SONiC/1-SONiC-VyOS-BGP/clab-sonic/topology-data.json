@@ -6,7 +6,7 @@
       "prefix": "clab",
       "mgmt": {
         "network": "clab",
-        "bridge": "br-25b759ce97fa",
+        "bridge": "br-4a00905c5bfc",
         "ipv4-subnet": "172.20.20.0/24",
         "ipv4-gw": "172.20.20.1",
         "ipv6-subnet": "2001:172:20:20::/64",
@@ -28,13 +28,13 @@
       "image": "192.168.2.100:5000/docker-sonic-vs:2020-11-12",
       "mgmt-net": "",
       "mgmt-intf": "",
-      "mgmt-ipv4-address": "172.20.20.2",
+      "mgmt-ipv4-address": "172.20.20.3",
       "mgmt-ipv4-prefix-length": 24,
-      "mgmt-ipv6-address": "2001:172:20:20::2",
+      "mgmt-ipv6-address": "2001:172:20:20::3",
       "mgmt-ipv6-prefix-length": 64,
       "mac-address": "",
       "labels": {
-        "clab-mgmt-net-bridge": "br-25b759ce97fa",
+        "clab-mgmt-net-bridge": "br-4a00905c5bfc",
         "clab-node-group": "",
         "clab-node-kind": "linux",
         "clab-node-lab-dir": "/root/wcni-kind/LabasCode/netenv/4-adv-netwotk/80-SONiC/1-SONiC-VyOS-BGP/clab-sonic/sonic",
@@ -55,13 +55,13 @@
       "image": "192.168.2.100:5000/vyos/vyos:1.4.7",
       "mgmt-net": "",
       "mgmt-intf": "",
-      "mgmt-ipv4-address": "172.20.20.3",
+      "mgmt-ipv4-address": "172.20.20.2",
       "mgmt-ipv4-prefix-length": 24,
-      "mgmt-ipv6-address": "2001:172:20:20::3",
+      "mgmt-ipv6-address": "2001:172:20:20::2",
       "mgmt-ipv6-prefix-length": 64,
       "mac-address": "",
       "labels": {
-        "clab-mgmt-net-bridge": "br-25b759ce97fa",
+        "clab-mgmt-net-bridge": "br-4a00905c5bfc",
         "clab-node-group": "",
         "clab-node-kind": "linux",
         "clab-node-lab-dir": "/root/wcni-kind/LabasCode/netenv/4-adv-netwotk/80-SONiC/1-SONiC-VyOS-BGP/clab-sonic/vyos",
@@ -77,13 +77,13 @@
       "a": {
         "node": "vyos",
         "interface": "eth1",
-        "mac": "aa:c1:ab:d9:0a:95",
+        "mac": "aa:c1:ab:43:c0:13",
         "peer": "z"
       },
       "z": {
         "node": "sonic",
         "interface": "eth1",
-        "mac": "aa:c1:ab:1a:04:32",
+        "mac": "aa:c1:ab:c8:8e:1f",
         "peer": "a"
       }
     }
