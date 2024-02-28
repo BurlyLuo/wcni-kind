@@ -6,7 +6,7 @@
       "prefix": "clab",
       "mgmt": {
         "network": "clab",
-        "bridge": "br-cefbe984f37d",
+        "bridge": "br-4114f42d2155",
         "ipv4-subnet": "172.20.20.0/24",
         "ipv4-gw": "172.20.20.1",
         "ipv6-subnet": "2001:172:20:20::/64",
@@ -23,24 +23,24 @@
       "longname": "clab-ipvlan-gwx",
       "fqdn": "gwx.ipvlan.io",
       "group": "",
-      "labdir": "/root/wcni-kind/split/netenv/4-basic-netwotk/e-ipvlan/clab-ipvlan/gwx",
+      "labdir": "/root/wcni-kind/LabasCode/netenv/4-adv-netwotk/14-IPVLAN/clab-ipvlan/gwx",
       "kind": "linux",
       "image": "192.168.2.100:5000/vyos/vyos:1.4.7",
       "mgmt-net": "",
       "mgmt-intf": "",
-      "mgmt-ipv4-address": "172.20.20.3",
+      "mgmt-ipv4-address": "172.20.20.6",
       "mgmt-ipv4-prefix-length": 24,
-      "mgmt-ipv6-address": "2001:172:20:20::3",
+      "mgmt-ipv6-address": "2001:172:20:20::6",
       "mgmt-ipv6-prefix-length": 64,
       "mac-address": "",
       "labels": {
-        "clab-mgmt-net-bridge": "br-cefbe984f37d",
+        "clab-mgmt-net-bridge": "br-4114f42d2155",
         "clab-node-group": "",
         "clab-node-kind": "linux",
-        "clab-node-lab-dir": "/root/wcni-kind/split/netenv/4-basic-netwotk/e-ipvlan/clab-ipvlan/gwx",
+        "clab-node-lab-dir": "/root/wcni-kind/LabasCode/netenv/4-adv-netwotk/14-IPVLAN/clab-ipvlan/gwx",
         "clab-node-name": "gwx",
         "clab-node-type": "",
-        "clab-topo-file": "/root/wcni-kind/split/netenv/4-basic-netwotk/e-ipvlan/clab.yaml",
+        "clab-topo-file": "/root/wcni-kind/LabasCode/netenv/4-adv-netwotk/14-IPVLAN/clab.yaml",
         "containerlab": "ipvlan"
       }
     },
@@ -50,34 +50,7 @@
       "longname": "clab-ipvlan-ipvlan02",
       "fqdn": "ipvlan02.ipvlan.io",
       "group": "",
-      "labdir": "/root/wcni-kind/split/netenv/4-basic-netwotk/e-ipvlan/clab-ipvlan/ipvlan02",
-      "kind": "linux",
-      "image": "192.168.2.100:5000/nettool",
-      "mgmt-net": "",
-      "mgmt-intf": "",
-      "mgmt-ipv4-address": "172.20.20.2",
-      "mgmt-ipv4-prefix-length": 24,
-      "mgmt-ipv6-address": "2001:172:20:20::2",
-      "mgmt-ipv6-prefix-length": 64,
-      "mac-address": "",
-      "labels": {
-        "clab-mgmt-net-bridge": "br-cefbe984f37d",
-        "clab-node-group": "",
-        "clab-node-kind": "linux",
-        "clab-node-lab-dir": "/root/wcni-kind/split/netenv/4-basic-netwotk/e-ipvlan/clab-ipvlan/ipvlan02",
-        "clab-node-name": "ipvlan02",
-        "clab-node-type": "",
-        "clab-topo-file": "/root/wcni-kind/split/netenv/4-basic-netwotk/e-ipvlan/clab.yaml",
-        "containerlab": "ipvlan"
-      }
-    },
-    "ipvlan03": {
-      "index": "2",
-      "shortname": "ipvlan03",
-      "longname": "clab-ipvlan-ipvlan03",
-      "fqdn": "ipvlan03.ipvlan.io",
-      "group": "",
-      "labdir": "/root/wcni-kind/split/netenv/4-basic-netwotk/e-ipvlan/clab-ipvlan/ipvlan03",
+      "labdir": "/root/wcni-kind/LabasCode/netenv/4-adv-netwotk/14-IPVLAN/clab-ipvlan/ipvlan02",
       "kind": "linux",
       "image": "192.168.2.100:5000/nettool",
       "mgmt-net": "",
@@ -88,13 +61,40 @@
       "mgmt-ipv6-prefix-length": 64,
       "mac-address": "",
       "labels": {
-        "clab-mgmt-net-bridge": "br-cefbe984f37d",
+        "clab-mgmt-net-bridge": "br-4114f42d2155",
         "clab-node-group": "",
         "clab-node-kind": "linux",
-        "clab-node-lab-dir": "/root/wcni-kind/split/netenv/4-basic-netwotk/e-ipvlan/clab-ipvlan/ipvlan03",
+        "clab-node-lab-dir": "/root/wcni-kind/LabasCode/netenv/4-adv-netwotk/14-IPVLAN/clab-ipvlan/ipvlan02",
+        "clab-node-name": "ipvlan02",
+        "clab-node-type": "",
+        "clab-topo-file": "/root/wcni-kind/LabasCode/netenv/4-adv-netwotk/14-IPVLAN/clab.yaml",
+        "containerlab": "ipvlan"
+      }
+    },
+    "ipvlan03": {
+      "index": "2",
+      "shortname": "ipvlan03",
+      "longname": "clab-ipvlan-ipvlan03",
+      "fqdn": "ipvlan03.ipvlan.io",
+      "group": "",
+      "labdir": "/root/wcni-kind/LabasCode/netenv/4-adv-netwotk/14-IPVLAN/clab-ipvlan/ipvlan03",
+      "kind": "linux",
+      "image": "192.168.2.100:5000/nettool",
+      "mgmt-net": "",
+      "mgmt-intf": "",
+      "mgmt-ipv4-address": "172.20.20.8",
+      "mgmt-ipv4-prefix-length": 24,
+      "mgmt-ipv6-address": "2001:172:20:20::8",
+      "mgmt-ipv6-prefix-length": 64,
+      "mac-address": "",
+      "labels": {
+        "clab-mgmt-net-bridge": "br-4114f42d2155",
+        "clab-node-group": "",
+        "clab-node-kind": "linux",
+        "clab-node-lab-dir": "/root/wcni-kind/LabasCode/netenv/4-adv-netwotk/14-IPVLAN/clab-ipvlan/ipvlan03",
         "clab-node-name": "ipvlan03",
         "clab-node-type": "",
-        "clab-topo-file": "/root/wcni-kind/split/netenv/4-basic-netwotk/e-ipvlan/clab.yaml",
+        "clab-topo-file": "/root/wcni-kind/LabasCode/netenv/4-adv-netwotk/14-IPVLAN/clab.yaml",
         "containerlab": "ipvlan"
       }
     },
@@ -104,24 +104,24 @@
       "longname": "clab-ipvlan-ipvlan1",
       "fqdn": "ipvlan1.ipvlan.io",
       "group": "",
-      "labdir": "/root/wcni-kind/split/netenv/4-basic-netwotk/e-ipvlan/clab-ipvlan/ipvlan1",
+      "labdir": "/root/wcni-kind/LabasCode/netenv/4-adv-netwotk/14-IPVLAN/clab-ipvlan/ipvlan1",
       "kind": "linux",
       "image": "192.168.2.100:5000/nettool",
       "mgmt-net": "",
       "mgmt-intf": "",
-      "mgmt-ipv4-address": "172.20.20.6",
+      "mgmt-ipv4-address": "172.20.20.7",
       "mgmt-ipv4-prefix-length": 24,
-      "mgmt-ipv6-address": "2001:172:20:20::6",
+      "mgmt-ipv6-address": "2001:172:20:20::7",
       "mgmt-ipv6-prefix-length": 64,
       "mac-address": "",
       "labels": {
-        "clab-mgmt-net-bridge": "br-cefbe984f37d",
+        "clab-mgmt-net-bridge": "br-4114f42d2155",
         "clab-node-group": "",
         "clab-node-kind": "linux",
-        "clab-node-lab-dir": "/root/wcni-kind/split/netenv/4-basic-netwotk/e-ipvlan/clab-ipvlan/ipvlan1",
+        "clab-node-lab-dir": "/root/wcni-kind/LabasCode/netenv/4-adv-netwotk/14-IPVLAN/clab-ipvlan/ipvlan1",
         "clab-node-name": "ipvlan1",
         "clab-node-type": "",
-        "clab-topo-file": "/root/wcni-kind/split/netenv/4-basic-netwotk/e-ipvlan/clab.yaml",
+        "clab-topo-file": "/root/wcni-kind/LabasCode/netenv/4-adv-netwotk/14-IPVLAN/clab.yaml",
         "containerlab": "ipvlan"
       }
     },
@@ -131,7 +131,7 @@
       "longname": "clab-ipvlan-ipvlan20",
       "fqdn": "ipvlan20.ipvlan.io",
       "group": "",
-      "labdir": "/root/wcni-kind/split/netenv/4-basic-netwotk/e-ipvlan/clab-ipvlan/ipvlan20",
+      "labdir": "/root/wcni-kind/LabasCode/netenv/4-adv-netwotk/14-IPVLAN/clab-ipvlan/ipvlan20",
       "kind": "linux",
       "image": "192.168.2.100:5000/nettool",
       "mgmt-net": "",
@@ -142,13 +142,13 @@
       "mgmt-ipv6-prefix-length": 64,
       "mac-address": "",
       "labels": {
-        "clab-mgmt-net-bridge": "br-cefbe984f37d",
+        "clab-mgmt-net-bridge": "br-4114f42d2155",
         "clab-node-group": "",
         "clab-node-kind": "linux",
-        "clab-node-lab-dir": "/root/wcni-kind/split/netenv/4-basic-netwotk/e-ipvlan/clab-ipvlan/ipvlan20",
+        "clab-node-lab-dir": "/root/wcni-kind/LabasCode/netenv/4-adv-netwotk/14-IPVLAN/clab-ipvlan/ipvlan20",
         "clab-node-name": "ipvlan20",
         "clab-node-type": "",
-        "clab-topo-file": "/root/wcni-kind/split/netenv/4-basic-netwotk/e-ipvlan/clab.yaml",
+        "clab-topo-file": "/root/wcni-kind/LabasCode/netenv/4-adv-netwotk/14-IPVLAN/clab.yaml",
         "containerlab": "ipvlan"
       }
     }
@@ -158,13 +158,27 @@
       "a": {
         "node": "ipvlan1",
         "interface": "net1",
-        "mac": "aa:c1:ab:5a:b9:92",
+        "mac": "aa:c1:ab:fe:b3:50",
         "peer": "z"
       },
       "z": {
         "node": "gwx",
         "interface": "eth1",
-        "mac": "aa:c1:ab:d3:2a:53",
+        "mac": "aa:c1:ab:63:17:2f",
+        "peer": "a"
+      }
+    },
+    {
+      "a": {
+        "node": "ipvlan1",
+        "interface": "net2",
+        "mac": "aa:c1:ab:03:58:a3",
+        "peer": "z"
+      },
+      "z": {
+        "node": "gwx",
+        "interface": "eth2",
+        "mac": "aa:c1:ab:da:ef:05",
         "peer": "a"
       }
     }
