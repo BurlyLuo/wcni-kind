@@ -15,8 +15,8 @@
 # The watchfrr, zebra and staticd daemons are always started.
 #
 bgpd=yes
-ospfd=no
-ospf6d=no
+ospfd=yes
+ospf6d=yes
 ripd=no
 ripngd=no
 isisd=no
