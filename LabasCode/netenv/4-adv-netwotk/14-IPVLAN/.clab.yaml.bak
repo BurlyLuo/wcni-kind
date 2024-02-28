@@ -77,4 +77,5 @@ topology:
           
   links:
     - endpoints: ["ipvlan1:net1", "gwx:eth1"]
+    - endpoints: ["ipvlan1:net2", "gwx:eth2"]
     
