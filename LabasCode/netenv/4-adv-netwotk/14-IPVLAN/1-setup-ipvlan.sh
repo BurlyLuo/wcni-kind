@@ -80,6 +80,5 @@ topology:
           
   links:
     - endpoints: ["ipvlan1:net1", "gwx:eth1"]
-    
 EOF
 

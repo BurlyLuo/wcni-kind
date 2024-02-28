@@ -3,12 +3,12 @@ all:
     linux:
       hosts:
         clab-ipvlan-gwx:
-          ansible_host: 172.20.20.3
-        clab-ipvlan-ipvlan02:
-          ansible_host: 172.20.20.2
-        clab-ipvlan-ipvlan03:
-          ansible_host: 172.20.20.4
-        clab-ipvlan-ipvlan1:
           ansible_host: 172.20.20.6
+        clab-ipvlan-ipvlan02:
+          ansible_host: 172.20.20.4
+        clab-ipvlan-ipvlan03:
+          ansible_host: 172.20.20.8
+        clab-ipvlan-ipvlan1:
+          ansible_host: 172.20.20.7
         clab-ipvlan-ipvlan20:
           ansible_host: 172.20.20.5
