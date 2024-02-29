@@ -6,7 +6,7 @@ kind: Cluster
 apiVersion: kind.x-k8s.io/v1alpha4
 networking:
   disableDefaultCNI: true
-  # kubeProxyMode: "none" # Enable KubeProxy
+  # kubeProxyMode: "none" # Enable KubeProxy[https://docs.cilium.io/en/latest/security/network/encryption-ipsec/#limitations]
 nodes:
   - role: control-plane
   - role: worker
