@@ -6,7 +6,7 @@
       "prefix": "clab",
       "mgmt": {
         "network": "clab",
-        "bridge": "br-4a00905c5bfc",
+        "bridge": "br-b2c9b4a334a9",
         "ipv4-subnet": "172.20.20.0/24",
         "ipv4-gw": "172.20.20.1",
         "ipv6-subnet": "2001:172:20:20::/64",
@@ -34,7 +34,7 @@
       "mgmt-ipv6-prefix-length": 64,
       "mac-address": "",
       "labels": {
-        "clab-mgmt-net-bridge": "br-4a00905c5bfc",
+        "clab-mgmt-net-bridge": "br-b2c9b4a334a9",
         "clab-node-group": "",
         "clab-node-kind": "linux",
         "clab-node-lab-dir": "/root/wcni-kind/LabasCode/netenv/4-adv-netwotk/80-SONiC/1-SONiC-VyOS-BGP/clab-sonic/sonic",
@@ -61,7 +61,7 @@
       "mgmt-ipv6-prefix-length": 64,
       "mac-address": "",
       "labels": {
-        "clab-mgmt-net-bridge": "br-4a00905c5bfc",
+        "clab-mgmt-net-bridge": "br-b2c9b4a334a9",
         "clab-node-group": "",
         "clab-node-kind": "linux",
         "clab-node-lab-dir": "/root/wcni-kind/LabasCode/netenv/4-adv-netwotk/80-SONiC/1-SONiC-VyOS-BGP/clab-sonic/vyos",
@@ -77,13 +77,13 @@
       "a": {
         "node": "vyos",
         "interface": "eth1",
-        "mac": "aa:c1:ab:43:c0:13",
+        "mac": "aa:c1:ab:ed:43:84",
         "peer": "z"
       },
       "z": {
         "node": "sonic",
         "interface": "eth1",
-        "mac": "aa:c1:ab:c8:8e:1f",
+        "mac": "aa:c1:ab:1d:55:5a",
         "peer": "a"
       }
     }
