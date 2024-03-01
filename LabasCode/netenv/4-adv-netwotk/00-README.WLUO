@@ -10,6 +10,7 @@ Codename:       jammy
 [root@wluo ~]$ 
 
 2. kind version
+https://github.com/kubernetes-sigs/kind/releases
 [root@wluo ~]$ kind version 
 kind v0.20.0 go1.20.4 linux/amd64
 [root@wluo ~]$ 
