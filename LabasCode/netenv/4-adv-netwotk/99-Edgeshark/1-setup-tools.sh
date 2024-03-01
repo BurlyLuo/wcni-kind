@@ -10,5 +10,8 @@ wget -q --no-cache -O - \
 # Open edgeshark webui
 # firefox http://192.168.2.99:5001
 
-# 2. Install Containershark Extcap Plugin for Wireshark
+# 2. Install Containershark Extcap Plugin for Wireshark [Ubuntu]
 cshargextcap=cshargextcap_0.10.7_linux_amd64.deb && wget https://github.com/siemens/cshargextcap/releases/download/v0.10.7/$cshargextcap && dpkg -i ./$cshargextcap  && rm -rf ./$cshargextcap
+
+# 3. Install Containershark Extcap Plugin for Wireshark [Windows]
+wget https://github.com/siemens/cshargextcap/releases/download/v0.10.7/cshargextcap_0.10.7_windows_amd64.zip
