@@ -6,7 +6,7 @@
       "prefix": "clab",
       "mgmt": {
         "network": "clab",
-        "bridge": "br-e6b40facc3e8",
+        "bridge": "br-b95b0c005307",
         "ipv4-subnet": "172.20.20.0/24",
         "ipv4-gw": "172.20.20.1",
         "mtu": "1500",
@@ -21,24 +21,24 @@
       "longname": "clab-vlan-access-br1",
       "fqdn": "br1.vlan-access.io",
       "group": "",
-      "labdir": "/root/wcni-kind/split/netenv/4-adv-netwotk/25-L2-NETWORK/1-VLAN/1-Access-Mode/clab-vlan-access/br1",
+      "labdir": "/root/wcni-kind/LabasCode/netenv/4-adv-netwotk/25-L2-NETWORK/1-VLAN/1-Access-Mode/clab-vlan-access/br1",
       "kind": "linux",
-      "image": "192.168.2.100:5000/vyos/vyos:1.4.7",
+      "image": "192.168.2.100:5000/vyos/vyos:1.4.9",
       "mgmt-net": "",
       "mgmt-intf": "",
-      "mgmt-ipv4-address": "172.20.20.4",
+      "mgmt-ipv4-address": "172.20.20.3",
       "mgmt-ipv4-prefix-length": 24,
       "mgmt-ipv6-address": "",
       "mgmt-ipv6-prefix-length": 0,
       "mac-address": "",
       "labels": {
-        "clab-mgmt-net-bridge": "br-e6b40facc3e8",
+        "clab-mgmt-net-bridge": "br-b95b0c005307",
         "clab-node-group": "",
         "clab-node-kind": "linux",
-        "clab-node-lab-dir": "/root/wcni-kind/split/netenv/4-adv-netwotk/25-L2-NETWORK/1-VLAN/1-Access-Mode/clab-vlan-access/br1",
+        "clab-node-lab-dir": "/root/wcni-kind/LabasCode/netenv/4-adv-netwotk/25-L2-NETWORK/1-VLAN/1-Access-Mode/clab-vlan-access/br1",
         "clab-node-name": "br1",
         "clab-node-type": "",
-        "clab-topo-file": "/root/wcni-kind/split/netenv/4-adv-netwotk/25-L2-NETWORK/1-VLAN/1-Access-Mode/clab.yaml",
+        "clab-topo-file": "/root/wcni-kind/LabasCode/netenv/4-adv-netwotk/25-L2-NETWORK/1-VLAN/1-Access-Mode/clab.yaml",
         "containerlab": "vlan-access"
       }
     },
@@ -48,7 +48,34 @@
       "longname": "clab-vlan-access-server1",
       "fqdn": "server1.vlan-access.io",
       "group": "",
-      "labdir": "/root/wcni-kind/split/netenv/4-adv-netwotk/25-L2-NETWORK/1-VLAN/1-Access-Mode/clab-vlan-access/server1",
+      "labdir": "/root/wcni-kind/LabasCode/netenv/4-adv-netwotk/25-L2-NETWORK/1-VLAN/1-Access-Mode/clab-vlan-access/server1",
+      "kind": "linux",
+      "image": "192.168.2.100:5000/xcni",
+      "mgmt-net": "",
+      "mgmt-intf": "",
+      "mgmt-ipv4-address": "172.20.20.4",
+      "mgmt-ipv4-prefix-length": 24,
+      "mgmt-ipv6-address": "",
+      "mgmt-ipv6-prefix-length": 0,
+      "mac-address": "",
+      "labels": {
+        "clab-mgmt-net-bridge": "br-b95b0c005307",
+        "clab-node-group": "",
+        "clab-node-kind": "linux",
+        "clab-node-lab-dir": "/root/wcni-kind/LabasCode/netenv/4-adv-netwotk/25-L2-NETWORK/1-VLAN/1-Access-Mode/clab-vlan-access/server1",
+        "clab-node-name": "server1",
+        "clab-node-type": "",
+        "clab-topo-file": "/root/wcni-kind/LabasCode/netenv/4-adv-netwotk/25-L2-NETWORK/1-VLAN/1-Access-Mode/clab.yaml",
+        "containerlab": "vlan-access"
+      }
+    },
+    "server2": {
+      "index": "2",
+      "shortname": "server2",
+      "longname": "clab-vlan-access-server2",
+      "fqdn": "server2.vlan-access.io",
+      "group": "",
+      "labdir": "/root/wcni-kind/LabasCode/netenv/4-adv-netwotk/25-L2-NETWORK/1-VLAN/1-Access-Mode/clab-vlan-access/server2",
       "kind": "linux",
       "image": "192.168.2.100:5000/xcni",
       "mgmt-net": "",
@@ -59,40 +86,13 @@
       "mgmt-ipv6-prefix-length": 0,
       "mac-address": "",
       "labels": {
-        "clab-mgmt-net-bridge": "br-e6b40facc3e8",
+        "clab-mgmt-net-bridge": "br-b95b0c005307",
         "clab-node-group": "",
         "clab-node-kind": "linux",
-        "clab-node-lab-dir": "/root/wcni-kind/split/netenv/4-adv-netwotk/25-L2-NETWORK/1-VLAN/1-Access-Mode/clab-vlan-access/server1",
-        "clab-node-name": "server1",
-        "clab-node-type": "",
-        "clab-topo-file": "/root/wcni-kind/split/netenv/4-adv-netwotk/25-L2-NETWORK/1-VLAN/1-Access-Mode/clab.yaml",
-        "containerlab": "vlan-access"
-      }
-    },
-    "server2": {
-      "index": "2",
-      "shortname": "server2",
-      "longname": "clab-vlan-access-server2",
-      "fqdn": "server2.vlan-access.io",
-      "group": "",
-      "labdir": "/root/wcni-kind/split/netenv/4-adv-netwotk/25-L2-NETWORK/1-VLAN/1-Access-Mode/clab-vlan-access/server2",
-      "kind": "linux",
-      "image": "192.168.2.100:5000/xcni",
-      "mgmt-net": "",
-      "mgmt-intf": "",
-      "mgmt-ipv4-address": "172.20.20.3",
-      "mgmt-ipv4-prefix-length": 24,
-      "mgmt-ipv6-address": "",
-      "mgmt-ipv6-prefix-length": 0,
-      "mac-address": "",
-      "labels": {
-        "clab-mgmt-net-bridge": "br-e6b40facc3e8",
-        "clab-node-group": "",
-        "clab-node-kind": "linux",
-        "clab-node-lab-dir": "/root/wcni-kind/split/netenv/4-adv-netwotk/25-L2-NETWORK/1-VLAN/1-Access-Mode/clab-vlan-access/server2",
+        "clab-node-lab-dir": "/root/wcni-kind/LabasCode/netenv/4-adv-netwotk/25-L2-NETWORK/1-VLAN/1-Access-Mode/clab-vlan-access/server2",
         "clab-node-name": "server2",
         "clab-node-type": "",
-        "clab-topo-file": "/root/wcni-kind/split/netenv/4-adv-netwotk/25-L2-NETWORK/1-VLAN/1-Access-Mode/clab.yaml",
+        "clab-topo-file": "/root/wcni-kind/LabasCode/netenv/4-adv-netwotk/25-L2-NETWORK/1-VLAN/1-Access-Mode/clab.yaml",
         "containerlab": "vlan-access"
       }
     }
@@ -102,13 +102,13 @@
       "a": {
         "node": "br1",
         "interface": "eth1",
-        "mac": "aa:c1:ab:a0:02:ca",
+        "mac": "aa:c1:ab:25:c9:90",
         "peer": "z"
       },
       "z": {
         "node": "server1",
         "interface": "net0",
-        "mac": "aa:c1:ab:cc:c7:19",
+        "mac": "aa:c1:ab:cd:13:8a",
         "peer": "a"
       }
     },
@@ -116,13 +116,13 @@
       "a": {
         "node": "br1",
         "interface": "eth2",
-        "mac": "aa:c1:ab:a4:44:41",
+        "mac": "aa:c1:ab:21:63:02",
         "peer": "z"
       },
       "z": {
         "node": "server2",
         "interface": "net0",
-        "mac": "aa:c1:ab:1a:ab:1e",
+        "mac": "aa:c1:ab:7c:44:51",
         "peer": "a"
       }
     }
