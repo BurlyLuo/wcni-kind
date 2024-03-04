@@ -5,7 +5,7 @@ if [ ${1:-1} -ge 2 ]; then cpu=2;mem=2G;else cpu=8;mem=8G;fi
 
 for ((i=0; i<${1:-1}; i++))
 do
-  multipass launch 22.04 -n vm2204"$i" -c $cpu -m $mem -d 30G --cloud-init - <<EOF
+  multipass launch focal -n vm2204"$i" -c $cpu -m $mem -d 30G --cloud-init - <<EOF
   # cloud-config
   runcmd:
     - sudo sed -i "s/PasswordAuthentication no/PasswordAuthentication yes/g" /etc/ssh/sshd_config
