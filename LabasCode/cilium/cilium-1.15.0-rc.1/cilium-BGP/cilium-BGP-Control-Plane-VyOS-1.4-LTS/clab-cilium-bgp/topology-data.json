@@ -6,7 +6,7 @@
       "prefix": "clab",
       "mgmt": {
         "network": "clab",
-        "bridge": "br-e6353e370aeb",
+        "bridge": "br-0b8dc7152477",
         "ipv4-subnet": "172.20.20.0/24",
         "ipv4-gw": "172.20.20.1",
         "ipv6-subnet": "2001:172:20:20::/64",
@@ -23,7 +23,7 @@
       "longname": "clab-cilium-bgp-br-leaf0",
       "fqdn": "br-leaf0.cilium-bgp.io",
       "group": "",
-      "labdir": "/root/wcni-kind/LabasCode/cilium/cilium-1.15.0-rc.1/cilium-BGP/cilium-BGP-Control-Plane/clab-cilium-bgp/br-leaf0",
+      "labdir": "/root/wcni-kind/LabasCode/cilium/cilium-1.15.0-rc.1/cilium-BGP/cilium-BGP-Control-Plane1/clab-cilium-bgp/br-leaf0",
       "kind": "bridge",
       "image": "",
       "mgmt-net": "",
@@ -34,13 +34,13 @@
       "mgmt-ipv6-prefix-length": 0,
       "mac-address": "",
       "labels": {
-        "clab-mgmt-net-bridge": "br-e6353e370aeb",
+        "clab-mgmt-net-bridge": "br-0b8dc7152477",
         "clab-node-group": "",
         "clab-node-kind": "bridge",
-        "clab-node-lab-dir": "/root/wcni-kind/LabasCode/cilium/cilium-1.15.0-rc.1/cilium-BGP/cilium-BGP-Control-Plane/clab-cilium-bgp/br-leaf0",
+        "clab-node-lab-dir": "/root/wcni-kind/LabasCode/cilium/cilium-1.15.0-rc.1/cilium-BGP/cilium-BGP-Control-Plane1/clab-cilium-bgp/br-leaf0",
         "clab-node-name": "br-leaf0",
         "clab-node-type": "",
-        "clab-topo-file": "/root/wcni-kind/LabasCode/cilium/cilium-1.15.0-rc.1/cilium-BGP/cilium-BGP-Control-Plane/clab.yaml",
+        "clab-topo-file": "/root/wcni-kind/LabasCode/cilium/cilium-1.15.0-rc.1/cilium-BGP/cilium-BGP-Control-Plane1/clab.yaml",
         "containerlab": "cilium-bgp"
       }
     },
@@ -50,7 +50,7 @@
       "longname": "clab-cilium-bgp-br-leaf1",
       "fqdn": "br-leaf1.cilium-bgp.io",
       "group": "",
-      "labdir": "/root/wcni-kind/LabasCode/cilium/cilium-1.15.0-rc.1/cilium-BGP/cilium-BGP-Control-Plane/clab-cilium-bgp/br-leaf1",
+      "labdir": "/root/wcni-kind/LabasCode/cilium/cilium-1.15.0-rc.1/cilium-BGP/cilium-BGP-Control-Plane1/clab-cilium-bgp/br-leaf1",
       "kind": "bridge",
       "image": "",
       "mgmt-net": "",
@@ -61,13 +61,13 @@
       "mgmt-ipv6-prefix-length": 0,
       "mac-address": "",
       "labels": {
-        "clab-mgmt-net-bridge": "br-e6353e370aeb",
+        "clab-mgmt-net-bridge": "br-0b8dc7152477",
         "clab-node-group": "",
         "clab-node-kind": "bridge",
-        "clab-node-lab-dir": "/root/wcni-kind/LabasCode/cilium/cilium-1.15.0-rc.1/cilium-BGP/cilium-BGP-Control-Plane/clab-cilium-bgp/br-leaf1",
+        "clab-node-lab-dir": "/root/wcni-kind/LabasCode/cilium/cilium-1.15.0-rc.1/cilium-BGP/cilium-BGP-Control-Plane1/clab-cilium-bgp/br-leaf1",
         "clab-node-name": "br-leaf1",
         "clab-node-type": "",
-        "clab-topo-file": "/root/wcni-kind/LabasCode/cilium/cilium-1.15.0-rc.1/cilium-BGP/cilium-BGP-Control-Plane/clab.yaml",
+        "clab-topo-file": "/root/wcni-kind/LabasCode/cilium/cilium-1.15.0-rc.1/cilium-BGP/cilium-BGP-Control-Plane1/clab.yaml",
         "containerlab": "cilium-bgp"
       }
     },
@@ -77,24 +77,24 @@
       "longname": "clab-cilium-bgp-leaf0",
       "fqdn": "leaf0.cilium-bgp.io",
       "group": "",
-      "labdir": "/root/wcni-kind/LabasCode/cilium/cilium-1.15.0-rc.1/cilium-BGP/cilium-BGP-Control-Plane/clab-cilium-bgp/leaf0",
+      "labdir": "/root/wcni-kind/LabasCode/cilium/cilium-1.15.0-rc.1/cilium-BGP/cilium-BGP-Control-Plane1/clab-cilium-bgp/leaf0",
       "kind": "linux",
-      "image": "192.168.2.100:5000/vyos/vyos:1.4.7",
+      "image": "192.168.2.100:5000/vyos/vyos:1.4.9",
       "mgmt-net": "",
       "mgmt-intf": "",
-      "mgmt-ipv4-address": "172.20.20.2",
+      "mgmt-ipv4-address": "172.20.20.4",
       "mgmt-ipv4-prefix-length": 24,
-      "mgmt-ipv6-address": "2001:172:20:20::2",
+      "mgmt-ipv6-address": "2001:172:20:20::4",
       "mgmt-ipv6-prefix-length": 64,
       "mac-address": "",
       "labels": {
-        "clab-mgmt-net-bridge": "br-e6353e370aeb",
+        "clab-mgmt-net-bridge": "br-0b8dc7152477",
         "clab-node-group": "",
         "clab-node-kind": "linux",
-        "clab-node-lab-dir": "/root/wcni-kind/LabasCode/cilium/cilium-1.15.0-rc.1/cilium-BGP/cilium-BGP-Control-Plane/clab-cilium-bgp/leaf0",
+        "clab-node-lab-dir": "/root/wcni-kind/LabasCode/cilium/cilium-1.15.0-rc.1/cilium-BGP/cilium-BGP-Control-Plane1/clab-cilium-bgp/leaf0",
         "clab-node-name": "leaf0",
         "clab-node-type": "",
-        "clab-topo-file": "/root/wcni-kind/LabasCode/cilium/cilium-1.15.0-rc.1/cilium-BGP/cilium-BGP-Control-Plane/clab.yaml",
+        "clab-topo-file": "/root/wcni-kind/LabasCode/cilium/cilium-1.15.0-rc.1/cilium-BGP/cilium-BGP-Control-Plane1/clab.yaml",
         "containerlab": "cilium-bgp"
       }
     },
@@ -104,24 +104,24 @@
       "longname": "clab-cilium-bgp-leaf1",
       "fqdn": "leaf1.cilium-bgp.io",
       "group": "",
-      "labdir": "/root/wcni-kind/LabasCode/cilium/cilium-1.15.0-rc.1/cilium-BGP/cilium-BGP-Control-Plane/clab-cilium-bgp/leaf1",
+      "labdir": "/root/wcni-kind/LabasCode/cilium/cilium-1.15.0-rc.1/cilium-BGP/cilium-BGP-Control-Plane1/clab-cilium-bgp/leaf1",
       "kind": "linux",
-      "image": "192.168.2.100:5000/vyos/vyos:1.4.7",
+      "image": "192.168.2.100:5000/vyos/vyos:1.4.9",
       "mgmt-net": "",
       "mgmt-intf": "",
-      "mgmt-ipv4-address": "172.20.20.3",
+      "mgmt-ipv4-address": "172.20.20.5",
       "mgmt-ipv4-prefix-length": 24,
-      "mgmt-ipv6-address": "2001:172:20:20::3",
+      "mgmt-ipv6-address": "2001:172:20:20::5",
       "mgmt-ipv6-prefix-length": 64,
       "mac-address": "",
       "labels": {
-        "clab-mgmt-net-bridge": "br-e6353e370aeb",
+        "clab-mgmt-net-bridge": "br-0b8dc7152477",
         "clab-node-group": "",
         "clab-node-kind": "linux",
-        "clab-node-lab-dir": "/root/wcni-kind/LabasCode/cilium/cilium-1.15.0-rc.1/cilium-BGP/cilium-BGP-Control-Plane/clab-cilium-bgp/leaf1",
+        "clab-node-lab-dir": "/root/wcni-kind/LabasCode/cilium/cilium-1.15.0-rc.1/cilium-BGP/cilium-BGP-Control-Plane1/clab-cilium-bgp/leaf1",
         "clab-node-name": "leaf1",
         "clab-node-type": "",
-        "clab-topo-file": "/root/wcni-kind/LabasCode/cilium/cilium-1.15.0-rc.1/cilium-BGP/cilium-BGP-Control-Plane/clab.yaml",
+        "clab-topo-file": "/root/wcni-kind/LabasCode/cilium/cilium-1.15.0-rc.1/cilium-BGP/cilium-BGP-Control-Plane1/clab.yaml",
         "containerlab": "cilium-bgp"
       }
     },
@@ -131,7 +131,7 @@
       "longname": "clab-cilium-bgp-server1",
       "fqdn": "server1.cilium-bgp.io",
       "group": "",
-      "labdir": "/root/wcni-kind/LabasCode/cilium/cilium-1.15.0-rc.1/cilium-BGP/cilium-BGP-Control-Plane/clab-cilium-bgp/server1",
+      "labdir": "/root/wcni-kind/LabasCode/cilium/cilium-1.15.0-rc.1/cilium-BGP/cilium-BGP-Control-Plane1/clab-cilium-bgp/server1",
       "kind": "linux",
       "image": "192.168.2.100:5000/nettool",
       "mgmt-net": "",
@@ -142,13 +142,13 @@
       "mgmt-ipv6-prefix-length": 0,
       "mac-address": "",
       "labels": {
-        "clab-mgmt-net-bridge": "br-e6353e370aeb",
+        "clab-mgmt-net-bridge": "br-0b8dc7152477",
         "clab-node-group": "",
         "clab-node-kind": "linux",
-        "clab-node-lab-dir": "/root/wcni-kind/LabasCode/cilium/cilium-1.15.0-rc.1/cilium-BGP/cilium-BGP-Control-Plane/clab-cilium-bgp/server1",
+        "clab-node-lab-dir": "/root/wcni-kind/LabasCode/cilium/cilium-1.15.0-rc.1/cilium-BGP/cilium-BGP-Control-Plane1/clab-cilium-bgp/server1",
         "clab-node-name": "server1",
         "clab-node-type": "",
-        "clab-topo-file": "/root/wcni-kind/LabasCode/cilium/cilium-1.15.0-rc.1/cilium-BGP/cilium-BGP-Control-Plane/clab.yaml",
+        "clab-topo-file": "/root/wcni-kind/LabasCode/cilium/cilium-1.15.0-rc.1/cilium-BGP/cilium-BGP-Control-Plane1/clab.yaml",
         "containerlab": "cilium-bgp"
       }
     },
@@ -158,7 +158,7 @@
       "longname": "clab-cilium-bgp-server2",
       "fqdn": "server2.cilium-bgp.io",
       "group": "",
-      "labdir": "/root/wcni-kind/LabasCode/cilium/cilium-1.15.0-rc.1/cilium-BGP/cilium-BGP-Control-Plane/clab-cilium-bgp/server2",
+      "labdir": "/root/wcni-kind/LabasCode/cilium/cilium-1.15.0-rc.1/cilium-BGP/cilium-BGP-Control-Plane1/clab-cilium-bgp/server2",
       "kind": "linux",
       "image": "192.168.2.100:5000/nettool",
       "mgmt-net": "",
@@ -169,13 +169,13 @@
       "mgmt-ipv6-prefix-length": 0,
       "mac-address": "",
       "labels": {
-        "clab-mgmt-net-bridge": "br-e6353e370aeb",
+        "clab-mgmt-net-bridge": "br-0b8dc7152477",
         "clab-node-group": "",
         "clab-node-kind": "linux",
-        "clab-node-lab-dir": "/root/wcni-kind/LabasCode/cilium/cilium-1.15.0-rc.1/cilium-BGP/cilium-BGP-Control-Plane/clab-cilium-bgp/server2",
+        "clab-node-lab-dir": "/root/wcni-kind/LabasCode/cilium/cilium-1.15.0-rc.1/cilium-BGP/cilium-BGP-Control-Plane1/clab-cilium-bgp/server2",
         "clab-node-name": "server2",
         "clab-node-type": "",
-        "clab-topo-file": "/root/wcni-kind/LabasCode/cilium/cilium-1.15.0-rc.1/cilium-BGP/cilium-BGP-Control-Plane/clab.yaml",
+        "clab-topo-file": "/root/wcni-kind/LabasCode/cilium/cilium-1.15.0-rc.1/cilium-BGP/cilium-BGP-Control-Plane1/clab.yaml",
         "containerlab": "cilium-bgp"
       }
     },
@@ -185,7 +185,7 @@
       "longname": "clab-cilium-bgp-server3",
       "fqdn": "server3.cilium-bgp.io",
       "group": "",
-      "labdir": "/root/wcni-kind/LabasCode/cilium/cilium-1.15.0-rc.1/cilium-BGP/cilium-BGP-Control-Plane/clab-cilium-bgp/server3",
+      "labdir": "/root/wcni-kind/LabasCode/cilium/cilium-1.15.0-rc.1/cilium-BGP/cilium-BGP-Control-Plane1/clab-cilium-bgp/server3",
       "kind": "linux",
       "image": "192.168.2.100:5000/nettool",
       "mgmt-net": "",
@@ -196,13 +196,13 @@
       "mgmt-ipv6-prefix-length": 0,
       "mac-address": "",
       "labels": {
-        "clab-mgmt-net-bridge": "br-e6353e370aeb",
+        "clab-mgmt-net-bridge": "br-0b8dc7152477",
         "clab-node-group": "",
         "clab-node-kind": "linux",
-        "clab-node-lab-dir": "/root/wcni-kind/LabasCode/cilium/cilium-1.15.0-rc.1/cilium-BGP/cilium-BGP-Control-Plane/clab-cilium-bgp/server3",
+        "clab-node-lab-dir": "/root/wcni-kind/LabasCode/cilium/cilium-1.15.0-rc.1/cilium-BGP/cilium-BGP-Control-Plane1/clab-cilium-bgp/server3",
         "clab-node-name": "server3",
         "clab-node-type": "",
-        "clab-topo-file": "/root/wcni-kind/LabasCode/cilium/cilium-1.15.0-rc.1/cilium-BGP/cilium-BGP-Control-Plane/clab.yaml",
+        "clab-topo-file": "/root/wcni-kind/LabasCode/cilium/cilium-1.15.0-rc.1/cilium-BGP/cilium-BGP-Control-Plane1/clab.yaml",
         "containerlab": "cilium-bgp"
       }
     },
@@ -212,7 +212,7 @@
       "longname": "clab-cilium-bgp-server4",
       "fqdn": "server4.cilium-bgp.io",
       "group": "",
-      "labdir": "/root/wcni-kind/LabasCode/cilium/cilium-1.15.0-rc.1/cilium-BGP/cilium-BGP-Control-Plane/clab-cilium-bgp/server4",
+      "labdir": "/root/wcni-kind/LabasCode/cilium/cilium-1.15.0-rc.1/cilium-BGP/cilium-BGP-Control-Plane1/clab-cilium-bgp/server4",
       "kind": "linux",
       "image": "192.168.2.100:5000/nettool",
       "mgmt-net": "",
@@ -223,13 +223,13 @@
       "mgmt-ipv6-prefix-length": 0,
       "mac-address": "",
       "labels": {
-        "clab-mgmt-net-bridge": "br-e6353e370aeb",
+        "clab-mgmt-net-bridge": "br-0b8dc7152477",
         "clab-node-group": "",
         "clab-node-kind": "linux",
-        "clab-node-lab-dir": "/root/wcni-kind/LabasCode/cilium/cilium-1.15.0-rc.1/cilium-BGP/cilium-BGP-Control-Plane/clab-cilium-bgp/server4",
+        "clab-node-lab-dir": "/root/wcni-kind/LabasCode/cilium/cilium-1.15.0-rc.1/cilium-BGP/cilium-BGP-Control-Plane1/clab-cilium-bgp/server4",
         "clab-node-name": "server4",
         "clab-node-type": "",
-        "clab-topo-file": "/root/wcni-kind/LabasCode/cilium/cilium-1.15.0-rc.1/cilium-BGP/cilium-BGP-Control-Plane/clab.yaml",
+        "clab-topo-file": "/root/wcni-kind/LabasCode/cilium/cilium-1.15.0-rc.1/cilium-BGP/cilium-BGP-Control-Plane1/clab.yaml",
         "containerlab": "cilium-bgp"
       }
     },
@@ -239,24 +239,24 @@
       "longname": "clab-cilium-bgp-spine0",
       "fqdn": "spine0.cilium-bgp.io",
       "group": "",
-      "labdir": "/root/wcni-kind/LabasCode/cilium/cilium-1.15.0-rc.1/cilium-BGP/cilium-BGP-Control-Plane/clab-cilium-bgp/spine0",
+      "labdir": "/root/wcni-kind/LabasCode/cilium/cilium-1.15.0-rc.1/cilium-BGP/cilium-BGP-Control-Plane1/clab-cilium-bgp/spine0",
       "kind": "linux",
-      "image": "192.168.2.100:5000/vyos/vyos:1.4.7",
+      "image": "192.168.2.100:5000/vyos/vyos:1.4.9",
       "mgmt-net": "",
       "mgmt-intf": "",
-      "mgmt-ipv4-address": "172.20.20.5",
+      "mgmt-ipv4-address": "172.20.20.3",
       "mgmt-ipv4-prefix-length": 24,
-      "mgmt-ipv6-address": "2001:172:20:20::5",
+      "mgmt-ipv6-address": "2001:172:20:20::3",
       "mgmt-ipv6-prefix-length": 64,
       "mac-address": "",
       "labels": {
-        "clab-mgmt-net-bridge": "br-e6353e370aeb",
+        "clab-mgmt-net-bridge": "br-0b8dc7152477",
         "clab-node-group": "",
         "clab-node-kind": "linux",
-        "clab-node-lab-dir": "/root/wcni-kind/LabasCode/cilium/cilium-1.15.0-rc.1/cilium-BGP/cilium-BGP-Control-Plane/clab-cilium-bgp/spine0",
+        "clab-node-lab-dir": "/root/wcni-kind/LabasCode/cilium/cilium-1.15.0-rc.1/cilium-BGP/cilium-BGP-Control-Plane1/clab-cilium-bgp/spine0",
         "clab-node-name": "spine0",
         "clab-node-type": "",
-        "clab-topo-file": "/root/wcni-kind/LabasCode/cilium/cilium-1.15.0-rc.1/cilium-BGP/cilium-BGP-Control-Plane/clab.yaml",
+        "clab-topo-file": "/root/wcni-kind/LabasCode/cilium/cilium-1.15.0-rc.1/cilium-BGP/cilium-BGP-Control-Plane1/clab.yaml",
         "containerlab": "cilium-bgp"
       }
     },
@@ -266,24 +266,24 @@
       "longname": "clab-cilium-bgp-spine1",
       "fqdn": "spine1.cilium-bgp.io",
       "group": "",
-      "labdir": "/root/wcni-kind/LabasCode/cilium/cilium-1.15.0-rc.1/cilium-BGP/cilium-BGP-Control-Plane/clab-cilium-bgp/spine1",
+      "labdir": "/root/wcni-kind/LabasCode/cilium/cilium-1.15.0-rc.1/cilium-BGP/cilium-BGP-Control-Plane1/clab-cilium-bgp/spine1",
       "kind": "linux",
-      "image": "192.168.2.100:5000/vyos/vyos:1.4.7",
+      "image": "192.168.2.100:5000/vyos/vyos:1.4.9",
       "mgmt-net": "",
       "mgmt-intf": "",
-      "mgmt-ipv4-address": "172.20.20.4",
+      "mgmt-ipv4-address": "172.20.20.2",
       "mgmt-ipv4-prefix-length": 24,
-      "mgmt-ipv6-address": "2001:172:20:20::4",
+      "mgmt-ipv6-address": "2001:172:20:20::2",
       "mgmt-ipv6-prefix-length": 64,
       "mac-address": "",
       "labels": {
-        "clab-mgmt-net-bridge": "br-e6353e370aeb",
+        "clab-mgmt-net-bridge": "br-0b8dc7152477",
         "clab-node-group": "",
         "clab-node-kind": "linux",
-        "clab-node-lab-dir": "/root/wcni-kind/LabasCode/cilium/cilium-1.15.0-rc.1/cilium-BGP/cilium-BGP-Control-Plane/clab-cilium-bgp/spine1",
+        "clab-node-lab-dir": "/root/wcni-kind/LabasCode/cilium/cilium-1.15.0-rc.1/cilium-BGP/cilium-BGP-Control-Plane1/clab-cilium-bgp/spine1",
         "clab-node-name": "spine1",
         "clab-node-type": "",
-        "clab-topo-file": "/root/wcni-kind/LabasCode/cilium/cilium-1.15.0-rc.1/cilium-BGP/cilium-BGP-Control-Plane/clab.yaml",
+        "clab-topo-file": "/root/wcni-kind/LabasCode/cilium/cilium-1.15.0-rc.1/cilium-BGP/cilium-BGP-Control-Plane1/clab.yaml",
         "containerlab": "cilium-bgp"
       }
     }
@@ -293,13 +293,13 @@
       "a": {
         "node": "br-leaf0",
         "interface": "br-leaf0-net0",
-        "mac": "aa:c1:ab:85:72:6b",
+        "mac": "aa:c1:ab:a6:3d:cb",
         "peer": "z"
       },
       "z": {
         "node": "server1",
         "interface": "net0",
-        "mac": "aa:c1:ab:72:b8:7b",
+        "mac": "aa:c1:ab:9d:20:15",
         "peer": "a"
       }
     },
@@ -307,13 +307,13 @@
       "a": {
         "node": "br-leaf0",
         "interface": "br-leaf0-net1",
-        "mac": "aa:c1:ab:9e:f3:d6",
+        "mac": "aa:c1:ab:28:96:ff",
         "peer": "z"
       },
       "z": {
         "node": "server2",
         "interface": "net0",
-        "mac": "aa:c1:ab:58:42:e8",
+        "mac": "aa:c1:ab:3b:fb:e9",
         "peer": "a"
       }
     },
@@ -321,13 +321,13 @@
       "a": {
         "node": "br-leaf1",
         "interface": "br-leaf1-net0",
-        "mac": "aa:c1:ab:70:47:bf",
+        "mac": "aa:c1:ab:a5:d7:23",
         "peer": "z"
       },
       "z": {
         "node": "server3",
         "interface": "net0",
-        "mac": "aa:c1:ab:47:f8:09",
+        "mac": "aa:c1:ab:71:d9:1e",
         "peer": "a"
       }
     },
@@ -335,13 +335,13 @@
       "a": {
         "node": "br-leaf1",
         "interface": "br-leaf1-net1",
-        "mac": "aa:c1:ab:7c:f1:56",
+        "mac": "aa:c1:ab:6d:18:99",
         "peer": "z"
       },
       "z": {
         "node": "server4",
         "interface": "net0",
-        "mac": "aa:c1:ab:af:a1:a8",
+        "mac": "aa:c1:ab:5b:dc:1a",
         "peer": "a"
       }
     },
@@ -349,13 +349,13 @@
       "a": {
         "node": "leaf0",
         "interface": "eth1",
-        "mac": "aa:c1:ab:80:6f:54",
+        "mac": "aa:c1:ab:79:40:1d",
         "peer": "z"
       },
       "z": {
         "node": "spine0",
         "interface": "eth1",
-        "mac": "aa:c1:ab:d3:21:06",
+        "mac": "aa:c1:ab:ce:10:78",
         "peer": "a"
       }
     },
@@ -363,13 +363,13 @@
       "a": {
         "node": "leaf0",
         "interface": "eth2",
-        "mac": "aa:c1:ab:f7:f9:4f",
+        "mac": "aa:c1:ab:02:d4:6c",
         "peer": "z"
       },
       "z": {
         "node": "spine1",
         "interface": "eth1",
-        "mac": "aa:c1:ab:bc:06:cb",
+        "mac": "aa:c1:ab:bc:15:46",
         "peer": "a"
       }
     },
@@ -377,13 +377,13 @@
       "a": {
         "node": "leaf0",
         "interface": "eth3",
-        "mac": "aa:c1:ab:13:6a:49",
+        "mac": "aa:c1:ab:e1:b7:82",
         "peer": "z"
       },
       "z": {
         "node": "br-leaf0",
         "interface": "br-leaf0-net2",
-        "mac": "aa:c1:ab:2d:80:5f",
+        "mac": "aa:c1:ab:e1:a6:66",
         "peer": "a"
       }
     },
@@ -391,13 +391,13 @@
       "a": {
         "node": "leaf1",
         "interface": "eth1",
-        "mac": "aa:c1:ab:ee:4b:cc",
+        "mac": "aa:c1:ab:88:4d:12",
         "peer": "z"
       },
       "z": {
         "node": "spine0",
         "interface": "eth2",
-        "mac": "aa:c1:ab:8e:88:d1",
+        "mac": "aa:c1:ab:cb:dd:72",
         "peer": "a"
       }
     },
@@ -405,13 +405,13 @@
       "a": {
         "node": "leaf1",
         "interface": "eth2",
-        "mac": "aa:c1:ab:cd:18:81",
+        "mac": "aa:c1:ab:2d:35:3d",
         "peer": "z"
       },
       "z": {
         "node": "spine1",
         "interface": "eth2",
-        "mac": "aa:c1:ab:54:4c:a9",
+        "mac": "aa:c1:ab:71:47:09",
         "peer": "a"
       }
     },
@@ -419,13 +419,13 @@
       "a": {
         "node": "leaf1",
         "interface": "eth3",
-        "mac": "aa:c1:ab:a5:8b:15",
+        "mac": "aa:c1:ab:89:a5:ce",
         "peer": "z"
       },
       "z": {
         "node": "br-leaf1",
         "interface": "br-leaf1-net2",
-        "mac": "aa:c1:ab:5b:a4:97",
+        "mac": "aa:c1:ab:e5:73:4e",
         "peer": "a"
       }
     }
