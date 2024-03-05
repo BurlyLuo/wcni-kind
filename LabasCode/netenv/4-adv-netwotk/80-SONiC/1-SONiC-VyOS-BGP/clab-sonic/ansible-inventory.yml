@@ -1,8 +1,0 @@
-all:
-  children:
-    linux:
-      hosts:
-        clab-sonic-sonic:
-          ansible_host: 172.20.20.3
-        clab-sonic-vyos:
-          ansible_host: 172.20.20.2
