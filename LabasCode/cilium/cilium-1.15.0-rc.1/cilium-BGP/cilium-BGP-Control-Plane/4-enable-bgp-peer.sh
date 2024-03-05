@@ -43,6 +43,9 @@ spec:
       gracefulRestart:
         enabled: true
         restartTimeSeconds: 120
+      families:
+      - afi: ipv4
+        safi: unicast
 ---
 apiVersion: "cilium.io/v2alpha1"
 kind: CiliumBGPPeeringPolicy
@@ -61,5 +64,8 @@ spec:
       gracefulRestart:
         enabled: true
         restartTimeSeconds: 120
+      families:
+      - afi: ipv4
+        safi: unicast
 EOF
 
