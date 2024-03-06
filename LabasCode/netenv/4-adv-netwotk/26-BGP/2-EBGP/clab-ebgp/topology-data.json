@@ -6,7 +6,7 @@
       "prefix": "clab",
       "mgmt": {
         "network": "clab",
-        "bridge": "br-23adb15b461f",
+        "bridge": "br-006350ad3928",
         "ipv4-subnet": "172.20.20.0/24",
         "ipv4-gw": "172.20.20.1",
         "ipv6-subnet": "2001:172:20:20::/64",
@@ -23,24 +23,24 @@
       "longname": "clab-ebgp-gw1",
       "fqdn": "gw1.ebgp.io",
       "group": "",
-      "labdir": "/root/wcni-kind/split/netenv/4-adv-netwotk/22-BGP/2-EBGP/clab-ebgp/gw1",
+      "labdir": "/root/wcni-kind/LabasCode/netenv/4-adv-netwotk/26-BGP/2-EBGP/clab-ebgp/gw1",
       "kind": "linux",
-      "image": "192.168.2.100:5000/vyos/vyos:1.4.7",
+      "image": "192.168.2.100:5000/vyos/vyos:1.4.9",
       "mgmt-net": "",
       "mgmt-intf": "",
-      "mgmt-ipv4-address": "172.20.20.3",
+      "mgmt-ipv4-address": "172.20.20.2",
       "mgmt-ipv4-prefix-length": 24,
-      "mgmt-ipv6-address": "2001:172:20:20::3",
+      "mgmt-ipv6-address": "2001:172:20:20::2",
       "mgmt-ipv6-prefix-length": 64,
       "mac-address": "",
       "labels": {
-        "clab-mgmt-net-bridge": "br-23adb15b461f",
+        "clab-mgmt-net-bridge": "br-006350ad3928",
         "clab-node-group": "",
         "clab-node-kind": "linux",
-        "clab-node-lab-dir": "/root/wcni-kind/split/netenv/4-adv-netwotk/22-BGP/2-EBGP/clab-ebgp/gw1",
+        "clab-node-lab-dir": "/root/wcni-kind/LabasCode/netenv/4-adv-netwotk/26-BGP/2-EBGP/clab-ebgp/gw1",
         "clab-node-name": "gw1",
         "clab-node-type": "",
-        "clab-topo-file": "/root/wcni-kind/split/netenv/4-adv-netwotk/22-BGP/2-EBGP/clab.yaml",
+        "clab-topo-file": "/root/wcni-kind/LabasCode/netenv/4-adv-netwotk/26-BGP/2-EBGP/clab.yaml",
         "containerlab": "ebgp"
       }
     },
@@ -50,24 +50,24 @@
       "longname": "clab-ebgp-gw2",
       "fqdn": "gw2.ebgp.io",
       "group": "",
-      "labdir": "/root/wcni-kind/split/netenv/4-adv-netwotk/22-BGP/2-EBGP/clab-ebgp/gw2",
+      "labdir": "/root/wcni-kind/LabasCode/netenv/4-adv-netwotk/26-BGP/2-EBGP/clab-ebgp/gw2",
       "kind": "linux",
-      "image": "192.168.2.100:5000/vyos/vyos:1.4.7",
+      "image": "192.168.2.100:5000/vyos/vyos:1.4.9",
       "mgmt-net": "",
       "mgmt-intf": "",
-      "mgmt-ipv4-address": "172.20.20.2",
+      "mgmt-ipv4-address": "172.20.20.3",
       "mgmt-ipv4-prefix-length": 24,
-      "mgmt-ipv6-address": "2001:172:20:20::2",
+      "mgmt-ipv6-address": "2001:172:20:20::3",
       "mgmt-ipv6-prefix-length": 64,
       "mac-address": "",
       "labels": {
-        "clab-mgmt-net-bridge": "br-23adb15b461f",
+        "clab-mgmt-net-bridge": "br-006350ad3928",
         "clab-node-group": "",
         "clab-node-kind": "linux",
-        "clab-node-lab-dir": "/root/wcni-kind/split/netenv/4-adv-netwotk/22-BGP/2-EBGP/clab-ebgp/gw2",
+        "clab-node-lab-dir": "/root/wcni-kind/LabasCode/netenv/4-adv-netwotk/26-BGP/2-EBGP/clab-ebgp/gw2",
         "clab-node-name": "gw2",
         "clab-node-type": "",
-        "clab-topo-file": "/root/wcni-kind/split/netenv/4-adv-netwotk/22-BGP/2-EBGP/clab.yaml",
+        "clab-topo-file": "/root/wcni-kind/LabasCode/netenv/4-adv-netwotk/26-BGP/2-EBGP/clab.yaml",
         "containerlab": "ebgp"
       }
     },
@@ -77,7 +77,7 @@
       "longname": "clab-ebgp-server1",
       "fqdn": "server1.ebgp.io",
       "group": "",
-      "labdir": "/root/wcni-kind/split/netenv/4-adv-netwotk/22-BGP/2-EBGP/clab-ebgp/server1",
+      "labdir": "/root/wcni-kind/LabasCode/netenv/4-adv-netwotk/26-BGP/2-EBGP/clab-ebgp/server1",
       "kind": "linux",
       "image": "192.168.2.100:5000/nettool",
       "mgmt-net": "",
@@ -88,13 +88,13 @@
       "mgmt-ipv6-prefix-length": 64,
       "mac-address": "",
       "labels": {
-        "clab-mgmt-net-bridge": "br-23adb15b461f",
+        "clab-mgmt-net-bridge": "br-006350ad3928",
         "clab-node-group": "",
         "clab-node-kind": "linux",
-        "clab-node-lab-dir": "/root/wcni-kind/split/netenv/4-adv-netwotk/22-BGP/2-EBGP/clab-ebgp/server1",
+        "clab-node-lab-dir": "/root/wcni-kind/LabasCode/netenv/4-adv-netwotk/26-BGP/2-EBGP/clab-ebgp/server1",
         "clab-node-name": "server1",
         "clab-node-type": "",
-        "clab-topo-file": "/root/wcni-kind/split/netenv/4-adv-netwotk/22-BGP/2-EBGP/clab.yaml",
+        "clab-topo-file": "/root/wcni-kind/LabasCode/netenv/4-adv-netwotk/26-BGP/2-EBGP/clab.yaml",
         "containerlab": "ebgp"
       }
     },
@@ -104,7 +104,7 @@
       "longname": "clab-ebgp-server2",
       "fqdn": "server2.ebgp.io",
       "group": "",
-      "labdir": "/root/wcni-kind/split/netenv/4-adv-netwotk/22-BGP/2-EBGP/clab-ebgp/server2",
+      "labdir": "/root/wcni-kind/LabasCode/netenv/4-adv-netwotk/26-BGP/2-EBGP/clab-ebgp/server2",
       "kind": "linux",
       "image": "192.168.2.100:5000/nettool",
       "mgmt-net": "",
@@ -115,13 +115,13 @@
       "mgmt-ipv6-prefix-length": 64,
       "mac-address": "",
       "labels": {
-        "clab-mgmt-net-bridge": "br-23adb15b461f",
+        "clab-mgmt-net-bridge": "br-006350ad3928",
         "clab-node-group": "",
         "clab-node-kind": "linux",
-        "clab-node-lab-dir": "/root/wcni-kind/split/netenv/4-adv-netwotk/22-BGP/2-EBGP/clab-ebgp/server2",
+        "clab-node-lab-dir": "/root/wcni-kind/LabasCode/netenv/4-adv-netwotk/26-BGP/2-EBGP/clab-ebgp/server2",
         "clab-node-name": "server2",
         "clab-node-type": "",
-        "clab-topo-file": "/root/wcni-kind/split/netenv/4-adv-netwotk/22-BGP/2-EBGP/clab.yaml",
+        "clab-topo-file": "/root/wcni-kind/LabasCode/netenv/4-adv-netwotk/26-BGP/2-EBGP/clab.yaml",
         "containerlab": "ebgp"
       }
     }
@@ -131,13 +131,13 @@
       "a": {
         "node": "gw1",
         "interface": "eth12",
-        "mac": "aa:c1:ab:b9:4a:d0",
+        "mac": "aa:c1:ab:b8:f1:a7",
         "peer": "z"
       },
       "z": {
         "node": "gw2",
         "interface": "eth12",
-        "mac": "aa:c1:ab:7d:7e:36",
+        "mac": "aa:c1:ab:99:a7:c1",
         "peer": "a"
       }
     },
@@ -145,13 +145,13 @@
       "a": {
         "node": "gw1",
         "interface": "eth20",
-        "mac": "aa:c1:ab:55:9a:bd",
+        "mac": "aa:c1:ab:82:99:d2",
         "peer": "z"
       },
       "z": {
         "node": "server1",
         "interface": "net0",
-        "mac": "aa:c1:ab:b8:6e:48",
+        "mac": "aa:c1:ab:3c:01:92",
         "peer": "a"
       }
     },
@@ -159,13 +159,13 @@
       "a": {
         "node": "gw2",
         "interface": "eth20",
-        "mac": "aa:c1:ab:fd:4d:c7",
+        "mac": "aa:c1:ab:20:ce:e9",
         "peer": "z"
       },
       "z": {
         "node": "server2",
         "interface": "net0",
-        "mac": "aa:c1:ab:6d:9d:7e",
+        "mac": "aa:c1:ab:0a:75:bc",
         "peer": "a"
       }
     }
