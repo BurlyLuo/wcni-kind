@@ -9,9 +9,9 @@ all:
     linux:
       hosts:
         clab-cilium-bgp-leaf0:
-          ansible_host: 172.20.20.3
+          ansible_host: 172.20.20.4
         clab-cilium-bgp-leaf1:
-          ansible_host: 172.20.20.2
+          ansible_host: 172.20.20.5
         clab-cilium-bgp-server1:
           ansible_host: 
         clab-cilium-bgp-server2:
@@ -21,6 +21,6 @@ all:
         clab-cilium-bgp-server4:
           ansible_host: 
         clab-cilium-bgp-spine0:
-          ansible_host: 172.20.20.4
+          ansible_host: 172.20.20.3
         clab-cilium-bgp-spine1:
-          ansible_host: 172.20.20.5
+          ansible_host: 172.20.20.2
