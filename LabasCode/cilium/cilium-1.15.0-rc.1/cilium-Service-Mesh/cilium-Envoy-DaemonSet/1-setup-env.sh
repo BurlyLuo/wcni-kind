@@ -1,7 +1,7 @@
 #!/bin/bash
 set -v
 # 1.Prepare NoCNI kubernetes environment[Ubuntu 22.04][https://docs.cilium.io/en/v1.15/installation/kind/#install-cilium]
-cat <<EOF | kind create cluster --name=cilium-gwapi-http --image=kindest/node:v1.27.3 --config=-
+cat <<EOF | kind create cluster --name=cilium-envoy-ds --image=kindest/node:v1.27.3 --config=-
 kind: Cluster
 apiVersion: kind.x-k8s.io/v1alpha4
 networking:
@@ -33,7 +33,7 @@ kubectl apply -f https://raw.githubusercontent.com/kubernetes-sigs/gateway-api/v
 # 4.Install CNI[Cilium 1.15.0-rc.1]
 cilium_version=v1.15.0-rc.1
 docker pull quay.io/cilium/cilium:$cilium_version && docker pull quay.io/cilium/operator-generic:$cilium_version
-kind load docker-image quay.io/cilium/cilium:$cilium_version quay.io/cilium/operator-generic:$cilium_version --name cilium-gwapi-http
+kind load docker-image quay.io/cilium/cilium:$cilium_version quay.io/cilium/operator-generic:$cilium_version --name cilium-envoy-ds
 { helm repo add cilium https://helm.cilium.io ; helm repo update; } > /dev/null 2>&1
 
 # Direct Routing Options(--set routingMode=native --set autoDirectNodeRoutes=true --set ipv4NativeRoutingCIDR="10.0.0.0/8")
@@ -43,7 +43,9 @@ kind load docker-image quay.io/cilium/cilium:$cilium_version quay.io/cilium/oper
 
 # 1.0: Envoy enable Options(--set envoy.enabled=true)
 
-helm install cilium cilium/cilium --set k8sServiceHost=$controller_node_ip --set k8sServicePort=6443 --version 1.15.0-rc.1 --namespace kube-system --set image.pullPolicy=IfNotPresent --set debug.enabled=true --set debug.verbose="datapath flow kvstore envoy policy" --set bpf.monitorAggregation=none --set monitor.enabled=true --set ipam.mode=cluster-pool --set cluster.name=cilium-gwapi-http --set kubeProxyReplacement=true --set routingMode=native --set autoDirectNodeRoutes=true --set ipv4NativeRoutingCIDR="10.0.0.0/8" --set gatewayAPI.enabled=true --set l7Proxy=true --set envoy.enabled=true
+helm install cilium cilium/cilium --set k8sServiceHost=$controller_node_ip --set k8sServicePort=6443 --version 1.15.0-rc.1 --namespace kube-system --set image.pullPolicy=IfNotPresent --set debug.enabled=true --set debug.verbose="datapath flow kvstore envoy policy" --set bpf.monitorAggregation=none --set monitor.enabled=true --set ipam.mode=cluster-pool --set cluster.name=cilium-envoy-ds --set kubeProxyReplacement=true --set routingMode=native --set autoDirectNodeRoutes=true --set ipv4NativeRoutingCIDR="10.0.0.0/8" --set gatewayAPI.enabled=true --set l7Proxy=true --set envoy.enabled=true
+
+kubectl apply -f ./2-metallb
 
 # 5. Wait all pods ready
 kubectl wait --timeout=100s --for=condition=Ready=true pods --all -A
@@ -52,6 +54,6 @@ kubectl wait --timeout=100s --for=condition=Ready=true pods --all -A
 kubectl -nkube-system exec -it ds/cilium -- cilium status
 
 # 7. Separate namesapce and cgroup v2 verify [https://github.com/cilium/cilium/pull/16259 && https://docs.cilium.io/en/stable/installation/kind/#install-cilium]
-for container in $(docker ps -a --format "table {{.Names}}" | grep cilium-gwapi-http);do docker exec $container ls -al /proc/self/ns/cgroup;done
+for container in $(docker ps -a --format "table {{.Names}}" | grep cilium-envoy-ds);do docker exec $container ls -al /proc/self/ns/cgroup;done
 mount -l | grep cgroup && docker info | grep "Cgroup Version" | awk '$1=$1'
 
