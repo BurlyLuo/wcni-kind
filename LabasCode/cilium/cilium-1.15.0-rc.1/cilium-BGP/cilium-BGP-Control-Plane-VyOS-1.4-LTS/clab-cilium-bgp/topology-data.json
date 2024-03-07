@@ -6,7 +6,7 @@
       "prefix": "clab",
       "mgmt": {
         "network": "clab",
-        "bridge": "br-28f965dfe696",
+        "bridge": "br-72c7d19b79e2",
         "ipv4-subnet": "172.20.20.0/24",
         "ipv4-gw": "172.20.20.1",
         "ipv6-subnet": "2001:172:20:20::/64",
@@ -34,7 +34,7 @@
       "mgmt-ipv6-prefix-length": 0,
       "mac-address": "",
       "labels": {
-        "clab-mgmt-net-bridge": "br-28f965dfe696",
+        "clab-mgmt-net-bridge": "br-72c7d19b79e2",
         "clab-node-group": "",
         "clab-node-kind": "bridge",
         "clab-node-lab-dir": "/root/wcni-kind/LabasCode/cilium/cilium-1.15.0-rc.1/cilium-BGP/cilium-BGP-Control-Plane-VyOS-1.4-LTS/clab-cilium-bgp/br-leaf0",
@@ -61,7 +61,7 @@
       "mgmt-ipv6-prefix-length": 0,
       "mac-address": "",
       "labels": {
-        "clab-mgmt-net-bridge": "br-28f965dfe696",
+        "clab-mgmt-net-bridge": "br-72c7d19b79e2",
         "clab-node-group": "",
         "clab-node-kind": "bridge",
         "clab-node-lab-dir": "/root/wcni-kind/LabasCode/cilium/cilium-1.15.0-rc.1/cilium-BGP/cilium-BGP-Control-Plane-VyOS-1.4-LTS/clab-cilium-bgp/br-leaf1",
@@ -82,13 +82,13 @@
       "image": "192.168.2.100:5000/vyos/vyos:1.4.9",
       "mgmt-net": "",
       "mgmt-intf": "",
-      "mgmt-ipv4-address": "172.20.20.4",
+      "mgmt-ipv4-address": "172.20.20.3",
       "mgmt-ipv4-prefix-length": 24,
-      "mgmt-ipv6-address": "2001:172:20:20::4",
+      "mgmt-ipv6-address": "2001:172:20:20::3",
       "mgmt-ipv6-prefix-length": 64,
       "mac-address": "",
       "labels": {
-        "clab-mgmt-net-bridge": "br-28f965dfe696",
+        "clab-mgmt-net-bridge": "br-72c7d19b79e2",
         "clab-node-group": "",
         "clab-node-kind": "linux",
         "clab-node-lab-dir": "/root/wcni-kind/LabasCode/cilium/cilium-1.15.0-rc.1/cilium-BGP/cilium-BGP-Control-Plane-VyOS-1.4-LTS/clab-cilium-bgp/leaf0",
@@ -109,13 +109,13 @@
       "image": "192.168.2.100:5000/vyos/vyos:1.4.9",
       "mgmt-net": "",
       "mgmt-intf": "",
-      "mgmt-ipv4-address": "172.20.20.5",
+      "mgmt-ipv4-address": "172.20.20.2",
       "mgmt-ipv4-prefix-length": 24,
-      "mgmt-ipv6-address": "2001:172:20:20::5",
+      "mgmt-ipv6-address": "2001:172:20:20::2",
       "mgmt-ipv6-prefix-length": 64,
       "mac-address": "",
       "labels": {
-        "clab-mgmt-net-bridge": "br-28f965dfe696",
+        "clab-mgmt-net-bridge": "br-72c7d19b79e2",
         "clab-node-group": "",
         "clab-node-kind": "linux",
         "clab-node-lab-dir": "/root/wcni-kind/LabasCode/cilium/cilium-1.15.0-rc.1/cilium-BGP/cilium-BGP-Control-Plane-VyOS-1.4-LTS/clab-cilium-bgp/leaf1",
@@ -142,7 +142,7 @@
       "mgmt-ipv6-prefix-length": 0,
       "mac-address": "",
       "labels": {
-        "clab-mgmt-net-bridge": "br-28f965dfe696",
+        "clab-mgmt-net-bridge": "br-72c7d19b79e2",
         "clab-node-group": "",
         "clab-node-kind": "linux",
         "clab-node-lab-dir": "/root/wcni-kind/LabasCode/cilium/cilium-1.15.0-rc.1/cilium-BGP/cilium-BGP-Control-Plane-VyOS-1.4-LTS/clab-cilium-bgp/server1",
@@ -169,7 +169,7 @@
       "mgmt-ipv6-prefix-length": 0,
       "mac-address": "",
       "labels": {
-        "clab-mgmt-net-bridge": "br-28f965dfe696",
+        "clab-mgmt-net-bridge": "br-72c7d19b79e2",
         "clab-node-group": "",
         "clab-node-kind": "linux",
         "clab-node-lab-dir": "/root/wcni-kind/LabasCode/cilium/cilium-1.15.0-rc.1/cilium-BGP/cilium-BGP-Control-Plane-VyOS-1.4-LTS/clab-cilium-bgp/server2",
@@ -196,7 +196,7 @@
       "mgmt-ipv6-prefix-length": 0,
       "mac-address": "",
       "labels": {
-        "clab-mgmt-net-bridge": "br-28f965dfe696",
+        "clab-mgmt-net-bridge": "br-72c7d19b79e2",
         "clab-node-group": "",
         "clab-node-kind": "linux",
         "clab-node-lab-dir": "/root/wcni-kind/LabasCode/cilium/cilium-1.15.0-rc.1/cilium-BGP/cilium-BGP-Control-Plane-VyOS-1.4-LTS/clab-cilium-bgp/server3",
@@ -223,7 +223,7 @@
       "mgmt-ipv6-prefix-length": 0,
       "mac-address": "",
       "labels": {
-        "clab-mgmt-net-bridge": "br-28f965dfe696",
+        "clab-mgmt-net-bridge": "br-72c7d19b79e2",
         "clab-node-group": "",
         "clab-node-kind": "linux",
         "clab-node-lab-dir": "/root/wcni-kind/LabasCode/cilium/cilium-1.15.0-rc.1/cilium-BGP/cilium-BGP-Control-Plane-VyOS-1.4-LTS/clab-cilium-bgp/server4",
@@ -244,13 +244,13 @@
       "image": "192.168.2.100:5000/vyos/vyos:1.4.9",
       "mgmt-net": "",
       "mgmt-intf": "",
-      "mgmt-ipv4-address": "172.20.20.3",
+      "mgmt-ipv4-address": "172.20.20.5",
       "mgmt-ipv4-prefix-length": 24,
-      "mgmt-ipv6-address": "2001:172:20:20::3",
+      "mgmt-ipv6-address": "2001:172:20:20::5",
       "mgmt-ipv6-prefix-length": 64,
       "mac-address": "",
       "labels": {
-        "clab-mgmt-net-bridge": "br-28f965dfe696",
+        "clab-mgmt-net-bridge": "br-72c7d19b79e2",
         "clab-node-group": "",
         "clab-node-kind": "linux",
         "clab-node-lab-dir": "/root/wcni-kind/LabasCode/cilium/cilium-1.15.0-rc.1/cilium-BGP/cilium-BGP-Control-Plane-VyOS-1.4-LTS/clab-cilium-bgp/spine0",
@@ -271,13 +271,13 @@
       "image": "192.168.2.100:5000/vyos/vyos:1.4.9",
       "mgmt-net": "",
       "mgmt-intf": "",
-      "mgmt-ipv4-address": "172.20.20.2",
+      "mgmt-ipv4-address": "172.20.20.4",
       "mgmt-ipv4-prefix-length": 24,
-      "mgmt-ipv6-address": "2001:172:20:20::2",
+      "mgmt-ipv6-address": "2001:172:20:20::4",
       "mgmt-ipv6-prefix-length": 64,
       "mac-address": "",
       "labels": {
-        "clab-mgmt-net-bridge": "br-28f965dfe696",
+        "clab-mgmt-net-bridge": "br-72c7d19b79e2",
         "clab-node-group": "",
         "clab-node-kind": "linux",
         "clab-node-lab-dir": "/root/wcni-kind/LabasCode/cilium/cilium-1.15.0-rc.1/cilium-BGP/cilium-BGP-Control-Plane-VyOS-1.4-LTS/clab-cilium-bgp/spine1",
@@ -293,13 +293,13 @@
       "a": {
         "node": "br-leaf0",
         "interface": "br-leaf0-net0",
-        "mac": "aa:c1:ab:2e:68:d7",
+        "mac": "aa:c1:ab:b5:33:a2",
         "peer": "z"
       },
       "z": {
         "node": "server1",
         "interface": "net0",
-        "mac": "aa:c1:ab:9a:77:4e",
+        "mac": "aa:c1:ab:7e:a2:e0",
         "peer": "a"
       }
     },
@@ -307,13 +307,13 @@
       "a": {
         "node": "br-leaf0",
         "interface": "br-leaf0-net1",
-        "mac": "aa:c1:ab:58:98:48",
+        "mac": "aa:c1:ab:f2:03:53",
         "peer": "z"
       },
       "z": {
         "node": "server2",
         "interface": "net0",
-        "mac": "aa:c1:ab:e2:2b:50",
+        "mac": "aa:c1:ab:41:c8:1c",
         "peer": "a"
       }
     },
@@ -321,13 +321,13 @@
       "a": {
         "node": "br-leaf1",
         "interface": "br-leaf1-net0",
-        "mac": "aa:c1:ab:b6:d8:96",
+        "mac": "aa:c1:ab:08:39:12",
         "peer": "z"
       },
       "z": {
         "node": "server3",
         "interface": "net0",
-        "mac": "aa:c1:ab:ec:70:f4",
+        "mac": "aa:c1:ab:1b:ef:94",
         "peer": "a"
       }
     },
@@ -335,13 +335,13 @@
       "a": {
         "node": "br-leaf1",
         "interface": "br-leaf1-net1",
-        "mac": "aa:c1:ab:0c:63:f0",
+        "mac": "aa:c1:ab:f2:1b:c7",
         "peer": "z"
       },
       "z": {
         "node": "server4",
         "interface": "net0",
-        "mac": "aa:c1:ab:d3:b1:70",
+        "mac": "aa:c1:ab:71:de:5f",
         "peer": "a"
       }
     },
@@ -349,13 +349,13 @@
       "a": {
         "node": "leaf0",
         "interface": "eth1",
-        "mac": "aa:c1:ab:6a:92:d6",
+        "mac": "aa:c1:ab:7e:ec:af",
         "peer": "z"
       },
       "z": {
         "node": "spine0",
         "interface": "eth1",
-        "mac": "aa:c1:ab:28:0c:d8",
+        "mac": "aa:c1:ab:d8:19:4a",
         "peer": "a"
       }
     },
@@ -363,13 +363,13 @@
       "a": {
         "node": "leaf0",
         "interface": "eth2",
-        "mac": "aa:c1:ab:72:81:44",
+        "mac": "aa:c1:ab:8c:10:02",
         "peer": "z"
       },
       "z": {
         "node": "spine1",
         "interface": "eth1",
-        "mac": "aa:c1:ab:97:57:42",
+        "mac": "aa:c1:ab:c8:1e:7d",
         "peer": "a"
       }
     },
@@ -377,13 +377,13 @@
       "a": {
         "node": "leaf0",
         "interface": "eth3",
-        "mac": "aa:c1:ab:ff:d0:3e",
+        "mac": "aa:c1:ab:49:f6:65",
         "peer": "z"
       },
       "z": {
         "node": "br-leaf0",
         "interface": "br-leaf0-net2",
-        "mac": "aa:c1:ab:3b:e0:8a",
+        "mac": "aa:c1:ab:00:a3:59",
         "peer": "a"
       }
     },
@@ -391,13 +391,13 @@
       "a": {
         "node": "leaf1",
         "interface": "eth1",
-        "mac": "aa:c1:ab:72:50:e5",
+        "mac": "aa:c1:ab:4c:d8:96",
         "peer": "z"
       },
       "z": {
         "node": "spine0",
         "interface": "eth2",
-        "mac": "aa:c1:ab:07:7c:7d",
+        "mac": "aa:c1:ab:9a:7f:43",
         "peer": "a"
       }
     },
@@ -405,13 +405,13 @@
       "a": {
         "node": "leaf1",
         "interface": "eth2",
-        "mac": "aa:c1:ab:cc:83:36",
+        "mac": "aa:c1:ab:1d:e2:5f",
         "peer": "z"
       },
       "z": {
         "node": "spine1",
         "interface": "eth2",
-        "mac": "aa:c1:ab:37:5e:8d",
+        "mac": "aa:c1:ab:b3:5d:aa",
         "peer": "a"
       }
     },
@@ -419,13 +419,13 @@
       "a": {
         "node": "leaf1",
         "interface": "eth3",
-        "mac": "aa:c1:ab:0b:56:67",
+        "mac": "aa:c1:ab:5c:8e:d0",
         "peer": "z"
       },
       "z": {
         "node": "br-leaf1",
         "interface": "br-leaf1-net2",
-        "mac": "aa:c1:ab:b0:94:79",
+        "mac": "aa:c1:ab:88:5e:8e",
         "peer": "a"
       }
     }
