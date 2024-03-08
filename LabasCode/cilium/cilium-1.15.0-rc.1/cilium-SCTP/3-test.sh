@@ -1,6 +1,6 @@
 #/bin/bash
-
 set -v
+# 1. svc sctp
 #expose the svc
 kubectl expose deployment sctp-deployment --port=9999 --type=NodePort >/dev/null 2>&1
 
@@ -15,3 +15,5 @@ apt install -y ncat >/dev/null 2>&1
 
 ncat --sctp $NODE_IP $PORT
 
+# 2. pod to pod sctp
+# kubectl exc -it pod1 -- ncat --sctp $pod2_ip 9999
