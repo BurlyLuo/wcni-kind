@@ -1,0 +1,242 @@
+{
+  "name": "cni-multus",
+  "type": "clab",
+  "clab": {
+    "config": {
+      "prefix": "clab",
+      "mgmt": {
+        "network": "clab",
+        "bridge": "br-66c50c028a4e",
+        "ipv4-subnet": "172.20.20.0/24",
+        "ipv4-gw": "172.20.20.1",
+        "ipv6-subnet": "2001:172:20:20::/64",
+        "ipv6-gw": "2001:172:20:20::1",
+        "mtu": "1500",
+        "external-access": true
+      }
+    }
+  },
+  "nodes": {
+    "br-pool0": {
+      "index": "0",
+      "shortname": "br-pool0",
+      "longname": "clab-cni-multus-br-pool0",
+      "fqdn": "br-pool0.cni-multus.io",
+      "group": "",
+      "labdir": "/root/wcni-kind/LabasCode/multus/6-kind-multus-macvlan-vyos/clab-cni-multus/br-pool0",
+      "kind": "bridge",
+      "image": "",
+      "mgmt-net": "",
+      "mgmt-intf": "",
+      "mgmt-ipv4-address": "",
+      "mgmt-ipv4-prefix-length": 0,
+      "mgmt-ipv6-address": "",
+      "mgmt-ipv6-prefix-length": 0,
+      "mac-address": "",
+      "labels": {
+        "clab-mgmt-net-bridge": "br-66c50c028a4e",
+        "clab-node-group": "",
+        "clab-node-kind": "bridge",
+        "clab-node-lab-dir": "/root/wcni-kind/LabasCode/multus/6-kind-multus-macvlan-vyos/clab-cni-multus/br-pool0",
+        "clab-node-name": "br-pool0",
+        "clab-node-type": "",
+        "clab-topo-file": "/root/wcni-kind/LabasCode/multus/6-kind-multus-macvlan-vyos/clab.yaml",
+        "containerlab": "cni-multus"
+      }
+    },
+    "br-pool1": {
+      "index": "1",
+      "shortname": "br-pool1",
+      "longname": "clab-cni-multus-br-pool1",
+      "fqdn": "br-pool1.cni-multus.io",
+      "group": "",
+      "labdir": "/root/wcni-kind/LabasCode/multus/6-kind-multus-macvlan-vyos/clab-cni-multus/br-pool1",
+      "kind": "bridge",
+      "image": "",
+      "mgmt-net": "",
+      "mgmt-intf": "",
+      "mgmt-ipv4-address": "",
+      "mgmt-ipv4-prefix-length": 0,
+      "mgmt-ipv6-address": "",
+      "mgmt-ipv6-prefix-length": 0,
+      "mac-address": "",
+      "labels": {
+        "clab-mgmt-net-bridge": "br-66c50c028a4e",
+        "clab-node-group": "",
+        "clab-node-kind": "bridge",
+        "clab-node-lab-dir": "/root/wcni-kind/LabasCode/multus/6-kind-multus-macvlan-vyos/clab-cni-multus/br-pool1",
+        "clab-node-name": "br-pool1",
+        "clab-node-type": "",
+        "clab-topo-file": "/root/wcni-kind/LabasCode/multus/6-kind-multus-macvlan-vyos/clab.yaml",
+        "containerlab": "cni-multus"
+      }
+    },
+    "server1": {
+      "index": "2",
+      "shortname": "server1",
+      "longname": "clab-cni-multus-server1",
+      "fqdn": "server1.cni-multus.io",
+      "group": "",
+      "labdir": "/root/wcni-kind/LabasCode/multus/6-kind-multus-macvlan-vyos/clab-cni-multus/server1",
+      "kind": "linux",
+      "image": "192.168.2.100:5000/nettool",
+      "mgmt-net": "",
+      "mgmt-intf": "",
+      "mgmt-ipv4-address": "",
+      "mgmt-ipv4-prefix-length": 0,
+      "mgmt-ipv6-address": "",
+      "mgmt-ipv6-prefix-length": 0,
+      "mac-address": "",
+      "labels": {
+        "clab-mgmt-net-bridge": "br-66c50c028a4e",
+        "clab-node-group": "",
+        "clab-node-kind": "linux",
+        "clab-node-lab-dir": "/root/wcni-kind/LabasCode/multus/6-kind-multus-macvlan-vyos/clab-cni-multus/server1",
+        "clab-node-name": "server1",
+        "clab-node-type": "",
+        "clab-topo-file": "/root/wcni-kind/LabasCode/multus/6-kind-multus-macvlan-vyos/clab.yaml",
+        "containerlab": "cni-multus"
+      }
+    },
+    "server2": {
+      "index": "3",
+      "shortname": "server2",
+      "longname": "clab-cni-multus-server2",
+      "fqdn": "server2.cni-multus.io",
+      "group": "",
+      "labdir": "/root/wcni-kind/LabasCode/multus/6-kind-multus-macvlan-vyos/clab-cni-multus/server2",
+      "kind": "linux",
+      "image": "192.168.2.100:5000/nettool",
+      "mgmt-net": "",
+      "mgmt-intf": "",
+      "mgmt-ipv4-address": "",
+      "mgmt-ipv4-prefix-length": 0,
+      "mgmt-ipv6-address": "",
+      "mgmt-ipv6-prefix-length": 0,
+      "mac-address": "",
+      "labels": {
+        "clab-mgmt-net-bridge": "br-66c50c028a4e",
+        "clab-node-group": "",
+        "clab-node-kind": "linux",
+        "clab-node-lab-dir": "/root/wcni-kind/LabasCode/multus/6-kind-multus-macvlan-vyos/clab-cni-multus/server2",
+        "clab-node-name": "server2",
+        "clab-node-type": "",
+        "clab-topo-file": "/root/wcni-kind/LabasCode/multus/6-kind-multus-macvlan-vyos/clab.yaml",
+        "containerlab": "cni-multus"
+      }
+    },
+    "server3": {
+      "index": "4",
+      "shortname": "server3",
+      "longname": "clab-cni-multus-server3",
+      "fqdn": "server3.cni-multus.io",
+      "group": "",
+      "labdir": "/root/wcni-kind/LabasCode/multus/6-kind-multus-macvlan-vyos/clab-cni-multus/server3",
+      "kind": "linux",
+      "image": "192.168.2.100:5000/nettool",
+      "mgmt-net": "",
+      "mgmt-intf": "",
+      "mgmt-ipv4-address": "",
+      "mgmt-ipv4-prefix-length": 0,
+      "mgmt-ipv6-address": "",
+      "mgmt-ipv6-prefix-length": 0,
+      "mac-address": "",
+      "labels": {
+        "clab-mgmt-net-bridge": "br-66c50c028a4e",
+        "clab-node-group": "",
+        "clab-node-kind": "linux",
+        "clab-node-lab-dir": "/root/wcni-kind/LabasCode/multus/6-kind-multus-macvlan-vyos/clab-cni-multus/server3",
+        "clab-node-name": "server3",
+        "clab-node-type": "",
+        "clab-topo-file": "/root/wcni-kind/LabasCode/multus/6-kind-multus-macvlan-vyos/clab.yaml",
+        "containerlab": "cni-multus"
+      }
+    }
+  },
+  "links": [
+    {
+      "a": {
+        "node": "br-pool0",
+        "interface": "br-pool0-net0",
+        "mac": "aa:c1:ab:91:9a:0a",
+        "peer": "z"
+      },
+      "z": {
+        "node": "server1",
+        "interface": "net1",
+        "mac": "aa:c1:ab:fb:13:a7",
+        "peer": "a"
+      }
+    },
+    {
+      "a": {
+        "node": "br-pool0",
+        "interface": "br-pool0-net1",
+        "mac": "aa:c1:ab:f8:cb:fd",
+        "peer": "z"
+      },
+      "z": {
+        "node": "server2",
+        "interface": "net1",
+        "mac": "aa:c1:ab:2f:e3:22",
+        "peer": "a"
+      }
+    },
+    {
+      "a": {
+        "node": "br-pool0",
+        "interface": "br-pool0-net2",
+        "mac": "aa:c1:ab:0d:36:f0",
+        "peer": "z"
+      },
+      "z": {
+        "node": "server3",
+        "interface": "net1",
+        "mac": "aa:c1:ab:9b:5a:8d",
+        "peer": "a"
+      }
+    },
+    {
+      "a": {
+        "node": "br-pool1",
+        "interface": "br-pool1-net0",
+        "mac": "aa:c1:ab:ee:20:10",
+        "peer": "z"
+      },
+      "z": {
+        "node": "server1",
+        "interface": "net2",
+        "mac": "aa:c1:ab:3b:e5:85",
+        "peer": "a"
+      }
+    },
+    {
+      "a": {
+        "node": "br-pool1",
+        "interface": "br-pool1-net1",
+        "mac": "aa:c1:ab:08:74:99",
+        "peer": "z"
+      },
+      "z": {
+        "node": "server2",
+        "interface": "net2",
+        "mac": "aa:c1:ab:1e:8a:c2",
+        "peer": "a"
+      }
+    },
+    {
+      "a": {
+        "node": "br-pool1",
+        "interface": "br-pool1-net2",
+        "mac": "aa:c1:ab:df:56:12",
+        "peer": "z"
+      },
+      "z": {
+        "node": "server3",
+        "interface": "net2",
+        "mac": "aa:c1:ab:d1:e9:63",
+        "peer": "a"
+      }
+    }
+  ]
+}

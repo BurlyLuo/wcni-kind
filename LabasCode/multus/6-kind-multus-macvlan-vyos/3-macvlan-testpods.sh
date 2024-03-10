@@ -47,21 +47,22 @@ cat <<EOF | kubectl apply -f -
 apiVersion: v1
 kind: Pod
 metadata:
-  name: vyos1
+  name: vyos
   annotations:
     k8s.v1.cni.cncf.io/networks: macvlan-whereabouts-public@eth1, macvlan-whereabouts-private@eth2
 spec:
   containers:
-  - name: nettool
+  - name: vyos
     image: 192.168.2.100:5000/vyos/vyos:1.4.9
     command: ["/sbin/init"]
-    volumeMount:
+    volumeMounts:
     - name: lib-muodules
       mountPath: /lib/modules
     securityContext:
       privileged: true
   volumes:
   - name: lib-muodules
-    hostPath: /lib/modules
+    hostPath:
+      path: /lib/modules
   nodeName: ${worker_node}
 EOF
