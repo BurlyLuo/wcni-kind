@@ -1,0 +1,16 @@
+all:
+  children:
+    bridge:
+      hosts:
+        clab-cni-multus-br-pool0:
+          ansible_host: 
+        clab-cni-multus-br-pool1:
+          ansible_host: 
+    linux:
+      hosts:
+        clab-cni-multus-server1:
+          ansible_host: 
+        clab-cni-multus-server2:
+          ansible_host: 
+        clab-cni-multus-server3:
+          ansible_host: 
