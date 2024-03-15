@@ -29,6 +29,6 @@ for ((ip_id=0; ip_id<${#ip_addresses[@]}; ip_id++)); do
     echo "${ip_addresses[$ip_id]} vm2304$ip_id" >> /etc/hosts
 
     master_ip=${ip_addresses[$ip_id]}
-    k3sup install --ip=$master_ip --user=root --merge --sudo --cluster --k3s-version=v1.27.3+k3s1 --k3s-extra-args "--flannel-backend=none --cluster-cidr=10.244.0.0/16 --disable-network-policy --disable traefik --disable servicelb --node-ip=$master_ip" --local-path $HOME/.kube/config --context=k8s
+    k3sup install --ip=$master_ip --user=root --merge --sudo --cluster --k3s-version=v1.27.3+k3s1 --k3s-extra-args "--flannel-backend=none --cluster-cidr=10.244.0.0/16 --disable-network-policy --disable traefik --disable servicelb --node-ip=$master_ip" --local-path $HOME/.kube/config --context=2304ctx
 done
 
