@@ -1,6 +1,8 @@
 #!/bin/bash
 set -v 
 
+echo "https://docs.cilium.io/en/v1.15/network/servicemesh/mutual-authentication/mutual-authentication-example/"
+
 # 1.0: Make a non-mutual-auth demo
 kubectl apply -f ./mutual-auth/mutual-auth-example.yaml
 kubectl apply -f ./mutual-auth/cnp-without-mutual-auth.yaml
