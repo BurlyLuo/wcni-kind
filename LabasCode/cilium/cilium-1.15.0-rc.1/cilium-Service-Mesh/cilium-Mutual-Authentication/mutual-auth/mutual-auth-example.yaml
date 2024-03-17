@@ -31,7 +31,7 @@ spec:
         app: echo
     spec:
       containers:
-      - image: gcr.io/kubernetes-e2e-test-images/echoserver:2.2
+      - image: 192.168.2.100:5000/kubernetes-e2e-test-images/echoserver:2.2
         name: echo
         ports:
         - containerPort: 8080
@@ -63,3 +63,16 @@ spec:
   containers:
   - name: netshoot
     image: 192.168.2.100:5000/nettool
+
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  labels:
+    app: pod-deny-client
+  name: pod-deny-client
+spec:
+  containers:
+  - name: netshoot
+    image: 192.168.2.100:5000/nettool
+
