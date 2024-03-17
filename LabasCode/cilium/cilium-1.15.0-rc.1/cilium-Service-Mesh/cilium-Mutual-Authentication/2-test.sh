@@ -3,6 +3,10 @@ set -v
 
 echo "https://docs.cilium.io/en/v1.15/network/servicemesh/mutual-authentication/mutual-authentication-example/"
 
+# 0.0: Non CiliumNetworkPolicy Apply.
+kubectl exec -it pod-worker -- curl -s -o /dev/null -w "%{http_code}" http://echo:8080/headers
+kubectl exec -it pod-deny-client -- curl -s -o /dev/null -w "%{http_code}" http://echo:8080/headers
+
 # 1.0: Make a non-mutual-auth demo
 kubectl apply -f ./mutual-auth/mutual-auth-example.yaml
 kubectl apply -f ./mutual-auth/cnp-without-mutual-auth.yaml
@@ -12,12 +16,17 @@ kubectl apply -f ./mutual-auth/cnp-without-mutual-auth.yaml
 # 200
 # kubectl exec -it pod-worker -- curl http://echo:8080/headers-1
 # Access denied
+# kubectl exec -it pod-deny-client -- curl -s -o /dev/null -w "%{http_code}" http://echo:8080/headers
+# Drop(From hubble UI)
 
 # 1.2: with expected path(headers)
 kubectl exec -it pod-worker -- curl -s -o /dev/null -w "%{http_code}" http://echo:8080/headers
 
 # 1.3: with un-expected path(headers-1)
 kubectl exec -it pod-worker -- curl http://echo:8080/headers-1
+
+# 1.4: spec the different client that can't allow to access the target the svc.
+kubectl exec -it pod-deny-client -- curl -s -o /dev/null -w "%{http_code}" http://echo:8080/headers
 
 # 2.0: Enable mutual authentication[kubectl exec -n cilium-spire spire-server-0 -c spire-server -- /opt/spire/bin/spire-server healthcheck]
 kubectl exec -n cilium-spire spire-server-0 -c spire-server -- /opt/spire/bin/spire-server healthcheck
@@ -31,6 +40,9 @@ kubectl exec -it pod-worker -- curl -s -o /dev/null -w "%{http_code}" http://ech
 
 # 2.3: with un-expected path(headers-1)[Enable mutual auth]
 kubectl exec -it pod-worker -- curl http://echo:8080/headers-1
+
+# 2.4: with deny list pod to access the svc
+kubectl exec -it pod-deny-client -- curl -s -o /dev/null -w "%{http_code}" http://echo:8080/headers
 
 # 3.0: Check logs
 echo_pod_node_name=$(kubectl get pods -oname -o wide | grep echo | awk -F " " '{print $7}')
