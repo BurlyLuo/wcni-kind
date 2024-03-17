@@ -46,3 +46,5 @@ kubectl -nkube-system exec -it ds/cilium -- cilium status
 for container in $(docker ps -a --format "table {{.Names}}" | grep ciliumkubeproxy-mutual-auth);do docker exec $container ls -al /proc/self/ns/cgroup;done
 mount -l | grep cgroup && docker info | grep "Cgroup Version" | awk '$1=$1'
 
+# 7. Export Hubble svc:
+kubectl -nkube-system patch svc hubble-ui -p '{"spec": {"type": "NodePort"}}'
