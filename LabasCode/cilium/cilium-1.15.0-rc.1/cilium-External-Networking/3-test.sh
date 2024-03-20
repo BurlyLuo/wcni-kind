@@ -1,8 +1,8 @@
 kubectl create ns egress-access
 kubectl create ns egress-noaccess
 
-kubectl -n egress-access create deployment cni --image=192.168.2.100:5000/nettool
-kubectl -n egress-noaccess create deployment cni --image=192.168.2.100:5000/nettool
+kubectl -n egress-access run cni --image=192.168.2.100:5000/nettool
+kubectl -n egress-noaccess run cni --image=192.168.2.100:5000/nettool
 
 cat <<EOF | kubectl apply -f -
 apiVersion: cilium.io/v2
