@@ -23,7 +23,13 @@ spec:
     interface: eth9
 EOF
 
+kubectl wait --timeout=100s --for=condition=Ready=true pods --all -A
+# egress-access policy
+echo "TEST CILIUM EGRESS GATEWAY"
 kubectl -negress-access exec -it cni -- curl 11.1.8.10
+sleep 1
+echo "test not match cilium policy test_pod conncetion to the ext-client"
+# egress-noaccess 
 kubectl -negress-noaccess exec -it cni -- curl --connect-timeout 2 11.1.8.10
 
 
