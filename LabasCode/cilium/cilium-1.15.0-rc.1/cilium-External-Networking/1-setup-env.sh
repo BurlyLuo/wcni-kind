@@ -27,7 +27,6 @@ kubectl label nodes cilium-egress-gateway-worker2 egress-gw=true
 kubectl label nodes cilium-egress-gateway-worker3 egress-gw=true
 kubectl get nodes -o wide
 
-sleep 5
 ./2-setup-clab.sh
 
 # 3. Install CNI[Cilium 1.15.0-rc.1]
