@@ -9,7 +9,7 @@ topology:
   nodes:
     firewall:
       kind: linux
-      image: 192.168.2.100:5000/vyos/vyos:1.4.7
+      image: 192.168.2.100:5000/vyos/vyos:1.4.9
       cmd: /sbin/init
       binds:
         - /lib/modules:/lib/modules
