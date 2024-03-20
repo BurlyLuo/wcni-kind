@@ -29,7 +29,7 @@ kind: Service
 metadata:
   name: wluo
 spec:
-  type: LoadBalancer
+  type: NodePort
   selector:
     app: wluo
   ports:
