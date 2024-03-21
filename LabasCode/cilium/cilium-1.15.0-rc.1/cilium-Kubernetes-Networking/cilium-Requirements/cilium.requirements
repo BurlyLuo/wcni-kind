@@ -1,0 +1,17 @@
+1. Kubernetes version [https://docs.cilium.io/en/stable/network/kubernetes/requirements/#kubernetes-version]
+
+2. System Requirements [https://docs.cilium.io/en/stable/network/kubernetes/requirements/#system-requirements -> https://docs.cilium.io/en/stable/operations/system_requirements/#admin-system-reqs] https://stackoverflow.com/questions/5392756/what-does-m-mean-in-kernel-configuration-file -> https://www.linuxquestions.org/questions/linux-general-1/boot-config%2A-273853/
+
+Kernel parameters list:
+grep -w CONFIG_NET_SCH_FQ            /boot/config-6.5.0-25-generic
+CONFIG_NET_SCH_INGRESS [https://www.kernelconfig.io/config_net_sch_ingress]
+CONFIG_NET_CLS_BPF [https://www.kernelconfig.io/CONFIG_NET_CLS_BPF]
+CONFIG_CRYPTO_USER_API_HASH [https://www.kernelconfig.io/CONFIG_CRYPTO_USER_API_HASH]
+
+3. Enable CNI in Kubernetes [https://docs.cilium.io/en/stable/network/kubernetes/requirements/#enable-cni-in-kubernetes]
+
+4. Enable automatic node CIDR allocation (Recommended) [https://docs.cilium.io/en/stable/network/kubernetes/requirements/#enable-automatic-node-cidr-allocation-recommended]
+kk get pods kube-controller-manager-flannel-udp-control-plane  -o yaml | grep "allocate-node-cidrs"
+    - --allocate-node-cidrs=true
+ 
+
