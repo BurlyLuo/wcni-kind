@@ -28,3 +28,10 @@ echo "**************************************************************************
 echo "There only one Backend:" $test_pod_ip "for the NodePort Service:" $controller_node_ip:32000
 echo "****************************************************************************"
 
+echo "No available backend pod"
+kubectl taint node $controller_node_name node-role.kubernetes.io/control-plane:NoSchedule
+will_delete_pod=$(kubectl get pods -o wide | grep $controller_node_name | awk -F " " '{print $1}')
+kubectl delete pods $will_delete_pod
+
+echo "Test NodePort Service"
+curl $controller_node_ip:32000
