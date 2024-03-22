@@ -20,6 +20,7 @@ echo "kubectl -nkube-system exec -it $cilium_ds_pod -c cilium-agent -- cilium se
 echo "**********************************************************************************"
 kubectl -nkube-system exec -it $cilium_ds_pod -c cilium-agent -- cilium service list
 
+echo "****************************************************************************"
 echo "kubectl get svc -o yaml wluo -ojsonpath={.spec.externalTrafficPolicy}" 
 kubectl get svc -o yaml wluo -ojsonpath={.spec.externalTrafficPolicy} && echo 
 
