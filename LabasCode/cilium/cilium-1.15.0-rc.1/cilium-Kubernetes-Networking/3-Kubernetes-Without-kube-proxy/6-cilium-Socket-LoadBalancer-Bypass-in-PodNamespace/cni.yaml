@@ -21,6 +21,10 @@ spec:
             valueFrom:
               fieldRef:
                 fieldPath: spec.nodeName
+          - name: NETTOOL_NODE_IP
+            valueFrom:
+              fieldRef:
+                fieldPath: status.hostIP
         securityContext:
           privileged: true
 ---
