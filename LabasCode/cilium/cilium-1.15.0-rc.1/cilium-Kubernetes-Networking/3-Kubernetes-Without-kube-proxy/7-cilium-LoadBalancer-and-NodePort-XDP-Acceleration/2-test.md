@@ -21,6 +21,7 @@ make
 tcpdump -i ens3 -w tcpdump.cap
 
 # 2. Make a test: [FAQ]
+# Flow:                   |---> XDP redirect
 10.241.245.1:xxxx->10.241.245.155:32000->10.241.245.20[PodName: wluo-ntf7w | PodIP: eth0 10.0.2.239/32 | HostIP: 10.241.245.20]
 # curl $controller_node_ip:32000
 curl 10.241.245.155:32000
