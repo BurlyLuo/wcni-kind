@@ -1,6 +1,2 @@
 #!/bin/bash
-controller_node_name=`kubectl get nodes -o wide | grep control-plane | awk -F " " '{print $1}'`
-
-echo "docker exec -it $controller_node_name ip n s"
-docker exec -it $controller_node_name ip n s 
-
+echo "Cilium does not allow external access to ClusterIP SVC by default, you can enable it with bpf.lbExternalClusterIP=true. However, you need to break the relevant routes yourself."
