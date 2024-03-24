@@ -1,4 +1,7 @@
 #/bin/bash
+When managing pods in Kubernetes, Cilium will create a Custom Resource Definition (CRD) of Kind CiliumEndpoint. One CiliumEndpoint is created for each pod managed by Cilium, with the same name and in the same namespace. The CiliumEndpoint objects contain the same information as the json output of cilium-dbg endpoint get under the .status field, but can be fetched for all pods in the cluster. Adding the -o json will export more information about each endpoint. This includes the endpoint’s labels, security identity and the policy in effect on it.
+
+
 [root@wluo 4-cilium-Endpoint-CRD]$ k get ciliumendpoint -o wide 
 NAME         SECURITY IDENTITY   INGRESS ENFORCEMENT   EGRESS ENFORCEMENT   VISIBILITY POLICY   ENDPOINT STATE   IPV4         IPV6
 wluo-mvz4t   48861               <status disabled>     <status disabled>    <status disabled>   ready            10.0.1.200   
