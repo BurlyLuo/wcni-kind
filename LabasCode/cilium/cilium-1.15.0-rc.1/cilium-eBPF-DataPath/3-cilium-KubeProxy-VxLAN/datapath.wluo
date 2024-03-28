@@ -1,0 +1,110 @@
+1. Container to LXC(veth pair)
+[root@wluo]$ k get pods -owide 
+NAME         READY   STATUS    RESTARTS   AGE   IP           NODE                                   NOMINATED NODE   READINESS GATES
+wluo-jc8bd   1/1     Running   0          6h    10.0.0.178   cilium-kubeproxy-vxlan-control-plane   <none>           <none>
+wluo-xqlcc   1/1     Running   0          6h    10.0.2.39    cilium-kubeproxy-vxlan-worker          <none>           <none>
+[root@wluo ~]$ kubectl get nodes -owide
+NAME                                   STATUS   ROLES           AGE   VERSION   INTERNAL-IP   EXTERNAL-IP   OS-IMAGE                         KERNEL-VERSION     CONTAINER-RUNTIME
+cilium-kubeproxy-vxlan-control-plane   Ready    control-plane   23h   v1.27.3   172.18.0.4    <none>        Debian GNU/Linux 11 (bullseye)   6.5.0-26-generic   containerd://1.7.1
+cilium-kubeproxy-vxlan-worker          Ready    <none>          23h   v1.27.3   172.18.0.2    <none>        Debian GNU/Linux 11 (bullseye)   6.5.0-26-generic   containerd://1.7.1
+[root@wluo ~]$ 
+$ k exec -it wluo-jc8bd -- ping -c 1 10.0.2.39
+PING 10.0.2.39 (10.0.2.39): 56 data bytes
+64 bytes from 10.0.2.39: seq=0 ttl=63 time=0.578 ms
+
+# Capture at wluo-jc8bd Pod:
+$ tcpdump -pne -i eth0 icmp
+wluo-jc8bd~$tcpdump -pne -i eth0 
+tcpdump: verbose output suppressed, use -v[v]... for full protocol decode
+listening on eth0, link-type EN10MB (Ethernet), snapshot length 262144 bytes
+02:09:39.666691 e2:11:f9:ee:e2:a7 > 62:dc:dc:22:70:4e, ethertype IPv4 (0x0800), length 98: 10.0.0.178 > 10.0.2.39: ICMP echo request, id 63, seq 0, length 64
+02:09:39.667185 62:dc:dc:22:70:4e > e2:11:f9:ee:e2:a7, ethertype IPv4 (0x0800), length 98: 10.0.2.39 > 10.0.0.178: ICMP echo reply, id 63, seq 0, length 64
+
+2. LXC interface redirect to cilium_vxlan interface
+$ k exec -it wluo-jc8bd -- ip a 
+1: lo: <LOOPBACK,UP,LOWER_UP> mtu 65536 qdisc noqueue state UNKNOWN group default qlen 1000
+    link/loopback 00:00:00:00:00:00 brd 00:00:00:00:00:00
+    inet 127.0.0.1/8 scope host lo
+       valid_lft forever preferred_lft forever
+    inet6 ::1/128 scope host 
+       valid_lft forever preferred_lft forever
+13: eth0@if14: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc noqueue state UP group default qlen 1000
+    link/ether e2:11:f9:ee:e2:a7 brd ff:ff:ff:ff:ff:ff link-netnsid 0
+    inet 10.0.0.178/32 scope global eth0
+       valid_lft forever preferred_lft forever
+    inet6 fe80::e011:f9ff:feee:e2a7/64 scope link 
+       valid_lft forever preferred_lft forever
+
+# LXC interface tc bpf hook[redirect to cilium_vxlan {cil_from_container || https://github.com/cilium/cilium/blob/v1.15.0/bpf/bpf_lxc.c#L1392}]
+$ tc filter show dev lxcd92d2fc9309d ingress
+filter protocol all pref 1 bpf chain 0 
+filter protocol all pref 1 bpf chain 0 handle 0x1 cil_from_container-lxcd92d2fc9309d direct-action not_in_hw id 2832 tag 2fab8c42fde16273 jited
+
+3. Packet forward to cilium_vxlan interface[with orig packet which include the ip, mac,etc.]
+# Capture at cilium-kubeproxy-vxlan-control-plane Node:
+$ tcpdump -pne -i cilium_vxlan icmp 
+root@cilium-kubeproxy-vxlan-control-plane:~# tcpdump -pne -i cilium_vxlan 
+tcpdump: verbose output suppressed, use -v[v]... for full protocol decode
+listening on cilium_vxlan, link-type EN10MB (Ethernet), snapshot length 262144 bytes
+02:09:39.666792 e2:11:f9:ee:e2:a7 > 62:dc:dc:22:70:4e, ethertype IPv4 (0x0800), length 98: 10.0.0.178 > 10.0.2.39: ICMP echo request, id 63, seq 0, length 64
+02:09:39.667091 0a:2a:fc:fc:ee:23 > 0e:6c:89:13:e5:b9, ethertype IPv4 (0x0800), length 98: 10.0.2.39 > 10.0.0.178: ICMP echo reply, id 63, seq 0, length 64
+[Pod orig packet: e2:11:f9:ee:e2:a7 > 62:dc:dc:22:70:4e]          -|
+                                                                   |--> there is no mac changed!
+[cilium_vxlan packet: e2:11:f9:ee:e2:a7 > 62:dc:dc:22:70:4e]      -|
+
+4. cilium_vxlan to VxLAN Encaps. how to get the local and remote VTEP address?
+[ip -d link show cilium_vxlan 
+4: cilium_vxlan: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc noqueue state UNKNOWN mode DEFAULT group default qlen 1000
+    link/ether 26:ba:43:31:94:11 brd ff:ff:ff:ff:ff:ff promiscuity 0 minmtu 68 maxmtu 65535 
+    vxlan external addrgenmode eui64 numtxqueues 1 numrxqueues 1 gso_max_size 65536 gso_max_segs 65535]
+
+1. Read the Cilium SourceCode/bpf.
+2. Query from the cilium pod:
+kk exec -it ds/cilium -- bash 
+root@cilium-kubeproxy-vxlan-control-plane:/home/cilium# cilium bpf tunnel list 
+TUNNEL     VALUE
+10.0.1.0   172.18.0.3:0   
+10.0.2.0   172.18.0.2:0
+# with above logical: it can encaps the vxlan packet:
+tcpdump -pne -i eth0 port 8472
+tcpdump: verbose output suppressed, use -v[v]... for full protocol decode
+listening on eth0, link-type EN10MB (Ethernet), snapshot length 262144 bytes
+02:52:24.958577 02:42:ac:12:00:04 > 02:42:ac:12:00:02, ethertype IPv4 (0x0800), length 148: 172.18.0.4.42008 > 172.18.0.2.8472: OTV, flags [I] (0x08), overlay 0, instance 21845
+e2:11:f9:ee:e2:a7 > 62:dc:dc:22:70:4e, ethertype IPv4 (0x0800), length 98: 10.0.0.178 > 10.0.2.39: ICMP echo request, id 69, seq 0, length 64
+02:52:24.958807 02:42:ac:12:00:02 > 02:42:ac:12:00:04, ethertype IPv4 (0x0800), length 148: 172.18.0.2.42008 > 172.18.0.4.8472: OTV, flags [I] (0x08), overlay 0, instance 7396
+0a:2a:fc:fc:ee:23 > 0e:6c:89:13:e5:b9, ethertype IPv4 (0x0800), length 98: 10.0.2.39 > 10.0.0.178: ICMP echo reply, id 69, seq 0, length 64
+# [*]
+
+[*]Details:[*]
+Frame 9: 148 bytes on wire (1184 bits), 148 bytes captured (1184 bits)
+Ethernet II, Src: KinD_K8S_12:00:04 (02:42:ac:12:00:04), Dst: KinD_K8S_12:00:02 (02:42:ac:12:00:02)
+Internet Protocol Version 4, Src: 172.18.0.4, Dst: 172.18.0.2
+User Datagram Protocol, Src Port: 42008, Dst Port: 8472
+Virtual eXtensible Local Area Network
+    Flags: 0x0800, VXLAN Network ID (VNI)
+    Group Policy ID: 0
+    VXLAN Network Identifier (VNI): 21845
+    Reserved: 0
+Ethernet II, Src: e2:11:f9:ee:e2:a7 (e2:11:f9:ee:e2:a7), Dst: 62:dc:dc:22:70:4e (62:dc:dc:22:70:4e)
+Internet Protocol Version 4, Src: 10.0.0.178, Dst: 10.0.2.39
+Internet Control Message Protocol
+
+Frame 10: 148 bytes on wire (1184 bits), 148 bytes captured (1184 bits)
+Ethernet II, Src: KinD_K8S_12:00:02 (02:42:ac:12:00:02), Dst: KinD_K8S_12:00:04 (02:42:ac:12:00:04)
+Internet Protocol Version 4, Src: 172.18.0.2, Dst: 172.18.0.4
+User Datagram Protocol, Src Port: 42008, Dst Port: 8472
+Virtual eXtensible Local Area Network
+    Flags: 0x0800, VXLAN Network ID (VNI)
+    Group Policy ID: 0
+    VXLAN Network Identifier (VNI): 7396
+    Reserved: 0
+Ethernet II, Src: 0a:2a:fc:fc:ee:23 (0a:2a:fc:fc:ee:23), Dst: 0e:6c:89:13:e5:b9 (0e:6c:89:13:e5:b9)
+Internet Protocol Version 4, Src: 10.0.2.39, Dst: 10.0.0.178
+Internet Control Message Protocol
+[*]
+Above packet is after encapsed:
+Local  IP Address: 172.18.0.4
+Remote IP Address: 172.18.0.2 
+UDP Local  Port: 42008
+UDP Remote Port: 8472
+ICMP Request VNI: 21845 [cilium endpoint list <IDENTITY>]
