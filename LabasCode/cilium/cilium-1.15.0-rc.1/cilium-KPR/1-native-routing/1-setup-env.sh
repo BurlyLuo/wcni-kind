@@ -16,6 +16,7 @@ containerdConfigPatches:
   [plugins."io.containerd.grpc.v1.cri".registry.mirrors."192.168.2.100:5000"]
     endpoint = ["http://192.168.2.100:5000"]
 EOF
+kubectl get nodes | grep cc
 
 # 2. Remove kubernetes node taints
 controller_node_ip=`kubectl get node -o wide --no-headers | grep -E "control-plane|bpf1" | awk -F " " '{print $6}'`
