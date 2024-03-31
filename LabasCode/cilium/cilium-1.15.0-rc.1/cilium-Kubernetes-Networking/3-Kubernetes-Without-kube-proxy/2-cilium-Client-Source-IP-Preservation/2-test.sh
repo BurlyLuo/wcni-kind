@@ -7,7 +7,7 @@ test_pod_ip=$(kubectl get pods -owide | grep $controller_node_name | awk -F " " 
 
 curl $controller_node_ip:32000
 
-cilium_ds_pod=$(for i in $(kubectl -nkube-system get pods -o name | grep -e '^[^-]*-[^-]*$' | awk -F "/" '{print $2}');do kubectl -nkube-system exec -it $i -c cilium-agent -- env | grep $controller_node_name>/dev/null;if [ $? -eq 0  ]; then echo $i;fi;done)
+cilium_ds_pod=$(for i in $(kubectl -nkube-system get pods -o name | grep -e '^[^-]*-[^-]*$' | awk -F "/" '{print $2}');do kubectl -nkube-system exec -it $i -c cilium-agent -- env | grep $controller_node_name>/dev/null;if [ $? -eq 0 ]; then echo $i;fi;done)
 echo $cilium_ds_pod
 
 
@@ -35,3 +35,7 @@ kubectl delete pods $will_delete_pod
 
 echo "Test NodePort Service"
 curl $controller_node_ip:32000
+
+echo "****************************************************************************"
+echo "This is expected. due to there is no available backend pods!"
+echo "****************************************************************************"
