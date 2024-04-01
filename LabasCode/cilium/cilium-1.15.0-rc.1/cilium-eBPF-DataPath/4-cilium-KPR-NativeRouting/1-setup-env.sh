@@ -10,7 +10,6 @@ networking:
 nodes:
   - role: control-plane
   - role: worker
-  - role: worker
 containerdConfigPatches:
 - |-
   [plugins."io.containerd.grpc.v1.cri".registry.mirrors."192.168.2.100:5000"]
@@ -78,3 +77,5 @@ kubectl -nkube-system exec -it ds/cilium -- cilium status
 for container in $(docker ps -a --format "table {{.Names}}" | grep cilium-kpr);do docker exec $container ls -al /proc/self/ns/cgroup;done
 mount -l | grep cgroup && docker info | grep "Cgroup Version" | awk '$1=$1'
 
+# 7. Create Pod and Service
+./2-test.sh
