@@ -77,7 +77,8 @@ root@cilium-kubeproxy-control-plane:~#
 
 
 2. External Client to NodePort Service
+# https://docs.tigera.io/calico/latest/about/kubernetes-training/about-kubernetes-services#load-balancer-services
 *************************************************************************************************************
-cilium KubeProxy NativeRouting DataFlow [clusterIP]: kubectl exec -it client -- curl 10.96.94.95:9495
+cilium KubeProxy NativeRouting DataFlow [clusterIP]: kubectl exec -it client -- curl x.x.x.x
 *************************************************************************************************************
 
