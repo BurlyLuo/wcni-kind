@@ -1,75 +1,101 @@
 1. Pod to ClusterIP Service
 1.1: Pod and Service details:
-[root@wluo 2-cilium-KubeProxy-NativeRouting]$ k get pods -owide 
-NAME     READY   STATUS    RESTARTS   AGE   IP             NODE                             NOMINATED NODE   READINESS GATES
-client   1/1     Running   0          11m   10.244.0.140   cilium-kubeproxy-control-plane   <none>           <none>
-server   1/1     Running   0          11m   10.244.1.16    cilium-kubeproxy-worker          <none>           <none>
-[root@wluo 2-cilium-KubeProxy-NativeRouting]$ k get nodes -o wide 
-NAME                             STATUS   ROLES           AGE   VERSION   INTERNAL-IP   EXTERNAL-IP   OS-IMAGE                         KERNEL-VERSION
-cilium-kubeproxy-control-plane   Ready    control-plane   12m   v1.27.3   172.18.0.3    <none>        Debian GNU/Linux 11 (bullseye)   6.5.0-26-generic 
-cilium-kubeproxy-worker          Ready    <none>          12m   v1.27.3   172.18.0.2    <none>        Debian GNU/Linux 11 (bullseye)   6.5.0-26-generic
-[root@wluo 2-cilium-KubeProxy-NativeRouting]$ k get svc -owide 
-NAME         TYPE        CLUSTER-IP    EXTERNAL-IP   PORT(S)    AGE   SELECTOR
-clientsvc    ClusterIP   10.96.94.94   <none>        9494/TCP   11m   run=client
-serversvc    ClusterIP   10.96.94.95   <none>        9495/TCP   11m   run=server
+[root@wluo 4-cilium-KPR-NativeRouting]$ k get pods -owide 
+NAME     READY   STATUS    RESTARTS   AGE     IP          NODE                       NOMINATED NODE   READINESS GATES
+client   1/1     Running   0          8m25s   10.0.1.76   cilium-kpr-control-plane   <none>           <none>
+server   1/1     Running   0          8m25s   10.0.0.24   cilium-kpr-worker          <none>           <none>
+[root@wluo 4-cilium-KPR-NativeRouting]$ k get nodes -owide 
+NAME                       STATUS   ROLES           AGE     VERSION   INTERNAL-IP   EXTERNAL-IP   OS-IMAGE                         KERNEL-VERSION     CONTAINER-RUNTIME
+cilium-kpr-control-plane   Ready    control-plane   9m45s   v1.27.3   172.18.0.3    <none>        Debian GNU/Linux 11 (bullseye)   6.5.0-26-generic   containerd://1.7.1
+cilium-kpr-worker          Ready    <none>          9m20s   v1.27.3   172.18.0.2    <none>        Debian GNU/Linux 11 (bullseye)   6.5.0-26-generic   containerd://1.7.1
+[root@wluo 4-cilium-KPR-NativeRouting]$ k get svc -owide 
+NAME         TYPE        CLUSTER-IP    EXTERNAL-IP   PORT(S)          AGE     SELECTOR
+clientsvc    NodePort    10.96.94.94   <none>        9494:30494/TCP   8m38s   run=client
+serversvc    NodePort    10.96.94.95   <none>        9495:30495/TCP   8m37s   run=server
+[root@wluo 4-cilium-KPR-NativeRouting]$ 
 
 *************************************************************************************************************
-cilium KubeProxy NativeRouting DataFlow [clusterIP]: kubectl exec -it client -- curl 10.96.94.95:9495
+cilium KPR NativeRouting DataFlow [clusterIP]: kubectl exec -it client -- curl 10.96.94.95:9495
 *************************************************************************************************************
-Flow Logical: https://docs.tigera.io/assets/images/kube-proxy-cluster-ip-da828a9e8ef7c825261c2a87852ed1ac.svg
 1.1: iptables -nt nat -L PREROUTING
-root@cilium-kubeproxy-control-plane:~# iptables -nt nat -L PREROUTING
+iptables -nt nat -L PREROUTING
 Chain PREROUTING (policy ACCEPT)
 target     prot opt source               destination         
 CILIUM_PRE_nat  all  --  0.0.0.0/0            0.0.0.0/0            /* cilium-feeder: CILIUM_PRE_nat */
-KUBE-SERVICES  all  --  0.0.0.0/0            0.0.0.0/0            /* kubernetes service portals */     # 1.1: PREROUTING NAT
 DOCKER_OUTPUT  all  --  0.0.0.0/0            172.18.0.1          
-root@cilium-kubeproxy-control-plane:~# 
+root@cilium-kpr-control-plane:~# 
+*************************************************************************************************************
+There is no KUBE-SVC tables to flow the packet.
+*************************************************************************************************************
 
 1.2: iptables -nt nat -L KUBE-SERVICES
 root@cilium-kubeproxy-control-plane:~# iptables -nt nat -L KUBE-SERVICES
-Chain KUBE-SERVICES (2 references)
-target     prot opt source               destination         
-KUBE-SVC-NPX46M4PTMTKRN6Y  tcp  --  0.0.0.0/0            10.96.0.1            /* default/kubernetes:https cluster IP */ tcp dpt:443
-KUBE-SVC-TCOU7JCQXEZGVUNU  udp  --  0.0.0.0/0            10.96.0.10           /* kube-system/kube-dns:dns cluster IP */ udp dpt:53
-KUBE-SVC-ERIFXISQEP7F7OF4  tcp  --  0.0.0.0/0            10.96.0.10           /* kube-system/kube-dns:dns-tcp cluster IP */ tcp dpt:53
-KUBE-SVC-JD5MR3NA4I4DYORP  tcp  --  0.0.0.0/0            10.96.0.10           /* kube-system/kube-dns:metrics cluster IP */ tcp dpt:9153
-KUBE-SVL-NZTS37XDTDNXGCKJ  tcp  --  0.0.0.0/0            10.96.230.3          /* kube-system/hubble-peer:peer-service cluster IP */ tcp dpt:443
-KUBE-SVC-KCJY4KYQ6LVWE356  tcp  --  0.0.0.0/0            10.96.94.94          /* default/clientsvc cluster IP */ tcp dpt:9494
-KUBE-SVC-SWRT7AX63WBUEU6W  tcp  --  0.0.0.0/0            10.96.94.95          /* default/serversvc cluster IP */ tcp dpt:9495 # 1.2: Match this rule.
-KUBE-NODEPORTS  all  --  0.0.0.0/0            0.0.0.0/0            /* kubernetes service nodeports; NOTE: this must be the last rule in this chain */ ADDRTYPE match dst-type LOCAL
+empty
 
 1.3: iptables -nt nat -L KUBE-SVC-SWRT7AX63WBUEU6W
-root@cilium-kubeproxy-control-plane:~# iptables -nt nat -L KUBE-SVC-SWRT7AX63WBUEU6W
-Chain KUBE-SVC-SWRT7AX63WBUEU6W (1 references)
-target     prot opt source               destination         
-KUBE-MARK-MASQ  tcp  -- !10.244.0.0/16        10.96.94.95          /* default/serversvc cluster IP */ tcp dpt:9495
-KUBE-SEP-Q7ITRINEDXC7ONHS  all  --  0.0.0.0/0            0.0.0.0/0            /* default/serversvc -> 10.244.1.16:9495 */ # 1.3: Match this rule.[Real IP.]
-root@cilium-kubeproxy-control-plane:~# 
+empty
 
-1.4: Capture the packet at eth0:
-$ kubectl exec -it client -- curl 10.96.94.95:9495
-root@cilium-kubeproxy-control-plane:~# tcpdump -pne -i eth0 port 9495
+
+*********How to process the packet about the Service?*********
+
+
+# 1.4: cilium service list
+root@cilium-kpr-control-plane:/home/cilium# cilium service list | grep 10.96.94.95:9495
+8    10.96.94.95:9495   ClusterIP      1 => 10.0.0.24:9495 (active)    
+root@cilium-kpr-control-plane:/home/cilium# 
+
+1.5: Capture packet:
+1.5.1: Capture the packet at eht0[pod client]
+[root@wluo 4-service_datapath]$ k exec -it client bash 
+kubectl exec [POD] [COMMAND] is DEPRECATED and will be removed in a future version. Use kubectl exec [POD] -- [COMMAND] instead.
+client~$curl 10.96.94.95:9495
+server
+[root@wluo 4-cilium-KPR-NativeRouting]$ k exec -it client bash 
+kubectl exec [POD] [COMMAND] is DEPRECATED and will be removed in a future version. Use kubectl exec [POD] -- [COMMAND] instead.
+client~$tcpdump -pne -i eth0
 tcpdump: verbose output suppressed, use -v[v]... for full protocol decode
 listening on eth0, link-type EN10MB (Ethernet), snapshot length 262144 bytes
-09:15:36.860874 02:42:ac:12:00:03 > 02:42:ac:12:00:02, ethertype IPv4 (0x0800), length 74: 10.244.0.140.53574 > 10.244.1.16.9495: Flags [S], seq 2855342963, win 64240, options [mss 1460,sackOK,TS val 699300925 ecr 0,nop,wscale 7], length 0
-09:15:36.861057 02:42:ac:12:00:02 > 02:42:ac:12:00:03, ethertype IPv4 (0x0800), length 74: 10.244.1.16.9495 > 10.244.0.140.53574: Flags [S.], seq 1132229059, ack 2855342964, win 65160, options [mss 1460,sackOK,TS val 3245031956 ecr 699300925,nop,wscale 7], length 0
-09:15:36.861159 02:42:ac:12:00:03 > 02:42:ac:12:00:02, ethertype IPv4 (0x0800), length 66: 10.244.0.140.53574 > 10.244.1.16.9495: Flags [.], ack 1, win 502, options [nop,nop,TS val 699300926 ecr 3245031956], length 0
-09:15:36.861372 02:42:ac:12:00:03 > 02:42:ac:12:00:02, ethertype IPv4 (0x0800), length 146: 10.244.0.140.53574 > 10.244.1.16.9495: Flags [P.], seq 1:81, ack 1, win 502, options [nop,nop,TS val 699300926 ecr 3245031956], length 80
-09:15:36.861497 02:42:ac:12:00:02 > 02:42:ac:12:00:03, ethertype IPv4 (0x0800), length 66: 10.244.1.16.9495 > 10.244.0.140.53574: Flags [.], ack 81, win 509, options [nop,nop,TS val 3245031956 ecr 699300926], length 0
-09:15:36.861813 02:42:ac:12:00:02 > 02:42:ac:12:00:03, ethertype IPv4 (0x0800), length 300: 10.244.1.16.9495 > 10.244.0.140.53574: Flags [P.], seq 1:235, ack 81, win 509, options [nop,nop,TS val 3245031956 ecr 699300926], length 234
-09:15:36.861948 02:42:ac:12:00:03 > 02:42:ac:12:00:02, ethertype IPv4 (0x0800), length 66: 10.244.0.140.53574 > 10.244.1.16.9495: Flags [.], ack 235, win 501, options [nop,nop,TS val 699300927 ecr 3245031956], length 0
-09:15:36.862134 02:42:ac:12:00:02 > 02:42:ac:12:00:03, ethertype IPv4 (0x0800), length 73: 10.244.1.16.9495 > 10.244.0.140.53574: Flags [P.], seq 235:242, ack 81, win 509, options [nop,nop,TS val 3245031957 ecr 699300927], length 7
-09:15:36.862241 02:42:ac:12:00:03 > 02:42:ac:12:00:02, ethertype IPv4 (0x0800), length 66: 10.244.0.140.53574 > 10.244.1.16.9495: Flags [.], ack 242, win 501, options [nop,nop,TS val 699300927 ecr 3245031957], length 0
-09:15:36.862583 02:42:ac:12:00:03 > 02:42:ac:12:00:02, ethertype IPv4 (0x0800), length 66: 10.244.0.140.53574 > 10.244.1.16.9495: Flags [F.], seq 81, ack 242, win 501, options [nop,nop,TS val 699300927 ecr 3245031957], length 0
-09:15:36.862906 02:42:ac:12:00:02 > 02:42:ac:12:00:03, ethertype IPv4 (0x0800), length 66: 10.244.1.16.9495 > 10.244.0.140.53574: Flags [F.], seq 242, ack 82, win 509, options [nop,nop,TS val 3245031957 ecr 699300927], length 0
-09:15:36.863042 02:42:ac:12:00:03 > 02:42:ac:12:00:02, ethertype IPv4 (0x0800), length 66: 10.244.0.140.53574 > 10.244.1.16.9495: Flags [.], ack 243, win 501, options [nop,nop,TS val 699300928 ecr 3245031957], length 0
+06:37:37.163235 42:af:52:c7:bd:ea > 26:99:58:79:a6:66, ethertype IPv4 (0x0800), length 74: 10.0.1.76.46232 > 10.0.0.24.9495: Flags [S], seq 2276620871, win 64240, options [mss 1460,sackOK,TS val 654989525 ecr 0,nop,wscale 7], length 0
+06:37:37.163546 26:99:58:79:a6:66 > 42:af:52:c7:bd:ea, ethertype IPv4 (0x0800), length 74: 10.0.0.24.9495 > 10.0.1.76.46232: Flags [S.], seq 3828752189, ack 2276620872, win 65160, options [mss 1460,sackOK,TS val 4146991257 ecr 654989525,nop,wscale 7], length 0
+06:37:37.163568 42:af:52:c7:bd:ea > 26:99:58:79:a6:66, ethertype IPv4 (0x0800), length 66: 10.0.1.76.46232 > 10.0.0.24.9495: Flags [.], ack 1, win 502, options [nop,nop,TS val 654989525 ecr 4146991257], length 0
+06:37:37.163770 42:af:52:c7:bd:ea > 26:99:58:79:a6:66, ethertype IPv4 (0x0800), length 146: 10.0.1.76.46232 > 10.0.0.24.9495: Flags [P.], seq 1:81, ack 1, win 502, options [nop,nop,TS val 654989525 ecr 4146991257], length 80
+06:37:37.164000 26:99:58:79:a6:66 > 42:af:52:c7:bd:ea, ethertype IPv4 (0x0800), length 66: 10.0.0.24.9495 > 10.0.1.76.46232: Flags [.], ack 81, win 509, options [nop,nop,TS val 4146991257 ecr 654989525], length 0
+06:37:37.164228 26:99:58:79:a6:66 > 42:af:52:c7:bd:ea, ethertype IPv4 (0x0800), length 300: 10.0.0.24.9495 > 10.0.1.76.46232: Flags [P.], seq 1:235, ack 81, win 509, options [nop,nop,TS val 4146991258 ecr 654989525], length 234
+06:37:37.164271 42:af:52:c7:bd:ea > 26:99:58:79:a6:66, ethertype IPv4 (0x0800), length 66: 10.0.1.76.46232 > 10.0.0.24.9495: Flags [.], ack 235, win 501, options [nop,nop,TS val 654989526 ecr 4146991258], length 0
+06:37:37.164617 26:99:58:79:a6:66 > 42:af:52:c7:bd:ea, ethertype IPv4 (0x0800), length 73: 10.0.0.24.9495 > 10.0.1.76.46232: Flags [P.], seq 235:242, ack 81, win 509, options [nop,nop,TS val 4146991258 ecr 654989526], length 7
+06:37:37.164642 42:af:52:c7:bd:ea > 26:99:58:79:a6:66, ethertype IPv4 (0x0800), length 66: 10.0.1.76.46232 > 10.0.0.24.9495: Flags [.], ack 242, win 501, options [nop,nop,TS val 654989526 ecr 4146991258], length 0
+06:37:37.164847 42:af:52:c7:bd:ea > 26:99:58:79:a6:66, ethertype IPv4 (0x0800), length 66: 10.0.1.76.46232 > 10.0.0.24.9495: Flags [F.], seq 81, ack 242, win 501, options [nop,nop,TS val 654989526 ecr 4146991258], length 0
+06:37:37.165293 26:99:58:79:a6:66 > 42:af:52:c7:bd:ea, ethertype IPv4 (0x0800), length 66: 10.0.0.24.9495 > 10.0.1.76.46232: Flags [F.], seq 242, ack 82, win 509, options [nop,nop,TS val 4146991259 ecr 654989526], length 0
+06:37:37.165309 42:af:52:c7:bd:ea > 26:99:58:79:a6:66, ethertype IPv4 (0x0800), length 66: 10.0.1.76.46232 > 10.0.0.24.9495: Flags [.], ack 243, win 501, options [nop,nop,TS val 654989527 ecr 4146991259], length 0
 ^C
 12 packets captured
 12 packets received by filter
 0 packets dropped by kernel
-root@cilium-kubeproxy-control-plane:~# 
+client~$
 
+1.5.2: Capture the packet at eth0[cilium-kpr-control-plane Node]:
+$ docker exec -it cilium-kpr-control-plane curl 10.96.94.95:9495
+[root@wluo 4-service_datapath]$ lo cilium-kpr-control-plane bash 
+root@cilium-kpr-control-plane:~# tcpdump -pne -i eth0 port 9495
+tcpdump: verbose output suppressed, use -v[v]... for full protocol decode
+listening on eth0, link-type EN10MB (Ethernet), snapshot length 262144 bytes
+06:35:28.540957 02:42:ac:12:00:03 > 02:42:ac:12:00:02, ethertype IPv4 (0x0800), length 74: 172.18.0.3.49224 > 10.0.0.24.9495: Flags [S], seq 3249051019, win 64240, options [mss 1460,sackOK,TS val 1620548799 ecr 0,nop,wscale 7], length 0
+06:35:28.541139 02:42:ac:12:00:02 > 02:42:ac:12:00:03, ethertype IPv4 (0x0800), length 74: 10.0.0.24.9495 > 172.18.0.3.49224: Flags [S.], seq 1902902459, ack 3249051020, win 65160, options [mss 1460,sackOK,TS val 3793065972 ecr 1620548799,nop,wscale 7], length 0
+06:35:28.541194 02:42:ac:12:00:03 > 02:42:ac:12:00:02, ethertype IPv4 (0x0800), length 66: 172.18.0.3.49224 > 10.0.0.24.9495: Flags [.], ack 1, win 502, options [nop,nop,TS val 1620548799 ecr 3793065972], length 0
+06:35:28.541349 02:42:ac:12:00:03 > 02:42:ac:12:00:02, ethertype IPv4 (0x0800), length 146: 172.18.0.3.49224 > 10.0.0.24.9495: Flags [P.], seq 1:81, ack 1, win 502, options [nop,nop,TS val 1620548799 ecr 3793065972], length 80
+06:35:28.541464 02:42:ac:12:00:02 > 02:42:ac:12:00:03, ethertype IPv4 (0x0800), length 66: 10.0.0.24.9495 > 172.18.0.3.49224: Flags [.], ack 81, win 509, options [nop,nop,TS val 3793065972 ecr 1620548799], length 0
+06:35:28.541600 02:42:ac:12:00:02 > 02:42:ac:12:00:03, ethertype IPv4 (0x0800), length 300: 10.0.0.24.9495 > 172.18.0.3.49224: Flags [P.], seq 1:235, ack 81, win 509, options [nop,nop,TS val 3793065972 ecr 1620548799], length 234
+06:35:28.541691 02:42:ac:12:00:03 > 02:42:ac:12:00:02, ethertype IPv4 (0x0800), length 66: 172.18.0.3.49224 > 10.0.0.24.9495: Flags [.], ack 235, win 501, options [nop,nop,TS val 1620548799 ecr 3793065972], length 0
+06:35:28.541859 02:42:ac:12:00:02 > 02:42:ac:12:00:03, ethertype IPv4 (0x0800), length 73: 10.0.0.24.9495 > 172.18.0.3.49224: Flags [P.], seq 235:242, ack 81, win 509, options [nop,nop,TS val 3793065972 ecr 1620548799], length 7
+06:35:28.541931 02:42:ac:12:00:03 > 02:42:ac:12:00:02, ethertype IPv4 (0x0800), length 66: 172.18.0.3.49224 > 10.0.0.24.9495: Flags [.], ack 242, win 501, options [nop,nop,TS val 1620548800 ecr 3793065972], length 0
+06:35:28.542162 02:42:ac:12:00:03 > 02:42:ac:12:00:02, ethertype IPv4 (0x0800), length 66: 172.18.0.3.49224 > 10.0.0.24.9495: Flags [F.], seq 81, ack 242, win 501, options [nop,nop,TS val 1620548800 ecr 3793065972], length 0
+06:35:28.542426 02:42:ac:12:00:02 > 02:42:ac:12:00:03, ethertype IPv4 (0x0800), length 66: 10.0.0.24.9495 > 172.18.0.3.49224: Flags [F.], seq 242, ack 82, win 509, options [nop,nop,TS val 3793065973 ecr 1620548800], length 0
+06:35:28.542489 02:42:ac:12:00:03 > 02:42:ac:12:00:02, ethertype IPv4 (0x0800), length 66: 172.18.0.3.49224 > 10.0.0.24.9495: Flags [.], ack 243, win 501, options [nop,nop,TS val 1620548800 ecr 3793065973], length 0
+^C
+12 packets captured
+12 packets received by filter
+0 packets dropped by kernel
+root@cilium-kpr-control-plane:~# 
 
 
 
@@ -79,6 +105,11 @@ root@cilium-kubeproxy-control-plane:~#
 2. External Client to NodePort Service
 # https://docs.tigera.io/calico/latest/about/kubernetes-training/about-kubernetes-services#load-balancer-services
 *************************************************************************************************************
-cilium KubeProxy NativeRouting DataFlow [clusterIP]: kubectl exec -it client -- curl x.x.x.x
+cilium KPR NativeRouting DataFlow [clusterIP]: kubectl exec -it client -- curl 172.18.0.2:30495
 *************************************************************************************************************
+[root@wluo 4-service_datapath]$ kk exec -it ds/cilium -- cilium service list | grep 172.18.0.3:30495
+Defaulted container "cilium-agent" out of: cilium-agent, cilium-monitor, config (init), mount-cgroup (init), apply-sysctl-overwrites (init), mount-bpf-fs (init), clean-cilium-state (init), install-cni-binaries (init)
+9    172.18.0.3:30495   NodePort       1 => 10.0.0.24:9495 (active)    
+[root@wluo 4-service_datapath]$ 
+
 
