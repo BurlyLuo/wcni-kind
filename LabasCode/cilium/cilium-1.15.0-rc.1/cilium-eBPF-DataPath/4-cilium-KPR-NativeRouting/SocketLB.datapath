@@ -1,0 +1,51 @@
+***********************************************************************************
+# Compare with Cilium KubeProxy && cilium KPR-eBPF
+***********************************************************************************
+[root@wluo 4-cilium-KPR-NativeRouting]$ cc
+CURRENT   NAME              CLUSTER           AUTHINFO          NAMESPACE
+*         kind-cilium-kpr   kind-cilium-kpr   kind-cilium-kpr   
+[root@wluo 4-cilium-KPR-NativeRouting]$ sc kind-cilium-kpr
+Switched to context "kind-cilium-kpr".
+[root@wluo 4-cilium-KPR-NativeRouting]$ k get pods -owide 
+NAME     READY   STATUS    RESTARTS   AGE    IP          NODE                       NOMINATED NODE   READINESS GATES
+client   1/1     Running   0          101s   10.0.1.76   cilium-kpr-control-plane   <none>           <none>
+server   1/1     Running   0          101s   10.0.0.24   cilium-kpr-worker          <none>           <none>
+[root@wluo 4-cilium-KPR-NativeRouting]$ k get nodes -owide 
+NAME                       STATUS   ROLES           AGE     VERSION   INTERNAL-IP   EXTERNAL-IP   OS-IMAGE                         KERNEL-VERSION     CONTAINER-RUNTIME
+cilium-kpr-control-plane   Ready    control-plane   2m55s   v1.27.3   172.18.0.3    <none>        Debian GNU/Linux 11 (bullseye)   6.5.0-26-generic   containerd://1.7.1
+cilium-kpr-worker          Ready    <none>          2m30s   v1.27.3   172.18.0.2    <none>        Debian GNU/Linux 11 (bullseye)   6.5.0-26-generic   containerd://1.7.1
+[root@wluo 4-cilium-KPR-NativeRouting]$ 
+
+***********************************************************************************
+Case1: From Client Pod access to the NodePort: 172.18.0.2:30495
+# 1st Packet:    06:22:27.618702 42:af:52:c7:bd:ea > 26:99:58:79:a6:66, ethertype IPv4 (0x0800), length 74: 10.0.1.76.57826 > 10.0.0.24.9495: Flags [S], seq 2939483081, win 64240, options [mss 1460,sackOK,TS val 654079980 ecr 0,nop,wscale 7], length 0
+***********************************************************************************
+[root@wluo 4-cilium-KPR-NativeRouting]$ k exec -it client bash 
+[root@wluo 4-cilium-KPR-NativeRouting]$ k exec -it client bash 
+kubectl exec [POD] [COMMAND] is DEPRECATED and will be removed in a future version. Use kubectl exec [POD] -- [COMMAND] instead.
+client~$curl 172.18.0.2:30495
+server
+client~$
+[root@wluo 4-cilium-KPR-NativeRouting]$ k exec -it client bash 
+kubectl exec [POD] [COMMAND] is DEPRECATED and will be removed in a future version. Use kubectl exec [POD] -- [COMMAND] instead.
+client~$tcpdump -pne -i eth0
+tcpdump: verbose output suppressed, use -v[v]... for full protocol decode
+listening on eth0, link-type EN10MB (Ethernet), snapshot length 262144 bytes
+06:22:27.618702 42:af:52:c7:bd:ea > 26:99:58:79:a6:66, ethertype IPv4 (0x0800), length 74: 10.0.1.76.57826 > 10.0.0.24.9495: Flags [S], seq 2939483081, win 64240, options [mss 1460,sackOK,TS val 654079980 ecr 0,nop,wscale 7], length 0
+06:22:27.619091 26:99:58:79:a6:66 > 42:af:52:c7:bd:ea, ethertype IPv4 (0x0800), length 74: 10.0.0.24.9495 > 10.0.1.76.57826: Flags [S.], seq 3619260168, ack 2939483082, win 65160, options [mss 1460,sackOK,TS val 4146081713 ecr 654079980,nop,wscale 7], length 0
+06:22:27.619120 42:af:52:c7:bd:ea > 26:99:58:79:a6:66, ethertype IPv4 (0x0800), length 66: 10.0.1.76.57826 > 10.0.0.24.9495: Flags [.], ack 1, win 502, options [nop,nop,TS val 654079981 ecr 4146081713], length 0
+06:22:27.619352 42:af:52:c7:bd:ea > 26:99:58:79:a6:66, ethertype IPv4 (0x0800), length 146: 10.0.1.76.57826 > 10.0.0.24.9495: Flags [P.], seq 1:81, ack 1, win 502, options [nop,nop,TS val 654079981 ecr 4146081713], length 80
+06:22:27.619530 26:99:58:79:a6:66 > 42:af:52:c7:bd:ea, ethertype IPv4 (0x0800), length 66: 10.0.0.24.9495 > 10.0.1.76.57826: Flags [.], ack 81, win 509, options [nop,nop,TS val 4146081713 ecr 654079981], length 0
+06:22:27.620080 26:99:58:79:a6:66 > 42:af:52:c7:bd:ea, ethertype IPv4 (0x0800), length 300: 10.0.0.24.9495 > 10.0.1.76.57826: Flags [P.], seq 1:235, ack 81, win 509, options [nop,nop,TS val 4146081713 ecr 654079981], length 234
+06:22:27.620124 42:af:52:c7:bd:ea > 26:99:58:79:a6:66, ethertype IPv4 (0x0800), length 66: 10.0.1.76.57826 > 10.0.0.24.9495: Flags [.], ack 235, win 501, options [nop,nop,TS val 654079982 ecr 4146081713], length 0
+06:22:27.620456 26:99:58:79:a6:66 > 42:af:52:c7:bd:ea, ethertype IPv4 (0x0800), length 73: 10.0.0.24.9495 > 10.0.1.76.57826: Flags [P.], seq 235:242, ack 81, win 509, options [nop,nop,TS val 4146081714 ecr 654079982], length 7
+06:22:27.620492 42:af:52:c7:bd:ea > 26:99:58:79:a6:66, ethertype IPv4 (0x0800), length 66: 10.0.1.76.57826 > 10.0.0.24.9495: Flags [.], ack 242, win 501, options [nop,nop,TS val 654079982 ecr 4146081714], length 0
+06:22:27.620737 42:af:52:c7:bd:ea > 26:99:58:79:a6:66, ethertype IPv4 (0x0800), length 66: 10.0.1.76.57826 > 10.0.0.24.9495: Flags [F.], seq 81, ack 242, win 501, options [nop,nop,TS val 654079982 ecr 4146081714], length 0
+06:22:27.621105 26:99:58:79:a6:66 > 42:af:52:c7:bd:ea, ethertype IPv4 (0x0800), length 66: 10.0.0.24.9495 > 10.0.1.76.57826: Flags [F.], seq 242, ack 82, win 509, options [nop,nop,TS val 4146081715 ecr 654079982], length 0
+06:22:27.621122 42:af:52:c7:bd:ea > 26:99:58:79:a6:66, ethertype IPv4 (0x0800), length 66: 10.0.1.76.57826 > 10.0.0.24.9495: Flags [.], ack 243, win 501, options [nop,nop,TS val 654079983 ecr 4146081715], length 0
+^C
+12 packets captured
+12 packets received by filter
+0 packets dropped by kernel
+client~$
+
