@@ -1,0 +1,18 @@
+root@cilium-ipsec-control-plane:~# ip x s 
+src 10.0.0.135 dst 10.0.1.211
+        proto esp spi 0x00000003 reqid 1 mode tunnel
+        replay-window 0 
+        mark 0xd3e63e00/0xffffff00 output-mark 0xe00/0xffffff00
+        aead rfc4106(gcm(aes)) 0xd6b1d73d67c8787a4b49c6e00f0e2cfd87b2e86f 128
+        lastused 2024-04-05 00:42:38
+        anti-replay context: seq 0x0, oseq 0x1, bitmap 0x00000000
+        sel src 0.0.0.0/0 dst 0.0.0.0/0 
+src 0.0.0.0 dst 10.0.0.135
+        proto esp spi 0x00000003 reqid 1 mode tunnel
+        replay-window 0 
+        mark 0xd00/0xf00 output-mark 0xd00/0xffffff00
+        aead rfc4106(gcm(aes)) 0xd6b1d73d67c8787a4b49c6e00f0e2cfd87b2e86f 128
+        lastused 2024-04-05 00:42:38
+        anti-replay context: seq 0x0, oseq 0x0, bitmap 0x00000000
+        sel src 0.0.0.0/0 dst 0.0.0.0/0 
+root@cilium-ipsec-control-plane:~# 
