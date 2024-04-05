@@ -13,7 +13,6 @@ networking:
 nodes:
   - role: control-plane
   - role: worker
-  - role: worker
         
 containerdConfigPatches:
 - |-
