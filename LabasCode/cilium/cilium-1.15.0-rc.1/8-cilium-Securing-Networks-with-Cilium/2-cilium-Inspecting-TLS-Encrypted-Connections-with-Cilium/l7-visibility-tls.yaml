@@ -10,7 +10,7 @@ spec:
       class: mediabot
   egress:
   - toFQDNs:
-    - matchName: "artii.herokuapp.com"
+    - matchPattern: "*"
     toPorts:
     - ports:
       - port: "443"
