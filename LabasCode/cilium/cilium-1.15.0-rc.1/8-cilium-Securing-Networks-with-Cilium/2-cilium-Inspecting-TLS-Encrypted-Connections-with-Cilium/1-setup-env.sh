@@ -76,6 +76,3 @@ kubectl -nkube-system exec -it ds/cilium -- cilium status
 # 6. Separate namesapce and cgroup v2 verify [https://github.com/cilium/cilium/pull/16259 && https://docs.cilium.io/en/stable/installation/kind/#install-cilium]
 for container in $(docker ps -a --format "table {{.Names}}" | grep cilium-kpr);do docker exec $container ls -al /proc/self/ns/cgroup;done
 mount -l | grep cgroup && docker info | grep "Cgroup Version" | awk '$1=$1'
-
-# 7. Create Pod
-kubectl apply -f dns-sw-app.yaml
