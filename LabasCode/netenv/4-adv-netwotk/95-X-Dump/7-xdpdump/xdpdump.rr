@@ -1,1 +1,23 @@
 xdpdump
+
+https://github.com/xdp-project/xdp-tools/tree/master
+
+apt install clang
+apt --fix-broken install
+apt install clang
+apt install llvm
+apt install pkg-config
+apt install m4
+apt install libelf-dev
+apt install libpcap-dev
+apt-get install -y gcc-multilib
+apt-get install make
+
+wget https://github.com/xdp-project/xdp-tools/releases/download/v1.4.2/xdp-tools-1.4.2.tar.gz
+tar -xzvf xdp-tools-1.4.2.tar.gz
+cd xdp-tools-1.4.2/
+./configure 
+make 
+
+# capture xdp pcap.
+/root/xdp-tools-1.4.2/xdp-dump/xdpdump -i ens3 -w xdpdump.cap
