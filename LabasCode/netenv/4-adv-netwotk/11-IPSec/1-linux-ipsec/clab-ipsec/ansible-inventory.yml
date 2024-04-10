@@ -3,16 +3,16 @@ all:
     linux:
       hosts:
         clab-ipsec-gwx:
-          ansible_host: 172.20.20.8
-        clab-ipsec-ipsec1:
-          ansible_host: 172.20.20.4
-        clab-ipsec-ipsec2:
-          ansible_host: 172.20.20.2
-        clab-ipsec-ipsec3:
           ansible_host: 172.20.20.6
-        clab-ipsec-server1:
-          ansible_host: 172.20.20.7
-        clab-ipsec-server2:
+        clab-ipsec-ipsec1:
           ansible_host: 172.20.20.5
+        clab-ipsec-ipsec2:
+          ansible_host: 172.20.20.8
+        clab-ipsec-ipsec3:
+          ansible_host: 172.20.20.4
+        clab-ipsec-server1:
+          ansible_host: 172.20.20.2
+        clab-ipsec-server2:
+          ansible_host: 172.20.20.7
         clab-ipsec-server3:
           ansible_host: 172.20.20.3
