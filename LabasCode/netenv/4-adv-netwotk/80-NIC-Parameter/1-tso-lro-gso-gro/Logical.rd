@@ -1,5 +1,9 @@
 2039	2024-04-19 17:53:45.929506	10.2.19.94	10.2.148.26	SIP/SDP	2476	5060	9020	131	Request: INVITE sip:18898710139@sha-st.mavenir.com | 
 
+###
+ethtool -K eth0 tso off lro off gso off gro off
+###
+
 Length: 2476
 Frame 2039: 2476 bytes on wire (19808 bits), 2492 bytes captured (19936 bits)
     Encapsulation type: Linux cooked-mode capture v1 (25)
