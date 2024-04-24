@@ -6,7 +6,7 @@
       "prefix": "clab",
       "mgmt": {
         "network": "clab",
-        "bridge": "br-460e5ea9058d",
+        "bridge": "br-36387985494e",
         "ipv4-subnet": "172.20.20.0/24",
         "ipv4-gw": "172.20.20.1",
         "mtu": "1500",
@@ -21,34 +21,7 @@
       "longname": "clab-tcp-mss-mtu-gw1",
       "fqdn": "gw1.tcp-mss-mtu.io",
       "group": "",
-      "labdir": "/root/wcni-kind/split/netenv/4-adv-netwotk/32-tcp-mss-mtu/clab-tcp-mss-mtu/gw1",
-      "kind": "linux",
-      "image": "192.168.2.100:5000/vyos/vyos:1.4.7",
-      "mgmt-net": "",
-      "mgmt-intf": "",
-      "mgmt-ipv4-address": "172.20.20.3",
-      "mgmt-ipv4-prefix-length": 24,
-      "mgmt-ipv6-address": "",
-      "mgmt-ipv6-prefix-length": 0,
-      "mac-address": "",
-      "labels": {
-        "clab-mgmt-net-bridge": "br-460e5ea9058d",
-        "clab-node-group": "",
-        "clab-node-kind": "linux",
-        "clab-node-lab-dir": "/root/wcni-kind/split/netenv/4-adv-netwotk/32-tcp-mss-mtu/clab-tcp-mss-mtu/gw1",
-        "clab-node-name": "gw1",
-        "clab-node-type": "",
-        "clab-topo-file": "/root/wcni-kind/split/netenv/4-adv-netwotk/32-tcp-mss-mtu/clab.yaml",
-        "containerlab": "tcp-mss-mtu"
-      }
-    },
-    "gw2": {
-      "index": "1",
-      "shortname": "gw2",
-      "longname": "clab-tcp-mss-mtu-gw2",
-      "fqdn": "gw2.tcp-mss-mtu.io",
-      "group": "",
-      "labdir": "/root/wcni-kind/split/netenv/4-adv-netwotk/32-tcp-mss-mtu/clab-tcp-mss-mtu/gw2",
+      "labdir": "/root/wcni-kind/LabasCode/netenv/4-adv-netwotk/32-tcp-MSS-MTU/clab-tcp-mss-mtu/gw1",
       "kind": "linux",
       "image": "192.168.2.100:5000/vyos/vyos:1.4.7",
       "mgmt-net": "",
@@ -59,13 +32,40 @@
       "mgmt-ipv6-prefix-length": 0,
       "mac-address": "",
       "labels": {
-        "clab-mgmt-net-bridge": "br-460e5ea9058d",
+        "clab-mgmt-net-bridge": "br-36387985494e",
         "clab-node-group": "",
         "clab-node-kind": "linux",
-        "clab-node-lab-dir": "/root/wcni-kind/split/netenv/4-adv-netwotk/32-tcp-mss-mtu/clab-tcp-mss-mtu/gw2",
+        "clab-node-lab-dir": "/root/wcni-kind/LabasCode/netenv/4-adv-netwotk/32-tcp-MSS-MTU/clab-tcp-mss-mtu/gw1",
+        "clab-node-name": "gw1",
+        "clab-node-type": "",
+        "clab-topo-file": "/root/wcni-kind/LabasCode/netenv/4-adv-netwotk/32-tcp-MSS-MTU/clab.yaml",
+        "containerlab": "tcp-mss-mtu"
+      }
+    },
+    "gw2": {
+      "index": "1",
+      "shortname": "gw2",
+      "longname": "clab-tcp-mss-mtu-gw2",
+      "fqdn": "gw2.tcp-mss-mtu.io",
+      "group": "",
+      "labdir": "/root/wcni-kind/LabasCode/netenv/4-adv-netwotk/32-tcp-MSS-MTU/clab-tcp-mss-mtu/gw2",
+      "kind": "linux",
+      "image": "192.168.2.100:5000/vyos/vyos:1.4.7",
+      "mgmt-net": "",
+      "mgmt-intf": "",
+      "mgmt-ipv4-address": "172.20.20.2",
+      "mgmt-ipv4-prefix-length": 24,
+      "mgmt-ipv6-address": "",
+      "mgmt-ipv6-prefix-length": 0,
+      "mac-address": "",
+      "labels": {
+        "clab-mgmt-net-bridge": "br-36387985494e",
+        "clab-node-group": "",
+        "clab-node-kind": "linux",
+        "clab-node-lab-dir": "/root/wcni-kind/LabasCode/netenv/4-adv-netwotk/32-tcp-MSS-MTU/clab-tcp-mss-mtu/gw2",
         "clab-node-name": "gw2",
         "clab-node-type": "",
-        "clab-topo-file": "/root/wcni-kind/split/netenv/4-adv-netwotk/32-tcp-mss-mtu/clab.yaml",
+        "clab-topo-file": "/root/wcni-kind/LabasCode/netenv/4-adv-netwotk/32-tcp-MSS-MTU/clab.yaml",
         "containerlab": "tcp-mss-mtu"
       }
     },
@@ -75,7 +75,7 @@
       "longname": "clab-tcp-mss-mtu-server1",
       "fqdn": "server1.tcp-mss-mtu.io",
       "group": "",
-      "labdir": "/root/wcni-kind/split/netenv/4-adv-netwotk/32-tcp-mss-mtu/clab-tcp-mss-mtu/server1",
+      "labdir": "/root/wcni-kind/LabasCode/netenv/4-adv-netwotk/32-tcp-MSS-MTU/clab-tcp-mss-mtu/server1",
       "kind": "linux",
       "image": "192.168.2.100:5000/xcni",
       "mgmt-net": "",
@@ -86,13 +86,13 @@
       "mgmt-ipv6-prefix-length": 0,
       "mac-address": "",
       "labels": {
-        "clab-mgmt-net-bridge": "br-460e5ea9058d",
+        "clab-mgmt-net-bridge": "br-36387985494e",
         "clab-node-group": "",
         "clab-node-kind": "linux",
-        "clab-node-lab-dir": "/root/wcni-kind/split/netenv/4-adv-netwotk/32-tcp-mss-mtu/clab-tcp-mss-mtu/server1",
+        "clab-node-lab-dir": "/root/wcni-kind/LabasCode/netenv/4-adv-netwotk/32-tcp-MSS-MTU/clab-tcp-mss-mtu/server1",
         "clab-node-name": "server1",
         "clab-node-type": "",
-        "clab-topo-file": "/root/wcni-kind/split/netenv/4-adv-netwotk/32-tcp-mss-mtu/clab.yaml",
+        "clab-topo-file": "/root/wcni-kind/LabasCode/netenv/4-adv-netwotk/32-tcp-MSS-MTU/clab.yaml",
         "containerlab": "tcp-mss-mtu"
       }
     },
@@ -102,24 +102,24 @@
       "longname": "clab-tcp-mss-mtu-server2",
       "fqdn": "server2.tcp-mss-mtu.io",
       "group": "",
-      "labdir": "/root/wcni-kind/split/netenv/4-adv-netwotk/32-tcp-mss-mtu/clab-tcp-mss-mtu/server2",
+      "labdir": "/root/wcni-kind/LabasCode/netenv/4-adv-netwotk/32-tcp-MSS-MTU/clab-tcp-mss-mtu/server2",
       "kind": "linux",
       "image": "192.168.2.100:5000/xcni",
       "mgmt-net": "",
       "mgmt-intf": "",
-      "mgmt-ipv4-address": "172.20.20.2",
+      "mgmt-ipv4-address": "172.20.20.3",
       "mgmt-ipv4-prefix-length": 24,
       "mgmt-ipv6-address": "",
       "mgmt-ipv6-prefix-length": 0,
       "mac-address": "",
       "labels": {
-        "clab-mgmt-net-bridge": "br-460e5ea9058d",
+        "clab-mgmt-net-bridge": "br-36387985494e",
         "clab-node-group": "",
         "clab-node-kind": "linux",
-        "clab-node-lab-dir": "/root/wcni-kind/split/netenv/4-adv-netwotk/32-tcp-mss-mtu/clab-tcp-mss-mtu/server2",
+        "clab-node-lab-dir": "/root/wcni-kind/LabasCode/netenv/4-adv-netwotk/32-tcp-MSS-MTU/clab-tcp-mss-mtu/server2",
         "clab-node-name": "server2",
         "clab-node-type": "",
-        "clab-topo-file": "/root/wcni-kind/split/netenv/4-adv-netwotk/32-tcp-mss-mtu/clab.yaml",
+        "clab-topo-file": "/root/wcni-kind/LabasCode/netenv/4-adv-netwotk/32-tcp-MSS-MTU/clab.yaml",
         "containerlab": "tcp-mss-mtu"
       }
     }
@@ -129,13 +129,13 @@
       "a": {
         "node": "gw1",
         "interface": "eth1",
-        "mac": "aa:c1:ab:38:a8:27",
+        "mac": "aa:c1:ab:d6:df:ee",
         "peer": "z"
       },
       "z": {
         "node": "server1",
         "interface": "net0",
-        "mac": "aa:c1:ab:3d:61:9f",
+        "mac": "aa:c1:ab:2e:88:06",
         "peer": "a"
       }
     },
@@ -143,13 +143,13 @@
       "a": {
         "node": "gw2",
         "interface": "eth1",
-        "mac": "aa:c1:ab:cf:d0:5f",
+        "mac": "aa:c1:ab:18:a6:3a",
         "peer": "z"
       },
       "z": {
         "node": "server2",
         "interface": "net0",
-        "mac": "aa:c1:ab:b7:77:35",
+        "mac": "aa:c1:ab:81:f9:7b",
         "peer": "a"
       }
     },
@@ -157,13 +157,13 @@
       "a": {
         "node": "gw1",
         "interface": "eth2",
-        "mac": "aa:c1:ab:80:3d:af",
+        "mac": "aa:c1:ab:3a:80:74",
         "peer": "z"
       },
       "z": {
         "node": "gw2",
         "interface": "eth2",
-        "mac": "aa:c1:ab:16:61:a4",
+        "mac": "aa:c1:ab:eb:11:a1",
         "peer": "a"
       }
     }
