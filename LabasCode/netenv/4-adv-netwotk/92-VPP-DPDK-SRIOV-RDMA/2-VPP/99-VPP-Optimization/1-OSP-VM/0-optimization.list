@@ -47,5 +47,4 @@ backlog_wait_time 60000
 backlog_wait_time_actual 0
 [root@nbgmavpcrtt12-rtmpu1 ~]# auditctl -e 0
 Error sending enable request (Operation not permitted)
-[root@nbgmavpcrtt12-rtmpu1 ~]# auditctl -s  
 
