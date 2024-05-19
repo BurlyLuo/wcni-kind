@@ -1,0 +1,28 @@
+# Date: 20211021
+[root@k8s-1 ~]# kubectl exec -it sha bash 
+kubectl exec [POD] [COMMAND] is DEPRECATED and will be removed in a future version. Use kubectl exec [POD] -- [COMMAND] instead.
+[root@sha /]# supervisorctl status
+httpd                            RUNNING   pid 35, uptime 9:31:30
+named                            RUNNING   pid 36, uptime 9:31:30
+sshd                             RUNNING   pid 37, uptime 9:31:30
+[root@sha /]# ps -ef 
+UID         PID   PPID  C STIME TTY          TIME CMD
+root          1      0  0 03:05 ?        00:00:00 bash /config/bootstrap.sh
+root         32      1  0 03:05 ?        00:00:06 /usr/bin/python /usr/bin/supervisord -n -c /etc/supervisord.conf
+root         35     32  0 03:05 ?        00:00:01 /usr/sbin/httpd -D FOREGROUND
+named        36     32  0 03:05 ?        00:00:00 /usr/sbin/named -g -u named
+root         37     32  0 03:05 ?        00:00:00 /usr/sbin/sshd -D
+apache       46     35  0 03:05 ?        00:00:00 /usr/sbin/httpd -D FOREGROUND
+apache       47     35  0 03:05 ?        00:00:00 /usr/sbin/httpd -D FOREGROUND
+apache       48     35  0 03:05 ?        00:00:00 /usr/sbin/httpd -D FOREGROUND
+apache       49     35  0 03:05 ?        00:00:00 /usr/sbin/httpd -D FOREGROUND
+apache       50     35  0 03:05 ?        00:00:00 /usr/sbin/httpd -D FOREGROUND
+root         51      0  0 03:05 pts/0    00:00:00 bash
+root       3291      0  0 12:36 pts/1    00:00:00 bash
+root       3308   3291  0 12:36 pts/1    00:00:00 ps -ef
+[root@sha /]#
+
+
+
+
+
