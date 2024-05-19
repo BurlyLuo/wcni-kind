@@ -1,0 +1,89 @@
+# mkdir supervisor
+# cp supervisortools.tgz supervisor
+# cd supervisor 
+# tar -xzvf supervisortools.tgz
+[root@k8s-1 pod2vm]# ls
+circle.yml  container-files  Dockerfile  LICENSE  m12.ci  README.md  UserGuide.YAML
+# view the Dockerfile:
+FROM million12/centos-supervisor
+
+ENV ROOT_PASS=password
+
+RUN \
+    rpm --rebuilddb && yum clean all && \
+    yum install --nogpgcheck -y \
+                                  openssh-server \
+                                  openssh-clients \
+                                  pwgen \
+                                  sudo \
+                                  hostname \
+                                  wget \
+                                  htop \
+                                  iftop \
+                                  vim \
+                                  httpd \
+                                  bind-utils \
+                                  nslookup \
+                                  wget \
+                                  bind \
+                                  epel-release \
+                                  php \
+                                  php-common \
+                                  php-opcache \
+                                  php-mcrypt \
+                                  php-cli \
+                                  php-gd \
+                                  php-curl \
+                                  php-mysql \
+                                  yum-utils \
+                                  tcpdump \
+                                  net-tools \ 
+                                  links && \
+    yum clean all && \
+
+    ssh-keygen -q -b 1024 -N '' -t rsa -f /etc/ssh/ssh_host_rsa_key && \
+    ssh-keygen -q -b 1024 -N '' -t dsa -f /etc/ssh/ssh_host_dsa_key && \
+    ssh-keygen -q -b 521 -N '' -t ecdsa -f /etc/ssh/ssh_host_ecdsa_key && \
+
+    sed -i -r 's/.?UseDNS\syes/UseDNS no/' /etc/ssh/sshd_config && \
+    sed -i -r 's/.?ChallengeResponseAuthentication.+/ChallengeResponseAuthentication no/' /etc/ssh/sshd_config && \
+    sed -i -r 's/.?PermitRootLogin.+/PermitRootLogin yes/' /etc/ssh/sshd_config
+
+COPY container-files /
+
+EXPOSE 22
+
+# if you want to add tools, you can install it with yum. and add it to the Dockerfile file. Like httpd, named(bind-utils) etc..
+
+# if the tools(service) need run with FOREGROUND format, you need add some configuration in the  container-files/etc/supervisor.d/sshd.conf 
+DEMO:
+[root@k8s-1 pod2vm]# cat  container-files/etc/supervisor.d/sshd.conf 
+[program:sshd]
+command=/usr/sbin/sshd -D
+stdout_logfile=/data/logs/sshd.log
+stderr_logfile=/data/logs/sshd.log
+autorestart=true
+
+[program:httpd]
+command=/usr/sbin/httpd -D FOREGROUND
+stdout_logfile=/data/logs/httpd.log
+stderr_logfile=/data/logs/httpd.log
+
+[program:named]
+command=/usr/sbin/named -g -u named
+stdout_logfile=/data/logs/named.log
+stderr_logfile=/data/logs/named.log
+autorestart=true
+
+
+
+# Once cpmpleted, you can build the image by:docker build -t supervisortools:v1 ./      # unde the supervisor 
+
+
+
+
+
+
+
+
+ 
