@@ -1,0 +1,25 @@
+$TTL 1
+$ORIGIN simu-sha-it.mavenir.com.
+@       IN      SOA     ns1.simu-sha-it.mavenir.com. root.ns1.simu-sha-it.mavenir.com. (
+                                203053026  ; serial
+                                3600       ; refresh (1 hour)
+                                900        ; retry (15 minutes)
+                                1209600    ; expire (1 second)
+                                3600       ; minimum (1 hour)
+                                )
+@               IN      NS      ns1
+
+;A
+ns1.simu-sha-it.mavenir.com.             IN      AAAA       fcff:172:16:227::9104
+icscf.simu-sha-it.mavenir.com.           IN      AAAA       fcff:172:16:227::9104
+scscf.simu-sha-it.mavenir.com.           IN      AAAA       fcff:172:16:227::9104
+
+;SRV:
+_sip._udp           IN  SRV  1 1 5060     icscf.simu-sha-it.mavenir.com.
+_sip._udp.scscf       IN  SRV 1 1 5070    scscf.simu-sha-it.mavenir.com.
+
+;NAPTR:
+simu-sha-it.mavenir.com. IN  NAPTR 10 100 "s" "SIP+D2U" "" _sip._udp.simu-sha-it.mavenir.com.
+scscf.simu-sha-it.mavenir.com. IN  NAPTR 10 100 "s" "SIP+D2U" "" _sip._udp.scscf.simu-sha-it.mavenir.com.
+
+

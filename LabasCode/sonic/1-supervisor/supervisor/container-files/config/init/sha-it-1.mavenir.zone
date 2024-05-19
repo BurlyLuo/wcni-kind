@@ -1,0 +1,32 @@
+$TTL 1
+$ORIGIN sha-it-1.mavenir.com.
+@       IN      SOA     ns1.sha-it-1.mavenir.com. root.ns1.sha-it-1.mavenir.com. (
+                                203053026  ; serial
+                                3600       ; refresh (1 hour)
+                                900        ; retry (15 minutes)
+                                1209600    ; expire (1 second)
+                                3600       ; minimum (1 hour)
+                                )
+@               IN      NS      ns1
+
+;DNS For ASBC
+;A
+ns1.sha-it-1.mavenir.com.             IN      AAAA       fcff:172:16:227::9004
+icscf.sha-it-1.mavenir.com.           IN      AAAA       fcff:172:16:227::9104
+scscf.sha-it-1.mavenir.com.           IN      AAAA       fcff:172:16:227::9104
+pcrf.sha-it.mavenir.com.            IN      AAAA       fcff:172:16:227::9104
+simu-sccas.sha-it.mavenir.com.      IN      AAAA       fcff:172:16:227::9104                          
+as2321.sha-it.mavenir.com.          IN      AAAA       fcff:172:16:227::9104
+hss.sha-it.mavenir.com.             IN      AAAA       fcff:172:16:227::abae
+;SRV:
+_sip._udp.sha-it-1.mavenir.com.                       IN  SRV  1 1 5060     icscf.sha-it-1.mavenir.com.
+_sip._udp.simu-sccas            IN  SRV  1 1 5064     simu-sccas.sha-it.mavenir.com.
+_sip._udp.as2321                IN  SRV  1 1 5060     as2321.sha-it.mavenir.com.
+_sip._tcp.hss                   IN  SRV  1 1 3868 hss.sha-it.mavenir.com.
+_sip._udp.hss                   IN  SRV  1 1 3880 hss.sha-it.mavenir.com.
+
+;NAPTR:
+sha-it-1.mavenir.com.          IN  NAPTR 10 100 "s" "SIP+D2U" "" _sip._udp.sha-it-1.mavenir.com.
+simu-sccas.sha-it.mavenir.com. IN  NAPTR 10 100 "s" "SIP+D2U" "" _sip._udp.simu-sccas.sha-it.mavenir.com.
+as2321.sha-it.mavenir.com.     IN  NAPTR 10 100 "s" "SIP+D2U" "" _sip._udp.as2321.sha-it.mavenir.com.
+hss.sha-it.mavenir.com.        IN  NAPTR 10 100 "s" "SIP+D2T" "" _sip._tcp.hss.sha-it.mavenir.com.
