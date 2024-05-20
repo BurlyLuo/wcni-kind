@@ -6,7 +6,7 @@ kubectl apply -f ./calico.yaml
 kubectl wait --timeout=100s --for=condition=Ready=true pods --all -A
 
 # 1.2. disable bgp fullmesh
-cat <<EOF | calicoctl apply -f - 
+cat <<EOF | calicoctl  --allow-version-mismatch apply -f - 
 apiVersion: projectcalico.org/v3
 items:
 - apiVersion: projectcalico.org/v3
@@ -21,7 +21,7 @@ metadata:
 EOF
 
 # 1.3. add() bgp configuration for the nodes
-cat <<EOF | calicoctl apply -f - 
+cat <<EOF | calicoctl  --allow-version-mismatch apply -f - 
 apiVersion: projectcalico.org/v3
 kind: Node
 metadata:
@@ -53,7 +53,7 @@ status:
   - 10.244.0.0/24
 EOF
 
-cat <<EOF | calicoctl apply -f - 
+cat <<EOF | calicoctl  --allow-version-mismatch apply -f - 
 apiVersion: projectcalico.org/v3
 kind: Node
 metadata:
@@ -84,7 +84,7 @@ status:
 EOF
 
 
-cat <<EOF | calicoctl apply -f - 
+cat <<EOF | calicoctl  --allow-version-mismatch apply -f - 
 apiVersion: projectcalico.org/v3
 kind: Node
 metadata:
@@ -115,7 +115,7 @@ status:
 EOF
 
 
-cat <<EOF | calicoctl apply -f - 
+cat <<EOF | calicoctl  --allow-version-mismatch apply -f - 
 apiVersion: projectcalico.org/v3
 kind: Node
 metadata:
@@ -146,7 +146,7 @@ status:
 EOF
 
 # 1.4. peer to leaf0 switch
-cat <<EOF | calicoctl apply -f -
+cat <<EOF | calicoctl  --allow-version-mismatch apply -f -
 apiVersion: projectcalico.org/v3
 kind: BGPPeer
 metadata:
@@ -158,7 +158,7 @@ spec:
 EOF
 
 # 1.5. peer to leaf1 switch
-cat <<EOF | calicoctl apply -f -
+cat <<EOF | calicoctl --allow-version-mismatch  apply -f -
 apiVersion: projectcalico.org/v3
 kind: BGPPeer
 metadata:
