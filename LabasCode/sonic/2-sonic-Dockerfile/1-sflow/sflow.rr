@@ -1,0 +1,323 @@
+admin@sonic:~$ docker exec -it sflow ps -efw 
+UID        PID  PPID  C STIME TTY          TIME CMD
+root         1     0  0 05:47 pts/0    00:00:00 /usr/bin/python /usr/bin/supervisord
+root        19     1  0 05:47 pts/0    00:00:00 python /usr/bin/supervisor-proc-exit-listener
+root        21     1  0 05:47 pts/0    00:00:00 python /usr/bin/port_index_mapper.py
+root        25     1  0 05:47 pts/0    00:00:00 /usr/sbin/rsyslogd -n
+root        31     1  0 05:47 pts/0    00:00:00 /usr/bin/sflowmgrd
+root        90     0  0 05:56 pts/1    00:00:00 ps -efw
+admin@sonic:~$ docker exec -it sflow supervisorctl status
+port_index_mapper                RUNNING   pid 21, uptime 0:08:52
+rsyslogd                         RUNNING   pid 25, uptime 0:08:49
+sflowmgrd                        RUNNING   pid 31, uptime 0:08:45
+start.sh                         EXITED    May 20 05:48 AM
+supervisor-proc-exit-listener    RUNNING   pid 19, uptime 0:08:52              f
+[supervisord]$ docker exec -it sflow cat /etc/supervisor/conf.d/supervisord.conf 
+logfile_maxbytes=1MB
+logfile_backups=2
+nodaemon=true
+
+[eventlistener:supervisor-proc-exit-listener]
+command=/usr/bin/supervisor-proc-exit-listener
+events=PROCESS_STATE_EXITED
+autostart=true
+autorestart=unexpected
+
+[program:start.sh]
+command=/usr/bin/start.sh
+priority=1
+autostart=true
+autorestart=false
+stdout_logfile=syslog
+stderr_logfile=syslog
+
+[program:rsyslogd]
+command=/usr/sbin/rsyslogd -n
+priority=2
+autostart=false
+autorestart=false
+stdout_logfile=syslog
+stderr_logfile=syslog
+
+[program:sflowmgrd]
+command=/usr/bin/sflowmgrd
+priority=3
+autostart=false
+autorestart=false
+stdout_logfile=syslog
+stderr_logfile=syslog
+dependent_startup=true
+dependent_startup_wait_for=rsyslogd:running
+
+[program:port_index_mapper]
+command=/usr/bin/port_index_mapper.py
+priority=3
+autostart=true
+autorestart=true
+stdout_logfile=syslog
+stderr_logfile=syslog
+dependent_startup=true
+dependent_startup_wait_for=rsyslogd:running
+admin@sonic:~$ 
+
+
+
+
+admin@sonic:~$ docker exec -it sflow cat /usr/bin/start.sh
+#!/usr/bin/env bash
+
+rm -f /var/run/rsyslogd.pid
+
+supervisorctl start rsyslogd
+
+supervisorctl start sflowmgrd
+admin@sonic:~$ 
+
+
+admin@sonic:~$ docker exec -it sflow cat /usr/bin/port_index_mapper.py
+#!/usr/bin/env python
+
+import signal
+import sys
+import syslog
+import traceback
+from ctypes import CDLL
+from ctypes.util import find_library
+from swsssdk import SonicV2Connector, port_util
+from swsscommon import swsscommon
+
+SYSLOG_IDENTIFIER = 'port_index_mapper'
+
+
+class PortIndexMapper(object):
+
+    def __init__(self):
+        REDIS_TIMEOUT_MS = 0
+        # Update this list to support more interfaces
+        tbl_lst = [swsscommon.STATE_PORT_TABLE_NAME,
+                   swsscommon.STATE_VLAN_TABLE_NAME]
+        self.appl_db = swsscommon.DBConnector("STATE_DB",
+                                              REDIS_TIMEOUT_MS,
+                                              True)
+
+        self.state_db = SonicV2Connector(host='127.0.0.1')
+        self.state_db.connect(self.state_db.STATE_DB, False)
+        self.sel = swsscommon.Select()
+        self.tlbs = [swsscommon.SubscriberStateTable(self.appl_db, t)
+                     for t in tbl_lst]
+
+        self.cur_interfaces = {}
+        self.libc = CDLL(find_library('c'))
+
+        for t in self.tlbs:
+            self.sel.addSelectable(t)
+
+    def ifname_to_index(self, ifname):
+        ret = self.libc.if_nametoindex(ifname)
+        return ret if ret else None
+
+    def set_port_index_table_entry(self, key, index, ifindex):
+        self.state_db.set(self.state_db.STATE_DB, key, 'index', index)
+        self.state_db.set(self.state_db.STATE_DB, key, 'ifindex', ifindex)
+
+    def update_db(self, ifname, op):
+        index = port_util.get_index_from_str(ifname)
+        if op == 'SET' and index is None:
+            return
+        ifindex = self.ifname_to_index(ifname)
+        if op == 'SET' and ifindex is None:
+            return
+
+        # Check if ifname already exist or if index/ifindex changed due to
+        # syncd restart
+
+        if (ifname in self.cur_interfaces and
+                self.cur_interfaces[ifname] == (index, ifindex)):
+            return
+
+        _hash = '{}|{}'.format('PORT_INDEX_TABLE', ifname)
+
+        if op == 'SET':
+            self.cur_interfaces[ifname] = (index, ifindex)
+            self.set_port_index_table_entry(_hash, str(index), str(ifindex))
+        elif op == 'DEL':
+            del self.cur_interfaces[ifname]
+            self.state_db.delete(self.state_db.STATE_DB, _hash)
+
+    def listen(self):
+        SELECT_TIMEOUT_MS = -1  # Infinite wait
+
+        while True:
+            (state, c) = self.sel.select(SELECT_TIMEOUT_MS)
+            if state == swsscommon.Select.OBJECT:
+                for t in self.tlbs:
+                    (key, op, cfvs) = t.pop()
+                    if op == 'DEL' and key in self.cur_interfaces:
+                        self.update_db(key, op)
+                    elif (op == 'SET' and key != 'PortInitDone' and
+                            key not in self.cur_interfaces):
+                        self.update_db(key, op)
+            elif state == swsscomm.Select.ERROR:
+                syslog.syslog(syslog.LOG_ERR, "Receieved error from select()")
+                break
+
+    def populate(self):
+        SELECT_TIMEOUT_MS = 0
+
+        while True:
+            (state, c) = self.sel.select(SELECT_TIMEOUT_MS)
+            if state == swsscommon.Select.OBJECT:
+                for t in self.tlbs:
+                    (key, op, cfvs) = t.pop()
+                    if key and key != 'PortInitDone':
+                        self.update_db(key, op)
+            else:
+                break
+
+
+def signal_handler(signum, frame):
+    syslog.syslog(syslog.LOG_NOTICE, "got signal %d" % signum)
+    sys.exit(0)
+
+
+def main():
+    port_mapper = PortIndexMapper()
+    port_mapper.populate()
+    port_mapper.listen()
+
+if __name__ == '__main__':
+    rc = 0
+    try:
+        syslog.openlog(SYSLOG_IDENTIFIER)
+        signal.signal(signal.SIGTERM, signal_handler)
+        signal.signal(signal.SIGINT, signal_handler)
+        main()
+    except Exception, e:
+        tb = sys.exc_info()[2]
+        traceback.print_tb(tb)
+        syslog.syslog(syslog.LOG_CRIT, "%s" % str(e))
+        rc = -1
+    finally:
+        syslog.closelog()
+        sys.exit(rc)
+admin@sonic:~$ 
+
+
+
+admin@sonic:~$ docker logs sflow 
+/usr/lib/python2.7/dist-packages/supervisor/options.py:298: UserWarning: Supervisord is running as root and it is searching for its configuration file in default locations (including its current working directory); you probably want to specify a "-c" argument specifying an absolute path to a configuration file for improved security.
+  'Supervisord is running as root and it is searching '
+2024-05-19 10:41:19,203 CRIT Set uid to user 0
+2024-05-19 10:41:19,203 INFO Included extra file "/etc/supervisor/conf.d/supervisord.conf" during parsing
+2024-05-19 10:41:19,244 INFO RPC interface 'supervisor' initialized
+2024-05-19 10:41:19,247 INFO supervisord started with pid 1
+2024-05-19 10:41:20,249 INFO spawned: 'supervisor-proc-exit-listener' with pid 8
+2024-05-19 10:41:20,251 INFO spawned: 'start.sh' with pid 9
+2024-05-19 10:41:20,331 INFO spawned: 'port_index_mapper' with pid 10
+2024-05-19 10:41:21,287 INFO success: supervisor-proc-exit-listener entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2024-05-19 10:41:21,287 INFO success: start.sh entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2024-05-19 10:41:21,287 INFO success: port_index_mapper entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2024-05-19 10:41:23,606 INFO spawned: 'rsyslogd' with pid 15
+2024-05-19 10:41:24,679 INFO success: rsyslogd entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2024-05-19 10:41:26,478 INFO spawned: 'sflowmgrd' with pid 20
+2024-05-19 10:41:27,520 INFO success: sflowmgrd entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2024-05-19 10:41:27,579 INFO exited: start.sh (exit status 0; expected)
+2024-05-19 10:46:58,471 WARN received SIGTERM indicating exit request
+2024-05-19 10:46:58,472 INFO waiting for port_index_mapper, sflowmgrd, rsyslogd, supervisor-proc-exit-listener to die
+2024-05-19 10:46:58,473 WARN stopped: sflowmgrd (terminated by SIGTERM)
+2024-05-19 10:47:01,478 INFO waiting for port_index_mapper, rsyslogd, supervisor-proc-exit-listener to die
+2024-05-19 10:47:04,481 INFO waiting for port_index_mapper, rsyslogd, supervisor-proc-exit-listener to die
+2024-05-19 10:47:07,485 INFO waiting for port_index_mapper, rsyslogd, supervisor-proc-exit-listener to die
+2024-05-19 10:47:08,486 WARN killing 'port_index_mapper' (10) with SIGKILL
+2024-05-19 10:47:08,489 WARN stopped: port_index_mapper (terminated by SIGKILL)
+/usr/lib/python2.7/dist-packages/supervisor/options.py:298: UserWarning: Supervisord is running as root and it is searching for its configuration file in default locations (including its current working directory); you probably want to specify a "-c" argument specifying an absolute path to a configuration file for improved security.
+  'Supervisord is running as root and it is searching '
+2024-05-19 10:48:03,909 CRIT Set uid to user 0
+2024-05-19 10:48:03,931 INFO Included extra file "/etc/supervisor/conf.d/supervisord.conf" during parsing
+Unlinking stale socket /var/run/supervisor.sock
+2024-05-19 10:48:04,400 INFO RPC interface 'supervisor' initialized
+2024-05-19 10:48:04,420 INFO supervisord started with pid 1
+2024-05-19 10:48:05,434 INFO spawned: 'supervisor-proc-exit-listener' with pid 19
+2024-05-19 10:48:05,444 INFO spawned: 'start.sh' with pid 20
+2024-05-19 10:48:05,452 INFO spawned: 'port_index_mapper' with pid 21
+2024-05-19 10:48:05,864 INFO spawned: 'rsyslogd' with pid 24
+2024-05-19 10:48:06,637 INFO success: supervisor-proc-exit-listener entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2024-05-19 10:48:06,641 INFO success: start.sh entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2024-05-19 10:48:06,643 INFO success: port_index_mapper entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2024-05-19 10:48:07,650 INFO success: rsyslogd entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2024-05-19 10:48:09,198 INFO spawned: 'sflowmgrd' with pid 31
+2024-05-19 10:48:10,217 INFO success: sflowmgrd entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2024-05-19 10:48:10,328 INFO exited: start.sh (exit status 0; expected)
+/usr/lib/python2.7/dist-packages/supervisor/options.py:298: UserWarning: Supervisord is running as root and it is searching for its configuration file in default locations (including its current working directory); you probably want to specify a "-c" argument specifying an absolute path to a configuration file for improved security.
+  'Supervisord is running as root and it is searching '
+2024-05-20 06:45:07,943 CRIT Set uid to user 0
+2024-05-20 06:45:07,947 INFO Included extra file "/etc/supervisor/conf.d/supervisord.conf" during parsing
+Unlinking stale socket /var/run/supervisor.sock
+2024-05-20 06:45:08,455 INFO RPC interface 'supervisor' initialized
+2024-05-20 06:45:08,485 INFO supervisord started with pid 1
+2024-05-20 06:45:09,493 INFO spawned: 'supervisor-proc-exit-listener' with pid 19
+2024-05-20 06:45:09,524 INFO spawned: 'start.sh' with pid 20
+2024-05-20 06:45:09,687 INFO spawned: 'port_index_mapper' with pid 21
+2024-05-20 06:45:10,742 INFO success: supervisor-proc-exit-listener entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2024-05-20 06:45:10,758 INFO success: start.sh entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2024-05-20 06:45:10,785 INFO success: port_index_mapper entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2024-05-20 06:45:12,694 INFO spawned: 'rsyslogd' with pid 26
+2024-05-20 06:45:13,711 INFO success: rsyslogd entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2024-05-20 06:45:14,876 INFO spawned: 'sflowmgrd' with pid 31
+2024-05-20 06:45:15,887 INFO success: sflowmgrd entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2024-05-20 06:45:16,007 INFO exited: start.sh (exit status 0; expected)
+/usr/lib/python2.7/dist-packages/supervisor/options.py:298: UserWarning: Supervisord is running as root and it is searching for its configuration file in default locations (including its current working directory); you probably want to specify a "-c" argument specifying an absolute path to a configuration file for improved security.
+  'Supervisord is running as root and it is searching '
+2024-05-20 07:07:24,125 CRIT Set uid to user 0
+2024-05-20 07:07:24,241 INFO Included extra file "/etc/supervisor/conf.d/supervisord.conf" during parsing
+Unlinking stale socket /var/run/supervisor.sock
+2024-05-20 07:07:24,724 INFO RPC interface 'supervisor' initialized
+2024-05-20 07:07:24,747 INFO supervisord started with pid 1
+2024-05-20 07:07:25,756 INFO spawned: 'supervisor-proc-exit-listener' with pid 19
+2024-05-20 07:07:25,773 INFO spawned: 'start.sh' with pid 20
+2024-05-20 07:07:25,793 INFO spawned: 'port_index_mapper' with pid 21
+2024-05-20 07:07:26,836 INFO success: supervisor-proc-exit-listener entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2024-05-20 07:07:26,836 INFO success: start.sh entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2024-05-20 07:07:26,837 INFO success: port_index_mapper entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2024-05-20 07:07:28,515 INFO spawned: 'rsyslogd' with pid 25
+2024-05-20 07:07:29,523 INFO success: rsyslogd entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2024-05-20 07:07:31,471 INFO spawned: 'sflowmgrd' with pid 31
+2024-05-20 07:07:32,496 INFO success: sflowmgrd entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2024-05-20 07:07:32,629 INFO exited: start.sh (exit status 0; expected)
+/usr/lib/python2.7/dist-packages/supervisor/options.py:298: UserWarning: Supervisord is running as root and it is searching for its configuration file in default locations (including its current working directory); you probably want to specify a "-c" argument specifying an absolute path to a configuration file for improved security.
+  'Supervisord is running as root and it is searching '
+2024-05-20 02:08:02,833 CRIT Set uid to user 0
+2024-05-20 02:08:02,846 INFO Included extra file "/etc/supervisor/conf.d/supervisord.conf" during parsing
+Unlinking stale socket /var/run/supervisor.sock
+2024-05-20 02:08:03,404 INFO RPC interface 'supervisor' initialized
+2024-05-20 02:08:03,407 INFO supervisord started with pid 1
+2024-05-20 02:08:04,410 INFO spawned: 'supervisor-proc-exit-listener' with pid 19
+2024-05-20 02:08:04,412 INFO spawned: 'start.sh' with pid 20
+2024-05-20 02:08:04,414 INFO spawned: 'port_index_mapper' with pid 21
+2024-05-20 02:08:05,545 INFO success: supervisor-proc-exit-listener entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2024-05-20 02:08:05,548 INFO success: start.sh entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2024-05-20 02:08:05,548 INFO success: port_index_mapper entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2024-05-20 02:08:06,782 INFO spawned: 'rsyslogd' with pid 26
+2024-05-20 02:08:07,787 INFO success: rsyslogd entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2024-05-20 02:08:09,114 INFO spawned: 'sflowmgrd' with pid 31
+2024-05-20 02:08:10,118 INFO success: sflowmgrd entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2024-05-20 02:08:10,252 INFO exited: start.sh (exit status 0; expected)
+/usr/lib/python2.7/dist-packages/supervisor/options.py:298: UserWarning: Supervisord is running as root and it is searching for its configuration file in default locations (including its current working directory); you probably want to specify a "-c" argument specifying an absolute path to a configuration file for improved security.
+  'Supervisord is running as root and it is searching '
+2024-05-20 05:47:51,265 CRIT Set uid to user 0
+2024-05-20 05:47:51,274 INFO Included extra file "/etc/supervisor/conf.d/supervisord.conf" during parsing
+Unlinking stale socket /var/run/supervisor.sock
+2024-05-20 05:47:51,781 INFO RPC interface 'supervisor' initialized
+2024-05-20 05:47:51,806 INFO supervisord started with pid 1
+2024-05-20 05:47:52,807 INFO spawned: 'supervisor-proc-exit-listener' with pid 19
+2024-05-20 05:47:52,946 INFO spawned: 'start.sh' with pid 20
+2024-05-20 05:47:52,947 INFO spawned: 'port_index_mapper' with pid 21
+2024-05-20 05:47:53,990 INFO success: supervisor-proc-exit-listener entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2024-05-20 05:47:54,001 INFO success: start.sh entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2024-05-20 05:47:54,002 INFO success: port_index_mapper entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2024-05-20 05:47:55,766 INFO spawned: 'rsyslogd' with pid 25
+2024-05-20 05:47:56,782 INFO success: rsyslogd entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2024-05-20 05:47:59,838 INFO spawned: 'sflowmgrd' with pid 31
+2024-05-20 05:48:00,849 INFO success: sflowmgrd entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2024-05-20 05:48:01,061 INFO exited: start.sh (exit status 0; expected)
+admin@sonic:~$ 
