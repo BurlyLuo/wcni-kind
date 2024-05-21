@@ -1,0 +1,251 @@
+admin@sonic:~$ docker exec -it nat ps -efw   
+UID        PID  PPID  C STIME TTY          TIME CMD
+root         1     0  0 May20 pts/0    00:00:15 /usr/bin/python /usr/bin/supervisord
+root        19     1  0 May20 pts/0    00:00:00 python /usr/bin/supervisor-proc-exit-listener
+root        25     1  0 May20 pts/0    00:00:00 /usr/sbin/rsyslogd -n
+root        33     1  0 May20 pts/0    00:00:02 /usr/bin/natmgrd
+root        36     1  0 May20 pts/0    00:01:04 /usr/bin/natsyncd
+root        66     0  0 03:09 pts/1    00:00:00 ps -efw
+admin@sonic:~$ 
+admin@sonic:~$ docker exec -it nat supervisorctl status
+add_default_tables               EXITED    May 20 05:47 AM
+natmgrd                          RUNNING   pid 33, uptime 21:21:53
+natsyncd                         RUNNING   pid 36, uptime 21:21:51
+restore_nat_entries              EXITED    May 20 05:48 AM
+rsyslogd                         RUNNING   pid 25, uptime 21:21:56
+start.sh                         EXITED    May 20 05:48 AM
+supervisor-proc-exit-listener    RUNNING   pid 19, uptime 21:21:58
+admin@sonic:~$ 
+
+docker exec -it nat cat /etc/supervisor/conf.d/supervisord.conf
+admin@sonic:~$ docker exec -it nat cat /etc/supervisor/conf.d/supervisord.conf
+[supervisord]
+logfile_maxbytes=1MB
+logfile_backups=2
+nodaemon=true
+
+[eventlistener:supervisor-proc-exit-listener]
+command=/usr/bin/supervisor-proc-exit-listener
+events=PROCESS_STATE_EXITED
+autostart=true
+autorestart=unexpected
+
+[program:start.sh]
+command=/usr/bin/start.sh
+priority=1
+autostart=true
+autorestart=false
+stdout_logfile=syslog
+stderr_logfile=syslog
+
+[program:rsyslogd]
+command=/usr/sbin/rsyslogd -n
+priority=2
+autostart=false
+autorestart=false
+stdout_logfile=syslog
+stderr_logfile=syslog
+
+[program:add_default_tables]
+command=/usr/bin/add_default_tables.py
+priority=3
+autostart=false
+autorestart=false
+startsecs=0
+startretries=0
+stdout_logfile=syslog
+stderr_logfile=syslog
+
+[program:natmgrd]
+command=/usr/bin/natmgrd
+priority=3
+autostart=false
+autorestart=false
+stdout_logfile=syslog
+stderr_logfile=syslog
+
+[program:natsyncd]
+command=/usr/bin/natsyncd
+priority=4
+autostart=false
+autorestart=false
+stdout_logfile=syslog
+stderr_logfile=syslog
+
+[program:restore_nat_entries]
+command=/usr/bin/restore_nat_entries.py
+priority=5
+autostart=false
+autorestart=false
+startsecs=0
+startretries=0
+stdout_logfile=syslog
+stderr_logfile=syslog
+
+admin@sonic:~$ 
+
+admin@sonic:~$ docker exec -it nat cat /usr/bin/start.sh
+#!/usr/bin/env bash
+
+rm -f /var/run/rsyslogd.pid
+rm -f /var/run/nat/*
+
+mkdir -p /var/warmboot/nat
+
+supervisorctl start rsyslogd
+
+supervisorctl start add_default_tables
+
+supervisorctl start natmgrd
+
+supervisorctl start natsyncd
+
+supervisorctl start restore_nat_entries
+
+admin@sonic:~$ 
+
+admin@sonic:~$ docker exec -it nat cat /usr/bin/add_default_tables.py
+#!/usr/bin/env python
+
+import swsssdk
+
+def add_global_table(config_db):
+    info = {}
+    global_data = config_db.get_entry('NAT_GLOBAL', 'Values')
+
+    if global_data:
+       if 'admin_mode' not in global_data:
+           info['admin_mode'] = 'disabled'
+       if 'nat_timeout' not in global_data:
+           info['nat_timeout'] = '600'
+       if 'nat_tcp_timeout' not in global_data:
+           info['nat_tcp_timeout'] = '86400'
+       if 'nat_udp_timeout' not in global_data:
+           info['nat_udp_timeout'] = '300'
+
+       if info != {}:
+           config_db.mod_entry('NAT_GLOBAL', 'Values', info)
+    else:
+       info['admin_mode'] = 'disabled'
+       info['nat_timeout'] = '600'
+       info['nat_tcp_timeout'] = '86400'
+       info['nat_udp_timeout'] = '300'
+       config_db.mod_entry('NAT_GLOBAL', 'Values', info) 
+
+def main():
+    config_db = swsssdk.ConfigDBConnector()
+    config_db.connect()
+    add_global_table(config_db)
+
+if __name__ == '__main__':
+    main()
+
+admin@sonic:~$
+
+
+admin@sonic:~$ docker exec -it nat cat /usr/bin/restore_nat_entries.py
+#!/usr/bin/env python
+
+""""
+Description: restore_nat_entries.py -- restoring nat entries table into kernel during system warm reboot.
+    The script is started by supervisord in nat docker when the docker is started.
+    It does not do anything in case neither system nor nat warm restart is enabled.
+    In case nat warm restart enabled only, it sets the stateDB flag so natsyncd can continue
+    the reconciation process.
+    In case system warm reboot is enabled, it will try to restore the nat entries table into kernel
+    , then it sets the stateDB flag for natsyncd to continue the
+    reconciliation process.
+"""
+
+import sys
+import subprocess
+import swsssdk
+from swsscommon import swsscommon
+import logging
+import logging.handlers
+import re
+import os
+
+WARM_BOOT_FILE_DIR = '/var/warmboot/nat/'
+NAT_WARM_BOOT_FILE = 'nat_entries.dump'
+IP_PROTO_TCP       = '6'
+
+MATCH_CONNTRACK_ENTRY = '^(\w+)\s+(\d+).*src=([\d.]+)\s+dst=([\d.]+)\s+sport=(\d+)\s+dport=(\d+).*src=([\d.]+)\s+dst=([\d.]+)\s+sport=(\d+)\s+dport=(\d+)'
+
+logger = logging.getLogger(__name__)
+logger.setLevel(logging.INFO)
+handler = logging.handlers.SysLogHandler(address = '/dev/log')
+logger.addHandler(handler)
+
+def add_nat_conntrack_entry_in_kernel(ipproto, srcip, dstip, srcport, dstport, natsrcip, natdstip, natsrcport, natdstport):
+    # pyroute2 doesn't have support for adding conntrack entries via netlink yet. So, invoking the conntrack utility to add the entries.
+    state = ''
+    if (ipproto == IP_PROTO_TCP):
+        state = ' --state ESTABLISHED '
+    ctcmd = 'conntrack -I -n ' + natdstip + ':' + natdstport + ' -g ' + natsrcip + ':' + natsrcport + \
+                       ' --protonum ' + ipproto + state + ' --timeout 432000 --src ' + srcip + ' --sport ' + srcport + \
+                       ' --dst ' + dstip + ' --dport ' + dstport + ' -u ASSURED'
+    subprocess.call(ctcmd, shell=True)
+    logger.info("Restored NAT entry: {}".format(ctcmd))
+
+# Set the statedb "NAT_RESTORE_TABLE|Flags", so natsyncd can start reconciliation
+def set_statedb_nat_restore_done():
+    db = swsssdk.SonicV2Connector(host='127.0.0.1')
+    db.connect(db.STATE_DB, False)
+    db.set(db.STATE_DB, 'NAT_RESTORE_TABLE|Flags', 'restored', 'true')
+    db.close(db.STATE_DB)
+    return
+
+# This function is to restore the kernel nat entries based on the saved nat entries.
+def restore_update_kernel_nat_entries(filename):
+    # Read the entries from nat_entries.dump file and add them to kernel
+    conntrack_match_pattern = re.compile(r'{}'.format(MATCH_CONNTRACK_ENTRY))
+    with open(filename, 'r') as fp:
+        for line in fp:
+            ctline = conntrack_match_pattern.findall(line)
+            if not ctline:
+                continue
+            cmdargs = list(ctline.pop(0))
+            proto = cmdargs.pop(0)
+            if proto not in ('tcp', 'udp'):
+               continue
+            add_nat_conntrack_entry_in_kernel(*cmdargs)
+
+def main():
+    logger.info("restore_nat_entries service is started")
+
+    # Use warmstart python binding to check warmstart information
+    warmstart = swsscommon.WarmStart()
+    warmstart.initialize("natsyncd", "nat")
+    warmstart.checkWarmStart("natsyncd", "nat", False)
+
+    # if swss or system warm reboot not enabled, don't run
+    if not warmstart.isWarmStart():
+        logger.info("restore_nat_entries service is skipped as warm restart not enabled")
+        return
+
+    # NAT restart not system warm reboot, set statedb directly
+    if not warmstart.isSystemWarmRebootEnabled():
+        set_statedb_nat_restore_done()
+        logger.info("restore_nat_entries service is done as system warm reboot not enabled")
+        return
+
+    # Program the nat conntrack entries in the kernel by reading the
+    # entries from nat_entries.dump
+    try:
+        restore_update_kernel_nat_entries(WARM_BOOT_FILE_DIR + NAT_WARM_BOOT_FILE)
+    except Exception as e:
+        logger.exception(str(e))
+        sys.exit(1)
+
+    # Remove the dump file after restoration
+    os.remove(WARM_BOOT_FILE_DIR + NAT_WARM_BOOT_FILE) 
+
+    # set statedb to signal other processes like natsyncd
+    set_statedb_nat_restore_done()
+    logger.info("restore_nat_entries service is done for system warmreboot")
+    return
+
+if __name__ == '__main__':
+    main()
+admin@sonic:~$ 
