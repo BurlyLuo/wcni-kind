@@ -1,0 +1,120 @@
+root@sonic:~# docker exec -it lldp  ps -efw
+UID        PID  PPID  C STIME TTY          TIME CMD
+root         1     0  0 May20 pts/0    00:00:17 /usr/bin/python /usr/bin/supervisord
+root        19     1  0 May20 pts/0    00:00:00 python /usr/bin/supervisor-proc-exit-listener
+root        23     1  0 May20 pts/0    00:00:00 /usr/sbin/rsyslogd -n
+root        36     1  0 May20 pts/0    00:00:00 lldpd: monitor. 
+_lldpd      38    36  0 May20 pts/0    00:00:13 lldpd: no neighbor.
+root        42     1  0 May20 pts/0    00:00:13 python2 -m lldp_syncd
+root        48     1  0 May20 pts/0    00:00:01 python /usr/bin/lldpmgrd
+root     17292     0  0 05:47 pts/1    00:00:00 ps -efw
+root@sonic:~# docker exec -it lldp supervisorctl status
+lldp-syncd                       RUNNING   pid 42, uptime 23:59:26
+lldpd                            RUNNING   pid 36, uptime 23:59:27
+lldpmgrd                         RUNNING   pid 48, uptime 23:59:24
+rsyslogd                         RUNNING   pid 23, uptime 23:59:35
+start.sh                         EXITED    May 20 05:48 AM
+supervisor-proc-exit-listener    RUNNING   pid 19, uptime 23:59:38
+root@sonic:~# 
+docker exec -it lldp cat /etc/supervisor/conf.d/supervisord.conf 
+root@sonic:~# docker exec -it lldp cat /etc/supervisor/conf.d/supervisord.conf 
+[supervisord]
+logfile_maxbytes=1MB
+logfile_backups=2
+nodaemon=true
+
+[eventlistener:supervisor-proc-exit-listener]
+command=/usr/bin/supervisor-proc-exit-listener
+events=PROCESS_STATE_EXITED
+autostart=true
+autorestart=unexpected
+
+[program:start.sh]
+command=/usr/bin/start.sh
+priority=1
+autostart=true
+autorestart=false
+stdout_logfile=syslog
+stderr_logfile=syslog
+
+[program:rsyslogd]
+command=/usr/sbin/rsyslogd -n
+priority=2
+autostart=false
+autorestart=false
+stdout_logfile=syslog
+stderr_logfile=syslog
+
+[program:lldpd]
+# https://github.com/vincentbernat/lldpd/commit/9856f2792c301116cc4a3fcfba91b9672ee5db1f
+# - `-d` means to stay in foreground, log to syslog
+# - `-dd` means to stay in foreground, log warnings to console
+# - `-ddd` means to stay in foreground, log warnings and info to console
+# - `-dddd` means to stay in foreground, log all to console
+command=/usr/sbin/lldpd -d -I Ethernet*,eth0 -C eth0
+priority=3
+autostart=false
+autorestart=false
+stdout_logfile=syslog
+stderr_logfile=syslog
+
+[program:lldp-syncd]
+command=/usr/bin/env python2 -m lldp_syncd
+priority=4
+autostart=false
+autorestart=false
+stdout_logfile=syslog
+stderr_logfile=syslog
+
+[program:lldpmgrd]
+command=/usr/bin/lldpmgrd
+priority=5
+autostart=false
+autorestart=false
+stdout_logfile=syslog
+stderr_logfile=syslog
+stopwaitsecs=15
+root@sonic:~# 
+
+
+root@sonic:~# docker exec -it lldp cat /usr/bin/start.sh
+#!/usr/bin/env bash
+
+sonic-cfggen -d -t /usr/share/sonic/templates/lldpd.conf.j2 > /etc/lldpd.conf
+sonic-cfggen -d -y /etc/sonic/sonic_version.yml -t /usr/share/sonic/templates/lldpdSysDescr.conf.j2 >> /etc/lldpd.conf
+
+mkdir -p /var/sonic
+echo "# Config files managed by sonic-config-engine" > /var/sonic/config_status
+
+rm -f /var/run/rsyslogd.pid
+rm -f /var/run/lldpd.socket
+
+supervisorctl start rsyslogd
+supervisorctl start lldpd
+
+# Current lldpd version has a bug.
+# When lldpd starts it is in the pause state by default
+# But then it execute 'lldpcli resume' to configure and unpause itself.
+# When lldpd execute lldpcli, it doesn't check the return code
+# Sometimes lldpcli returns failure, but lldpd doesn't catch it
+# and keeps working paused and unconfigured
+#
+# The fix below addresses the issue.
+#
+
+# wait until lldpd started
+until [[ -e /var/run/lldpd.socket ]];
+do
+    sleep 1;
+done
+
+# Manually try to resume lldpd, until it's successful
+while /bin/true;
+do
+    lldpcli -u /var/run/lldpd.socket -c /etc/lldpd.conf -c /etc/lldpd.d resume > /dev/null && break
+    sleep 1
+done
+
+supervisorctl start lldp-syncd
+supervisorctl start lldpmgrd
+root@sonic:~# 
