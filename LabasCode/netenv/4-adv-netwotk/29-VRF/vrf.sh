@@ -67,7 +67,9 @@ vrf_init() {
     elif [[ $1 == "destroy" ]]; then
         vrf_destroy
     else 
-        echo "\$1 parameter error! should be from [create or destroy]"
+        echo "******************************************************"
+        echo "\$1 parameter error! Should be from [create or destroy]"
+        echo "******************************************************"
     fi
 }
 
