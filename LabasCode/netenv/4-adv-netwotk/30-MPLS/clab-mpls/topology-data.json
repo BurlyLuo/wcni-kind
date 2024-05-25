@@ -1,0 +1,132 @@
+{
+  "name": "mpls",
+  "type": "clab",
+  "clab": {
+    "config": {
+      "prefix": "clab",
+      "mgmt": {
+        "network": "clab",
+        "bridge": "br-5c40d92f477d",
+        "ipv4-subnet": "172.20.20.0/24",
+        "ipv4-gw": "172.20.20.1",
+        "ipv6-subnet": "2001:172:20:20::/64",
+        "ipv6-gw": "2001:172:20:20::1",
+        "mtu": "1500",
+        "external-access": true
+      }
+    }
+  },
+  "nodes": {
+    "mpls1": {
+      "index": "0",
+      "shortname": "mpls1",
+      "longname": "clab-mpls-mpls1",
+      "fqdn": "mpls1.mpls.io",
+      "group": "",
+      "labdir": "/root/wcni-kind/LabasCode/netenv/4-adv-netwotk/30-MPLS/clab-mpls/mpls1",
+      "kind": "linux",
+      "image": "192.168.2.100:5000/vyos/vyos:1.4.9",
+      "mgmt-net": "",
+      "mgmt-intf": "",
+      "mgmt-ipv4-address": "172.20.20.3",
+      "mgmt-ipv4-prefix-length": 24,
+      "mgmt-ipv6-address": "2001:172:20:20::3",
+      "mgmt-ipv6-prefix-length": 64,
+      "mac-address": "",
+      "labels": {
+        "clab-mgmt-net-bridge": "br-5c40d92f477d",
+        "clab-node-group": "",
+        "clab-node-kind": "linux",
+        "clab-node-lab-dir": "/root/wcni-kind/LabasCode/netenv/4-adv-netwotk/30-MPLS/clab-mpls/mpls1",
+        "clab-node-name": "mpls1",
+        "clab-node-type": "",
+        "clab-topo-file": "/root/wcni-kind/LabasCode/netenv/4-adv-netwotk/30-MPLS/clab.yaml",
+        "containerlab": "mpls"
+      }
+    },
+    "mpls2": {
+      "index": "1",
+      "shortname": "mpls2",
+      "longname": "clab-mpls-mpls2",
+      "fqdn": "mpls2.mpls.io",
+      "group": "",
+      "labdir": "/root/wcni-kind/LabasCode/netenv/4-adv-netwotk/30-MPLS/clab-mpls/mpls2",
+      "kind": "linux",
+      "image": "192.168.2.100:5000/vyos/vyos:1.4.9",
+      "mgmt-net": "",
+      "mgmt-intf": "",
+      "mgmt-ipv4-address": "172.20.20.4",
+      "mgmt-ipv4-prefix-length": 24,
+      "mgmt-ipv6-address": "2001:172:20:20::4",
+      "mgmt-ipv6-prefix-length": 64,
+      "mac-address": "",
+      "labels": {
+        "clab-mgmt-net-bridge": "br-5c40d92f477d",
+        "clab-node-group": "",
+        "clab-node-kind": "linux",
+        "clab-node-lab-dir": "/root/wcni-kind/LabasCode/netenv/4-adv-netwotk/30-MPLS/clab-mpls/mpls2",
+        "clab-node-name": "mpls2",
+        "clab-node-type": "",
+        "clab-topo-file": "/root/wcni-kind/LabasCode/netenv/4-adv-netwotk/30-MPLS/clab.yaml",
+        "containerlab": "mpls"
+      }
+    },
+    "mpls3": {
+      "index": "2",
+      "shortname": "mpls3",
+      "longname": "clab-mpls-mpls3",
+      "fqdn": "mpls3.mpls.io",
+      "group": "",
+      "labdir": "/root/wcni-kind/LabasCode/netenv/4-adv-netwotk/30-MPLS/clab-mpls/mpls3",
+      "kind": "linux",
+      "image": "192.168.2.100:5000/vyos/vyos:1.4.9",
+      "mgmt-net": "",
+      "mgmt-intf": "",
+      "mgmt-ipv4-address": "172.20.20.2",
+      "mgmt-ipv4-prefix-length": 24,
+      "mgmt-ipv6-address": "2001:172:20:20::2",
+      "mgmt-ipv6-prefix-length": 64,
+      "mac-address": "",
+      "labels": {
+        "clab-mgmt-net-bridge": "br-5c40d92f477d",
+        "clab-node-group": "",
+        "clab-node-kind": "linux",
+        "clab-node-lab-dir": "/root/wcni-kind/LabasCode/netenv/4-adv-netwotk/30-MPLS/clab-mpls/mpls3",
+        "clab-node-name": "mpls3",
+        "clab-node-type": "",
+        "clab-topo-file": "/root/wcni-kind/LabasCode/netenv/4-adv-netwotk/30-MPLS/clab.yaml",
+        "containerlab": "mpls"
+      }
+    }
+  },
+  "links": [
+    {
+      "a": {
+        "node": "mpls1",
+        "interface": "eth1",
+        "mac": "aa:c1:ab:5a:76:2d",
+        "peer": "z"
+      },
+      "z": {
+        "node": "mpls2",
+        "interface": "eth1",
+        "mac": "aa:c1:ab:c3:dd:e3",
+        "peer": "a"
+      }
+    },
+    {
+      "a": {
+        "node": "mpls2",
+        "interface": "eth2",
+        "mac": "aa:c1:ab:1c:48:75",
+        "peer": "z"
+      },
+      "z": {
+        "node": "mpls3",
+        "interface": "eth1",
+        "mac": "aa:c1:ab:c2:73:e5",
+        "peer": "a"
+      }
+    }
+  ]
+}
