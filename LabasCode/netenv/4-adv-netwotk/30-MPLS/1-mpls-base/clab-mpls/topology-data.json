@@ -6,7 +6,7 @@
       "prefix": "clab",
       "mgmt": {
         "network": "clab",
-        "bridge": "br-726b1f3ad29f",
+        "bridge": "br-328e68c1686e",
         "ipv4-subnet": "172.20.20.0/24",
         "ipv4-gw": "172.20.20.1",
         "ipv6-subnet": "2001:172:20:20::/64",
@@ -34,7 +34,7 @@
       "mgmt-ipv6-prefix-length": 64,
       "mac-address": "",
       "labels": {
-        "clab-mgmt-net-bridge": "br-726b1f3ad29f",
+        "clab-mgmt-net-bridge": "br-328e68c1686e",
         "clab-node-group": "",
         "clab-node-kind": "linux",
         "clab-node-lab-dir": "/root/wcni-kind/LabasCode/netenv/4-adv-netwotk/30-MPLS/clab-mpls/mpls1",
@@ -55,13 +55,13 @@
       "image": "192.168.2.100:5000/vyos/vyos:1.4.9",
       "mgmt-net": "",
       "mgmt-intf": "",
-      "mgmt-ipv4-address": "172.20.20.2",
+      "mgmt-ipv4-address": "172.20.20.3",
       "mgmt-ipv4-prefix-length": 24,
-      "mgmt-ipv6-address": "2001:172:20:20::2",
+      "mgmt-ipv6-address": "2001:172:20:20::3",
       "mgmt-ipv6-prefix-length": 64,
       "mac-address": "",
       "labels": {
-        "clab-mgmt-net-bridge": "br-726b1f3ad29f",
+        "clab-mgmt-net-bridge": "br-328e68c1686e",
         "clab-node-group": "",
         "clab-node-kind": "linux",
         "clab-node-lab-dir": "/root/wcni-kind/LabasCode/netenv/4-adv-netwotk/30-MPLS/clab-mpls/mpls2",
@@ -82,13 +82,13 @@
       "image": "192.168.2.100:5000/vyos/vyos:1.4.9",
       "mgmt-net": "",
       "mgmt-intf": "",
-      "mgmt-ipv4-address": "172.20.20.3",
+      "mgmt-ipv4-address": "172.20.20.2",
       "mgmt-ipv4-prefix-length": 24,
-      "mgmt-ipv6-address": "2001:172:20:20::3",
+      "mgmt-ipv6-address": "2001:172:20:20::2",
       "mgmt-ipv6-prefix-length": 64,
       "mac-address": "",
       "labels": {
-        "clab-mgmt-net-bridge": "br-726b1f3ad29f",
+        "clab-mgmt-net-bridge": "br-328e68c1686e",
         "clab-node-group": "",
         "clab-node-kind": "linux",
         "clab-node-lab-dir": "/root/wcni-kind/LabasCode/netenv/4-adv-netwotk/30-MPLS/clab-mpls/mpls3",
@@ -104,13 +104,13 @@
       "a": {
         "node": "mpls1",
         "interface": "eth1",
-        "mac": "aa:c1:ab:08:50:8f",
+        "mac": "aa:c1:ab:49:9a:46",
         "peer": "z"
       },
       "z": {
         "node": "mpls2",
         "interface": "eth1",
-        "mac": "aa:c1:ab:d4:89:b6",
+        "mac": "aa:c1:ab:bc:3b:8d",
         "peer": "a"
       }
     },
@@ -118,13 +118,13 @@
       "a": {
         "node": "mpls2",
         "interface": "eth2",
-        "mac": "aa:c1:ab:f5:f7:19",
+        "mac": "aa:c1:ab:ef:9a:fa",
         "peer": "z"
       },
       "z": {
         "node": "mpls3",
         "interface": "eth1",
-        "mac": "aa:c1:ab:33:dd:3d",
+        "mac": "aa:c1:ab:0f:ea:06",
         "peer": "a"
       }
     }
