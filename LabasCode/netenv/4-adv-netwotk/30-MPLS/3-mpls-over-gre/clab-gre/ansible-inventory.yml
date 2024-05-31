@@ -1,0 +1,14 @@
+all:
+  children:
+    linux:
+      hosts:
+        clab-gre-gre1:
+          ansible_host: 172.20.20.4
+        clab-gre-gre2:
+          ansible_host: 172.20.20.3
+        clab-gre-gre3:
+          ansible_host: 172.20.20.2
+        clab-gre-server1:
+          ansible_host: 172.20.20.6
+        clab-gre-server2:
+          ansible_host: 172.20.20.5

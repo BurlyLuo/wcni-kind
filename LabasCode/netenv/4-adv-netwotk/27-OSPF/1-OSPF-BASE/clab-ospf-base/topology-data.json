@@ -6,7 +6,7 @@
       "prefix": "clab",
       "mgmt": {
         "network": "clab",
-        "bridge": "br-e518e5376dc4",
+        "bridge": "br-788c0ce5002a",
         "ipv4-subnet": "172.20.20.0/24",
         "ipv4-gw": "172.20.20.1",
         "ipv6-subnet": "2001:172:20:20::/64",
@@ -23,24 +23,24 @@
       "longname": "clab-ospf-base-gw1",
       "fqdn": "gw1.ospf-base.io",
       "group": "",
-      "labdir": "/root/wcni-kind/split/netenv/4-adv-netwotk/23-OSPF/1-OSPF-BASE/clab-ospf-base/gw1",
+      "labdir": "/root/wcni-kind/LabasCode/netenv/4-adv-netwotk/27-OSPF/1-OSPF-BASE/clab-ospf-base/gw1",
       "kind": "linux",
       "image": "192.168.2.100:5000/vyos/vyos:1.4.7",
       "mgmt-net": "",
       "mgmt-intf": "",
-      "mgmt-ipv4-address": "172.20.20.4",
+      "mgmt-ipv4-address": "172.20.20.7",
       "mgmt-ipv4-prefix-length": 24,
-      "mgmt-ipv6-address": "2001:172:20:20::4",
+      "mgmt-ipv6-address": "2001:172:20:20::7",
       "mgmt-ipv6-prefix-length": 64,
       "mac-address": "",
       "labels": {
-        "clab-mgmt-net-bridge": "br-e518e5376dc4",
+        "clab-mgmt-net-bridge": "br-788c0ce5002a",
         "clab-node-group": "",
         "clab-node-kind": "linux",
-        "clab-node-lab-dir": "/root/wcni-kind/split/netenv/4-adv-netwotk/23-OSPF/1-OSPF-BASE/clab-ospf-base/gw1",
+        "clab-node-lab-dir": "/root/wcni-kind/LabasCode/netenv/4-adv-netwotk/27-OSPF/1-OSPF-BASE/clab-ospf-base/gw1",
         "clab-node-name": "gw1",
         "clab-node-type": "",
-        "clab-topo-file": "/root/wcni-kind/split/netenv/4-adv-netwotk/23-OSPF/1-OSPF-BASE/clab.yaml",
+        "clab-topo-file": "/root/wcni-kind/LabasCode/netenv/4-adv-netwotk/27-OSPF/1-OSPF-BASE/clab.yaml",
         "containerlab": "ospf-base"
       }
     },
@@ -50,24 +50,24 @@
       "longname": "clab-ospf-base-gw2",
       "fqdn": "gw2.ospf-base.io",
       "group": "",
-      "labdir": "/root/wcni-kind/split/netenv/4-adv-netwotk/23-OSPF/1-OSPF-BASE/clab-ospf-base/gw2",
+      "labdir": "/root/wcni-kind/LabasCode/netenv/4-adv-netwotk/27-OSPF/1-OSPF-BASE/clab-ospf-base/gw2",
       "kind": "linux",
       "image": "192.168.2.100:5000/vyos/vyos:1.4.7",
       "mgmt-net": "",
       "mgmt-intf": "",
-      "mgmt-ipv4-address": "172.20.20.3",
+      "mgmt-ipv4-address": "172.20.20.6",
       "mgmt-ipv4-prefix-length": 24,
-      "mgmt-ipv6-address": "2001:172:20:20::3",
+      "mgmt-ipv6-address": "2001:172:20:20::6",
       "mgmt-ipv6-prefix-length": 64,
       "mac-address": "",
       "labels": {
-        "clab-mgmt-net-bridge": "br-e518e5376dc4",
+        "clab-mgmt-net-bridge": "br-788c0ce5002a",
         "clab-node-group": "",
         "clab-node-kind": "linux",
-        "clab-node-lab-dir": "/root/wcni-kind/split/netenv/4-adv-netwotk/23-OSPF/1-OSPF-BASE/clab-ospf-base/gw2",
+        "clab-node-lab-dir": "/root/wcni-kind/LabasCode/netenv/4-adv-netwotk/27-OSPF/1-OSPF-BASE/clab-ospf-base/gw2",
         "clab-node-name": "gw2",
         "clab-node-type": "",
-        "clab-topo-file": "/root/wcni-kind/split/netenv/4-adv-netwotk/23-OSPF/1-OSPF-BASE/clab.yaml",
+        "clab-topo-file": "/root/wcni-kind/LabasCode/netenv/4-adv-netwotk/27-OSPF/1-OSPF-BASE/clab.yaml",
         "containerlab": "ospf-base"
       }
     },
@@ -77,24 +77,24 @@
       "longname": "clab-ospf-base-server1",
       "fqdn": "server1.ospf-base.io",
       "group": "",
-      "labdir": "/root/wcni-kind/split/netenv/4-adv-netwotk/23-OSPF/1-OSPF-BASE/clab-ospf-base/server1",
+      "labdir": "/root/wcni-kind/LabasCode/netenv/4-adv-netwotk/27-OSPF/1-OSPF-BASE/clab-ospf-base/server1",
       "kind": "linux",
       "image": "192.168.2.100:5000/nettool",
       "mgmt-net": "",
       "mgmt-intf": "",
-      "mgmt-ipv4-address": "172.20.20.2",
+      "mgmt-ipv4-address": "172.20.20.8",
       "mgmt-ipv4-prefix-length": 24,
-      "mgmt-ipv6-address": "2001:172:20:20::2",
+      "mgmt-ipv6-address": "2001:172:20:20::8",
       "mgmt-ipv6-prefix-length": 64,
       "mac-address": "",
       "labels": {
-        "clab-mgmt-net-bridge": "br-e518e5376dc4",
+        "clab-mgmt-net-bridge": "br-788c0ce5002a",
         "clab-node-group": "",
         "clab-node-kind": "linux",
-        "clab-node-lab-dir": "/root/wcni-kind/split/netenv/4-adv-netwotk/23-OSPF/1-OSPF-BASE/clab-ospf-base/server1",
+        "clab-node-lab-dir": "/root/wcni-kind/LabasCode/netenv/4-adv-netwotk/27-OSPF/1-OSPF-BASE/clab-ospf-base/server1",
         "clab-node-name": "server1",
         "clab-node-type": "",
-        "clab-topo-file": "/root/wcni-kind/split/netenv/4-adv-netwotk/23-OSPF/1-OSPF-BASE/clab.yaml",
+        "clab-topo-file": "/root/wcni-kind/LabasCode/netenv/4-adv-netwotk/27-OSPF/1-OSPF-BASE/clab.yaml",
         "containerlab": "ospf-base"
       }
     },
@@ -104,24 +104,24 @@
       "longname": "clab-ospf-base-server2",
       "fqdn": "server2.ospf-base.io",
       "group": "",
-      "labdir": "/root/wcni-kind/split/netenv/4-adv-netwotk/23-OSPF/1-OSPF-BASE/clab-ospf-base/server2",
+      "labdir": "/root/wcni-kind/LabasCode/netenv/4-adv-netwotk/27-OSPF/1-OSPF-BASE/clab-ospf-base/server2",
       "kind": "linux",
       "image": "192.168.2.100:5000/nettool",
       "mgmt-net": "",
       "mgmt-intf": "",
-      "mgmt-ipv4-address": "172.20.20.5",
+      "mgmt-ipv4-address": "172.20.20.9",
       "mgmt-ipv4-prefix-length": 24,
-      "mgmt-ipv6-address": "2001:172:20:20::5",
+      "mgmt-ipv6-address": "2001:172:20:20::9",
       "mgmt-ipv6-prefix-length": 64,
       "mac-address": "",
       "labels": {
-        "clab-mgmt-net-bridge": "br-e518e5376dc4",
+        "clab-mgmt-net-bridge": "br-788c0ce5002a",
         "clab-node-group": "",
         "clab-node-kind": "linux",
-        "clab-node-lab-dir": "/root/wcni-kind/split/netenv/4-adv-netwotk/23-OSPF/1-OSPF-BASE/clab-ospf-base/server2",
+        "clab-node-lab-dir": "/root/wcni-kind/LabasCode/netenv/4-adv-netwotk/27-OSPF/1-OSPF-BASE/clab-ospf-base/server2",
         "clab-node-name": "server2",
         "clab-node-type": "",
-        "clab-topo-file": "/root/wcni-kind/split/netenv/4-adv-netwotk/23-OSPF/1-OSPF-BASE/clab.yaml",
+        "clab-topo-file": "/root/wcni-kind/LabasCode/netenv/4-adv-netwotk/27-OSPF/1-OSPF-BASE/clab.yaml",
         "containerlab": "ospf-base"
       }
     }
@@ -131,13 +131,13 @@
       "a": {
         "node": "gw1",
         "interface": "eth1",
-        "mac": "aa:c1:ab:e2:3a:bc",
+        "mac": "aa:c1:ab:c2:ee:ca",
         "peer": "z"
       },
       "z": {
         "node": "server1",
         "interface": "net0",
-        "mac": "aa:c1:ab:41:d4:31",
+        "mac": "aa:c1:ab:6d:d0:c9",
         "peer": "a"
       }
     },
@@ -145,13 +145,13 @@
       "a": {
         "node": "gw2",
         "interface": "eth1",
-        "mac": "aa:c1:ab:6c:0b:6e",
+        "mac": "aa:c1:ab:98:36:fe",
         "peer": "z"
       },
       "z": {
         "node": "server2",
         "interface": "net0",
-        "mac": "aa:c1:ab:e1:29:82",
+        "mac": "aa:c1:ab:d4:ab:10",
         "peer": "a"
       }
     },
@@ -159,13 +159,13 @@
       "a": {
         "node": "gw1",
         "interface": "eth2",
-        "mac": "aa:c1:ab:d3:c4:f7",
+        "mac": "aa:c1:ab:be:a0:0e",
         "peer": "z"
       },
       "z": {
         "node": "gw2",
         "interface": "eth2",
-        "mac": "aa:c1:ab:dc:a3:21",
+        "mac": "aa:c1:ab:b2:68:df",
         "peer": "a"
       }
     }
