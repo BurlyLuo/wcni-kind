@@ -1,0 +1,450 @@
+"vrf-funcs.sh" 330L, 8661B written                                                                                                                     
+[root@wluo vrf-with-mpls]$ ./vrf-setup.sh 
++ . vrf-funcs.sh
+++ set -x
+++ IP=/usr/sbin/ip
+++ set +x
+creating...
+++ seq 1 2
++ for cust in `seq 1 2`
+++ seq 1 2
++ for edge in `seq 1 2`
++ /usr/sbin/ip link add br11 type bridge
++ /usr/sbin/ip link set br11 up
++ for edge in `seq 1 2`
++ /usr/sbin/ip link add br12 type bridge
++ /usr/sbin/ip link set br12 up
++ for cust in `seq 1 2`
+++ seq 1 2
++ for edge in `seq 1 2`
++ /usr/sbin/ip link add br21 type bridge
++ /usr/sbin/ip link set br21 up
++ for edge in `seq 1 2`
++ /usr/sbin/ip link add br22 type bridge
++ /usr/sbin/ip link set br22 up
++ create_hosts
++ set -x
++ edge=1
+++ seq 1 2
++ for cust in `seq 1 2`
+++ seq 1 2
++ for host in `seq 1 2`
++ _do_create_host 1 1 1
++ set -x
++ cust=1
++ host=1
++ edge=1
++ echo 'creating cust=1 host=1 edge=1'
+creating cust=1 host=1 edge=1
++ custhost=c1h1
++ custbr=br11
++ /usr/sbin/ip netns add c1h1
++ /usr/sbin/ip link add c1h1-eth type veth peer name c1h1-br11-eth
++ /usr/sbin/ip link set c1h1-br11-eth master br11
++ /usr/sbin/ip link set c1h1-br11-eth up
++ /usr/sbin/ip link set c1h1-eth netns c1h1
++ /usr/sbin/ip netns exec c1h1 /usr/sbin/ip link set lo up
++ /usr/sbin/ip netns exec c1h1 /usr/sbin/ip link set c1h1-eth up
++ /usr/sbin/ip netns exec c1h1 /usr/sbin/ip addr add 88.1.1.1/24 dev c1h1-eth
++ for host in `seq 1 2`
++ _do_create_host 1 2 1
++ set -x
++ cust=1
++ host=2
++ edge=1
++ echo 'creating cust=1 host=2 edge=1'
+creating cust=1 host=2 edge=1
++ custhost=c1h2
++ custbr=br11
++ /usr/sbin/ip netns add c1h2
++ /usr/sbin/ip link add c1h2-eth type veth peer name c1h2-br11-eth
++ /usr/sbin/ip link set c1h2-br11-eth master br11
++ /usr/sbin/ip link set c1h2-br11-eth up
++ /usr/sbin/ip link set c1h2-eth netns c1h2
++ /usr/sbin/ip netns exec c1h2 /usr/sbin/ip link set lo up
++ /usr/sbin/ip netns exec c1h2 /usr/sbin/ip link set c1h2-eth up
++ /usr/sbin/ip netns exec c1h2 /usr/sbin/ip addr add 88.1.1.2/24 dev c1h2-eth
++ for cust in `seq 1 2`
+++ seq 1 2
++ for host in `seq 1 2`
++ _do_create_host 2 1 1
++ set -x
++ cust=2
++ host=1
++ edge=1
++ echo 'creating cust=2 host=1 edge=1'
+creating cust=2 host=1 edge=1
++ custhost=c2h1
++ custbr=br21
++ /usr/sbin/ip netns add c2h1
++ /usr/sbin/ip link add c2h1-eth type veth peer name c2h1-br21-eth
++ /usr/sbin/ip link set c2h1-br21-eth master br21
++ /usr/sbin/ip link set c2h1-br21-eth up
++ /usr/sbin/ip link set c2h1-eth netns c2h1
++ /usr/sbin/ip netns exec c2h1 /usr/sbin/ip link set lo up
++ /usr/sbin/ip netns exec c2h1 /usr/sbin/ip link set c2h1-eth up
++ /usr/sbin/ip netns exec c2h1 /usr/sbin/ip addr add 88.1.1.1/24 dev c2h1-eth
++ for host in `seq 1 2`
++ _do_create_host 2 2 1
++ set -x
++ cust=2
++ host=2
++ edge=1
++ echo 'creating cust=2 host=2 edge=1'
+creating cust=2 host=2 edge=1
++ custhost=c2h2
++ custbr=br21
++ /usr/sbin/ip netns add c2h2
++ /usr/sbin/ip link add c2h2-eth type veth peer name c2h2-br21-eth
++ /usr/sbin/ip link set c2h2-br21-eth master br21
++ /usr/sbin/ip link set c2h2-br21-eth up
++ /usr/sbin/ip link set c2h2-eth netns c2h2
++ /usr/sbin/ip netns exec c2h2 /usr/sbin/ip link set lo up
++ /usr/sbin/ip netns exec c2h2 /usr/sbin/ip link set c2h2-eth up
++ /usr/sbin/ip netns exec c2h2 /usr/sbin/ip addr add 88.1.1.2/24 dev c2h2-eth
++ edge=2
+++ seq 1 2
++ for cust in `seq 1 2`
+++ seq 3 4
++ for host in `seq 3 4`
++ _do_create_host 1 3 2
++ set -x
++ cust=1
++ host=3
++ edge=2
++ echo 'creating cust=1 host=3 edge=2'
+creating cust=1 host=3 edge=2
++ custhost=c1h3
++ custbr=br12
++ /usr/sbin/ip netns add c1h3
++ /usr/sbin/ip link add c1h3-eth type veth peer name c1h3-br12-eth
++ /usr/sbin/ip link set c1h3-br12-eth master br12
++ /usr/sbin/ip link set c1h3-br12-eth up
++ /usr/sbin/ip link set c1h3-eth netns c1h3
++ /usr/sbin/ip netns exec c1h3 /usr/sbin/ip link set lo up
++ /usr/sbin/ip netns exec c1h3 /usr/sbin/ip link set c1h3-eth up
++ /usr/sbin/ip netns exec c1h3 /usr/sbin/ip addr add 88.2.1.3/24 dev c1h3-eth
++ for host in `seq 3 4`
++ _do_create_host 1 4 2
++ set -x
++ cust=1
++ host=4
++ edge=2
++ echo 'creating cust=1 host=4 edge=2'
+creating cust=1 host=4 edge=2
++ custhost=c1h4
++ custbr=br12
++ /usr/sbin/ip netns add c1h4
++ /usr/sbin/ip link add c1h4-eth type veth peer name c1h4-br12-eth
++ /usr/sbin/ip link set c1h4-br12-eth master br12
++ /usr/sbin/ip link set c1h4-br12-eth up
++ /usr/sbin/ip link set c1h4-eth netns c1h4
++ /usr/sbin/ip netns exec c1h4 /usr/sbin/ip link set lo up
++ /usr/sbin/ip netns exec c1h4 /usr/sbin/ip link set c1h4-eth up
++ /usr/sbin/ip netns exec c1h4 /usr/sbin/ip addr add 88.2.1.4/24 dev c1h4-eth
++ for cust in `seq 1 2`
+++ seq 3 4
++ for host in `seq 3 4`
++ _do_create_host 2 3 2
++ set -x
++ cust=2
++ host=3
++ edge=2
++ echo 'creating cust=2 host=3 edge=2'
+creating cust=2 host=3 edge=2
++ custhost=c2h3
++ custbr=br22
++ /usr/sbin/ip netns add c2h3
++ /usr/sbin/ip link add c2h3-eth type veth peer name c2h3-br22-eth
++ /usr/sbin/ip link set c2h3-br22-eth master br22
++ /usr/sbin/ip link set c2h3-br22-eth up
++ /usr/sbin/ip link set c2h3-eth netns c2h3
++ /usr/sbin/ip netns exec c2h3 /usr/sbin/ip link set lo up
++ /usr/sbin/ip netns exec c2h3 /usr/sbin/ip link set c2h3-eth up
++ /usr/sbin/ip netns exec c2h3 /usr/sbin/ip addr add 88.2.1.3/24 dev c2h3-eth
++ for host in `seq 3 4`
++ _do_create_host 2 4 2
++ set -x
++ cust=2
++ host=4
++ edge=2
++ echo 'creating cust=2 host=4 edge=2'
+creating cust=2 host=4 edge=2
++ custhost=c2h4
++ custbr=br22
++ /usr/sbin/ip netns add c2h4
++ /usr/sbin/ip link add c2h4-eth type veth peer name c2h4-br22-eth
++ /usr/sbin/ip link set c2h4-br22-eth master br22
++ /usr/sbin/ip link set c2h4-br22-eth up
++ /usr/sbin/ip link set c2h4-eth netns c2h4
++ /usr/sbin/ip netns exec c2h4 /usr/sbin/ip link set lo up
++ /usr/sbin/ip netns exec c2h4 /usr/sbin/ip link set c2h4-eth up
++ /usr/sbin/ip netns exec c2h4 /usr/sbin/ip addr add 88.2.1.4/24 dev c2h4-eth
++ create_ce_routers
++ set -x
+++ seq 1 2
++ for cust in `seq 1 2`
+++ seq 1 2
++ for edge in `seq 1 2`
++ custedge=c1e1
++ custbr=br11
++ /usr/sbin/ip netns add c1e1
++ /usr/sbin/ip link add c1e1-eth type veth peer name c1e1-br11-eth
++ /usr/sbin/ip link set c1e1-br11-eth master br11
++ /usr/sbin/ip link set c1e1-br11-eth up
++ /usr/sbin/ip link set c1e1-eth netns c1e1
++ /usr/sbin/ip netns exec c1e1 /usr/sbin/ip link set lo up
++ /usr/sbin/ip netns exec c1e1 /usr/sbin/ip link set c1e1-eth up
++ /usr/sbin/ip netns exec c1e1 /usr/sbin/ip addr add 88.1.1.254/24 dev c1e1-eth
++ for edge in `seq 1 2`
++ custedge=c1e2
++ custbr=br12
++ /usr/sbin/ip netns add c1e2
++ /usr/sbin/ip link add c1e2-eth type veth peer name c1e2-br12-eth
++ /usr/sbin/ip link set c1e2-br12-eth master br12
++ /usr/sbin/ip link set c1e2-br12-eth up
++ /usr/sbin/ip link set c1e2-eth netns c1e2
++ /usr/sbin/ip netns exec c1e2 /usr/sbin/ip link set lo up
++ /usr/sbin/ip netns exec c1e2 /usr/sbin/ip link set c1e2-eth up
++ /usr/sbin/ip netns exec c1e2 /usr/sbin/ip addr add 88.2.1.254/24 dev c1e2-eth
++ for cust in `seq 1 2`
+++ seq 1 2
++ for edge in `seq 1 2`
++ custedge=c2e1
++ custbr=br21
++ /usr/sbin/ip netns add c2e1
++ /usr/sbin/ip link add c2e1-eth type veth peer name c2e1-br21-eth
++ /usr/sbin/ip link set c2e1-br21-eth master br21
++ /usr/sbin/ip link set c2e1-br21-eth up
++ /usr/sbin/ip link set c2e1-eth netns c2e1
++ /usr/sbin/ip netns exec c2e1 /usr/sbin/ip link set lo up
++ /usr/sbin/ip netns exec c2e1 /usr/sbin/ip link set c2e1-eth up
++ /usr/sbin/ip netns exec c2e1 /usr/sbin/ip addr add 88.1.1.254/24 dev c2e1-eth
++ for edge in `seq 1 2`
++ custedge=c2e2
++ custbr=br22
++ /usr/sbin/ip netns add c2e2
++ /usr/sbin/ip link add c2e2-eth type veth peer name c2e2-br22-eth
++ /usr/sbin/ip link set c2e2-br22-eth master br22
++ /usr/sbin/ip link set c2e2-br22-eth up
++ /usr/sbin/ip link set c2e2-eth netns c2e2
++ /usr/sbin/ip netns exec c2e2 /usr/sbin/ip link set lo up
++ /usr/sbin/ip netns exec c2e2 /usr/sbin/ip link set c2e2-eth up
++ /usr/sbin/ip netns exec c2e2 /usr/sbin/ip addr add 88.2.1.254/24 dev c2e2-eth
++ create_pe_routers
++ set -x
++ edge=1
++ pe=pe1
++ /usr/sbin/ip netns add pe1
++ /usr/sbin/ip netns exec pe1 /usr/sbin/ip link set lo up
+++ seq 1 2
++ for cust in `seq 1 2`
++ _do_create_pe_router 1 1
++ set -x
++ cust=1
++ edge=1
++ custedge=c1e1
++ pe=pe1
++ /usr/sbin/ip link add c1e1-pe1-eth type veth peer name pe1-c1e1-eth
++ /usr/sbin/ip link set c1e1-pe1-eth netns c1e1
++ /usr/sbin/ip netns exec c1e1 /usr/sbin/ip link set c1e1-pe1-eth up
++ '[' 1 -eq 1 ']'
++ /usr/sbin/ip netns exec c1e1 /usr/sbin/ip addr add 1.1.1.1/30 dev c1e1-pe1-eth
++ /usr/sbin/ip link set pe1-c1e1-eth netns pe1
++ /usr/sbin/ip netns exec pe1 /usr/sbin/ip link set pe1-c1e1-eth up
++ '[' 1 -eq 1 ']'
++ /usr/sbin/ip netns exec pe1 /usr/sbin/ip addr add 1.1.1.2/30 dev pe1-c1e1-eth
++ /usr/sbin/ip netns exec pe1 /usr/sbin/ip link add vrf-pe1-c1 type vrf table 10
++ /usr/sbin/ip netns exec pe1 /usr/sbin/ip link set vrf-pe1-c1 up
++ /usr/sbin/ip netns exec pe1 /usr/sbin/ip link set pe1-c1e1-eth master vrf-pe1-c1
++ for cust in `seq 1 2`
++ _do_create_pe_router 2 1
++ set -x
++ cust=2
++ edge=1
++ custedge=c2e1
++ pe=pe1
++ /usr/sbin/ip link add c2e1-pe1-eth type veth peer name pe1-c2e1-eth
++ /usr/sbin/ip link set c2e1-pe1-eth netns c2e1
++ /usr/sbin/ip netns exec c2e1 /usr/sbin/ip link set c2e1-pe1-eth up
++ '[' 1 -eq 1 ']'
++ /usr/sbin/ip netns exec c2e1 /usr/sbin/ip addr add 1.1.1.1/30 dev c2e1-pe1-eth
++ /usr/sbin/ip link set pe1-c2e1-eth netns pe1
++ /usr/sbin/ip netns exec pe1 /usr/sbin/ip link set pe1-c2e1-eth up
++ '[' 1 -eq 1 ']'
++ /usr/sbin/ip netns exec pe1 /usr/sbin/ip addr add 1.1.1.2/30 dev pe1-c2e1-eth
++ /usr/sbin/ip netns exec pe1 /usr/sbin/ip link add vrf-pe1-c2 type vrf table 20
++ /usr/sbin/ip netns exec pe1 /usr/sbin/ip link set vrf-pe1-c2 up
++ /usr/sbin/ip netns exec pe1 /usr/sbin/ip link set pe1-c2e1-eth master vrf-pe1-c2
++ edge=2
++ pe=pe2
++ /usr/sbin/ip netns add pe2
++ /usr/sbin/ip netns exec pe2 /usr/sbin/ip link set lo up
+++ seq 1 2
++ for cust in `seq 1 2`
++ _do_create_pe_router 1 2
++ set -x
++ cust=1
++ edge=2
++ custedge=c1e2
++ pe=pe2
++ /usr/sbin/ip link add c1e2-pe2-eth type veth peer name pe2-c1e2-eth
++ /usr/sbin/ip link set c1e2-pe2-eth netns c1e2
++ /usr/sbin/ip netns exec c1e2 /usr/sbin/ip link set c1e2-pe2-eth up
++ '[' 2 -eq 1 ']'
++ /usr/sbin/ip netns exec c1e2 /usr/sbin/ip addr add 3.1.1.2/30 dev c1e2-pe2-eth
++ /usr/sbin/ip link set pe2-c1e2-eth netns pe2
++ /usr/sbin/ip netns exec pe2 /usr/sbin/ip link set pe2-c1e2-eth up
++ '[' 2 -eq 1 ']'
++ /usr/sbin/ip netns exec pe2 /usr/sbin/ip addr add 3.1.1.1/30 dev pe2-c1e2-eth
++ /usr/sbin/ip netns exec pe2 /usr/sbin/ip link add vrf-pe2-c1 type vrf table 10
++ /usr/sbin/ip netns exec pe2 /usr/sbin/ip link set vrf-pe2-c1 up
++ /usr/sbin/ip netns exec pe2 /usr/sbin/ip link set pe2-c1e2-eth master vrf-pe2-c1
++ for cust in `seq 1 2`
++ _do_create_pe_router 2 2
++ set -x
++ cust=2
++ edge=2
++ custedge=c2e2
++ pe=pe2
++ /usr/sbin/ip link add c2e2-pe2-eth type veth peer name pe2-c2e2-eth
++ /usr/sbin/ip link set c2e2-pe2-eth netns c2e2
++ /usr/sbin/ip netns exec c2e2 /usr/sbin/ip link set c2e2-pe2-eth up
++ '[' 2 -eq 1 ']'
++ /usr/sbin/ip netns exec c2e2 /usr/sbin/ip addr add 3.1.1.2/30 dev c2e2-pe2-eth
++ /usr/sbin/ip link set pe2-c2e2-eth netns pe2
++ /usr/sbin/ip netns exec pe2 /usr/sbin/ip link set pe2-c2e2-eth up
++ '[' 2 -eq 1 ']'
++ /usr/sbin/ip netns exec pe2 /usr/sbin/ip addr add 3.1.1.1/30 dev pe2-c2e2-eth
++ /usr/sbin/ip netns exec pe2 /usr/sbin/ip link add vrf-pe2-c2 type vrf table 20
++ /usr/sbin/ip netns exec pe2 /usr/sbin/ip link set vrf-pe2-c2 up
++ /usr/sbin/ip netns exec pe2 /usr/sbin/ip link set pe2-c2e2-eth master vrf-pe2-c2
++ create_p_routers
++ set -x
++ /usr/sbin/ip netns add p
++ /usr/sbin/ip link add p-pe1-eth type veth peer name pe1-p-eth
++ /usr/sbin/ip link set p-pe1-eth netns p
++ /usr/sbin/ip netns exec p /usr/sbin/ip link set p-pe1-eth up
++ /usr/sbin/ip netns exec p /usr/sbin/ip addr add 2.1.1.2/30 dev p-pe1-eth
++ /usr/sbin/ip link set pe1-p-eth netns pe1
++ /usr/sbin/ip netns exec pe1 /usr/sbin/ip link set pe1-p-eth up
++ /usr/sbin/ip netns exec pe1 /usr/sbin/ip addr add 2.1.1.1/30 dev pe1-p-eth
++ /usr/sbin/ip link add p-pe2-eth type veth peer name pe2-p-eth
++ /usr/sbin/ip link set p-pe2-eth netns p
++ /usr/sbin/ip netns exec p /usr/sbin/ip link set p-pe2-eth up
++ /usr/sbin/ip netns exec p /usr/sbin/ip addr add 2.1.1.5/30 dev p-pe2-eth
++ /usr/sbin/ip link set pe2-p-eth netns pe2
++ /usr/sbin/ip netns exec pe2 /usr/sbin/ip link set pe2-p-eth up
++ /usr/sbin/ip netns exec pe2 /usr/sbin/ip addr add 2.1.1.6/30 dev pe2-p-eth
++ echo 'setting up...'
+setting up...
++ setup_mpls
++ set -x
++ modprobe mpls_router
++ /usr/sbin/ip netns exec p sysctl -w net.mpls.platform_labels=10000
+net.mpls.platform_labels = 10000
++ /usr/sbin/ip netns exec pe1 sysctl -w net.mpls.platform_labels=10000
+net.mpls.platform_labels = 10000
++ /usr/sbin/ip netns exec pe2 sysctl -w net.mpls.platform_labels=10000
+net.mpls.platform_labels = 10000
+++ seq 1 2
++ for edge in `seq 1 2`
+++ seq 1 2
++ for cust in `seq 1 2`
++ /usr/sbin/ip netns exec pe1 sysctl -w net.mpls.conf.pe1-c1e1-eth.input=1
+net.mpls.conf.pe1-c1e1-eth.input = 1
++ for cust in `seq 1 2`
++ /usr/sbin/ip netns exec pe1 sysctl -w net.mpls.conf.pe1-c2e1-eth.input=1
+net.mpls.conf.pe1-c2e1-eth.input = 1
++ /usr/sbin/ip netns exec pe1 sysctl -w net.mpls.conf.pe1-p-eth.input=1
+net.mpls.conf.pe1-p-eth.input = 1
++ /usr/sbin/ip netns exec p sysctl -w net.mpls.conf.p-pe1-eth.input=1
+net.mpls.conf.p-pe1-eth.input = 1
++ for edge in `seq 1 2`
+++ seq 1 2
++ for cust in `seq 1 2`
++ /usr/sbin/ip netns exec pe2 sysctl -w net.mpls.conf.pe2-c1e2-eth.input=1
+net.mpls.conf.pe2-c1e2-eth.input = 1
++ for cust in `seq 1 2`
++ /usr/sbin/ip netns exec pe2 sysctl -w net.mpls.conf.pe2-c2e2-eth.input=1
+net.mpls.conf.pe2-c2e2-eth.input = 1
++ /usr/sbin/ip netns exec pe2 sysctl -w net.mpls.conf.pe2-p-eth.input=1
+net.mpls.conf.pe2-p-eth.input = 1
++ /usr/sbin/ip netns exec p sysctl -w net.mpls.conf.p-pe2-eth.input=1
+net.mpls.conf.p-pe2-eth.input = 1
++ setup_routing
++ set -x
+++ seq 1 2
++ for cust in `seq 1 2`
+++ seq 1 2
++ for host in `seq 1 2`
++ custhost=c1h1
++ /usr/sbin/ip netns exec c1h1 /usr/sbin/ip route add default via 88.1.1.254 dev c1h1-eth
++ for host in `seq 1 2`
++ custhost=c1h2
++ /usr/sbin/ip netns exec c1h2 /usr/sbin/ip route add default via 88.1.1.254 dev c1h2-eth
++ for cust in `seq 1 2`
+++ seq 1 2
++ for host in `seq 1 2`
++ custhost=c2h1
++ /usr/sbin/ip netns exec c2h1 /usr/sbin/ip route add default via 88.1.1.254 dev c2h1-eth
++ for host in `seq 1 2`
++ custhost=c2h2
++ /usr/sbin/ip netns exec c2h2 /usr/sbin/ip route add default via 88.1.1.254 dev c2h2-eth
+++ seq 1 2
++ for cust in `seq 1 2`
+++ seq 3 4
++ for host in `seq 3 4`
++ custhost=c1h3
++ /usr/sbin/ip netns exec c1h3 /usr/sbin/ip route add default via 88.2.1.254 dev c1h3-eth
++ for host in `seq 3 4`
++ custhost=c1h4
++ /usr/sbin/ip netns exec c1h4 /usr/sbin/ip route add default via 88.2.1.254 dev c1h4-eth
++ for cust in `seq 1 2`
+++ seq 3 4
++ for host in `seq 3 4`
++ custhost=c2h3
++ /usr/sbin/ip netns exec c2h3 /usr/sbin/ip route add default via 88.2.1.254 dev c2h3-eth
++ for host in `seq 3 4`
++ custhost=c2h4
++ /usr/sbin/ip netns exec c2h4 /usr/sbin/ip route add default via 88.2.1.254 dev c2h4-eth
++ /usr/sbin/ip netns exec c1e1 sysctl -w net.ipv4.ip_forward=1
+net.ipv4.ip_forward = 1
++ /usr/sbin/ip netns exec c1e1 /usr/sbin/ip route add default via 1.1.1.2 dev c1e1-pe1-eth
++ /usr/sbin/ip netns exec c2e1 sysctl -w net.ipv4.ip_forward=1
+net.ipv4.ip_forward = 1
++ /usr/sbin/ip netns exec c2e1 /usr/sbin/ip route add default via 1.1.1.2 dev c2e1-pe1-eth
++ /usr/sbin/ip netns exec c1e2 sysctl -w net.ipv4.ip_forward=1
+net.ipv4.ip_forward = 1
++ /usr/sbin/ip netns exec c1e2 /usr/sbin/ip route add default via 3.1.1.1 dev c1e2-pe2-eth
++ /usr/sbin/ip netns exec c2e2 sysctl -w net.ipv4.ip_forward=1
+net.ipv4.ip_forward = 1
++ /usr/sbin/ip netns exec c2e2 /usr/sbin/ip route add default via 3.1.1.1 dev c2e2-pe2-eth
++ /usr/sbin/ip netns exec pe1 sysctl -w net.ipv4.ip_forward=1
+net.ipv4.ip_forward = 1
++ /usr/sbin/ip netns exec pe1 /usr/sbin/ip route add 2.1.1.2/32 dev pe1-p-eth table 10
++ /usr/sbin/ip netns exec pe1 /usr/sbin/ip route add 88.2.1.0/24 encap mpls 101 via 2.1.1.2 table 10
++ /usr/sbin/ip netns exec pe1 /usr/sbin/ip route add 88.1.1.0/24 via 1.1.1.1 table 10
++ /usr/sbin/ip netns exec pe1 /usr/sbin/ip route add 2.1.1.2/32 dev pe1-p-eth table 20
++ /usr/sbin/ip netns exec pe1 /usr/sbin/ip route add 88.2.1.0/24 encap mpls 201 via 2.1.1.2 table 20
++ /usr/sbin/ip netns exec pe1 /usr/sbin/ip route add 88.1.1.0/24 via 1.1.1.1 table 20
++ /usr/sbin/ip netns exec pe2 sysctl -w net.ipv4.ip_forward=1
+net.ipv4.ip_forward = 1
++ /usr/sbin/ip netns exec pe2 /usr/sbin/ip route add 2.1.1.5/32 dev pe2-p-eth table 10
++ /usr/sbin/ip netns exec pe2 /usr/sbin/ip route add 88.1.1.0/24 encap mpls 102 via 2.1.1.5 table 10
++ /usr/sbin/ip netns exec pe2 /usr/sbin/ip route add 88.2.1.0/24 via 3.1.1.2 table 10
++ /usr/sbin/ip netns exec pe2 /usr/sbin/ip route add 2.1.1.5/32 dev pe2-p-eth table 20
++ /usr/sbin/ip netns exec pe2 /usr/sbin/ip route add 88.1.1.0/24 encap mpls 202 via 2.1.1.5 table 20
++ /usr/sbin/ip netns exec pe2 /usr/sbin/ip route add 88.2.1.0/24 via 3.1.1.2 table 20
++ /usr/sbin/ip netns exec p sysctl -w net.ipv4.ip_forward=1
+net.ipv4.ip_forward = 1
++ /usr/sbin/ip netns exec p /usr/sbin/ip -f mpls route add 101 as 111 via inet 2.1.1.6
++ /usr/sbin/ip netns exec p /usr/sbin/ip -f mpls route add 201 as 211 via inet 2.1.1.6
++ /usr/sbin/ip netns exec p /usr/sbin/ip -f mpls route add 102 as 112 via inet 2.1.1.1
++ /usr/sbin/ip netns exec p /usr/sbin/ip -f mpls route add 202 as 212 via inet 2.1.1.1
++ /usr/sbin/ip netns exec pe1 /usr/sbin/ip -f mpls route add 112 via inet 1.1.1.1 dev vrf-pe1-c1
++ /usr/sbin/ip netns exec pe1 /usr/sbin/ip -f mpls route add 212 via inet 1.1.1.1 dev vrf-pe1-c2
++ /usr/sbin/ip netns exec pe2 /usr/sbin/ip -f mpls route add 111 via inet 3.1.1.1 dev vrf-pe2-c1
++ /usr/sbin/ip netns exec pe2 /usr/sbin/ip -f mpls route add 211 via inet 3.1.1.1 dev vrf-pe2-c2
++ set +x
+[root@wluo vrf-with-mpls]$ 
