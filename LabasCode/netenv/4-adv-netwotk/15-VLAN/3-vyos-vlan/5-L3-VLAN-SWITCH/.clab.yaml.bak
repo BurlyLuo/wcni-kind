@@ -1,6 +1,3 @@
-#!/bin/bash
-set -v
-cat <<EOF>clab.yaml | clab deploy -t clab.yaml -
 name: l3-vlan-switch
 mgmt:
   ipv6-subnet: ""
@@ -69,6 +66,4 @@ topology:
 
     - endpoints: ["br12:eth1", "br1:eth3"]
     - endpoints: ["br12:eth2", "br2:eth3"]
-
-EOF
 
