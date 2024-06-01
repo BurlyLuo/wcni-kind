@@ -40,9 +40,9 @@ topology:
 
 
   links:
-    - endpoints: ["gwx:eth1", "br-vrf:net1"]
-    - endpoints: ["br-vrf:net2", "server1:net0"]
-    - endpoints: ["br-vrf:net3", "server2:net0"]
+    - endpoints: ["gwx:eth1", "br-vrf:eth1"]
+    - endpoints: ["br-vrf:eth2", "server1:net0"]
+    - endpoints: ["br-vrf:eth3", "server2:net0"]
     - endpoints: ["gwx:eth2", "server3:net0"]
 
 EOF
