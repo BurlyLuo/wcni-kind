@@ -1,0 +1,18 @@
+all:
+  children:
+    linux:
+      hosts:
+        clab-l3-vlan-switch-vrf-br1:
+          ansible_host: 172.20.20.3
+        clab-l3-vlan-switch-vrf-br12:
+          ansible_host: 172.20.20.6
+        clab-l3-vlan-switch-vrf-br2:
+          ansible_host: 172.20.20.2
+        clab-l3-vlan-switch-vrf-server1:
+          ansible_host: 172.20.20.5
+        clab-l3-vlan-switch-vrf-server2:
+          ansible_host: 172.20.20.4
+        clab-l3-vlan-switch-vrf-server3:
+          ansible_host: 172.20.20.8
+        clab-l3-vlan-switch-vrf-server4:
+          ansible_host: 172.20.20.7
