@@ -3,16 +3,16 @@ all:
     linux:
       hosts:
         clab-l3-vlan-vrf-br1:
-          ansible_host: 172.20.20.9
+          ansible_host: 172.20.20.5
         clab-l3-vlan-vrf-br12:
-          ansible_host: 172.20.20.12
+          ansible_host: 172.20.20.6
         clab-l3-vlan-vrf-server1:
-          ansible_host: 172.20.20.15
+          ansible_host: 172.20.20.3
         clab-l3-vlan-vrf-server2:
-          ansible_host: 172.20.20.10
+          ansible_host: 172.20.20.2
         clab-l3-vlan-vrf-server3:
-          ansible_host: 172.20.20.13
+          ansible_host: 172.20.20.4
         clab-l3-vlan-vrf-server4:
-          ansible_host: 172.20.20.14
+          ansible_host: 172.20.20.7
         clab-l3-vlan-vrf-server5:
-          ansible_host: 172.20.20.11
+          ansible_host: 172.20.20.8
