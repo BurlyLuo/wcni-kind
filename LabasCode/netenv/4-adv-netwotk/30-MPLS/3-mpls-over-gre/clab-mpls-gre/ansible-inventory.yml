@@ -3,12 +3,6 @@ all:
     linux:
       hosts:
         clab-mpls-gre-r1:
-          ansible_host: 172.20.20.3
-        clab-mpls-gre-r2:
           ansible_host: 172.20.20.2
-        clab-mpls-gre-r3:
-          ansible_host: 172.20.20.4
-        clab-mpls-gre-server1:
-          ansible_host: 172.20.20.6
-        clab-mpls-gre-server2:
-          ansible_host: 172.20.20.5
+        clab-mpls-gre-r2:
+          ansible_host: 172.20.20.3
