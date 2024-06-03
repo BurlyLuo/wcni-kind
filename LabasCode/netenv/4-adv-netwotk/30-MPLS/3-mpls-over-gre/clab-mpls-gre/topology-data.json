@@ -6,7 +6,7 @@
       "prefix": "clab",
       "mgmt": {
         "network": "clab",
-        "bridge": "br-c7a0336a0731",
+        "bridge": "br-f4971c958cfa",
         "ipv4-subnet": "172.20.20.0/24",
         "ipv4-gw": "172.20.20.1",
         "ipv6-subnet": "2001:172:20:20::/64",
@@ -28,13 +28,13 @@
       "image": "192.168.2.100:5000/vyos/vyos:1.4.9",
       "mgmt-net": "",
       "mgmt-intf": "",
-      "mgmt-ipv4-address": "172.20.20.3",
+      "mgmt-ipv4-address": "172.20.20.2",
       "mgmt-ipv4-prefix-length": 24,
-      "mgmt-ipv6-address": "2001:172:20:20::3",
+      "mgmt-ipv6-address": "2001:172:20:20::2",
       "mgmt-ipv6-prefix-length": 64,
       "mac-address": "",
       "labels": {
-        "clab-mgmt-net-bridge": "br-c7a0336a0731",
+        "clab-mgmt-net-bridge": "br-f4971c958cfa",
         "clab-node-group": "",
         "clab-node-kind": "linux",
         "clab-node-lab-dir": "/root/wcni-kind/LabasCode/netenv/4-adv-netwotk/30-MPLS/3-mpls-over-gre/clab-mpls-gre/r1",
@@ -55,98 +55,17 @@
       "image": "192.168.2.100:5000/vyos/vyos:1.4.9",
       "mgmt-net": "",
       "mgmt-intf": "",
-      "mgmt-ipv4-address": "172.20.20.2",
+      "mgmt-ipv4-address": "172.20.20.3",
       "mgmt-ipv4-prefix-length": 24,
-      "mgmt-ipv6-address": "2001:172:20:20::2",
+      "mgmt-ipv6-address": "2001:172:20:20::3",
       "mgmt-ipv6-prefix-length": 64,
       "mac-address": "",
       "labels": {
-        "clab-mgmt-net-bridge": "br-c7a0336a0731",
+        "clab-mgmt-net-bridge": "br-f4971c958cfa",
         "clab-node-group": "",
         "clab-node-kind": "linux",
         "clab-node-lab-dir": "/root/wcni-kind/LabasCode/netenv/4-adv-netwotk/30-MPLS/3-mpls-over-gre/clab-mpls-gre/r2",
         "clab-node-name": "r2",
-        "clab-node-type": "",
-        "clab-topo-file": "/root/wcni-kind/LabasCode/netenv/4-adv-netwotk/30-MPLS/3-mpls-over-gre/clab.yaml",
-        "containerlab": "mpls-gre"
-      }
-    },
-    "r3": {
-      "index": "2",
-      "shortname": "r3",
-      "longname": "clab-mpls-gre-r3",
-      "fqdn": "r3.mpls-gre.io",
-      "group": "",
-      "labdir": "/root/wcni-kind/LabasCode/netenv/4-adv-netwotk/30-MPLS/3-mpls-over-gre/clab-mpls-gre/r3",
-      "kind": "linux",
-      "image": "192.168.2.100:5000/vyos/vyos:1.4.9",
-      "mgmt-net": "",
-      "mgmt-intf": "",
-      "mgmt-ipv4-address": "172.20.20.4",
-      "mgmt-ipv4-prefix-length": 24,
-      "mgmt-ipv6-address": "2001:172:20:20::4",
-      "mgmt-ipv6-prefix-length": 64,
-      "mac-address": "",
-      "labels": {
-        "clab-mgmt-net-bridge": "br-c7a0336a0731",
-        "clab-node-group": "",
-        "clab-node-kind": "linux",
-        "clab-node-lab-dir": "/root/wcni-kind/LabasCode/netenv/4-adv-netwotk/30-MPLS/3-mpls-over-gre/clab-mpls-gre/r3",
-        "clab-node-name": "r3",
-        "clab-node-type": "",
-        "clab-topo-file": "/root/wcni-kind/LabasCode/netenv/4-adv-netwotk/30-MPLS/3-mpls-over-gre/clab.yaml",
-        "containerlab": "mpls-gre"
-      }
-    },
-    "server1": {
-      "index": "3",
-      "shortname": "server1",
-      "longname": "clab-mpls-gre-server1",
-      "fqdn": "server1.mpls-gre.io",
-      "group": "",
-      "labdir": "/root/wcni-kind/LabasCode/netenv/4-adv-netwotk/30-MPLS/3-mpls-over-gre/clab-mpls-gre/server1",
-      "kind": "linux",
-      "image": "192.168.2.100:5000/nettool",
-      "mgmt-net": "",
-      "mgmt-intf": "",
-      "mgmt-ipv4-address": "172.20.20.6",
-      "mgmt-ipv4-prefix-length": 24,
-      "mgmt-ipv6-address": "2001:172:20:20::6",
-      "mgmt-ipv6-prefix-length": 64,
-      "mac-address": "",
-      "labels": {
-        "clab-mgmt-net-bridge": "br-c7a0336a0731",
-        "clab-node-group": "",
-        "clab-node-kind": "linux",
-        "clab-node-lab-dir": "/root/wcni-kind/LabasCode/netenv/4-adv-netwotk/30-MPLS/3-mpls-over-gre/clab-mpls-gre/server1",
-        "clab-node-name": "server1",
-        "clab-node-type": "",
-        "clab-topo-file": "/root/wcni-kind/LabasCode/netenv/4-adv-netwotk/30-MPLS/3-mpls-over-gre/clab.yaml",
-        "containerlab": "mpls-gre"
-      }
-    },
-    "server2": {
-      "index": "4",
-      "shortname": "server2",
-      "longname": "clab-mpls-gre-server2",
-      "fqdn": "server2.mpls-gre.io",
-      "group": "",
-      "labdir": "/root/wcni-kind/LabasCode/netenv/4-adv-netwotk/30-MPLS/3-mpls-over-gre/clab-mpls-gre/server2",
-      "kind": "linux",
-      "image": "192.168.2.100:5000/nettool",
-      "mgmt-net": "",
-      "mgmt-intf": "",
-      "mgmt-ipv4-address": "172.20.20.5",
-      "mgmt-ipv4-prefix-length": 24,
-      "mgmt-ipv6-address": "2001:172:20:20::5",
-      "mgmt-ipv6-prefix-length": 64,
-      "mac-address": "",
-      "labels": {
-        "clab-mgmt-net-bridge": "br-c7a0336a0731",
-        "clab-node-group": "",
-        "clab-node-kind": "linux",
-        "clab-node-lab-dir": "/root/wcni-kind/LabasCode/netenv/4-adv-netwotk/30-MPLS/3-mpls-over-gre/clab-mpls-gre/server2",
-        "clab-node-name": "server2",
         "clab-node-type": "",
         "clab-topo-file": "/root/wcni-kind/LabasCode/netenv/4-adv-netwotk/30-MPLS/3-mpls-over-gre/clab.yaml",
         "containerlab": "mpls-gre"
@@ -158,55 +77,13 @@
       "a": {
         "node": "r1",
         "interface": "eth1",
-        "mac": "aa:c1:ab:ad:00:20",
-        "peer": "z"
-      },
-      "z": {
-        "node": "server1",
-        "interface": "net0",
-        "mac": "aa:c1:ab:7d:74:04",
-        "peer": "a"
-      }
-    },
-    {
-      "a": {
-        "node": "r3",
-        "interface": "eth1",
-        "mac": "aa:c1:ab:dd:af:28",
-        "peer": "z"
-      },
-      "z": {
-        "node": "server2",
-        "interface": "net0",
-        "mac": "aa:c1:ab:51:a9:f5",
-        "peer": "a"
-      }
-    },
-    {
-      "a": {
-        "node": "r1",
-        "interface": "eth2",
-        "mac": "aa:c1:ab:46:fd:aa",
+        "mac": "aa:c1:ab:e7:41:97",
         "peer": "z"
       },
       "z": {
         "node": "r2",
         "interface": "eth1",
-        "mac": "aa:c1:ab:94:a9:b2",
-        "peer": "a"
-      }
-    },
-    {
-      "a": {
-        "node": "r2",
-        "interface": "eth2",
-        "mac": "aa:c1:ab:24:18:20",
-        "peer": "z"
-      },
-      "z": {
-        "node": "r3",
-        "interface": "eth2",
-        "mac": "aa:c1:ab:66:1d:92",
+        "mac": "aa:c1:ab:e9:30:f0",
         "peer": "a"
       }
     }
