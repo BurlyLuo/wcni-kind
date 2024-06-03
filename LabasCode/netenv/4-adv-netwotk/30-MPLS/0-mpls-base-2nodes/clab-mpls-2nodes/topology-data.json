@@ -1,0 +1,91 @@
+{
+  "name": "mpls-2nodes",
+  "type": "clab",
+  "clab": {
+    "config": {
+      "prefix": "clab",
+      "mgmt": {
+        "network": "clab",
+        "bridge": "br-10d34a796fb1",
+        "ipv4-subnet": "172.20.20.0/24",
+        "ipv4-gw": "172.20.20.1",
+        "ipv6-subnet": "2001:172:20:20::/64",
+        "ipv6-gw": "2001:172:20:20::1",
+        "mtu": "1500",
+        "external-access": true
+      }
+    }
+  },
+  "nodes": {
+    "mpls1": {
+      "index": "0",
+      "shortname": "mpls1",
+      "longname": "clab-mpls-2nodes-mpls1",
+      "fqdn": "mpls1.mpls-2nodes.io",
+      "group": "",
+      "labdir": "/root/wcni-kind/LabasCode/netenv/4-adv-netwotk/30-MPLS/0-mpls-base-2nodes/clab-mpls-2nodes/mpls1",
+      "kind": "linux",
+      "image": "192.168.2.100:5000/vyos/vyos:1.4.9",
+      "mgmt-net": "",
+      "mgmt-intf": "",
+      "mgmt-ipv4-address": "172.20.20.3",
+      "mgmt-ipv4-prefix-length": 24,
+      "mgmt-ipv6-address": "2001:172:20:20::3",
+      "mgmt-ipv6-prefix-length": 64,
+      "mac-address": "",
+      "labels": {
+        "clab-mgmt-net-bridge": "br-10d34a796fb1",
+        "clab-node-group": "",
+        "clab-node-kind": "linux",
+        "clab-node-lab-dir": "/root/wcni-kind/LabasCode/netenv/4-adv-netwotk/30-MPLS/0-mpls-base-2nodes/clab-mpls-2nodes/mpls1",
+        "clab-node-name": "mpls1",
+        "clab-node-type": "",
+        "clab-topo-file": "/root/wcni-kind/LabasCode/netenv/4-adv-netwotk/30-MPLS/0-mpls-base-2nodes/clab.yaml",
+        "containerlab": "mpls-2nodes"
+      }
+    },
+    "mpls2": {
+      "index": "1",
+      "shortname": "mpls2",
+      "longname": "clab-mpls-2nodes-mpls2",
+      "fqdn": "mpls2.mpls-2nodes.io",
+      "group": "",
+      "labdir": "/root/wcni-kind/LabasCode/netenv/4-adv-netwotk/30-MPLS/0-mpls-base-2nodes/clab-mpls-2nodes/mpls2",
+      "kind": "linux",
+      "image": "192.168.2.100:5000/vyos/vyos:1.4.9",
+      "mgmt-net": "",
+      "mgmt-intf": "",
+      "mgmt-ipv4-address": "172.20.20.2",
+      "mgmt-ipv4-prefix-length": 24,
+      "mgmt-ipv6-address": "2001:172:20:20::2",
+      "mgmt-ipv6-prefix-length": 64,
+      "mac-address": "",
+      "labels": {
+        "clab-mgmt-net-bridge": "br-10d34a796fb1",
+        "clab-node-group": "",
+        "clab-node-kind": "linux",
+        "clab-node-lab-dir": "/root/wcni-kind/LabasCode/netenv/4-adv-netwotk/30-MPLS/0-mpls-base-2nodes/clab-mpls-2nodes/mpls2",
+        "clab-node-name": "mpls2",
+        "clab-node-type": "",
+        "clab-topo-file": "/root/wcni-kind/LabasCode/netenv/4-adv-netwotk/30-MPLS/0-mpls-base-2nodes/clab.yaml",
+        "containerlab": "mpls-2nodes"
+      }
+    }
+  },
+  "links": [
+    {
+      "a": {
+        "node": "mpls1",
+        "interface": "eth1",
+        "mac": "aa:c1:ab:00:57:d5",
+        "peer": "z"
+      },
+      "z": {
+        "node": "mpls2",
+        "interface": "eth1",
+        "mac": "aa:c1:ab:41:82:a6",
+        "peer": "a"
+      }
+    }
+  ]
+}
