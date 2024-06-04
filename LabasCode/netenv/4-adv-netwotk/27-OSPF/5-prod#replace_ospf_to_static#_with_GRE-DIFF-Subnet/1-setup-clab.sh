@@ -7,7 +7,9 @@ set -v
 # gre1:10.10.10.2/24         gre1:10.10.10.3/24
 
 # 如果使用eth0 作为GRE的underlay网络的话，我们可以再叠加上NAT。这样，既可以GRE互通，又可以SANT。
-
+########################################################################
+# NOTE: Replace the docker bridge default route with VyoS default route 
+########################################################################
 cat <<EOF>clab.yaml | clab deploy -t clab.yaml -
 name: static-gre-diff
 topology:
