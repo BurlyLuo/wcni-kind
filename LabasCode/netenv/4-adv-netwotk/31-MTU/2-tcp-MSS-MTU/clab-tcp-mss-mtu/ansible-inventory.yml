@@ -1,0 +1,12 @@
+all:
+  children:
+    linux:
+      hosts:
+        clab-tcp-mss-mtu-gw1:
+          ansible_host: 172.20.20.5
+        clab-tcp-mss-mtu-gw2:
+          ansible_host: 172.20.20.2
+        clab-tcp-mss-mtu-server1:
+          ansible_host: 172.20.20.4
+        clab-tcp-mss-mtu-server2:
+          ansible_host: 172.20.20.3
