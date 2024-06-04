@@ -1,0 +1,5 @@
+这是simu发出来的。和FE上的MTU没有关系【simu上的mtu也是1500】。这个应该是网卡 的tso on造成的。
+ethtool -K eth0 tso off
+
+tcp-segmentation-offload: off
+	tx-tcp-segmentation: off
