@@ -1,0 +1,3 @@
+BGP --- GRE underlay network
+OSPF --- lo/dummmy interface via gre to remote
+LDP --- LDP Over GRE
