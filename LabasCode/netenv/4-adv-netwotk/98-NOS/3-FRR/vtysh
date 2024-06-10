@@ -1,0 +1,1 @@
+docker run --name=frr -td --privileged frrouting/frr:v7.5.0
