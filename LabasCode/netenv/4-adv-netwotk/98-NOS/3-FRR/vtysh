@@ -1,1 +1,184 @@
 docker run --name=frr -td --privileged frrouting/frr:v7.5.0
+
+
+```
+# https://github.com/srl-labs/containerlab/blob/main/lab-examples/frr01/frr01.clab.yml
+# topo.yaml
+name: bgp-cplane-demo
+topology:
+  kinds:
+    linux:
+      cmd: bash
+  nodes:
+    router0:
+      kind: linux
+      image: frrouting/frr:v8.2.2
+      labels:
+        app: frr
+      exec:
+      - iptables -t nat -A POSTROUTING -o eth0 -j MASQUERADE
+      - ip addr add 10.0.0.0/32 dev lo
+      - ip route add blackhole 10.0.0.0/8
+      - touch /etc/frr/vtysh.conf
+      - sed -i -e 's/bgpd=no/bgpd=yes/g' /etc/frr/daemons
+      - usr/lib/frr/frrinit.sh start
+      - >-
+         vtysh -c 'conf t'
+         -c 'router bgp 65000'
+         -c ' bgp router-id 10.0.0.0'
+         -c ' no bgp ebgp-requires-policy'
+         -c ' neighbor ROUTERS peer-group'
+         -c ' neighbor ROUTERS remote-as external'
+         -c ' neighbor ROUTERS default-originate'
+         -c ' neighbor net0 interface peer-group ROUTERS'
+         -c ' neighbor net1 interface peer-group ROUTERS'
+         -c ' address-family ipv4 unicast'
+         -c '   redistribute connected'
+         -c ' exit-address-family'
+         -c '!'
+            
+     tor0:
+      kind: linux
+      image: frrouting/frr:v8.2.2  
+      labels:
+        app: frr
+      exec:
+      - ip link del eth0
+      - ip addr add 10.0.0.1/32 dev lo
+      - ip addr add 10.0.1.1/24 dev net1
+      - ip addr add 10.0.2.1/24 dev net2
+      - touch /etc/frr/vtysh.conf
+      - sed -i -e 's/bgpd=no/bgpd=yes/g' /etc/frr/daemons
+      - /usr/lib/frr/frrinit.sh start
+      - >-
+         vtysh -c 'conf t'
+         -c 'frr defaults datacenter'
+         -c 'router bgp 65010'
+         -c ' bgp router-id 10.0.0.1'
+         -c ' no bgp ebgp-requires-policy'
+         -c ' neighbor ROUTERS peer-group'
+         -c ' neighbor ROUTERS remote-as external'
+         -c ' neighbor SERVERS peer-group'
+         -c ' neighbor SERVERS remote-as internal'
+         -c ' neighbor net0 interface peer-group ROUTERS'
+         -c ' neighbor 10.0.1.2 peer-group SERVERS'
+         -c ' neighbor 10.0.2.2 peer-group SERVERS'
+         -c ' address-family ipv4 unicast'
+         -c '   redistribute connected'
+         -c '  exit-address-family'
+         -c '!'
+          
+     tor1:
+      kind: linux
+      image: frrouting/frr:v8.2.2
+      labels:
+        app: frr
+      exec:
+      - ip link del eth0
+      - ip addr add 10.0.0.2/32 dev lo
+      - ip addr add 10.0.3.1/24 dev net1
+      - ip addr add 10.0.4.1/24 dev net2
+      - touch /etc/frr/vtysh.conf
+      - sed -i -e 's/bgpd=no/bgpd=yes/g' /etc/frr/daemons
+      - /usr/lib/frr/frrinit.sh start
+      - >-
+         vtysh -c 'conf t'
+         -c 'frr defaults datacenter'
+         -c 'router bgp 65011'
+         -c ' bgp router-id 10.0.0.2'
+         -c ' no bgp ebgp-requires-policy'
+         -c ' neighbor ROUTERS peer-group'
+         -c ' neighbor ROUTERS remote-as external'
+         -c ' neighbor SERVERS peer-group'
+         -c ' neighbor SERVERS remote-as internal'
+         -c ' neighbor net0 interface peer-group ROUTERS'
+         -c ' neighbor 10.0.3.2 peer-group SERVERS'
+         -c ' neighbor 10.0.4.2 peer-group SERVERS'
+         -c ' address-family ipv4 unicast'
+         -c '   redistribute connected'
+         -c '  exit-address-family'
+         -c '!'      
+     
+    server0:
+      kind: linux
+      image: nicolaka/netshoot:latest
+      network-mode: container:control-plane
+      exec:
+      - ip addr add 10.0.1.2/24 dev net0
+      - ip route replace default via 10.0.1.1
+ 
+    server1:
+      kind: linux
+      image: nicolaka/netshoot:latest
+      network-mode: container:worker
+      exec:
+      - ip addr add 10.0.2.2/24 dev net0
+      - ip route replace default via 10.0.2.1
+ 
+    server2:
+      kind: linux
+      image: nicolaka/netshoot:latest
+      network-mode: container:worker2
+      exec:
+      - ip addr add 10.0.3.2/24 dev net0
+      - ip route replace default via 10.0.3.1
+ 
+    server3:
+      kind: linux
+      image: nicolaka/netshoot:latest
+      network-mode: container:worker3
+      exec:
+      - ip addr add 10.0.4.2/24 dev net0
+      - ip route replace default via 10.0.4.1
+ 
+  links:
+  - endpoints: ["router0:net0", "tor0:net0"]
+  - endpoints: ["router0:net1", "tor1:net0"]
+  - endpoints: ["tor0:net1", "server0:net0"]
+  - endpoints: ["tor0:net2", "server1:net0"]
+  - endpoints: ["tor1:net1", "server2:net0"]
+  - endpoints: ["tor1:net2", "server3:net0"]
+
+```
+
+```
+name: frr01
+
+topology:
+  nodes:
+    router1:
+      kind: linux
+      image: frrouting/frr:v7.5.1
+      binds:
+        - router1/daemons:/etc/frr/daemons
+        - router1/frr.conf:/etc/frr/frr.conf
+    router2:
+      kind: linux
+      image: frrouting/frr:v7.5.1
+      binds:
+        - router2/daemons:/etc/frr/daemons
+        - router2/frr.conf:/etc/frr/frr.conf
+    router3:
+      kind: linux
+      image: frrouting/frr:v7.5.1
+      binds:
+        - router3/daemons:/etc/frr/daemons
+        - router3/frr.conf:/etc/frr/frr.conf
+    PC1:
+      kind: linux
+      image: praqma/network-multitool:latest
+    PC2:
+      kind: linux
+      image: praqma/network-multitool:latest
+    PC3:
+      kind: linux
+      image: praqma/network-multitool:latest
+
+  links:
+    - endpoints: ["router1:eth1", "router2:eth1"]
+    - endpoints: ["router1:eth2", "router3:eth1"]
+    - endpoints: ["router2:eth2", "router3:eth2"]
+    - endpoints: ["PC1:eth1", "router1:eth3"]
+    - endpoints: ["PC2:eth1", "router2:eth3"]
+    - endpoints: ["PC3:eth1", "router3:eth3"]
+```
