@@ -3,10 +3,10 @@ all:
     linux:
       hosts:
         clab-bgp-base-gw1:
-          ansible_host: 172.20.20.4
-        clab-bgp-base-gw2:
           ansible_host: 172.20.20.5
-        clab-bgp-base-server1:
+        clab-bgp-base-gw2:
           ansible_host: 172.20.20.3
-        clab-bgp-base-server2:
+        clab-bgp-base-server1:
           ansible_host: 172.20.20.2
+        clab-bgp-base-server2:
+          ansible_host: 172.20.20.4
