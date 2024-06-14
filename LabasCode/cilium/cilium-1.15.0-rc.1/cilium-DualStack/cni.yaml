@@ -29,6 +29,7 @@ kind: Service
 metadata:
   name: wluo
 spec:
+  clusterIP: None
   ipFamilyPolicy: PreferDualStack
   ipFamilies:
   - IPv6
