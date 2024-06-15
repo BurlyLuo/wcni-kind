@@ -142,9 +142,16 @@ alias 1804d='set -f;sed -i '/vm1804/d' /etc/hosts && for vm in $(multipass list 
 
 alias 2310d='set -f;sed -i /vm2310/d /etc/hosts && for vm in $(multipass list | grep vm2310[0-9] | awk -F " " "{print \$1}"); do multipass delete --purge $vm; done && { sed -i "1!d" /root/.ssh/known_hosts; } > /dev/null 2>&1;set +f'
 
+alias 2404d='set -f;sed -i '/vm2404/d' /etc/hosts && for vm in $(multipass list | grep vm2404[0-9] | awk -F " " "{print \$1}"); do multipass delete --purge $vm; done && { sed -i "1!d" /root/.ssh/known_hosts;kubectl config delete-cluster 2404ctx && kubectl config delete-context 2404ctx && kubectl config delete-user 2404ctx && kubectl config unset current-context; } > /dev/null 2>&1;set +f'
+
 alias 2204='ip=$(cat /etc/hosts | grep 2204 | awk -F " " '\''{print $1}'\'') && ssh root@$ip'
 alias 22040='ip=$(cat /etc/hosts | grep 22040 | awk -F " " '\''{print $1}'\'') && ssh root@$ip'
 alias 22041='ip=$(cat /etc/hosts | grep 22041 | awk -F " " '\''{print $1}'\'') && ssh root@$ip'
+
+
+alias 2404='ip=$(cat /etc/hosts | grep 2404 | awk -F " " '\''{print $1}'\'') && ssh root@$ip'
+alias 24040='ip=$(cat /etc/hosts | grep 24040 | awk -F " " '\''{print $1}'\'') && ssh root@$ip'
+alias 24041='ip=$(cat /etc/hosts | grep 24041 | awk -F " " '\''{print $1}'\'') && ssh root@$ip'
 
 alias 2304d='set -f;sed -i '/vm2304/d' /etc/hosts && for vm in $(multipass list | grep vm2304[0-9] | awk -F " " "{print \$1}"); do multipass delete --purge $vm; done && { sed -i "1!d" /root/.ssh/known_hosts; } > /dev/null 2>&1;set +f'
 alias 2304='ip=$(cat /etc/hosts | grep 2304 | awk -F " " '\''{print $1}'\'') && ssh root@$ip'
