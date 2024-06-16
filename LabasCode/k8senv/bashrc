@@ -141,7 +141,7 @@ alias 2204d='set -f;sed -i '/vm2204/d' /etc/hosts && for vm in $(multipass list 
 
 alias 2304d='set -f;sed -i '/vm2304/d' /etc/hosts && for vm in $(multipass list | grep vm2304[0-9] | awk -F " " "{print \$1}"); do multipass delete --purge $vm; done && { sed -i "1!d" /root/.ssh/known_hosts; } > /dev/null 2>&1;set +f'
 
-alias 2310d='set -f;sed -i /vm2310/d /etc/hosts && for vm in $(multipass list | grep vm2310[0-9] | awk -F " " "{print \$1}"); do multipass delete --purge $vm; done && { sed -i "1!d" /root/.ssh/known_hosts; } > /dev/null 2>&1;set +f'
+alias 2310d='set -f;sed -i '/vm2310/d' /etc/hosts && for vm in $(multipass list | grep vm2310[0-9] | awk -F " " "{print \$1}"); do multipass delete --purge $vm; done && { sed -i "1!d" /root/.ssh/known_hosts; } > /dev/null 2>&1;set +f'
 
 alias 2404d='set -f;sed -i '/vm2404/d' /etc/hosts && for vm in $(multipass list | grep vm2404[0-9] | awk -F " " "{print \$1}"); do multipass delete --purge $vm; done && { sed -i "1!d" /root/.ssh/known_hosts;kubectl config delete-cluster 2404ctx && kubectl config delete-context 2404ctx && kubectl config delete-user 2404ctx && kubectl config unset current-context; } > /dev/null 2>&1;set +f'
 
