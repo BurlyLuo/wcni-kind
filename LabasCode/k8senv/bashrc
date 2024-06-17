@@ -145,6 +145,8 @@ alias 2310d='set -f;sed -i '/vm2310/d' /etc/hosts && for vm in $(multipass list 
 
 alias 2404d='set -f;sed -i '/vm2404/d' /etc/hosts && for vm in $(multipass list | grep vm2404[0-9] | awk -F " " "{print \$1}"); do multipass delete --purge $vm; done && { sed -i "1!d" /root/.ssh/known_hosts;kubectl config delete-cluster 2404ctx && kubectl config delete-context 2404ctx && kubectl config delete-user 2404ctx && kubectl config unset current-context; } > /dev/null 2>&1;set +f'
 
+alias 2410d='set -f;sed -i '/vm2410/d' /etc/hosts && for vm in $(multipass list | grep vm2410[0-9] | awk -F " " "{print \$1}"); do multipass delete --purge $vm; done && { sed -i "1!d" /root/.ssh/known_hosts;kubectl config delete-cluster 2410ctx && kubectl config delete-context 2410ctx && kubectl config delete-user 2410ctx && kubectl config unset current-context; } > /dev/null 2>&1;set +f'
+
 # 2. multipass login
 alias 1604='ip=$(cat /etc/hosts | grep 1604 | awk -F " " '\''{print $1}'\'') && ssh root@$ip'
 
@@ -161,6 +163,8 @@ alias 2304='ip=$(cat /etc/hosts | grep 2304 | awk -F " " '\''{print $1}'\'') && 
 alias 2404='ip=$(cat /etc/hosts | grep 2404 | awk -F " " '\''{print $1}'\'') && ssh root@$ip'
 alias 24040='ip=$(cat /etc/hosts | grep 24040 | awk -F " " '\''{print $1}'\'') && ssh root@$ip'
 alias 24041='ip=$(cat /etc/hosts | grep 24041 | awk -F " " '\''{print $1}'\'') && ssh root@$ip'
+
+alias 2410='ip=$(cat /etc/hosts | grep 2410 | awk -F " " '\''{print $1}'\'') && ssh root@$ip'
 
 # 3. gc extra-k8s ctx 
 alias dkc='set -f;{ kubectl config delete-cluster $1 && kubectl config delete-context $1 && kubectl config delete-user $1 && kubectl config unset current-context; } > /dev/null 2>&1;set +f'
