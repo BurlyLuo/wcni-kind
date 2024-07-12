@@ -1,0 +1,3 @@
+vlan tag at k8s-sriov-device-plugin for each vf
+
+otherwise the dpdk-input trace will raise unknown vlan.
