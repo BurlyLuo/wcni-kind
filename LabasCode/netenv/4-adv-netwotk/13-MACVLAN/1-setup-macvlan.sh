@@ -20,6 +20,7 @@ topology:
         - >
           bash -c '
           ip l s net1 promisc on &&
+          ip l s net1 mtu 1400 &&
 
           ip l a l net1 name macvlan1 type macvlan mode bridge &&
           ip l s macvlan1 up &&
@@ -36,6 +37,7 @@ topology:
         - >
           bash -c '
           ip l s net1 promisc on &&
+          ip l s net1 mtu 1400 &&
 
           ip l a l net1 name macvlan1 type macvlan mode bridge &&
           ip l s macvlan1 up &&
@@ -52,7 +54,8 @@ topology:
         - >
           bash -c '
           ip l s net1 promisc on &&
-
+          ip l s net1 mtu 1400 &&
+ 
           ip l a l net1 name macvlan1 type macvlan mode bridge &&
           ip l s macvlan1 up &&
           ip a a 10.1.9.10/24 dev macvlan1 &&
