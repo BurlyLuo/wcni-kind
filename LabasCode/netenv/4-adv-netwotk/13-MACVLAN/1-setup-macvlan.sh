@@ -16,6 +16,7 @@ topology:
       kind: linux
       image: 192.168.2.100:5000/nettool
       exec:
+      # MTU: https://www.cni.dev/plugins/current/main/macvlan/#network-configuration-reference
       # N-S Traffic:
         - >
           bash -c '
