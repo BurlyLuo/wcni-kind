@@ -6,7 +6,7 @@
       "prefix": "clab",
       "mgmt": {
         "network": "clab",
-        "bridge": "br-dd2b54899b79",
+        "bridge": "br-0a379f1038fa",
         "ipv4-subnet": "172.20.20.0/24",
         "ipv4-gw": "172.20.20.1",
         "ipv6-subnet": "2001:172:20:20::/64",
@@ -28,13 +28,13 @@
       "image": "192.168.2.100:5000/vyos/vyos:1.4.7",
       "mgmt-net": "",
       "mgmt-intf": "",
-      "mgmt-ipv4-address": "172.20.20.5",
+      "mgmt-ipv4-address": "172.20.20.2",
       "mgmt-ipv4-prefix-length": 24,
-      "mgmt-ipv6-address": "2001:172:20:20::5",
+      "mgmt-ipv6-address": "2001:172:20:20::2",
       "mgmt-ipv6-prefix-length": 64,
       "mac-address": "",
       "labels": {
-        "clab-mgmt-net-bridge": "br-dd2b54899b79",
+        "clab-mgmt-net-bridge": "br-0a379f1038fa",
         "clab-node-group": "",
         "clab-node-kind": "linux",
         "clab-node-lab-dir": "/root/wcni-kind/LabasCode/netenv/4-adv-netwotk/13-MACVLAN/clab-macvlan/gwx",
@@ -61,7 +61,7 @@
       "mgmt-ipv6-prefix-length": 64,
       "mac-address": "",
       "labels": {
-        "clab-mgmt-net-bridge": "br-dd2b54899b79",
+        "clab-mgmt-net-bridge": "br-0a379f1038fa",
         "clab-node-group": "",
         "clab-node-kind": "linux",
         "clab-node-lab-dir": "/root/wcni-kind/LabasCode/netenv/4-adv-netwotk/13-MACVLAN/clab-macvlan/macvlan1",
@@ -82,13 +82,13 @@
       "image": "192.168.2.100:5000/nettool",
       "mgmt-net": "",
       "mgmt-intf": "",
-      "mgmt-ipv4-address": "172.20.20.3",
+      "mgmt-ipv4-address": "172.20.20.5",
       "mgmt-ipv4-prefix-length": 24,
-      "mgmt-ipv6-address": "2001:172:20:20::3",
+      "mgmt-ipv6-address": "2001:172:20:20::5",
       "mgmt-ipv6-prefix-length": 64,
       "mac-address": "",
       "labels": {
-        "clab-mgmt-net-bridge": "br-dd2b54899b79",
+        "clab-mgmt-net-bridge": "br-0a379f1038fa",
         "clab-node-group": "",
         "clab-node-kind": "linux",
         "clab-node-lab-dir": "/root/wcni-kind/LabasCode/netenv/4-adv-netwotk/13-MACVLAN/clab-macvlan/macvlan2",
@@ -109,13 +109,13 @@
       "image": "192.168.2.100:5000/nettool",
       "mgmt-net": "",
       "mgmt-intf": "",
-      "mgmt-ipv4-address": "172.20.20.2",
+      "mgmt-ipv4-address": "172.20.20.3",
       "mgmt-ipv4-prefix-length": 24,
-      "mgmt-ipv6-address": "2001:172:20:20::2",
+      "mgmt-ipv6-address": "2001:172:20:20::3",
       "mgmt-ipv6-prefix-length": 64,
       "mac-address": "",
       "labels": {
-        "clab-mgmt-net-bridge": "br-dd2b54899b79",
+        "clab-mgmt-net-bridge": "br-0a379f1038fa",
         "clab-node-group": "",
         "clab-node-kind": "linux",
         "clab-node-lab-dir": "/root/wcni-kind/LabasCode/netenv/4-adv-netwotk/13-MACVLAN/clab-macvlan/macvlan3",
@@ -131,13 +131,13 @@
       "a": {
         "node": "macvlan1",
         "interface": "net1",
-        "mac": "aa:c1:ab:3c:bf:16",
+        "mac": "aa:c1:ab:cb:21:5c",
         "peer": "z"
       },
       "z": {
         "node": "gwx",
         "interface": "eth1",
-        "mac": "aa:c1:ab:88:9f:42",
+        "mac": "aa:c1:ab:ec:4e:a6",
         "peer": "a"
       }
     },
@@ -145,13 +145,13 @@
       "a": {
         "node": "macvlan2",
         "interface": "net1",
-        "mac": "aa:c1:ab:32:9a:bc",
+        "mac": "aa:c1:ab:25:a8:95",
         "peer": "z"
       },
       "z": {
         "node": "gwx",
         "interface": "eth2",
-        "mac": "aa:c1:ab:e6:84:06",
+        "mac": "aa:c1:ab:85:fe:5e",
         "peer": "a"
       }
     },
@@ -159,13 +159,13 @@
       "a": {
         "node": "macvlan3",
         "interface": "net1",
-        "mac": "aa:c1:ab:7e:68:65",
+        "mac": "aa:c1:ab:ab:31:b7",
         "peer": "z"
       },
       "z": {
         "node": "gwx",
         "interface": "eth3",
-        "mac": "aa:c1:ab:dc:11:8d",
+        "mac": "aa:c1:ab:36:85:a9",
         "peer": "a"
       }
     }
