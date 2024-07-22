@@ -48,6 +48,11 @@ rules:
   verbs:
   - list
   - watch
+- apiGroups: [""]
+  resources:
+  - nodes
+  verbs:
+  - get
 - apiGroups: ["k8s.cni.cncf.io"]
   resources:
     - network-attachment-definitions
@@ -64,6 +69,19 @@ rules:
   - create
   - patch
   - update
+  - get
+
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: whereabouts-config
+  namespace: kube-system
+  annotations:
+    kubernetes.io/description: |
+      Configmap containing user customizable cronjob schedule
+data:
+  cron-expression: "30 4 * * *" # Default schedule is once per day at 4:30am. Users may configure this value to their liking.
 ---
 apiVersion: apps/v1
 kind: DaemonSet
@@ -86,10 +104,8 @@ spec:
         app: whereabouts
         name: whereabouts
     spec:
-      hostNetwork: true      
+      hostNetwork: true
       serviceAccountName: whereabouts
-      nodeSelector:
-        beta.kubernetes.io/arch: amd64
       tolerations:
       - operator: Exists
         effect: NoSchedule
@@ -101,9 +117,14 @@ spec:
           - >
             SLEEP=false /install-cni.sh &&
             /ip-control-loop -log-level debug
-        #image: ghcr.io/k8snetworkplumbingwg/whereabouts:latest-amd64
-        image: 192.168.2.100:5000/k8snetworkplumbingwg/whereabouts:20221111
+        #image: ghcr.io/k8snetworkplumbingwg/whereabouts:latest
+        image: 192.168.2.100:5000/k8snetworkplumbingwg/whereabouts:latest
         env:
+        - name: NODENAME
+          valueFrom:
+            fieldRef:
+              apiVersion: v1
+              fieldPath: spec.nodeName
         - name: WHEREABOUTS_NAMESPACE
           valueFrom:
             fieldRef:
@@ -122,6 +143,8 @@ spec:
           mountPath: /host/opt/cni/bin
         - name: cni-net-dir
           mountPath: /host/etc/cni/net.d
+        - name: cron-scheduler-configmap
+          mountPath: /cron-schedule
       volumes:
         - name: cnibin
           hostPath:
@@ -129,3 +152,10 @@ spec:
         - name: cni-net-dir
           hostPath:
             path: /etc/cni/net.d
+        - name: cron-scheduler-configmap
+          configMap:
+            name: "whereabouts-config"
+            defaultMode: 0744
+            items:
+            - key: "cron-expression"
+              path: "config"
