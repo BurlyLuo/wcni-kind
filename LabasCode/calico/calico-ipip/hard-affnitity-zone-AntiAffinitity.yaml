@@ -3,17 +3,17 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   labels:
-    app: wluo
-  name: wluo
+    app: wluox
+  name: wluox
 spec:
-  replicas: 4
+  replicas: 9
   selector:
     matchLabels:
-      app: wluo
+      app: wluox
   template:
     metadata:
       labels:
-        app: wluo
+        app: wluox
     spec:
       containers:
       - image: 192.168.2.100:5000/nettool
@@ -33,10 +33,17 @@ spec:
               - key: topology.kubernetes.io/zone
                 operator: In
                 values:
-                - zone1
                 - zone2
                 - zone3
             topologyKey: topology.kubernetes.io/zone
+
+          - labelSelector:
+              matchExpressions:
+              - key: app
+                operator: In
+                values:
+                - wluox
+            topologyKey: kubernetes.io/hostname
 ---
 apiVersion: v1
 kind: Service
@@ -45,7 +52,7 @@ metadata:
 spec:
   type: NodePort
   selector:
-    app: wluo
+    app: wluox
   ports:
   - name: wluo
     port: 80
