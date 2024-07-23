@@ -1,0 +1,697 @@
+[root@wluo afxdp-plugins-for-kubernetes]$ make run-on-kind
+#kind delete cluster --name af-xdp-deployment
+#mkdir -p /tmp/afxdp_dp/
+#mkdir -p /tmp/afxdp_dp2/
+#kind create cluster --config hack/kind-config.yaml --name af-xdp-deployment
+#kubectl label node af-xdp-deployment-worker cndp="true"
+#kubectl label node af-xdp-deployment-worker2 cndp="true"
+kubectl apply -f https://raw.githubusercontent.com/k8snetworkplumbingwg/multus-cni/master/deployments/multus-daemonset.yml
+customresourcedefinition.apiextensions.k8s.io/network-attachment-definitions.k8s.cni.cncf.io unchanged
+clusterrole.rbac.authorization.k8s.io/multus unchanged
+clusterrolebinding.rbac.authorization.k8s.io/multus unchanged
+serviceaccount/multus unchanged
+configmap/multus-cni-config unchanged
+daemonset.apps/kube-multus-ds unchanged
+if make podman; then \
+  echo "Podman build succeeded"; \
+ else \
+  echo "Podman build failed, trying docker.."; \
+ make docker; \
+ fi
+make[1]: Entering directory '/root/wcni-kind/LabasCode/netenv/4-adv-netwotk/90-eBPF/3-afxdp-run/afxdp-plugins-for-kubernetes'
+******  Podman Image    ******
+
+podman build -t afxdp-device-plugin -f images/amd64.dockerfile .
+make[1]: podman: No such file or directory
+make[1]: *** [Makefile:83: podman] Error 127
+make[1]: Leaving directory '/root/wcni-kind/LabasCode/netenv/4-adv-netwotk/90-eBPF/3-afxdp-run/afxdp-plugins-for-kubernetes'
+Podman build failed, trying docker..
+make[1]: Entering directory '/root/wcni-kind/LabasCode/netenv/4-adv-netwotk/90-eBPF/3-afxdp-run/afxdp-plugins-for-kubernetes'
+******  Docker Image    ******
+
+docker build -t afxdp-device-plugin -f images/amd64.dockerfile .
+DEPRECATED: The legacy builder is deprecated and will be removed in a future release.
+            Install the buildx component to build images with BuildKit:
+            https://docs.docker.com/go/buildx/
+
+Sending build context to Docker daemon  13.96MB
+Step 1/16 : FROM golang:1.20@sha256:efe38cb419e2b2012f66d1782d2efe2fd8884c71d9f342581e1697ba9047b5f8 as cnibuilder
+ ---> f0b37d626a99
+Step 2/16 : COPY . /usr/src/afxdp_k8s_plugins
+ ---> d901921dabb6
+Step 3/16 : WORKDIR /usr/src/afxdp_k8s_plugins
+ ---> Running in bd21449336bb
+Removing intermediate container bd21449336bb
+ ---> fdab6ffe5f0e
+Step 4/16 : RUN apt-get update && apt-get -y install --no-install-recommends libxdp-dev=1.3.1-1 && apt-get -y install -o APT::Keep-Downloaded-Packages=false --no-install-recommends clang=1:14.0-55.7~deb12u1 && apt-get -y install -o APT::Keep-Downloaded-Packages=false --no-install-recommends llvm=1:14.0-55.7~deb12u1 && apt-get -y install -o APT::Keep-Downloaded-Packages=false --no-install-recommends gcc-multilib=4:12.2.0-3 && make buildcni
+ ---> Running in acd9901008c9
+Get:1 http://deb.debian.org/debian bookworm InRelease [151 kB]
+Get:2 http://deb.debian.org/debian bookworm-updates InRelease [55.4 kB]
+Get:3 http://deb.debian.org/debian-security bookworm-security InRelease [48.0 kB]
+Get:4 http://deb.debian.org/debian bookworm/main amd64 Packages [8788 kB]
+Get:5 http://deb.debian.org/debian bookworm-updates/main amd64 Packages [13.8 kB]
+Get:6 http://deb.debian.org/debian-security bookworm-security/main amd64 Packages [169 kB]
+Fetched 9225 kB in 45s (204 kB/s)
+Reading package lists...
+Reading package lists...
+Building dependency tree...
+Reading state information...
+The following additional packages will be installed:
+  libbpf-dev libbpf1 libelf-dev libelf1 libxdp1 zlib1g-dev
+The following NEW packages will be installed:
+  libbpf-dev libbpf1 libelf-dev libelf1 libxdp-dev libxdp1 zlib1g-dev
+0 upgraded, 7 newly installed, 0 to remove and 48 not upgraded.
+Need to get 1643 kB of archives.
+After this operation, 4699 kB of additional disk space will be used.
+Get:1 http://deb.debian.org/debian bookworm/main amd64 libelf1 amd64 0.188-2.1 [174 kB]
+Get:2 http://deb.debian.org/debian bookworm/main amd64 libbpf1 amd64 1:1.1.0-1 [145 kB]
+Get:3 http://deb.debian.org/debian bookworm/main amd64 zlib1g-dev amd64 1:1.2.13.dfsg-1 [916 kB]
+Get:4 http://deb.debian.org/debian bookworm/main amd64 libelf-dev amd64 0.188-2.1 [72.9 kB]
+Get:5 http://deb.debian.org/debian bookworm/main amd64 libbpf-dev amd64 1:1.1.0-1 [225 kB]
+Get:6 http://deb.debian.org/debian bookworm/main amd64 libxdp1 amd64 1.3.1-1 [56.3 kB]
+Get:7 http://deb.debian.org/debian bookworm/main amd64 libxdp-dev amd64 1.3.1-1 [53.1 kB]
+debconf: delaying package configuration, since apt-utils is not installed
+Fetched 1643 kB in 6s (260 kB/s)
+Selecting previously unselected package libelf1:amd64.
+(Reading database ... 15610 files and directories currently installed.)
+Preparing to unpack .../0-libelf1_0.188-2.1_amd64.deb ...
+Unpacking libelf1:amd64 (0.188-2.1) ...
+Selecting previously unselected package libbpf1:amd64.
+Preparing to unpack .../1-libbpf1_1%3a1.1.0-1_amd64.deb ...
+Unpacking libbpf1:amd64 (1:1.1.0-1) ...
+Selecting previously unselected package zlib1g-dev:amd64.
+Preparing to unpack .../2-zlib1g-dev_1%3a1.2.13.dfsg-1_amd64.deb ...
+Unpacking zlib1g-dev:amd64 (1:1.2.13.dfsg-1) ...
+Selecting previously unselected package libelf-dev:amd64.
+Preparing to unpack .../3-libelf-dev_0.188-2.1_amd64.deb ...
+Unpacking libelf-dev:amd64 (0.188-2.1) ...
+Selecting previously unselected package libbpf-dev:amd64.
+Preparing to unpack .../4-libbpf-dev_1%3a1.1.0-1_amd64.deb ...
+Unpacking libbpf-dev:amd64 (1:1.1.0-1) ...
+Selecting previously unselected package libxdp1:amd64.
+Preparing to unpack .../5-libxdp1_1.3.1-1_amd64.deb ...
+Unpacking libxdp1:amd64 (1.3.1-1) ...
+Selecting previously unselected package libxdp-dev:amd64.
+Preparing to unpack .../6-libxdp-dev_1.3.1-1_amd64.deb ...
+Unpacking libxdp-dev:amd64 (1.3.1-1) ...
+Setting up zlib1g-dev:amd64 (1:1.2.13.dfsg-1) ...
+Setting up libelf1:amd64 (0.188-2.1) ...
+Setting up libbpf1:amd64 (1:1.1.0-1) ...
+Setting up libxdp1:amd64 (1.3.1-1) ...
+Setting up libelf-dev:amd64 (0.188-2.1) ...
+Setting up libbpf-dev:amd64 (1:1.1.0-1) ...
+Setting up libxdp-dev:amd64 (1.3.1-1) ...
+Processing triggers for libc-bin (2.36-9+deb12u1) ...
+Reading package lists...
+Building dependency tree...
+Reading state information...
+The following additional packages will be installed:
+  clang-14 libclang-common-14-dev libclang-cpp14 libclang1-14 libgc1 libicu72
+  libllvm14 libobjc-12-dev libobjc4 libxml2 libz3-4 llvm-14-linker-tools
+Suggested packages:
+  clang-14-doc wasi-libc
+Recommended packages:
+  llvm-14-dev libclang-rt-14-dev
+The following NEW packages will be installed:
+  clang clang-14 libclang-common-14-dev libclang-cpp14 libclang1-14 libgc1
+  libicu72 libllvm14 libobjc-12-dev libobjc4 libxml2 libz3-4
+  llvm-14-linker-tools
+0 upgraded, 13 newly installed, 0 to remove and 48 not upgraded.
+Need to get 59.1 MB of archives.
+After this operation, 289 MB of additional disk space will be used.
+Get:1 http://deb.debian.org/debian bookworm/main amd64 libicu72 amd64 72.1-3 [9376 kB]
+Get:2 http://deb.debian.org/debian bookworm/main amd64 libxml2 amd64 2.9.14+dfsg-1.3~deb12u1 [687 kB]
+Get:3 http://deb.debian.org/debian bookworm/main amd64 libz3-4 amd64 4.8.12-3.1 [7216 kB]
+Get:4 http://deb.debian.org/debian bookworm/main amd64 libllvm14 amd64 1:14.0.6-12 [21.8 MB]
+Get:5 http://deb.debian.org/debian bookworm/main amd64 libclang-cpp14 amd64 1:14.0.6-12 [11.1 MB]
+Get:6 http://deb.debian.org/debian bookworm/main amd64 libgc1 amd64 1:8.2.2-3 [245 kB]
+Get:7 http://deb.debian.org/debian bookworm/main amd64 libobjc4 amd64 12.2.0-14 [43.1 kB]
+Get:8 http://deb.debian.org/debian bookworm/main amd64 libobjc-12-dev amd64 12.2.0-14 [170 kB]
+Get:9 http://deb.debian.org/debian bookworm/main amd64 libclang-common-14-dev all 1:14.0.6-12 [890 kB]
+Get:10 http://deb.debian.org/debian bookworm/main amd64 llvm-14-linker-tools amd64 1:14.0.6-12 [1288 kB]
+Get:11 http://deb.debian.org/debian bookworm/main amd64 libclang1-14 amd64 1:14.0.6-12 [6157 kB]
+Get:12 http://deb.debian.org/debian bookworm/main amd64 clang-14 amd64 1:14.0.6-12 [102 kB]
+Get:13 http://deb.debian.org/debian bookworm/main amd64 clang amd64 1:14.0-55.7~deb12u1 [5144 B]
+debconf: delaying package configuration, since apt-utils is not installed
+Fetched 59.1 MB in 6min 35s (150 kB/s)
+Selecting previously unselected package libicu72:amd64.
+(Reading database ... 15737 files and directories currently installed.)
+Preparing to unpack .../00-libicu72_72.1-3_amd64.deb ...
+Unpacking libicu72:amd64 (72.1-3) ...
+Selecting previously unselected package libxml2:amd64.
+Preparing to unpack .../01-libxml2_2.9.14+dfsg-1.3~deb12u1_amd64.deb ...
+Unpacking libxml2:amd64 (2.9.14+dfsg-1.3~deb12u1) ...
+Selecting previously unselected package libz3-4:amd64.
+Preparing to unpack .../02-libz3-4_4.8.12-3.1_amd64.deb ...
+Unpacking libz3-4:amd64 (4.8.12-3.1) ...
+Selecting previously unselected package libllvm14:amd64.
+Preparing to unpack .../03-libllvm14_1%3a14.0.6-12_amd64.deb ...
+Unpacking libllvm14:amd64 (1:14.0.6-12) ...
+Selecting previously unselected package libclang-cpp14.
+Preparing to unpack .../04-libclang-cpp14_1%3a14.0.6-12_amd64.deb ...
+Unpacking libclang-cpp14 (1:14.0.6-12) ...
+Selecting previously unselected package libgc1:amd64.
+Preparing to unpack .../05-libgc1_1%3a8.2.2-3_amd64.deb ...
+Unpacking libgc1:amd64 (1:8.2.2-3) ...
+Selecting previously unselected package libobjc4:amd64.
+Preparing to unpack .../06-libobjc4_12.2.0-14_amd64.deb ...
+Unpacking libobjc4:amd64 (12.2.0-14) ...
+Selecting previously unselected package libobjc-12-dev:amd64.
+Preparing to unpack .../07-libobjc-12-dev_12.2.0-14_amd64.deb ...
+Unpacking libobjc-12-dev:amd64 (12.2.0-14) ...
+Selecting previously unselected package libclang-common-14-dev.
+Preparing to unpack .../08-libclang-common-14-dev_1%3a14.0.6-12_all.deb ...
+Unpacking libclang-common-14-dev (1:14.0.6-12) ...
+Selecting previously unselected package llvm-14-linker-tools.
+Preparing to unpack .../09-llvm-14-linker-tools_1%3a14.0.6-12_amd64.deb ...
+Unpacking llvm-14-linker-tools (1:14.0.6-12) ...
+Selecting previously unselected package libclang1-14.
+Preparing to unpack .../10-libclang1-14_1%3a14.0.6-12_amd64.deb ...
+Unpacking libclang1-14 (1:14.0.6-12) ...
+Selecting previously unselected package clang-14.
+Preparing to unpack .../11-clang-14_1%3a14.0.6-12_amd64.deb ...
+Unpacking clang-14 (1:14.0.6-12) ...
+Selecting previously unselected package clang.
+Preparing to unpack .../12-clang_1%3a14.0-55.7~deb12u1_amd64.deb ...
+Unpacking clang (1:14.0-55.7~deb12u1) ...
+Setting up libicu72:amd64 (72.1-3) ...
+Setting up libz3-4:amd64 (4.8.12-3.1) ...
+Setting up libgc1:amd64 (1:8.2.2-3) ...
+Setting up libxml2:amd64 (2.9.14+dfsg-1.3~deb12u1) ...
+Setting up libobjc4:amd64 (12.2.0-14) ...
+Setting up libllvm14:amd64 (1:14.0.6-12) ...
+Setting up libobjc-12-dev:amd64 (12.2.0-14) ...
+Setting up llvm-14-linker-tools (1:14.0.6-12) ...
+Setting up libclang1-14 (1:14.0.6-12) ...
+Setting up libclang-common-14-dev (1:14.0.6-12) ...
+Setting up libclang-cpp14 (1:14.0.6-12) ...
+Setting up clang-14 (1:14.0.6-12) ...
+Setting up clang (1:14.0-55.7~deb12u1) ...
+Processing triggers for libc-bin (2.36-9+deb12u1) ...
+Reading package lists...
+Building dependency tree...
+Reading state information...
+The following additional packages will be installed:
+  curl libcurl3-gnutls libcurl3-nss libcurl4 libnspr4 libnss3 libpfm4 llvm-14
+  llvm-14-runtime llvm-runtime nss-plugin-pem
+Suggested packages:
+  llvm-14-doc
+Recommended packages:
+  llvm-14-dev binfmt-support | systemd
+The following NEW packages will be installed:
+  libcurl3-nss libnspr4 libnss3 libpfm4 llvm llvm-14 llvm-14-runtime
+  llvm-runtime nss-plugin-pem
+The following packages will be upgraded:
+  curl libcurl3-gnutls libcurl4
+3 upgraded, 9 newly installed, 0 to remove and 45 not upgraded.
+Need to get 15.5 MB of archives.
+After this operation, 59.5 MB of additional disk space will be used.
+Get:1 http://deb.debian.org/debian bookworm/main amd64 curl amd64 7.88.1-10+deb12u6 [314 kB]
+Get:2 http://deb.debian.org/debian bookworm/main amd64 libcurl4 amd64 7.88.1-10+deb12u6 [390 kB]
+Get:3 http://deb.debian.org/debian bookworm/main amd64 libcurl3-gnutls amd64 7.88.1-10+deb12u6 [385 kB]
+Get:4 http://deb.debian.org/debian bookworm/main amd64 libnspr4 amd64 2:4.35-1 [113 kB]
+Get:5 http://deb.debian.org/debian bookworm/main amd64 libnss3 amd64 2:3.87.1-1 [1331 kB]
+Get:6 http://deb.debian.org/debian bookworm/main amd64 nss-plugin-pem amd64 1.0.8+1-1 [54.6 kB]
+Get:7 http://deb.debian.org/debian bookworm/main amd64 libcurl3-nss amd64 7.88.1-10+deb12u6 [394 kB]
+Get:8 http://deb.debian.org/debian bookworm/main amd64 libpfm4 amd64 4.13.0-1 [294 kB]
+Get:9 http://deb.debian.org/debian bookworm/main amd64 llvm-14-runtime amd64 1:14.0.6-12 [477 kB]
+Get:10 http://deb.debian.org/debian bookworm/main amd64 llvm-runtime amd64 1:14.0-55.7~deb12u1 [4812 B]
+Get:11 http://deb.debian.org/debian bookworm/main amd64 llvm-14 amd64 1:14.0.6-12 [11.7 MB]
+Get:12 http://deb.debian.org/debian bookworm/main amd64 llvm amd64 1:14.0-55.7~deb12u1 [7212 B]
+debconf: delaying package configuration, since apt-utils is not installed
+Fetched 15.5 MB in 1min 36s (161 kB/s)
+(Reading database ... 16066 files and directories currently installed.)
+Preparing to unpack .../00-curl_7.88.1-10+deb12u6_amd64.deb ...
+Unpacking curl (7.88.1-10+deb12u6) over (7.88.1-10+deb12u1) ...
+Preparing to unpack .../01-libcurl4_7.88.1-10+deb12u6_amd64.deb ...
+Unpacking libcurl4:amd64 (7.88.1-10+deb12u6) over (7.88.1-10+deb12u1) ...
+Preparing to unpack .../02-libcurl3-gnutls_7.88.1-10+deb12u6_amd64.deb ...
+Unpacking libcurl3-gnutls:amd64 (7.88.1-10+deb12u6) over (7.88.1-10+deb12u1) ...
+Selecting previously unselected package libnspr4:amd64.
+Preparing to unpack .../03-libnspr4_2%3a4.35-1_amd64.deb ...
+Unpacking libnspr4:amd64 (2:4.35-1) ...
+Selecting previously unselected package libnss3:amd64.
+Preparing to unpack .../04-libnss3_2%3a3.87.1-1_amd64.deb ...
+Unpacking libnss3:amd64 (2:3.87.1-1) ...
+Selecting previously unselected package nss-plugin-pem:amd64.
+Preparing to unpack .../05-nss-plugin-pem_1.0.8+1-1_amd64.deb ...
+Unpacking nss-plugin-pem:amd64 (1.0.8+1-1) ...
+Selecting previously unselected package libcurl3-nss:amd64.
+Preparing to unpack .../06-libcurl3-nss_7.88.1-10+deb12u6_amd64.deb ...
+Unpacking libcurl3-nss:amd64 (7.88.1-10+deb12u6) ...
+Selecting previously unselected package libpfm4:amd64.
+Preparing to unpack .../07-libpfm4_4.13.0-1_amd64.deb ...
+Unpacking libpfm4:amd64 (4.13.0-1) ...
+Selecting previously unselected package llvm-14-runtime.
+Preparing to unpack .../08-llvm-14-runtime_1%3a14.0.6-12_amd64.deb ...
+Unpacking llvm-14-runtime (1:14.0.6-12) ...
+Selecting previously unselected package llvm-runtime:amd64.
+Preparing to unpack .../09-llvm-runtime_1%3a14.0-55.7~deb12u1_amd64.deb ...
+Unpacking llvm-runtime:amd64 (1:14.0-55.7~deb12u1) ...
+Selecting previously unselected package llvm-14.
+Preparing to unpack .../10-llvm-14_1%3a14.0.6-12_amd64.deb ...
+Unpacking llvm-14 (1:14.0.6-12) ...
+Selecting previously unselected package llvm.
+Preparing to unpack .../11-llvm_1%3a14.0-55.7~deb12u1_amd64.deb ...
+Unpacking llvm (1:14.0-55.7~deb12u1) ...
+Setting up libcurl3-gnutls:amd64 (7.88.1-10+deb12u6) ...
+Setting up libpfm4:amd64 (4.13.0-1) ...
+Setting up llvm-14-runtime (1:14.0.6-12) ...
+Setting up libnspr4:amd64 (2:4.35-1) ...
+Setting up llvm-runtime:amd64 (1:14.0-55.7~deb12u1) ...
+Setting up libcurl4:amd64 (7.88.1-10+deb12u6) ...
+Setting up curl (7.88.1-10+deb12u6) ...
+Setting up libnss3:amd64 (2:3.87.1-1) ...
+Setting up nss-plugin-pem:amd64 (1.0.8+1-1) ...
+Setting up libcurl3-nss:amd64 (7.88.1-10+deb12u6) ...
+Setting up llvm-14 (1:14.0.6-12) ...
+Setting up llvm (1:14.0-55.7~deb12u1) ...
+Processing triggers for libc-bin (2.36-9+deb12u1) ...
+Reading package lists...
+Building dependency tree...
+Reading state information...
+The following additional packages will be installed:
+  gcc-12-multilib lib32asan8 lib32atomic1 lib32gcc-12-dev lib32gcc-s1
+  lib32gomp1 lib32itm1 lib32quadmath0 lib32stdc++6 lib32ubsan1 libc-bin
+  libc-dev-bin libc6 libc6-dev libc6-dev-i386 libc6-dev-x32 libc6-i386
+  libc6-x32 libx32asan8 libx32atomic1 libx32gcc-12-dev libx32gcc-s1
+  libx32gomp1 libx32itm1 libx32quadmath0 libx32stdc++6 libx32ubsan1
+Suggested packages:
+  glibc-doc libc-l10n locales libnss-nis libnss-nisplus manpages-dev
+Recommended packages:
+  manpages manpages-dev libc-devtools
+The following NEW packages will be installed:
+  gcc-12-multilib gcc-multilib lib32asan8 lib32atomic1 lib32gcc-12-dev
+  lib32gcc-s1 lib32gomp1 lib32itm1 lib32quadmath0 lib32stdc++6 lib32ubsan1
+  libc6-dev-i386 libc6-dev-x32 libc6-i386 libc6-x32 libx32asan8 libx32atomic1
+  libx32gcc-12-dev libx32gcc-s1 libx32gomp1 libx32itm1 libx32quadmath0
+  libx32stdc++6 libx32ubsan1
+The following packages will be upgraded:
+  libc-bin libc-dev-bin libc6 libc6-dev
+4 upgraded, 24 newly installed, 0 to remove and 41 not upgraded.
+Need to get 25.5 MB of archives.
+After this operation, 81.5 MB of additional disk space will be used.
+Get:1 http://deb.debian.org/debian bookworm/main amd64 libc6-dev amd64 2.36-9+deb12u7 [1899 kB]
+Get:2 http://deb.debian.org/debian bookworm/main amd64 libc-dev-bin amd64 2.36-9+deb12u7 [45.8 kB]
+Get:3 http://deb.debian.org/debian bookworm/main amd64 libc6 amd64 2.36-9+deb12u7 [2758 kB]
+Get:4 http://deb.debian.org/debian bookworm/main amd64 libc-bin amd64 2.36-9+deb12u7 [607 kB]
+Get:5 http://deb.debian.org/debian bookworm/main amd64 libc6-i386 amd64 2.36-9+deb12u7 [2460 kB]
+Get:6 http://deb.debian.org/debian bookworm/main amd64 libc6-dev-i386 amd64 2.36-9+deb12u7 [1351 kB]
+Get:7 http://deb.debian.org/debian bookworm/main amd64 libc6-x32 amd64 2.36-9+deb12u7 [2584 kB]
+Get:8 http://deb.debian.org/debian bookworm/main amd64 libc6-dev-x32 amd64 2.36-9+deb12u7 [1515 kB]
+Get:9 http://deb.debian.org/debian bookworm/main amd64 lib32gcc-s1 amd64 12.2.0-14 [59.7 kB]
+Get:10 http://deb.debian.org/debian bookworm/main amd64 libx32gcc-s1 amd64 12.2.0-14 [50.2 kB]
+Get:11 http://deb.debian.org/debian bookworm/main amd64 lib32gomp1 amd64 12.2.0-14 [121 kB]
+Get:12 http://deb.debian.org/debian bookworm/main amd64 libx32gomp1 amd64 12.2.0-14 [116 kB]
+Get:13 http://deb.debian.org/debian bookworm/main amd64 lib32itm1 amd64 12.2.0-14 [27.7 kB]
+Get:14 http://deb.debian.org/debian bookworm/main amd64 libx32itm1 amd64 12.2.0-14 [26.5 kB]
+Get:15 http://deb.debian.org/debian bookworm/main amd64 lib32atomic1 amd64 12.2.0-14 [7732 B]
+Get:16 http://deb.debian.org/debian bookworm/main amd64 libx32atomic1 amd64 12.2.0-14 [9264 B]
+Get:17 http://deb.debian.org/debian bookworm/main amd64 lib32asan8 amd64 12.2.0-14 [2081 kB]
+Get:18 http://deb.debian.org/debian bookworm/main amd64 libx32asan8 amd64 12.2.0-14 [2063 kB]
+Get:19 http://deb.debian.org/debian bookworm/main amd64 lib32stdc++6 amd64 12.2.0-14 [644 kB]
+Get:20 http://deb.debian.org/debian bookworm/main amd64 lib32ubsan1 amd64 12.2.0-14 [870 kB]
+Get:21 http://deb.debian.org/debian bookworm/main amd64 libx32stdc++6 amd64 12.2.0-14 [599 kB]
+Get:22 http://deb.debian.org/debian bookworm/main amd64 libx32ubsan1 amd64 12.2.0-14 [875 kB]
+Get:23 http://deb.debian.org/debian bookworm/main amd64 lib32quadmath0 amd64 12.2.0-14 [227 kB]
+Get:24 http://deb.debian.org/debian bookworm/main amd64 libx32quadmath0 amd64 12.2.0-14 [146 kB]
+Get:25 http://deb.debian.org/debian bookworm/main amd64 lib32gcc-12-dev amd64 12.2.0-14 [2269 kB]
+Get:26 http://deb.debian.org/debian bookworm/main amd64 libx32gcc-12-dev amd64 12.2.0-14 [2041 kB]
+Get:27 http://deb.debian.org/debian bookworm/main amd64 gcc-12-multilib amd64 12.2.0-14 [1020 B]
+Get:28 http://deb.debian.org/debian bookworm/main amd64 gcc-multilib amd64 4:12.2.0-3 [1520 B]
+debconf: delaying package configuration, since apt-utils is not installed
+Fetched 25.5 MB in 2min 56s (145 kB/s)
+(Reading database ... 16425 files and directories currently installed.)
+Preparing to unpack .../libc6-dev_2.36-9+deb12u7_amd64.deb ...
+Unpacking libc6-dev:amd64 (2.36-9+deb12u7) over (2.36-9+deb12u1) ...
+Preparing to unpack .../libc-dev-bin_2.36-9+deb12u7_amd64.deb ...
+Unpacking libc-dev-bin (2.36-9+deb12u7) over (2.36-9+deb12u1) ...
+Preparing to unpack .../libc6_2.36-9+deb12u7_amd64.deb ...
+debconf: unable to initialize frontend: Dialog
+debconf: (TERM is not set, so the dialog frontend is not usable.)
+debconf: falling back to frontend: Readline
+debconf: unable to initialize frontend: Readline
+debconf: (This frontend requires a controlling tty.)
+debconf: falling back to frontend: Teletype
+Unpacking libc6:amd64 (2.36-9+deb12u7) over (2.36-9+deb12u1) ...
+Setting up libc6:amd64 (2.36-9+deb12u7) ...
+debconf: unable to initialize frontend: Dialog
+debconf: (TERM is not set, so the dialog frontend is not usable.)
+debconf: falling back to frontend: Readline
+debconf: unable to initialize frontend: Readline
+debconf: (This frontend requires a controlling tty.)
+debconf: falling back to frontend: Teletype
+(Reading database ... 16425 files and directories currently installed.)
+Preparing to unpack .../libc-bin_2.36-9+deb12u7_amd64.deb ...
+Unpacking libc-bin (2.36-9+deb12u7) over (2.36-9+deb12u1) ...
+Setting up libc-bin (2.36-9+deb12u7) ...
+Selecting previously unselected package libc6-i386.
+(Reading database ... 16425 files and directories currently installed.)
+Preparing to unpack .../00-libc6-i386_2.36-9+deb12u7_amd64.deb ...
+Unpacking libc6-i386 (2.36-9+deb12u7) ...
+Selecting previously unselected package libc6-dev-i386.
+Preparing to unpack .../01-libc6-dev-i386_2.36-9+deb12u7_amd64.deb ...
+Unpacking libc6-dev-i386 (2.36-9+deb12u7) ...
+Selecting previously unselected package libc6-x32.
+Preparing to unpack .../02-libc6-x32_2.36-9+deb12u7_amd64.deb ...
+Unpacking libc6-x32 (2.36-9+deb12u7) ...
+Selecting previously unselected package libc6-dev-x32.
+Preparing to unpack .../03-libc6-dev-x32_2.36-9+deb12u7_amd64.deb ...
+Unpacking libc6-dev-x32 (2.36-9+deb12u7) ...
+Selecting previously unselected package lib32gcc-s1.
+Preparing to unpack .../04-lib32gcc-s1_12.2.0-14_amd64.deb ...
+Unpacking lib32gcc-s1 (12.2.0-14) ...
+Selecting previously unselected package libx32gcc-s1.
+Preparing to unpack .../05-libx32gcc-s1_12.2.0-14_amd64.deb ...
+Unpacking libx32gcc-s1 (12.2.0-14) ...
+Selecting previously unselected package lib32gomp1.
+Preparing to unpack .../06-lib32gomp1_12.2.0-14_amd64.deb ...
+Unpacking lib32gomp1 (12.2.0-14) ...
+Selecting previously unselected package libx32gomp1.
+Preparing to unpack .../07-libx32gomp1_12.2.0-14_amd64.deb ...
+Unpacking libx32gomp1 (12.2.0-14) ...
+Selecting previously unselected package lib32itm1.
+Preparing to unpack .../08-lib32itm1_12.2.0-14_amd64.deb ...
+Unpacking lib32itm1 (12.2.0-14) ...
+Selecting previously unselected package libx32itm1.
+Preparing to unpack .../09-libx32itm1_12.2.0-14_amd64.deb ...
+Unpacking libx32itm1 (12.2.0-14) ...
+Selecting previously unselected package lib32atomic1.
+Preparing to unpack .../10-lib32atomic1_12.2.0-14_amd64.deb ...
+Unpacking lib32atomic1 (12.2.0-14) ...
+Selecting previously unselected package libx32atomic1.
+Preparing to unpack .../11-libx32atomic1_12.2.0-14_amd64.deb ...
+Unpacking libx32atomic1 (12.2.0-14) ...
+Selecting previously unselected package lib32asan8.
+Preparing to unpack .../12-lib32asan8_12.2.0-14_amd64.deb ...
+Unpacking lib32asan8 (12.2.0-14) ...
+Selecting previously unselected package libx32asan8.
+Preparing to unpack .../13-libx32asan8_12.2.0-14_amd64.deb ...
+Unpacking libx32asan8 (12.2.0-14) ...
+Selecting previously unselected package lib32stdc++6.
+Preparing to unpack .../14-lib32stdc++6_12.2.0-14_amd64.deb ...
+Unpacking lib32stdc++6 (12.2.0-14) ...
+Selecting previously unselected package lib32ubsan1.
+Preparing to unpack .../15-lib32ubsan1_12.2.0-14_amd64.deb ...
+Unpacking lib32ubsan1 (12.2.0-14) ...
+Selecting previously unselected package libx32stdc++6.
+Preparing to unpack .../16-libx32stdc++6_12.2.0-14_amd64.deb ...
+Unpacking libx32stdc++6 (12.2.0-14) ...
+Selecting previously unselected package libx32ubsan1.
+Preparing to unpack .../17-libx32ubsan1_12.2.0-14_amd64.deb ...
+Unpacking libx32ubsan1 (12.2.0-14) ...
+Selecting previously unselected package lib32quadmath0.
+Preparing to unpack .../18-lib32quadmath0_12.2.0-14_amd64.deb ...
+Unpacking lib32quadmath0 (12.2.0-14) ...
+Selecting previously unselected package libx32quadmath0.
+Preparing to unpack .../19-libx32quadmath0_12.2.0-14_amd64.deb ...
+Unpacking libx32quadmath0 (12.2.0-14) ...
+Selecting previously unselected package lib32gcc-12-dev.
+Preparing to unpack .../20-lib32gcc-12-dev_12.2.0-14_amd64.deb ...
+Unpacking lib32gcc-12-dev (12.2.0-14) ...
+Selecting previously unselected package libx32gcc-12-dev.
+Preparing to unpack .../21-libx32gcc-12-dev_12.2.0-14_amd64.deb ...
+Unpacking libx32gcc-12-dev (12.2.0-14) ...
+Selecting previously unselected package gcc-12-multilib.
+Preparing to unpack .../22-gcc-12-multilib_12.2.0-14_amd64.deb ...
+Unpacking gcc-12-multilib (12.2.0-14) ...
+Selecting previously unselected package gcc-multilib.
+Preparing to unpack .../23-gcc-multilib_4%3a12.2.0-3_amd64.deb ...
+Unpacking gcc-multilib (4:12.2.0-3) ...
+Setting up libc6-x32 (2.36-9+deb12u7) ...
+Setting up libx32gomp1 (12.2.0-14) ...
+Setting up libc6-i386 (2.36-9+deb12u7) ...
+Setting up libx32quadmath0 (12.2.0-14) ...
+Setting up libc-dev-bin (2.36-9+deb12u7) ...
+Setting up lib32atomic1 (12.2.0-14) ...
+Setting up libx32atomic1 (12.2.0-14) ...
+Setting up lib32itm1 (12.2.0-14) ...
+Setting up libx32gcc-s1 (12.2.0-14) ...
+Setting up libx32itm1 (12.2.0-14) ...
+Setting up libx32asan8 (12.2.0-14) ...
+Setting up lib32gomp1 (12.2.0-14) ...
+Setting up lib32gcc-s1 (12.2.0-14) ...
+Setting up lib32stdc++6 (12.2.0-14) ...
+Setting up lib32asan8 (12.2.0-14) ...
+Setting up lib32quadmath0 (12.2.0-14) ...
+Setting up libc6-dev:amd64 (2.36-9+deb12u7) ...
+Setting up libx32stdc++6 (12.2.0-14) ...
+Setting up libc6-dev-i386 (2.36-9+deb12u7) ...
+Setting up libx32ubsan1 (12.2.0-14) ...
+Setting up lib32ubsan1 (12.2.0-14) ...
+Setting up libc6-dev-x32 (2.36-9+deb12u7) ...
+Setting up lib32gcc-12-dev (12.2.0-14) ...
+Setting up libx32gcc-12-dev (12.2.0-14) ...
+Setting up gcc-12-multilib (12.2.0-14) ...
+Setting up gcc-multilib (4:12.2.0-3) ...
+Processing triggers for libc-bin (2.36-9+deb12u7) ...
+******     Build BPF     ******
+
+gcc ./internal/bpf/bpfWrapper.c -lxdp -c -o ./internal/bpf/bpfWrapper.o
+ar rs ./internal/bpf/libwrapper.a ./internal/bpf/bpfWrapper.o  &> /dev/null
+
+
+******     Build CNI     ******
+
+go build -ldflags="-extldflags=-static" -tags netgo -o ./bin/afxdp ./cmd/cni
+ar: creating ./internal/bpf/libwrapper.a
+go: downloading github.com/containernetworking/cni v1.1.2
+go: downloading github.com/containernetworking/plugins v1.1.1
+go: downloading github.com/go-ozzo/ozzo-validation/v4 v4.3.0
+go: downloading github.com/sirupsen/logrus v1.9.0
+go: downloading github.com/vishvananda/netlink v1.1.1-0.20210330154013-f5de75959ad5
+go: downloading google.golang.org/grpc v1.56.3
+go: downloading k8s.io/kubelet v0.25.2
+go: downloading github.com/google/uuid v1.3.0
+go: downloading github.com/moby/sys/mount v0.3.3
+go: downloading github.com/pkg/errors v0.9.1
+go: downloading github.com/safchain/ethtool v0.0.0-20210803160452-9aa261dae9b1
+go: downloading github.com/golang/protobuf v1.5.3
+go: downloading golang.org/x/sys v0.13.0
+go: downloading github.com/gogo/protobuf v1.3.2
+go: downloading github.com/vishvananda/netns v0.0.0-20210104183010-2eb08e3e575f
+go: downloading github.com/moby/sys/mountinfo v0.6.2
+go: downloading golang.org/x/net v0.17.0
+go: downloading google.golang.org/genproto v0.0.0-20230410155749-daa745c078e1
+go: downloading google.golang.org/protobuf v1.30.0
+go: downloading github.com/coreos/go-iptables v0.6.0
+go: downloading golang.org/x/text v0.13.0
+
+
+Removing intermediate container acd9901008c9
+ ---> 7a0ee5de4b65
+Step 5/16 : FROM golang:1.20-alpine@sha256:ebceb16dc094769b6e2a393d51e0417c19084ba20eb8967fb3f7675c32b45774 as dpbuilder
+ ---> 4e5a50858d3a
+Step 6/16 : COPY . /usr/src/afxdp_k8s_plugins
+ ---> dc39ab26d918
+Step 7/16 : WORKDIR /usr/src/afxdp_k8s_plugins
+ ---> Running in 4e88c2d1c33e
+Removing intermediate container 4e88c2d1c33e
+ ---> 58d01a3ea647
+Step 8/16 : RUN apk add --no-cache build-base~=0.5-r3 && apk add --no-cache libbsd-dev~=0.11.7 && apk add --no-cache libxdp-dev~=1.2.10-r0 && apk add --no-cache libbpf-dev~=1.0.1-r0 && apk add --no-cache llvm15~=15.0.7-r0 && apk add --no-cache clang15~=15.0.7-r0 && make builddp
+ ---> Running in 6ab2725a888e
+fetch https://dl-cdn.alpinelinux.org/alpine/v3.17/main/x86_64/APKINDEX.tar.gz
+fetch https://dl-cdn.alpinelinux.org/alpine/v3.17/community/x86_64/APKINDEX.tar.gz
+(1/21) Upgrading musl (1.2.3-r4 -> 1.2.3-r5)
+(2/21) Installing libgcc (12.2.1_git20220924-r4)
+(3/21) Installing libstdc++ (12.2.1_git20220924-r4)
+(4/21) Installing binutils (2.39-r2)
+(5/21) Installing libmagic (5.43-r0)
+(6/21) Installing file (5.43-r0)
+(7/21) Installing libgomp (12.2.1_git20220924-r4)
+(8/21) Installing libatomic (12.2.1_git20220924-r4)
+(9/21) Installing gmp (6.2.1-r2)
+(10/21) Installing isl25 (0.25-r1)
+(11/21) Installing mpfr4 (4.1.0-r0)
+(12/21) Installing mpc1 (1.2.1-r1)
+(13/21) Installing gcc (12.2.1_git20220924-r4)
+(14/21) Installing libstdc++-dev (12.2.1_git20220924-r4)
+(15/21) Installing musl-dev (1.2.3-r5)
+(16/21) Installing libc-dev (0.7.2-r3)
+(17/21) Installing g++ (12.2.1_git20220924-r4)
+(18/21) Installing make (4.3-r1)
+(19/21) Installing fortify-headers (1.1-r1)
+(20/21) Installing patch (2.7.6-r9)
+(21/21) Installing build-base (0.5-r3)
+Executing busybox-1.35.0-r29.trigger
+OK: 245 MiB in 36 packages
+fetch https://dl-cdn.alpinelinux.org/alpine/v3.17/main/x86_64/APKINDEX.tar.gz
+fetch https://dl-cdn.alpinelinux.org/alpine/v3.17/community/x86_64/APKINDEX.tar.gz
+(1/7) Installing bsd-compat-headers (0.7.2-r3)
+(2/7) Installing linux-headers (5.19.5-r0)
+(3/7) Installing libmd (1.0.4-r0)
+(4/7) Installing pkgconf (1.9.4-r0)
+(5/7) Installing libmd-dev (1.0.4-r0)
+(6/7) Installing libbsd (0.11.7-r0)
+(7/7) Installing libbsd-dev (0.11.7-r0)
+Executing busybox-1.35.0-r29.trigger
+OK: 253 MiB in 43 packages
+fetch https://dl-cdn.alpinelinux.org/alpine/v3.17/main/x86_64/APKINDEX.tar.gz
+fetch https://dl-cdn.alpinelinux.org/alpine/v3.17/community/x86_64/APKINDEX.tar.gz
+(1/13) Installing libbz2 (1.0.8-r4)
+(2/13) Installing musl-fts (1.2.7-r3)
+(3/13) Installing xz-libs (5.2.9-r0)
+(4/13) Installing libelf (0.187-r2)
+(5/13) Installing musl-obstack (1.2.3-r0)
+(6/13) Installing elfutils (0.187-r2)
+(7/13) Installing libbpf (1.0.1-r0)
+(8/13) Installing libxdp (1.2.10-r0)
+(9/13) Installing xz-dev (5.2.9-r0)
+(10/13) Installing zlib-dev (1.2.13-r0)
+(11/13) Installing elfutils-dev (0.187-r2)
+(12/13) Installing libbpf-dev (1.0.1-r0)
+(13/13) Installing libxdp-dev (1.2.10-r0)
+Executing busybox-1.35.0-r29.trigger
+OK: 259 MiB in 56 packages
+fetch https://dl-cdn.alpinelinux.org/alpine/v3.17/main/x86_64/APKINDEX.tar.gz
+fetch https://dl-cdn.alpinelinux.org/alpine/v3.17/community/x86_64/APKINDEX.tar.gz
+OK: 259 MiB in 56 packages
+fetch https://dl-cdn.alpinelinux.org/alpine/v3.17/main/x86_64/APKINDEX.tar.gz
+fetch https://dl-cdn.alpinelinux.org/alpine/v3.17/community/x86_64/APKINDEX.tar.gz
+(1/5) Installing libffi (3.4.4-r0)
+(2/5) Installing libxml2 (2.10.4-r0)
+(3/5) Installing zstd-libs (1.5.5-r0)
+(4/5) Installing llvm15-libs (15.0.7-r0)
+(5/5) Installing llvm15 (15.0.7-r0)
+Executing busybox-1.35.0-r29.trigger
+OK: 448 MiB in 61 packages
+fetch https://dl-cdn.alpinelinux.org/alpine/v3.17/main/x86_64/APKINDEX.tar.gz
+fetch https://dl-cdn.alpinelinux.org/alpine/v3.17/community/x86_64/APKINDEX.tar.gz
+(1/2) Installing clang15-libs (15.0.7-r0)
+(2/2) Installing clang15 (15.0.7-r0)
+Executing busybox-1.35.0-r29.trigger
+OK: 525 MiB in 63 packages
+******     Build BPF     ******
+
+gcc ./internal/bpf/bpfWrapper.c -lxdp -c -o ./internal/bpf/bpfWrapper.o
+ar rs ./internal/bpf/libwrapper.a ./internal/bpf/bpfWrapper.o  &> /dev/null
+
+
+******     Build xdp_pass     ******
+make -C ./internal/bpf/xdp-pass/
+make[1]: Entering directory '/usr/src/afxdp_k8s_plugins/internal/bpf/xdp-pass'
+clang -S \
+-target bpf \
+-D __BPF_TRACING__ \
+-I/usr/include/bpf \
+-Wall \
+-Wno-unused-value \
+-Wno-pointer-sign \
+-Wno-compare-distinct-pointer-types \
+-Werror \
+-O2 -emit-llvm -c -g -o xdp_pass.ll xdp_pass.c
+llc -march=bpf -filetype=obj -o xdp_pass.o xdp_pass.ll
+make[1]: Leaving directory '/usr/src/afxdp_k8s_plugins/internal/bpf/xdp-pass'
+******     Build xdp_afxdp_redirect     ******
+make -C ./internal/bpf/xdp-afxdp-redirect/
+make[1]: Entering directory '/usr/src/afxdp_k8s_plugins/internal/bpf/xdp-afxdp-redirect'
+clang -S \
+-target bpf \
+-D __BPF_TRACING__ \
+-I/usr/include/bpf \
+-Wall \
+-Wno-unused-value \
+-Wno-pointer-sign \
+-Wno-compare-distinct-pointer-types \
+-Werror \
+-O2 -emit-llvm -c -g -o xdp_afxdp_redirect.ll xdp_afxdp_redirect.c
+llc -march=bpf -filetype=obj -o xdp_afxdp_redirect.o xdp_afxdp_redirect.ll
+make[1]: Leaving directory '/usr/src/afxdp_k8s_plugins/internal/bpf/xdp-afxdp-redirect'
+
+******     Build DP      ******
+
+go build -o ./bin/afxdp-dp ./cmd/deviceplugin
+go: downloading github.com/sirupsen/logrus v1.9.0
+go: downloading github.com/pkg/errors v0.9.1
+go: downloading github.com/safchain/ethtool v0.0.0-20210803160452-9aa261dae9b1
+go: downloading github.com/vishvananda/netlink v1.1.1-0.20210330154013-f5de75959ad5
+go: downloading github.com/go-ozzo/ozzo-validation/v4 v4.3.0
+go: downloading golang.org/x/net v0.17.0
+go: downloading google.golang.org/grpc v1.56.3
+go: downloading k8s.io/kubelet v0.25.2
+go: downloading github.com/google/uuid v1.3.0
+go: downloading github.com/moby/sys/mount v0.3.3
+go: downloading github.com/golang/protobuf v1.5.3
+go: downloading golang.org/x/sys v0.13.0
+go: downloading github.com/google/gofuzz v1.1.0
+go: downloading github.com/moby/sys/mountinfo v0.6.2
+go: downloading github.com/asaskevich/govalidator v0.0.0-20200108200545-475eaeb16496
+go: downloading github.com/gogo/protobuf v1.3.2
+go: downloading github.com/vishvananda/netns v0.0.0-20210104183010-2eb08e3e575f
+go: downloading google.golang.org/protobuf v1.30.0
+go: downloading google.golang.org/genproto v0.0.0-20230410155749-daa745c078e1
+go: downloading golang.org/x/text v0.13.0
+
+
+Removing intermediate container 6ab2725a888e
+ ---> ba84e3600f07
+Step 9/16 : FROM amd64/alpine:3.18@sha256:25fad2a32ad1f6f510e528448ae1ec69a28ef81916a004d3629874104f8a7f70
+docker.io/amd64/alpine:3.18@sha256:25fad2a32ad1f6f510e528448ae1ec69a28ef81916a004d3629874104f8a7f70: Pulling from amd64/alpine
+31e352740f53: Pull complete 
+Digest: sha256:25fad2a32ad1f6f510e528448ae1ec69a28ef81916a004d3629874104f8a7f70
+Status: Downloaded newer image for amd64/alpine:3.18@sha256:25fad2a32ad1f6f510e528448ae1ec69a28ef81916a004d3629874104f8a7f70
+ ---> c1aabb73d233
+Step 10/16 : RUN apk --no-cache -U add iproute2-rdma~=6.3.0-r0 acl~=2.3       && apk add --no-cache xdp-tools~=1.2.10-r0
+ ---> Running in 0ba8b55bd519
+fetch https://dl-cdn.alpinelinux.org/alpine/v3.18/main/x86_64/APKINDEX.tar.gz
+fetch https://dl-cdn.alpinelinux.org/alpine/v3.18/community/x86_64/APKINDEX.tar.gz
+(1/5) Installing libacl (2.3.1-r3)
+(2/5) Installing acl (2.3.1-r3)
+(3/5) Installing libcap2 (2.69-r0)
+(4/5) Installing libmnl (1.0.5-r1)
+(5/5) Installing iproute2-rdma (6.3.0-r0)
+Executing busybox-1.36.1-r0.trigger
+OK: 8 MiB in 20 packages
+fetch https://dl-cdn.alpinelinux.org/alpine/v3.18/main/x86_64/APKINDEX.tar.gz
+fetch https://dl-cdn.alpinelinux.org/alpine/v3.18/community/x86_64/APKINDEX.tar.gz
+(1/9) Installing libbz2 (1.0.8-r5)
+(2/9) Installing musl-fts (1.2.7-r5)
+(3/9) Installing xz-libs (5.4.3-r0)
+(4/9) Installing zstd-libs (1.5.5-r4)
+(5/9) Installing libelf (0.189-r2)
+(6/9) Installing libbpf (1.2.2-r0)
+(7/9) Installing libpcap (1.10.4-r1)
+(8/9) Installing libxdp (1.2.10-r0)
+(9/9) Installing xdp-tools (1.2.10-r0)
+Executing busybox-1.36.1-r0.trigger
+OK: 11 MiB in 29 packages
+Removing intermediate container 0ba8b55bd519
+ ---> 5b4a602713d3
+Step 11/16 : COPY --from=cnibuilder /usr/src/afxdp_k8s_plugins/bin/afxdp /afxdp/afxdp
+ ---> 84d0af04c5c0
+Step 12/16 : COPY --from=dpbuilder /usr/src/afxdp_k8s_plugins/bin/afxdp-dp /afxdp/afxdp-dp
+ ---> 9970f85521b3
+Step 13/16 : COPY --from=dpbuilder /usr/src/afxdp_k8s_plugins/images/entrypoint.sh /afxdp/entrypoint.sh
+ ---> 31768f2ca03b
+Step 14/16 : COPY --from=dpbuilder /usr/src/afxdp_k8s_plugins/internal/bpf/xdp-pass/xdp_pass.o /afxdp/xdp_pass.o
+ ---> f93c0dfb6f0a
+Step 15/16 : COPY --from=dpbuilder /usr/src/afxdp_k8s_plugins/internal/bpf/xdp-afxdp-redirect/xdp_afxdp_redirect.o /afxdp/xdp_afxdp_redirect.o
+ ---> ac55faa94661
+Step 16/16 : ENTRYPOINT ["/afxdp/entrypoint.sh"]
+ ---> Running in d7982aa9affa
+Removing intermediate container d7982aa9affa
+ ---> 41f3552f4e90
+Successfully built 41f3552f4e90
+Successfully tagged afxdp-device-plugin:latest
+
+
+make[1]: Leaving directory '/root/wcni-kind/LabasCode/netenv/4-adv-netwotk/90-eBPF/3-afxdp-run/afxdp-plugins-for-kubernetes'
+******  Stop Daemonset   ******
+
+kubectl delete -f ./deployments/daemonset.yml --ignore-not-found=true
+
+
+****** Deploy Daemonset  ******
+
+kind load --name af-xdp-deployment docker-image afxdp-device-plugin
+Image: "afxdp-device-plugin" with ID "sha256:41f3552f4e90d1f535355dd7410a3471dc5c23ff3b194a1b0b27a246c918f5a6" not yet present on node "af-xdp-deployment-worker", loading...
+Image: "afxdp-device-plugin" with ID "sha256:41f3552f4e90d1f535355dd7410a3471dc5c23ff3b194a1b0b27a246c918f5a6" not yet present on node "af-xdp-deployment-worker2", loading...
+Image: "afxdp-device-plugin" with ID "sha256:41f3552f4e90d1f535355dd7410a3471dc5c23ff3b194a1b0b27a246c918f5a6" not yet present on node "af-xdp-deployment-control-plane", loading...
+kubectl create -f ./deployments/daemonset-kind.yaml
+configmap/afxdp-dp-config created
+serviceaccount/afxdp-device-plugin created
+daemonset.apps/kube-afxdp-device-plugin created
+
+
+******       Kind Setup complete       ******
+[root@wluo afxdp-plugins-for-kubernetes]$ 
