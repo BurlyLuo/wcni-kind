@@ -41,5 +41,5 @@ for ((ip_id=0; ip_id<${#ip_addresses[@]}; ip_id++)); do
 done
 
 # 3. Install Cilium CNI
-cilium install --version 1.16.0-rc.1  --set k8sServiceHost=$master_ip --set k8sServicePort=6443 --namespace kube-system --set routingMode=native --set bpf.masquerade=true --set kubeProxyReplacement=true --set ipam.mode=kubernetes --set autoDirectNodeRoutes=true --set ipv4NativeRoutingCIDR="10.0.0.0/8" --set bpf.datapathMode=netkit
+cilium install --version 1.16.0-rc.1 --set k8sServiceHost=$master_ip --set k8sServicePort=6443 --namespace kube-system --set routingMode=native --set bpf.masquerade=true --set kubeProxyReplacement=true --set ipam.mode=kubernetes --set autoDirectNodeRoutes=true --set ipv4NativeRoutingCIDR="10.0.0.0/8" --set bpf.datapathMode=netkit
 
