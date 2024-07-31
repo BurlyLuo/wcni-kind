@@ -179,11 +179,13 @@ spec:
       serviceAccountName: multus
       containers:
       - name: kube-multus
-        image: 192.168.2.100:5000/k8snetworkplumbingwg/multus-cni:stable
-        command: ["/entrypoint.sh"]
+        #image: ghcr.io/k8snetworkplumbingwg/multus-cni:snapshot
+        image: 192.168.2.100:5000/k8snetworkplumbingwg/multus-cni:snapshot
+        command: ["/thin_entrypoint"]
         args:
         - "--multus-conf-file=auto"
-        - "--cni-version=0.3.1"
+        - "--multus-autoconfig-dir=/host/etc/cni/net.d"
+        - "--cni-conf-dir=/host/etc/cni/net.d"
         resources:
           requests:
             cpu: "100m"
@@ -193,6 +195,7 @@ spec:
             memory: "50Mi"
         securityContext:
           privileged: true
+        terminationMessagePolicy: FallbackToLogsOnError
         volumeMounts:
         - name: cni
           mountPath: /host/etc/cni/net.d
@@ -202,17 +205,19 @@ spec:
           mountPath: /tmp/multus-conf
       initContainers:
         - name: install-multus-binary
-          image: 192.168.2.100:5000/k8snetworkplumbingwg/multus-cni:stable
-          command:
-            - "cp"
-            - "/usr/src/multus-cni/bin/multus"
-            - "/host/opt/cni/bin/multus"
+          #image: ghcr.io/k8snetworkplumbingwg/multus-cni:snapshot
+          image: 192.168.2.100:5000/k8snetworkplumbingwg/multus-cni:snapshot
+          command: ["/install_multus"]
+          args:
+            - "--type"
+            - "thin"
           resources:
             requests:
               cpu: "10m"
               memory: "15Mi"
           securityContext:
             privileged: true
+          terminationMessagePolicy: FallbackToLogsOnError
           volumeMounts:
             - name: cnibin
               mountPath: /host/opt/cni/bin
