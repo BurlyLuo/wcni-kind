@@ -3,7 +3,7 @@ kind: Deployment
 metadata:
   name: wluox
 spec:
-  replicas: 2
+  replicas: 9
   selector:
     matchLabels:
       app: wluox
