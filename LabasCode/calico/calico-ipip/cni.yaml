@@ -15,11 +15,11 @@ spec:
       labels:
         app: wluo
     spec:
-      # share IPC 
+      # 1.Share IPC 
       hostIPC: true
-      # share host Network
+      # 2.Share host Network
       hostNetwork: true
-      # Inherit the process ID from the host
+      # 3.Inherit the process ID from the host
       hostPID: true
       volumes:
       - name: host
