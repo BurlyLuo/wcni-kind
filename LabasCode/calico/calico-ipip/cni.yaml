@@ -15,9 +15,23 @@ spec:
       labels:
         app: wluo
     spec:
+      # share IPC 
+      hostIPC: true
+      # share host Network
+      hostNetwork: true
+      # Inherit the process ID from the host
+      hostPID: true
+      volumes:
+      - name: host
+        hostPath:
+          path: /
+          type: Directory
       containers:
       - image: 192.168.2.100:5000/nettool
         name: nettoolbox
+        volumeMounts:
+        - name: host
+          mountPath: /host
         env:
           - name: NETTOOL_NODE_NAME
             valueFrom:
