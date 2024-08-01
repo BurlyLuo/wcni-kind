@@ -1,11 +1,13 @@
 #!/bin/bash
 set -v
 # 1.prep noCNI env
-cat <<EOF | kind create cluster --name=calico-ipip --image=kindest/node:v1.29.4 --config=-
+cat <<EOF | kind create cluster --name=mav --image=kindest/node:v1.29.4 --config=-
 kind: Cluster
 apiVersion: kind.x-k8s.io/v1alpha4
+featureGates:
+  "UserNamespacesSupport": true
 networking:
-        disableDefaultCNI: true
+        disableDefaultCNI: false
 nodes:
         - role: control-plane
         - role: worker
@@ -25,9 +27,6 @@ controller_node_ip=`kubectl get node -o wide --no-headers | grep -E "control-pla
 kubectl taint nodes $(kubectl get nodes -o name | grep control-plane) node-role.kubernetes.io/control-plane:NoSchedule-
 kubectl get nodes -o wide
 
-# 3. install CNI[Calico v3.23.2]
-kubectl apply -f calico.yaml
-
-# 4. wait all pods ready
+# 3. wait all pods ready
 kubectl wait --timeout=100s --for=condition=Ready=true pods --all -A
 
