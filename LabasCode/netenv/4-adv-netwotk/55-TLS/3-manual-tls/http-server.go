@@ -9,7 +9,7 @@ import (
 )
 
 func main() {
-        interfaceName := "ens33"
+        interfaceName := "ens3"
 
         interfaces, err := net.Interfaces()
         if err != nil {
@@ -43,11 +43,11 @@ func main() {
 
         fmt.Printf("Bind at IPv4 address for interface %s: %s\n", interfaceName, ipAddr)
 
-	http.HandleFunc("/", func(w http.ResponseWriter, req *http.Request) {
-		io.WriteString(w, "Hello, HTTP!\n")
-	})
-	if err := http.ListenAndServe(":80", nil); err != nil {
-		log.Fatal("ListenAndServe: ", err)
-	}
+        http.HandleFunc("/", func(w http.ResponseWriter, req *http.Request) {
+                io.WriteString(w, "Hello, HTTP!\n")
+        })
+        if err := http.ListenAndServe(":80", nil); err != nil {
+                log.Fatal("ListenAndServe: ", err)
+        }
 }
 
