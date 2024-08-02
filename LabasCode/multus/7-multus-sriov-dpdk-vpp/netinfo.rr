@@ -1,0 +1,232 @@
+https://github.com/k8snetworkplumbingwg/network-resources-injector/issues/20
+https://github.com/k8snetworkplumbingwg/device-info-spec/blob/main/SPEC.md
+https://github.com/k8snetworkplumbingwg/network-attachment-definition-client/pull/29
+https://github.com/k8snetworkplumbingwg/network-attachment-definition-client/pull/21
+https://docs.google.com/document/d/1oE93V3SgOGWJ4O1zeD1UmpeToa0ZiiO6LqRAmZBPFWM/edit
+
+netinfo demo:
+[root@my-cluster-worker0 ~]# asc get pods asbc-mpvnf-0 -o yaml 
+apiVersion: v1
+kind: Pod
+metadata:
+  annotations:
+    cni.projectcalico.org/podIP: 10.20.36.104/32
+    cni.projectcalico.org/podIPs: 10.20.36.104/32
+    k8s.v1.cni.cncf.io/network-status: |-
+      [{
+          "name": "k8s-pod-network",
+          "ips": [
+              "10.20.36.104"
+          ],
+          "default": true,
+          "dns": {}
+      },{
+          "name": "bond/macvlan-oam",
+          "interface": "eth1",
+          "ips": [
+              "10.2.149.92"
+          ],
+          "mac": "9e:43:10:5a:00:a8",
+          "dns": {}
+      },{
+          "name": "bond/intel-sriov-dpdk-vfio-pci-rtp-internal-mpvnf-1",
+          "interface": "eth10",
+          "dns": {},
+          "device-info": {
+              "type": "pci",
+              "version": "1.0.0",
+              "pci": {
+                  "pci-address": "0000:86:09.5"
+              }
+          }
+      },{
+          "name": "bond/macvlan-emx",
+          "interface": "eth2",
+          "ips": [
+              "192.172.2.92"
+          ],
+          "mac": "4a:11:72:05:e6:91",
+          "dns": {}
+      },{
+          "name": "bond/macvlan-db",
+          "interface": "eth3",
+          "ips": [
+              "192.172.1.96"
+          ],
+          "mac": "aa:35:cf:53:db:b5",
+          "dns": {}
+      },{
+          "name": "bond/macvlan-h248",
+          "interface": "eth4",
+          "ips": [
+              "192.172.4.87"
+          ],
+          "mac": "66:58:d3:02:2a:e5",
+          "dns": {}
+      },{
+          "name": "bond/intel-sriov-dpdk-vfio-pci-gm-mpvnf-0",
+          "interface": "eth5",
+          "dns": {},
+          "device-info": {
+              "type": "pci",
+              "version": "1.0.0",
+              "pci": {
+                  "pci-address": "0000:86:05.4"
+              }
+          }
+      },{
+          "name": "bond/intel-sriov-dpdk-vfio-pci-gm-mpvnf-1",
+          "interface": "eth6",
+          "dns": {},
+          "device-info": {
+              "type": "pci",
+              "version": "1.0.0",
+              "pci": {
+                  "pci-address": "0000:86:08.5"
+              }
+          }
+      },{
+          "name": "bond/intel-sriov-dpdk-vfio-pci-mw-mpvnf-0",
+          "interface": "eth7",
+          "dns": {},
+          "device-info": {
+              "type": "pci",
+              "version": "1.0.0",
+              "pci": {
+                  "pci-address": "0000:86:04.6"
+              }
+          }
+      },{
+          "name": "bond/intel-sriov-dpdk-vfio-pci-mw-mpvnf-1",
+          "interface": "eth8",
+          "dns": {},
+          "device-info": {
+              "type": "pci",
+              "version": "1.0.0",
+              "pci": {
+                  "pci-address": "0000:86:07.4"
+              }
+          }
+      },{
+          "name": "bond/intel-sriov-dpdk-vfio-pci-rtp-internal-mpvnf-0",
+          "interface": "eth9",
+          "dns": {},
+          "device-info": {
+              "type": "pci",
+              "version": "1.0.0",
+              "pci": {
+                  "pci-address": "0000:86:04.2"
+              }
+          }
+      }]
+    k8s.v1.cni.cncf.io/networks: '[{"interface":"eth1","name":"macvlan-oam"},{"interface":"eth10","name":"intel-sriov-dpdk-vfio-pci-rtp-internal-mpvnf-1"},{"interface":"eth2","name":"macvlan-emx"},{"interface":"eth3","name":"macvlan-db"},{"interface":"eth4","name":"macvlan-h248"},{"interface":"eth5","name":"intel-sriov-dpdk-vfio-pci-gm-mpvnf-0"},{"interface":"eth6","name":"intel-sriov-dpdk-vfio-pci-gm-mpvnf-1"},{"interface":"eth7","name":"intel-sriov-dpdk-vfio-pci-mw-mpvnf-0"},{"interface":"eth8","name":"intel-sriov-dpdk-vfio-pci-mw-mpvnf-1"},{"interface":"eth9","name":"intel-sriov-dpdk-vfio-pci-rtp-internal-mpvnf-0"}]'
+    k8s.v1.cni.cncf.io/networks-status: |-
+      [{
+          "name": "k8s-pod-network",
+          "ips": [
+              "10.20.36.104"
+          ],
+          "default": true,
+          "dns": {}
+      },{
+          "name": "bond/macvlan-oam",
+          "interface": "eth1",
+          "ips": [
+              "10.2.149.92"
+          ],
+          "mac": "9e:43:10:5a:00:a8",
+          "dns": {}
+      },{
+          "name": "bond/intel-sriov-dpdk-vfio-pci-rtp-internal-mpvnf-1",
+          "interface": "eth10",
+          "dns": {},
+          "device-info": {
+              "type": "pci",
+              "version": "1.0.0",
+              "pci": {
+                  "pci-address": "0000:86:09.5"
+              }
+          }
+      },{
+          "name": "bond/macvlan-emx",
+          "interface": "eth2",
+          "ips": [
+              "192.172.2.92"
+          ],
+          "mac": "4a:11:72:05:e6:91",
+          "dns": {}
+      },{
+          "name": "bond/macvlan-db",
+          "interface": "eth3",
+          "ips": [
+              "192.172.1.96"
+          ],
+          "mac": "aa:35:cf:53:db:b5",
+          "dns": {}
+      },{
+          "name": "bond/macvlan-h248",
+          "interface": "eth4",
+          "ips": [
+              "192.172.4.87"
+          ],
+          "mac": "66:58:d3:02:2a:e5",
+          "dns": {}
+      },{
+          "name": "bond/intel-sriov-dpdk-vfio-pci-gm-mpvnf-0",
+          "interface": "eth5",
+          "dns": {},
+          "device-info": {
+              "type": "pci",
+              "version": "1.0.0",
+              "pci": {
+                  "pci-address": "0000:86:05.4"
+              }
+          }
+      },{
+          "name": "bond/intel-sriov-dpdk-vfio-pci-gm-mpvnf-1",
+          "interface": "eth6",
+          "dns": {},
+          "device-info": {
+              "type": "pci",
+              "version": "1.0.0",
+              "pci": {
+                  "pci-address": "0000:86:08.5"
+              }
+          }
+      },{
+          "name": "bond/intel-sriov-dpdk-vfio-pci-mw-mpvnf-0",
+          "interface": "eth7",
+          "dns": {},
+          "device-info": {
+              "type": "pci",
+              "version": "1.0.0",
+              "pci": {
+                  "pci-address": "0000:86:04.6"
+              }
+          }
+      },{
+          "name": "bond/intel-sriov-dpdk-vfio-pci-mw-mpvnf-1",
+          "interface": "eth8",
+          "dns": {},
+          "device-info": {
+              "type": "pci",
+              "version": "1.0.0",
+              "pci": {
+                  "pci-address": "0000:86:07.4"
+              }
+          }
+      },{
+          "name": "bond/intel-sriov-dpdk-vfio-pci-rtp-internal-mpvnf-0",
+          "interface": "eth9",
+          "dns": {},
+          "device-info": {
+              "type": "pci",
+              "version": "1.0.0",
+              "pci": {
+                  "pci-address": "0000:86:04.2"
+              }
+          }
+      }]
+  creationTimestamp: "2024-08-01T09:00:12Z"
+  generateName: asbc-mpvnf-
+
