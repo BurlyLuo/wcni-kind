@@ -1,0 +1,48 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: wluo
+spec:
+  replicas: 9
+  selector:
+    matchLabels:
+      app: wluo
+  template:
+    metadata:
+      labels:
+        app: wluo
+    spec:
+      affinity:
+        podAntiAffinity:
+          preferredDuringSchedulingIgnoredDuringExecution:
+          - podAffinityTerm:
+              labelSelector:
+                matchExpressions:
+                - key: app
+                  operator: In
+                  values:
+                  - wluo
+              topologyKey: kubernetes.io/hostname
+            weight: 100   
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+            - matchExpressions:
+              - key: topology.kubernetes.io/zone
+                operator: In
+                values:
+                - zone1
+                - zone2
+                - zone3
+      #topologySpreadConstraints:
+      #- maxSkew: 5
+      #  topologyKey: topology.kubernetes.io/zone
+      #  whenUnsatisfiable: DoNotSchedule
+      #  labelSelector:
+      #    matchLabels:
+      #      app: wluo
+      containers:
+      - name: wluo
+        image: 192.168.2.100:5000/nettool
+        ports:
+        - containerPort: 80
