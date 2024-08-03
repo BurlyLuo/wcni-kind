@@ -18,21 +18,21 @@ spec:
       volumes:
       - name: host
         hostPath:
-          path: /proc
+          path: /
           type: Directory
       containers:
       - image: 192.168.2.100:5000/nettool
         name: nettoolbox
         volumeMounts:
         - name: host
-          mountPath: /proc
+          mountPath: /host
         env:
           - name: NETTOOL_NODE_NAME
             valueFrom:
               fieldRef:
                 fieldPath: spec.nodeName
         securityContext:
-          procMount: Default
+          privileged: true
           
 ---
 apiVersion: v1
