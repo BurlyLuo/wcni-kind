@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: sample-api-client
+  name: sample-api-client
+  namespace: sandbox
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: sample-api-client
+  template:
+    metadata:
+      labels:
+        app: sample-api-client
+    spec:
+      volumes:
+      - name: tls
+        csi:
+          driver: csi.cert-manager.io
+          readOnly: true
+          volumeAttributes:
+             csi.cert-manager.io/issuer-name: my-ca-issuer
+      containers:
+      - name: sample-api
+        image: 192.168.2.100:5000/nettool
+        volumeMounts:
+        - mountPath: "/etc/tls"
+          name: tls
+          readOnly: true
