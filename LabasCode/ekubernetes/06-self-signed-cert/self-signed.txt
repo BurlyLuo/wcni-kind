@@ -1,0 +1,13 @@
+openssl genrsa -out server.key 2048
+openssl req -nodes -new -key server.key -subj '/CN=vm22040' -out server.csr
+openssl x509 -req -sha256 -days 365 -in server.csr -signkey server.key -out server.crt
+
+openssl genrsa -out server.key 2048：生成一个2048位的RSA私钥，保存在server.key文件中。这是服务器的私钥。
+
+openssl req -nodes -new -key server.key -subj '/CN=vm22040' -out server.csr：使用上述生成的私钥生成一个证书签名请求（CSR），其中/CN=vm22040是您指定的通用名称（Common Name），它通常是服务器的域名或主机名。CSR保存在server.csr文件中
+
+openssl x509 -req -sha256 -days 365 -in server.csr -signkey server.key -out server.crt：使用自己的私钥（不涉及CA）对CSR进行签名，生成一个自签名的X.509证书。这个证书在server.crt文件中.
+
+test:
+curl --cacert server.crt https://vm22040
+[指定的域名是: vm22040]
