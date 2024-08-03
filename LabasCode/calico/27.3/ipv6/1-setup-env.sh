@@ -1,14 +1,11 @@
 #!/bin/bash
 set -v
 # 1.prep noCNI env
-cat <<EOF | kind create cluster --name=mav --image=kindest/node:v1.29.4 --config=-
+cat <<EOF | kind create cluster --name=comp --image=kindest/node:v1.27.3 --config=-
 kind: Cluster
 apiVersion: kind.x-k8s.io/v1alpha4
-# https://kind.sigs.k8s.io/docs/user/configuration/#feature-gates
-featureGates:
-  "UserNamespacesSupport": true
-
 networking:
+        ipFamily: ipv6
         disableDefaultCNI: false
 nodes:
         - role: control-plane
