@@ -31,7 +31,7 @@ topology:
       - ip a a 10.1.5.99/24 dev net1
       - keepalived -D  -f /etc/keepalived/keepalived.conf
       - haproxy -f /etc/haproxy/haproxy.cfg
-      cmd: sleep infinity 
+      #cmd: sleep infinity 
       binds:
         - ./keepalived/keepalived1/keepalived.conf:/etc/keepalived/keepalived.conf
         - ./haproxy/haproxy1/haproxy.cfg:/etc/haproxy/haproxy.cfg
@@ -39,7 +39,7 @@ topology:
     keepalived2-haproxy2:
       kind: linux
       image: 192.168.2.100:5000/keepalived-2.0.8-haproxy-1.5.18
-      cmd: sleep infinity
+      #cmd: sleep infinity
       exec:
       - ip a a 10.1.5.101/24 dev net1
       - keepalived -D  -f /etc/keepalived/keepalived.conf
