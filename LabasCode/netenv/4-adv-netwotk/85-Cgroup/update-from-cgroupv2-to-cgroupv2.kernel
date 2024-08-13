@@ -1,0 +1,8 @@
+vi /etc/default/grub
+GRUB_CMDLINE_LINUX="cgroup_enable=memory swapaccount=0 systemd.unified_cgroup_hierarchy=0"
+
+systemd.unified_cgroup_hierarchy=0 [值为1就是cgroup v2, 值为0则为cgroup v1]
+
+grub2-mkconfig -o /boot/grub2/grub.cfg
+
+reboot
