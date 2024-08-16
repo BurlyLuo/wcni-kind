@@ -1,0 +1,994 @@
+[root@rocky92 ~]# history 
+    1  df -h 
+    2  lsblk
+    3  growpart /dev/vda 5
+    4  lsblk
+    5  df -h
+    6  xfs_growfs /
+    7  df -h 
+    8  ll
+    9  df -h 
+   10  cat <<EOF>/etc/environment
+   11  LANG=en_US.UTF-8
+   12  EOF
+   13  cat <<EOF>>~/.bashrc
+   14  export LC_ALL=en_US.UTF-8
+   15  EOF
+   16  cat <<EOF>/etc/locale.conf
+   17  LANG=en_US.UTF-8
+   18  EOF
+   19  ll
+   20  ps -ef 
+   21  ll
+   22  ll -rth 
+   23  hostnamectl set-hostname rocky92
+   24  exit
+   25  vi /etc/ssh/sshd_config
+   26  systemctl restart sshd
+   27  pi a 
+   28  clear
+   29  ip a 
+   30  taskset -cp 1 
+   31  sed -i 's/^ *SELINUX=enforcing/SELINUX=disabled/g' /etc/selinux/config
+   32  systemctl stop firewalld.service ;  systemctl disable firewalld
+   33  systemctl stop firewalld.service 
+   34  systemctl status iptables
+   35  mv /etc/yum.repos.d/CentOS-Base.repo /etc/yum.repos.d/CentOS-Base.repo.bak
+   36  cd /etc/yum.
+   37  cd /etc/yum.repos.d/rocky
+   38  cd /etc/yum.repos.d/
+   39  ls
+   40  ll
+   41  cat *
+   42  cat <<EOF > /etc/yum.repos.d/kubernetes.repo
+   43  [kubernetes]
+   44  name=Kubernetes
+   45  baseurl=https://mirrors.aliyun.com/kubernetes/yum/repos/kubernetes-el7-x86_64
+   46  enabled=1
+   47  gpgcheck=0
+   48  repo_gpgcheck=0
+   49  gpgkey=https://mirrors.aliyun.com/kubernetes/yum/doc/yum-key.gpg https://mirrors.aliyun.com/kubernetes/yum/doc/rpm-package-key.gpg
+   50  EOF
+   51  cd
+   52  ll
+   53  yum clean all
+   54  timedatectl set-timezone Asia/Shanghai
+   55  ntpq -p
+   56  chronyc
+   57  sed -ri 's/.*swap.*/#&/' /etc/fstab 
+   58   swapoff -a
+   59   vim /etc/modules-load.d/k8s.conf
+   60   vi /etc/modules-load.d/k8s.conf
+   61  modprobe br_netfilter
+   62  modprobe overlay
+   63  lsmod  | grep br_ne
+   64  cat > /etc/sysctl.d/k8s.conf <<EOF
+   65  net.bridge.bridge-nf-call-ip6tables = 1
+   66  net.bridge.bridge-nf-call-iptables = 1
+   67  net.ipv4.ip_forward = 1
+   68  EOF
+   69  sysctl -p /etc/sysctl.d/k8s.conf
+   70  sysctl --system
+   71  route -n 
+   72  ip s 
+   73  ip r s 
+   74  yum install -y yum-utils device-mapper-persistent-data lvm2 wget net-tools lrzsz gcc gcc-c++ make cmake libxml2-devel openssl-devel curl curl-devel unzip sudo ntp libaio-devel wget vim ncurses-devel autoconf automake zlibdevel python-devel epel-release openssh-server socat  conntrack  telnet 
+   75  yum install -y yum-utils device-mapper-persistent-data lvm2
+   76  yum -y install wget net-tools lrzsz gcc gcc-c++ make
+   77  yum -y install cmake libxml2-devel openssl-devel
+   78  yum -y install curl curl-devel unzip
+   79  yum -y install libaio-devel wget  ncurses-devel autoconf automake zlibdevel python-devel epel-release openssh-server socat  conntrack  telnet 
+   80  yum -y install libaio-devel wget  ncurses-devel autoconf automake python-devel epel-release openssh-server socat  conntrack  telnet 
+   81  yum clean all
+   82  ll
+   83  df -h 
+   84  curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
+   85  ethtool -i eth0
+   86  tcpdump 
+   87  brctl show 
+   88  yum -y install bridge-utils
+   89  uname -r 
+   90  systemctl stop docker
+   91  yum remove docker docker-client docker-client-latest docker-common docker-latest docker-latest-logrotate docker-logrotate docker-selinux docker-engine-selinux docker-engine docker-ce
+   92  rm -rf /etc/docker
+   93  rm -rf /run/docker
+   94  rm -rf /var/lib/dockershim
+   95  rm -rf /var/lib/docker
+   96  yum install -y yum-utils   device-mapper-persistent-data   lvm2
+   97   yum-config-manager     --add-repo     https://download.docker.com/linux/centos/docker-ce.repo
+   98  yum install -y docker-ce-3:19.03.15-3.el8 docker-ce-cli-1:19.03.15-3.el8 containerd.io-1.3.9-3.1.el8
+   99  history 
+  100  cat /etc/sysctl.d/k8s.conf
+  101  yum install docker-ce-23.0.6-1.el7 -y
+  102  cd /etc/yum.repos.d/
+  103  ls
+  104  ll
+  105  cat docker-ce.repo 
+  106  d 
+  107  cd
+  108  yum-config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo
+  109  history 
+  110  yum install -y docker-ce-3:20.10.15-3.el9 docker-ce-cli-1:20.10.15-3.el9 containerd.io
+  111  yum install -y docker-ce-3:20.10.15-3.el9 docker-ce-cli-1:20.10.15-3.el9 
+  112  yum install docker-ce-23.0.6-1.el7 -y
+  113  yum remove -y docker-ce-3:20.10.15-3.el9 docker-ce-cli-1:20.10.15-3.el9 containerd.io
+  114  yum install docker-ce-23.0.6-1.el7 -y
+  115  yum update
+  116  yum install docker-ce-23.0.6-1.el7 -y
+  117  yum install docker-ce*
+  118  curl -fsSL https://get.docker.com | bash -s docker --mirror Aliyun
+  119  sudo wget -O /etc/yum.repos.d/docker-ce.repo https://mirrors.aliyun.com/docker-ce/linux/centos/docker-ce.repo
+  120  yum install docker-ce*
+  121  yum remove  docker-ce*
+  122  ll
+  123  yum install docker-ce-23.0.6-1.el7 -y
+  124  yum list docker-ce
+  125  yum install docker-ce-3:27.1.1-1.el9
+  126  mkdir -pv /opt/docker
+  127  cat /etc/docker/daemon.json 
+  128  {     "registry-mirrors": ["https://zd6lf0p4.mirror.aliyuncs.com"],;     "exec-opts": ["native.cgroupdriver=systemd"],;     "data-root":"/opt/docker"; }
+  129  cat /etc/docker/daemon.json 
+  130  {     "registry-mirrors": ["https://zd6lf0p4.mirror.aliyuncs.com"],;     "exec-opts": ["native.cgroupdriver=systemd"],;     "data-root":"/opt/docker"; }
+  131  vi /etc/docker/daemon.json
+  132  systemctl start docker
+  133  systemctl enable docker
+  134  cat /etc/docker/daemon.json 
+  135  wget https://github.com/Mirantis/cri-dockerd/releases/download/v0.3.15/cri-dockerd-0.3.15-3.fc36.x86_64.rpm
+  136  rpm -ivh cri-dockerd-0.3.15-3.fc36.x86_64.rpm 
+  137  yum -y install libcgroup
+  138  dnf install libcgroup-0.41-19.el8.x86_64.rpm -y
+  139  wget https://kojihub.stream.centos.org/kojifiles/packages/libcgroup/0.42.2/5.el9/x86_64/libcgroup-0.42.2-5.el9.x86_64.rpm
+  140  wget https://kojihub.stream.centos.org/kojifiles/packages/libcgroup/0.41/19.el8/x86_64/libcgroup-0.41-19.el8.x86_64.rpm
+  141  rpm -ivh libcgroup-0.41-19.el8.x86_64.rpm 
+  142  ll
+  143  rpm -ivh cri-dockerd-0.3.15-3.fc36.x86_64.rpm 
+  144  ll
+  145  vi /usr/lib/systemd/system/cri-docker.service 
+  146  systemctl daemon-reload
+  147  systemctl enable --now cri-docker
+  148  cat /etc/yum.repos.d/kubernetes.repo 
+  149  yum list kubeadm 
+  150  yum -y install  kubeadm=1.27.3-0 kubelet=1.27.3-0 kubectl=1.27.3-0
+  151  docker version 
+  152  yum -y install  kubeadm=1.27.3-0 kubelet=1.27.3-0 kubectl=1.27.3-0
+  153  yum list kubeadm 
+  154  yum -y install  kubeadm=1.28.2-0 kubelet=1.28.2-0 kubectl=1.28.2-0
+  155  yum -y install kubeadm 
+  156  yum -y install kubelet kubectl 
+  157  ls
+  158  systemctl enable kubelet --now
+  159  systemctl status kubelet
+  160  clear
+  161  ls
+  162  kubeadm config images pull --kubernetes-version=v1.27.3 --image-repository registry.aliyuncs.com/google_containers --cri-socket unix:///var/run/cri-dockerd.sock
+  163  docker image ls
+  164  docker rmi all
+  165  docker rmi 08a0c939e61b 41697ceeb70b 5780543258cf 7cffc01dba0e 73deb9a3f702 ead0a4a53df8- e6f181688397 
+  166  docker rmi 08a0c939e61b 41697ceeb70b 5780543258cf 7cffc01dba0e 73deb9a3f702 ead0a4a53df8 e6f181688397 
+  167  docker image ls 
+  168  ll
+  169  kubeadm config images pull --kubernetes-version=v1.28.2 --image-repository registry.aliyuncs.com/google_containers --cri-socket unix:///var/run/cri-dockerd.sock
+  170  kubeadm init --apiserver-advertise-address=192.168.2.55 --image-repository registry.aliyuncs.com/google_containers --kubernetes-version v1.28.2 --cri-socket unix:///var/run/cri-dockerd.sock --ignore-preflight-errors=all
+  171    mkdir -p $HOME/.kube
+  172    sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
+  173    sudo chown $(id -u):$(id -g) $HOME/.kube/config
+  174  kubectl get nodes -owide 
+  175  ls
+  176  ssh 192.168.2.99
+  177  sftp 192.168.2.99
+  178  ll
+  179  vi /etc/docker/daemon.json 
+  180  systemctl daemon-reload
+  181  systemctl restart docker
+  182  vi /etc/docker/daemon.json 
+  183  systemctl restart docker
+  184  systemctl daemon-reload
+  185  systemctl restart docker
+  186  ls
+  187  docker ps 
+  188  ll
+  189  kubectl apply -f calico.yaml 
+  190  kubectl get pods -owide -A -w 
+  191  kubectl get pods -owide -A
+  192  kubectl get pods -A
+  193  kubectl get pods -A -o wide 
+  194  kubectl 
+  195  kubectl taint node rocky92 key1:NoSchedule-
+  196  kubectl taint nodes master1 node-role.kubernetes.io/master=:NoSchedule
+  197  kubectl taint nodes rocky92 node-role.kubernetes.io/master=:NoSchedule
+  198  kubectl get pods -A 
+  199  all
+  200  kubectl -nkube-system describe pods calico-kube-controllers-58c8766984-4mgms
+  201  all
+  202  kubectl get pods -A 
+  203  kubectl -nkube-system delete pods  calico-kube-controllers-58c8766984-4mgms 
+  204  kubectl get pods -A 
+  205  kubectl -nkube-system describe pods calico-kube-controllers-58c8766984-jhtd4
+  206  kubectl describe nodes 
+  207  kubectl get nodes 
+  208  kubectl taint nodes master1 node-role.kubernetes.io/master=:NoSchedule
+  209  kubectl taint nodes all node-role.kubernetes.io/master=:NoSchedule
+  210  kubectl taint nodes rocky92 node-role.kubernetes.io/master=:NoSchedule
+  211  kubectl taint nodes rocky92 node-role.kubernetes.io/control-plane=:NoSchedule
+  212  kubectl taint nodes rocky92 node-role.kubernetes.io/control-plane=:NoSchedule -
+  213  kubectl taint node k8s-master node-role.kubernetes.io/master:NoSchedule-
+  214  kubectl taint node rocky92 node-role.kubernetes.io/master:NoSchedule-
+  215  kubectl taint node rocky92 node-role.kubernetes.io/control-plane:NoSchedule-
+  216  kubectl get nodes 
+  217  kubectl get nodes -A
+  218  kubectl get pods -A 
+  219  kubectl get pods -A -o wide 
+  220  kubectl get pods -owide 
+  221  ll
+  222  vi pod.yaml
+  223  kubectl apply -f pod.yaml 
+  224  kubectl get pods -owide 
+  225  kubectl get nodes -owide 
+  226  ip a 
+  227  ll
+  228  vi pod.yaml 
+  229  kubectl apply -f pod.yaml 
+  230  kubectl get pods -owide -w 
+  231  kubectl get pods -owide 
+  232  history 
+  233   systemctl enable --now cri-docker
+  234   systemctl status cri-docker
+  235  ps -ef 
+  236  ip a 
+  237  ip a
+  238  ps -ef 
+  239  pi a 
+  240  ip a 
+  241  kubectl get pods -owide 
+  242  kubectl get nodes -owide 
+  243  ps -ef 
+  244  ip a 
+  245  systemctl status cri-docker
+  246  ps -ef 
+  247  ip a 
+  248  ps -ef 
+  249  ll
+  250  kubectl delete -f pod.yaml 
+  251  kubectl -nkube-system delete pods --all
+  252  kubectl get pods -A 
+  253  kubectl get pods -A  -w
+  254  kubectl get pods -A 
+  255  kubectl -nkube-system delete pods --all
+  256  kubectl get pods -A 
+  257  ls
+  258  kubectl get pods -v=9
+  259  kubectl get pods -A 
+  260  ls
+  261  reboot 
+  262  ip a
+  263  kubectl get pods -A 
+  264  kubectl get pods -A  -w
+  265  ps -ef 
+  266  pi a 
+  267  ip a 
+  268  clear
+  269  ps -ef 
+  270  kubectl get pods -A 
+  271  kubectl -nkube-system delete pods --all
+  272  kubectl get pods -A -w 
+  273  ls
+  274  kubectl get pods -owide 
+  275  clear
+  276  ip a 
+  277  docker ps 
+  278  kubectl get nodes -owide 
+  279  ls
+  280  kubectl get nodes -owide 
+  281  ps -ef 
+  282  ip a 
+  283  docker ps 
+  284  docker image ls 
+  285  ip a 
+  286  kubectl get nodes -owide 
+  287  ll
+  288  sz cri-dockerd-0.3.15-3.fc36.x86_64.rpm 
+  289  sz libcgroup-0.41-19.el8.x86_64.rpm 
+  290  ll
+  291  sz pod.yaml 
+  292  sz calico.yaml 
+  293  ll
+  294  kubectl get pods -A 
+  295  ls
+  296  systemctl cat kubelet 
+  297  vi /usr/lib/systemd/system/kubelet.service.d/10-kubeadm.conf
+  298  vi /var/lib/kubelet/kubeadm-flags.env
+  299   rm -rf /var/lib/kubelet/cpu_manager_state 
+  300  systemctl restart kubelet
+  301  kubectl get nodes 
+  302  kubectl describe nodes 
+  303  ll
+  304  cd /home/
+  305  ls
+  306  mkdir mav
+  307  cd mav/
+  308  ls
+  309  ll
+  310  sftp 192.168.2.99
+  311  ll
+  312  cd sriovdp-config/
+  313  ls
+  314  cd ..
+  315  ll
+  316  sftp 192.168.2.99
+  317  ll
+  318  python dpdk.py -s
+  319  ls
+  320  ll
+  321  cd sriovdp-config/
+  322  ls
+  323  ll
+  324  cd ..
+  325  ll
+  326  ls
+  327  ll
+  328  mkdir cpu-pin
+  329  cd cpu-pin/
+  330  ll
+  331  ls
+  332  ip a 
+  333  clear
+  334  ip a 
+  335  ll
+  336  vi cpu-pin-pod.yaml
+  337  kubectl apply -f cpu-pin-pod.yaml 
+  338  kubectl get pods 
+  339  kubectl get pods -owdie 
+  340  ll
+  341  vi cpu-pin-pod.yaml 
+  342  kubectl apply -f cpu-pin-pod.yaml 
+  343  kubectl delete -f cpu-pin-pod.yaml 
+  344  kubectl apply -f cpu-pin-pod.yaml 
+  345  kubectl get pods 
+  346  kubectl describe pods 
+  347  kubectl describe nodes 
+  348  ls
+  349  rm -rf 1 
+  350  ll
+  351  vi cpu-pin-pod.yaml 
+  352  kubectl delee -f cpu-pin-pod.yaml 
+  353  kubectl delete cpu-pin-pod.yaml 
+  354  kubectl apply -f cpu-pin-pod.yaml 
+  355  kubectl delete -f cpu-pin-pod.yaml 
+  356  kubectl apply -f cpu-pin-pod.yaml 
+  357  kubectl get pods 
+  358  kubectl describe pods 
+  359  ll
+  360  history 
+  361   vi /usr/lib/systemd/system/kubelet.service.d/10-kubeadm.conf
+  362  vi /var/lib/kubelet/kubeadm-flags.env
+  363  systemctl restart kubele
+  364  systemctl restart kubelet
+  365  kubectl describe pods 
+  366  kubectl get pods 
+  367  kubectl exec -it cpu-pin -- taskset -cp 1 
+  368  kubectl exec -it cpu-pin -- bash 
+  369  kubectl get pods 
+  370  kubectl delete -f cpu-pin-pod.yaml 
+  371  kubectl get 
+  372  docker image ls 
+  373  ll
+  374  vi cpu-pin-pod.yaml 
+  375  kubectl apply -f cpu-pin-pod.yaml 
+  376  kubectl get pods -o wide -w 
+  377  kubectl get pods 
+  378  kubectl describe pods 
+  379  vi cpu-pin-pod.yaml 
+  380  ll
+  381  kubectl apply -f cpu-pin-pod.yaml 
+  382  kubectl delete -f cpu-pin-pod.yaml 
+  383  ll
+  384  vi /etc/default/grub 
+  385  grubby --update-kernel=ALL --args="iommu=pt intel_iommu=on"
+  386  grub2-mkconfig -o /boot/grub2/grub.cfg 
+  387  ls
+  388  ll
+  389  kubectl describe nodes 
+  390  ll
+  391  cd
+  392  ll
+  393  cd /home/
+  394  ls
+  395  cd mav/
+  396  ls
+  397  mkdir multus
+  398  ll
+  399  cd multus/
+  400  ls
+  401  sftp 192.168.2.99
+  402  ll
+  403  sftp 192.168.2.99
+  404  ll
+  405  cd k8snetworkplumbingwg/
+  406  ll
+  407  rm -rf calico.yaml 
+  408  ll
+  409  kubectl apply -f *
+  410  kubectl apply -f ..
+  411  kubectl apply -f ./
+  412  kubectl get pods -A 
+  413  ls
+  414  ll
+  415  cd ..
+  416  ll
+  417  cd ..
+  418  ll
+  419  cd sriovdp-config/
+  420  ll
+  421  mkdir sriov-and-sriov-device
+  422  cd sriov-and-sriov-device/
+  423  ll
+  424  wget https://raw.githubusercontent.com/k8snetworkplumbingwg/sriov-cni/master/images/sriov-cni-daemonset.yaml
+  425  ll
+  426  vi sriov-cni-daemonset.yaml
+  427  kubectl apply -f ./
+  428  kubectl get pods -A -w 
+  429  ll
+  430  cd ..
+  431  ll
+  432  cp -r sriovdp-config-vhost.yaml  sriov-and-sriov-device/
+  433  ll
+  434  cd sriov-and-sriov-device/
+  435  ll
+  436  kubectl apply -f ./
+  437  wget https://raw.githubusercontent.com/k8snetworkplumbingwg/sriov-network-device-plugin/master/deployments/sriovdp-daemonset.yaml
+  438  vi sriovdp-daemonset.yaml
+  439  kubectl apply -f ./
+  440  kubectl get pods -A -w 
+  441  kubectl -nkube-system describe pods kube-sriov-device-plugin-25dp7 
+  442  kubectl -nkube-system describe pods kube-sriov-device-plugin-25dp7 | grep image 
+  443  ll
+  444  kubectl -nkube-system get pods kube-sriov-device-plugin-25dp7 -o yaml | grep image 
+  445  ll
+  446  kubectl get pods -A 
+  447  kubectl get pods -A -w
+  448  ll
+  449  docker pull ghcr.io/k8snetworkplumbingwg/sriov-network-device-plugin:latest
+  450  kubectl get pods -A -w
+  451  reboot &
+  452  docekr image s
+  453  kubectl get pods -A 
+  454  kubectl get pods -owide 
+  455  kubectl delete pods cpu-pin
+  456  ll
+  457  cd /home/mav/
+  458  ls
+  459  cd cpu-pin/
+  460  ls
+  461  ll
+  462  vi cpu-pin-pod.yaml 
+  463  kubectl get pods -A 
+  464  ll
+  465  kubectl get pods -A -w
+  466  kubectl delete pods cpu-pin --force
+  467  kubectl apply -f cpu-pin-pod.yaml 
+  468  kubectl get pods 
+  469  kubectl get pods -owide 
+  470  kubectl describe pods 
+  471  kubectl get pods -owide 
+  472  kubectl exec -it cpu-pin bash 
+  473  ll
+  474  kubectl delete -f cpu-pin-pod.yaml 
+  475  echo 1 > /sys/module/vfio/parameters/enable_unsafe_noiommu_mode
+  476  modprobe vfio_pci
+  477  echo 1 > /sys/module/vfio/parameters/enable_unsafe_noiommu_mode
+  478  lshw -class network -businfo
+  479  ll
+  480  cd ..
+  481  ll
+  482  cd sriovdp-config/
+  483  ls
+  484  ll
+  485  cat sriovdp-config-details.rr 
+  486  ll
+  487  cat sriovdp-config-vhost.yaml 
+  488  ll
+  489  cat vpp-sts.yaml 
+  490  cd ..
+  491  kubectl get pods -A -w 
+  492  docker ps 
+  493  docker ps -a 
+  494  cd
+  495  docker ps 
+  496  uptime 
+  497  uptime -s
+  498  ps -ef
+  499  date
+  500  ip a 
+  501  ps -ef 
+  502  docekr ps 
+  503  docker ps 
+  504  kubectl get pods -A -w 
+  505  kubectl describe nodes 
+  506  free -mh 
+  507  vi /etc/default/grub 
+  508  history | grep gru
+  509   grub2-mkconfig -o /boot/grub2/grub.cfg 
+  510  free -mh 
+  511  ls
+  512  ip  
+  513  a
+  514  kubectl describe nodes 
+  515  ll
+  516  history | grep gru
+  517  vi /etc/default/grub 
+  518   grub2-mkconfig -o /boot/grub2/grub.cfg 
+  519  reboot 
+  520  kubectl describe nodes 
+  521  kubectl get pods -A 
+  522  kubectl get pods -A -w
+  523  kubectl get nodes -A
+  524  kubectl describe nodes 
+  525  ls
+  526  cat /proc/meminfo | grep -i huge
+  527  ls
+  528  ip a
+  529  ll
+  530  cd /home/
+  531  cd mav/
+  532  ls
+  533  ll
+  534  cd multus/
+  535  ls
+  536  ll
+  537  cd k8snetworkplumbingwg/
+  538  ls
+  539  ll
+  540  cd
+  541  shutdown -h now
+  542  ip a 
+  543  kubectl describe nodes 
+  544  docker ps 
+  545  docker ps -a 
+  546  systemctl status kubelet 
+  547  systemctl status docker 
+  548  systemctl status cri-docker 
+  549  docker ps -a 
+  550  docker ps 
+  551  kubectl get node 
+  552  docker ps -a 
+  553  ip a
+  554  free -mh 
+  555  taskset -cp 1
+  556  ps -ef
+  557  ls
+  558  systemctl restart kubelet
+  559  ps -ef
+  560  docker ps 
+  561  for i in $(docker ps -aq);do docekr start $i;done
+  562  for i in $(docker ps -aq);do docker start $i;done
+  563  docker ps 
+  564  kubectl get pods -A 
+  565  docker ps 
+  566  docker ps | grep -v pause
+  567  vi /etc/default/grub 
+  568  history | grep grub
+  569  grub2-mkconfig -o /boot/grub2/grub.cfg 
+  570  docker ps 
+  571  docker ps -a 
+  572  for i in $(docker ps -aq);do docker start $i;done
+  573  docker ps -a 
+  574  kubectl get pods -A 
+  575  kubectl get pods -A -w
+  576  kubectl get pods -A 
+  577  docker ps -a 
+  578  kubectl get pods -A 
+  579  reboot 
+  580  docker ps 
+  581  docker ps -a 
+  582  systemctl status firewalld
+  583  history | grep for
+  584   for i in $(docker ps -aq);do docker start $i;done
+  585  docker ps -a 
+  586   for i in $(docker ps -aq);do docker start $i;done
+  587  docker ps 
+  588  kubectl get pods -A 
+  589  kubectl get pods -A -w
+  590  kubectl describe nodes 
+  591  cat /proc/meminfo | grep -i huge
+  592  ipa 
+  593  ps -ef 
+  594  docekr ps 
+  595  kubectl get pods -A 
+  596  kubectl get pods -A -w
+  597  history | grep env
+  598  vi /var/lib/kubelet/kubeadm-flags.env
+  599  ps -ef 
+  600  docker ps 
+  601   for i in $(docker ps -aq);do docker start $i;done
+  602  kubectl get pods -A 
+  603  kubectl -nkube-system delete pods --all
+  604  kubectl get pods -A 
+  605  cd /etc/kubernetes/manifests/
+  606  ls
+  607  ll
+  608  ps -ef 
+  609  systemctl status kubelet 
+  610  journalctl -ex -u kubelet 
+  611   rm -rf /var/lib/kubelet/cpu_manager_state 
+  612  systemctl restart kubelet
+  613  journalctl -ex -u kubelet 
+  614  kubectl get pods -A 
+  615  kubectl get pods -A -w -o wide 
+  616  kubectl get pods -A -w -o
+  617  kubectl get pods -A -w 
+  618  kubectl get pods -A -owide 
+  619  ll
+  620  kubectl describe ndoes 
+  621  kubectl describe nodes
+  622  kubectl get pods -owide 
+  623  ll
+  624  wp
+  625  cd
+  626  ll
+  627  cd /home/
+  628  ls
+  629  cd mav/
+  630  ls
+  631  ll
+  632  cd sriovdp-config/
+  633  ls
+  634  ll
+  635  cd ..
+  636  ll
+  637  cd cpu-pin/
+  638  ls
+  639  ll
+  640  k apply -f cpu-pin-pod.yaml 
+  641  kubectl apply -f cpu-pin-pod.yaml 
+  642  kubectl get pods -owide 
+  643  kubectl exec -it cpu-pin bash 
+  644  ls
+  645  ll
+  646  cd ..
+  647  ll
+  648  cd sriovdp-config/
+  649  ls
+  650  ll
+  651  vi virtio-nic-bind-vfio-pci.sh
+  652  ll
+  653  chmod +x virtio-nic-bind-vfio-pci.sh 
+  654  ll
+  655  ll
+  656  cd /home/
+  657  ls
+  658  cd mav/
+  659  ls
+  660  cd sriovdp-config/
+  661  ls
+  662  ll
+  663  vi virtio-nic-bind-vfio-pci.sh 
+  664  ls
+  665  ip a
+  666  ll
+  667  kubectl get pods -A 
+  668  ll
+  669  kubectl get pods -owide 
+  670  kubectl exec -it cpu-pin -- taskset -cp 1 
+  671  kubectl describe nodes 
+  672  ll
+  673  kubectl get pods
+  674  cd ..
+  675  ll
+  676  cd cpu-pin/
+  677  ll
+  678  kubectl delete -f cpu-pin-pod.yaml 
+  679  ll
+  680  vi cpu-pin-pod.yaml 
+  681  kubectl apply -f cpu-pin-pod.yaml 
+  682  kubectl get pods -owdie 
+  683  kubectl get pods -owide
+  684  kubectl describe nodes 
+  685  kubectl get nodes -owide 
+  686  ps -ef 
+  687  ls
+  688  ps -ef 
+  689  ll
+  690  ps -ef 
+  691  wp
+  692  ll
+  693  cd
+  694  ll
+  695  cd /home/
+  696  cd mav/
+  697  ls
+  698  ll
+  699  cd sriovdp-config/
+  700  ls
+  701  ll
+  702  lseth 
+  703  vi virtio-nic-bind-vfio-pci.sh 
+  704  ll
+  705  pwd
+  706  cp -r ../dpdk.py ./
+  707  ll
+  708  sed -i "s#/etc/mavenir/sriov/dpdk-devbind.py#/home/mav/sriovdp-config/dpdk.py#g" virtio-nic-bind-vfio-pci.sh 
+  709  ll
+  710  cat v
+  711  cat virtio-nic-bind-vfio-pci.sh 
+  712  ./virtio-nic-bind-vfio-pci.sh 
+  713  cat /sys/bus/pci/devices/0000\:02\:00.0/numa_node 
+  714  echo 0 > /sys/bus/pci/devices/0000\:00\:02.0/numa_node
+  715  cat /sys/bus/pci/devices/0000\:03\:00.0/numa_node 
+  716  vi virtio-nic-bind-vfio-pci.sh 
+  717  ./virtio-nic-bind-vfio-pci.sh 
+  718  vi virtio-nic-bind-vfio-pci.sh 
+  719  lseth 
+  720  vi virtio-nic-bind-vfio-pci.sh 
+  721  echo 0 > /sys/bus/pci/devices/0000\:00\:03.0/numa_node
+  722  cat /sys/bus/pci/devices/0000\:03\:00.0/numa_node 
+  723  vi virtio-nic-bind-vfio-pci.sh 
+  724  lseth 
+  725  vi virtio-nic-bind-vfio-pci.sh 
+  726  ./virtio-nic-bind-vfio-pci.sh 
+  727  /home/mav/sriovdp-config/dpdk.py -b vfio-pci 02:00.0
+  728  echo 1 > /sys/module/vfio/parameters/enable_unsafe_noiommu_mode
+  729  /home/mav/sriovdp-config/dpdk.py -b vfio-pci 02:00.0
+  730  /home/mav/sriovdp-config/dpdk.py -b vfio-pci 03:00.0
+  731  vi virtio-nic-bind-vfio-pci.sh 
+  732  ./virtio-nic-bind-vfio-pci.sh 
+  733  vi virtio-nic-bind-vfio-pci.sh 
+  734  lseth 
+  735  cp -r dpdk.py /usr/bin/dpdk-dev
+  736  dpdk-dev -s
+  737  ll
+  738  ps -ef 
+  739  wp
+  740  cd
+  741  vi ~/.bashrc 
+  742  soure ~/.bashrc 
+  743  source ~/.bashrc 
+  744  all
+  745  ll
+  746  vi pod.yaml 
+  747  ll
+  748  vi /etc/rc.local 
+  749  vi /etc/rc.d/rc.local 
+  750  ll
+  751  history | grep env
+  752  vi /var/lib/kubelet/kubeadm-flags.env
+  753   rm -rf /var/lib/kubelet/cpu_manager_state 
+  754  systemctl restart kubelet
+  755  systemctl status kubelet 
+  756  kubectl describe nodes 
+  757  ll
+  758  taskset -cp 1 
+  759  ip a 
+  760  ls
+  761  ps -ef 
+  762  ip a 
+  763  ll
+  764  cd /opt/
+  765  cd /home/mav/
+  766  ls
+  767  ll
+  768  cd cpu-pin/
+  769  ls
+  770  vi cpu-pingning.sh
+  771  ll
+  772  chmod +x cpu-pingning.sh 
+  773  mv cpu-pingning.sh cpu-pinning.sh 
+  774  ll
+  775  vi /usr/lib/systemd/system/cpu-pinning.service
+  776  pwd
+  777  ll
+  778  vi /usr/lib/systemd/system/cpu-pinning.service
+  779  systemctl restart cpu-pinning
+  780  journalctl -xe -u cpu-pinning.service
+  781  yum -y install tuna
+  782  systemctl restart cpu-pinning
+  783  journalctl -xe -u cpu-pinning.service
+  784  systemctl restart cpu-pinning
+  785  journalctl -xe -u cpu-pinning.service
+  786  vi cpu-pinning.sh 
+  787  tuna --cpus=2-3,6-7 --isolate
+  788   tuna --cpus=2-3 --isolate
+  789  tuna -h
+  790  tuna show
+  791  tuna -v
+  792  history 
+  793    713   tuna --cpus=2-3 --isolate
+  794  tuna --cpus=2-3 --isolate
+  795  tuna --cpus=2-3 
+  796  tuna isolate --cpus=2-3 
+  797  tuna isolate --cpus=2-3,4-5 
+  798  tuna isolate --cpus="2-3,4-5"
+  799  ls
+  800  cat cpu-pinning.sh 
+  801  vi cpu-pinning.sh 
+  802  tuna --cpus=2-3,6-7 isolate
+  803  tuna isolate --cpus=2-3,6-7
+  804  vi cpu-pinning.sh 
+  805  tuna --irqs='*' --cpus=0-1,4-5 --spread
+  806  tuna spread --irqs='*' --cpus=0-1,4-5
+  807  taskset -cp 1 
+  808  tuna spread --irqs='*' --cpus="0-1,4-5"
+  809  taskset -cp 1 
+  810  cat cpu-pinning.sh 
+  811  systemctl stop irqbalance; systemctl disable irqbalance
+  812  tuna spread --irqs='*' --cpus="0-1,4-5"
+  813  taskset -cp 1 
+  814  numactl --hardware
+  815  yum -y install numactl
+  816  numactl --hardware
+  817  vi cpu-pinning.sh 
+  818  systemctl restart cpu-pinning
+  819  vi cpu-pinning.sh 
+  820  systemctl restart cpu-pinning
+  821  taskset -cp 1 
+  822  ip a
+  823  kubectl delete -f cpu-pin-pod.yaml 
+  824  ll
+  825  vi cpu-pinning.sh 
+  826  vi cpu-pin-pod.yaml 
+  827  kubectl apply -f cpu-pin-pod.yaml 
+  828  kubectl get pods -owide 
+  829  kubectl exec -it cpu-pin bash 
+  830  cat cpu-pinning.sh 
+  831  ps -ef 
+  832  ll
+  833  cd ..
+  834  ll
+  835  cd sriovdp-config/
+  836  ls
+  837  ll
+  838  vi /usr/lib/systemd/system/config-sriov.service
+  839  ll
+  840  vi virtio-nic-bind-vfio-pci.sh 
+  841  ll
+  842  pwd
+  843  vi /usr/lib/systemd/system/config-sriov.service
+  844  systemctl restart config-sriov
+  845  lseth 
+  846  dpdk-dev -s
+  847  ll
+  848  cd ..
+  849  ll
+  850  rm -rf dpdk.py 
+  851  ll
+  852  cd cpu-pin/
+  853  ll
+  854  vi cpu-pin-pod.yaml 
+  855  kubectl apply -f cpu-pin-pod.yaml 
+  856  kubectl delete -f cpu-pin-pod.yaml 
+  857  kubectl apply -f cpu-pin-pod.yaml 
+  858  kubectl exec -it cpu-pin bash 
+  859  kubectl get pods 
+  860  kubectl describe pods 
+  861  kubectl get nodes 
+  862  kubectl describe nodes 
+  863  ll
+  864  vi cpu-pin-pod.yaml 
+  865  kubectl delete -f cpu-pin-pod.yaml 
+  866  kubectl apply -f cpu-pin-pod.yaml 
+  867  kubectl get pods -owide 
+  868  kubectl exec -it cpu-pin bash 
+  869  ll
+  870  vi cpu-pin-pod.yaml 
+  871  ll
+  872  kubectl get pods -opwide 
+  873  k get pods -owide 
+  874  ll
+  875  vi ~/.bashrc 
+  876  source  ~/.bashrc 
+  877  k get pods -owide 
+  878  k exec -it cpu-pin bash 
+  879  ll
+  880  k delete -f cpu-pin-pod.yaml 
+  881  vi /var/lib/kubelet/kubeadm-flags.env
+  882  ll
+  883  cd
+  884  ll
+  885  kubectl get pods -owide 
+  886  all
+  887  cat /etc/rc.d/rc.local 
+  888  history | grep docker 
+  889  vi  /etc/rc.d/rc.local 
+  890  reboot 
+  891  all
+  892  docker ps 
+  893  vi /etc/rc.d/rc.local 
+  894  vi ~/.bashrc 
+  895  docker ps 
+  896  kubectl get nodes -owide
+  897  all
+  898  all -w 
+  899  systemctl enable config-sriov
+  900  systemctl enable cpu-pinning
+  901  ps -ef 
+  902  all
+  903  all -w 
+  904  k get pods -o wide 
+  905  ll
+  906  all
+  907  kubectl describe nodes 
+  908  ll
+  909  kubectl get nodes -owide 
+  910  ll
+  911  all
+  912  all -owide 
+  913  ll
+  914  cd /home/mav/
+  915  ls
+  916  cd cpu-pin/
+  917  ls
+  918  k apply -f cpu-pin-pod.yaml 
+  919  k get pods -owide -w 
+  920  k exec -it cpu-pin bash 
+  921  cd
+  922  ll
+  923  history | grep kubeadm
+  924  history 
+  925  yum clean all
+  926  ps -ef 
+  927  ll
+  928  all
+  929  ll
+  930  kubectl apply -f pod.yaml 
+  931  k get pods 
+  932  k exec -it wluo-6fd56b84d4-w9wc6 bash 
+  933  curl 192.168.2.55:32000
+  934  exit
+  935  ip a 
+  936  kubectl get nodes -owide 
+  937  exit
+  938  ip a 
+  939  mount -l | grep cgroup
+  940   kubectl get nodes -owide 
+  941  exit
+  942  df -h 
+  943  pi a 
+  944  ip a 
+  945  ip a
+  946  mount -l | grep cgroup
+  947  i pa 
+  948  kubectl get nodes -owide 
+  949  ip a 
+  950  cd /etc/NetworkManager/system-connections/
+  951  vi eth0.nmconnection 
+  952  kubectl get nodes -owide 
+  953  ip a 
+  954  vi eth0.nmconnection 
+  955  nmcli connection up  eth0
+  956  i
+  957  ip a 
+  958  exit
+  959  ipa 
+  960  ip a 
+  961  nmcli connection reload  eth0
+  962  ipa 
+  963  ip a 
+  964  route -n 
+  965  route -6 -n 
+  966  exit
+  967  ip a 
+  968  ps -ef 
+  969  exit
+  970  ip a 
+  971  mount | grep cgroup
+  972  ll
+  973  vi /etc/default/grub 
+  974  exit
+  975  vi /etc/default/grub 
+  976  grub2-mkconfig -o /boot/grub2/grub.cfg
+  977  reboot 
+  978  ipa 
+  979  ip a 
+  980  mount | grep cgroup
+  981  ps -ef 
+  982  docker ps 
+  983  all -w 
+  984  all 
+  985  kk get cm 
+  986  all -w 
+  987  all 
+  988  all -w 
+  989  all
+  990  ps -ef 
+  991  mount -l | grep cgroup
+  992  shutdown -h now
+  993  history 
