@@ -5,6 +5,61 @@ master_ip=192.168.2.98
 k3sup install --ip=$master_ip --user=root --merge --sudo --cluster --k3s-version=v1.27.3+k3s1 --k3s-extra-args "--flannel-backend=none --cluster-cidr=10.244.0.0/16 --disable-network-policy --disable traefik --disable servicelb --node-ip=$master_ip" --local-path $HOME/.kube/config --context=vpp
 kubectl create -f https://raw.githubusercontent.com/flannel-io/flannel/master/Documentation/kube-flannel.yml [sed -i "s#10.244#10.42#g" kube-flannel.yml]
 
+# Prepare Node:
+#!/bin/bash
+rm -rf /var/lib/kubelet/cpu_manager_state
+systemctl restart kubelet
+
+modprobe gre
+modprobe ip_gre
+modprobe ip_tunnel
+
+if ! ip addr show eth0 | grep -q 'inet 10.2.31.20/24'; then
+    ip addr add 10.2.31.20/24 dev eth0
+fi
+
+if ! ip route show | grep -q 'default via 10.2.31.1 dev eth0'; then
+    ip route add default via 10.2.31.1 dev eth0
+fi
+
+if ! ip -6 addr show eth0 | grep -q 'inet6 1010:501::1001/64'; then
+    ip -6 addr add 6010:501::1001/64 dev eth0
+fi
+
+if ! ip link show eth0 | grep -q 'UP'; then
+    ip link set eth0 up
+fi
+
+if ! ip link show eth1 | grep -q 'UP'; then
+    ip link set eth1 up
+fi
+
+for vlan_id in 1310 1320 1330 1340 1350 1360 1370 1380; do
+    if ! ip link show eth1.$vlan_id | grep -q 'link/ether'; then
+        ip link add link eth1 name eth1.$vlan_id type vlan id $vlan_id
+        ip link set eth1.$vlan_id up
+    fi
+done
+
+if ! ip route show | grep -q 'default via 10.2.31.1 dev eth0'; then
+    ip route add default via 10.2.31.1 dev eth0
+fi
+
+
+[root@rocky92 k8s-necessary]# systemctl cat prep-node
+# /usr/lib/systemd/system/prep-node.service
+[Unit]
+Description=Prep-Node configuration
+DefaultDependencies=no
+After=network-online.target
+[Service]
+Type=oneshot
+ExecStart=/home/mav/k8s-necessary/prep-node.sh
+[Install]
+WantedBy=sysinit.target
+
+
+
 # 1.hugepage and cpu isolution:
 # Enable CPU policy
 rm -rf /var/lib/kubelet/cpu_manager_state
@@ -262,11 +317,6 @@ echo 1 > /sys/module/vfio/parameters/enable_unsafe_noiommu_mode
 ./dpdk.py --bind=vfio-pci eth1
 ./dpdk.py --bind=vfio-pci eth2
 
-# Enable CPU policy
-rm -rf /var/lib/kubelet/cpu_manager_state 
-
-cat /var/lib/kubelet/kubeadm-flags.env  //Add ：--cpu-manager-policy=static --kube-reserved=cpu=1(reserve 1 cpu for host.)。
-KUBELET_KUBEADM_ARGS="--network-plugin=cni --pod-infra-container-image=registry.aliyuncs.com/google_containers/pause:3.6 --cpu-manager-policy=static --kube-reserved=cpu=1"
 
 yum -q makecache -y --disablerepo='*' --enablerepo='fdio_release'
 yum list vpp* && yum install -y vpp vpp-api-lua vpp-api-python vpp-api-python3 vpp-debuginfo vpp-devel vpp-ext-deps vpp-lib vpp-plugins vpp-selinux-policy
