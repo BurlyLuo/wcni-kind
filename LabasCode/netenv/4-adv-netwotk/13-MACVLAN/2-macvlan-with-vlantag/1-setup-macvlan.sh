@@ -13,6 +13,7 @@ topology:
           bash -c '
           ip l s net1 promisc on &&
           ip l s net1 mtu 1400 &&
+          ip l s net1 up &&
 
           ip l a name net1.5 link net1 type vlan id 5 &&
           ip l s net1.5 up &&
@@ -29,6 +30,7 @@ topology:
           bash -c '
           ip l s net1 promisc on &&
           ip l s net1 mtu 1400 &&
+          ip l s net1 up &&
 
           ip l a name net1.5 link net1 type vlan id 5 &&
           ip l s net1.5 up &&
