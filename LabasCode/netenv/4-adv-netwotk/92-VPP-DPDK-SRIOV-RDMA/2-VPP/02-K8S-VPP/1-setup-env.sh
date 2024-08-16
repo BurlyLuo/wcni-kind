@@ -6,6 +6,34 @@ k3sup install --ip=$master_ip --user=root --merge --sudo --cluster --k3s-version
 kubectl create -f https://raw.githubusercontent.com/flannel-io/flannel/master/Documentation/kube-flannel.yml [sed -i "s#10.244#10.42#g" kube-flannel.yml]
 
 # 1.hugepage and cpu isolution:
+# Enable CPU policy
+rm -rf /var/lib/kubelet/cpu_manager_state
+
+cat /var/lib/kubelet/kubeadm-flags.env  //Add ：--cpu-manager-policy=static --kube-reserved=cpu=1(reserve 1 cpu for host.)。
+KUBELET_KUBEADM_ARGS="--network-plugin=cni --pod-infra-container-image=registry.aliyuncs.com/google_containers/pause:3.6 --cpu-manager-policy=static --kube-reserved=cpu=1"
+
+# Enable CPU pin with tuna:
+# systemctl cat cpu-pinning
+# /usr/lib/systemd/system/cpu-pinning.service
+[Unit]
+Description=CPU pinning configuration
+Before=basic.target
+After=local-fs.target sysinit.target
+DefaultDependencies=no
+[Service]
+Type=oneshot
+RemainAfterExit=yes
+ExecStart=/home/mav/cpu-pin/cpu-pinning.sh
+[Install]
+WantedBy=sysinit.target
+[root@rocky92 ~]# cat /home/mav/cpu-pin/cpu-pinning.sh
+#!/bin/bash
+export LC_ALL="en_US.UTF-8"
+systemctl stop irqbalance; systemctl disable irqbalance
+tuna isolate --cpus=4-7
+tuna spread --irqs='*' --cpus=0-3
+
+
 vi /etc/default/grub 
 GRUB_CMDLINE_LINUX="console=tty0 crashkernel=auto net.ifnames=0 console=ttyS0 isolcpus=1,2,3 iommu=pt intel_iommu=on default_hugepagesz=1G hugepagesz=1G hugepages=2"
 grub2-mkconfig -o /boot/grub2/grub.cfg && reboot
@@ -28,7 +56,7 @@ if abnormal with hugepage, pls mode the hugepage, and restart k3s[systemctl rest
   memory:                    10072208Ki
   pods:                      110
 Allocatable:
-  cpu:                       8
+  cpu:                       7
   ephemeral-storage:         50990658316
   hugepages-1Gi:             2Gi
   intel.com/sriov_vppdpdk5:  1
@@ -239,29 +267,6 @@ rm -rf /var/lib/kubelet/cpu_manager_state
 
 cat /var/lib/kubelet/kubeadm-flags.env  //Add ：--cpu-manager-policy=static --kube-reserved=cpu=1(reserve 1 cpu for host.)。
 KUBELET_KUBEADM_ARGS="--network-plugin=cni --pod-infra-container-image=registry.aliyuncs.com/google_containers/pause:3.6 --cpu-manager-policy=static --kube-reserved=cpu=1"
-
-# Enable CPU pin with tuna:
-[root@rocky92 ~]# systemctl cat cpu-pinning 
-# /usr/lib/systemd/system/cpu-pinning.service
-[Unit]
-Description=CPU pinning configuration
-Before=basic.target
-After=local-fs.target sysinit.target
-DefaultDependencies=no
-[Service]
-Type=oneshot
-RemainAfterExit=yes
-ExecStart=/home/mav/cpu-pin/cpu-pinning.sh
-[Install]
-WantedBy=sysinit.target
-[root@rocky92 ~]# cat /home/mav/cpu-pin/cpu-pinning.sh
-#!/bin/bash
-export LC_ALL="en_US.UTF-8"
-systemctl stop irqbalance; systemctl disable irqbalance
-tuna isolate --cpus=4-7
-tuna spread --irqs='*' --cpus=0-3
-[root@rocky92 ~]#
-
 
 yum -q makecache -y --disablerepo='*' --enablerepo='fdio_release'
 yum list vpp* && yum install -y vpp vpp-api-lua vpp-api-python vpp-api-python3 vpp-debuginfo vpp-devel vpp-ext-deps vpp-lib vpp-plugins vpp-selinux-policy
