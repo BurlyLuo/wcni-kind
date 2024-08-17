@@ -1,0 +1,20 @@
+all:
+  children:
+    bridge:
+      hosts:
+        clab-vrf-br-vrf:
+          ansible_host: 
+    linux:
+      hosts:
+        clab-vrf-gwx:
+          ansible_host: 172.20.20.2
+        clab-vrf-server1:
+          ansible_host: 172.20.20.7
+        clab-vrf-server2:
+          ansible_host: 172.20.20.3
+        clab-vrf-server3:
+          ansible_host: 172.20.20.5
+        clab-vrf-server4:
+          ansible_host: 172.20.20.4
+        clab-vrf-server5:
+          ansible_host: 172.20.20.6
