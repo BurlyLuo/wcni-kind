@@ -19,12 +19,14 @@ topology:
         - ./startup-conf/gwx.cfg:/opt/vyatta/etc/config/config.boot
 
     server1:
+      # VRF 5
       kind: linux
       image: 192.168.2.100:5000/nettool
       exec:
       - ip addr add 10.1.5.10/24 dev net0
       - ip route replace default via 10.1.5.1
     server2:
+      # VRF 5
       kind: linux
       image: 192.168.2.100:5000/nettool
       exec:
@@ -32,18 +34,27 @@ topology:
       - ip route replace default via 10.1.5.1
 
     server3:
+      # VFR 8
       kind: linux
       image: 192.168.2.100:5000/nettool
       exec:
       - ip addr add 10.1.8.10/24 dev net0
       - ip route replace default via 10.1.8.1
 
+    server4:
+      # No VRF(default vrf)
+      kind: linux
+      image: 192.168.2.100:5000/nettool
+      exec:
+      - ip addr add 10.1.9.10/24 dev net0
+      - ip route replace default via 10.1.9.1
 
   links:
     - endpoints: ["gwx:eth1", "br-vrf:eth1"]
     - endpoints: ["br-vrf:eth2", "server1:net0"]
     - endpoints: ["br-vrf:eth3", "server2:net0"]
     - endpoints: ["gwx:eth2", "server3:net0"]
+    - endpoints: ["gwx:eth3", "server4:net0"]
 
 EOF
 
