@@ -9,7 +9,7 @@ cat <<EOF | kubectl apply -f -
 apiVersion: "k8s.cni.cncf.io/v1"
 kind: NetworkAttachmentDefinition
 metadata:
-  name: multihoming-muti-nic-sbr-conf1
+  name: multihoming-sbr-conf1
 spec:
   config: '{
     "cniVersion": "0.3.1",
@@ -44,7 +44,7 @@ cat <<EOF | kubectl apply -f -
 apiVersion: "k8s.cni.cncf.io/v1"
 kind: NetworkAttachmentDefinition
 metadata:
-  name: multihoming-muti-nic-sbr-conf2
+  name: multihoming-sbr-conf2
 spec:
   config: '{
     "cniVersion": "0.3.1",
@@ -81,7 +81,7 @@ kind: Pod
 metadata:
   name: multihoming-pod1
   annotations:
-    k8s.v1.cni.cncf.io/networks: multihoming-muti-nic-sbr-conf1@eth1
+    k8s.v1.cni.cncf.io/networks: multihoming-sbr-conf1@eth1
 spec:
   containers:
   - name: nettool
@@ -99,7 +99,7 @@ kind: Pod
 metadata:
   name: multihoming-pod2
   annotations:
-    k8s.v1.cni.cncf.io/networks: multihoming-muti-nic-sbr-conf2@eth1
+    k8s.v1.cni.cncf.io/networks: multihoming-sbr-conf2@eth1
 spec:
   containers:
   - name: nettool
