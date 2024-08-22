@@ -1,10 +1,3 @@
-#!/bin/bash
-set -v
-
-{ ip l s br-pool0 down;ip l d br-pool0; } > /dev/null 2>&1
-ip l a br-pool0 type bridge && ip l s br-pool0 up
-
-cat <<EOF>clab.yaml | clab deploy -t clab.yaml -
 name: cni-multus
 topology:
   nodes:
@@ -41,5 +34,3 @@ topology:
     - endpoints: ["br-pool0:br-pool0-net2", "server3:net0"]
 
     - endpoints: ["gw0:eth1", "br-pool0:br-pool0-net3"]
-EOF
-
