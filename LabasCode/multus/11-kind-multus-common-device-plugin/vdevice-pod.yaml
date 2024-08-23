@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: device-plugin-pod
+spec:
+  containers:
+    - name: nettool
+      image: 192.168.2.100:5000/nettool
+      resources:
+        requests:
+          cni.dev/vdevice: "1"
+        limits:
+          cni.dev/vdevice: "1"

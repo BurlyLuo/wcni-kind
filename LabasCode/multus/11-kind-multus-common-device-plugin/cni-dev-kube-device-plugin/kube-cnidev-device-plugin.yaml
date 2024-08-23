@@ -1,0 +1,40 @@
+apiVersion: apps/v1
+kind: DaemonSet
+metadata:
+  name: kube-cnidev-device-plugin
+  namespace: kube-system
+  labels:
+    app: device-plugin
+spec:
+  selector:
+    matchLabels:
+      app: device-plugin
+  template:
+    metadata:
+      labels:
+        app: device-plugin
+    spec:
+      containers:
+        - name: device-plugin
+          image: 192.168.2.100:5000/device-plugin:latest
+          imagePullPolicy: Always
+          resources:
+            limits:
+              cpu: "1"
+              memory: "512Mi"
+            requests:
+              cpu: "0.1"
+              memory: "128Mi"
+          volumeMounts:
+            - name: device-plugin
+              mountPath: /var/lib/kubelet/device-plugins
+            - name: vdevices
+              mountPath: /etc/vdevices
+      volumes:
+        - name: device-plugin
+          hostPath:
+            path: /var/lib/kubelet/device-plugins
+        - name: vdevices
+          hostPath:
+            path: /etc/vdevices
+
