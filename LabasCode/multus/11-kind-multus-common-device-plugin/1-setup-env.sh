@@ -33,5 +33,6 @@ kubectl wait --timeout=100s --for=condition=Ready=true pods --all -A
 # 5. Prepnode:
 for n in $(docker ps  -a --format "table {{.Names}}" | grep cni-multus);do docker exec -it $n bash -c "mkdir -p /etc/vdevices && touch /etc/vdevices/cni_dev_vdevice_01 && touch /etc/vdevices/cni_dev_vdevice_02";done
 
+# Take reference: https://www.lixueduan.com/posts/kubernetes/21-device-plugin/
 kubectl apply -f cni-dev-kube-device-plugin/
 
