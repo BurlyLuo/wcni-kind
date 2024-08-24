@@ -1,6 +1,0 @@
-kubeProxyReplacement: strict
-l2announcement:
-  enabled: true
-devices: {eth0, net0}
-externalIPs:
-  enabled: true

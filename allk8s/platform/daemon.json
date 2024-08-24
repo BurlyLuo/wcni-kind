@@ -1,5 +1,0 @@
-{
-  "registry-mirrors": ["https://cu2yw19m.mirror.aliyuncs.com"],
-   "exec-opts": ["native.cgroupdriver=systemd"],
-   "insecure-registries":["192.168.2.100:5000"]
-}
