@@ -1,7 +1,7 @@
 #!/bin/bash
 set -v
 # 1.prep noCNI env
-cat <<EOF | kind create cluster --name=calico-ipip --image=kindest/node:v1.27.3 --config=-
+cat <<EOF | kind create cluster --name=calico-ipip --image=kindest/node:v1.27.3 -v=9 --config=-
 kind: Cluster
 apiVersion: kind.x-k8s.io/v1alpha4
 networking:
