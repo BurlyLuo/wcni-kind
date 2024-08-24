@@ -1,5 +1,0 @@
-1. DSR currently requires Cilium to be deployed in Native-Routing, i.e. it will not work in either tunneling mode.  // only work with Native-Routing Mode
-
-2. Another advantage in DSR mode is that the client’s source IP is preserved, so policy can match on it at the backend node.
-
-3. 
