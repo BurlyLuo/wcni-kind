@@ -7,6 +7,7 @@ cat <<EOF | KIND_EXPERIMENTAL_DOCKER_NETWORK=kind kind create cluster -v=9 --nam
 kind: Cluster
 apiVersion: kind.x-k8s.io/v1alpha4
 networking:
+  apiServerAddress: 0.0.0.0
   disableDefaultCNI: true
   podSubnet: "10.244.0.0/16"
 nodes:
