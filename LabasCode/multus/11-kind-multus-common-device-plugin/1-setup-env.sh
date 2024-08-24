@@ -7,6 +7,7 @@ cat <<EOF | kind create cluster --name=cni-multus --image=kindest/node:v1.27.3 -
 kind: Cluster
 apiVersion: kind.x-k8s.io/v1alpha4
 networking:
+        apiServerAddress: 0.0.0.0
         disableDefaultCNI: true
 nodes:
         - role: control-plane
