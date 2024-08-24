@@ -1,0 +1,50 @@
+# Let NetworkManager manage all devices on this system
+network:
+  version: 2
+  ethernets:
+    ens33:
+      dhcp4: no
+    ens160:
+      dhcp4: no
+    ens192:
+      dhcp4: no
+    ens224:
+      dhcp4: no
+
+  bridges:
+    brnet:
+      interfaces:
+        - ens33
+      addresses: [192.168.2.99/24, 1010:501::99/64]
+      gateway4: 192.168.2.1
+      nameservers:
+        addresses: [192.168.2.1, 2001:4860::8888]
+        search: []
+
+    vppdpdk5:
+      interfaces:
+        - ens160
+      addresses: [10.1.5.3/24, 10:1:5:3::3/64]
+      # gateway4: 10.1.5.254
+      nameservers:
+        addresses: [192.168.2.1]
+        search: []
+
+    vppdpdk8:
+      interfaces:
+        - ens192
+      addresses: [10.1.8.3/24, 10:1:8:3::3/64]
+      # gateway4: 10.1.8.254
+      nameservers:
+        addresses: [192.168.2.1]
+        search: []
+
+    vppdpdk9:
+      interfaces:
+        - ens224
+      addresses: [10.1.9.3/24, 10:1:9:3::3/64]
+      # gateway4: 10.1.9.254
+      nameservers:
+        addresses: [192.168.2.1]
+        search: []
+
