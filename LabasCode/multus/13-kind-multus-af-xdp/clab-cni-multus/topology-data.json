@@ -1,0 +1,214 @@
+{
+  "name": "cni-multus",
+  "type": "clab",
+  "clab": {
+    "config": {
+      "prefix": "clab",
+      "mgmt": {
+        "network": "clab",
+        "bridge": "br-08ac5a914a7c",
+        "ipv4-subnet": "172.20.20.0/24",
+        "ipv4-gw": "172.20.20.1",
+        "ipv6-subnet": "2001:172:20:20::/64",
+        "ipv6-gw": "2001:172:20:20::1",
+        "mtu": "1500",
+        "external-access": true
+      }
+    }
+  },
+  "nodes": {
+    "br-pool0": {
+      "index": "0",
+      "shortname": "br-pool0",
+      "longname": "clab-cni-multus-br-pool0",
+      "fqdn": "br-pool0.cni-multus.io",
+      "group": "",
+      "labdir": "/root/wcni-kind/LabasCode/multus/13-kind-multus-af-xdp/clab-cni-multus/br-pool0",
+      "kind": "bridge",
+      "image": "",
+      "mgmt-net": "",
+      "mgmt-intf": "",
+      "mgmt-ipv4-address": "",
+      "mgmt-ipv4-prefix-length": 0,
+      "mgmt-ipv6-address": "",
+      "mgmt-ipv6-prefix-length": 0,
+      "mac-address": "",
+      "labels": {
+        "clab-mgmt-net-bridge": "br-08ac5a914a7c",
+        "clab-node-group": "",
+        "clab-node-kind": "bridge",
+        "clab-node-lab-dir": "/root/wcni-kind/LabasCode/multus/13-kind-multus-af-xdp/clab-cni-multus/br-pool0",
+        "clab-node-name": "br-pool0",
+        "clab-node-type": "",
+        "clab-topo-file": "/root/wcni-kind/LabasCode/multus/13-kind-multus-af-xdp/clab.yaml",
+        "containerlab": "cni-multus"
+      }
+    },
+    "gw0": {
+      "index": "1",
+      "shortname": "gw0",
+      "longname": "clab-cni-multus-gw0",
+      "fqdn": "gw0.cni-multus.io",
+      "group": "",
+      "labdir": "/root/wcni-kind/LabasCode/multus/13-kind-multus-af-xdp/clab-cni-multus/gw0",
+      "kind": "linux",
+      "image": "192.168.2.100:5000/vyos/vyos:1.4.9",
+      "mgmt-net": "",
+      "mgmt-intf": "",
+      "mgmt-ipv4-address": "172.20.20.2",
+      "mgmt-ipv4-prefix-length": 24,
+      "mgmt-ipv6-address": "2001:172:20:20::2",
+      "mgmt-ipv6-prefix-length": 64,
+      "mac-address": "",
+      "labels": {
+        "clab-mgmt-net-bridge": "br-08ac5a914a7c",
+        "clab-node-group": "",
+        "clab-node-kind": "linux",
+        "clab-node-lab-dir": "/root/wcni-kind/LabasCode/multus/13-kind-multus-af-xdp/clab-cni-multus/gw0",
+        "clab-node-name": "gw0",
+        "clab-node-type": "",
+        "clab-topo-file": "/root/wcni-kind/LabasCode/multus/13-kind-multus-af-xdp/clab.yaml",
+        "containerlab": "cni-multus"
+      }
+    },
+    "server1": {
+      "index": "2",
+      "shortname": "server1",
+      "longname": "clab-cni-multus-server1",
+      "fqdn": "server1.cni-multus.io",
+      "group": "",
+      "labdir": "/root/wcni-kind/LabasCode/multus/13-kind-multus-af-xdp/clab-cni-multus/server1",
+      "kind": "linux",
+      "image": "192.168.2.100:5000/nettool",
+      "mgmt-net": "",
+      "mgmt-intf": "",
+      "mgmt-ipv4-address": "",
+      "mgmt-ipv4-prefix-length": 0,
+      "mgmt-ipv6-address": "",
+      "mgmt-ipv6-prefix-length": 0,
+      "mac-address": "",
+      "labels": {
+        "clab-mgmt-net-bridge": "br-08ac5a914a7c",
+        "clab-node-group": "",
+        "clab-node-kind": "linux",
+        "clab-node-lab-dir": "/root/wcni-kind/LabasCode/multus/13-kind-multus-af-xdp/clab-cni-multus/server1",
+        "clab-node-name": "server1",
+        "clab-node-type": "",
+        "clab-topo-file": "/root/wcni-kind/LabasCode/multus/13-kind-multus-af-xdp/clab.yaml",
+        "containerlab": "cni-multus"
+      }
+    },
+    "server2": {
+      "index": "3",
+      "shortname": "server2",
+      "longname": "clab-cni-multus-server2",
+      "fqdn": "server2.cni-multus.io",
+      "group": "",
+      "labdir": "/root/wcni-kind/LabasCode/multus/13-kind-multus-af-xdp/clab-cni-multus/server2",
+      "kind": "linux",
+      "image": "192.168.2.100:5000/nettool",
+      "mgmt-net": "",
+      "mgmt-intf": "",
+      "mgmt-ipv4-address": "",
+      "mgmt-ipv4-prefix-length": 0,
+      "mgmt-ipv6-address": "",
+      "mgmt-ipv6-prefix-length": 0,
+      "mac-address": "",
+      "labels": {
+        "clab-mgmt-net-bridge": "br-08ac5a914a7c",
+        "clab-node-group": "",
+        "clab-node-kind": "linux",
+        "clab-node-lab-dir": "/root/wcni-kind/LabasCode/multus/13-kind-multus-af-xdp/clab-cni-multus/server2",
+        "clab-node-name": "server2",
+        "clab-node-type": "",
+        "clab-topo-file": "/root/wcni-kind/LabasCode/multus/13-kind-multus-af-xdp/clab.yaml",
+        "containerlab": "cni-multus"
+      }
+    },
+    "server3": {
+      "index": "4",
+      "shortname": "server3",
+      "longname": "clab-cni-multus-server3",
+      "fqdn": "server3.cni-multus.io",
+      "group": "",
+      "labdir": "/root/wcni-kind/LabasCode/multus/13-kind-multus-af-xdp/clab-cni-multus/server3",
+      "kind": "linux",
+      "image": "192.168.2.100:5000/nettool",
+      "mgmt-net": "",
+      "mgmt-intf": "",
+      "mgmt-ipv4-address": "",
+      "mgmt-ipv4-prefix-length": 0,
+      "mgmt-ipv6-address": "",
+      "mgmt-ipv6-prefix-length": 0,
+      "mac-address": "",
+      "labels": {
+        "clab-mgmt-net-bridge": "br-08ac5a914a7c",
+        "clab-node-group": "",
+        "clab-node-kind": "linux",
+        "clab-node-lab-dir": "/root/wcni-kind/LabasCode/multus/13-kind-multus-af-xdp/clab-cni-multus/server3",
+        "clab-node-name": "server3",
+        "clab-node-type": "",
+        "clab-topo-file": "/root/wcni-kind/LabasCode/multus/13-kind-multus-af-xdp/clab.yaml",
+        "containerlab": "cni-multus"
+      }
+    }
+  },
+  "links": [
+    {
+      "a": {
+        "node": "br-pool0",
+        "interface": "br-pool0-net0",
+        "mac": "aa:c1:ab:f7:fe:ca",
+        "peer": "z"
+      },
+      "z": {
+        "node": "server1",
+        "interface": "net0",
+        "mac": "aa:c1:ab:1c:32:bd",
+        "peer": "a"
+      }
+    },
+    {
+      "a": {
+        "node": "br-pool0",
+        "interface": "br-pool0-net1",
+        "mac": "aa:c1:ab:cc:e3:50",
+        "peer": "z"
+      },
+      "z": {
+        "node": "server2",
+        "interface": "net0",
+        "mac": "aa:c1:ab:06:28:f4",
+        "peer": "a"
+      }
+    },
+    {
+      "a": {
+        "node": "br-pool0",
+        "interface": "br-pool0-net2",
+        "mac": "aa:c1:ab:80:b4:78",
+        "peer": "z"
+      },
+      "z": {
+        "node": "server3",
+        "interface": "net0",
+        "mac": "aa:c1:ab:e3:c0:8b",
+        "peer": "a"
+      }
+    },
+    {
+      "a": {
+        "node": "gw0",
+        "interface": "eth1",
+        "mac": "aa:c1:ab:33:16:b3",
+        "peer": "z"
+      },
+      "z": {
+        "node": "br-pool0",
+        "interface": "br-pool0-net3",
+        "mac": "aa:c1:ab:80:fc:8d",
+        "peer": "a"
+      }
+    }
+  ]
+}
