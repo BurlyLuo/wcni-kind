@@ -9,9 +9,10 @@ metadata:
 spec:
   containers:
   - name: afxdp
-    image: docker-image:latest                 # Specify your docker image here, along with PullPolicy and command
+    image: docker-image:latest
+    #image: 192.168.2.100:5000/nettool                 # Specify your docker image here, along with PullPolicy and command
     imagePullPolicy: IfNotPresent
-    command: ["tail", "-f", "/dev/null"]
+    #command: ["tail", "-f", "/dev/null"]
     securityContext:
       capabilities:
         add:
