@@ -1,0 +1,16 @@
+vi /etc/default/grub
+GRUB_CMDLINE_LINUX="cgroup_enable=memory swapaccount=0 systemd.unified_cgroup_hierarchy=0"
+
+systemd.unified_cgroup_hierarchy=0 [值为1就是cgroup v2, 值为0则为cgroup v1]
+
+grub2-mkconfig -o /boot/grub2/grub.cfg
+
+reboot
+
+
+
+2.)
+https://docs.redhat.com/zh_hans/documentation/red_hat_enterprise_linux/9/html/monitoring_and_managing_system_status_and_performance/proc_mounting-cgroups-v1_assembly_using-cgroupfs-to-manually-manage-cgroups
+
+[root@rocky#]grubby --update-kernel=ALL --args="systemd.unified_cgroup_hierarchy=0 systemd.legacy_systemd_cgroup_controller" && reboot
+
