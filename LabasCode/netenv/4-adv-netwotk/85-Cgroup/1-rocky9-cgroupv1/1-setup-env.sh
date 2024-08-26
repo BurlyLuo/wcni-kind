@@ -1,3 +1,4 @@
+https://help.aliyun.com/zh/alinux/support/differences-between-cgroup-v1-and-cgroup-v2?spm=a2c4g.11186623.0.i10#67b9948211nqu
 1. node version kernel version k8s version:
 # [root@rocky92 ~]# k get nodes -owide 
 NAME      STATUS   ROLES           AGE   VERSION   INTERNAL-IP    EXTERNAL-IP   OS-IMAGE                      KERNEL-VERSION                 CONTAINER-RUNTIME
