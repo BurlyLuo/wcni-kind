@@ -14,13 +14,10 @@ data:
              "mode":"primary",
              "drivers":[
                 {
-                  "name": "ens38"
-                },
-                {
-                  "name": "e1000drv",
+                  "name": "e1000",
                   "excludeDevices": [
                     {
-                      "name": "ens33" 
+                      "name": "ens33"
                     }
                   ]
                 }
