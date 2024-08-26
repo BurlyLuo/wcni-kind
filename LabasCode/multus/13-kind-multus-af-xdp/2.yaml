@@ -1,0 +1,21 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: xdp
+  annotations:
+    k8s.v1.cni.cncf.io/networks: afxdp-east-network
+spec:
+  containers:
+  - name: l2fwd
+    image: 192.168.2.100:5000/nettool
+    imagePullPolicy: Never
+    command: ["sleep", "infinity"]
+    securityContext:
+      privileged: true
+    resources:
+      requests:
+        cpu: "6000m"
+        afxdp/myPool: '1'                                          
+      limits:                                  
+        cpu: "6000m"
+        afxdp/myPool: '1'                     

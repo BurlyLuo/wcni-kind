@@ -13,10 +13,6 @@ spec:
       "mode": "primary",                                                                 # CNI mode setting (required)
       "logFile": "afxdp-cni.log",                                                        # CNI log file location (optional)
       "logLevel": "debug",                                                               # CNI logging level (optional)
-      "ethtoolCmds" : ["-X -device- equal 5 start 3",                                    # CNI ethtool filters (optional)
-                       "--config-ntuple -device- flow-type udp4 dst-ip -ip- action"
-                      ],
-
       "ipam": {                                                                          # CNI IPAM plugin and associated config (optional)
         "type": "host-local",
         "subnet": "192.168.1.0/24",
