@@ -10,6 +10,7 @@ data:
        "logFile":"afxdp-dp.log",
        "pools":[
           {
+             "UdsTimeout": 300,
              "name":"myPool",
              "mode":"primary",
              "drivers":[
