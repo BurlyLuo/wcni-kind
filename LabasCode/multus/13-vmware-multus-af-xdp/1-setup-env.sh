@@ -5,6 +5,7 @@ set -v
 # 1.prep noCNI env
 alias addk3s
 addk3s
+# alias addk3s='rm -rf /usr/local/bin/k3s/ ; wget http://192.168.2.100/http/k3s -P /usr/local/bin/ && chmod +x /usr/local/bin/k3s && INSTALL_K3S_SKIP_DOWNLOAD=true INSTALL_K3S_EXEC='\''--docker --flannel-backend=none --disable=traefik --disable=servicelb'\'' /root/wcni-kind/LabasCode/k8senv/vmenv/k3senv/k3s-install.sh && export KUBECONFIG=/etc/rancher/k3s/k3s.yaml'
 
 # 2.remove taints
 controller_node_ip=`kubectl get node -o wide --no-headers | grep -E "control-plane|bpf1" | awk -F " " '{print $6}'`
