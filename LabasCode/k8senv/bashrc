@@ -187,6 +187,10 @@ alias image="cd /var/lib/libvirt/images && ls -lrth"
 # env
 alias envkind='echo "# kind version" && kind version; echo "# docker info" && docker info; echo "# kubectl version" && kubectl version; echo "# helm version" && helm version; echo "# lsb_release -a" && lsb_release -a; echo "# uname -a" && uname -a'
 
+# k3s
+alias k3sconfig="export KUBECONFIG=/etc/rancher/k3s/k3s.yaml"
+alias addk3s="wget http://192.168.2.100/http/k3s -P /usr/local/bin/ && chmod +x /usr/local/bin/k3s && INSTALL_K3S_SKIP_DOWNLOAD=true INSTALL_K3S_EXEC='--docker' /root/wcni-kind/LabasCode/k8senv/vmenv/k3senv/k3s-install.sh && export KUBECONFIG=/etc/rancher/k3s/k3s.yaml"
+alias delk3s="sudo /root/wcni-kind/LabasCode/k8senv/vmenv/k3senv/k3s-uninstall.sh && docker stop \$(docker ps -aq --filter 'name=k8s_') ; docker rm \$(docker ps -aq --filter 'name=k8s_') ; docker system prune -f && df -h"
 
 # Alias definitions.
 # You may want to put all your additions into a separate file like
