@@ -190,7 +190,7 @@ alias envkind='echo "# kind version" && kind version; echo "# docker info" && do
 # k3s
 alias k3sconfig="export KUBECONFIG=/etc/rancher/k3s/k3s.yaml"
 alias addk3s="rm -rf /usr/local/bin/k3s/ ; wget http://192.168.2.100/http/k3s -P /usr/local/bin/ && chmod +x /usr/local/bin/k3s && INSTALL_K3S_SKIP_DOWNLOAD=true INSTALL_K3S_EXEC='--docker --flannel-backend=none --disable=traefik --disable=servicelb' /root/wcni-kind/LabasCode/k8senv/vmenv/k3senv/k3s-install.sh && export KUBECONFIG=/etc/rancher/k3s/k3s.yaml"
-alias delk3s="sudo /root/wcni-kind/LabasCode/k8senv/vmenv/k3senv/k3s-uninstall.sh && docker stop \$(docker ps -aq --filter 'name=k8s_') ; docker rm \$(docker ps -aq --filter 'name=k8s_') ; docker system prune -f && rm -rf /etc/cni/net.d/* && df -h"
+alias delk3s="sudo /root/wcni-kind/LabasCode/k8senv/vmenv/k3senv/k3s-uninstall.sh && docker stop \$(docker ps -aq --filter 'name=k8s_') ; docker rm \$(docker ps -aq --filter 'name=k8s_') ; docker system prune -f && docker network create --driver bridge --subnet=172.18.0.0/16 --gateway=172.18.0.1 --ipv6 --subnet=172:18:0:1::/64 kind && rm -rf /etc/cni/net.d/* && df -h"
 
 # Alias definitions.
 # You may want to put all your additions into a separate file like
@@ -215,10 +215,6 @@ fi
 #if [ -f /etc/bash_completion ] && ! shopt -oq posix; then
 #    . /etc/bash_completion
 #fi
-export PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/root/bin
-export PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/root/bin
-export PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/root/bin
-export PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/root/bin
 export PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/root/bin
 export PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/root/bin:/root/bin
 export PATH=$PATH:/root/.local/bin
