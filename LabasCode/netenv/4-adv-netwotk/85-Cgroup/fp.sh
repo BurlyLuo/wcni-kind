@@ -10,6 +10,7 @@ for cpu in $(taskset -cp 1 | awk -F ":" '{print $NF}' | awk '$1=$1' | tr "," '\n
             cpu_ids+="$row_cpu "
             echo "Host_Cpu_id: $row_cpu"
         done
+        echo $cpu_ids
     else
         cpu_ids+="$cpu "
         echo "Host_Cpu_id: $cpu"
