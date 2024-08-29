@@ -220,6 +220,8 @@ export PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/ga
 export PATH=$PATH:/root/.local/bin
 export PATH=$HOME/.istioctl/bin:$PATH
 export PATH=$PATH:/root/packetdrill/gtests/net/packetdrill
-PS1="[\u@\h \W]\$ "
+
+#PS1="[\u@\h \W]\$ "
+PS1='[\u@rowan> \W]\$ '
 
 source <(kubectl completion bash)
