@@ -1,0 +1,21 @@
+# kvm with virtio
+
+yum install rdma-core perftest -y
+
+sudo modprobe ib_core
+sudo modprobe ib_uverbs
+sudo modprobe rdma_cm
+
+cat /boot/config-$(uname -r) | grep RXE
+#m
+
+modprobe rdma_rxe
+
+rdma link add rxe_0 type rxe netdev eth1
+
+rdma link
+
+A: ib_send_bw -d rxe_0
+
+B: ib_send_bw -d rxe_0 <server_ip>
+
