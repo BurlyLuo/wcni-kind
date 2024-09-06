@@ -31,6 +31,7 @@ spec:
   podSelector: {}
   policyTypes:
   - Egress
+  - Ingress
   egress:
   - to:
     - namespaceSelector:
@@ -40,6 +41,11 @@ spec:
         matchLabels:
           k8s-app: kube-dns
 
+  ingress:
+  - from:
+    - namespaceSelector:
+        matchLabels:
+          app: sm
 ---
 apiVersion: networking.k8s.io/v1
 kind: NetworkPolicy
