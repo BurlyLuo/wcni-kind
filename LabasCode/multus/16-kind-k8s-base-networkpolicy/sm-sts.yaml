@@ -1,0 +1,41 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: sm
+  namespace: default
+spec:
+  serviceName: "sm-service"
+  replicas: 3
+  selector:
+    matchLabels:
+      app: sm
+  template:
+    metadata:
+      labels:
+        app: sm
+    spec:
+      containers:
+      - name: sm
+        image: 192.168.2.100:5000/nettool
+        volumeMounts:
+        - name: smx
+          mountPath: /data/
+  volumeClaimTemplates:
+  - metadata:
+      name: smx
+    spec:
+      accessModes: ["ReadWriteOnce"]
+      storageClassName: "standard"
+      resources:
+        requests:
+          storage: 1Gi
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: sm-service
+  namespace: default
+spec:
+  clusterIP: None
+  selector:
+    app: sm
