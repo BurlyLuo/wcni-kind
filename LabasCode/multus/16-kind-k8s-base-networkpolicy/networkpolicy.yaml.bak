@@ -50,8 +50,8 @@ spec:
     - podSelector: {}
       namespaceSelector: {}
   - ports:
-      - protocol: TCP
-        #port: 6443
+    - port: 6443
+      protocol: TCP
 ---
 apiVersion: networking.k8s.io/v1
 kind: NetworkPolicy
