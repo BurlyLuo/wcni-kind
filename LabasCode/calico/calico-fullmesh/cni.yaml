@@ -36,6 +36,6 @@ spec:
     app: wluo
   ports:
   - name: wluo
-    port: 80
+    #port: 3080
     targetPort: 80
     nodePort: 32000
