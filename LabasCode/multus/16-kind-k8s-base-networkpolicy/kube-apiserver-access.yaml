@@ -6,12 +6,13 @@ metadata:
 spec:
   podSelector: {}
   policyTypes:
-  - Ingress
   - Egress
   egress:
   - to:
-    - podSelector: {}
-      namespaceSelector: {}
-  - ports:
+    - namespaceSelector:
+        matchLabels:
+          kubernetes.io/metadata.name: kube-system
+    ports:
       - protocol: TCP
-        #port: 6443
+        port: 6443
+  - to:
