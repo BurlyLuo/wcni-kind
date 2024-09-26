@@ -1,0 +1,14 @@
+  807  yum -y install net-tools
+  808  curl -I https://mirrors.aliyun.com/docker-ce/linux/centos/9/x86_64/stable/
+  809  ll
+  810  mv epel* /tmp/
+  811  ll
+  812  yum -y install net-tools
+  813  mv kubernetes.repo /tmp/
+  814  yum -y install net-tools
+  815  ll
+  816  sed -i "s/https/http/g" *.repo
+  817  yum -y install net-tools
+  818  yum -y install kernel-modules-extra
+  819  yum -y install kernel-moduels kernel kernel-core 
+  820  yum -y install kernel-modules 
