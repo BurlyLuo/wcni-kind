@@ -15,19 +15,11 @@ spec:
     - ipBlock:
         cidr: 10.10.0.0/16
         except:
-        - 10.10.100.0/24
-    #ports:
-    #- protocol: TCP
-    #  port: 80
-    #- protocol: ICMP
+        - 10.10.1.0/24
   egress:
   - to:
     - ipBlock:
         cidr: 10.10.0.0/16
-    #ports:
-    #- protocol: TCP
-    #  port: 80
-    #- protocol: ICMP
 ---
 apiVersion: "k8s.cni.cncf.io/v1"
 kind: NetworkAttachmentDefinition
@@ -40,15 +32,22 @@ spec:
             "master": "eth0",
             "mode": "bridge",
             "ipam": {
-                "type": "whereabouts",
-                "range": "10.10.0.20-10.10.0.50/16"
+                "type": "host-local",
+                "ranges": [
+                    [ {
+                         "subnet": "10.10.0.0/16",
+                         "rangeStart": "10.10.1.20",
+                         "rangeEnd": "10.10.3.50",
+                         "gateway": "10.10.0.254"
+                    } ]
+                ]
             }
         }'
 ---
 apiVersion: v1
 kind: Pod
 metadata:
-  name: mpolicy1
+  name: mpicmp
   namespace: default
   annotations:
     k8s.v1.cni.cncf.io/networks: macvlan-conf-1
@@ -56,24 +55,7 @@ spec:
   containers:
   - image: 192.168.2.100:5000/nettool
     imagePullPolicy: IfNotPresent
-    name: nettool
-    securityContext:
-      capabilities:
-        add: ["NET_RAW", "NET_ADMIN"]
-  restartPolicy: Always
----
-apiVersion: v1
-kind: Pod
-metadata:
-  name: mpolicy2
-  namespace: default
-  annotations:
-    k8s.v1.cni.cncf.io/networks: macvlan-conf-1
-spec:
-  containers:
-  - image: 192.168.2.100:5000/nettool
-    imagePullPolicy: IfNotPresent
-    name: nettool
+    name: alpine
     securityContext:
       capabilities:
         add: ["NET_RAW", "NET_ADMIN"]
