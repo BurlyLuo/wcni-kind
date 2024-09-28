@@ -30,4 +30,6 @@ kubectl apply -f ./k8snetworkplumbingwg
 # 4. wait all pods ready
 kubectl wait --timeout=100s --for=condition=Ready=true pods --all -A
 
-ip a a 10.10.10.10/16 dev br-4babca298763
+br_name=$(ip -o addr show | grep '172.18.0.1' | awk '{print $2}' | uniq)
+ip a a 10.10.10.10/16 dev $br_name
+
