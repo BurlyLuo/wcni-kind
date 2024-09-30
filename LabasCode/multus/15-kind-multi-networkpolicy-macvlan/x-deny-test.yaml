@@ -10,16 +10,8 @@ spec:
   policyTypes:
   - Ingress
   - Egress
-  ingress:
-  - from:
-    - ipBlock:
-        cidr: 10.10.0.0/16
-        except:
-        - 10.10.100.0/24
-  egress:
-  - to:
-    - ipBlock:
-        cidr: 10.10.0.0/16
+  ingress: []
+  egress: []
 ---
 apiVersion: "k8s.cni.cncf.io/v1"
 kind: NetworkAttachmentDefinition
