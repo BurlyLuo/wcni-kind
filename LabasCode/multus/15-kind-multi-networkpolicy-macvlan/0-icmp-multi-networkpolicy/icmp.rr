@@ -1,3 +1,4 @@
+[root@rowan> k8snetworkplumbingwg]# kk exec -it multi-networkpolicy-ds-amd64-27lnm bash 
 [root@cni-multus-worker2 bin]# multi-networkpolicy-iptables -h
 I1008 07:32:41.382999      48 main.go:83] Executing ...
 TBD
