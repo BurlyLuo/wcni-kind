@@ -1,0 +1,41 @@
+[root@cni-multus-worker2 bin]# multi-networkpolicy-iptables -h
+I1008 07:32:41.382999      48 main.go:83] Executing ...
+TBD
+
+Usage:
+  multi-networkpolicy-node [flags]
+
+Flags:
+      --container-runtime RuntimeKind        Container runtime using for the cluster. Possible values: 'cri'.  (default cri)
+      --container-runtime-endpoint string    Path to cri socket.
+      --kubeconfig string                    Path to kubeconfig file with authorization information (the master location is set by the master flag).
+      --master string                        The address of the Kubernetes API server (overrides any value in kubeconfig)
+      --hostname-override string             If non-empty, will use this string as identification instead of the actual hostname.
+      --host-prefix string                   If non-empty, will use this string as prefix for host filesystem.
+      --network-plugins strings              List of network plugins to be be considered for network policies. (default [macvlan])
+      --pod-iptables string                  If non-empty, will use this path to store pod's iptables for troubleshooting helper.
+      --sync-period int                      sync period for multi-networkpolicy syncRunner (default 30)
+      --accept-icmp                          accept all ICMP traffic
+      --accept-icmpv6                        accept all ICMPv6 traffic
+      --allow-ipv6-src-prefix string         Accept source IPv6 prefix list, comma separated (e.g. "fe80::/10")
+      --allow-ipv6-dst-prefix string         Accept destination IPv6 prefix list, comma separated (e.g. "fe80:/10,ff00::/8")
+      --custom-v4-ingress-rule-file string   custom rule file for IPv4 ingress
+      --custom-v4-egress-rule-file string    custom rule file for IPv4 egress
+      --custom-v6-ingress-rule-file string   custom rule file for IPv6 ingress
+      --custom-v6-egress-rule-file string    custom rule file for IPv6 egress
+      --add_dir_header                       If true, adds the file directory to the header
+      --alsologtostderr                      log to standard error as well as files
+      --log_backtrace_at traceLocation       when logging hits line file:N, emit a stack trace (default :0)
+      --log_dir string                       If non-empty, write log files in this directory
+      --log_file string                      If non-empty, use this log file
+      --log_file_max_size uint               Defines the maximum size a log file can grow to. Unit is megabytes. If the value is 0, the maximum file size is unlimited. (default 1800)
+      --logtostderr                          log to standard error instead of files (default true)
+      --skip_headers                         If true, avoid header prefixes in the log messages
+      --skip_log_headers                     If true, avoid headers when opening log files
+      --stderrthreshold severity             logs at or above this threshold go to stderr (default 2)
+  -v, --v Level                              number for the log level verbosity
+      --vmodule moduleSpec                   comma-separated list of pattern=N settings for file-filtered logging
+      --log-flush-frequency duration         Maximum number of seconds between log flushes (default 5s)
+  -h, --help                                 help for multi-networkpolicy-node
+I1008 07:32:41.383627      48 main.go:90] Exiting
+[root@cni-multus-worker2 bin]# 
