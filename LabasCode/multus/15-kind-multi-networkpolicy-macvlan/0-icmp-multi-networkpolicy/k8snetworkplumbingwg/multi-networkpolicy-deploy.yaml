@@ -127,8 +127,9 @@ spec:
         command: ["/usr/bin/multi-networkpolicy-iptables"]
         args:
         - "--host-prefix=/host"
+        - "--container-runtime-endpoint=/run/containerd/containerd.sock"
         # change this if runtime is different that crio default
-        - "--container-runtime-endpoint=/run/crio/crio.sock"
+        # - "--container-runtime-endpoint=/run/crio/crio.sock"
         # uncomment this if you want to store iptables rules
         - "--pod-iptables=/var/lib/multi-networkpolicy/iptables"
         # uncomment this if you need to accept link-local address traffic
