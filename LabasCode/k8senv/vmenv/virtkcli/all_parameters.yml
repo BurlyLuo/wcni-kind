@@ -111,7 +111,9 @@ myvm:
   cloudinit_file: myspecific.cloudinit
   cmds:
   -  echo "I am the king of the world" >/etc/motd
-  -  sed -i "s/123/124/g" /etc/ssh/sshd_config
+  -  sed -i "s/123/124/g" /etc/ssh/sshd_config*
+  -  echo 'PermitRootLogin yes' >> /etc/ssh/sshd_config
+  -  echo "root:hive" | sudo chpasswd
   cmdline: "ip=192.168.1.2 myparam=xxx"
   cpuflags:
   - acpi
