@@ -1,6 +1,3 @@
-#!/bin/bash
-set -v
-cat <<EOF>clab.yaml | clab deploy -t clab.yaml -
 name: vyos-ipsec
 mgmt:
   ipv6-subnet: ""
@@ -135,4 +132,3 @@ topology:
 
     - endpoints: ["gwx:eth1", "gwx1:eth2"]
     - endpoints: ["gwx:eth2", "gwx2:eth2"]
-EOF
