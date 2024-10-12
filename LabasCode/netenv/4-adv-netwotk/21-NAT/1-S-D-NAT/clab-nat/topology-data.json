@@ -6,7 +6,7 @@
       "prefix": "clab",
       "mgmt": {
         "network": "clab",
-        "bridge": "br-7105f536da09",
+        "bridge": "br-635747df37ba",
         "ipv4-subnet": "172.20.20.0/24",
         "ipv4-gw": "172.20.20.1",
         "ipv6-subnet": "2001:172:20:20::/64",
@@ -23,7 +23,7 @@
       "longname": "clab-nat-br-vlan",
       "fqdn": "br-vlan.nat.io",
       "group": "",
-      "labdir": "/root/wcni-kind/split/netenv/4-adv-netwotk/21-NAT/1-S-D-NAT/clab-nat/br-vlan",
+      "labdir": "/root/wcni-kind/LabasCode/netenv/4-adv-netwotk/21-NAT/1-S-D-NAT/clab-nat/br-vlan",
       "kind": "bridge",
       "image": "",
       "mgmt-net": "",
@@ -34,13 +34,13 @@
       "mgmt-ipv6-prefix-length": 0,
       "mac-address": "",
       "labels": {
-        "clab-mgmt-net-bridge": "br-7105f536da09",
+        "clab-mgmt-net-bridge": "br-635747df37ba",
         "clab-node-group": "",
         "clab-node-kind": "bridge",
-        "clab-node-lab-dir": "/root/wcni-kind/split/netenv/4-adv-netwotk/21-NAT/1-S-D-NAT/clab-nat/br-vlan",
+        "clab-node-lab-dir": "/root/wcni-kind/LabasCode/netenv/4-adv-netwotk/21-NAT/1-S-D-NAT/clab-nat/br-vlan",
         "clab-node-name": "br-vlan",
         "clab-node-type": "",
-        "clab-topo-file": "/root/wcni-kind/split/netenv/4-adv-netwotk/21-NAT/1-S-D-NAT/clab.yaml",
+        "clab-topo-file": "/root/wcni-kind/LabasCode/netenv/4-adv-netwotk/21-NAT/1-S-D-NAT/clab.yaml",
         "containerlab": "nat"
       }
     },
@@ -50,24 +50,24 @@
       "longname": "clab-nat-gwx",
       "fqdn": "gwx.nat.io",
       "group": "",
-      "labdir": "/root/wcni-kind/split/netenv/4-adv-netwotk/21-NAT/1-S-D-NAT/clab-nat/gwx",
+      "labdir": "/root/wcni-kind/LabasCode/netenv/4-adv-netwotk/21-NAT/1-S-D-NAT/clab-nat/gwx",
       "kind": "linux",
-      "image": "192.168.2.100:5000/vyos/vyos:1.4.7",
+      "image": "192.168.2.100:5000/vyos/vyos:1.4.9",
       "mgmt-net": "",
       "mgmt-intf": "",
-      "mgmt-ipv4-address": "172.20.20.3",
+      "mgmt-ipv4-address": "172.20.20.2",
       "mgmt-ipv4-prefix-length": 24,
-      "mgmt-ipv6-address": "2001:172:20:20::3",
+      "mgmt-ipv6-address": "2001:172:20:20::2",
       "mgmt-ipv6-prefix-length": 64,
       "mac-address": "",
       "labels": {
-        "clab-mgmt-net-bridge": "br-7105f536da09",
+        "clab-mgmt-net-bridge": "br-635747df37ba",
         "clab-node-group": "",
         "clab-node-kind": "linux",
-        "clab-node-lab-dir": "/root/wcni-kind/split/netenv/4-adv-netwotk/21-NAT/1-S-D-NAT/clab-nat/gwx",
+        "clab-node-lab-dir": "/root/wcni-kind/LabasCode/netenv/4-adv-netwotk/21-NAT/1-S-D-NAT/clab-nat/gwx",
         "clab-node-name": "gwx",
         "clab-node-type": "",
-        "clab-topo-file": "/root/wcni-kind/split/netenv/4-adv-netwotk/21-NAT/1-S-D-NAT/clab.yaml",
+        "clab-topo-file": "/root/wcni-kind/LabasCode/netenv/4-adv-netwotk/21-NAT/1-S-D-NAT/clab.yaml",
         "containerlab": "nat"
       }
     },
@@ -77,61 +77,7 @@
       "longname": "clab-nat-vlan1",
       "fqdn": "vlan1.nat.io",
       "group": "",
-      "labdir": "/root/wcni-kind/split/netenv/4-adv-netwotk/21-NAT/1-S-D-NAT/clab-nat/vlan1",
-      "kind": "linux",
-      "image": "192.168.2.100:5000/nettool",
-      "mgmt-net": "",
-      "mgmt-intf": "",
-      "mgmt-ipv4-address": "172.20.20.2",
-      "mgmt-ipv4-prefix-length": 24,
-      "mgmt-ipv6-address": "2001:172:20:20::2",
-      "mgmt-ipv6-prefix-length": 64,
-      "mac-address": "",
-      "labels": {
-        "clab-mgmt-net-bridge": "br-7105f536da09",
-        "clab-node-group": "",
-        "clab-node-kind": "linux",
-        "clab-node-lab-dir": "/root/wcni-kind/split/netenv/4-adv-netwotk/21-NAT/1-S-D-NAT/clab-nat/vlan1",
-        "clab-node-name": "vlan1",
-        "clab-node-type": "",
-        "clab-topo-file": "/root/wcni-kind/split/netenv/4-adv-netwotk/21-NAT/1-S-D-NAT/clab.yaml",
-        "containerlab": "nat"
-      }
-    },
-    "vlan2": {
-      "index": "3",
-      "shortname": "vlan2",
-      "longname": "clab-nat-vlan2",
-      "fqdn": "vlan2.nat.io",
-      "group": "",
-      "labdir": "/root/wcni-kind/split/netenv/4-adv-netwotk/21-NAT/1-S-D-NAT/clab-nat/vlan2",
-      "kind": "linux",
-      "image": "192.168.2.100:5000/nettool",
-      "mgmt-net": "",
-      "mgmt-intf": "",
-      "mgmt-ipv4-address": "172.20.20.4",
-      "mgmt-ipv4-prefix-length": 24,
-      "mgmt-ipv6-address": "2001:172:20:20::4",
-      "mgmt-ipv6-prefix-length": 64,
-      "mac-address": "",
-      "labels": {
-        "clab-mgmt-net-bridge": "br-7105f536da09",
-        "clab-node-group": "",
-        "clab-node-kind": "linux",
-        "clab-node-lab-dir": "/root/wcni-kind/split/netenv/4-adv-netwotk/21-NAT/1-S-D-NAT/clab-nat/vlan2",
-        "clab-node-name": "vlan2",
-        "clab-node-type": "",
-        "clab-topo-file": "/root/wcni-kind/split/netenv/4-adv-netwotk/21-NAT/1-S-D-NAT/clab.yaml",
-        "containerlab": "nat"
-      }
-    },
-    "vlan3": {
-      "index": "4",
-      "shortname": "vlan3",
-      "longname": "clab-nat-vlan3",
-      "fqdn": "vlan3.nat.io",
-      "group": "",
-      "labdir": "/root/wcni-kind/split/netenv/4-adv-netwotk/21-NAT/1-S-D-NAT/clab-nat/vlan3",
+      "labdir": "/root/wcni-kind/LabasCode/netenv/4-adv-netwotk/21-NAT/1-S-D-NAT/clab-nat/vlan1",
       "kind": "linux",
       "image": "192.168.2.100:5000/nettool",
       "mgmt-net": "",
@@ -142,13 +88,67 @@
       "mgmt-ipv6-prefix-length": 64,
       "mac-address": "",
       "labels": {
-        "clab-mgmt-net-bridge": "br-7105f536da09",
+        "clab-mgmt-net-bridge": "br-635747df37ba",
         "clab-node-group": "",
         "clab-node-kind": "linux",
-        "clab-node-lab-dir": "/root/wcni-kind/split/netenv/4-adv-netwotk/21-NAT/1-S-D-NAT/clab-nat/vlan3",
+        "clab-node-lab-dir": "/root/wcni-kind/LabasCode/netenv/4-adv-netwotk/21-NAT/1-S-D-NAT/clab-nat/vlan1",
+        "clab-node-name": "vlan1",
+        "clab-node-type": "",
+        "clab-topo-file": "/root/wcni-kind/LabasCode/netenv/4-adv-netwotk/21-NAT/1-S-D-NAT/clab.yaml",
+        "containerlab": "nat"
+      }
+    },
+    "vlan2": {
+      "index": "3",
+      "shortname": "vlan2",
+      "longname": "clab-nat-vlan2",
+      "fqdn": "vlan2.nat.io",
+      "group": "",
+      "labdir": "/root/wcni-kind/LabasCode/netenv/4-adv-netwotk/21-NAT/1-S-D-NAT/clab-nat/vlan2",
+      "kind": "linux",
+      "image": "192.168.2.100:5000/nettool",
+      "mgmt-net": "",
+      "mgmt-intf": "",
+      "mgmt-ipv4-address": "172.20.20.4",
+      "mgmt-ipv4-prefix-length": 24,
+      "mgmt-ipv6-address": "2001:172:20:20::4",
+      "mgmt-ipv6-prefix-length": 64,
+      "mac-address": "",
+      "labels": {
+        "clab-mgmt-net-bridge": "br-635747df37ba",
+        "clab-node-group": "",
+        "clab-node-kind": "linux",
+        "clab-node-lab-dir": "/root/wcni-kind/LabasCode/netenv/4-adv-netwotk/21-NAT/1-S-D-NAT/clab-nat/vlan2",
+        "clab-node-name": "vlan2",
+        "clab-node-type": "",
+        "clab-topo-file": "/root/wcni-kind/LabasCode/netenv/4-adv-netwotk/21-NAT/1-S-D-NAT/clab.yaml",
+        "containerlab": "nat"
+      }
+    },
+    "vlan3": {
+      "index": "4",
+      "shortname": "vlan3",
+      "longname": "clab-nat-vlan3",
+      "fqdn": "vlan3.nat.io",
+      "group": "",
+      "labdir": "/root/wcni-kind/LabasCode/netenv/4-adv-netwotk/21-NAT/1-S-D-NAT/clab-nat/vlan3",
+      "kind": "linux",
+      "image": "192.168.2.100:5000/nettool",
+      "mgmt-net": "",
+      "mgmt-intf": "",
+      "mgmt-ipv4-address": "172.20.20.3",
+      "mgmt-ipv4-prefix-length": 24,
+      "mgmt-ipv6-address": "2001:172:20:20::3",
+      "mgmt-ipv6-prefix-length": 64,
+      "mac-address": "",
+      "labels": {
+        "clab-mgmt-net-bridge": "br-635747df37ba",
+        "clab-node-group": "",
+        "clab-node-kind": "linux",
+        "clab-node-lab-dir": "/root/wcni-kind/LabasCode/netenv/4-adv-netwotk/21-NAT/1-S-D-NAT/clab-nat/vlan3",
         "clab-node-name": "vlan3",
         "clab-node-type": "",
-        "clab-topo-file": "/root/wcni-kind/split/netenv/4-adv-netwotk/21-NAT/1-S-D-NAT/clab.yaml",
+        "clab-topo-file": "/root/wcni-kind/LabasCode/netenv/4-adv-netwotk/21-NAT/1-S-D-NAT/clab.yaml",
         "containerlab": "nat"
       }
     }
@@ -158,13 +158,13 @@
       "a": {
         "node": "vlan1",
         "interface": "net1",
-        "mac": "aa:c1:ab:92:d7:3e",
+        "mac": "aa:c1:ab:31:a8:b6",
         "peer": "z"
       },
       "z": {
         "node": "br-vlan",
         "interface": "net2",
-        "mac": "aa:c1:ab:9e:30:3a",
+        "mac": "aa:c1:ab:d7:0e:07",
         "peer": "a"
       }
     },
@@ -172,13 +172,13 @@
       "a": {
         "node": "vlan2",
         "interface": "net1",
-        "mac": "aa:c1:ab:fe:97:04",
+        "mac": "aa:c1:ab:eb:3a:5e",
         "peer": "z"
       },
       "z": {
         "node": "br-vlan",
         "interface": "net3",
-        "mac": "aa:c1:ab:e7:ea:ec",
+        "mac": "aa:c1:ab:0a:f7:97",
         "peer": "a"
       }
     },
@@ -186,13 +186,13 @@
       "a": {
         "node": "vlan3",
         "interface": "net1",
-        "mac": "aa:c1:ab:15:8f:e9",
+        "mac": "aa:c1:ab:9d:21:62",
         "peer": "z"
       },
       "z": {
         "node": "br-vlan",
         "interface": "net4",
-        "mac": "aa:c1:ab:a2:4e:62",
+        "mac": "aa:c1:ab:75:43:6d",
         "peer": "a"
       }
     },
@@ -200,13 +200,13 @@
       "a": {
         "node": "br-vlan",
         "interface": "net1",
-        "mac": "aa:c1:ab:a7:15:06",
+        "mac": "aa:c1:ab:1f:73:7d",
         "peer": "z"
       },
       "z": {
         "node": "gwx",
         "interface": "eth1",
-        "mac": "aa:c1:ab:a5:af:ce",
+        "mac": "aa:c1:ab:0c:c9:0d",
         "peer": "a"
       }
     }
