@@ -1,0 +1,47 @@
+wget https://github.com/jhunt/caps/releases/download/v1.0.0/caps-linux-amd64 && mv caps-linux-amd64 /usr/bin/caps && chmod +x /usr/bin/caps
+[root@rowan> ~]# caps
+(via /proc/self/status)
+000001ffffffffff (38 capabilities):
+  chown                  0 (0x00000000000001)  Make arbitrary changes to file UIDs and GIDs
+  dac_override           1 (0x00000000000002)  Bypass file read, write, and execute permission checks.
+  dac_read_search        2 (0x00000000000004)  Bypass file read permission checks and directory read and execute permission checks.
+  fowner                 3 (0x00000000000008)  Bypass file ownership / process owner equality permission checks.
+  fsetid                 4 (0x00000000000010)  Don't clear set-user-ID and set-group-ID mode bits when a file is modified
+  kill                   5 (0x00000000000020)  Bypass permission checks for sending signals.
+  setgid                 6 (0x00000000000040)  Make arbitrary manipulations of process GIDs and supplementary GID list.
+  setuid                 7 (0x00000000000080)  Make arbitrary manipulations of process UIDs.
+  setpcap                8 (0x00000000000100)  Manage capability sets (from bounded / inherited set).
+  linux_immutable        9 (0x00000000000200)  Set files to be immutable or append-only.
+  net_bind_service      10 (0x00000000000400)  Bind a socket to Internet domain privileged ports.
+  net_broadcast         11 (0x00000000000800)  Make socket broadcasts, and listen to multicasts.  DEPRECATED.
+  net_admin             12 (0x00000000001000)  Manage network configuration and interfaces (broad scope).
+  net_raw               13 (0x00000000002000)  Use RAW and PACKET sockets.
+  ipc_lock              14 (0x00000000004000)  Lock memory, via mlock(2) and friends.
+  ipc_owner             15 (0x00000000008000)  Bypass permission checks for operations on System V IPC objects.
+  sys_module            16 (0x00000000010000)  Load and unload kernel modules.
+  sys_rawio             17 (0x00000000020000)  Perform I/O port operations
+  sys_chroot            18 (0x00000000040000)  Use chroot(2) and manage kernel namespaces.
+  sys_ptrace            19 (0x00000000080000)  Trace arbitrary processes using ptrace.
+  sys_pacct             20 (0x00000000100000)  Use the acct(2) system call.
+  sys_admin             21 (0x00000000200000)  Basically be root again.  This is a HUGE scope.
+  sys_boot              22 (0x00000000400000)  Use the reboot(2) system call
+  sys_nice              23 (0x00000000800000)  Raise process nice value and change the nice value for arbitrary processes.
+  sys_resource          24 (0x00000001000000)  Manage resource limits on filesystems, ulimits, etc.
+  sys_time              25 (0x00000002000000)  Set the system clock and manage realtime clock(s).
+  sys_tty_config        26 (0x00000004000000)  Manage virtual teletype terminals and their settings.
+  mknod                 27 (0x00000008000000)  Create special files using mknod(2).
+  lease                 28 (0x00000010000000)  Establish leases on arbitrary files via fcntl(2).
+  audit_write           29 (0x00000020000000)  Write records to kernel auditing log.
+  audit_control         30 (0x00000040000000)  Manage kernel auditing.
+  setfcap               31 (0x00000080000000)  Set arbitrary capabilities on a file.
+  mac_override          32 (0x00000100000000)  Override Mandatory Access Control (MAC).  Implemented for the Smack LSM.
+  mac_admin             33 (0x00000200000000)  Allow MAC configuration or state changes.  Implemented for the Smack Linux Security Module (LSM).
+  syslog                34 (0x00000400000000)  Perform privileged syslog(2) operations.
+  wake_alarm            35 (0x00000800000000)  Trigger something that will wake up the system.
+  block_suspend         36 (0x00001000000000)  Employ features that can block system suspend.
+  audit_read            37 (0x00002000000000)  Allow reading the audit log via a multicast netlink socket.
+[root@rowan> ~]# 
+
+[root@rowan> ~]#
+cat /usr/include/linux/capability.h
+
