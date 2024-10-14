@@ -1,3 +1,6 @@
+#!/bin/bash
+set -v
+cat <<EOF>clab.yaml | clab deploy -t clab.yaml -
 name: ipsec
 topology:
   nodes:
@@ -116,3 +119,5 @@ topology:
     - endpoints: ["ipsec2:eth2", "gwx:net2"]
     - endpoints: ["ipsec3:eth2", "gwx:net3"]
     
+EOF
+
