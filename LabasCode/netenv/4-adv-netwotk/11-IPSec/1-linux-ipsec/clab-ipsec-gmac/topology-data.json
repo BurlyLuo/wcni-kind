@@ -1,0 +1,296 @@
+{
+  "name": "ipsec-gmac",
+  "type": "clab",
+  "clab": {
+    "config": {
+      "prefix": "clab",
+      "mgmt": {
+        "network": "clab",
+        "bridge": "br-03d42c822c8a",
+        "ipv4-subnet": "172.20.20.0/24",
+        "ipv4-gw": "172.20.20.1",
+        "ipv6-subnet": "2001:172:20:20::/64",
+        "ipv6-gw": "2001:172:20:20::1",
+        "mtu": "1500",
+        "external-access": true
+      }
+    }
+  },
+  "nodes": {
+    "gwx": {
+      "index": "0",
+      "shortname": "gwx",
+      "longname": "clab-ipsec-gmac-gwx",
+      "fqdn": "gwx.ipsec-gmac.io",
+      "group": "",
+      "labdir": "/root/wcni-kind/LabasCode/netenv/4-adv-netwotk/11-IPSec/1-linux-ipsec/clab-ipsec-gmac/gwx",
+      "kind": "linux",
+      "image": "192.168.2.100:5000/nettool",
+      "mgmt-net": "",
+      "mgmt-intf": "",
+      "mgmt-ipv4-address": "172.20.20.7",
+      "mgmt-ipv4-prefix-length": 24,
+      "mgmt-ipv6-address": "2001:172:20:20::7",
+      "mgmt-ipv6-prefix-length": 64,
+      "mac-address": "",
+      "labels": {
+        "clab-mgmt-net-bridge": "br-03d42c822c8a",
+        "clab-node-group": "",
+        "clab-node-kind": "linux",
+        "clab-node-lab-dir": "/root/wcni-kind/LabasCode/netenv/4-adv-netwotk/11-IPSec/1-linux-ipsec/clab-ipsec-gmac/gwx",
+        "clab-node-name": "gwx",
+        "clab-node-type": "",
+        "clab-topo-file": "/root/wcni-kind/LabasCode/netenv/4-adv-netwotk/11-IPSec/1-linux-ipsec/clab.yaml",
+        "containerlab": "ipsec-gmac"
+      }
+    },
+    "ipsec1": {
+      "index": "1",
+      "shortname": "ipsec1",
+      "longname": "clab-ipsec-gmac-ipsec1",
+      "fqdn": "ipsec1.ipsec-gmac.io",
+      "group": "",
+      "labdir": "/root/wcni-kind/LabasCode/netenv/4-adv-netwotk/11-IPSec/1-linux-ipsec/clab-ipsec-gmac/ipsec1",
+      "kind": "linux",
+      "image": "192.168.2.100:5000/nettool",
+      "mgmt-net": "",
+      "mgmt-intf": "",
+      "mgmt-ipv4-address": "172.20.20.6",
+      "mgmt-ipv4-prefix-length": 24,
+      "mgmt-ipv6-address": "2001:172:20:20::6",
+      "mgmt-ipv6-prefix-length": 64,
+      "mac-address": "",
+      "labels": {
+        "clab-mgmt-net-bridge": "br-03d42c822c8a",
+        "clab-node-group": "",
+        "clab-node-kind": "linux",
+        "clab-node-lab-dir": "/root/wcni-kind/LabasCode/netenv/4-adv-netwotk/11-IPSec/1-linux-ipsec/clab-ipsec-gmac/ipsec1",
+        "clab-node-name": "ipsec1",
+        "clab-node-type": "",
+        "clab-topo-file": "/root/wcni-kind/LabasCode/netenv/4-adv-netwotk/11-IPSec/1-linux-ipsec/clab.yaml",
+        "containerlab": "ipsec-gmac"
+      }
+    },
+    "ipsec2": {
+      "index": "2",
+      "shortname": "ipsec2",
+      "longname": "clab-ipsec-gmac-ipsec2",
+      "fqdn": "ipsec2.ipsec-gmac.io",
+      "group": "",
+      "labdir": "/root/wcni-kind/LabasCode/netenv/4-adv-netwotk/11-IPSec/1-linux-ipsec/clab-ipsec-gmac/ipsec2",
+      "kind": "linux",
+      "image": "192.168.2.100:5000/nettool",
+      "mgmt-net": "",
+      "mgmt-intf": "",
+      "mgmt-ipv4-address": "172.20.20.11",
+      "mgmt-ipv4-prefix-length": 24,
+      "mgmt-ipv6-address": "2001:172:20:20::b",
+      "mgmt-ipv6-prefix-length": 64,
+      "mac-address": "",
+      "labels": {
+        "clab-mgmt-net-bridge": "br-03d42c822c8a",
+        "clab-node-group": "",
+        "clab-node-kind": "linux",
+        "clab-node-lab-dir": "/root/wcni-kind/LabasCode/netenv/4-adv-netwotk/11-IPSec/1-linux-ipsec/clab-ipsec-gmac/ipsec2",
+        "clab-node-name": "ipsec2",
+        "clab-node-type": "",
+        "clab-topo-file": "/root/wcni-kind/LabasCode/netenv/4-adv-netwotk/11-IPSec/1-linux-ipsec/clab.yaml",
+        "containerlab": "ipsec-gmac"
+      }
+    },
+    "ipsec3": {
+      "index": "3",
+      "shortname": "ipsec3",
+      "longname": "clab-ipsec-gmac-ipsec3",
+      "fqdn": "ipsec3.ipsec-gmac.io",
+      "group": "",
+      "labdir": "/root/wcni-kind/LabasCode/netenv/4-adv-netwotk/11-IPSec/1-linux-ipsec/clab-ipsec-gmac/ipsec3",
+      "kind": "linux",
+      "image": "192.168.2.100:5000/nettool",
+      "mgmt-net": "",
+      "mgmt-intf": "",
+      "mgmt-ipv4-address": "172.20.20.5",
+      "mgmt-ipv4-prefix-length": 24,
+      "mgmt-ipv6-address": "2001:172:20:20::5",
+      "mgmt-ipv6-prefix-length": 64,
+      "mac-address": "",
+      "labels": {
+        "clab-mgmt-net-bridge": "br-03d42c822c8a",
+        "clab-node-group": "",
+        "clab-node-kind": "linux",
+        "clab-node-lab-dir": "/root/wcni-kind/LabasCode/netenv/4-adv-netwotk/11-IPSec/1-linux-ipsec/clab-ipsec-gmac/ipsec3",
+        "clab-node-name": "ipsec3",
+        "clab-node-type": "",
+        "clab-topo-file": "/root/wcni-kind/LabasCode/netenv/4-adv-netwotk/11-IPSec/1-linux-ipsec/clab.yaml",
+        "containerlab": "ipsec-gmac"
+      }
+    },
+    "server1": {
+      "index": "4",
+      "shortname": "server1",
+      "longname": "clab-ipsec-gmac-server1",
+      "fqdn": "server1.ipsec-gmac.io",
+      "group": "",
+      "labdir": "/root/wcni-kind/LabasCode/netenv/4-adv-netwotk/11-IPSec/1-linux-ipsec/clab-ipsec-gmac/server1",
+      "kind": "linux",
+      "image": "192.168.2.100:5000/nettool",
+      "mgmt-net": "",
+      "mgmt-intf": "",
+      "mgmt-ipv4-address": "172.20.20.9",
+      "mgmt-ipv4-prefix-length": 24,
+      "mgmt-ipv6-address": "2001:172:20:20::9",
+      "mgmt-ipv6-prefix-length": 64,
+      "mac-address": "",
+      "labels": {
+        "clab-mgmt-net-bridge": "br-03d42c822c8a",
+        "clab-node-group": "",
+        "clab-node-kind": "linux",
+        "clab-node-lab-dir": "/root/wcni-kind/LabasCode/netenv/4-adv-netwotk/11-IPSec/1-linux-ipsec/clab-ipsec-gmac/server1",
+        "clab-node-name": "server1",
+        "clab-node-type": "",
+        "clab-topo-file": "/root/wcni-kind/LabasCode/netenv/4-adv-netwotk/11-IPSec/1-linux-ipsec/clab.yaml",
+        "containerlab": "ipsec-gmac"
+      }
+    },
+    "server2": {
+      "index": "5",
+      "shortname": "server2",
+      "longname": "clab-ipsec-gmac-server2",
+      "fqdn": "server2.ipsec-gmac.io",
+      "group": "",
+      "labdir": "/root/wcni-kind/LabasCode/netenv/4-adv-netwotk/11-IPSec/1-linux-ipsec/clab-ipsec-gmac/server2",
+      "kind": "linux",
+      "image": "192.168.2.100:5000/nettool",
+      "mgmt-net": "",
+      "mgmt-intf": "",
+      "mgmt-ipv4-address": "172.20.20.10",
+      "mgmt-ipv4-prefix-length": 24,
+      "mgmt-ipv6-address": "2001:172:20:20::a",
+      "mgmt-ipv6-prefix-length": 64,
+      "mac-address": "",
+      "labels": {
+        "clab-mgmt-net-bridge": "br-03d42c822c8a",
+        "clab-node-group": "",
+        "clab-node-kind": "linux",
+        "clab-node-lab-dir": "/root/wcni-kind/LabasCode/netenv/4-adv-netwotk/11-IPSec/1-linux-ipsec/clab-ipsec-gmac/server2",
+        "clab-node-name": "server2",
+        "clab-node-type": "",
+        "clab-topo-file": "/root/wcni-kind/LabasCode/netenv/4-adv-netwotk/11-IPSec/1-linux-ipsec/clab.yaml",
+        "containerlab": "ipsec-gmac"
+      }
+    },
+    "server3": {
+      "index": "6",
+      "shortname": "server3",
+      "longname": "clab-ipsec-gmac-server3",
+      "fqdn": "server3.ipsec-gmac.io",
+      "group": "",
+      "labdir": "/root/wcni-kind/LabasCode/netenv/4-adv-netwotk/11-IPSec/1-linux-ipsec/clab-ipsec-gmac/server3",
+      "kind": "linux",
+      "image": "192.168.2.100:5000/nettool",
+      "mgmt-net": "",
+      "mgmt-intf": "",
+      "mgmt-ipv4-address": "172.20.20.8",
+      "mgmt-ipv4-prefix-length": 24,
+      "mgmt-ipv6-address": "2001:172:20:20::8",
+      "mgmt-ipv6-prefix-length": 64,
+      "mac-address": "",
+      "labels": {
+        "clab-mgmt-net-bridge": "br-03d42c822c8a",
+        "clab-node-group": "",
+        "clab-node-kind": "linux",
+        "clab-node-lab-dir": "/root/wcni-kind/LabasCode/netenv/4-adv-netwotk/11-IPSec/1-linux-ipsec/clab-ipsec-gmac/server3",
+        "clab-node-name": "server3",
+        "clab-node-type": "",
+        "clab-topo-file": "/root/wcni-kind/LabasCode/netenv/4-adv-netwotk/11-IPSec/1-linux-ipsec/clab.yaml",
+        "containerlab": "ipsec-gmac"
+      }
+    }
+  },
+  "links": [
+    {
+      "a": {
+        "node": "ipsec1",
+        "interface": "eth1",
+        "mac": "aa:c1:ab:ff:b4:31",
+        "peer": "z"
+      },
+      "z": {
+        "node": "server1",
+        "interface": "net0",
+        "mac": "aa:c1:ab:92:c0:bc",
+        "peer": "a"
+      }
+    },
+    {
+      "a": {
+        "node": "ipsec2",
+        "interface": "eth1",
+        "mac": "aa:c1:ab:9e:af:48",
+        "peer": "z"
+      },
+      "z": {
+        "node": "server2",
+        "interface": "net0",
+        "mac": "aa:c1:ab:4c:98:0a",
+        "peer": "a"
+      }
+    },
+    {
+      "a": {
+        "node": "ipsec3",
+        "interface": "eth1",
+        "mac": "aa:c1:ab:4c:03:17",
+        "peer": "z"
+      },
+      "z": {
+        "node": "server3",
+        "interface": "net0",
+        "mac": "aa:c1:ab:3f:74:3a",
+        "peer": "a"
+      }
+    },
+    {
+      "a": {
+        "node": "ipsec1",
+        "interface": "eth2",
+        "mac": "aa:c1:ab:b4:56:a2",
+        "peer": "z"
+      },
+      "z": {
+        "node": "gwx",
+        "interface": "net1",
+        "mac": "aa:c1:ab:9f:3a:6d",
+        "peer": "a"
+      }
+    },
+    {
+      "a": {
+        "node": "ipsec2",
+        "interface": "eth2",
+        "mac": "aa:c1:ab:ee:41:47",
+        "peer": "z"
+      },
+      "z": {
+        "node": "gwx",
+        "interface": "net2",
+        "mac": "aa:c1:ab:4f:86:10",
+        "peer": "a"
+      }
+    },
+    {
+      "a": {
+        "node": "ipsec3",
+        "interface": "eth2",
+        "mac": "aa:c1:ab:c0:4e:33",
+        "peer": "z"
+      },
+      "z": {
+        "node": "gwx",
+        "interface": "net3",
+        "mac": "aa:c1:ab:fa:8b:52",
+        "peer": "a"
+      }
+    }
+  ]
+}

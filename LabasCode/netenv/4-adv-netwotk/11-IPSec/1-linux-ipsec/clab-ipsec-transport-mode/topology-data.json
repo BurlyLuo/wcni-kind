@@ -6,7 +6,7 @@
       "prefix": "clab",
       "mgmt": {
         "network": "clab",
-        "bridge": "br-df4421a0b69a",
+        "bridge": "br-03d42c822c8a",
         "ipv4-subnet": "172.20.20.0/24",
         "ipv4-gw": "172.20.20.1",
         "ipv6-subnet": "2001:172:20:20::/64",
@@ -28,13 +28,13 @@
       "image": "192.168.2.100:5000/nettool",
       "mgmt-net": "",
       "mgmt-intf": "",
-      "mgmt-ipv4-address": "172.20.20.2",
+      "mgmt-ipv4-address": "172.20.20.5",
       "mgmt-ipv4-prefix-length": 24,
-      "mgmt-ipv6-address": "2001:172:20:20::2",
+      "mgmt-ipv6-address": "2001:172:20:20::5",
       "mgmt-ipv6-prefix-length": 64,
       "mac-address": "",
       "labels": {
-        "clab-mgmt-net-bridge": "br-df4421a0b69a",
+        "clab-mgmt-net-bridge": "br-03d42c822c8a",
         "clab-node-group": "",
         "clab-node-kind": "linux",
         "clab-node-lab-dir": "/root/wcni-kind/LabasCode/netenv/4-adv-netwotk/11-IPSec/1-linux-ipsec/clab-ipsec-transport-mode/gwx",
@@ -55,13 +55,13 @@
       "image": "192.168.2.100:5000/nettool",
       "mgmt-net": "",
       "mgmt-intf": "",
-      "mgmt-ipv4-address": "172.20.20.4",
+      "mgmt-ipv4-address": "172.20.20.7",
       "mgmt-ipv4-prefix-length": 24,
-      "mgmt-ipv6-address": "2001:172:20:20::4",
+      "mgmt-ipv6-address": "2001:172:20:20::7",
       "mgmt-ipv6-prefix-length": 64,
       "mac-address": "",
       "labels": {
-        "clab-mgmt-net-bridge": "br-df4421a0b69a",
+        "clab-mgmt-net-bridge": "br-03d42c822c8a",
         "clab-node-group": "",
         "clab-node-kind": "linux",
         "clab-node-lab-dir": "/root/wcni-kind/LabasCode/netenv/4-adv-netwotk/11-IPSec/1-linux-ipsec/clab-ipsec-transport-mode/ipsec1",
@@ -82,13 +82,13 @@
       "image": "192.168.2.100:5000/nettool",
       "mgmt-net": "",
       "mgmt-intf": "",
-      "mgmt-ipv4-address": "172.20.20.3",
+      "mgmt-ipv4-address": "172.20.20.6",
       "mgmt-ipv4-prefix-length": 24,
-      "mgmt-ipv6-address": "2001:172:20:20::3",
+      "mgmt-ipv6-address": "2001:172:20:20::6",
       "mgmt-ipv6-prefix-length": 64,
       "mac-address": "",
       "labels": {
-        "clab-mgmt-net-bridge": "br-df4421a0b69a",
+        "clab-mgmt-net-bridge": "br-03d42c822c8a",
         "clab-node-group": "",
         "clab-node-kind": "linux",
         "clab-node-lab-dir": "/root/wcni-kind/LabasCode/netenv/4-adv-netwotk/11-IPSec/1-linux-ipsec/clab-ipsec-transport-mode/ipsec2",
@@ -104,13 +104,13 @@
       "a": {
         "node": "ipsec1",
         "interface": "eth2",
-        "mac": "aa:c1:ab:9d:6a:e4",
+        "mac": "aa:c1:ab:5e:84:40",
         "peer": "z"
       },
       "z": {
         "node": "gwx",
         "interface": "net1",
-        "mac": "aa:c1:ab:d4:5d:a0",
+        "mac": "aa:c1:ab:3c:3b:b1",
         "peer": "a"
       }
     },
@@ -118,13 +118,13 @@
       "a": {
         "node": "ipsec2",
         "interface": "eth2",
-        "mac": "aa:c1:ab:7d:7a:62",
+        "mac": "aa:c1:ab:e2:6b:64",
         "peer": "z"
       },
       "z": {
         "node": "gwx",
         "interface": "net2",
-        "mac": "aa:c1:ab:fb:88:4b",
+        "mac": "aa:c1:ab:36:f3:ca",
         "peer": "a"
       }
     }
