@@ -197,7 +197,7 @@ alias delk3s="sudo /root/wcni-kind/LabasCode/k8senv/vmenv/k3senv/k3s-uninstall.s
 
 #kcli
 alias vm="cd /root/wcni-kind/LabasCode/k8senv/vmenv"
-
+alias kclissh='ssh-keygen -f "/root/.ssh/known_hosts" -R "192.168.2.96" > /dev/null 2>&1'
 
 # prepnode:
 modprobe rdma_rxe
