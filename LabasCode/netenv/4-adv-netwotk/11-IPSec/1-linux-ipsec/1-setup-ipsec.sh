@@ -1,7 +1,7 @@
 #!/bin/bash
 set -v
 cat <<EOF>clab.yaml | clab deploy -t clab.yaml -
-name: ipsec
+name: ipsec-gcm
 topology:
   nodes:
     gwx:
