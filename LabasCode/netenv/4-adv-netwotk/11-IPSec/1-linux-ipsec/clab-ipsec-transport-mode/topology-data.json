@@ -1,12 +1,12 @@
 {
-  "name": "ipsec",
+  "name": "ipsec-transport-mode",
   "type": "clab",
   "clab": {
     "config": {
       "prefix": "clab",
       "mgmt": {
         "network": "clab",
-        "bridge": "br-d310d60df2c7",
+        "bridge": "br-df4421a0b69a",
         "ipv4-subnet": "172.20.20.0/24",
         "ipv4-gw": "172.20.20.1",
         "ipv6-subnet": "2001:172:20:20::/64",
@@ -20,10 +20,10 @@
     "gwx": {
       "index": "0",
       "shortname": "gwx",
-      "longname": "clab-ipsec-gwx",
-      "fqdn": "gwx.ipsec.io",
+      "longname": "clab-ipsec-transport-mode-gwx",
+      "fqdn": "gwx.ipsec-transport-mode.io",
       "group": "",
-      "labdir": "/root/wcni-kind/LabasCode/netenv/4-adv-netwotk/11-IPSec/1-linux-ipsec/clab-ipsec/gwx",
+      "labdir": "/root/wcni-kind/LabasCode/netenv/4-adv-netwotk/11-IPSec/1-linux-ipsec/clab-ipsec-transport-mode/gwx",
       "kind": "linux",
       "image": "192.168.2.100:5000/nettool",
       "mgmt-net": "",
@@ -34,50 +34,23 @@
       "mgmt-ipv6-prefix-length": 64,
       "mac-address": "",
       "labels": {
-        "clab-mgmt-net-bridge": "br-d310d60df2c7",
+        "clab-mgmt-net-bridge": "br-df4421a0b69a",
         "clab-node-group": "",
         "clab-node-kind": "linux",
-        "clab-node-lab-dir": "/root/wcni-kind/LabasCode/netenv/4-adv-netwotk/11-IPSec/1-linux-ipsec/clab-ipsec/gwx",
+        "clab-node-lab-dir": "/root/wcni-kind/LabasCode/netenv/4-adv-netwotk/11-IPSec/1-linux-ipsec/clab-ipsec-transport-mode/gwx",
         "clab-node-name": "gwx",
         "clab-node-type": "",
         "clab-topo-file": "/root/wcni-kind/LabasCode/netenv/4-adv-netwotk/11-IPSec/1-linux-ipsec/clab.yaml",
-        "containerlab": "ipsec"
+        "containerlab": "ipsec-transport-mode"
       }
     },
     "ipsec1": {
       "index": "1",
       "shortname": "ipsec1",
-      "longname": "clab-ipsec-ipsec1",
-      "fqdn": "ipsec1.ipsec.io",
+      "longname": "clab-ipsec-transport-mode-ipsec1",
+      "fqdn": "ipsec1.ipsec-transport-mode.io",
       "group": "",
-      "labdir": "/root/wcni-kind/LabasCode/netenv/4-adv-netwotk/11-IPSec/1-linux-ipsec/clab-ipsec/ipsec1",
-      "kind": "linux",
-      "image": "192.168.2.100:5000/nettool",
-      "mgmt-net": "",
-      "mgmt-intf": "",
-      "mgmt-ipv4-address": "172.20.20.3",
-      "mgmt-ipv4-prefix-length": 24,
-      "mgmt-ipv6-address": "2001:172:20:20::3",
-      "mgmt-ipv6-prefix-length": 64,
-      "mac-address": "",
-      "labels": {
-        "clab-mgmt-net-bridge": "br-d310d60df2c7",
-        "clab-node-group": "",
-        "clab-node-kind": "linux",
-        "clab-node-lab-dir": "/root/wcni-kind/LabasCode/netenv/4-adv-netwotk/11-IPSec/1-linux-ipsec/clab-ipsec/ipsec1",
-        "clab-node-name": "ipsec1",
-        "clab-node-type": "",
-        "clab-topo-file": "/root/wcni-kind/LabasCode/netenv/4-adv-netwotk/11-IPSec/1-linux-ipsec/clab.yaml",
-        "containerlab": "ipsec"
-      }
-    },
-    "ipsec2": {
-      "index": "2",
-      "shortname": "ipsec2",
-      "longname": "clab-ipsec-ipsec2",
-      "fqdn": "ipsec2.ipsec.io",
-      "group": "",
-      "labdir": "/root/wcni-kind/LabasCode/netenv/4-adv-netwotk/11-IPSec/1-linux-ipsec/clab-ipsec/ipsec2",
+      "labdir": "/root/wcni-kind/LabasCode/netenv/4-adv-netwotk/11-IPSec/1-linux-ipsec/clab-ipsec-transport-mode/ipsec1",
       "kind": "linux",
       "image": "192.168.2.100:5000/nettool",
       "mgmt-net": "",
@@ -88,14 +61,41 @@
       "mgmt-ipv6-prefix-length": 64,
       "mac-address": "",
       "labels": {
-        "clab-mgmt-net-bridge": "br-d310d60df2c7",
+        "clab-mgmt-net-bridge": "br-df4421a0b69a",
         "clab-node-group": "",
         "clab-node-kind": "linux",
-        "clab-node-lab-dir": "/root/wcni-kind/LabasCode/netenv/4-adv-netwotk/11-IPSec/1-linux-ipsec/clab-ipsec/ipsec2",
+        "clab-node-lab-dir": "/root/wcni-kind/LabasCode/netenv/4-adv-netwotk/11-IPSec/1-linux-ipsec/clab-ipsec-transport-mode/ipsec1",
+        "clab-node-name": "ipsec1",
+        "clab-node-type": "",
+        "clab-topo-file": "/root/wcni-kind/LabasCode/netenv/4-adv-netwotk/11-IPSec/1-linux-ipsec/clab.yaml",
+        "containerlab": "ipsec-transport-mode"
+      }
+    },
+    "ipsec2": {
+      "index": "2",
+      "shortname": "ipsec2",
+      "longname": "clab-ipsec-transport-mode-ipsec2",
+      "fqdn": "ipsec2.ipsec-transport-mode.io",
+      "group": "",
+      "labdir": "/root/wcni-kind/LabasCode/netenv/4-adv-netwotk/11-IPSec/1-linux-ipsec/clab-ipsec-transport-mode/ipsec2",
+      "kind": "linux",
+      "image": "192.168.2.100:5000/nettool",
+      "mgmt-net": "",
+      "mgmt-intf": "",
+      "mgmt-ipv4-address": "172.20.20.3",
+      "mgmt-ipv4-prefix-length": 24,
+      "mgmt-ipv6-address": "2001:172:20:20::3",
+      "mgmt-ipv6-prefix-length": 64,
+      "mac-address": "",
+      "labels": {
+        "clab-mgmt-net-bridge": "br-df4421a0b69a",
+        "clab-node-group": "",
+        "clab-node-kind": "linux",
+        "clab-node-lab-dir": "/root/wcni-kind/LabasCode/netenv/4-adv-netwotk/11-IPSec/1-linux-ipsec/clab-ipsec-transport-mode/ipsec2",
         "clab-node-name": "ipsec2",
         "clab-node-type": "",
         "clab-topo-file": "/root/wcni-kind/LabasCode/netenv/4-adv-netwotk/11-IPSec/1-linux-ipsec/clab.yaml",
-        "containerlab": "ipsec"
+        "containerlab": "ipsec-transport-mode"
       }
     }
   },
@@ -104,13 +104,13 @@
       "a": {
         "node": "ipsec1",
         "interface": "eth2",
-        "mac": "aa:c1:ab:ec:25:08",
+        "mac": "aa:c1:ab:9d:6a:e4",
         "peer": "z"
       },
       "z": {
         "node": "gwx",
         "interface": "net1",
-        "mac": "aa:c1:ab:fb:76:f1",
+        "mac": "aa:c1:ab:d4:5d:a0",
         "peer": "a"
       }
     },
@@ -118,13 +118,13 @@
       "a": {
         "node": "ipsec2",
         "interface": "eth2",
-        "mac": "aa:c1:ab:84:cb:b2",
+        "mac": "aa:c1:ab:7d:7a:62",
         "peer": "z"
       },
       "z": {
         "node": "gwx",
         "interface": "net2",
-        "mac": "aa:c1:ab:9b:bb:ab",
+        "mac": "aa:c1:ab:fb:88:4b",
         "peer": "a"
       }
     }
