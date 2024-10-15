@@ -14,7 +14,8 @@ spec:
         app: wluo
     spec:
       containers:
-      - image: ealen/echo-server:latest
+      #- image: ealen/echo-server:latest
+      - image: 192.168.2.100:5000/nettool
         imagePullPolicy: IfNotPresent
         name: wluo
         ports:

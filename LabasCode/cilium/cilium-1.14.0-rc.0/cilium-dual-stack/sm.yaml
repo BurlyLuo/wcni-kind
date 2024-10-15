@@ -1,0 +1,327 @@
+---
+# Source: asbcsm/templates/rbac.yaml
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: asbcsm
+  namespace: default
+---
+# Source: asbcsm/templates/pods.yaml
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  namespace: default
+  name: sm-configmap
+data:
+  user-data: |
+  
+    network-ip-pools:
+      #<vld-id>-<virtual-link-id> # from VNFD
+      vnfc_vldid_gm:
+        - 15.15.6.100
+      vnfc_vldid_gm6:
+        - 2015:6::100
+    
+      vnfc_vldid_gm_pip:
+        - 15.15.6.101  
+      vnfc_vldid_gm6_pip:
+        - 2015:6::101
+    
+      vnfc_vldid_mw:
+        - 15.15.7.100
+      vnfc_vldid_mw6:
+        - 2015:7::100
+    
+      vnfc_vldid_mw_pip:
+        - 15.15.7.101
+      vnfc_vldid_mw6_pip:
+        - 2015:7::101
+    
+      vnfc_vldid_FE-int:
+        - 15.15.4.105
+      vnfc_vldid_FE-int_pip:
+        - 15.15.4.106
+         
+      vnfc_vldid_gm2:
+        - 15.15.6.30
+      vnfc_vldid_gm62:
+        - 2015:6::30
+    
+      vnfc_vldid_gm2_pip:
+        - 15.15.6.31 
+        - 15.15.6.32
+      vnfc_vldid_gm62_pip:
+        - 2015:6::31
+        - 2015:6::32
+    
+      vnfc_vldid_mw2:
+        - 15.15.7.30
+      vnfc_vldid_mw62:
+        - 2015:7::30
+    
+      vnfc_vldid_mw2_pip:
+        - 15.15.7.31
+        - 15.15.7.32 
+      vnfc_vldid_mw62_pip:
+        - 2015:7::31
+        - 2015:7::32
+    
+      vnfc_vldid_mp_rtp:
+        - 15.15.8.30
+      vnfc_vldid_mp_rtp_pip:
+        - 15.15.8.31
+        - 15.15.8.32
+    
+      vnfc_vldid_tc_rtp:
+        - 15.15.8.40
+      vnfc_vldid_tc_rtp_pip:
+        - 15.15.8.41
+        - 15.15.8.42
+      
+      vnfc_vldid_sag:
+        - 15.15.4.50
+      #vnfc_vldid_sag_re_pip:
+      #  - 15.15.4.51
+    
+    
+    network:
+      calico:
+        TYPE: Ethernet
+        IFNAME: eth0
+
+      calico-v6:
+        TYPE: Ethernet
+        IFNAME: eth0
+        IPV6ADDR: true
+
+      OAM:
+        TYPE: Ethernet
+        IFNAME: eth1
+    
+      emxrouter:
+        TYPE: Ethernet
+        IFNAME: eth2
+
+    config: 
+      CLOUD_PROFILE_ID: Lily-ASBC
+      VNF_ID: ASBC
+      VNF_TYPE: ASBC
+      NSD_ID: ASBC_NSD_ID
+      NSD_VERSION: ASBC_NSD_VERSION
+      VNFD_ID: SM_VNFD_ID
+      VNFD_VERSION: SM_VNFD_VERSION
+      VDU_NAME: SM_VDU_NAME  
+      SM_CLUSTER_SIZE: 3
+      SM_ADVERTISED_IP_TRAFFIC_TYPE: calico
+      VNFC_NETCONF_IP_TRAFFIC_TYPE: OAM
+      CMS_IP_ADDRESSES:
+      - "15.15.1.3:4334"
+    
+    vdu:
+      TIMEZONE: Hongkong
+        
+    runcmd: |
+      #!/bin/bash
+      sed -i "s/LOG_CONFIG_LEVEL_WARN/LOG_CONFIG_LEVEL_DEBUG/g"  /usr/IMS/current/config/xml/*.xml
+      sed -i "s/LOG_CONFIG_LEVEL_WARN/LOG_CONFIG_LEVEL_DEBUG/g"  /opt/confd/confdInstallDir/var/confd/cdb/*.xml
+      sed -i "/<netconfTraceLog>/{n;s/<enabled>false<\/enabled>/<enabled>true<\/enabled>/g}" /opt/confd/confdInstallDir/var/confd/cdb/confd_dyncfg_init.xml
+---
+# Source: asbcsm/templates/rbac.yaml
+kind: Role
+apiVersion: rbac.authorization.k8s.io/v1
+metadata:
+  name: asbc01sm-cr
+  namespace: default
+rules:
+  - apiGroups:
+    - '*'
+    resources:
+    - '*'
+    verbs: 
+    - '*'
+---
+# Source: asbcsm/templates/rbac.yaml
+kind: RoleBinding
+apiVersion: rbac.authorization.k8s.io/v1
+metadata:
+  name: asbc01sm-crb
+  namespace: default
+subjects:
+  - kind: ServiceAccount
+    name: asbcsm
+    namespace: default
+roleRef:
+  kind: Role
+  name: asbc01sm-cr
+  apiGroup: rbac.authorization.k8s.io
+---
+# Source: asbcsm/templates/services.yaml
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: sm-service
+  name: sm-service
+  namespace: default
+spec: {"clusterIP":"None","ports":[{"name":"etcd-server","port":2380,"protocol":"TCP"},{"name":"etcd-client","port":2374,"protocol":"TCP"}],"selector":{"app":"sm-pod"}}
+status:
+  loadBalancer: {}
+---
+# Source: asbcsm/templates/pods.yaml
+---
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  #name: sm-instance
+  name: asbc-sm
+  namespace: default
+spec:
+  podManagementPolicy: OrderedReady
+  replicas: !!int 3
+#  revisionHistoryLimit: 10
+  selector:
+    matchLabels:
+      app: sm-pod
+  serviceName: sm-service
+  template:
+    metadata:
+      
+      
+       # end-range network
+      annotations:
+        k8s.v1.cni.cncf.io/networks: '[{"interface":"eth1","name":"macvlan-oam-sm"},{"interface":"eth2","name":"macvlan-emx-sm"}]' # end-if network
+      labels:
+        app: sm-pod
+    spec:
+      volumes: 
+        - name: sm-configmap
+          configMap:
+            name: sm-configmap
+        -
+          name: "storage"
+        -
+          name: "etcd"
+        -
+          downwardAPI: {"items":[{"fieldRef":{"fieldPath":"metadata.labels"},"path":"labels"},{"fieldRef":{"fieldPath":"metadata.uid"},"path":"poduid"}]}
+          name: "podinfo"
+        -
+          hostPath: {"path":"/sys"}
+          name: "sys"
+        -
+          hostPath: {"path":"/var/lib/lxcfs/proc/meminfo"}
+          name: "mem"
+        -
+          hostPath: {"path":"/var/lib/lxcfs/proc/cpuinfo"}
+          name: "cpu"
+        -
+          hostPath: {"path":"/var/lib/lxcfs/proc/stat"}
+          name: "stat"
+        -
+          hostPath: {"path":"/var/lib/lxcfs/proc/uptime"}
+          name: "uptime"
+        -
+          hostPath: {"path":"/var/lib/lxcfs/proc/swaps"}
+          name: "swaps"
+        -
+          hostPath: {"path":"/usr/share/zoneinfo"}
+          name: "zoneinfo" # end-range volumes # end-range containerKeys
+      serviceAccount: asbcsm
+      serviceAccountName: asbcsm
+      containers:
+        - name: sm-container
+          command: [ "/bin/sh"]
+          args: ["-c", '/usr/IMS/current/tools/cfginit']
+          env:
+            - name: ETCD_DEBUG_LEVEL
+              value: debug # end-range env
+            - name: MY_POD_NAME
+              valueFrom:
+                fieldRef:
+                  fieldPath: "metadata.name" # end-range env
+            - name: MY_POD_NAMESPACE
+              valueFrom:
+                fieldRef:
+                  fieldPath: "metadata.namespace" # end-range env
+            - name: MY_POD_UID
+              valueFrom:
+                fieldRef:
+                  fieldPath: "metadata.name" # end-range env
+            - name: MY_SERVICE_NAME
+              value: sm-service # end-range env # end-range env
+          image: 192.168.2.100:5000/sm:latest
+          imagePullPolicy: Always
+          securityContext: {"capabilities":{"add":["DAC_OVERRIDE","CHOWN","KILL","MKNOD","SETGID","SETUID","SETPCAP","SETFCAP","NET_BIND_SERVICE","NET_ADMIN","NET_RAW","IPC_LOCK","IPC_OWNER","SYS_ADMIN","SYS_BOOT","DAC_READ_SEARCH","SYS_PTRACE"]},"privileged":true} # end-if securityContext
+          stdin: true
+          terminationMessagePath: /dev/termination-log
+          terminationMessagePolicy: File
+          tty: true
+          volumeMounts:
+          - name: sm-configmap
+            mountPath: /data/configmap
+            readOnly: false
+          - {"mountPath":"/data","name":"storage","readOnly":false}
+          - {"mountPath":"/var/lib/etcd","name":"etcd","readOnly":false}
+          - {"mountPath":"/sys","name":"sys","readOnly":false}
+          - {"mountPath":"/etc/podinfo","name":"podinfo"}
+          - {"mountPath":"/usr/share/zoneinfo","name":"zoneinfo"} # end-range volumeMounts
+          #
+          resources: {"limits":{"cpu":"2","memory":"16Gi"},"requests":{"cpu":"1","memory":"16Gi"}}
+  volumeClaimTemplates:
+  - metadata:
+      name: storage
+    spec: {"accessModes":["ReadWriteOnce"],"resources":{"requests":{"storage":"20Gi"}},"storageClassName":"standard"}
+  - metadata:
+      name: etcd
+    spec: {"accessModes":["ReadWriteOnce"],"resources":{"requests":{"storage":"2Gi"}},"storageClassName":"standard"} # end-if storage.class # end-if storage.class
+---
+# Source: asbcsm/templates/services.yaml
+#end-range services
+---
+# Source: asbcsm/templates/networks.yaml
+apiVersion: k8s.cni.cncf.io/v1
+kind: NetworkAttachmentDefinition
+metadata:
+  name: macvlan-oam-sm
+  namespace: default
+spec:
+  config: '{
+    "cniVersion": "0.3.0",
+    "type": "macvlan",
+    "master": "eth0",
+    "mode": "bridge",
+    "ipam": {
+      "datastore": "kubernetes",
+      "range": "15.15.1.90-15.15.1.90/24",
+      "type": "whereabouts",
+      "log_file": "/tmp/whereabouts-macvlan-oam-sm.log",
+      "log_level": "debug",
+      "kubernetes": {
+        "kubeconfig": "/etc/cni/net.d/whereabouts.d/whereabouts.kubeconfig"
+      }
+    }
+  }'
+---
+# Source: asbcsm/templates/networks.yaml
+apiVersion: k8s.cni.cncf.io/v1
+kind: NetworkAttachmentDefinition
+metadata:
+  name: macvlan-emx-sm
+  namespace: default
+spec:
+  config: '{
+    "cniVersion": "0.3.0",
+    "type": "macvlan",
+    "master": "eth0",
+    "mode": "bridge",
+    "ipam": {
+      "datastore": "kubernetes",
+      "range": "15.15.3.90-15.15.3.90/24",
+      "type": "whereabouts",
+      "log_file": "/tmp/whereabouts-macvlan-emx-sm.log",
+      "log_level": "debug",
+      "kubernetes": {
+        "kubeconfig": "/etc/cni/net.d/whereabouts.d/whereabouts.kubeconfig"
+      }
+    }
+  }'
+
