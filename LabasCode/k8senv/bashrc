@@ -227,8 +227,10 @@ fi
 #if [ -f /etc/bash_completion ] && ! shopt -oq posix; then
 #    . /etc/bash_completion
 #fi
-go env -w GO111MODULE=on
-go env -w GOPROXY=https://goproxy.cn,direct
+
+
+
+go env -w GO111MODULE=on && go env -w GOPROXY=https://goproxy.cn,direct
 
 # wget https://go.dev/dl/go1.23.2.linux-amd64.tar.gz
 # tar -C /usr/local -xzf go1.23.2.linux-amd64.tar.gz
