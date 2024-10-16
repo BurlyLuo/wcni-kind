@@ -123,6 +123,8 @@ data:
         
     runcmd: |
       #!/bin/bash
+      sed -i 's/LEVEL_CRITICAL/LEVEL_NONCRITICAL/g' /usr/IMS/current/config/xml/*.xml
+      sed -i 's/LEVEL_CRITICAL/LEVEL_NONCRITICAL/g' /opt/confd/confdInstallDir/var/confd/cdb/*.xml
       sed -i "s/LOG_CONFIG_LEVEL_WARN/LOG_CONFIG_LEVEL_DEBUG/g"  /usr/IMS/current/config/xml/*.xml
       sed -i "s/LOG_CONFIG_LEVEL_WARN/LOG_CONFIG_LEVEL_DEBUG/g"  /opt/confd/confdInstallDir/var/confd/cdb/*.xml
       sed -i "/<netconfTraceLog>/{n;s/<enabled>false<\/enabled>/<enabled>true<\/enabled>/g}" /opt/confd/confdInstallDir/var/confd/cdb/confd_dyncfg_init.xml
