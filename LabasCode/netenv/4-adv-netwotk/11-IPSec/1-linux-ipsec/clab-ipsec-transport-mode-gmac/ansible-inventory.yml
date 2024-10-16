@@ -3,8 +3,8 @@ all:
     linux:
       hosts:
         clab-ipsec-transport-mode-gmac-gwx:
-          ansible_host: 172.20.20.3
-        clab-ipsec-transport-mode-gmac-ipsec1:
           ansible_host: 172.20.20.2
-        clab-ipsec-transport-mode-gmac-ipsec2:
+        clab-ipsec-transport-mode-gmac-ipsec1:
           ansible_host: 172.20.20.4
+        clab-ipsec-transport-mode-gmac-ipsec2:
+          ansible_host: 172.20.20.3
