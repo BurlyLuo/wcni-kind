@@ -113,7 +113,7 @@ data:
       VNFD_VERSION: SM_VNFD_VERSION
       VDU_NAME: SM_VDU_NAME  
       SM_CLUSTER_SIZE: 3
-      SM_ADVERTISED_IP_TRAFFIC_TYPE: calico
+      SM_ADVERTISED_IP_TRAFFIC_TYPE: calico-v6
       VNFC_NETCONF_IP_TRAFFIC_TYPE: OAM
       CMS_IP_ADDRESSES:
       - "15.15.1.3:4334"
@@ -252,6 +252,8 @@ spec:
           env:
             - name: ETCD_DEBUG_LEVEL
               value: debug # end-range env
+            - name: LOG_STDOUT
+              value: enable
             - name: MY_POD_NAME
               valueFrom:
                 fieldRef:
@@ -305,7 +307,7 @@ spec:
   config: '{
     "cniVersion": "0.3.0",
     "type": "macvlan",
-    "master": "ens38",
+    "master": "eth0",
     "mode": "bridge",
     "ipam": {
       "datastore": "kubernetes",
@@ -329,7 +331,7 @@ spec:
   config: '{
     "cniVersion": "0.3.0",
     "type": "macvlan",
-    "master": "ens38",
+    "master": "eth0",
     "mode": "bridge",
     "ipam": {
       "datastore": "kubernetes",
