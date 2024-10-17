@@ -1,10 +1,10 @@
 apiVersion: apps/v1
-#kind: Deployment
-kind: DaemonSet  
+kind: Deployment
+#kind: DaemonSet  
 metadata:
   name: wluo
 spec:
-  #replicas: 2
+  replicas: 3
   selector:
     matchLabels:
       app: wluo
