@@ -167,9 +167,9 @@ metadata:
   name: sm-service
   namespace: default
 spec:
-  #ipFamilyPolicy: PreferDualStack
+  ipFamilyPolicy: PreferDualStack
   #ipFamilyPolicy: RequireDualStack
-  ipFamilyPolicy: SingleStack
+  #ipFamilyPolicy: SingleStack
   ipFamilies:
   - IPv4
   clusterIP: None
@@ -283,14 +283,14 @@ spec:
           - {"mountPath":"/etc/podinfo","name":"podinfo"}
           - {"mountPath":"/usr/share/zoneinfo","name":"zoneinfo"} # end-range volumeMounts
           #
-          resources: {"limits":{"cpu":"2","memory":"16Gi"},"requests":{"cpu":"1","memory":"16Gi"}}
+          resources: {"limits":{"cpu":"2","memory":"16Gi"},"requests":{"cpu":"1","memory":"1Gi"}}
   volumeClaimTemplates:
   - metadata:
       name: storage
-    spec: {"accessModes":["ReadWriteOnce"],"resources":{"requests":{"storage":"20Gi"}},"storageClassName":"standard"}
+    spec: {"accessModes":["ReadWriteOnce"],"resources":{"requests":{"storage":"20Gi"}}}
   - metadata:
       name: etcd
-    spec: {"accessModes":["ReadWriteOnce"],"resources":{"requests":{"storage":"2Gi"}},"storageClassName":"standard"} # end-if storage.class # end-if storage.class
+    spec: {"accessModes":["ReadWriteOnce"],"resources":{"requests":{"storage":"2Gi"}}} # end-if storage.class # end-if storage.class
 ---
 # Source: asbcsm/templates/services.yaml
 #end-range services
@@ -305,7 +305,7 @@ spec:
   config: '{
     "cniVersion": "0.3.0",
     "type": "macvlan",
-    "master": "eth0",
+    "master": "ens38",
     "mode": "bridge",
     "ipam": {
       "datastore": "kubernetes",
@@ -329,7 +329,7 @@ spec:
   config: '{
     "cniVersion": "0.3.0",
     "type": "macvlan",
-    "master": "eth0",
+    "master": "ens38",
     "mode": "bridge",
     "ipam": {
       "datastore": "kubernetes",
