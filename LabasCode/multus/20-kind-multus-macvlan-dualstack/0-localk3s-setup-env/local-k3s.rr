@@ -1,6 +1,11 @@
+# rr:
 open https://github.com/k3s-io/k3s/releases/tag/v1.27.3%2Bk3s1
+
 wget https://github.com/k3s-io/k3s/releases/download/v1.27.3%2Bk3s1/k3s
 wget https://github.com/k3s-io/k3s/releases/download/v1.27.3%2Bk3s1/k3s-airgap-images-amd64.tar.gz
+or
+wget http://192.168.2.100/http/k3s
+wget http://192.168.2.100/http/k3s-airgap-images-amd64.tar
 
 docker load -i k3s-airgap-images-amd64.tar.gz
 
