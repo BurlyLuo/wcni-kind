@@ -1,4 +1,8 @@
 # Let NetworkManager manage all devices on this system
+# cat /etc/rc.local
+# ip rule add from 10.1.5.3 table 100
+# ip route add default via 10.1.5.254 dev vppdpdk5 table 100
+
 network:
   version: 2
   ethernets:
@@ -29,9 +33,9 @@ network:
       interfaces:
         - ens160
       addresses: [10.1.5.3/24, 10:1:5:3::3/64]
-      # gateway4: 10.1.5.254
+      #gateway4: 10.1.5.254
       nameservers:
-        addresses: [192.168.2.1]
+        addresses: [192.168.2.1, 8.8.8.8, 1.1.1.1]
         search: []
 
     vppdpdk8:
