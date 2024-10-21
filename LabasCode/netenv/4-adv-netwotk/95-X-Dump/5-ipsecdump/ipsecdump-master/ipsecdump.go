@@ -23,7 +23,7 @@ import (
 func main() {
 	var (
 		dumpDuration      = flag.Duration("t", 10*time.Second, "how long to run the NFLOG dumping")
-		iface             = flag.String("i", "any", "incoming interface to listen on (default: any)")
+		iface             = flag.String("i", "any", "interface to listen on (default: any)")
 		mode              = flag.String("m", "tunnel", "IPSec mode (tunnel or transport)")
 		tunnelSource      = flag.String("s", "", "IPSec tunnel source IP")
 		tunnelDestination = flag.String("d", "", "IPSec tunnel destination IP")
@@ -68,16 +68,24 @@ func main() {
 		log.Fatalf("Could not register nflog callback: %v\n", err)
 	}
 
-	addCmd := exec.Command("iptables", buildIptablesParams(false, *mode, *iface, *tunnelSource, *tunnelDestination, *nflogGroup, prefix)...)
-	delCmd := exec.Command("iptables", buildIptablesParams(true, *mode, *iface, *tunnelSource, *tunnelDestination, *nflogGroup, prefix)...)
+	addIngressCmd := exec.Command("iptables", buildIptablesParams(false, *mode, *iface, *tunnelSource, *tunnelDestination, *nflogGroup, prefix)...)
+	delIngressCmd := exec.Command("iptables", buildIptablesParams(true, *mode, *iface, *tunnelSource, *tunnelDestination, *nflogGroup, prefix)...)
+	addEgressCmd := exec.Command("iptables", buildEgressIptablesParams(false, *mode, *iface, *tunnelSource, *tunnelDestination, *nflogGroup, prefix)...)
+	delEgressCmd := exec.Command("iptables", buildEgressIptablesParams(true, *mode, *iface, *tunnelSource, *tunnelDestination, *nflogGroup, prefix)...)
 
 	defer func() {
-		if err := delCmd.Run(); err != nil {
-			fmt.Printf("Command finished with error: %s\n", err)
+		if err := delIngressCmd.Run(); err != nil {
+			fmt.Printf("Ingress command finished with error: %s\n", err)
+		}
+		if err := delEgressCmd.Run(); err != nil {
+			fmt.Printf("Egress command finished with error: %s\n", err)
 		}
 	}()
-	if err := addCmd.Run(); err != nil {
-		fmt.Printf("Command finished with error: %s\n", err)
+	if err := addIngressCmd.Run(); err != nil {
+		fmt.Printf("Ingress command finished with error: %s\n", err)
+	}
+	if err := addEgressCmd.Run(); err != nil {
+		fmt.Printf("Egress command finished with error: %s\n", err)
 	}
 
 	<-ctx.Done()
@@ -111,7 +119,7 @@ func validateFlags(mode, tunnelSource, tunnelDestination string) error {
 }
 
 func validateTransportFlags(tunnelSource, tunnelDestination string) error {
-	if (tunnelSource != "") || (tunnelDestination != "") {
+	if tunnelSource != "" || tunnelDestination != "" {
 		return fmt.Errorf("transport mode does not support tunnel source/destination IPs")
 	}
 	return nil
@@ -142,6 +150,35 @@ func buildIptablesParams(del bool, mode, iface, tunnelSource, tunnelDestination 
 	}
 
 	params = append(params, []string{"-m", "policy", "--dir", "in", "--pol", "ipsec", "--mode", mode, "--proto", "esp"}...)
+	if mode == "tunnel" {
+		if tunnelSource != "" {
+			params = append(params, "--tunnel-src", tunnelSource)
+		}
+		if tunnelDestination != "" {
+			params = append(params, "--tunnel-dst", tunnelDestination)
+		}
+	}
+
+	params = append(params, "-j", "NFLOG", "--nflog-group", fmt.Sprintf("%d", nflogGroup), "--nflog-prefix", prefix)
+
+	return params
+}
+
+func buildEgressIptablesParams(del bool, mode, iface, tunnelSource, tunnelDestination string, nflogGroup int, prefix string) []string {
+	var params []string
+
+	if del {
+		params = append(params, "-D")
+	} else {
+		params = append(params, "-I")
+	}
+
+	params = append(params, []string{"OUTPUT", "-t", "raw"}...)
+	if iface != "any" {
+		params = append(params, "-o", iface)
+	}
+
+	params = append(params, []string{"-m", "policy", "--dir", "out", "--pol", "ipsec", "--mode", mode, "--proto", "esp"}...)
 	if mode == "tunnel" {
 		if tunnelSource != "" {
 			params = append(params, "--tunnel-src", tunnelSource)
