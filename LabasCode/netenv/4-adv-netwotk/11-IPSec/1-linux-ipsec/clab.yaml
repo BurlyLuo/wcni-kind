@@ -10,7 +10,7 @@ topology:
 
     ipsec1:
       kind: linux
-      image: 192.168.2.100:5000/ubuntu:22.04
+      image: 192.168.2.100:5000/nettool
       exec:
       - ip addr add 10.1.5.10/24 dev eth2
       - ip r a 10.1.8.0/24 via 10.1.5.1 dev eth2
@@ -30,7 +30,7 @@ topology:
 
     ipsec2:
       kind: linux
-      image: 192.168.2.100:5000/ubuntu:22.04
+      image: 192.168.2.100:5000/nettool
       exec:
       - ip addr add 10.1.8.10/24 dev eth2
       - ip r a 10.1.5.0/24 via 10.1.8.1 dev eth2
