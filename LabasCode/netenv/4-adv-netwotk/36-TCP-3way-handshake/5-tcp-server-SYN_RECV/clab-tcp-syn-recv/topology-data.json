@@ -6,7 +6,7 @@
       "prefix": "clab",
       "mgmt": {
         "network": "clab",
-        "bridge": "br-d2b04a5d2aa8",
+        "bridge": "br-f53089365b39",
         "ipv4-subnet": "172.20.20.0/24",
         "ipv4-gw": "172.20.20.1",
         "mtu": "1500",
@@ -21,7 +21,7 @@
       "longname": "clab-tcp-syn-recv-gw1",
       "fqdn": "gw1.tcp-syn-recv.io",
       "group": "",
-      "labdir": "/root/wcni-kind/split/netenv/4-adv-netwotk/30-tcp-3way-handshake/5-tcp-SYN_RECV/clab-tcp-syn-recv/gw1",
+      "labdir": "/root/wcni-kind/LabasCode/netenv/4-adv-netwotk/36-TCP-3way-handshake/5-tcp-server-SYN_RECV/clab-tcp-syn-recv/gw1",
       "kind": "linux",
       "image": "192.168.2.100:5000/xcni",
       "mgmt-net": "",
@@ -32,13 +32,13 @@
       "mgmt-ipv6-prefix-length": 0,
       "mac-address": "",
       "labels": {
-        "clab-mgmt-net-bridge": "br-d2b04a5d2aa8",
+        "clab-mgmt-net-bridge": "br-f53089365b39",
         "clab-node-group": "",
         "clab-node-kind": "linux",
-        "clab-node-lab-dir": "/root/wcni-kind/split/netenv/4-adv-netwotk/30-tcp-3way-handshake/5-tcp-SYN_RECV/clab-tcp-syn-recv/gw1",
+        "clab-node-lab-dir": "/root/wcni-kind/LabasCode/netenv/4-adv-netwotk/36-TCP-3way-handshake/5-tcp-server-SYN_RECV/clab-tcp-syn-recv/gw1",
         "clab-node-name": "gw1",
         "clab-node-type": "",
-        "clab-topo-file": "/root/wcni-kind/split/netenv/4-adv-netwotk/30-tcp-3way-handshake/5-tcp-SYN_RECV/clab.yaml",
+        "clab-topo-file": "/root/wcni-kind/LabasCode/netenv/4-adv-netwotk/36-TCP-3way-handshake/5-tcp-server-SYN_RECV/clab.yaml",
         "containerlab": "tcp-syn-recv"
       }
     },
@@ -48,7 +48,7 @@
       "longname": "clab-tcp-syn-recv-server1",
       "fqdn": "server1.tcp-syn-recv.io",
       "group": "",
-      "labdir": "/root/wcni-kind/split/netenv/4-adv-netwotk/30-tcp-3way-handshake/5-tcp-SYN_RECV/clab-tcp-syn-recv/server1",
+      "labdir": "/root/wcni-kind/LabasCode/netenv/4-adv-netwotk/36-TCP-3way-handshake/5-tcp-server-SYN_RECV/clab-tcp-syn-recv/server1",
       "kind": "linux",
       "image": "192.168.2.100:5000/xcni",
       "mgmt-net": "",
@@ -59,13 +59,13 @@
       "mgmt-ipv6-prefix-length": 0,
       "mac-address": "",
       "labels": {
-        "clab-mgmt-net-bridge": "br-d2b04a5d2aa8",
+        "clab-mgmt-net-bridge": "br-f53089365b39",
         "clab-node-group": "",
         "clab-node-kind": "linux",
-        "clab-node-lab-dir": "/root/wcni-kind/split/netenv/4-adv-netwotk/30-tcp-3way-handshake/5-tcp-SYN_RECV/clab-tcp-syn-recv/server1",
+        "clab-node-lab-dir": "/root/wcni-kind/LabasCode/netenv/4-adv-netwotk/36-TCP-3way-handshake/5-tcp-server-SYN_RECV/clab-tcp-syn-recv/server1",
         "clab-node-name": "server1",
         "clab-node-type": "",
-        "clab-topo-file": "/root/wcni-kind/split/netenv/4-adv-netwotk/30-tcp-3way-handshake/5-tcp-SYN_RECV/clab.yaml",
+        "clab-topo-file": "/root/wcni-kind/LabasCode/netenv/4-adv-netwotk/36-TCP-3way-handshake/5-tcp-server-SYN_RECV/clab.yaml",
         "containerlab": "tcp-syn-recv"
       }
     },
@@ -75,7 +75,7 @@
       "longname": "clab-tcp-syn-recv-server2",
       "fqdn": "server2.tcp-syn-recv.io",
       "group": "",
-      "labdir": "/root/wcni-kind/split/netenv/4-adv-netwotk/30-tcp-3way-handshake/5-tcp-SYN_RECV/clab-tcp-syn-recv/server2",
+      "labdir": "/root/wcni-kind/LabasCode/netenv/4-adv-netwotk/36-TCP-3way-handshake/5-tcp-server-SYN_RECV/clab-tcp-syn-recv/server2",
       "kind": "linux",
       "image": "192.168.2.100:5000/xcni",
       "mgmt-net": "",
@@ -86,13 +86,13 @@
       "mgmt-ipv6-prefix-length": 0,
       "mac-address": "",
       "labels": {
-        "clab-mgmt-net-bridge": "br-d2b04a5d2aa8",
+        "clab-mgmt-net-bridge": "br-f53089365b39",
         "clab-node-group": "",
         "clab-node-kind": "linux",
-        "clab-node-lab-dir": "/root/wcni-kind/split/netenv/4-adv-netwotk/30-tcp-3way-handshake/5-tcp-SYN_RECV/clab-tcp-syn-recv/server2",
+        "clab-node-lab-dir": "/root/wcni-kind/LabasCode/netenv/4-adv-netwotk/36-TCP-3way-handshake/5-tcp-server-SYN_RECV/clab-tcp-syn-recv/server2",
         "clab-node-name": "server2",
         "clab-node-type": "",
-        "clab-topo-file": "/root/wcni-kind/split/netenv/4-adv-netwotk/30-tcp-3way-handshake/5-tcp-SYN_RECV/clab.yaml",
+        "clab-topo-file": "/root/wcni-kind/LabasCode/netenv/4-adv-netwotk/36-TCP-3way-handshake/5-tcp-server-SYN_RECV/clab.yaml",
         "containerlab": "tcp-syn-recv"
       }
     }
@@ -102,13 +102,13 @@
       "a": {
         "node": "gw1",
         "interface": "eth1",
-        "mac": "aa:c1:ab:b3:cc:59",
+        "mac": "aa:c1:ab:34:40:f7",
         "peer": "z"
       },
       "z": {
         "node": "server1",
         "interface": "net0",
-        "mac": "aa:c1:ab:20:d5:46",
+        "mac": "aa:c1:ab:fe:eb:d5",
         "peer": "a"
       }
     },
@@ -116,13 +116,13 @@
       "a": {
         "node": "gw1",
         "interface": "eth2",
-        "mac": "aa:c1:ab:87:39:3d",
+        "mac": "aa:c1:ab:74:b6:fb",
         "peer": "z"
       },
       "z": {
         "node": "server2",
         "interface": "net0",
-        "mac": "aa:c1:ab:2d:35:c8",
+        "mac": "aa:c1:ab:5b:d4:2f",
         "peer": "a"
       }
     }
