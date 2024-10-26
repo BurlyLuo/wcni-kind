@@ -71,6 +71,7 @@ topology:
       - ip addr add 10.1.5.5/24 dev net0
       - ip route replace default via 10.1.5.1
       - sh -c 'echo "10.1.5.100 www.wluo.com" >> /etc/hosts'
+      # curl www.wluo.com:88
 
   links:
     - endpoints: ["nginx1:net0", "brl4l7:net1"]

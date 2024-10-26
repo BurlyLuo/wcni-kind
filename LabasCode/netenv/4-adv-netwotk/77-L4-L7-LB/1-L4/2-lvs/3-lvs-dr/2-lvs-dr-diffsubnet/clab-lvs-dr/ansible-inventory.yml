@@ -7,14 +7,14 @@ all:
     linux:
       hosts:
         clab-lvs-dr-client:
-          ansible_host: 172.20.20.7
-        clab-lvs-dr-dr-rs1:
           ansible_host: 172.20.20.2
-        clab-lvs-dr-dr-rs2:
-          ansible_host: 172.20.20.5
-        clab-lvs-dr-dr-rs3:
-          ansible_host: 172.20.20.3
-        clab-lvs-dr-lvs-dr-lb:
+        clab-lvs-dr-dr-rs1:
           ansible_host: 172.20.20.4
-        clab-lvs-dr-router:
+        clab-lvs-dr-dr-rs2:
+          ansible_host: 172.20.20.7
+        clab-lvs-dr-dr-rs3:
+          ansible_host: 172.20.20.5
+        clab-lvs-dr-lvs-dr-lb:
           ansible_host: 172.20.20.6
+        clab-lvs-dr-router:
+          ansible_host: 172.20.20.3
