@@ -24,7 +24,7 @@ topology:
     # 10.1.5.1-eth1 10.1.8.1/24-eth2
     router:
       kind: linux
-      image: 192.168.2.100:5000/vyos/vyos:1.4.7
+      image: 192.168.2.100:5000/vyos/vyos:1.4.9
       cmd: /sbin/init
       binds:
         - /lib/modules:/lib/modules
@@ -33,7 +33,7 @@ topology:
     # 10.1.8.253/24-eth1
     lvs-dr-lb1:
       kind: linux
-      image: 192.168.2.100:5000/vyos/vyos:1.4.7
+      image: 192.168.2.100:5000/vyos/vyos:1.4.9
       cmd: /sbin/init
       exec:
         - >
@@ -49,7 +49,7 @@ topology:
     lvs-dr-lb2:
       kind: linux
       cmd: /sbin/init
-      image: 192.168.2.100:5000/vyos/vyos:1.4.7
+      image: 192.168.2.100:5000/vyos/vyos:1.4.9
       exec:
         - >
           bash -c '
