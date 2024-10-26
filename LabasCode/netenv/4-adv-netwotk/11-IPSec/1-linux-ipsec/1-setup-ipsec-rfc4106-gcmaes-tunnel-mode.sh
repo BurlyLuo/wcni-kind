@@ -35,7 +35,9 @@ topology:
       - ip xfrm policy add src 10.244.3.10/24 dst 10.244.1.10/24 dir fwd tmpl src 10.1.9.10 dst 10.1.5.10 proto esp reqid 0xfe51d978 mode tunnel
       - ip xfrm policy add src 10.244.3.10/24 dst 10.244.1.10/24 dir in  tmpl src 10.1.9.10 dst 10.1.5.10 proto esp reqid 0xfe51d978 mode tunnel
       - iptables -t nat -A POSTROUTING -s 10.1.0.0/16 -o eth0 -j MASQUERADE
-
+     
+      binds:
+        - ./ipsecdump.sh:/ipsecdump.sh
 
 
     ipsec2:
@@ -62,6 +64,8 @@ topology:
       - ip xfrm policy add src 10.244.3.10/24 dst 10.244.2.10/24 dir in  tmpl src 10.1.9.10 dst 10.1.8.10 proto esp reqid 0xfe51d979 mode tunnel
       - iptables -t nat -A POSTROUTING -s 10.1.0.0/16 -o eth0 -j MASQUERADE
 
+      binds:
+        - ./ipsecdump.sh:/ipsecdump.sh
 
 
     ipsec3:
@@ -88,6 +92,8 @@ topology:
       - ip xfrm policy add src 10.244.2.10/24 dst 10.244.3.10/24 dir in  tmpl src 10.1.8.10 dst 10.1.9.10 proto esp reqid 0xfe51d979 mode tunnel
       - iptables -t nat -A POSTROUTING -s 10.1.0.0/16 -o eth0 -j MASQUERADE
 
+      binds:
+        - ./ipsecdump.sh:/ipsecdump.sh
 
 
     server1:
