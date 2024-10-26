@@ -37,6 +37,7 @@ topology:
     lvs-dr-lb:
       kind: linux
       image: 192.168.2.100:5000/xcni
+      # tcpdump -pne -i net1 <> {Request who-has 10.1.9.254 tell 10.1.9.1,Reply 10.1.9.254 is-at aa:c1:ab:0e:60:96. [All other real-dr-rsx ignore ARP request]}
       exec:
         - >
           bash -c '
