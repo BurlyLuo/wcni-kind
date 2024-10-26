@@ -3,11 +3,11 @@ set -v
 
 # topo:    
 #        keepalived1+haproxy1           nginx1
-#          ---10.1.5.99/24-------------10.1.5.80---web1(nginx)
+#          ---10.1.5.99/24-------------10.1.5.80:80---web1:80(nettool-nginx)
 #          |                         /
-# client---| keepalived+haproxy 10.1.5.100/24  
+# client---| keepalived+haproxy 10.1.5.100:88/24  
 #          |                         \
-#          ---10.1.5.98/24-------------10.1.5.90---web2(nginx)
+#          ---10.1.5.98/24-------------10.1.5.90:80---web2:80(nettool-nginx)
 #        keepalived2+jhaproxy2          nginx2
 
 { ip l s brl4l7 down && brctl delbr brl4l7; } > /dev/null 2>&1
@@ -87,6 +87,7 @@ topology:
       - ip addr add 10.1.5.5/24 dev net0
       - ip route replace default via 10.1.5.1
       - sh -c 'echo "10.1.5.100 www.wluo.com" >> /etc/hosts'
+      # curl www.wluo.com:88
 
   links:
     - endpoints: ["nginx1:net0", "brl4l7:net1"]
