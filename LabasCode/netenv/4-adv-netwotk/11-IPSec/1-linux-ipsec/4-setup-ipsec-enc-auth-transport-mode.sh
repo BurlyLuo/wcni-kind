@@ -31,6 +31,8 @@ topology:
 
       #- ipsecdump -i eth2 -m transport -t 5000s
 
+      binds:
+        - ./ipsecdump.sh:/ipsecdump.sh
 
     ipsec2:
       kind: linux
@@ -49,6 +51,9 @@ topology:
       - iptables -t nat -A POSTROUTING -s 10.1.0.0/16 -o eth0 -j MASQUERADE
       
       #- ipsecdump -i eth2 -m transport -t 5000s
+
+      binds:
+        - ./ipsecdump.sh:/ipsecdump.sh
 
   links:
     - endpoints: ["ipsec1:eth2", "gwx:net1"]
