@@ -38,6 +38,8 @@ topology:
 
       - iptables -t nat -A POSTROUTING -s 10.1.0.0/16 -o eth0 -j MASQUERADE
 
+      binds:
+        - ./ipsecdump.sh:/ipsecdump.sh
 
     ipsec2:
       kind: linux
@@ -64,6 +66,8 @@ topology:
 
       - iptables -t nat -A POSTROUTING -s 10.1.0.0/16 -o eth0 -j MASQUERADE
 
+      binds:
+        - ./ipsecdump.sh:/ipsecdump.sh
 
     ipsec3:
       kind: linux
@@ -91,6 +95,8 @@ topology:
 
       - iptables -t nat -A POSTROUTING -s 10.1.0.0/16 -o eth0 -j MASQUERADE
 
+      binds:
+        - ./ipsecdump.sh:/ipsecdump.sh
 
     server1:
       kind: linux
