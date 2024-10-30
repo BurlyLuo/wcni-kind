@@ -1,7 +1,7 @@
 #!/bin/bash
 set -v
 cat <<EOF>clab.yaml | clab deploy -t clab.yaml -
-name: ipsec-tunnel-mode-aes-gmac
+name: ipsec-tunnel-mode-aes-gcm
 topology:
   nodes:
     gwx:
