@@ -1,3 +1,6 @@
+#!/bin/bash
+set -v
+cat <<EOF>clab.yaml | clab deploy -t clab.yaml -
 name: ipsec-transport-mode-gmac
 topology:
   nodes:
@@ -54,3 +57,4 @@ topology:
     - endpoints: ["ipsec1:eth2", "gwx:net1"]
     - endpoints: ["ipsec2:eth2", "gwx:net2"]
     
+EOF
