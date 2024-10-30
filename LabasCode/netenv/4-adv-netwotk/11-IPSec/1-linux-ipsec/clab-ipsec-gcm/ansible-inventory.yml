@@ -1,0 +1,18 @@
+all:
+  children:
+    linux:
+      hosts:
+        clab-ipsec-gcm-gwx:
+          ansible_host: 172.20.20.5
+        clab-ipsec-gcm-ipsec1:
+          ansible_host: 172.20.20.7
+        clab-ipsec-gcm-ipsec2:
+          ansible_host: 172.20.20.6
+        clab-ipsec-gcm-ipsec3:
+          ansible_host: 172.20.20.3
+        clab-ipsec-gcm-server1:
+          ansible_host: 172.20.20.4
+        clab-ipsec-gcm-server2:
+          ansible_host: 172.20.20.2
+        clab-ipsec-gcm-server3:
+          ansible_host: 172.20.20.8
