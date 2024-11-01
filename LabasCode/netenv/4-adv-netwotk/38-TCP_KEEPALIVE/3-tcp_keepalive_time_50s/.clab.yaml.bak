@@ -11,8 +11,8 @@ topology:
       exec:
       - ip a a 10.1.5.1/24 dev eth1
       - ip a a 10.1.8.1/24 dev eth2
-      - iptables -A FORWARD -s 10.1.8.10/32 -d 10.1.5.10/32 -p tcp -m tcp --tcp-flags SYN,ACK SYN,ACK -j ACCEPT
-      - iptables -A FORWARD -s 10.1.8.10 -d 10.1.5.10 -p tcp --tcp-flags ACK ACK -j DROP
+      #- iptables -A FORWARD -s 10.1.8.10/32 -d 10.1.5.10/32 -p tcp -m tcp --tcp-flags SYN,ACK SYN,ACK -j ACCEPT
+      #- iptables -A FORWARD -s 10.1.8.10 -d 10.1.5.10 -p tcp --tcp-flags ACK ACK -j DROP
 
       env:
         TZ: Asia/Shanghai
