@@ -10,21 +10,21 @@ topology:
   nodes:
     gw1:
       kind: linux
-      image: 192.168.2.100:5000/xcni
+      image: 192.168.2.100:5000/xcni-http-keepalive-500s
       exec:
       - ip a a 10.1.5.1/24 dev eth1
       - ip a a 10.1.8.1/24 dev eth2
 
     server1:
       kind: linux
-      image: 192.168.2.100:5000/xcni
+      image: 192.168.2.100:5000/xcni-http-keepalive-500s
       exec:
       - ip addr add 10.1.5.10/24 dev net0
       - ip r r default via 10.1.5.1 dev net0
 
     server2:
       kind: linux
-      image: 192.168.2.100:5000/xcni
+      image: 192.168.2.100:5000/xcni-http-keepalive-500s
       exec:
       - ip addr add 10.1.8.10/24 dev net0
       - ip r r default via 10.1.8.1 dev net0
