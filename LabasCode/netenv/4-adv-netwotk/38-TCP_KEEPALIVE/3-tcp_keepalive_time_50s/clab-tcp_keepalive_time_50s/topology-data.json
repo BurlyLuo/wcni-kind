@@ -6,10 +6,9 @@
       "prefix": "clab",
       "mgmt": {
         "network": "clab",
-        "bridge": "br-ea8eebc8cba5",
+        "bridge": "br-5273cd0115a6",
         "ipv4-subnet": "172.20.20.0/24",
         "ipv4-gw": "172.20.20.1",
-        "ipv6-gw": "fe80::42:7cff:fe86:be6e",
         "mtu": "1500",
         "external-access": true
       }
@@ -22,34 +21,7 @@
       "longname": "clab-tcp_keepalive_time_50s-gw1",
       "fqdn": "gw1.tcp_keepalive_time_50s.io",
       "group": "",
-      "labdir": "/root/wcni-kind/LabasCode/netenv/4-adv-netwotk/45-TCP-Abnormal-with-Wireshark/00-tcp-http-long-short-conn/3-tcp_keepalive_time_50s/clab-tcp_keepalive_time_50s/gw1",
-      "kind": "linux",
-      "image": "192.168.2.100:5000/xcni_http_keepalive_timeout_500s",
-      "mgmt-net": "",
-      "mgmt-intf": "",
-      "mgmt-ipv4-address": "172.20.20.2",
-      "mgmt-ipv4-prefix-length": 24,
-      "mgmt-ipv6-address": "",
-      "mgmt-ipv6-prefix-length": 0,
-      "mac-address": "",
-      "labels": {
-        "clab-mgmt-net-bridge": "br-ea8eebc8cba5",
-        "clab-node-group": "",
-        "clab-node-kind": "linux",
-        "clab-node-lab-dir": "/root/wcni-kind/LabasCode/netenv/4-adv-netwotk/45-TCP-Abnormal-with-Wireshark/00-tcp-http-long-short-conn/3-tcp_keepalive_time_50s/clab-tcp_keepalive_time_50s/gw1",
-        "clab-node-name": "gw1",
-        "clab-node-type": "",
-        "clab-topo-file": "/root/wcni-kind/LabasCode/netenv/4-adv-netwotk/45-TCP-Abnormal-with-Wireshark/00-tcp-http-long-short-conn/3-tcp_keepalive_time_50s/clab.yaml",
-        "containerlab": "tcp_keepalive_time_50s"
-      }
-    },
-    "server1": {
-      "index": "1",
-      "shortname": "server1",
-      "longname": "clab-tcp_keepalive_time_50s-server1",
-      "fqdn": "server1.tcp_keepalive_time_50s.io",
-      "group": "",
-      "labdir": "/root/wcni-kind/LabasCode/netenv/4-adv-netwotk/45-TCP-Abnormal-with-Wireshark/00-tcp-http-long-short-conn/3-tcp_keepalive_time_50s/clab-tcp_keepalive_time_50s/server1",
+      "labdir": "/root/wcni-kind/LabasCode/netenv/4-adv-netwotk/38-TCP_KEEPALIVE/3-tcp_keepalive_time_50s/clab-tcp_keepalive_time_50s/gw1",
       "kind": "linux",
       "image": "192.168.2.100:5000/xcni_http_keepalive_timeout_500s",
       "mgmt-net": "",
@@ -60,23 +32,23 @@
       "mgmt-ipv6-prefix-length": 0,
       "mac-address": "",
       "labels": {
-        "clab-mgmt-net-bridge": "br-ea8eebc8cba5",
+        "clab-mgmt-net-bridge": "br-5273cd0115a6",
         "clab-node-group": "",
         "clab-node-kind": "linux",
-        "clab-node-lab-dir": "/root/wcni-kind/LabasCode/netenv/4-adv-netwotk/45-TCP-Abnormal-with-Wireshark/00-tcp-http-long-short-conn/3-tcp_keepalive_time_50s/clab-tcp_keepalive_time_50s/server1",
-        "clab-node-name": "server1",
+        "clab-node-lab-dir": "/root/wcni-kind/LabasCode/netenv/4-adv-netwotk/38-TCP_KEEPALIVE/3-tcp_keepalive_time_50s/clab-tcp_keepalive_time_50s/gw1",
+        "clab-node-name": "gw1",
         "clab-node-type": "",
-        "clab-topo-file": "/root/wcni-kind/LabasCode/netenv/4-adv-netwotk/45-TCP-Abnormal-with-Wireshark/00-tcp-http-long-short-conn/3-tcp_keepalive_time_50s/clab.yaml",
+        "clab-topo-file": "/root/wcni-kind/LabasCode/netenv/4-adv-netwotk/38-TCP_KEEPALIVE/3-tcp_keepalive_time_50s/clab.yaml",
         "containerlab": "tcp_keepalive_time_50s"
       }
     },
-    "server2": {
-      "index": "2",
-      "shortname": "server2",
-      "longname": "clab-tcp_keepalive_time_50s-server2",
-      "fqdn": "server2.tcp_keepalive_time_50s.io",
+    "server1": {
+      "index": "1",
+      "shortname": "server1",
+      "longname": "clab-tcp_keepalive_time_50s-server1",
+      "fqdn": "server1.tcp_keepalive_time_50s.io",
       "group": "",
-      "labdir": "/root/wcni-kind/LabasCode/netenv/4-adv-netwotk/45-TCP-Abnormal-with-Wireshark/00-tcp-http-long-short-conn/3-tcp_keepalive_time_50s/clab-tcp_keepalive_time_50s/server2",
+      "labdir": "/root/wcni-kind/LabasCode/netenv/4-adv-netwotk/38-TCP_KEEPALIVE/3-tcp_keepalive_time_50s/clab-tcp_keepalive_time_50s/server1",
       "kind": "linux",
       "image": "192.168.2.100:5000/xcni_http_keepalive_timeout_500s",
       "mgmt-net": "",
@@ -87,13 +59,40 @@
       "mgmt-ipv6-prefix-length": 0,
       "mac-address": "",
       "labels": {
-        "clab-mgmt-net-bridge": "br-ea8eebc8cba5",
+        "clab-mgmt-net-bridge": "br-5273cd0115a6",
         "clab-node-group": "",
         "clab-node-kind": "linux",
-        "clab-node-lab-dir": "/root/wcni-kind/LabasCode/netenv/4-adv-netwotk/45-TCP-Abnormal-with-Wireshark/00-tcp-http-long-short-conn/3-tcp_keepalive_time_50s/clab-tcp_keepalive_time_50s/server2",
+        "clab-node-lab-dir": "/root/wcni-kind/LabasCode/netenv/4-adv-netwotk/38-TCP_KEEPALIVE/3-tcp_keepalive_time_50s/clab-tcp_keepalive_time_50s/server1",
+        "clab-node-name": "server1",
+        "clab-node-type": "",
+        "clab-topo-file": "/root/wcni-kind/LabasCode/netenv/4-adv-netwotk/38-TCP_KEEPALIVE/3-tcp_keepalive_time_50s/clab.yaml",
+        "containerlab": "tcp_keepalive_time_50s"
+      }
+    },
+    "server2": {
+      "index": "2",
+      "shortname": "server2",
+      "longname": "clab-tcp_keepalive_time_50s-server2",
+      "fqdn": "server2.tcp_keepalive_time_50s.io",
+      "group": "",
+      "labdir": "/root/wcni-kind/LabasCode/netenv/4-adv-netwotk/38-TCP_KEEPALIVE/3-tcp_keepalive_time_50s/clab-tcp_keepalive_time_50s/server2",
+      "kind": "linux",
+      "image": "192.168.2.100:5000/xcni_http_keepalive_timeout_500s",
+      "mgmt-net": "",
+      "mgmt-intf": "",
+      "mgmt-ipv4-address": "172.20.20.2",
+      "mgmt-ipv4-prefix-length": 24,
+      "mgmt-ipv6-address": "",
+      "mgmt-ipv6-prefix-length": 0,
+      "mac-address": "",
+      "labels": {
+        "clab-mgmt-net-bridge": "br-5273cd0115a6",
+        "clab-node-group": "",
+        "clab-node-kind": "linux",
+        "clab-node-lab-dir": "/root/wcni-kind/LabasCode/netenv/4-adv-netwotk/38-TCP_KEEPALIVE/3-tcp_keepalive_time_50s/clab-tcp_keepalive_time_50s/server2",
         "clab-node-name": "server2",
         "clab-node-type": "",
-        "clab-topo-file": "/root/wcni-kind/LabasCode/netenv/4-adv-netwotk/45-TCP-Abnormal-with-Wireshark/00-tcp-http-long-short-conn/3-tcp_keepalive_time_50s/clab.yaml",
+        "clab-topo-file": "/root/wcni-kind/LabasCode/netenv/4-adv-netwotk/38-TCP_KEEPALIVE/3-tcp_keepalive_time_50s/clab.yaml",
         "containerlab": "tcp_keepalive_time_50s"
       }
     }
@@ -103,13 +102,13 @@
       "a": {
         "node": "gw1",
         "interface": "eth1",
-        "mac": "aa:c1:ab:86:42:09",
+        "mac": "aa:c1:ab:bb:a2:dd",
         "peer": "z"
       },
       "z": {
         "node": "server1",
         "interface": "net0",
-        "mac": "aa:c1:ab:ab:0f:c4",
+        "mac": "aa:c1:ab:03:cc:5c",
         "peer": "a"
       }
     },
@@ -117,13 +116,13 @@
       "a": {
         "node": "gw1",
         "interface": "eth2",
-        "mac": "aa:c1:ab:9b:55:06",
+        "mac": "aa:c1:ab:17:58:cd",
         "peer": "z"
       },
       "z": {
         "node": "server2",
         "interface": "net0",
-        "mac": "aa:c1:ab:24:b5:13",
+        "mac": "aa:c1:ab:aa:f9:ea",
         "peer": "a"
       }
     }
