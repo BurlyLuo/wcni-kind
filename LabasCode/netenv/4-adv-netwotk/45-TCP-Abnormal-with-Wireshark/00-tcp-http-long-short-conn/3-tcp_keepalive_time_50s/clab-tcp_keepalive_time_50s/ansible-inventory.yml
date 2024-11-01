@@ -1,0 +1,10 @@
+all:
+  children:
+    linux:
+      hosts:
+        clab-tcp_keepalive_time_50s-gw1:
+          ansible_host: 172.20.20.2
+        clab-tcp_keepalive_time_50s-server1:
+          ansible_host: 172.20.20.3
+        clab-tcp_keepalive_time_50s-server2:
+          ansible_host: 172.20.20.4
