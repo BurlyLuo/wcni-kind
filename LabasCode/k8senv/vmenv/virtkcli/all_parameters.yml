@@ -114,6 +114,7 @@ myvm:
   -  sed -i "s/123/124/g" /etc/ssh/sshd_config*
   -  echo 'PermitRootLogin yes' >> /etc/ssh/sshd_config
   -  echo "root:hive" | sudo chpasswd
+  -  echo "export 'TZ=Asia/Shanghai'" > ~/.bashrc
   cmdline: "ip=192.168.1.2 myparam=xxx"
   cpuflags:
   - acpi
