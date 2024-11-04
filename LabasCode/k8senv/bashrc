@@ -176,9 +176,6 @@ alias dkc='set -f;{ kubectl config delete-cluster $1 && kubectl config delete-co
 # 4. restart multipass service
 alias mmrs="systemctl stop snap.multipass.multipassd.service && systemctl start snap.multipass.multipassd.service && systemctl status snap.multipass.multipassd.service"
 
-# 1. kvm
-alias ks="virsh list --all"
-
 #key reference
 alias key="cat /root/wcni-kind/LabasCode/weiluo/env.x"
 
@@ -203,6 +200,7 @@ alias delk3s="sudo /root/wcni-kind/LabasCode/k8senv/vmenv/k3senv/k3s-uninstall.s
 #kcli
 alias vm="cd /root/wcni-kind/LabasCode/k8senv/vmenv"
 alias kclissh='ssh-keygen -f "/root/.ssh/known_hosts" -R "192.168.2.96" > /dev/null 2>&1'
+alias vms="ssh 192.168.2.96"
 
 # prepnode:
 modprobe rdma_rxe
