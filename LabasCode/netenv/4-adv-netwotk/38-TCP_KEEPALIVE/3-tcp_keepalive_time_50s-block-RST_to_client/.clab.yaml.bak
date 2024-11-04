@@ -1,6 +1,3 @@
-#!/bin/bash
-set -v
-cat <<EOF>clab.yaml | clab deploy -t clab.yaml -
 name: tcp_keepalive_time_50s
 mgmt:
   ipv6-subnet: ""
@@ -54,6 +51,4 @@ topology:
   links:
     - endpoints: ["gw1:eth1", "server1:net0"]
     - endpoints: ["gw1:eth2", "server2:net0"]
-
-EOF
 
