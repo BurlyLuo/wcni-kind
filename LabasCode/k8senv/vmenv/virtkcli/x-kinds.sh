@@ -2,6 +2,34 @@
 # cat /var/lib/cloud/instances/vm/scripts/runcmd
 # dnf --enablerepo=devel install libpcap-devel libnet-devel
 
+# [root@rowan> images]# cp -r openEuler2403 openEuler2403.bak
+[root@rowan> images]# virt-customize -a /var/lib/libvirt/images/openEuler2403 --edit '/etc/default/grub:s/GRUB_CMDLINE_LINUX=".*"/GRUB_CMDLINE_LINUX="console=tty1 console=ttyS0 rootfstype=ext4 quiet oops=panic softlockup_panic=1 nmi_watchdog=1 rd.shell=0 selinux=0 crashkernel=256M panic=3 net.ifnames=0"/g'
+[   0.0] Examining the guest ...
+[   3.7] Setting a random seed
+[   3.8] Editing: /etc/default/grub
+[   3.9] Finishing off
+[root@rowan> images]# 
+[root@rowan> images]# virt-cat -a /var/lib/libvirt/images/openEuler2403 /etc/default/grub
+GRUB_TIMEOUT=5
+GRUB_DEFAULT=saved
+GRUB_DISABLE_SUBMENU=true
+GRUB_TERMINAL_OUTPUT="console"
+GRUB_CMDLINE_LINUX="console=tty1 console=ttyS0 rootfstype=ext4 quiet oops=panic softlockup_panic=1 nmi_watchdog=1 rd.shell=0 selinux=0 crashkernel=256M panic=3 net.ifnames=0"
+GRUB_DISABLE_RECOVERY="true"
+GRUB_DISABLE_OS_PROBER="true"
+[root@rowan> images]# virt-customize -a /var/lib/libvirt/images/openEuler2403 --run-command 'grub2-mkconfig -o /boot/grub2/grub.cfg'
+[   0.0] Examining the guest ...
+[   3.5] Setting a random seed
+[   3.6] Running: grub2-mkconfig -o /boot/grub2/grub.cfg
+[   4.0] Finishing off
+[root@rowan> images]# virt-cat -a /var/lib/libvirt/images/openEuler2403 /boot/grub2/grub.cfg | grep 'net.ifnames=0'
+        linux   /vmlinuz-6.6.0-28.0.0.34.oe2403.x86_64 root=UUID=1f4c3ba2-226d-4365-8d1f-30d80117c355 console=tty1 console=ttyS0 rootfstype=ext4 quiet oops=panic softlockup_panic=1 nmi_watchdog=1 rd.shell=0 selinux=0 crashkernel=256M panic=3 net.ifnames=0 
+[root@rowan> images]# 
+
+
+
+
+
 # 1. centos7
 kcli create vm -i       centos7 -P memory=4096 -P disks=[50] -P rootpassword=hive -P guestagent=False -P nets="[{'name':'brnet','ip':'192.168.2.96','netmask':'24','gateway':'192.168.2.1'},{'name':'vppdpdk5','noconf':'true'},{'name':'vppdpdk8','noconf':'true'},{'name':'vppdpdk9','noconf':'true'}]" -P cpupinning=['{"vcpus": "0", "hostcpus": "0"}','{"vcpus": "1", "hostcpus": "1"}','{"vcpus": "2", "hostcpus": "2"}','{"vcpus": 3, "hostcpus": 3}'] -P numcpus=4 -P cmds='[rm -rf /etc/yum.repos.d/* && curl -o /etc/yum.repos.d/CentOS-Base.repo https://mirrors.aliyun.com/repo/Centos-7.repo && yum -y install net-tools pciutils wget lrzsz && wget http://192.168.2.100/kvm/tools/lseth -P /usr/bin/ && chmod +x /usr/bin/lseth ; echo "TZ=Asia/Shanghai;export TZ" >> ~/.bashrc]' vm
 
