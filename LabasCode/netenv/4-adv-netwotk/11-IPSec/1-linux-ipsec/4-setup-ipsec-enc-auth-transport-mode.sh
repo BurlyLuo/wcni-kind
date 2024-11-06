@@ -25,7 +25,7 @@ topology:
 
       - ip xfrm policy add src 10.1.5.10/24 dst 10.1.8.10/24 proto tcp sport 81 dport 80 dir out tmpl src 0.0.0.0 dst 0.0.0.0 proto esp reqid 0xfe51d977 mode transport
       - ip xfrm policy add src 10.1.5.10/24 dst 10.1.8.10/24 proto tcp sport 81 dport 80 dir fwd tmpl src 0.0.0.0 dst 0.0.0.0 proto esp reqid 0xfe51d977 mode transport
-      - ip xfrm policy add src 10.1.5.10/24 dst 10.1.8.10/24 proto tcp sport 81 dport 80 dir in  tmpl src 0.0.0.0 dst 0.0.0.0 proto esp reqid 0xfe51d977 mode transport
+      - ip xfrm policy add src 10.1.8.10/24 dst 10.1.5.10/24 proto tcp sport 81 dport 80 dir in  tmpl src 0.0.0.0 dst 0.0.0.0 proto esp reqid 0xfe51d977 mode transport
 
       - iptables -t nat -A POSTROUTING -s 10.1.0.0/16 -o eth0 -j MASQUERADE
 
@@ -46,7 +46,7 @@ topology:
 
       - ip xfrm policy add src 10.1.8.10/24 dst 10.1.5.10/24 proto tcp sport 80 dport 81 dir out tmpl src 0.0.0.0 dst 0.0.0.0 proto esp reqid 0xfe51d977 mode transport
       - ip xfrm policy add src 10.1.8.10/24 dst 10.1.5.10/24 proto tcp sport 80 dport 81 dir fwd tmpl src 0.0.0.0 dst 0.0.0.0 proto esp reqid 0xfe51d977 mode transport
-      - ip xfrm policy add src 10.1.8.10/24 dst 10.1.5.10/24 proto tcp sport 80 dport 81 dir in  tmpl src 0.0.0.0 dst 0.0.0.0 proto esp reqid 0xfe51d977 mode transport
+      - ip xfrm policy add src 10.1.5.10/24 dst 10.1.8.10/24 proto tcp sport 80 dport 81 dir in  tmpl src 0.0.0.0 dst 0.0.0.0 proto esp reqid 0xfe51d977 mode transport
 
       - iptables -t nat -A POSTROUTING -s 10.1.0.0/16 -o eth0 -j MASQUERADE
       
