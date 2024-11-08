@@ -20,7 +20,7 @@ topology:
 
       env:
         TZ: Asia/Shanghai
-
+    # ./client[ip and port already defined at script]
     server1:
       kind: linux
       image: 192.168.2.100:5000/xcni_http_keepalive_timeout_500s
@@ -42,9 +42,11 @@ topology:
       exec:
       - ip addr add 10.1.8.10/24 dev net0
       - ip r a 10.1.5.0/24 via 10.1.8.1 dev net0
+      - bash -c "/server &"
       - >
         bash -c '
         bash -c "sysctl net.ipv4.tcp_keepalive_time=50" && bash -c "sysctl net.ipv4.tcp_keepalive_probes=2" && bash -c "sysctl net.ipv4.tcp_keepalive_intvl=6"'
+
       binds:
         - ./server:/server
 
