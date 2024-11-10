@@ -38,9 +38,12 @@ spec:
     - etcd0=http://etcd0:2380,etcd1=http://etcd1:2380,etcd2=http://etcd2:2380
     - --initial-cluster-state
     - new
-    image: 192.168.2.100:5000/alpine-etcd:3.5.15
+    - --log-level
+    - debug
+    #image: 192.168.2.100:5000/alpine-etcd:3.5.15
+    image: 192.168.2.100:5000/centos8-etcd:3.5.15
     name: etcd0
-    imagePullPolicy: IfNotPresent
+    imagePullPolicy: Always
     ports:
     - containerPort: 2379
       name: client
@@ -59,6 +62,7 @@ metadata:
     etcd_node: etcd0
   name: etcd0
 spec:
+  clusterIP: None
   ports:
   - name: client
     port: 2379
@@ -98,8 +102,10 @@ spec:
     - etcd0=http://etcd0:2380,etcd1=http://etcd1:2380,etcd2=http://etcd2:2380
     - --initial-cluster-state
     - new
-    image: 192.168.2.100:5000/alpine-etcd:3.5.15
-    imagePullPolicy: IfNotPresent
+    - --log-level
+    - debug
+    image: 192.168.2.100:5000/centos8-etcd:3.5.15
+    imagePullPolicy: Always
     name: etcd1
     ports:
     - containerPort: 2379
@@ -119,6 +125,7 @@ metadata:
     etcd_node: etcd1
   name: etcd1
 spec:
+  clusterIP: None
   ports:
   - name: client
     port: 2379
@@ -158,8 +165,10 @@ spec:
     - etcd0=http://etcd0:2380,etcd1=http://etcd1:2380,etcd2=http://etcd2:2380
     - --initial-cluster-state
     - new
-    image: 192.168.2.100:5000/alpine-etcd:3.5.15
-    imagePullPolicy: IfNotPresent
+    - --log-level
+    - debug
+    image: 192.168.2.100:5000/centos8-etcd:3.5.15
+    imagePullPolicy: Always
     name: etcd2
     ports:
     - containerPort: 2379
@@ -179,6 +188,7 @@ metadata:
     etcd_node: etcd2
   name: etcd2
 spec:
+  clusterIP: None
   ports:
   - name: client
     port: 2379
