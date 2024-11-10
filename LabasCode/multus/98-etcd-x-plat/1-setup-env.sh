@@ -7,7 +7,7 @@ cat <<EOF | kind create cluster --name=platx --image=kindest/node:v1.27.3 --conf
 kind: Cluster
 apiVersion: kind.x-k8s.io/v1alpha4
 networking:
-        disableDefaultCNI: true
+        disableDefaultCNI: false
 nodes:
         - role: control-plane
         - role: worker
@@ -25,7 +25,7 @@ kubectl taint nodes $(kubectl get nodes -o name | grep control-plane) node-role.
 kubectl get nodes -o wide
 
 # 3. install CNI[Calico v3.23.2]
-kubectl apply -f ./calico.yaml
+# kubectl apply -f ./calico.yaml
 
 # 4. wait all pods ready
 kubectl wait --timeout=100s --for=condition=Ready=true pods --all -A
