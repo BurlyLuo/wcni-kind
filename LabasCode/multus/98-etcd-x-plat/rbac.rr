@@ -7,3 +7,30 @@ POD_NAME=etcd-0
 # list all pods:
 curl -H "Authorization: Bearer $TOKEN" -H "Content-Type: application/json" https://kubernetes.default.svc/api/v1/namespaces/$NAMESPACE/pods
 
+
+
+
+
+# without necessary permission: [will get 4xx]
+etcd0# cd /var/run/secrets/kubernetes.io/serviceaccount
+etcd0# export CURL_CA_BUNDLE=/var/run/secrets/kubernetes.io/serviceaccount/ca.crt
+etcd0# TOKEN=$(cat /var/run/secrets/kubernetes.io/serviceaccount/token)
+etcd0# NAMESPACE=$(cat /var/run/secrets/kubernetes.io/serviceaccount/namespace)
+POD_NAME=asbc-mpvnf-0
+etcd0# POD_NAME=asbc-mpvnf-0
+etcd0#  
+etcd0# # list all pods:
+etcd0# curl -H "Authorization: Bearer $TOKEN" -H "Content-Type: application/json" https://kubernetes.default.svc/api/v1/namespaces/$NAMESPACE/pods
+{
+  "kind": "Status",
+  "apiVersion": "v1",
+  "metadata": {},
+  "status": "Failure",
+  "message": "pods is forbidden: User \"system:serviceaccount:default:default\" cannot list resource \"pods\" in API group \"\" in the namespace \"default\"",
+  "reason": "Forbidden",
+  "details": {
+    "kind": "pods"
+  },
+  "code": 403
+}etcd0# 
+
