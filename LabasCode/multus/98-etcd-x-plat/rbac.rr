@@ -16,8 +16,8 @@ etcd0# cd /var/run/secrets/kubernetes.io/serviceaccount
 etcd0# export CURL_CA_BUNDLE=/var/run/secrets/kubernetes.io/serviceaccount/ca.crt
 etcd0# TOKEN=$(cat /var/run/secrets/kubernetes.io/serviceaccount/token)
 etcd0# NAMESPACE=$(cat /var/run/secrets/kubernetes.io/serviceaccount/namespace)
-POD_NAME=asbc-mpvnf-0
-etcd0# POD_NAME=asbc-mpvnf-0
+POD_NAME=etcd-1
+etcd0# POD_NAME=etcd-1
 etcd0#  
 etcd0# # list all pods:
 etcd0# curl -H "Authorization: Bearer $TOKEN" -H "Content-Type: application/json" https://kubernetes.default.svc/api/v1/namespaces/$NAMESPACE/pods
