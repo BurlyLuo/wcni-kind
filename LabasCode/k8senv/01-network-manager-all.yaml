@@ -12,6 +12,8 @@ network:
       dhcp4: no
     ens39:
       dhcp4: no
+    ens40:
+      dhcp4: no
     ens160:
       dhcp4: no
     ens192:
