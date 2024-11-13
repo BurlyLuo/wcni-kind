@@ -249,6 +249,9 @@ spec:
                   fieldPath: "metadata.name" # end-range env
             - name: MY_SERVICE_NAME
               value: sm-service # end-range env # end-range env
+            - name: TZ
+              value: "Asia/Shanghai"
+
           image: 192.168.2.100:5000/sm:latest
           imagePullPolicy: Always
           securityContext: {"capabilities":{"add":["DAC_OVERRIDE","CHOWN","KILL","MKNOD","SETGID","SETUID","SETPCAP","SETFCAP","NET_BIND_SERVICE","NET_ADMIN","NET_RAW","IPC_LOCK","IPC_OWNER","SYS_ADMIN","SYS_BOOT","DAC_READ_SEARCH","SYS_PTRACE"]},"privileged":true} # end-if securityContext
