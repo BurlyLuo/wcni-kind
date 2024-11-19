@@ -1,0 +1,85 @@
+[root@wluo kvm]$ cp -r Rocky9.qcow2  Rocky9.qcow2.bak
+[root@wluo rocky]$ virt-customize -a /root/kvm/rocky/Rocky9.qcow2.bak --root-password password:hive
+[   0.0] Examining the guest ...
+virt-customize: warning: mount: mount exited with status 32: mount: 
+/sysroot/boot: wrong fs type, bad option, bad superblock on /dev/sda2, 
+missing codepage or helper program, or other error. (ignored)
+virt-customize: warning: mount: mount: /boot/efi: mount point is not a 
+directory (ignored)
+[  37.1] Setting a random seed
+[  37.1] Setting the machine ID in /etc/machine-id
+[  37.2] Setting passwords
+[  38.6] Finishing off
+[root@wluo rocky]$ 
+virt-install --os-variant list
+osinfo-query os
+# If with permission:
+setfacl -m u:libvirt-qemu:--x /root
+
+[root@wluo kvm]$ qemu-img resize Rocky9.qcow2.bak 50G 
+Image resized.
+
+
+virt-install --name rocky9 --memory 2048  --cpu host-model --vcpus=4 --disk /root/kvm/rocky/Rocky9.qcow2.bak,device=disk,bus=virtio --disk size=50 --os-variant rocky9 --virt-type kvm --graphics none --network=bridge=brnet,model=virtio --network=bridge=vppdpdk5,model=virtio --network=bridge=vppdpdk8,model=virtio --network=bridge=vppdpdk9,model=virtio --import
+
+# virsh console rocky9
+[root@localhost ~]# df -h 
+Filesystem      Size  Used Avail Use% Mounted on
+devtmpfs        4.0M     0  4.0M   0% /dev
+tmpfs           889M     0  889M   0% /dev/shm
+tmpfs           356M  9.6M  346M   3% /run
+/dev/vda5       9.0G 1002M  8.0G  11% /
+/dev/vda2       994M  141M  854M  15% /boot
+/dev/vda1        99M  7.0M   92M   8% /boot/efi
+tmpfs           178M     0  178M   0% /run/user/0
+[root@localhost ~]# lsblk
+NAME   MAJ:MIN RM  SIZE RO TYPE MOUNTPOINTS
+vda    252:0    0   50G  0 disk 
+├─vda1 252:1    0   99M  0 part /boot/efi
+├─vda2 252:2    0 1000M  0 part /boot
+├─vda3 252:3    0    4M  0 part 
+├─vda4 252:4    0    1M  0 part 
+└─vda5 252:5    0  8.9G  0 part /
+vdb    252:16   0   50G  0 disk 
+[root@localhost ~]# growpart /dev/vda 5
+CHANGED: partition=5 start=2265088 old: size=18704384 end=20969471 new: size=102592479 end=104857566
+[root@localhost ~]# lsblk
+NAME   MAJ:MIN RM  SIZE RO TYPE MOUNTPOINTS
+vda    252:0    0   50G  0 disk 
+├─vda1 252:1    0   99M  0 part /boot/efi
+├─vda2 252:2    0 1000M  0 part /boot
+├─vda3 252:3    0    4M  0 part 
+├─vda4 252:4    0    1M  0 part 
+└─vda5 252:5    0 48.9G  0 part /
+vdb    252:16   0   50G  0 disk 
+[root@localhost ~]# df -h
+Filesystem      Size  Used Avail Use% Mounted on
+devtmpfs        4.0M     0  4.0M   0% /dev
+tmpfs           889M     0  889M   0% /dev/shm
+tmpfs           356M  9.6M  346M   3% /run
+/dev/vda5       9.0G 1002M  8.0G  11% /
+/dev/vda2       994M  173M  822M  18% /boot
+/dev/vda1        99M  7.0M   92M   8% /boot/efi
+tmpfs           178M     0  178M   0% /run/user/0
+[root@localhost ~]# xfs_growfs /
+meta-data=/dev/vda5              isize=512    agcount=4, agsize=584512 blks
+         =                       sectsz=512   attr=2, projid32bit=1
+         =                       crc=1        finobt=1, sparse=1, rmapbt=0
+         =                       reflink=1    bigtime=0 inobtcount=0
+data     =                       bsize=4096   blocks=2338048, imaxpct=25
+         =                       sunit=0      swidth=0 blks
+naming   =version 2              bsize=4096   ascii-ci=0, ftype=1
+log      =internal log           bsize=4096   blocks=2560, version=2
+         =                       sectsz=512   sunit=0 blks, lazy-count=1
+realtime =none                   extsz=4096   blocks=0, rtextents=0
+data blocks changed from 2338048 to 12824059
+[root@localhost ~]# df -h 
+Filesystem      Size  Used Avail Use% Mounted on
+devtmpfs        4.0M     0  4.0M   0% /dev
+tmpfs           889M     0  889M   0% /dev/shm
+tmpfs           356M  9.6M  346M   3% /run
+/dev/vda5        49G  1.3G   48G   3% /
+/dev/vda2       994M  173M  822M  18% /boot
+/dev/vda1        99M  7.0M   92M   8% /boot/efi
+tmpfs           178M     0  178M   0% /run/user/0
+[root@localhost ~]# 
