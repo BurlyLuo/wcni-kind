@@ -6,7 +6,7 @@
       "prefix": "clab",
       "mgmt": {
         "network": "clab",
-        "bridge": "br-a113f9cc25f4",
+        "bridge": "br-ed95cdcbc39a",
         "ipv4-subnet": "172.20.20.0/24",
         "ipv4-gw": "172.20.20.1",
         "mtu": "1500",
@@ -32,7 +32,7 @@
       "mgmt-ipv6-prefix-length": 0,
       "mac-address": "",
       "labels": {
-        "clab-mgmt-net-bridge": "br-a113f9cc25f4",
+        "clab-mgmt-net-bridge": "br-ed95cdcbc39a",
         "clab-node-group": "",
         "clab-node-kind": "linux",
         "clab-node-lab-dir": "/root/wcni-kind/LabasCode/netenv/4-adv-netwotk/38-TCP_KEEPALIVE/4-server_side_SO_KEEPALIVE_tcp_keepalive_time_50s-allow-RST_to_client/clab-tcp_keepalive_time_50s_allow_rst/gw1",
@@ -59,7 +59,7 @@
       "mgmt-ipv6-prefix-length": 0,
       "mac-address": "",
       "labels": {
-        "clab-mgmt-net-bridge": "br-a113f9cc25f4",
+        "clab-mgmt-net-bridge": "br-ed95cdcbc39a",
         "clab-node-group": "",
         "clab-node-kind": "linux",
         "clab-node-lab-dir": "/root/wcni-kind/LabasCode/netenv/4-adv-netwotk/38-TCP_KEEPALIVE/4-server_side_SO_KEEPALIVE_tcp_keepalive_time_50s-allow-RST_to_client/clab-tcp_keepalive_time_50s_allow_rst/server1",
@@ -86,7 +86,7 @@
       "mgmt-ipv6-prefix-length": 0,
       "mac-address": "",
       "labels": {
-        "clab-mgmt-net-bridge": "br-a113f9cc25f4",
+        "clab-mgmt-net-bridge": "br-ed95cdcbc39a",
         "clab-node-group": "",
         "clab-node-kind": "linux",
         "clab-node-lab-dir": "/root/wcni-kind/LabasCode/netenv/4-adv-netwotk/38-TCP_KEEPALIVE/4-server_side_SO_KEEPALIVE_tcp_keepalive_time_50s-allow-RST_to_client/clab-tcp_keepalive_time_50s_allow_rst/server2",
@@ -102,13 +102,13 @@
       "a": {
         "node": "gw1",
         "interface": "eth1",
-        "mac": "aa:c1:ab:3f:86:45",
+        "mac": "aa:c1:ab:ff:3d:6a",
         "peer": "z"
       },
       "z": {
         "node": "server1",
         "interface": "net0",
-        "mac": "aa:c1:ab:ed:33:10",
+        "mac": "aa:c1:ab:fe:d0:d6",
         "peer": "a"
       }
     },
@@ -116,13 +116,13 @@
       "a": {
         "node": "gw1",
         "interface": "eth2",
-        "mac": "aa:c1:ab:95:9e:6d",
+        "mac": "aa:c1:ab:40:07:44",
         "peer": "z"
       },
       "z": {
         "node": "server2",
         "interface": "net0",
-        "mac": "aa:c1:ab:e5:08:7f",
+        "mac": "aa:c1:ab:3b:9c:bf",
         "peer": "a"
       }
     }
