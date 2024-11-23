@@ -36,6 +36,8 @@ topology:
       env:
         TZ: Asia/Shanghai
 
+
+    # ss -4npo | grep keep
     server2:
       kind: linux
       image: 192.168.2.100:5000/xcni_http_keepalive_timeout_500s
