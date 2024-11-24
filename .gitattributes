@@ -1,1 +1,1 @@
-LabasCode/*.html linguist-vendored
+*.html linguist-detectable=false
