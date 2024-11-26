@@ -1,0 +1,23 @@
+1. one in vm
+config the vlan interface. like eth0.23 eth0.33 
+
+2. another in host-interface:
+like:
+2.1: vlan host-interface:
+[root@kvm network-scripts]# cat ifcfg-ens2f0.23 
+DEVICE=ens2f0.23
+BOOTPROTO=static
+ONBOOT=yes
+VLAN=yes
+BRIDGE=brvlan23
+
+2.2: bridge brvlan23
+[root@kvm network-scripts]# cat ifcfg-brvlan23 
+TYPE=Bridge
+BOOTPROTO=static
+NAME=brvlan23
+DEVICE=brvlan23
+ONBOOT=yes
+
+virt-install --name wei  --memory 2048 --vcpus 2   --os-variant centos7.0 --virt-type kvm --graphics none --disk /data/images/wei/centos7.qcow2,device=disk,bus=virtio --network bridge=brvlan23,model=virtio --import
+
