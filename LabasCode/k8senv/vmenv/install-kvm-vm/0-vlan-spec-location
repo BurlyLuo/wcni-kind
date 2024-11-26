@@ -3,6 +3,8 @@ config the vlan interface. like eth0.23 eth0.33
 
 2. another in host-interface:
 like:
+2.0: host-interface: ifcfg-ens2f0
+
 2.1: vlan host-interface:
 [root@kvm network-scripts]# cat ifcfg-ens2f0.23 
 DEVICE=ens2f0.23
