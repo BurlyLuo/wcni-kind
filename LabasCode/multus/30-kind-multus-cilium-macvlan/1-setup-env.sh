@@ -83,4 +83,3 @@ kubectl -nkube-system exec -it ds/cilium -- cilium status
 for container in $(docker ps -a --format "table {{.Names}}" | grep cilium-kpr);do docker exec $container ls -al /proc/self/ns/cgroup;done
 mount -l | grep cgroup && docker info | grep "Cgroup Version" | awk '$1=$1'
 
-
