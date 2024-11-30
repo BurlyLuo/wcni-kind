@@ -210,6 +210,8 @@ alias kls="kcli list vms"
 modprobe rdma_rxe
 modprobe sctp
 
+# RBAC:
+alias rbac='echo "cd /var/run/secrets/kubernetes.io/serviceaccount && export CURL_CA_BUNDLE=/var/run/secrets/kubernetes.io/serviceaccount/ca.crt && TOKEN=\$(cat /var/run/secrets/kubernetes.io/serviceaccount/token) && NAMESPACE=\$(cat /var/run/secrets/kubernetes.io/serviceaccount/namespace) && curl -H \"Authorization: Bearer \$TOKEN\" -H \"Content-Type: application/json\" https://kubernetes.default.svc/api/v1/namespaces/\$NAMESPACE/pods"'
 
 # Alias definitions.
 # You may want to put all your additions into a separate file like
