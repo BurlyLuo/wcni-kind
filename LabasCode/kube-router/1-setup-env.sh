@@ -35,5 +35,5 @@ else
   echo "No such controller_node!"
 fi
 
-# 4. Install CNI(kube-router) [https://github.com/cloudnativelabs/kube-router/blob/master/docs/user-guide.md]
+# 4. Install CNI(kube-router ipip mode) [https://github.com/cloudnativelabs/kube-router/blob/master/docs/user-guide.md]
 kubectl apply -f ./kubeadm-kuberouter.yaml
