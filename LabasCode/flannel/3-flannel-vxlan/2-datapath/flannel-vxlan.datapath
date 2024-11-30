@@ -1,4 +1,29 @@
 ---------------------------------------------------------------------------------------------------------------
+root@flannel-vxlan-control-plane:~# ip -d link show flannel.1
+3: flannel.1: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1450 qdisc noqueue state UNKNOWN mode DEFAULT group default 
+    link/ether 96:29:91:98:6f:a2 brd ff:ff:ff:ff:ff:ff promiscuity 0 minmtu 68 maxmtu 65535 
+    vxlan id 1 local 172.18.0.3 dev eth0 srcport 0 0 dstport 8472 nolearning ttl auto ageing 300 udpcsum noudp6zerocsumtx noudp6zerocsumrx addrgenmode eui64 numtxqueues 1 numrxqueues 1 gso_max_size 65536 gso_max_segs 65535 
+root@flannel-vxlan-control-plane:~# route -n 
+Kernel IP routing table
+Destination     Gateway         Genmask         Flags Metric Ref    Use Iface
+0.0.0.0         172.18.0.1      0.0.0.0         UG    0      0        0 eth0
+10.244.0.0      0.0.0.0         255.255.255.0   U     0      0        0 cni0
+10.244.1.0      10.244.1.0      255.255.255.0   UG    0      0        0 flannel.1
+172.18.0.0      0.0.0.0         255.255.0.0     U     0      0        0 eth0
+root@flannel-vxlan-control-plane:~# cat startup_monitor.txt | grep 10.244.1.0
+[2024-11-30T15:21:11.214585] [NEIGH]10.244.1.0 dev flannel.1 lladdr 6e:f6:79:d3:eb:b0 PERMANENT
+[2024-11-30T15:21:11.214746] [ROUTE]10.244.1.0/24 via 10.244.1.0 dev flannel.1 onlink 
+root@flannel-vxlan-control-plane:~# bridge fdb show | grep 6e:f6:79:d3:eb:b0
+6e:f6:79:d3:eb:b0 dev flannel.1 dst 172.18.0.2 self permanent
+root@flannel-vxlan-control-plane:~# 
+---------------------------------------------------------------------------------------------------------------
+
+
+
+
+
+
+---------------------------------------------------------------------------------------------------------------
 Flannel VxLAN ENV:
 $ kubectl get node -owide | grep -E "bpf1|bpf3"
 bpf1   Ready    control-plane,master   3d20h   v1.23.4   192.168.2.71   <none>        Ubuntu 20.04.5 LTS   5.15.0-52-generic   docker://20.10.21
