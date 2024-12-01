@@ -9,7 +9,7 @@ all:
     linux:
       hosts:
         clab-flannel-wireguard-crosssubnet-gw0:
-          ansible_host: 172.20.20.9
+          ansible_host: 172.20.20.2
         clab-flannel-wireguard-crosssubnet-server1:
           ansible_host: 
         clab-flannel-wireguard-crosssubnet-server2:
