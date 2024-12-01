@@ -58,17 +58,24 @@ kubectl get nodes -o wide
 
 ./2-setup-clab.sh
 
-# 3. Collect startup message
+# 3. Collect startup message and update sources.list
 controller_node_name=$(kubectl get nodes -o jsonpath='{range .items[*]}{.metadata.name}{"\n"}{end}' | grep control-plane)
 if [ -n "$controller_node_name" ]; then
-  timeout 1 docker exec -t $controller_node_name bash -c 'cat << EOF > /root/monitor_startup.sh
-#!/bin/bash
-ip -ts monitor all > /root/startup_monitor.txt 2>&1
+  docker exec -it $controller_node_name bash -c '
+  cat <<EOF >/etc/apt/sources.list
+deb http://mirrors.aliyun.com/debian/ bullseye main
+deb http://mirrors.aliyun.com/debian-security/ bullseye-security main
+deb http://mirrors.aliyun.com/debian/ bullseye-updates main
 EOF
-chmod +x /root/monitor_startup.sh && /root/monitor_startup.sh'
+  cat <<EOF > /root/monitor_startup.sh
+#!/bin/bash
+ip -ts monitor all > /root/startup_monitor.txt 2>&1 
+EOF'
 else
   echo "No such controller_node!"
 fi
+
+timeout 1 docker exec -t $controller_node_name bash -c 'chmod +x /root/monitor_startup.sh && /root/monitor_startup.sh'
 
 # 4. Install CNI(flannel udp mode) [https://github.com/flannel-io/flannel#deploying-flannel-with-kubectl]
 kubectl apply -f ./flannel.yaml
