@@ -6,7 +6,6 @@ set -v
 ip l a br-pool0 type bridge && ip l s br-pool0 up
 ip l a br-pool1 type bridge && ip l s br-pool1 up
 
-
 cat <<EOF>clab.yaml | clab deploy -t clab.yaml -
 name: calico-ipip-crosssubnet
 topology:
@@ -56,7 +55,6 @@ topology:
       exec:
       - ip addr add 10.1.8.11/24 dev net0
       - ip route replace default via 10.1.8.1
-
 
   links:
     - endpoints: ["br-pool0:br-pool0-net0", "server1:net0"]
