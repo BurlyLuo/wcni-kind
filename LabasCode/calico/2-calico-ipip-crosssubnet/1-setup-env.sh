@@ -1,6 +1,6 @@
 #!/bin/bash
 set -v
-# 1 .Prepare NoCNI environment
+# 1. Prepare NoCNI environment
 cat <<EOF | kind create cluster --name=calico-ipip-crosssubnet --image=kindest/node:v1.27.3 --config=-
 kind: Cluster
 apiVersion: kind.x-k8s.io/v1alpha4
