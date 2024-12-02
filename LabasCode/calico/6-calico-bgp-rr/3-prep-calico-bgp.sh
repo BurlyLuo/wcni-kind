@@ -1,6 +1,6 @@
 #!/bin/bash
 set -v
-# 1. install CNI[Calico v3.23.2]
+# 1. Install CNI[Calico v3.23.2]
 kubectl apply -f ./calico.yaml
 
 kubectl wait --timeout=100s --for=condition=Ready=true pods --all -A
@@ -113,7 +113,6 @@ status:
   podCIDRs:
   - 10.244.2.0/24
 EOF
-
 
 cat <<EOF | calicoctl  --allow-version-mismatch apply -f - 
 apiVersion: projectcalico.org/v3
