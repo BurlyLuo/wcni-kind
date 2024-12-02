@@ -13,7 +13,7 @@ topology:
   nodes:
     spine0:
       kind: linux
-      image: 192.168.2.100:5000/vyos/vyos:1.4.7
+      image: 192.168.2.100:5000/vyos/vyos:1.4.9
       cmd: /sbin/init
       binds:
         - /lib/modules:/lib/modules
@@ -21,7 +21,7 @@ topology:
 
     spine1:
       kind: linux
-      image: 192.168.2.100:5000/vyos/vyos:1.4.7
+      image: 192.168.2.100:5000/vyos/vyos:1.4.9
       cmd: /sbin/init
       binds:
         - /lib/modules:/lib/modules
@@ -29,7 +29,7 @@ topology:
 
     leaf0:
       kind: linux
-      image: 192.168.2.100:5000/vyos/vyos:1.4.7
+      image: 192.168.2.100:5000/vyos/vyos:1.4.9
       cmd: /sbin/init
       binds:
         - /lib/modules:/lib/modules
@@ -37,7 +37,7 @@ topology:
 
     leaf1:
       kind: linux
-      image: 192.168.2.100:5000/vyos/vyos:1.4.7
+      image: 192.168.2.100:5000/vyos/vyos:1.4.9
       cmd: /sbin/init
       binds:
         - /lib/modules:/lib/modules
@@ -80,7 +80,6 @@ topology:
       exec:
       - ip addr add 10.1.8.11/24 dev net0
       - ip route replace default via 10.1.8.1
-
 
   links:
     - endpoints: ["br-leaf0:br-leaf0-net0", "server1:net0"]
