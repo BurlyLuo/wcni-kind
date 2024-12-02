@@ -9,9 +9,9 @@ all:
     linux:
       hosts:
         clab-calico-bgp-rr-leaf0:
-          ansible_host: 172.20.20.4
-        clab-calico-bgp-rr-leaf1:
           ansible_host: 172.20.20.2
+        clab-calico-bgp-rr-leaf1:
+          ansible_host: 172.20.20.4
         clab-calico-bgp-rr-server1:
           ansible_host: 
         clab-calico-bgp-rr-server2:
@@ -21,6 +21,6 @@ all:
         clab-calico-bgp-rr-server4:
           ansible_host: 
         clab-calico-bgp-rr-spine0:
-          ansible_host: 172.20.20.3
-        clab-calico-bgp-rr-spine1:
           ansible_host: 172.20.20.5
+        clab-calico-bgp-rr-spine1:
+          ansible_host: 172.20.20.3

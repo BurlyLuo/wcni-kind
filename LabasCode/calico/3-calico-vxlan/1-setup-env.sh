@@ -33,7 +33,6 @@ else
   echo "No such controller_node!"
 fi
 
-
 # 4. Install CNI[Calico v3.23.2]
 kubectl apply -f calico.yaml
 
