@@ -1,15 +1,12 @@
 #!/bin/bash
-date
 set -v
-
-# 1.prep noCNI env
+# 1. prep noCNI env
 cat <<EOF | kind create cluster --name=cilium-kubeproxy --image=kindest/node:v1.27.3 --config=-
 kind: Cluster
 apiVersion: kind.x-k8s.io/v1alpha4
 networking:
   disableDefaultCNI: true
   # kubeProxyMode: "none" # Enable KubeProxy
-
 nodes:
   - role: control-plane
   - role: worker
