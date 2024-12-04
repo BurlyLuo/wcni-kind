@@ -1,0 +1,18 @@
+[root@repo ~]# cd /etc/systemd/system/docker.service.d/
+[root@repo docker.service.d]# ls
+http-proxy.conf
+[root@repo docker.service.d]# cat http-proxy.conf 
+[Service]
+Environment="HTTP_PROXY=socks5://192.168.2.10:10808"
+Environment="HTTPS_PROXY=socks5://192.168.2.10:10808"
+Environment="NO_PROXY=localhost,127.0.0.1,192.168.0.0/16,192.168.2.100"
+[root@repo docker.service.d]# 
+
+esp the local_ip_address: 192.168.2.100
+
+systemctl daemon-reload && systemctl restart docker
+
+exit
+
+and re-login the machine.
+
