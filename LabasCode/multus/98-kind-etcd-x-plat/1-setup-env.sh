@@ -7,11 +7,11 @@ cat <<EOF | kind create cluster --name=platx --image=kindest/node:v1.27.3 --conf
 kind: Cluster
 apiVersion: kind.x-k8s.io/v1alpha4
 networking:
-        disableDefaultCNI: false
+  disableDefaultCNI: false
 nodes:
-        - role: control-plane
-        - role: worker
-        - role: worker
+  - role: control-plane
+  - role: worker
+  - role: worker
 
 containerdConfigPatches:
 - |-
