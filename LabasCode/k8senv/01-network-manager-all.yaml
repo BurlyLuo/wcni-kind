@@ -21,6 +21,15 @@ network:
     ens224:
       dhcp4: no
 
+  vlans:
+    ens40.10:
+      id: 10
+      link: ens40
+
+    ens40.20:
+      id: 20
+      link: ens40
+ 
   bridges:
     brnet:
       interfaces:
@@ -30,6 +39,16 @@ network:
       nameservers:
         addresses: [192.168.2.1, 8.8.8.8, 1.1.1.1]
         search: []
+
+    brvlan10:
+      interfaces:
+        - ens40.10
+      addresses: [192.168.10.99/24, 1010:501::10/64]
+
+    brvlan20:
+      interfaces:
+        - ens40.20
+      addresses: [192.168.20.99/24, 1010:501::20/64]
 
     vppdpdk5:
       interfaces:
