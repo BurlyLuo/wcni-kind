@@ -37,18 +37,18 @@ network:
       addresses: [192.168.2.99/24, 1010:501::99/64]
       gateway4: 192.168.2.1
       nameservers:
-        addresses: [192.168.2.1, 8.8.8.8, 1.1.1.1]
+        addresses: [192.168.2.1, 8.8.8.8, 223.6.6.6]
         search: []
 
-    brvlan10:
-      interfaces:
-        - ens40.10
-      addresses: [192.168.10.99/24, 1010:501::10/64]
+    #brvlan10:
+    #  interfaces:
+    #    - ens40.10
+    #  addresses: [192.168.10.99/24, 1010:501::10/64]
 
-    brvlan20:
-      interfaces:
-        - ens40.20
-      addresses: [192.168.20.99/24, 1010:501::20/64]
+    #brvlan20:
+    #  interfaces:
+    #    - ens40.20
+    #  addresses: [192.168.20.99/24, 1010:501::20/64]
 
     vppdpdk5:
       interfaces:
