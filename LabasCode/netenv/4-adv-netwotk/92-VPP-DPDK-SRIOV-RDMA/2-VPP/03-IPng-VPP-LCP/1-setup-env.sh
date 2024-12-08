@@ -67,7 +67,10 @@ vppctl show trace
 ----------------------------------------------------------------------------------------------------------------------------
 Soluton2: Use ipng.ch's kvm snapshot image[https://ipng.ch/s/articles/2021/12/23/vpp-linux-cp-virtual-machine-playground/]
 ----------------------------------------------------------------------------------------------------------------------------
+wget https://ipng.ch/media/vpp-proto/vpp-proto-bookworm.qcow2.lrz
 brctl addbr empty
+lrzip -d vpp-proto-bookworm.qcow2.lrz
+
 virsh define vpp-proto-bookworm.xml
 virsh start vpp-proto-bookworm
 
