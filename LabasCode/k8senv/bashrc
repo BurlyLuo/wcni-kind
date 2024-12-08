@@ -203,6 +203,7 @@ alias delk3s="sudo /root/wcni-kind/LabasCode/k8senv/vmenv/k3senv/k3s-uninstall.s
 alias vm="cd /root/wcni-kind/LabasCode/k8senv/vmenv"
 alias kclissh='ssh-keygen -f "/root/.ssh/known_hosts" -R "192.168.2.96" > /dev/null 2>&1'
 alias vms='ssh-keygen -f "/root/.ssh/known_hosts" -R "192.168.2.96" > /dev/null 2>&1 && ssh -o StrictHostKeyChecking=no 192.168.2.96'
+alias lcp='sshpass -p hive ssh-copy-id -o StrictHostKeyChecking=no -p 22 root@192.168.2.127 > /dev/null 2>&1 && ssh -o StrictHostKeyChecking=no 192.168.2.127'
 alias kl="kcli"
 alias kls="kcli list vms"
 
