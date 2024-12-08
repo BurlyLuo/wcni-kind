@@ -1,3 +1,6 @@
+0. Download common debian12 qcow2 image
+wget https://cloud.debian.org/images/cloud/bookworm/latest/debian-12-genericcloud-amd64.qcow2
+
 1. Install kvm vm:
 virt-install --name vppx --memory 10240  --cpu host-model --vcpus=8 --disk /root/kvm/debian/debian12.qcow2,device=disk,bus=virtio --disk size=50 --os-variant debian12 --virt-type kvm --graphics none --network=bridge=brnet,model=virtio --network=bridge=vppdpdk5,model=virtio --network=bridge=vppdpdk8,model=virtio --network=bridge=vppdpdk9,model=virtio --import
 
@@ -5,8 +8,13 @@ virt-install --name vppx --memory 10240  --cpu host-model --vcpus=8 --disk /root
 apt update
 curl -s https://packagecloud.io/install/repositories/fdio/master/script.deb.sh | sudo bash
 apt --fix-broken install
+
 mkdir -p /var/log/vpp/
-wget -m --no-parent https://ipng.ch/media/vpp/bookworm/24.02-rc0~175-g31d4891cf/
+# Reference: you can build by yourself or use ipng.ch done(https://ipng.ch/media/vpp/bookworm/)
+[https://ipng.ch/s/articles/2021/12/23/vpp-linux-cp-virtual-machine-playground/   and  how to build custome deb packages: https://fd.io/docs/vpp/v2009/gettingstarted/developers/building.html?highlight=build]
+
+chrom https://ipng.ch/media/
+wget -m --no-parent https://ipng.ch/media/vpp/bookworm/24.xx-rc0~xxx-gxxxxxxxx/
 dpkg -i ipng.ch/media/vpp/bookworm/24.02-rc0~175-g31d4891cf/*.deb
 
 useradd -m pim && echo "pim:hive" | sudo chpasswd
@@ -54,3 +62,16 @@ vppctl show trace
 
 vppctl trace add dpdk-input
 vppctl show trace
+
+
+----------------------------------------------------------------------------------------------------------------------------
+Soluton2: Use ipng.ch's kvm snapshot image[https://ipng.ch/s/articles/2021/12/23/vpp-linux-cp-virtual-machine-playground/]
+----------------------------------------------------------------------------------------------------------------------------
+brctl addbr empty
+virsh define vpp-proto-bookworm.xml
+virsh start vpp-proto-bookworm
+
+virsh console vpp-proto-bookworm
+username: root
+passwd: IPng loves VPP
+
