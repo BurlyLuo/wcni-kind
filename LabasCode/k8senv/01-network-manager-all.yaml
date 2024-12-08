@@ -49,6 +49,9 @@ network:
     #  interfaces:
     #    - ens40.20
     #  addresses: [192.168.20.99/24, 1010:501::20/64]
+    
+    empty:
+      interfaces: []
 
     vppdpdk5:
       interfaces:
