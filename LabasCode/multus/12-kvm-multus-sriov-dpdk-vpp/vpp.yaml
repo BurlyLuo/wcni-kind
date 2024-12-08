@@ -8,6 +8,7 @@ spec:
   containers:
   - name: vpp
     image: soelvkaer/vppcontainer:latest
+    #image: 192.168.2.100:5000/docker.io/soelvkaer/vppcontainer:latest
     imagePullPolicy: IfNotPresent
     volumeMounts:
     - name: hugepage
