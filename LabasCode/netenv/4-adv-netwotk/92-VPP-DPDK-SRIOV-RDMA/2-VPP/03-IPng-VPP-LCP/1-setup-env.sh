@@ -1,3 +1,6 @@
+----------------------------------------------------------------------------------------------------------------------------
+Soluton1: Install vpp by debian repo[But not stable]
+----------------------------------------------------------------------------------------------------------------------------
 0. Download common debian12 qcow2 image
 wget https://cloud.debian.org/images/cloud/bookworm/latest/debian-12-genericcloud-amd64.qcow2
 
