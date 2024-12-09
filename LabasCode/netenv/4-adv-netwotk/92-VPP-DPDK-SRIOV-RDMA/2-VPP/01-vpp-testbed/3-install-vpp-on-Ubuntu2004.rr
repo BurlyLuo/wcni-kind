@@ -1,0 +1,3 @@
+wget http://192.168.2.100/vpp/ubuntu-2004-deb-package.tgz
+tar -xzvf ubuntu-2004-deb-package.tgz
+
