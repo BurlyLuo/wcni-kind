@@ -2,6 +2,7 @@ https://fd.io/docs/vpp/v2009/
 https://fd.io/docs/vpp/v2009/gettingstarted/developers/building
 
 
+[ubuntu 2004]
 git clone https://gerrit.fd.io/r/vpp
 cd vpp
 dpkg -l | grep vpp
