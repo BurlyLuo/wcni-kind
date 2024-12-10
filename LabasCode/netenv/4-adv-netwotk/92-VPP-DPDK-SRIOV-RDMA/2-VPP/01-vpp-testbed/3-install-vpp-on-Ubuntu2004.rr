@@ -1,4 +1,6 @@
-#Only fine at ubuntu2004
+# Only fine at ubuntu2004
+# https://www.intel.com/content/www/us/en/developer/articles/technical/build-a-fast-network-stack-with-vpp-on-an-intel-architecture-server.html
+
 wget http://192.168.2.100/vpp/ubuntu-2004-deb-package.tgz
 tar -xzvf ubuntu-2004-deb-package.tgz
 
