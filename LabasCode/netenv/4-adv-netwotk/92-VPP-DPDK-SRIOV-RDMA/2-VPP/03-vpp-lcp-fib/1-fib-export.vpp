@@ -1,0 +1,230 @@
+# 1. ip4 fib table:
+********************************************************************************************************************************************
+set interface state fpeth1 up
+set interface mtu 1500 fpeth1
+set interface ip address fpeth1 10.1.5.20/24
+set interface ip address fpeth1 10:1:5:3::20/64
+
+set interface state fpeth2 up
+set interface mtu 1500 fpeth2
+set interface ip address fpeth2 10.1.8.20/24
+set interface ip address fpeth2 10:1:8:3::20/64
+
+set interface state fpeth3 up
+set interface mtu 1500 fpeth3
+set interface ip address fpeth3 10.1.9.20/24
+set interface ip address fpeth3 10:1:9:3::20/64
+
+set interface state fpeth4 up
+set interface mtu 1500 fpeth4
+set interface ip address fpeth4 1.1.1.1/24
+set interface ip address fpeth4 1:1:1:1::20/64
+
+ip route add 0.0.0.0/0 via 10.1.5.254
+ip route add ::/0 via 10:1:5:3::3
+********************************************************************************************************************************************
+root@vpp-bookworm:~# vppctl 
+    _______    _        _   _____  ___ 
+ __/ __/ _ \  (_)__    | | / / _ \/ _ \
+ _/ _// // / / / _ \   | |/ / ___/ ___/
+ /_/ /____(_)_/\___/   |___/_/  /_/    
+
+vpp# show ip fib 
+ipv4-VRF:0, fib_index:0, flow hash:[src dst sport dport proto flowlabel ] epoch:0 flags:none locks:[adjacency:1, recursive-resolution:1, default-route:1, lcp-rt:1, ]
+0.0.0.0/0 #[key: 0.0.0.0/0>>>ip route add 0.0.0.0/0 via 10.1.5.254]
+  unicast-ip4-chain
+  [@0]: dpo-load-balance: [proto:ip4 index:1 buckets:1 uRPF:16 to:[0:0]]
+    [0] [@14]: dpo-load-balance: [proto:ip4 index:45 buckets:1 uRPF:34 to:[0:0]]
+          [0] [@3]: arp-ipv4: via 10.1.5.254 fpeth1
+0.0.0.0/32
+  unicast-ip4-chain
+  [@0]: dpo-load-balance: [proto:ip4 index:2 buckets:1 uRPF:1 to:[0:0]]
+    [0] [@0]: dpo-drop ip4
+1.1.1.0/32
+  unicast-ip4-chain
+  [@0]: dpo-load-balance: [proto:ip4 index:19 buckets:1 uRPF:12 to:[0:0]]
+    [0] [@0]: dpo-drop ip4
+1.1.1.0/24 #[key: ipv4-glean>>> arp request]
+  unicast-ip4-chain
+  [@0]: dpo-load-balance: [proto:ip4 index:24 buckets:1 uRPF:20 to:[0:0]]
+    [0] [@4]: ipv4-glean: [src:1.1.1.0/24] fpeth4: mtu:9000 next:4 flags:[] ffffffffffff525400f110030806
+1.1.1.1/32 #[key: dpo-receive>>> recv at local interface]
+  unicast-ip4-chain
+  [@0]: dpo-load-balance: [proto:ip4 index:21 buckets:1 uRPF:19 to:[0:0]]
+    [0] [@13]: dpo-receive: 1.1.1.1 on fpeth4
+1.1.1.255/32
+  unicast-ip4-chain
+  [@0]: dpo-load-balance: [proto:ip4 index:26 buckets:1 uRPF:21 to:[0:0]]
+    [0] [@0]: dpo-drop ip4
+10.1.5.0/32
+  unicast-ip4-chain
+  [@0]: dpo-load-balance: [proto:ip4 index:37 buckets:1 uRPF:51 to:[0:0]]
+    [0] [@0]: dpo-drop ip4
+10.1.5.10/32 #[key: 10.1.5.10/32 host address to 10.1.5.20>10.1.5.10]
+  unicast-ip4-chain
+  [@0]: dpo-load-balance: [proto:ip4 index:58 buckets:1 uRPF:74 to:[1:96] via:[1:96]]
+    [0] [@5]: ipv4 via 10.1.5.10 fpeth1: mtu:1500 next:6 flags:[] 5254004c3c2f525400f110000800
+10.1.5.0/24 #[key: ipv4-glean>>>arp request]                                             
+  unicast-ip4-chain
+  [@0]: dpo-load-balance: [proto:ip4 index:42 buckets:1 uRPF:9 to:[1:96]]
+    [0] [@4]: ipv4-glean: [src:10.1.5.0/24] fpeth1: mtu:9000 next:1 flags:[] ffffffffffff525400f110000806
+10.1.5.20/32 #[key: dpo-receive>>> recv at local interface]
+  unicast-ip4-chain
+  [@0]: dpo-load-balance: [proto:ip4 index:39 buckets:1 uRPF:50 to:[2:192]]
+    [0] [@13]: dpo-receive: 10.1.5.20 on fpeth1
+10.1.5.254/32 #[key: arp-ipv4: via 10.1.5.254 fpeth1>>>arp resolve 10.1.5.254 via fpeth1]
+  unicast-ip4-chain
+  [@0]: dpo-load-balance: [proto:ip4 index:45 buckets:1 uRPF:34 to:[0:0]]
+    [0] [@3]: arp-ipv4: via 10.1.5.254 fpeth1
+10.1.5.255/32
+  unicast-ip4-chain
+  [@0]: dpo-load-balance: [proto:ip4 index:44 buckets:1 uRPF:36 to:[664:154149]]
+    [0] [@0]: dpo-drop ip4
+10.1.8.0/32
+  unicast-ip4-chain
+  [@0]: dpo-load-balance: [proto:ip4 index:31 buckets:1 uRPF:38 to:[0:0]]
+    [0] [@0]: dpo-drop ip4
+10.1.8.10/32
+  unicast-ip4-chain
+  [@0]: dpo-load-balance: [proto:ip4 index:59 buckets:1 uRPF:75 to:[0:0] via:[1:96]]
+    [0] [@5]: ipv4 via 10.1.8.10 fpeth2: mtu:1500 next:7 flags:[] 525400772b5c525400f110010800
+10.1.8.0/24
+  unicast-ip4-chain
+  [@0]: dpo-load-balance: [proto:ip4 index:36 buckets:1 uRPF:35 to:[0:0]]
+    [0] [@4]: ipv4-glean: [src:10.1.8.0/24] fpeth2: mtu:9000 next:2 flags:[] ffffffffffff525400f110010806
+10.1.8.20/32
+  unicast-ip4-chain
+  [@0]: dpo-load-balance: [proto:ip4 index:33 buckets:1 uRPF:25 to:[1:96]]
+    [0] [@13]: dpo-receive: 10.1.8.20 on fpeth2
+10.1.8.255/32
+  unicast-ip4-chain
+  [@0]: dpo-load-balance: [proto:ip4 index:32 buckets:1 uRPF:40 to:[664:154149]]
+    [0] [@0]: dpo-drop ip4                                                                                                                            
+10.1.9.0/32
+  unicast-ip4-chain
+  [@0]: dpo-load-balance: [proto:ip4 index:34 buckets:1 uRPF:31 to:[0:0]]
+    [0] [@0]: dpo-drop ip4
+10.1.9.0/24
+  unicast-ip4-chain
+  [@0]: dpo-load-balance: [proto:ip4 index:30 buckets:1 uRPF:27 to:[0:0]]
+    [0] [@4]: ipv4-glean: [src:10.1.9.0/24] fpeth3: mtu:9000 next:3 flags:[] ffffffffffff525400f110020806
+10.1.9.20/32
+  unicast-ip4-chain
+  [@0]: dpo-load-balance: [proto:ip4 index:27 buckets:1 uRPF:26 to:[0:0]]
+    [0] [@13]: dpo-receive: 10.1.9.20 on fpeth3
+10.1.9.255/32
+  unicast-ip4-chain
+  [@0]: dpo-load-balance: [proto:ip4 index:29 buckets:1 uRPF:22 to:[664:154149]]
+    [0] [@0]: dpo-drop ip4
+224.0.0.0/4
+  unicast-ip4-chain
+  [@0]: dpo-load-balance: [proto:ip4 index:4 buckets:1 uRPF:3 to:[0:0]]
+    [0] [@0]: dpo-drop ip4
+240.0.0.0/4
+  unicast-ip4-chain
+  [@0]: dpo-load-balance: [proto:ip4 index:3 buckets:1 uRPF:2 to:[0:0]]
+    [0] [@0]: dpo-drop ip4
+255.255.255.255/32
+  unicast-ip4-chain
+  [@0]: dpo-load-balance: [proto:ip4 index:5 buckets:1 uRPF:44 to:[0:0]]
+    [0] [@13]: dpo-receive: 0.0.0.0 on local0
+vpp# 
+
+
+
+
+
+# 2. ip6 fib table
+********************************************************************************************************************************************
+set interface state fpeth1 up
+set interface mtu 1500 fpeth1
+set interface ip address fpeth1 10.1.5.20/24
+set interface ip address fpeth1 10:1:5:3::20/64
+
+set interface state fpeth2 up
+set interface mtu 1500 fpeth2
+set interface ip address fpeth2 10.1.8.20/24
+set interface ip address fpeth2 10:1:8:3::20/64
+
+set interface state fpeth3 up
+set interface mtu 1500 fpeth3
+set interface ip address fpeth3 10.1.9.20/24
+set interface ip address fpeth3 10:1:9:3::20/64
+
+set interface state fpeth4 up
+set interface mtu 1500 fpeth4
+set interface ip address fpeth4 1.1.1.1/24
+set interface ip address fpeth4 1:1:1:1::20/64
+
+ip route add 0.0.0.0/0 via 10.1.5.254
+ip route add ::/0 via 10:1:5:3::3
+********************************************************************************************************************************************
+vpp# show ip6 fib       
+ipv6-VRF:0, fib_index:0, flow hash:[src dst sport dport proto flowlabel ] epoch:0 flags:none locks:[adjacency:1, recursive-resolution:1, default-route:1, lcp-rt:1, ]
+::/0
+  unicast-ip6-chain
+  [@0]: dpo-load-balance: [proto:ip6 index:6 buckets:1 uRPF:53 to:[0:0]]
+    [0] [@21]: dpo-load-balance: [proto:ip6 index:46 buckets:1 uRPF:11 to:[0:0]]
+          [0] [@5]: ipv6 via 10:1:5:3::3 fpeth1: mtu:1500 next:6 flags:[] 8eb775a526a1525400f1100086dd
+1:1:1:1::/64
+  unicast-ip6-chain
+  [@0]: dpo-load-balance: [proto:ip6 index:22 buckets:1 uRPF:14 to:[0:0]]
+    [0] [@4]: ipv6-glean: [src:1:1:1:1::/64] fpeth4: mtu:9000 next:5 flags:[] ffffffffffff525400f1100386dd
+1:1:1:1::20/128
+  unicast-ip6-chain
+  [@0]: dpo-load-balance: [proto:ip6 index:23 buckets:1 uRPF:24 to:[0:0]]
+    [0] [@20]: dpo-receive: 1:1:1:1::20 on fpeth4
+10:1:5:3::/64
+  unicast-ip6-chain
+  [@0]: dpo-load-balance: [proto:ip6 index:40 buckets:1 uRPF:48 to:[2:144]]
+    [0] [@4]: ipv6-glean: [src:10:1:5:3::/64] fpeth1: mtu:9000 next:2 flags:[] ffffffffffff525400f1100086dd
+10:1:5:3::/128
+  unicast-ip6-chain
+  [@0]: dpo-load-balance: [proto:ip6 index:51 buckets:1 uRPF:68 to:[2:144]]
+    [0] [@5]: ipv6 via 10:1:5:3:: fpeth1: mtu:1500 next:6 flags:[] 8eb775a526a1525400f1100086dd
+10:1:5:3::3/128
+  unicast-ip6-chain
+  [@0]: dpo-load-balance: [proto:ip6 index:46 buckets:1 uRPF:11 to:[0:0]]
+    [0] [@5]: ipv6 via 10:1:5:3::3 fpeth1: mtu:1500 next:6 flags:[] 8eb775a526a1525400f1100086dd
+10:1:5:3::10/128
+  unicast-ip6-chain
+  [@0]: dpo-load-balance: [proto:ip6 index:60 buckets:1 uRPF:76 to:[0:0]]
+    [0] [@5]: ipv6 via 10:1:5:3::10 fpeth1: mtu:1500 next:6 flags:[] 5254004c3c2f525400f1100086dd
+10:1:5:3::20/128
+  unicast-ip6-chain
+  [@0]: dpo-load-balance: [proto:ip6 index:41 buckets:1 uRPF:49 to:[5:536]]
+    [0] [@20]: dpo-receive: 10:1:5:3::20 on fpeth1
+10:1:5:3::254/128                                                                                                                                     
+  unicast-ip6-chain
+  [@0]: dpo-load-balance: [proto:ip6 index:55 buckets:1 uRPF:72 to:[4:464]]
+    [0] [@5]: ipv6 via 10:1:5:3::254 fpeth1: mtu:1500 next:6 flags:[] 005056c00005525400f1100086dd
+10:1:8:3::/64
+  unicast-ip6-chain
+  [@0]: dpo-load-balance: [proto:ip6 index:43 buckets:1 uRPF:33 to:[0:0]]
+    [0] [@4]: ipv6-glean: [src:10:1:8:3::/64] fpeth2: mtu:9000 next:3 flags:[] ffffffffffff525400f1100186dd
+10:1:8:3::20/128
+  unicast-ip6-chain
+  [@0]: dpo-load-balance: [proto:ip6 index:38 buckets:1 uRPF:41 to:[0:0]]
+    [0] [@20]: dpo-receive: 10:1:8:3::20 on fpeth2
+10:1:8:3::254/128
+  unicast-ip6-chain
+  [@0]: dpo-load-balance: [proto:ip6 index:61 buckets:1 uRPF:77 to:[0:0]]
+    [0] [@5]: ipv6 via 10:1:8:3::254 fpeth2: mtu:1500 next:7 flags:[] 005056c00008525400f1100186dd
+10:1:9:3::/64
+  unicast-ip6-chain
+  [@0]: dpo-load-balance: [proto:ip6 index:28 buckets:1 uRPF:32 to:[0:0]]
+    [0] [@4]: ipv6-glean: [src:10:1:9:3::/64] fpeth3: mtu:9000 next:4 flags:[] ffffffffffff525400f1100286dd
+10:1:9:3::10/128
+  unicast-ip6-chain
+  [@0]: dpo-load-balance: [proto:ip6 index:57 buckets:1 uRPF:29 to:[0:0]]
+    [0] [@5]: ipv6 via 10:1:9:3::10 fpeth3: mtu:1500 next:8 flags:[] 525400325edc525400f1100286dd
+10:1:9:3::20/128
+  unicast-ip6-chain
+  [@0]: dpo-load-balance: [proto:ip6 index:35 buckets:1 uRPF:39 to:[6:592]]
+    [0] [@20]: dpo-receive: 10:1:9:3::20 on fpeth3
+fe80::/10
+  unicast-ip6-chain
+  [@0]: dpo-load-balance: [proto:ip6 index:7 buckets:1 uRPF:6 to:[2:144]]
+    [0] [@14]: ip6-link-local
+vpp#
+
