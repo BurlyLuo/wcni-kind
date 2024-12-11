@@ -10,32 +10,32 @@ lcp create loop0 host-if loop0
 set interface state loop0 up
 
 comment { Create one LinuxCP Interface Pair for each phy }
-lcp create fpeth0 host-if fpeth0
 lcp create fpeth1 host-if fpeth1
 lcp create fpeth2 host-if fpeth2
 lcp create fpeth3 host-if fpeth3
+lcp create fpeth4 host-if fpeth4
 
 comment { Pre-Config ip address and routes for spec interface }
-set interface state fpeth0 up
-set interface mtu 1500 fpeth0
-set interface ip address fpeth0 10.1.5.20/24
-set interface ip address fpeth0 10:1:5:3::20/64
-
 set interface state fpeth1 up
 set interface mtu 1500 fpeth1
-set interface ip address fpeth1 10.1.8.20/24
-set interface ip address fpeth1 10:1:8:3::20/64
+set interface ip address fpeth1 10.1.5.20/24
+set interface ip address fpeth1 10:1:5:3::20/64
 
 set interface state fpeth2 up
 set interface mtu 1500 fpeth2
-set interface ip address fpeth2 10.1.9.20/24
-set interface ip address fpeth2 10:1:9:3::20/64
+set interface ip address fpeth2 10.1.8.20/24
+set interface ip address fpeth2 10:1:8:3::20/64
 
 set interface state fpeth3 up
 set interface mtu 1500 fpeth3
-set interface ip address fpeth3 1.1.1.1/24
-set interface ip address fpeth3 1:1:1:1::20/64
+set interface ip address fpeth3 10.1.9.20/24
+set interface ip address fpeth3 10:1:9:3::20/64
+
+set interface state fpeth4 up
+set interface mtu 1500 fpeth4
+set interface ip address fpeth4 1.1.1.1/24
+set interface ip address fpeth4 1:1:1:1::20/64
 
 
 ip route add 0.0.0.0/0 via 10.1.5.254
-ip route add ::/0  via 10:1:5:3::3 fpeth0
+ip route add ::/0 via 10:1:5:3::3
