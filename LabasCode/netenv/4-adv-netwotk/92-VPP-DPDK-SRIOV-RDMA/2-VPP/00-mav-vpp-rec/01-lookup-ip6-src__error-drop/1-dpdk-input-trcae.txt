@@ -1,0 +1,106 @@
+Packet 4
+ 
+21:59:49:364155: dpdk-input
+  fpeth1 rx queue 2
+  buffer 0x300c6: current data 0, length 214, free-list 0, clone-count 0, totlen-nifb 0, trace 0x3000003
+                  ext-hdr-valid 
+                  l4-cksum-computed l4-cksum-correct 
+  PKT MBUF: port 0, nb_segs 1, pkt_len 214
+    buf_len 2176, data_len 214, ol_flags 0x0, data_off 128, phys_addr 0x25a03200
+    packet_type 0x0 l2_len 0 l3_len 0 outer_l2_len 0 outer_l3_len 0
+    rss 0x0 fdir.hi 0x0 fdir.lo 0x0
+  IP4: 5c:16:c7:0a:4a:de -> fa:16:3e:80:6e:b5
+  UDP: 217.189.176.136 -> 82.113.126.168
+    tos 0xb8, ttl 55, length 200, checksum 0xe70d
+    fragment id 0x0000, flags DONT_FRAGMENT
+  UDP: 5034 -> 11478
+    length 180, checksum 0x2243
+21:59:49:364169: ethernet-input
+  frame: flags 0x1, hw-if-index 1, sw-if-index 1
+  IP4: 5c:16:c7:0a:4a:de -> fa:16:3e:80:6e:b5
+21:59:49:364171: ip4-input
+  UDP: 217.189.176.136 -> 82.113.126.168
+    tos 0xb8, ttl 55, length 200, checksum 0xe70d
+    fragment id 0x0000, flags DONT_FRAGMENT
+  UDP: 5034 -> 11478
+    length 180, checksum 0x2243
+21:59:49:364172: ip4-lookup
+  fib 0 dpo-idx 13 flow hash: 0x00000000
+  UDP: 217.189.176.136 -> 82.113.126.168
+    tos 0xb8, ttl 55, length 200, checksum 0xe70d
+    fragment id 0x0000, flags DONT_FRAGMENT
+  UDP: 5034 -> 11478
+    length 180, checksum 0x2243
+21:59:49:364173: ip4-local
+    UDP: 217.189.176.136 -> 82.113.126.168
+      tos 0xb8, ttl 55, length 200, checksum 0xe70d
+      fragment id 0x0000, flags DONT_FRAGMENT
+    UDP: 5034 -> 11478
+      length 180, checksum 0x2243
+21:59:49:364173: qos4
+  tx_sw_if_index 1846136912 flow hash: 0x000f79e0 adj-idx 206703666 
+GMTP: 61.227.93.189 -> 114.60.255.61
+  version 5, header length 4
+  tos 0x7a, ttl 42, length 3840, checksum 0xe041 (should be 0x9f85)
+  fragment id 0x0000 offset 1536, flags 
+21:59:49:364175: rtp4-input
+  tx_sw_if_index 1846136912 flow hash: 0x000f79e0 adj-idx 206703666 
+GMTP: 61.227.93.189 -> 114.60.255.61
+  version 5, header length 4
+  tos 0x7a, ttl 42, length 3840, checksum 0xe041 (should be 0x9f85)
+  fragment id 0x0000 offset 1536, flags 
+21:59:49:364745: ip6-lookup
+  fib 0 dpo-idx 1 flow hash: 0x00000000
+  UDP: 2a02:3000:f000:3::1:126 -> 2a02:3102:1000:1010::4
+    tos 0xb8, flow label 0x0, hop limit 64, payload length 180
+  UDP: 10300 -> 10154
+    length 180, checksum 0xa7f7
+21:59:49:364746: lookup-ip6-src
+     fib-index:2 addr:2a02:3000:f000:3::1:126 load-balance:48
+21:59:49:364747: ip6-drop
+    UDP: 2a02:3000:f000:3::1:126 -> 2a02:3102:1000:1010::4
+      tos 0xb8, flow label 0x0, hop limit 64, payload length 180
+    UDP: 10300 -> 10154
+      length 180, checksum 0xa7f7
+21:59:49:364747: error-drop
+  ip4-input: unknown ip protocol
+====
+
+
+21:59:49:364746: lookup-ip6-src
+
+
+################################################################################################################################
+[root@NSD_UAGTRM08-UAGTRM08MPU1 ~]# 
+[root@NSD_UAGTRM08-UAGTRM08MPU1 ~]# /usr/local/mnvpp-pkg/bin/vppctl sh ip6 fib table 1 
+ip_table_1, fib_index:2, flow hash:[src dst sport dport proto ] locks:[src:API:1, src:recursive-resolution:1, ]
+::/0
+  unicast-ip6-chain
+  [@0]: dpo-load-balance: [proto:ip6 index:48 buckets:1 uRPF:77 to:[2391693:525661816]]
+    [0] [@0]: dpo-drop ip6
+::/27
+  unicast-ip6-chain
+  [@0]: dpo-load-balance: [proto:ip6 index:55 buckets:1 uRPF:95 to:[0:0]]
+    [0] [@3]: arp-ipv6: via 2a02:3000:f000:3::1:121 fpeth5
+fe80::/10
+  unicast-ip6-chain
+  [@0]: dpo-load-balance: [proto:ip6 index:49 buckets:1 uRPF:78 to:[0:0]]
+    [0] [@14]: ip6-link-local
+[root@NSD_UAGTRM08-UAGTRM08MPU1 ~]# 
+
+
+
+
+[root@NSD_UAGTRM08-UAGTRM08MPU1 ~]# /usr/local/mnvpp-pkg/bin/vppctl sh ip6 neighbor
+    Time                       Address                    Flags     Link layer                     Interface               
+    566.9062           2a02:3000:f000:3::1:127              D    fa:16:3e:96:a3:a6                  fpeth5                 
+
+[root@NSD_UAGTRM08-UAGTRM08MPU1 ~]# ip -6 n s 
+fe80::5e16:c7ff:fe0a:4ade dev fpeth5 lladdr 5c:16:c7:0a:4a:de router STALE
+2a02:3000:f000:3::1:121 dev fpeth5  router FAILED # kernel side failed
+fe80::f816:3eff:fe96:a3a6 dev fpeth5 lladdr fa:16:3e:96:a3:a6 router STALE
+fe80::5e16:c7ff:fe0a:4ade dev eth0 lladdr 5c:16:c7:0a:4a:de router REACHABLE
+fe80::5e16:c7ff:fe0a:4ade dev eth8 lladdr 5c:16:c7:0a:4a:de router STALE
+fe80::5e16:c7ff:fe0a:4ade dev eth6 lladdr 5c:16:c7:0a:4a:de router STALE
+[root@NSD_UAGTRM08-UAGTRM08MPU1 ~]# 
+
