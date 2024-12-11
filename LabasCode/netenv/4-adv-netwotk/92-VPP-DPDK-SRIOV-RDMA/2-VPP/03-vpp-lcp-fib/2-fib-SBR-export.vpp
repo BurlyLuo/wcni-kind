@@ -1,0 +1,64 @@
+Q1: How to solve SBR at vpp fib table?
+Based on VPP design, we can see that fib table should be only mantain based on destation route. so how to solve SBR(Source based Routing)
+Can we add another fib table to mantain SBR?
+Example there:
+1. ip rule list
+#ip rule show 
+0:	from all lookup local
+32762:	from 192.172.8.60/24 lookup 10003
+32763:	from 10.2.154.38/24 lookup 10001
+32764:	from 10.2.150.238/24 lookup 10000
+32766:	from all lookup main
+32767:	from all lookup default
+
+2. vpp fib table
+#vppctl 
+    _______    _        _   _____  ___ 
+ __/ __/ _ \  (_)__    | | / / _ \/ _ \
+ _/ _// // / / / _ \   | |/ / ___/ ___/
+ /_/ /____(_)_/\___/   |___/_/  /_/    
+
+vpp# show ip fib 
+ipv4-VRF:0, fib_index:0, flow hash:[src dst sport dport proto ] epoch:0 flags:none locks:[adjacency:1, default-route:1, ]
+0.0.0.0/0
+  unicast-ip4-chain
+  [@0]: dpo-load-balance: [proto:ip4 index:1 buckets:1 uRPF:54 to:[28442:5694397]]
+    [0] [@11]: src-address,unicast lookup in ip_table_1
+[key: src-address,unicast lookup in ip_table_1>>> lookup in ip_table 1]
+so show ip fib table 1:
+vpp# show ip fib table 1
+ip_table_1, fib_index:1, flow hash:[src dst sport dport proto ] epoch:0 flags:none locks:[API:1, recursive-resolution:1, ]
+0.0.0.0/0
+  unicast-ip4-chain
+  [@0]: dpo-load-balance: [proto:ip4 index:27 buckets:1 uRPF:46 to:[651:136197]]
+    [0] [@0]: dpo-drop ip4
+0.0.0.0/32
+  unicast-ip4-chain
+  [@0]: dpo-load-balance: [proto:ip4 index:28 buckets:1 uRPF:47 to:[0:0]]
+    [0] [@0]: dpo-drop ip4
+10.2.150.0/24 #[key: 10.2.150.0/24>>>source 10.2.150.0/24 via 10.2.150.1 fpbond0]--->this should match source_ip_address__Not__destation_ip_address.
+  unicast-ip4-chain
+  [@0]: dpo-load-balance: [proto:ip4 index:34 buckets:1 uRPF:59 to:[15376:3075200]]
+    [0] [@5]: ipv4 via 10.2.150.1 fpbond0: mtu:1500 next:4 000fe274eae0d2d35a9e84c70800
+10.2.154.0/24
+  unicast-ip4-chain
+  [@0]: dpo-load-balance: [proto:ip4 index:36 buckets:1 uRPF:58 to:[12415:2483000]]
+    [0] [@5]: ipv4 via 10.2.154.1 fpbond1: mtu:1500 next:3 000fe274eae076cd624dfd070800
+192.172.8.0/24
+  unicast-ip4-chain
+  [@0]: dpo-load-balance: [proto:ip4 index:37 buckets:1 uRPF:62 to:[0:0]]
+    [0] [@5]: ipv4 via 192.172.8.1 fpbond2: mtu:1500 next:5 88dffee4185d8211ae8836a20800
+224.0.0.0/4
+  unicast-ip4-chain
+  [@0]: dpo-load-balance: [proto:ip4 index:30 buckets:1 uRPF:49 to:[0:0]]
+    [0] [@0]: dpo-drop ip4
+240.0.0.0/4
+  unicast-ip4-chain
+  [@0]: dpo-load-balance: [proto:ip4 index:29 buckets:1 uRPF:48 to:[0:0]]
+    [0] [@0]: dpo-drop ip4
+255.255.255.255/32
+  unicast-ip4-chain
+  [@0]: dpo-load-balance: [proto:ip4 index:31 buckets:1 uRPF:50 to:[0:0]]
+    [0] [@0]: dpo-drop ip4
+vpp# 
+
