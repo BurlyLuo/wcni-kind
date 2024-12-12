@@ -1,0 +1,10 @@
+# ip -d tuntap list 
+fpeth1: tap
+	Attached to processes:vpp_main(6980)
+fpeth2: tap
+	Attached to processes:vpp_main(6980)
+fpeth3: tap
+	Attached to processes:vpp_main(6980)
+fpeth7: tap
+	Attached to processes:vpp_main(6980)
+
