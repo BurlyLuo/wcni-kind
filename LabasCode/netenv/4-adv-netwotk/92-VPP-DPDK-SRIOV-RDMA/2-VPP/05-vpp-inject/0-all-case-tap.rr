@@ -1,0 +1,54 @@
+# 1. normal tap interface
+ip tuntap add tap01 mode tap
+ip l s tap01 up
+ip -d link show
+
+# ip -d tuntap list
+tap01: tap persist
+        Attached to processes:
+
+# 2. vpp tap-inject mode
+# ip -d tuntap list 
+fpeth1: tap
+	Attached to processes:vpp_main(6980)
+fpeth2: tap
+	Attached to processes:vpp_main(6980)
+fpeth3: tap
+	Attached to processes:vpp_main(6980)
+fpeth7: tap
+	Attached to processes:vpp_main(6980)
+
+# 3. vpp lcp mode
+ip -d tuntap list   
+loop0: tap multi_queue vnet_hdr
+        Attached to processes:vpp_main(2900)
+fpeth1: tap multi_queue vnet_hdr
+        Attached to processes:vpp_main(2900)
+fpeth2: tap multi_queue vnet_hdr
+        Attached to processes:vpp_main(2900)
+fpeth3: tap multi_queue vnet_hdr
+        Attached to processes:vpp_main(2900)
+fpeth4: tap multi_queue vnet_hdr
+        Attached to processes:vpp_main(2900)
+
+# 4. kvm vnet interface
+# ip -d tuntap list 
+vnet47: tap vnet_hdr
+        Attached to processes:qemu-system-x86(27708)
+vnet48: tap vnet_hdr
+        Attached to processes:qemu-system-x86(27708)
+vnet49: tap vnet_hdr
+        Attached to processes:qemu-system-x86(27708)
+vnet50: tap vnet_hdr
+        Attached to processes:qemu-system-x86(27708)
+bookwormm: tap vnet_hdr
+        Attached to processes:qemu-system-x86(79003)
+bookworme0: tap vnet_hdr
+        Attached to processes:qemu-system-x86(79003)
+bookworme1: tap vnet_hdr
+        Attached to processes:qemu-system-x86(79003)
+bookworme2: tap vnet_hdr
+        Attached to processes:qemu-system-x86(79003)
+bookworme3: tap vnet_hdr
+        Attached to processes:qemu-system-x86(79003)
+

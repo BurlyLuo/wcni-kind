@@ -1,0 +1,8 @@
+ip tuntap add tap01 mode tap
+ip l s tap01 up
+ip -d link show
+
+# ip -d tuntap list
+tap01: tap persist
+        Attached to processes:
+
