@@ -1,0 +1,20 @@
+# ip -d tuntap list 
+vnet47: tap vnet_hdr
+        Attached to processes:qemu-system-x86(27708)
+vnet48: tap vnet_hdr
+        Attached to processes:qemu-system-x86(27708)
+vnet49: tap vnet_hdr
+        Attached to processes:qemu-system-x86(27708)
+vnet50: tap vnet_hdr
+        Attached to processes:qemu-system-x86(27708)
+bookwormm: tap vnet_hdr
+        Attached to processes:qemu-system-x86(79003)
+bookworme0: tap vnet_hdr
+        Attached to processes:qemu-system-x86(79003)
+bookworme1: tap vnet_hdr
+        Attached to processes:qemu-system-x86(79003)
+bookworme2: tap vnet_hdr
+        Attached to processes:qemu-system-x86(79003)
+bookworme3: tap vnet_hdr
+        Attached to processes:qemu-system-x86(79003)
+
