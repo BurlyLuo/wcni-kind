@@ -1,0 +1,12 @@
+ip -d tuntap list   
+loop0: tap multi_queue vnet_hdr
+        Attached to processes:vpp_main(2900)
+fpeth1: tap multi_queue vnet_hdr
+        Attached to processes:vpp_main(2900)
+fpeth2: tap multi_queue vnet_hdr
+        Attached to processes:vpp_main(2900)
+fpeth3: tap multi_queue vnet_hdr
+        Attached to processes:vpp_main(2900)
+fpeth4: tap multi_queue vnet_hdr
+        Attached to processes:vpp_main(2900)
+
