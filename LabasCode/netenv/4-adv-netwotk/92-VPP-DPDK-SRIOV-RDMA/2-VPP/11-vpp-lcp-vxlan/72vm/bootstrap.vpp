@@ -1,0 +1,33 @@
+set logging class linux-cp rate-limit 1000 level warn syslog-level notice
+
+lcp default netns dataplane
+lcp lcp-sync on
+lcp lcp-auto-subint on
+
+comment { Create a loopback interface }
+create loopback interface instance 0
+lcp create loop0 host-if loop0
+set interface state loop0 up
+
+comment { Create one LinuxCP Interface Pair for fpeth7 }
+lcp create fpeth7 host-if fpeth7
+set interface ip address fpeth7 10.1.9.12/24
+set interface state fpeth7 up 
+
+comment { Create VxLAN tunnnel }
+set interface state fpeth9 up
+set interface ip address fpeth9 10.1.9.12/24
+
+create bridge-domain 11 learn 1 forward 1 uu-flood 1 flood 1 arp-term 0
+create vxlan tunnel src 10.1.9.12 dst 10.1.9.11 vni 11 decap-next l2
+set interface l2 bridge vxlan_tunnel0 11
+
+loopback create mac 1a:2b:3c:4d:5e:8f
+set interface l2 bridge loop0 11 bvi
+set interface state loop0 up
+set interface ip address loop0 10.1.8.1/24
+set interface state fpeth8 up
+set interface l2 bridge fpeth8 11
+
+ip route add 10.1.5.0/24 via loop0 
+
