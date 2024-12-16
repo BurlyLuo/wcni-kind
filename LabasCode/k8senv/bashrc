@@ -234,8 +234,11 @@ addk3svm-cluster'
 alias delk3svm='delk3svm-cluster()
 {
     for ip in 192.168.2.51 192.168.2.52; do
+        echo "Uninstalling k3s on $ip..."
         sshpass -p hive ssh-copy-id -o StrictHostKeyChecking=no -p 22 root@"$ip" > /dev/null 2>&1 && ssh -o StrictHostKeyChecking=no $ip "bash -c "/root/k3s-uninstall.sh > /dev/null 2>&1""
+        ssh -o StrictHostKeyChecking=no $ip "bash -c "/root/rmvcontainers.sh > /dev/null 2>&1""
     done
+    echo "Deleting kubectl configurations.."
     kubectl config delete-cluster "k3svm"
     kubectl config delete-context "k3svm"
     kubectl config delete-user "k3svm"
