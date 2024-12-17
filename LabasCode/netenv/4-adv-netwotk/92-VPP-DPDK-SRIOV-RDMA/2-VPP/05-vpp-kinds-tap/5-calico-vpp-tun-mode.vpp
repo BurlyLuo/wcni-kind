@@ -1,0 +1,5 @@
+[root@k3s1 ~]# k exec -it wluo-zhgfq  -- ip -d tuntap list 
+eth0: tun multi_queue vnet_hdr persist
+        Attached to processes:
+[root@k3s1 ~]# 
+
