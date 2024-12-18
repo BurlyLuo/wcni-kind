@@ -4,6 +4,33 @@ kcli create vm -i k3s_compressed -P numcpus=4 -P memory=4096 -P disks=[50] -P ro
 
 # 2. add iptables to let 10.1.5.x and 10.1.8.x can reach ext-network.
 ssh 192.168.2.99 "iptables -t nat -A POSTROUTING -s 10.1.0.0/16 -o brnet -j MASQUERADE"
+# 2.1 node 10.1.5.11
+cat <<EOF>/etc/NetworkManager/conf.d/calico.conf
+[keyfile]
+unmanaged-devices=interface-name:cali*;interface-name:tunl*;interface-name:vxlan.calico;interface-name:vxlan-v6.calico;interface-name:wireguard.cali;interface-name:wg-v6.cali
+EOF
+mkdir -p /etc/systemd/system/docker.service.d/
+cat <<EOF>http-proxy.conf
+[Service]
+Environment="HTTP_PROXY=socks5://192.168.2.10:10808"
+Environment="HTTPS_PROXY=socks5://192.168.2.10:10808"
+Environment="NO_PROXY=localhost,127.0.0.1,192.168.0.0/16,10.1.5.11"
+EOF
+systemctl daemon-reload && systemctl restart docker
+
+# 2.2 node 10.1.8.12
+cat <<EOF>/etc/NetworkManager/conf.d/calico.conf
+[keyfile]
+unmanaged-devices=interface-name:cali*;interface-name:tunl*;interface-name:vxlan.calico;interface-name:vxlan-v6.calico;interface-name:wireguard.cali;interface-name:wg-v6.cali
+EOF
+mkdir -p /etc/systemd/system/docker.service.d/ 
+cat <<EOF>http-proxy.conf
+[Service]
+Environment="HTTP_PROXY=socks5://192.168.2.10:10808"
+Environment="HTTPS_PROXY=socks5://192.168.2.10:10808"
+Environment="NO_PROXY=localhost,127.0.0.1,192.168.0.0/16,10.1.8.12"
+EOF
+systemctl daemon-reload && systemctl restart docker
 
 # 3. init k3s cluster
 # 3.1 addk3svm to setup a multi-node k3s cluster.
