@@ -64,7 +64,7 @@ delk3svm-cluster
 5. kubectl create -f https://raw.githubusercontent.com/projectcalico/calico/v3.29.1/manifests/tigera-operator.yaml
 -6. kubectl create -f https://raw.githubusercontent.com/projectcalico/vpp-dataplane/v3.29.0/yaml/calico/installation-default.yaml
 |
-| installation-default.yaml[ipip mode]
+| installation-default.yaml[IPIPCrossSubnet mode]
 [root@k3s1 ~]# cat installation-default.yaml 
 # This section includes base Calico installation configuration.
 # For more information, see: https://projectcalico.docs.tigera.io/master/reference/installation/api#operator.tigera.io/v1.Installation
@@ -78,7 +78,7 @@ spec:
     linuxDataplane: VPP
     ipPools: 
     - cidr: 172.18.0.0/16
-      encapsulation: IPIP
+      encapsulation: IPIPCrossSubnet
 
 ---
 
