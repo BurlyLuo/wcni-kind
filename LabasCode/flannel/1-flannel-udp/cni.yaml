@@ -16,8 +16,11 @@ spec:
         app: wluo
     spec:
       containers:
-      - image: 192.168.2.100:5000/nettool
+      - image: 192.168.2.100:5000/xcni_http_keepalive_timeout_500s
         name: nettoolbox
+        volumeMounts:
+        - name: udp-server-client
+          mountPath: /root/udp
         env:
           - name: NETTOOL_NODE_NAME
             valueFrom:
@@ -25,6 +28,12 @@ spec:
                 fieldPath: spec.nodeName
         securityContext:
           privileged: true
+      volumes:
+      - name: udp-server-client
+        hostPath: 
+          path: /root/udp
+          type: Directory
+
 ---
 apiVersion: v1
 kind: Service
