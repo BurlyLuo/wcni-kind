@@ -9,7 +9,13 @@ networking:
   podSubnet: "10.244.0.0/16"
 nodes:
   - role: control-plane
+    extraMounts:
+    - hostPath: ./udp
+      containerPath: /root/udp
   - role: worker
+    extraMounts:
+    - hostPath: ./udp
+      containerPath: /root/udp
 
 containerdConfigPatches:
   - |-
