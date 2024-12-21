@@ -250,7 +250,14 @@ delk3svm-cluster'
 alias vm="cd /root/wcni-kind/LabasCode/k8senv/vmenv"
 alias kclissh='ssh-keygen -f "/root/.ssh/known_hosts" -R "192.168.2.96" > /dev/null 2>&1'
 alias vms='ssh-keygen -f "/root/.ssh/known_hosts" -R "192.168.2.127" > /dev/null 2>&1 && ssh -o StrictHostKeyChecking=no 192.168.2.127'
+alias 98='ssh -o StrictHostKeyChecking=no 192.168.2.98'
 alias 51='ssh -o StrictHostKeyChecking=no 10.1.5.51'
+alias 52='ssh -o StrictHostKeyChecking=no 10.1.8.52'
+alias 61='sshpass -p hive ssh-copy-id -o StrictHostKeyChecking=no -p 22 root@192.168.2.61 > /dev/null 2>&1 && ssh -o StrictHostKeyChecking=no 192.168.2.61'
+alias 62='sshpass -p hive ssh-copy-id -o StrictHostKeyChecking=no -p 22 root@192.168.2.62 > /dev/null 2>&1 && ssh -o StrictHostKeyChecking=no 192.168.2.62'
+alias 71='sshpass -p hive ssh-copy-id -o StrictHostKeyChecking=no -p 22 root@192.168.2.71 > /dev/null 2>&1 && ssh -o StrictHostKeyChecking=no 192.168.2.71'
+alias 72='sshpass -p hive ssh-copy-id -o StrictHostKeyChecking=no -p 22 root@192.168.2.72 > /dev/null 2>&1 && ssh -o StrictHostKeyChecking=no 192.168.2.72'
+alias vppof="ssh -o StrictHostKeyChecking=no 192.168.2.71 'systemctl stop vpp' ; ssh -o StrictHostKeyChecking=no 192.168.2.72 'systemctl stop vpp'"
 alias 52='ssh -o StrictHostKeyChecking=no 10.1.8.52'
 alias 61='sshpass -p hive ssh-copy-id -o StrictHostKeyChecking=no -p 22 root@192.168.2.61 > /dev/null 2>&1 && ssh -o StrictHostKeyChecking=no 192.168.2.61'
 alias 62='sshpass -p hive ssh-copy-id -o StrictHostKeyChecking=no -p 22 root@192.168.2.62 > /dev/null 2>&1 && ssh -o StrictHostKeyChecking=no 192.168.2.62'
@@ -297,6 +304,11 @@ fi
 # PROXY:
 git config --global http.proxy socks5://192.168.2.10:10808
 git config --global https.proxy socks5://192.168.2.10:10808
+
+# http/https proxy
+export HTTP_PROXY="socks5://192.168.2.10:10808"
+export HTTPS_PROXY="socks5://192.168.2.10:10808"
+export NO_PROXY="localhost,127.0.0.1"
 
 go env -w GO111MODULE=on && go env -w GOPROXY=https://goproxy.cn,direct
 # wget https://go.dev/dl/go1.23.2.linux-amd64.tar.gz
