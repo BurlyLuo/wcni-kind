@@ -9,8 +9,9 @@ cat <<EOF>/etc/NetworkManager/conf.d/calico.conf
 [keyfile]
 unmanaged-devices=interface-name:cali*;interface-name:tunl*;interface-name:vxlan.calico;interface-name:vxlan-v6.calico;interface-name:wireguard.cali;interface-name:wg-v6.cali
 EOF
+
 mkdir -p /etc/systemd/system/docker.service.d/
-cat <<EOF>http-proxy.conf
+cat <<EOF>/etc/systemd/system/docker.service.d/http-proxy.conf
 [Service]
 Environment="HTTP_PROXY=socks5://192.168.2.10:10808"
 Environment="HTTPS_PROXY=socks5://192.168.2.10:10808"
@@ -23,12 +24,13 @@ cat <<EOF>/etc/NetworkManager/conf.d/calico.conf
 [keyfile]
 unmanaged-devices=interface-name:cali*;interface-name:tunl*;interface-name:vxlan.calico;interface-name:vxlan-v6.calico;interface-name:wireguard.cali;interface-name:wg-v6.cali
 EOF
-mkdir -p /etc/systemd/system/docker.service.d/ 
-cat <<EOF>http-proxy.conf
+
+mkdir -p /etc/systemd/system/docker.service.d/
+cat <<EOF>/etc/systemd/system/docker.service.d/http-proxy.conf
 [Service]
 Environment="HTTP_PROXY=socks5://192.168.2.10:10808"
 Environment="HTTPS_PROXY=socks5://192.168.2.10:10808"
-Environment="NO_PROXY=localhost,127.0.0.1,192.168.0.0/16,10.1.8.12"
+Environment="NO_PROXY=localhost,127.0.0.1,192.168.0.0/16,10.1.5.11"
 EOF
 systemctl daemon-reload && systemctl restart docker
 
