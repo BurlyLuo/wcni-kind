@@ -81,8 +81,32 @@ alias la='ls -A'
 alias l='ls -CF'
 alias vi="vim"
 
-#alias push='function custom_push() { git add . && git commit -m "${1:-"'"Adjust/Rename the Directory/File"'"}" && git push gitee master ; git push github master ; }; custom_push'
-alias push='function custom_push() { if [ -z "$(git status --porcelain)" ]; then return 0; fi; git add .; git commit -m "${1:-"Adjust/Rename the Directory/File"}"; git push gitee master; git push github master; }; custom_push'
+# Github/Gitee
+alias push='custom_push() 
+{ 
+  if [ -z "$(git status --porcelain)" ]; then
+    return 0 
+  fi
+  git add .
+  git commit -m "${1:-"Adjust/Rename the Directory/File"}"
+  git push gitee master
+  git push github master 
+} 
+custom_push'
+
+alias scc='count_today_commits()
+{
+  DATE=$(date +"%Y-%m-%d")
+    
+  START_TIME="$DATE 00:00:00"
+  END_TIME="$DATE 23:59:59"
+    
+  COMMIT_COUNT=$(git log --since="$START_TIME" --until="$END_TIME" --pretty=format:"%ad %h" --date=short | grep "$DATE" | wc -l)
+    
+  echo "$DATE git_commit_times: $COMMIT_COUNT"
+}
+count_today_commits'
+
 
 alias svcd='kubectl delete pods client server && kubectl delete svc clientsvc serversvc'
 
