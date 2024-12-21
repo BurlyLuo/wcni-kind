@@ -6,7 +6,7 @@
       "prefix": "clab",
       "mgmt": {
         "network": "clab",
-        "bridge": "br-73595bf99069",
+        "bridge": "br-2f7faac0f767",
         "ipv4-subnet": "172.20.20.0/24",
         "ipv4-gw": "172.20.20.1",
         "ipv6-subnet": "2001:172:20:20::/64",
@@ -34,7 +34,7 @@
       "mgmt-ipv6-prefix-length": 64,
       "mac-address": "",
       "labels": {
-        "clab-mgmt-net-bridge": "br-73595bf99069",
+        "clab-mgmt-net-bridge": "br-2f7faac0f767",
         "clab-node-group": "",
         "clab-node-kind": "linux",
         "clab-node-lab-dir": "/root/wcni-kind/LabasCode/netenv/4-adv-netwotk/11-IPSec/1-linux-ipsec/clab-ipsec-transport-mode/gwx",
@@ -61,7 +61,7 @@
       "mgmt-ipv6-prefix-length": 64,
       "mac-address": "",
       "labels": {
-        "clab-mgmt-net-bridge": "br-73595bf99069",
+        "clab-mgmt-net-bridge": "br-2f7faac0f767",
         "clab-node-group": "",
         "clab-node-kind": "linux",
         "clab-node-lab-dir": "/root/wcni-kind/LabasCode/netenv/4-adv-netwotk/11-IPSec/1-linux-ipsec/clab-ipsec-transport-mode/ipsec1",
@@ -88,7 +88,7 @@
       "mgmt-ipv6-prefix-length": 64,
       "mac-address": "",
       "labels": {
-        "clab-mgmt-net-bridge": "br-73595bf99069",
+        "clab-mgmt-net-bridge": "br-2f7faac0f767",
         "clab-node-group": "",
         "clab-node-kind": "linux",
         "clab-node-lab-dir": "/root/wcni-kind/LabasCode/netenv/4-adv-netwotk/11-IPSec/1-linux-ipsec/clab-ipsec-transport-mode/ipsec2",
@@ -104,13 +104,13 @@
       "a": {
         "node": "ipsec1",
         "interface": "eth2",
-        "mac": "aa:c1:ab:e3:7e:d8",
+        "mac": "aa:c1:ab:32:90:bc",
         "peer": "z"
       },
       "z": {
         "node": "gwx",
         "interface": "net1",
-        "mac": "aa:c1:ab:9c:99:af",
+        "mac": "aa:c1:ab:15:b9:67",
         "peer": "a"
       }
     },
@@ -118,13 +118,13 @@
       "a": {
         "node": "ipsec2",
         "interface": "eth2",
-        "mac": "aa:c1:ab:5c:fd:77",
+        "mac": "aa:c1:ab:ff:fb:93",
         "peer": "z"
       },
       "z": {
         "node": "gwx",
         "interface": "net2",
-        "mac": "aa:c1:ab:9e:84:09",
+        "mac": "aa:c1:ab:dc:be:72",
         "peer": "a"
       }
     }
