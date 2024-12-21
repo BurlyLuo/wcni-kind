@@ -12,10 +12,14 @@ nodes:
     extraMounts:
     - hostPath: ./udp
       containerPath: /root/udp
+    - hostPath: ./http-proxy.conf
+      containerPath: /etc/systemd/system/containerd.service.d/http-proxy.conf
   - role: worker
     extraMounts:
     - hostPath: ./udp
       containerPath: /root/udp
+    - hostPath: ./http-proxy.conf
+      containerPath: /etc/systemd/system/containerd.service.d/http-proxy.conf
 
 containerdConfigPatches:
   - |-
