@@ -1,6 +1,6 @@
 #!/bin/bash
 set -v
-cat <<EOF>clab.yaml | clab deploy -t clab.yaml -
+cat <<EOF>clab.yaml | clab deploy -d -t clab.yaml -
 name: ipsec-transport-mode
 topology:
   nodes:
