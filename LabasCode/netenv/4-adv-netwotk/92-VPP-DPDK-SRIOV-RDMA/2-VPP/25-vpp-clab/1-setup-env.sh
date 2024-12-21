@@ -10,7 +10,9 @@ topology:
       binds:
         - config/vpp1:/etc/vpp
       exec:
-        - bash -c 'apt update ; apt install tcpdump lrzsz net-tools'
+        - bash -c 'apt update ; apt -y install tcpdump lrzsz net-tools'
+      env:
+        TZ: Asia/Shanghai
           
     vpp2:
       kind: linux
@@ -18,7 +20,9 @@ topology:
       binds:
         - config/vpp2:/etc/vpp
       exec:
-        - bash -c 'apt update ; apt install tcpdump lrzsz net-tools'
+        - bash -c 'apt update ; apt -y install tcpdump lrzsz net-tools'
+      env:
+        TZ: Asia/Shanghai
 
   links:
     - endpoints: ["vpp1:eth1", "vpp2:eth1"]
