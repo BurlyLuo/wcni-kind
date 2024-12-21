@@ -1,0 +1,23 @@
+#!/bin/bash
+set -v
+cat <<EOF>clab.yaml | clab deploy -t clab.yaml -
+name: cnf
+topology:
+  nodes:
+    vpp1:
+      kind: linux
+      image: ligato/vpp-base
+      binds:
+        - config/vpp1:/etc/vpp
+      exec:
+        - bash -c 'apt update ; apt install tcpdump lrzsz &'
+          
+    vpp2:
+      kind: linux
+      image: ligato/vpp-base
+      binds:
+        - config/vpp2:/etc/vpp
+      
+  links:
+    - endpoints: ["vpp1:eth1", "vpp2:eth1"]
+EOF
