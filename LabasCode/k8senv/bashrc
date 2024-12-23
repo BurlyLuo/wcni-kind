@@ -208,6 +208,7 @@ alias key="cat /root/wcni-kind/LabasCode/weiluo/env.x"
 # vpp
 alias vpp="cd /root/wcni-kind/LabasCode/netenv/4-adv-netwotk/92-VPP-DPDK-SRIOV-RDMA/2-VPP"
 alias image="cd /var/lib/libvirt/images && ls -lrth"
+alias vppcc='echo "sed \"/^\s*#/d; /^$/d\" "'
 
 # env
 alias envkind='echo "# kind version" && kind version; echo "# docker info" && docker info; echo "# kubectl version" && kubectl version; echo "# helm version" && helm version; echo "# lsb_release -a" && lsb_release -a; echo "# uname -a" && uname -a'
@@ -285,6 +286,7 @@ alias vppof="ssh -o StrictHostKeyChecking=no 192.168.2.71 'systemctl stop vpp' ;
 alias 52='ssh -o StrictHostKeyChecking=no 10.1.8.52'
 alias 61='sshpass -p hive ssh-copy-id -o StrictHostKeyChecking=no -p 22 root@192.168.2.61 > /dev/null 2>&1 && ssh -o StrictHostKeyChecking=no 192.168.2.61'
 alias 62='sshpass -p hive ssh-copy-id -o StrictHostKeyChecking=no -p 22 root@192.168.2.62 > /dev/null 2>&1 && ssh -o StrictHostKeyChecking=no 192.168.2.62'
+alias 66='ssh -o StrictHostKeyChecking=no 192.168.2.66'
 alias 71='sshpass -p hive ssh-copy-id -o StrictHostKeyChecking=no -p 22 root@192.168.2.71 > /dev/null 2>&1 && ssh -o StrictHostKeyChecking=no 192.168.2.71'
 alias 72='sshpass -p hive ssh-copy-id -o StrictHostKeyChecking=no -p 22 root@192.168.2.72 > /dev/null 2>&1 && ssh -o StrictHostKeyChecking=no 192.168.2.72'
 alias vppof="ssh -o StrictHostKeyChecking=no 192.168.2.71 'systemctl stop vpp' ; ssh -o StrictHostKeyChecking=no 192.168.2.72 'systemctl stop vpp'"
