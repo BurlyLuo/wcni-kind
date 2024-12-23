@@ -8,7 +8,7 @@ topology:
       kind: linux
       image: ligato/vpp-base
       binds:
-        - config/vpp1:/etc/vpp
+        - startup-conf/vpp1:/etc/vpp
       exec:
         - bash -c 'apt update ; apt -y install tcpdump lrzsz net-tools'
       env:
@@ -18,7 +18,7 @@ topology:
       kind: linux
       image: ligato/vpp-base
       binds:
-        - config/vpp2:/etc/vpp
+        - startup-conf/vpp2:/etc/vpp
       exec:
         - bash -c 'apt update ; apt -y install tcpdump lrzsz net-tools'
       env:
