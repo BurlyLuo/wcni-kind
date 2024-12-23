@@ -6,7 +6,7 @@
       "prefix": "clab",
       "mgmt": {
         "network": "clab",
-        "bridge": "br-3cfc5f475ef1",
+        "bridge": "br-cc1f4109d5bf",
         "ipv4-subnet": "172.20.20.0/24",
         "ipv4-gw": "172.20.20.1",
         "ipv6-subnet": "2001:172:20:20::/64",
@@ -28,13 +28,13 @@
       "image": "ligato/vpp-base",
       "mgmt-net": "",
       "mgmt-intf": "",
-      "mgmt-ipv4-address": "172.20.20.3",
+      "mgmt-ipv4-address": "172.20.20.2",
       "mgmt-ipv4-prefix-length": 24,
-      "mgmt-ipv6-address": "2001:172:20:20::3",
+      "mgmt-ipv6-address": "2001:172:20:20::2",
       "mgmt-ipv6-prefix-length": 64,
       "mac-address": "",
       "labels": {
-        "clab-mgmt-net-bridge": "br-3cfc5f475ef1",
+        "clab-mgmt-net-bridge": "br-cc1f4109d5bf",
         "clab-node-group": "",
         "clab-node-kind": "linux",
         "clab-node-lab-dir": "/root/wcni-kind/LabasCode/netenv/4-adv-netwotk/92-VPP-DPDK-SRIOV-RDMA/2-VPP/25-vpp-clab/clab-cnf/vpp1",
@@ -55,13 +55,13 @@
       "image": "ligato/vpp-base",
       "mgmt-net": "",
       "mgmt-intf": "",
-      "mgmt-ipv4-address": "172.20.20.2",
+      "mgmt-ipv4-address": "172.20.20.3",
       "mgmt-ipv4-prefix-length": 24,
-      "mgmt-ipv6-address": "2001:172:20:20::2",
+      "mgmt-ipv6-address": "2001:172:20:20::3",
       "mgmt-ipv6-prefix-length": 64,
       "mac-address": "",
       "labels": {
-        "clab-mgmt-net-bridge": "br-3cfc5f475ef1",
+        "clab-mgmt-net-bridge": "br-cc1f4109d5bf",
         "clab-node-group": "",
         "clab-node-kind": "linux",
         "clab-node-lab-dir": "/root/wcni-kind/LabasCode/netenv/4-adv-netwotk/92-VPP-DPDK-SRIOV-RDMA/2-VPP/25-vpp-clab/clab-cnf/vpp2",
@@ -77,13 +77,13 @@
       "a": {
         "node": "vpp1",
         "interface": "eth1",
-        "mac": "aa:c1:ab:87:7d:c7",
+        "mac": "aa:c1:ab:27:f8:a6",
         "peer": "z"
       },
       "z": {
         "node": "vpp2",
         "interface": "eth1",
-        "mac": "aa:c1:ab:21:63:b9",
+        "mac": "aa:c1:ab:aa:bc:a2",
         "peer": "a"
       }
     }
