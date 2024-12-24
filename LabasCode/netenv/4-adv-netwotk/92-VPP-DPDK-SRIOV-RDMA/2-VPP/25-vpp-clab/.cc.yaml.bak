@@ -1,0 +1,10 @@
+name: macvlan
+
+topology:
+  nodes:
+    node1:
+      kind: linux
+      image: alpine:3
+
+  links:
+    - endpoints: ["node1:eth1", "host:ens38"]
