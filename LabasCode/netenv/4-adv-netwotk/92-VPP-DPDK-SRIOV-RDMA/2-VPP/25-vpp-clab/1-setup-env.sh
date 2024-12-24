@@ -10,6 +10,7 @@ topology:
       binds:
         - startup-conf/vpp1:/etc/vpp
       exec:
+        - ip l s dev eth1 address aa:c1:ab:06:5b:01
         - bash -c 'apt update ; apt -y install tcpdump lrzsz net-tools'
       env:
         TZ: Asia/Shanghai
@@ -20,10 +21,12 @@ topology:
       binds:
         - startup-conf/vpp2:/etc/vpp
       exec:
+        - ip l s dev eth1 address aa:c1:ab:06:5b:02
         - bash -c 'apt update ; apt -y install tcpdump lrzsz net-tools'
       env:
         TZ: Asia/Shanghai
 
   links:
-    - endpoints: ["vpp1:eth1", "vpp2:eth1"]
+    - endpoints: ["vpp1:eth1", "macvlan:ens38"]
+    - endpoints: ["vpp2:eth1", "macvlan:ens38"]
 EOF
