@@ -1,4 +1,5 @@
 # ~/.bashrc: executed by bash(1) for non-login shells.
+
 # see /usr/share/doc/bash/examples/startup-files (in the package bash-doc)
 # for examples
 # If not running interactively, don't do anything
@@ -209,6 +210,7 @@ alias key="cat /root/wcni-kind/LabasCode/weiluo/env.x"
 alias vpp="cd /root/wcni-kind/LabasCode/netenv/4-adv-netwotk/92-VPP-DPDK-SRIOV-RDMA/2-VPP"
 alias image="cd /var/lib/libvirt/images && ls -lrth"
 alias vppcc='echo "sed \"/^\s*#/d; /^$/d\" "'
+alias vppdump='echo pcap trace rx tx max 300000 intfc any'
 
 # env
 alias envkind='echo "# kind version" && kind version; echo "# docker info" && docker info; echo "# kubectl version" && kubectl version; echo "# helm version" && helm version; echo "# lsb_release -a" && lsb_release -a; echo "# uname -a" && uname -a'
@@ -334,7 +336,7 @@ git config --global https.proxy socks5://192.168.2.10:10808
 # http/https proxy
 export HTTP_PROXY="socks5://192.168.2.10:10808"
 export HTTPS_PROXY="socks5://192.168.2.10:10808"
-export NO_PROXY="localhost,127.0.0.1"
+export NO_PROXY="localhost,127.0.0.1,10.1.0.0/16"
 
 go env -w GO111MODULE=on && go env -w GOPROXY=https://goproxy.cn,direct
 # wget https://go.dev/dl/go1.23.2.linux-amd64.tar.gz
