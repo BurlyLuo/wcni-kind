@@ -6,7 +6,7 @@
       "prefix": "clab",
       "mgmt": {
         "network": "clab",
-        "bridge": "br-d49acc01e4c9",
+        "bridge": "br-c781f1886e4c",
         "ipv4-subnet": "172.20.20.0/24",
         "ipv4-gw": "172.20.20.1",
         "ipv6-subnet": "3fff:172:20:20::/64",
@@ -23,7 +23,7 @@
       "longname": "clab-cnf-vpp1",
       "fqdn": "vpp1.cnf.io",
       "group": "",
-      "labdir": "/root/wcni-kind/LabasCode/netenv/4-adv-netwotk/92-VPP-DPDK-SRIOV-RDMA/2-VPP/25-vpp-clab/clab-cnf/vpp1",
+      "labdir": "/root/wcni-kind/LabasCode/netenv/4-adv-netwotk/92-VPP-DPDK-SRIOV-RDMA/2-VPP/25-vpp-macvlan/clab-cnf/vpp1",
       "kind": "linux",
       "image": "ligato/vpp-base",
       "mgmt-net": "",
@@ -34,14 +34,14 @@
       "mgmt-ipv6-prefix-length": 64,
       "mac-address": "",
       "labels": {
-        "clab-mgmt-net-bridge": "br-d49acc01e4c9",
+        "clab-mgmt-net-bridge": "br-c781f1886e4c",
         "clab-node-group": "",
         "clab-node-kind": "linux",
-        "clab-node-lab-dir": "/root/wcni-kind/LabasCode/netenv/4-adv-netwotk/92-VPP-DPDK-SRIOV-RDMA/2-VPP/25-vpp-clab/clab-cnf/vpp1",
+        "clab-node-lab-dir": "/root/wcni-kind/LabasCode/netenv/4-adv-netwotk/92-VPP-DPDK-SRIOV-RDMA/2-VPP/25-vpp-macvlan/clab-cnf/vpp1",
         "clab-node-name": "vpp1",
         "clab-node-type": "",
         "clab-owner": "root",
-        "clab-topo-file": "/root/wcni-kind/LabasCode/netenv/4-adv-netwotk/92-VPP-DPDK-SRIOV-RDMA/2-VPP/25-vpp-clab/clab.yaml",
+        "clab-topo-file": "/root/wcni-kind/LabasCode/netenv/4-adv-netwotk/92-VPP-DPDK-SRIOV-RDMA/2-VPP/25-vpp-macvlan/clab.yaml",
         "containerlab": "cnf"
       },
       "port-bindings": [
@@ -53,7 +53,7 @@
       "longname": "clab-cnf-vpp2",
       "fqdn": "vpp2.cnf.io",
       "group": "",
-      "labdir": "/root/wcni-kind/LabasCode/netenv/4-adv-netwotk/92-VPP-DPDK-SRIOV-RDMA/2-VPP/25-vpp-clab/clab-cnf/vpp2",
+      "labdir": "/root/wcni-kind/LabasCode/netenv/4-adv-netwotk/92-VPP-DPDK-SRIOV-RDMA/2-VPP/25-vpp-macvlan/clab-cnf/vpp2",
       "kind": "linux",
       "image": "ligato/vpp-base",
       "mgmt-net": "",
@@ -64,14 +64,14 @@
       "mgmt-ipv6-prefix-length": 64,
       "mac-address": "",
       "labels": {
-        "clab-mgmt-net-bridge": "br-d49acc01e4c9",
+        "clab-mgmt-net-bridge": "br-c781f1886e4c",
         "clab-node-group": "",
         "clab-node-kind": "linux",
-        "clab-node-lab-dir": "/root/wcni-kind/LabasCode/netenv/4-adv-netwotk/92-VPP-DPDK-SRIOV-RDMA/2-VPP/25-vpp-clab/clab-cnf/vpp2",
+        "clab-node-lab-dir": "/root/wcni-kind/LabasCode/netenv/4-adv-netwotk/92-VPP-DPDK-SRIOV-RDMA/2-VPP/25-vpp-macvlan/clab-cnf/vpp2",
         "clab-node-name": "vpp2",
         "clab-node-type": "",
         "clab-owner": "root",
-        "clab-topo-file": "/root/wcni-kind/LabasCode/netenv/4-adv-netwotk/92-VPP-DPDK-SRIOV-RDMA/2-VPP/25-vpp-clab/clab.yaml",
+        "clab-topo-file": "/root/wcni-kind/LabasCode/netenv/4-adv-netwotk/92-VPP-DPDK-SRIOV-RDMA/2-VPP/25-vpp-macvlan/clab.yaml",
         "containerlab": "cnf"
       },
       "port-bindings": [
@@ -83,7 +83,7 @@
       "a": {
         "node": "vpp1",
         "interface": "eth1",
-        "mac": "aa:c1:ab:47:ad:b9",
+        "mac": "aa:c1:ab:00:18:c5",
         "peer": "z"
       },
       "z": {
@@ -97,7 +97,7 @@
       "a": {
         "node": "vpp2",
         "interface": "eth1",
-        "mac": "aa:c1:ab:a2:62:93",
+        "mac": "aa:c1:ab:88:c4:15",
         "peer": "z"
       },
       "z": {
