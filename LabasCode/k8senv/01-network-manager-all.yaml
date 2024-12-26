@@ -20,6 +20,8 @@ network:
       dhcp4: no
     ens224:
       dhcp4: no
+    ensens257:
+      dhcp4: no
 
   vlans:
     ens40.10:
