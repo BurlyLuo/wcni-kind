@@ -4,13 +4,11 @@ The example files from the tutorial [Creating a SoNIC NOS Virtual Lab](http://19
 
 ```
 brctl addbr mgtbr0
-```
-```
 brctl addbr vmbr0
 ```
-
 The default login to SoNIC: ```admin/YourPaSsWoRd```
 
+Configuration reload
 ```
 sudo config reload
 ```
