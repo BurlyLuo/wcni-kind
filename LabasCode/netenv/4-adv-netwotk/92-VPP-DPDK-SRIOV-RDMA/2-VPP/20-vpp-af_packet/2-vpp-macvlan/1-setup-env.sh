@@ -27,6 +27,6 @@ topology:
         TZ: Asia/Shanghai
 
   links:
-    - endpoints: ["vpp1:eth1", "macvlan:ens38"]
-    - endpoints: ["vpp2:eth1", "macvlan:ens38"]
+    - endpoints: ["vpp1:eth1", "macvlan:ens256"]
+    - endpoints: ["vpp2:eth1", "macvlan:ens256"]
 EOF
