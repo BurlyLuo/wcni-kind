@@ -218,20 +218,37 @@ alias envkind='echo "# kind version" && kind version; echo "# docker info" && do
 # k3s
 alias k3sconfig="export KUBECONFIG=/etc/rancher/k3s/k3s.yaml"
 
-alias addk3s="rm -rf /usr/local/bin/k3s/ ; wget http://192.168.2.100/http/k3s -P /usr/local/bin/ && chmod +x /usr/local/bin/k3s && INSTALL_K3S_SKIP_DOWNLOAD=true INSTALL_K3S_EXEC='--docker --flannel-backend=none --disable=traefik --disable=servicelb --cluster-cidr=10.42.0.0/16,2001:cafe:42::/56 --service-cidr=10.43.0.0/16,2001:cafe:43::/112 --node-ip=192.168.2.99,1010:501::99' /root/wcni-kind/LabasCode/k8senv/vmenv/k3senv/k3s-install.sh && export KUBECONFIG=/etc/rancher/k3s/k3s.yaml"
+alias addk3s="INSTALL_K3S_SKIP_DOWNLOAD=true INSTALL_K3S_EXEC='--docker --flannel-backend=none --disable=traefik --disable=servicelb --cluster-cidr=10.42.0.0/16,2001:cafe:42::/56 --service-cidr=10.43.0.0/16,2001:cafe:43::/112 --node-ip=192.168.2.99,1010:501::99' /usr/local/bin/k3s-install.sh && export KUBECONFIG=/etc/rancher/k3s/k3s.yaml"
 
-alias kpraddk3s="rm -rf /usr/local/bin/k3s/ ; wget http://192.168.2.100/http/k3s -P /usr/local/bin/ && chmod +x /usr/local/bin/k3s && INSTALL_K3S_SKIP_DOWNLOAD=true INSTALL_K3S_EXEC='--docker --flannel-backend=none --disable-kube-proxy --disable=traefik --disable=servicelb --cluster-cidr=10.42.0.0/16 --service-cidr=10.43.0.0/16 --node-ip=192.168.2.99' /root/wcni-kind/LabasCode/k8senv/vmenv/k3senv/k3s-install.sh && export KUBECONFIG=/etc/rancher/k3s/k3s.yaml"
+alias kpraddk3s="INSTALL_K3S_SKIP_DOWNLOAD=true INSTALL_K3S_EXEC='--docker --flannel-backend=none --disable-kube-proxy --disable=traefik --disable=servicelb --cluster-cidr=10.42.0.0/16 --service-cidr=10.43.0.0/16 --node-ip=192.168.2.99' /usr/local/bin/k3s-install.sh && export KUBECONFIG=/etc/rancher/k3s/k3s.yaml"
 
 alias appcni="kubectl apply -f /root/wcni-kind/LabasCode/multus/20-kind-multus-macvlan-dualstack/k8snetworkplumbingwg/"
 
-alias delk3s="sudo /root/wcni-kind/LabasCode/k8senv/vmenv/k3senv/k3s-uninstall.sh && docker stop \$(docker ps -aq --filter 'name=k8s_') ; docker rm \$(docker ps -aq --filter 'name=k8s_') ; docker system prune -f && docker network create --driver bridge --subnet=172.18.0.0/16 --gateway=172.18.0.1 --ipv6 --subnet=172:18:0:1::/64 kind ; rm -rf /etc/cni/net.d/* ; df -h /"
+alias delk3s="/usr/local/bin/k3s-uninstall.sh && docker stop \$(docker ps -aq --filter 'name=k8s_') ; docker rm \$(docker ps -aq --filter 'name=k8s_') ; docker system prune -f && docker network create --driver bridge --subnet=172.18.0.0/16 --gateway=172.18.0.1 --ipv6 --subnet=172:18:0:1::/64 kind ; rm -rf /etc/cni/net.d/* ; df -h /"
 
 # vmk3s
-alias addk3svm='addk3svm-cluster()
-{
+alias addk3svms='addk3svms-cluster() {
+    echo "[*] Refreshing the environment..."
+    #delk3svms
+
+    echo "[*] Settingup k3s node..."
+    if [ -z "$(kcli list vms | egrep k1\|k2\|k3)" ]; then
+        kcli create vm -i k3s_compressed -P numcpus=6 -P memory=8192 -P disks=[50] -P rootpassword=hive -P nets="[{\"name\":\"vppdpdk5\",\"ip\":\"10.1.5.51\",\"netmask\":\"24\",\"gateway\":\"10.1.5.3\"},{\"name\":\"vppdpdk5\"},{\"name\":\"vppdpdk8\"},{\"name\":\"vppdpdk9\"}]" k1
+        kcli create vm -i k3s_compressed -P numcpus=6 -P memory=8192 -P disks=[50] -P rootpassword=hive -P nets="[{\"name\":\"vppdpdk8\",\"ip\":\"10.1.8.52\",\"netmask\":\"24\",\"gateway\":\"10.1.8.3\"},{\"name\":\"vppdpdk5\"},{\"name\":\"vppdpdk8\"},{\"name\":\"vppdpdk9\"}]" k2; \
+        kcli create vm -i k3s_compressed -P numcpus=6 -P memory=8192 -P disks=[50] -P rootpassword=hive -P nets="[{\"name\":\"vppdpdk8\",\"ip\":\"10.1.8.53\",\"netmask\":\"24\",\"gateway\":\"10.1.8.3\"},{\"name\":\"vppdpdk5\"},{\"name\":\"vppdpdk8\"},{\"name\":\"vppdpdk9\"}]" k3; \
+    fi
+
+    echo "[*] Initializing k3s cluster with k3sup..."
+    until ssh -o StrictHostKeyChecking=no -o BatchMode=yes -o ConnectTimeout=2 10.1.8.53 exit;do sleep 15;done
     k3s_version=v1.27.3+k3s1
     master_ip="10.1.5.51"
-    for ip in 10.1.5.51 10.1.8.52; do
+    for ip in 10.1.5.51 10.1.8.52 10.1.8.53; do
+        echo "[*] Loading k3s base image..."
+        #ssh -o StrictHostKeyChecking=no $ip "wget -q -P /root/ http://192.168.2.100/http/k3s-airgap-images-amd64.tar ; docker load -i /root/k3s-airgap-images-amd64.tar"
+        #ssh -o StrictHostKeyChecking=no $ip "wget -q -P /root/ http://192.168.2.100/http/k3s-uninstall.sh"
+        echo "[*] Downloading cni bin file..."
+        #ssh -o StrictHostKeyChecking=no $ip "mkdir -p /opt/cni/bin ; wget -q -r -np -nH --cut-dirs=3 --directory-prefix=/opt/cni/bin/ http://192.168.2.100/k3s/cni/bin/"
+
         if [ "$ip" == "$master_ip" ]; then
             k3sup install \
                 --ip="$master_ip" \
@@ -242,7 +259,7 @@ alias addk3svm='addk3svm-cluster()
                 --k3s-version="$k3s_version" \
                 --k3s-extra-args="--docker --flannel-backend=none --cluster-cidr=10.244.0.0/16 --disable-network-policy --disable traefik --disable servicelb --node-ip=$master_ip" \
                 --local-path="$HOME/.kube/config" \
-                --context=k3svm
+                --context=k3svms
         else
             k3sup join \
                 --ip="$ip" \
@@ -253,25 +270,35 @@ alias addk3svm='addk3svm-cluster()
                 --server-ip="$master_ip" \
                 --server-user=root
         fi
+        echo "[*] Deleting socks5 PROXY..."
+        ssh -o StrictHostKeyChecking=no $ip "env | grep PROXY"
+        if [ $? == 0 ]; then
+            ssh -o StrictHostKeyChecking=no $ip "sed -i \"/PROXY=/s/^/# /\" ~/.bashrc"
+        fi
     done
 
 }
-addk3svm-cluster'
+addk3svms-cluster'
 
-alias delk3svm='delk3svm-cluster()
-{
-    for ip in 10.1.5.51 10.1.8.52; do
-        echo "Uninstalling k3s on $ip..."
-        sshpass -p hive ssh-copy-id -o StrictHostKeyChecking=no -p 22 root@"$ip" > /dev/null 2>&1 && ssh -o StrictHostKeyChecking=no $ip "bash -c "/root/k3s-uninstall.sh > /dev/null 2>&1""
-        ssh -o StrictHostKeyChecking=no $ip "/root/rmvcontainers.sh > /dev/null 2>&1 ; rm -rf /etc/cni/net.d/*"
+alias delk3svms='delk3svms-cluster() {
+    for ip in 10.1.5.51 10.1.8.52 10.1.8.53; do
+        echo "[*] Uninstalling k3s on $ip..."
+        sed -i '1!d' /root/.ssh/known_hosts
+        scp -o StrictHostKeyChecking=no /root/wcni-kind/LabasCode/k8senv/vmenv/k3senv/k3s-uninstall.sh $ip:/root/ > /dev/null 2>&1
+        ssh -o StrictHostKeyChecking=no $ip "{ bash /root/k3s-uninstall.sh; } > /dev/null 2>&1 ; rm -rf /etc/cni/net.d/*"
+        #ssh -o StrictHostKeyChecking=no $ip "rm -rf /root/k3s-airgap-images-amd64.tar*"
     done
-    echo "Deleting kubectl configurations.."
-    kubectl config delete-cluster "k3svm"
-    kubectl config delete-context "k3svm"
-    kubectl config delete-user "k3svm"
+
+    echo "[*] Deleting kubectl configurations.."
+    kubectl config get-clusters | grep -q "k3svm"
+    if [ $? == 0 ]; then 
+        kubectl config delete-cluster "k3svms"
+        kubectl config delete-context "k3svms"
+        kubectl config delete-user "k3svms"
+    fi
     kubectl config unset current-context
 }
-delk3svm-cluster'
+delk3svms-cluster'
 
 #kcli
 alias vm="cd /root/wcni-kind/LabasCode/k8senv/vmenv"
@@ -280,6 +307,7 @@ alias vms='ssh-keygen -f "/root/.ssh/known_hosts" -R "192.168.2.127" > /dev/null
 alias 98='ssh -o StrictHostKeyChecking=no 192.168.2.98'
 alias 51='ssh -o StrictHostKeyChecking=no 10.1.5.51'
 alias 52='ssh -o StrictHostKeyChecking=no 10.1.8.52'
+alias 53='ssh -o StrictHostKeyChecking=no 10.1.8.53'
 alias 61='sshpass -p hive ssh-copy-id -o StrictHostKeyChecking=no -p 22 root@192.168.2.61 > /dev/null 2>&1 && ssh -o StrictHostKeyChecking=no 192.168.2.61'
 alias 62='sshpass -p hive ssh-copy-id -o StrictHostKeyChecking=no -p 22 root@192.168.2.62 > /dev/null 2>&1 && ssh -o StrictHostKeyChecking=no 192.168.2.62'
 alias 71='sshpass -p hive ssh-copy-id -o StrictHostKeyChecking=no -p 22 root@192.168.2.71 > /dev/null 2>&1 && ssh -o StrictHostKeyChecking=no 192.168.2.71'
@@ -336,7 +364,7 @@ git config --global https.proxy socks5://192.168.2.10:10808
 # http/https proxy
 export HTTP_PROXY="socks5://192.168.2.10:10808"
 export HTTPS_PROXY="socks5://192.168.2.10:10808"
-export NO_PROXY="localhost,127.0.0.1,10.1.0.0/16"
+export NO_PROXY="localhost,127.0.0.1,192.168.2.100,10.1.0.0/16"
 
 go env -w GO111MODULE=on && go env -w GOPROXY=https://goproxy.cn,direct
 # wget https://go.dev/dl/go1.23.2.linux-amd64.tar.gz
