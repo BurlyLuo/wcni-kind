@@ -32,9 +32,7 @@ data:
           "nodename": "__KUBERNETES_NODE_NAME__",
           "mtu": __CNI_MTU__,
           "ipam": {
-              "type": "calico-ipam",
-               "assign_ipv4": "true",
-               "assign_ipv6": "true"
+              "type": "calico-ipam"
           },
           "policy": {
               "type": "k8s"
@@ -4411,11 +4409,9 @@ spec:
             # Auto-detect the BGP IP address.
             - name: IP
               value: "autodetect"
-            - name: IP6
-              value: "autodetect"
             # Enable IPIP
             - name: CALICO_IPV4POOL_IPIP
-              value: "Always"
+              value: "CrossSubnet"
             # Enable or Disable VXLAN on the default IP pool.
             - name: CALICO_IPV4POOL_VXLAN
               value: "Never"
@@ -4443,8 +4439,8 @@ spec:
             # The default IPv4 pool to create on startup if none exists. Pod IPs will be
             # chosen from this range. Changing this value after installation will have
             # no effect. This should fall within `--cluster-cidr`.
-            # - name: CALICO_IPV4POOL_CIDR
-            #   value: "192.168.0.0/16"
+            - name: CALICO_IPV4POOL_CIDR
+              value: "12.16.0.0/16"
             # Disable file logging so `kubectl logs` works.
             - name: CALICO_DISABLE_FILE_LOGGING
               value: "true"
@@ -4453,7 +4449,7 @@ spec:
               value: "ACCEPT"
             # Disable IPv6 on Kubernetes.
             - name: FELIX_IPV6SUPPORT
-              value: "true"
+              value: "false"
             - name: FELIX_HEALTHENABLED
               value: "true"
           securityContext:
