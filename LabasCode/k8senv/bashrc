@@ -284,7 +284,7 @@ alias delk3svms='delk3svms-cluster() {
     for ip in 10.1.5.51 10.1.8.52 10.1.8.53; do
         echo "[*] Uninstalling k3s on $ip..."
         sed -i '1!d' /root/.ssh/known_hosts
-        scp -o StrictHostKeyChecking=no /root/wcni-kind/LabasCode/k8senv/vmenv/k3senv/k3s-uninstall.sh $ip:/root/ > /dev/null 2>&1
+        #scp -o StrictHostKeyChecking=no /root/wcni-kind/LabasCode/k8senv/vmenv/k3senv/k3s-uninstall.sh $ip:/root/ > /dev/null 2>&1
         ssh -o StrictHostKeyChecking=no $ip "{ bash /root/k3s-uninstall.sh; } > /dev/null 2>&1 ; rm -rf /etc/cni/net.d/*"
         #ssh -o StrictHostKeyChecking=no $ip "rm -rf /root/k3s-airgap-images-amd64.tar*"
     done
