@@ -83,8 +83,7 @@ alias l='ls -CF'
 alias vi="vim"
 
 # Github/Gitee
-alias push='custom_push() 
-{ 
+alias push='custom_push() { 
   if [ -z "$(git status --porcelain)" ]; then
     return 0 
   fi
@@ -95,8 +94,7 @@ alias push='custom_push()
 } 
 custom_push'
 
-alias scc='count_today_commits()
-{
+alias scc='count_today_commits() {
   DATE=$(date +"%Y-%m-%d")
     
   START_TIME="$DATE 00:00:00"
@@ -236,7 +234,7 @@ alias addk3svms='addk3svms-cluster() {
     fi
 
     echo "[*] Initializing k3s cluster..."
-    until ssh -o StrictHostKeyChecking=no -o BatchMode=yes -o ConnectTimeout=2 10.1.8.53 exit;do sleep 30;done
+    until ssh -o StrictHostKeyChecking=no -o BatchMode=yes -o ConnectTimeout=2 10.1.8.53 > /dev/null 2>&1 exit;do sleep 5;done
     echo "[*] Refreshing the environment..."
     delk3svms
 
