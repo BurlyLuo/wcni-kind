@@ -228,9 +228,6 @@ alias delk3s="/usr/local/bin/k3s-uninstall.sh && docker stop \$(docker ps -aq --
 
 # vmk3s
 alias addk3svms='addk3svms-cluster() {
-    echo "[*] Refreshing the environment..."
-    #delk3svms
-
     echo "[*] Settingup k3s node..."
     if [ -z "$(kcli list vms | egrep k1\|k2\|k3)" ]; then
         kcli create vm -i k3s_compressed -P numcpus=6 -P memory=8192 -P disks=[50] -P rootpassword=hive -P nets="[{\"name\":\"vppdpdk5\",\"ip\":\"10.1.5.51\",\"netmask\":\"24\",\"gateway\":\"10.1.5.3\"},{\"name\":\"vppdpdk5\"},{\"name\":\"vppdpdk8\"},{\"name\":\"vppdpdk9\"}]" k1
@@ -238,8 +235,11 @@ alias addk3svms='addk3svms-cluster() {
         kcli create vm -i k3s_compressed -P numcpus=6 -P memory=8192 -P disks=[50] -P rootpassword=hive -P nets="[{\"name\":\"vppdpdk8\",\"ip\":\"10.1.8.53\",\"netmask\":\"24\",\"gateway\":\"10.1.8.3\"},{\"name\":\"vppdpdk5\"},{\"name\":\"vppdpdk8\"},{\"name\":\"vppdpdk9\"}]" k3; \
     fi
 
-    echo "[*] Initializing k3s cluster with k3sup..."
-    until ssh -o StrictHostKeyChecking=no -o BatchMode=yes -o ConnectTimeout=2 10.1.8.53 exit;do sleep 15;done
+    echo "[*] Initializing k3s cluster..."
+    until ssh -o StrictHostKeyChecking=no -o BatchMode=yes -o ConnectTimeout=2 10.1.8.53 exit;do sleep 30;done
+    echo "[*] Refreshing the environment..."
+    delk3svms
+
     k3s_version=v1.27.3+k3s1
     master_ip="10.1.5.51"
     for ip in 10.1.5.51 10.1.8.52 10.1.8.53; do
@@ -248,6 +248,8 @@ alias addk3svms='addk3svms-cluster() {
         #ssh -o StrictHostKeyChecking=no $ip "wget -q -P /root/ http://192.168.2.100/http/k3s-uninstall.sh"
         echo "[*] Downloading cni bin file..."
         #ssh -o StrictHostKeyChecking=no $ip "mkdir -p /opt/cni/bin ; wget -q -r -np -nH --cut-dirs=3 --directory-prefix=/opt/cni/bin/ http://192.168.2.100/k3s/cni/bin/"
+        #echo "[*] Setting socks5 PROXY..."
+        #ssh -o StrictHostKeyChecking=no $ip "echo export HTTPS_PROXY=\"socks5://192.168.2.10:10808\" > ~/.bashrc && source ~/.bashrc"
 
         if [ "$ip" == "$master_ip" ]; then
             k3sup install \
@@ -259,6 +261,7 @@ alias addk3svms='addk3svms-cluster() {
                 --k3s-version="$k3s_version" \
                 --k3s-extra-args="--docker --flannel-backend=none --cluster-cidr=10.244.0.0/16 --disable-network-policy --disable traefik --disable servicelb --node-ip=$master_ip" \
                 --local-path="$HOME/.kube/config" \
+                --print-command \
                 --context=k3svms
         else
             k3sup join \
@@ -268,13 +271,15 @@ alias addk3svms='addk3svms-cluster() {
                 --k3s-version="$k3s_version" \
                 --k3s-extra-args="--docker" \
                 --server-ip="$master_ip" \
+                --print-command \
                 --server-user=root
         fi
-        echo "[*] Deleting socks5 PROXY..."
+        #echo "[*] Deleting socks5 PROXY..."
         ssh -o StrictHostKeyChecking=no $ip "env | grep PROXY"
         if [ $? == 0 ]; then
-            ssh -o StrictHostKeyChecking=no $ip "sed -i \"/PROXY=/s/^/# /\" ~/.bashrc"
+            ssh -o StrictHostKeyChecking=no $ip "sed -i \"/PROXY=/s/^/# /\" ~/.bashrc && source ~/.bashrc"
         fi
+        ssh -o StrictHostKeyChecking=no "systemctl restart k3s > /dev/null 2>&1"
     done
 
 }
