@@ -1,0 +1,8 @@
+docker network create -d macvlan --subnet=192.168.2.0/24 --gateway=192.168.2.253 -o parent=ens256 openwrt_net
+
+docker run --restart always --name openwrt -d --network openwrt_net --privileged --ip 192.168.2.1 openwrt/rootfs:20250101 /sbin/init
+
+docker volume create openwrt_volume
+
+docker run --restart always --name openwrt -v openwrt_volume:/etc -d --network openwrt_net --privileged openwrt:x86_64 /sbin/init
+
