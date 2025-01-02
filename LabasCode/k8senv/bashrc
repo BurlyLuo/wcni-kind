@@ -122,8 +122,9 @@ alias cld="kind delete clusters $1"
 alias clda="kind delete clusters -A"
 alias dip="kubectl get node -o wide"
 alias kk="kubectl -nkube-system"
-#alias ds="docker ps | grep -Ev 'registry|gostwire|edgeshark'"
-alias ds='docker ps --format "table {{.ID}}\t{{.Image}}\t{{.Command}}\t{{.Status}}\t{{.Names}}" | grep -Ev '\''registry|gostwire|edgeshark'\'' | awk NF'
+#alias ds="docker ps | grep -Ev 'registry|gostwire|edgeshark|openwrt'"
+alias ds='docker ps --format "table {{.ID}}\t{{.Image}}\t{{.Command}}\t{{.Status}}\t{{.Names}}" | grep -Ev '\''registry|gostwire|edgeshark|openwrt'\'' | awk NF'
+alias op="docker exec -ti openwrt bash"
 alias dcp="docker cp"
 alias cc="kubectl config get-contexts" 
 alias sc="kubectl config use-context $1" 
@@ -365,9 +366,9 @@ git config --global http.proxy socks5://192.168.2.10:10808
 git config --global https.proxy socks5://192.168.2.10:10808
 
 # http/https proxy
-export HTTP_PROXY="socks5://192.168.2.10:10808"
-export HTTPS_PROXY="socks5://192.168.2.10:10808"
-export NO_PROXY="localhost,127.0.0.1,192.168.2.100,10.1.0.0/16"
+#export HTTP_PROXY="socks5://192.168.2.10:10808"
+#export HTTPS_PROXY="socks5://192.168.2.10:10808"
+#export NO_PROXY="localhost,127.0.0.1,192.168.2.100,10.1.0.0/16"
 
 go env -w GO111MODULE=on && go env -w GOPROXY=https://goproxy.cn,direct
 # wget https://go.dev/dl/go1.23.2.linux-amd64.tar.gz
