@@ -6,7 +6,7 @@
       "prefix": "clab",
       "mgmt": {
         "network": "clab",
-        "bridge": "br-71eda668af20",
+        "bridge": "br-bea4ed95b67e",
         "ipv4-subnet": "172.20.20.0/24",
         "ipv4-gw": "172.20.20.1",
         "ipv6-subnet": "3fff:172:20:20::/64",
@@ -23,25 +23,25 @@
       "longname": "clab-cnf-vpp1",
       "fqdn": "vpp1.cnf.io",
       "group": "",
-      "labdir": "/root/wcni-kind/LabasCode/netenv/4-adv-netwotk/92-VPP-DPDK-SRIOV-RDMA/2-VPP/20-vpp-af_packet/26-vpp-veth/clab-cnf/vpp1",
+      "labdir": "/root/wcni-kind/LabasCode/netenv/4-adv-netwotk/92-VPP-DPDK-SRIOV-RDMA/2-VPP/21-vpp-af-packet/3-vpp-veth/clab-cnf/vpp1",
       "kind": "linux",
       "image": "ligato/vpp-base",
       "mgmt-net": "",
       "mgmt-intf": "",
-      "mgmt-ipv4-address": "172.20.20.2",
+      "mgmt-ipv4-address": "172.20.20.3",
       "mgmt-ipv4-prefix-length": 24,
-      "mgmt-ipv6-address": "3fff:172:20:20::2",
+      "mgmt-ipv6-address": "3fff:172:20:20::3",
       "mgmt-ipv6-prefix-length": 64,
       "mac-address": "",
       "labels": {
-        "clab-mgmt-net-bridge": "br-71eda668af20",
+        "clab-mgmt-net-bridge": "br-bea4ed95b67e",
         "clab-node-group": "",
         "clab-node-kind": "linux",
-        "clab-node-lab-dir": "/root/wcni-kind/LabasCode/netenv/4-adv-netwotk/92-VPP-DPDK-SRIOV-RDMA/2-VPP/20-vpp-af_packet/26-vpp-veth/clab-cnf/vpp1",
+        "clab-node-lab-dir": "/root/wcni-kind/LabasCode/netenv/4-adv-netwotk/92-VPP-DPDK-SRIOV-RDMA/2-VPP/21-vpp-af-packet/3-vpp-veth/clab-cnf/vpp1",
         "clab-node-name": "vpp1",
         "clab-node-type": "",
         "clab-owner": "root",
-        "clab-topo-file": "/root/wcni-kind/LabasCode/netenv/4-adv-netwotk/92-VPP-DPDK-SRIOV-RDMA/2-VPP/20-vpp-af_packet/26-vpp-veth/clab.yaml",
+        "clab-topo-file": "/root/wcni-kind/LabasCode/netenv/4-adv-netwotk/92-VPP-DPDK-SRIOV-RDMA/2-VPP/21-vpp-af-packet/3-vpp-veth/clab.yaml",
         "containerlab": "cnf"
       },
       "port-bindings": [
@@ -53,25 +53,25 @@
       "longname": "clab-cnf-vpp2",
       "fqdn": "vpp2.cnf.io",
       "group": "",
-      "labdir": "/root/wcni-kind/LabasCode/netenv/4-adv-netwotk/92-VPP-DPDK-SRIOV-RDMA/2-VPP/20-vpp-af_packet/26-vpp-veth/clab-cnf/vpp2",
+      "labdir": "/root/wcni-kind/LabasCode/netenv/4-adv-netwotk/92-VPP-DPDK-SRIOV-RDMA/2-VPP/21-vpp-af-packet/3-vpp-veth/clab-cnf/vpp2",
       "kind": "linux",
       "image": "ligato/vpp-base",
       "mgmt-net": "",
       "mgmt-intf": "",
-      "mgmt-ipv4-address": "172.20.20.3",
+      "mgmt-ipv4-address": "172.20.20.2",
       "mgmt-ipv4-prefix-length": 24,
-      "mgmt-ipv6-address": "3fff:172:20:20::3",
+      "mgmt-ipv6-address": "3fff:172:20:20::2",
       "mgmt-ipv6-prefix-length": 64,
       "mac-address": "",
       "labels": {
-        "clab-mgmt-net-bridge": "br-71eda668af20",
+        "clab-mgmt-net-bridge": "br-bea4ed95b67e",
         "clab-node-group": "",
         "clab-node-kind": "linux",
-        "clab-node-lab-dir": "/root/wcni-kind/LabasCode/netenv/4-adv-netwotk/92-VPP-DPDK-SRIOV-RDMA/2-VPP/20-vpp-af_packet/26-vpp-veth/clab-cnf/vpp2",
+        "clab-node-lab-dir": "/root/wcni-kind/LabasCode/netenv/4-adv-netwotk/92-VPP-DPDK-SRIOV-RDMA/2-VPP/21-vpp-af-packet/3-vpp-veth/clab-cnf/vpp2",
         "clab-node-name": "vpp2",
         "clab-node-type": "",
         "clab-owner": "root",
-        "clab-topo-file": "/root/wcni-kind/LabasCode/netenv/4-adv-netwotk/92-VPP-DPDK-SRIOV-RDMA/2-VPP/20-vpp-af_packet/26-vpp-veth/clab.yaml",
+        "clab-topo-file": "/root/wcni-kind/LabasCode/netenv/4-adv-netwotk/92-VPP-DPDK-SRIOV-RDMA/2-VPP/21-vpp-af-packet/3-vpp-veth/clab.yaml",
         "containerlab": "cnf"
       },
       "port-bindings": [
@@ -83,13 +83,13 @@
       "a": {
         "node": "vpp1",
         "interface": "eth1",
-        "mac": "aa:c1:ab:9d:43:ef",
+        "mac": "aa:c1:ab:d2:0b:2c",
         "peer": "z"
       },
       "z": {
         "node": "vpp2",
         "interface": "eth1",
-        "mac": "aa:c1:ab:5e:64:83",
+        "mac": "aa:c1:ab:ea:6b:6b",
         "peer": "a"
       }
     }
