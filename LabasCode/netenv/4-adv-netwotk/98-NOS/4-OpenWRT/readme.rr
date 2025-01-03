@@ -6,3 +6,11 @@ docker volume create openwrt_volume
 
 docker run --restart always --name openwrt -v openwrt_volume:/etc -d --network openwrt_net --privileged openwrt:x86_64 /sbin/init
 
+
+# Path_to: 192.168.2.x/24
+           
+                        |vppdkdk5:10.1.5.3---->[-A POSTROUTING -s 10.1.0.0/16 -o brnet -j MASQUERADE]
+10.1.5.10[gw:10.1.5.3]-->
+                        |brnet:192.168.2.1---->[default via 192.168.2.1 dev brnet proto static]
+                                         |---->[192.168.2.0/24 dev brnet proto kernel scope link src 192.168.2.99]    
+           
