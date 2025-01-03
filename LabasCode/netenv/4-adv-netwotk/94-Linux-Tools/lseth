@@ -1,0 +1,125 @@
+#!/bin/bash
+
+usage() {
+	echo -n "
+Usage: $(basename $0) [options]
+
+$(basename $0) enumerates all Ethernet devices in order of PCI ID of their controllers
+
+  -r  replace existing ifcfg-eth[n]
+  -f  fix the mappings of eth name and device by setting HWADDR in ifcfg-eth[n]
+  -R  rename device names in order of PCI ID of controllers, ifcfg-eth[n] will be replaced, only effective when -f specified
+
+" >&2
+	exit 1
+}
+
+REPLACE=false
+FIXMAC=false
+RENAME=false
+
+while getopts :frR OPTION; do
+	case $OPTION in
+	r)  REPLACE=true
+		;;
+	f)  FIXMAC=true
+		;;
+	R)  RENAME=true
+		;;
+	*) echo "Invalid option $OPTION" >&2
+		usage
+		;;
+	esac
+done
+
+${FIXMAC} || RENAME=false
+${RENAME} && REPLACE=true
+
+UNIT=0
+
+FORMAT="%-8s %-7s %-8s %-18s %-16s %-8s %s\n"
+printf "${FORMAT}" "PCIID" "IFINDEX" "DEVICE" "MAC ADDRESS" "STATE" "DRIVER" "DEVICE MODEL"
+
+
+for FILE in /sys/bus/pci/devices/*; do
+
+	if [ -L "${FILE}" -a -f "${FILE}/class" ]; then
+		PCIID=$(echo ${FILE##*/} | sed "s/^[0-9]*://")
+
+		CLASS=$(cat "${FILE}/class")
+		if [ "${CLASS}" = "0x020000" -o "${CLASS}" = "0x0c0600" -o "${CLASS}" = "0x010000" ]; then
+			[ -e ${FILE}/net ] && net_dir=${FILE}/net
+			[ -e ${FILE}/virtio*/net ] && net_dir=${FILE}/virtio*/net
+			[ -z "$net_dir" ] && continue
+			DRIVER=$(basename $(readlink ${FILE}/driver))
+			for ETHNAME in $(ls $net_dir); do
+				ETHDIR=${net_dir}/${ETHNAME}
+                        	ifconfig $ETHNAME | grep UP >/dev/null && LINK="Up" || LINK="Down"
+                        	if [ "${LINK}" = "Up" ]; then
+                                	LINK=$(ethtool $ETHNAME | grep "Link detected: " | sed "s/.*: //")
+                                	if [ "${LINK}" = "yes" ]; then
+                                        	SPEED=$(ethtool $ETHNAME | grep "Speed: " | sed "s/.*: //")
+                                        	DUPLEX=$(ethtool $ETHNAME | grep "Duplex: " | sed "s/.*: //")
+                                        	LINK="${DUPLEX} ${SPEED}"
+                                	else
+                                        	LINK="No Carrier"
+                                	fi
+                        	fi
+				IFINDEX=$(cat ${ETHDIR}/ifindex)
+
+				HWADDR=$(cat ${ETHDIR}/address)
+
+				# if enslaved, find real HWADDR
+				if [ -L "${ETHDIR}/master" ]; then
+					BOND=$(file ${ETHDIR}/master | sed "s/.*\(bond[0-9]*\).*$/\1/")
+					if echo $BOND |grep -q ^bond
+					then
+					HWADDR=$(cat /proc/net/bonding/${BOND} | grep -A 5 ${ETHNAME} | grep "Permanent" | sed "s/Permanent HW addr: //")
+					fi
+				fi
+
+				MODEL=$(lspci | grep "${PCIID}" | sed "s/[[:xdigit:]]*:[[:xdigit:]]*\.[[:xdigit:]] [^:]*: //")
+
+				printf "${FORMAT}" "${PCIID}" "${IFINDEX}" "${ETHNAME}" "${HWADDR}" "${LINK}" "${DRIVER}" "${MODEL}"
+				if ${REPLACE} || ${FIXMAC} || ${RENAME}; then
+
+					if ${RENAME}; then
+						ETHFILE=/etc/sysconfig/network-scripts/ifcfg-eth${UNIT}
+						ETHNAME=eth${UNIT}
+					else
+						ETHFILE=/etc/sysconfig/network-scripts/ifcfg-${ETHNAME}
+					fi
+
+					if ! ${REPLACE} && [ -f ${ETHFILE} ]; then
+						sed -i -e "/HWADDR=/d" ${ETHFILE}
+					else
+						if [ -f /etc/udev/rules.d/60-net.rules ]; then
+							ETHNAME=net${UNIT}
+							LINENUM=$(cat /etc/udev/rules.d/60-net.rules | grep -B 2 -n ${ETHNAME} | head -1 | awk -F- '{print $1}')
+							if [ ! -z ${LINENUM} ]; then
+								sed -i "${LINENUM},+2d" /etc/udev/rules.d/60-net.rules
+							fi
+						fi
+						cat > ${ETHFILE} << EOF
+# ${MODEL}
+DEVICE=${ETHNAME}
+BOOTPROTO=none
+ONBOOT=yes
+USERCTL=no
+EOF
+					fi
+
+					if ${FIXMAC}; then
+						sed -i -e "/DEVICE=/a HWADDR=${HWADDR}" ${ETHFILE}
+					fi
+
+					let UNIT++
+				fi
+			done
+		fi
+
+	fi
+	unset net_dir
+done
+
+exit 0
