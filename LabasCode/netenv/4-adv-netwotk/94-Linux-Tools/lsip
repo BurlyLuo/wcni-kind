@@ -5,7 +5,7 @@ interfaces=$(ip -o link show | awk -F': ' '{print $2}')
 max_length=0
 
 for intf in $interfaces; do
-    if [[ "$intf" != "lo" && ! "$intf" =~ ^veth ]]; then
+    if [[ "$intf" != "lo" && ! "$intf" =~ ^veth  && ! "$intf" =~ ^tunl0 ]]; then
         ipv4_addr=$(ip -4 addr show $intf | grep inet | awk '{print $2}')
         ipv6_addr=$(ip -6 addr show $intf | grep inet6 | awk '{print $2}' | grep -v '^fe80::')
         
@@ -22,7 +22,7 @@ extra_width=7
 total_width=$((max_length + extra_width))
 
 for intf in $interfaces; do
-    if [[ "$intf" != "lo" && ! "$intf" =~ ^veth ]]; then
+    if [[ "$intf" != "lo" && ! "$intf" =~ ^veth && ! "$intf" =~ ^tunl0 ]]; then
         ipv4_addr=$(ip -4 addr show $intf | grep inet | awk '{print $2}')
         ipv6_addr=$(ip -6 addr show $intf | grep inet6 | awk '{print $2}' | grep -v '^fe80::')
         mac_addr=$(ip link show $intf | awk '/ether/ {print $2}')
