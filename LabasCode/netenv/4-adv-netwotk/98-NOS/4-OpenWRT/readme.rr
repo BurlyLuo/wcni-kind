@@ -5,7 +5,7 @@ docker run --restart always --name openwrt -d --network openwrt_net --privileged
 docker volume create openwrt_volume
 
 docker run --restart always --name openwrt -v openwrt_volume:/etc -d --network openwrt_net --privileged openwrt:x86_64 /sbin/init
-
+docker run --restart always --name openwrt -v openwrt_volume:/etc -d --network openwrt_net --privileged --cpus="2" openwrt:x86_64 /sbin/init
 
 # Path_to: 192.168.2.x/24
            
