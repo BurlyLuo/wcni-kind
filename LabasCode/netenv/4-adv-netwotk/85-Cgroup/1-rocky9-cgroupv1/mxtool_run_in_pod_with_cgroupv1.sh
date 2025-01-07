@@ -1,4 +1,3 @@
-#!/bin/bash
 #1)Input arguments validation
 if [[ $# -ne 2 ]] ; then
     echo "Usage: ./mxTop.sh <sleep interval in secs> <CPU Calculation Type: 1 for average cpu, 2 for per cpu, 3 for per cpu allocated to this pod>"
@@ -123,6 +122,37 @@ while true;
 do
         echo "Calculating Per CPU"
         cpulist=$(taskset -cp 1 | cut -d ":" -f 2 | sed 's/,/ /g')
+        for j in `echo $cpulist`;
+        do
+            cpulistRange='' #Need to indentify any cpulist range if present like 11-14.
+            if [[ $j == *"-"* ]]; then
+                cpulist=${cpulist/$j/} #Once identified, It has to be removed from the existing cpulist.
+                cpulistRange=$(echo $j | sed 's/-/ /g')
+            fi
+            echo cpulistRange=$cpulistRange
+            rangeStart=" "
+            if [ ! -z "$cpulistRange" -a "$cpulistRange" != " " ]; then
+                for j in `echo $cpulistRange`;
+                do
+                    if [ ! -z "$rangeStart" -a "$rangeStart" != " " ]; then
+                        rangeEnd=$j
+                    else
+                        rangeStart=$j
+                    fi
+                done
+                echo rangeStart=$rangeStart
+                echo rangeEnd=$rangeEnd
+                #Then from rangeStart to rangeEnd, All the CPUs withing the range has to be added in the list.
+                for ((i=$rangeStart;i<=$rangeEnd;i++))
+                do
+                    if [ ! -z "$cpulist" -a "$cpulist" != " " ]; then
+                        cpulist+=' '
+                    fi
+                    cpulist+=$i
+                done
+            fi
+        done
+        echo cpulist=$cpulist
         tstart=$(date +%s%N) && cstart=$(cat /sys/fs/cgroup/cpu/$cgroup/cpuacct.usage_percpu)
         numOfCores=$(echo $cstart | wc -w)
         #echo "numOfCores=" $numOfCores
@@ -174,3 +204,4 @@ else
     echo "Invalid CPU calculation type $cpuCalcType <CPU Calculation Type: 1 for average cpu, 2 for per cpu, 3 for per cpu allocated to this pod>"
     exit 0
 fi
+
