@@ -370,6 +370,8 @@ git config --global https.proxy socks5://192.168.2.10:10808
 #export HTTPS_PROXY="socks5://192.168.2.10:10808"
 #export NO_PROXY="localhost,127.0.0.1,192.168.2.100,10.1.0.0/16"
 
+alias srr='for url in "https://google.com" "https://qq.com"; do echo -e "#> curl -k --connect-timeout 2 $url"; curl -k --connect-timeout 2 "$url"; echo ""; done'
+alias ssr=srr
 go env -w GO111MODULE=on && go env -w GOPROXY=https://goproxy.cn,direct
 # wget https://go.dev/dl/go1.23.2.linux-amd64.tar.gz
 # tar -C /usr/local -xzf go1.23.2.linux-amd64.tar.gz
