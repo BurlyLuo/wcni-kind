@@ -6,7 +6,7 @@
       "prefix": "clab",
       "mgmt": {
         "network": "clab",
-        "bridge": "br-22bac01f983a",
+        "bridge": "br-ae6e9a414054",
         "ipv4-subnet": "172.20.20.0/24",
         "ipv4-gw": "172.20.20.1",
         "ipv6-subnet": "3fff:172:20:20::/64",
@@ -23,25 +23,25 @@
       "longname": "clab-cnf-vpp1",
       "fqdn": "vpp1.cnf.io",
       "group": "",
-      "labdir": "/root/wcni-kind/LabasCode/netenv/4-adv-netwotk/92-VPP-DPDK-SRIOV-RDMA/2-VPP/20-vpp-af_packet/2-vpp-macvlan/clab-cnf/vpp1",
+      "labdir": "/root/wcni-kind/LabasCode/netenv/4-adv-netwotk/92-VPP-DPDK-SRIOV-RDMA/2-VPP/21-vpp-af-packet/2-vpp-macvlan/clab-cnf/vpp1",
       "kind": "linux",
       "image": "ligato/vpp-base",
       "mgmt-net": "",
       "mgmt-intf": "",
-      "mgmt-ipv4-address": "172.20.20.3",
+      "mgmt-ipv4-address": "172.20.20.2",
       "mgmt-ipv4-prefix-length": 24,
-      "mgmt-ipv6-address": "3fff:172:20:20::3",
+      "mgmt-ipv6-address": "3fff:172:20:20::2",
       "mgmt-ipv6-prefix-length": 64,
       "mac-address": "",
       "labels": {
-        "clab-mgmt-net-bridge": "br-22bac01f983a",
+        "clab-mgmt-net-bridge": "br-ae6e9a414054",
         "clab-node-group": "",
         "clab-node-kind": "linux",
-        "clab-node-lab-dir": "/root/wcni-kind/LabasCode/netenv/4-adv-netwotk/92-VPP-DPDK-SRIOV-RDMA/2-VPP/20-vpp-af_packet/2-vpp-macvlan/clab-cnf/vpp1",
+        "clab-node-lab-dir": "/root/wcni-kind/LabasCode/netenv/4-adv-netwotk/92-VPP-DPDK-SRIOV-RDMA/2-VPP/21-vpp-af-packet/2-vpp-macvlan/clab-cnf/vpp1",
         "clab-node-name": "vpp1",
         "clab-node-type": "",
         "clab-owner": "root",
-        "clab-topo-file": "/root/wcni-kind/LabasCode/netenv/4-adv-netwotk/92-VPP-DPDK-SRIOV-RDMA/2-VPP/20-vpp-af_packet/2-vpp-macvlan/clab.yaml",
+        "clab-topo-file": "/root/wcni-kind/LabasCode/netenv/4-adv-netwotk/92-VPP-DPDK-SRIOV-RDMA/2-VPP/21-vpp-af-packet/2-vpp-macvlan/clab.yaml",
         "containerlab": "cnf"
       },
       "port-bindings": [
@@ -53,25 +53,25 @@
       "longname": "clab-cnf-vpp2",
       "fqdn": "vpp2.cnf.io",
       "group": "",
-      "labdir": "/root/wcni-kind/LabasCode/netenv/4-adv-netwotk/92-VPP-DPDK-SRIOV-RDMA/2-VPP/20-vpp-af_packet/2-vpp-macvlan/clab-cnf/vpp2",
+      "labdir": "/root/wcni-kind/LabasCode/netenv/4-adv-netwotk/92-VPP-DPDK-SRIOV-RDMA/2-VPP/21-vpp-af-packet/2-vpp-macvlan/clab-cnf/vpp2",
       "kind": "linux",
       "image": "ligato/vpp-base",
       "mgmt-net": "",
       "mgmt-intf": "",
-      "mgmt-ipv4-address": "172.20.20.2",
+      "mgmt-ipv4-address": "172.20.20.3",
       "mgmt-ipv4-prefix-length": 24,
-      "mgmt-ipv6-address": "3fff:172:20:20::2",
+      "mgmt-ipv6-address": "3fff:172:20:20::3",
       "mgmt-ipv6-prefix-length": 64,
       "mac-address": "",
       "labels": {
-        "clab-mgmt-net-bridge": "br-22bac01f983a",
+        "clab-mgmt-net-bridge": "br-ae6e9a414054",
         "clab-node-group": "",
         "clab-node-kind": "linux",
-        "clab-node-lab-dir": "/root/wcni-kind/LabasCode/netenv/4-adv-netwotk/92-VPP-DPDK-SRIOV-RDMA/2-VPP/20-vpp-af_packet/2-vpp-macvlan/clab-cnf/vpp2",
+        "clab-node-lab-dir": "/root/wcni-kind/LabasCode/netenv/4-adv-netwotk/92-VPP-DPDK-SRIOV-RDMA/2-VPP/21-vpp-af-packet/2-vpp-macvlan/clab-cnf/vpp2",
         "clab-node-name": "vpp2",
         "clab-node-type": "",
         "clab-owner": "root",
-        "clab-topo-file": "/root/wcni-kind/LabasCode/netenv/4-adv-netwotk/92-VPP-DPDK-SRIOV-RDMA/2-VPP/20-vpp-af_packet/2-vpp-macvlan/clab.yaml",
+        "clab-topo-file": "/root/wcni-kind/LabasCode/netenv/4-adv-netwotk/92-VPP-DPDK-SRIOV-RDMA/2-VPP/21-vpp-af-packet/2-vpp-macvlan/clab.yaml",
         "containerlab": "cnf"
       },
       "port-bindings": [
@@ -83,7 +83,7 @@
       "a": {
         "node": "vpp1",
         "interface": "eth1",
-        "mac": "aa:c1:ab:1e:f6:ef",
+        "mac": "aa:c1:ab:f6:aa:e4",
         "peer": "z"
       },
       "z": {
@@ -97,7 +97,7 @@
       "a": {
         "node": "vpp2",
         "interface": "eth1",
-        "mac": "aa:c1:ab:6c:65:17",
+        "mac": "aa:c1:ab:b1:ce:26",
         "peer": "z"
       },
       "z": {
