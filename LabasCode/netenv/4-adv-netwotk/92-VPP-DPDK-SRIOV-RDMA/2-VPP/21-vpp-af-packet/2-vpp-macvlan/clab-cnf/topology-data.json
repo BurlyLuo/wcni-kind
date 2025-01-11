@@ -6,7 +6,7 @@
       "prefix": "clab",
       "mgmt": {
         "network": "clab",
-        "bridge": "br-ae6e9a414054",
+        "bridge": "br-2e18f15f7f6a",
         "ipv4-subnet": "172.20.20.0/24",
         "ipv4-gw": "172.20.20.1",
         "ipv6-subnet": "3fff:172:20:20::/64",
@@ -28,13 +28,13 @@
       "image": "ligato/vpp-base",
       "mgmt-net": "",
       "mgmt-intf": "",
-      "mgmt-ipv4-address": "172.20.20.2",
+      "mgmt-ipv4-address": "172.20.20.3",
       "mgmt-ipv4-prefix-length": 24,
-      "mgmt-ipv6-address": "3fff:172:20:20::2",
+      "mgmt-ipv6-address": "3fff:172:20:20::3",
       "mgmt-ipv6-prefix-length": 64,
       "mac-address": "",
       "labels": {
-        "clab-mgmt-net-bridge": "br-ae6e9a414054",
+        "clab-mgmt-net-bridge": "br-2e18f15f7f6a",
         "clab-node-group": "",
         "clab-node-kind": "linux",
         "clab-node-lab-dir": "/root/wcni-kind/LabasCode/netenv/4-adv-netwotk/92-VPP-DPDK-SRIOV-RDMA/2-VPP/21-vpp-af-packet/2-vpp-macvlan/clab-cnf/vpp1",
@@ -58,13 +58,13 @@
       "image": "ligato/vpp-base",
       "mgmt-net": "",
       "mgmt-intf": "",
-      "mgmt-ipv4-address": "172.20.20.3",
+      "mgmt-ipv4-address": "172.20.20.2",
       "mgmt-ipv4-prefix-length": 24,
-      "mgmt-ipv6-address": "3fff:172:20:20::3",
+      "mgmt-ipv6-address": "3fff:172:20:20::2",
       "mgmt-ipv6-prefix-length": 64,
       "mac-address": "",
       "labels": {
-        "clab-mgmt-net-bridge": "br-ae6e9a414054",
+        "clab-mgmt-net-bridge": "br-2e18f15f7f6a",
         "clab-node-group": "",
         "clab-node-kind": "linux",
         "clab-node-lab-dir": "/root/wcni-kind/LabasCode/netenv/4-adv-netwotk/92-VPP-DPDK-SRIOV-RDMA/2-VPP/21-vpp-af-packet/2-vpp-macvlan/clab-cnf/vpp2",
@@ -83,7 +83,7 @@
       "a": {
         "node": "vpp1",
         "interface": "eth1",
-        "mac": "aa:c1:ab:f6:aa:e4",
+        "mac": "aa:c1:ab:71:c5:ea",
         "peer": "z"
       },
       "z": {
@@ -97,7 +97,7 @@
       "a": {
         "node": "vpp2",
         "interface": "eth1",
-        "mac": "aa:c1:ab:b1:ce:26",
+        "mac": "aa:c1:ab:1e:ab:99",
         "peer": "z"
       },
       "z": {
