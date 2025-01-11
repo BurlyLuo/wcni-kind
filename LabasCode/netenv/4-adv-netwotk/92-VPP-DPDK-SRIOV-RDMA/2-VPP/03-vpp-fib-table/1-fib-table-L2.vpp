@@ -1,0 +1,44 @@
+#1. Case Path:
+/root/wcni-kind/LabasCode/netenv/4-adv-netwotk/92-VPP-DPDK-SRIOV-RDMA/2-VPP/21-vpp-af-packet/2-vpp-macvlan
+
+#2. Fib table:
+[root@rowan> 2-vpp-macvlan]# lo clab-cnf-vpp1 vppctl show ip fib
+ipv4-VRF:0, fib_index:0, flow hash:[src dst sport dport proto flowlabel ] epoch:0 flags:none locks:[default-route:1, ]
+0.0.0.0/0
+  unicast-ip4-chain
+  [@0]: dpo-load-balance: [proto:ip4 index:1 buckets:1 uRPF:0 to:[9192:878149]]
+    [0] [@0]: dpo-drop ip4
+0.0.0.0/32
+  unicast-ip4-chain
+  [@0]: dpo-load-balance: [proto:ip4 index:2 buckets:1 uRPF:1 to:[0:0]]
+    [0] [@0]: dpo-drop ip4
+10.1.5.0/32
+  unicast-ip4-chain
+  [@0]: dpo-load-balance: [proto:ip4 index:10 buckets:1 uRPF:9 to:[0:0]]
+    [0] [@0]: dpo-drop ip4
+10.1.5.0/24
+  unicast-ip4-chain
+  [@0]: dpo-load-balance: [proto:ip4 index:9 buckets:1 uRPF:8 to:[0:0]]
+    [0] [@4]: ipv4-glean: [src:10.1.5.0/24] host-eth1: mtu:9000 next:1 flags:[] ffffffffffffaac1ab065b010806  {Key: unicast-ip4-chain &&  ipv4-glean||| unicast and arp}
+10.1.5.10/32
+  unicast-ip4-chain
+  [@0]: dpo-load-balance: [proto:ip4 index:12 buckets:1 uRPF:13 to:[0:0]]
+    [0] [@12]: dpo-receive: 10.1.5.10 on host-eth1  {Key: dpo-receive||| recv pkt local}
+10.1.5.255/32
+  unicast-ip4-chain
+  [@0]: dpo-load-balance: [proto:ip4 index:11 buckets:1 uRPF:11 to:[0:0]]
+    [0] [@0]: dpo-drop ip4
+224.0.0.0/4
+  unicast-ip4-chain
+  [@0]: dpo-load-balance: [proto:ip4 index:4 buckets:1 uRPF:3 to:[0:0]]
+    [0] [@0]: dpo-drop ip4
+240.0.0.0/4
+  unicast-ip4-chain
+  [@0]: dpo-load-balance: [proto:ip4 index:3 buckets:1 uRPF:2 to:[0:0]]
+    [0] [@0]: dpo-drop ip4
+255.255.255.255/32
+  unicast-ip4-chain
+  [@0]: dpo-load-balance: [proto:ip4 index:5 buckets:1 uRPF:4 to:[1:336]]
+    [0] [@0]: dpo-drop ip4
+[root@rowan> 2-vpp-macvlan]# 
+
