@@ -1,0 +1,20 @@
+# iperf3 -s -B 10.2.149.101
+# for i in {1..50};do iperf3 -c 10.2.149.101 -u -b 10G;done
+Connecting to host 10.2.149.101, port 5201
+[  4] local 10.2.149.90 port 32420 connected to 10.2.149.101 port 5201
+[ ID] Interval           Transfer     Bandwidth       Total Datagrams
+[  4]   0.00-1.00   sec   123 MBytes  1.03 Gbits/sec  89094  
+[  4]   1.00-2.00   sec   111 MBytes   935 Mbits/sec  80724  
+[  4]   2.00-3.00   sec   105 MBytes   879 Mbits/sec  75843  
+[  4]   3.00-4.00   sec   124 MBytes  1.04 Gbits/sec  89689  
+[  4]   4.00-5.00   sec   110 MBytes   919 Mbits/sec  79364  
+[  4]   5.00-6.00   sec   130 MBytes  1.09 Gbits/sec  94315  
+[  4]   6.00-7.00   sec   115 MBytes   966 Mbits/sec  83364  
+[  4]   7.00-8.00   sec   111 MBytes   931 Mbits/sec  80392  
+[  4]   8.00-9.00   sec   112 MBytes   940 Mbits/sec  81103  
+[  4]   9.00-10.00  sec   110 MBytes   924 Mbits/sec  79738  
+- - - - - - - - - - - - - - - - - - - - - - - - -
+[ ID] Interval           Transfer     Bandwidth       Jitter    Lost/Total Datagrams
+[  4]   0.00-10.00  sec  1.12 GBytes   966 Mbits/sec  0.003 ms  0/833626 (0%)  
+[  4] Sent 833626 datagrams
+
