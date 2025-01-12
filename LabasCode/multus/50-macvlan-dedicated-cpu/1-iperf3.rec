@@ -1,3 +1,5 @@
+# taskset -cp 1 
+pid 1's current affinity list: 0-3,52-55
 # iperf3 -s -B 10.2.149.101
 # for i in {1..50};do iperf3 -c 10.2.149.101 -u -b 10G;done
 Connecting to host 10.2.149.101, port 5201
