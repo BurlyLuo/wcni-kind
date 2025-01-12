@@ -362,8 +362,15 @@ fi
 
 
 # PROXY:
-git config --global http.proxy socks5://192.168.2.10:10808
-git config --global https.proxy socks5://192.168.2.10:10808
+#git config --global http.proxy socks5://192.168.2.10:10808
+#git config --global https.proxy socks5://192.168.2.10:10808
+
+#git config --global --unset-all http.proxy
+#git config --global --unset-all https.proxy
+
+#git config --global --get http.proxy
+#git config --global --get https.proxy
+
 
 # http/https proxy
 #export HTTP_PROXY="socks5://192.168.2.10:10808"
