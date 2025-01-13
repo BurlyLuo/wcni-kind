@@ -1,5 +1,16 @@
 #!/bin/bash
 set -v
+
+# clab version [v0.59.0] https://github.com/srl-labs/containerlab/releases/download/v0.59.0/containerlab_0.59.0_linux_amd64.tar.gz
+# vyos version [v1.4.9 ] docker pull burlyluo/vyos:1.4.9
+
+# kind version [v0.20.0] https://github.com/kubernetes-sigs/kind/releases/download/v0.20.0/kind-linux-amd64
+# imge version [v1.27.3] docker pull burlyluo/kindest:v1.27.3
+
+# phub version [v2.7.1 ] docker pull docker.io/registry:2  
+  #run pri_hub [docker run -d --network=host --restart=always --name phub registry:2]
+# nettool imge [v1.1.11] docker pull burlyluo/nettool:latest
+
 # 1. Prepare NoCNI environment:
 cat <<EOF | kind create cluster --name=flannel-udp --image=kindest/node:v1.27.3 --config=-
 kind: Cluster
