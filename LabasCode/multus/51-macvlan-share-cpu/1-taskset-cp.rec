@@ -1,0 +1,87 @@
+Non-terminated Pods:          (50 in total)
+  Namespace                   Name                                          CPU Requests  CPU Limits  Memory Requests  Memory Limits  AGE
+  ---------                   ----                                          ------------  ----------  ---------------  -------------  ---
+  udp                         wluo-0                                  2 (2%)        2 (2%)      16Gi (1%)        16Gi (1%)      30h
+  udp                         wluo-1                                  2 (2%)        2 (2%)      16Gi (1%)        16Gi (1%)      103m
+  udp                         wluo-2                                  4 (4%)        4 (4%)      64Gi (4%)        64Gi (4%)      30h
+  udp                         wluo-3                                  4 (4%)        4 (4%)      64Gi (4%)        64Gi (4%)      30h
+  udp                         wluo-4                                  8 (8%)        8 (8%)      32Gi (2%)        32Gi (2%)      10h
+  udp                         wluo-5                                  8 (8%)        8 (8%)      32Gi (2%)        32Gi (2%)      31h
+  udp                         wluo-6                                  2 (2%)        2 (2%)      16Gi (1%)        16Gi (1%)      61m
+  udp                         wluo-7                                  2 (2%)        2 (2%)      16Gi (1%)        16Gi (1%)      60m
+  udp                         wluo-8                                  8 (8%)        8 (8%)      64Gi (4%)        64Gi (4%)      5m33s
+  udp                         wluo-9                                  8 (8%)        8 (8%)      64Gi (4%)        64Gi (4%)      7m46s
+  udp                         wluo-10                                 2 (2%)        2 (2%)      32Gi (2%)        32Gi (2%)      61m
+  udp                         wluo-11                                 2 (2%)        2 (2%)      32Gi (2%)        32Gi (2%)      60m
+  udp                         wluo-12                                 2 (2%)        2 (2%)      16Gi (1%)        16Gi (1%)      29h
+  udp                         wluo-23                                 2 (2%)        2 (2%)      16Gi (1%)        16Gi (1%)      30h
+  udp                         wluo-14                                 2 (2%)        2 (2%)      16Gi (1%)        16Gi (1%)      29h
+  udp                         wluo-15                                 8 (8%)        8 (8%)      64Gi (4%)        64Gi (4%)      30h
+  udp                         wluo-16                                 8 (8%)        8 (8%)      64Gi (4%)        64Gi (4%)      30h
+  udp                         wluo-17                                 2 (2%)        2 (2%)      32Gi (2%)        32Gi (2%)      10h
+  udp                         wluo-18                                 2 (2%)        2 (2%)      32Gi (2%)        32Gi (2%)      2m50s
+  udp                         wluo-19                                 4 (4%)        4 (4%)      32Gi (2%)        32Gi (2%)      29h
+  udp                         wluo-20                                 4 (4%)        4 (4%)      32Gi (2%)        32Gi (2%)      29h
+
+[root@my-cluster-worker0 ~]# lscpu 
+Architecture:          x86_64
+CPU op-mode(s):        32-bit, 64-bit
+Byte Order:            Little Endian
+CPU(s):                104
+On-line CPU(s) list:   0-103
+Thread(s) per core:    2
+Core(s) per socket:    26
+Socket(s):             2
+NUMA node(s):          2
+Vendor ID:             GenuineIntel
+CPU family:            6
+Model:                 85
+Model name:            Intel(R) Xeon(R) Gold 6230R CPU @ 2.10GHz
+Stepping:              7
+CPU MHz:               2100.000
+BogoMIPS:              4200.00
+Virtualization:        VT-x
+L1d cache:             32K
+L1i cache:             32K
+L2 cache:              1024K
+L3 cache:              36608K
+NUMA node0 CPU(s):     0,2,4,6,8,10,12,14,16,18,20,22,24,26,28,30,32,34,36,38,40,42,44,46,48,50,52,54,56,58,60,62,64,66,68,70,72,74,76,78,80,82,84,86,88,90,92,94,96,98,100,102
+NUMA node1 CPU(s):     1,3,5,7,9,11,13,15,17,19,21,23,25,27,29,31,33,35,37,39,41,43,45,47,49,51,53,55,57,59,61,63,65,67,69,71,73,75,77,79,81,83,85,87,89,91,93,95,97,99,101,103
+
+
+[root@my-cluster-worker0 ~]# kubectl exec -it nettool bash 
+kubectl exec [POD] [COMMAND] is DEPRECATED and will be removed in a future version. Use kubectl exec [POD] -- [COMMAND] instead.
+[root@nettool /]# taskset -cp 1 
+pid 1's current affinity list: 0-3,42,44,46,48,50,52-55,94,96,98,100,102
+[root@nettool /]# 
+
+
+
+# cpuid: 0-103:
+[root@my-cluster-worker0 ~]# for i in $(asc get pods -oname);do asc exec -it $i -- taskset -cp 1;done
+pid 1's current affinity list: 7,59
+pid 1's current affinity list: 35,87
+pid 1's current affinity list: 29,31,81,83
+pid 1's current affinity list: 37,39,89,91
+pid 1's current affinity list: 5,13,15,17,57,65,67,69
+pid 1's current affinity list: 34,36,38,40,86,88,90,92
+pid 1's current affinity list: 19,71
+pid 1's current affinity list: 33,85
+pid 1's current affinity list: 10,12,14,16,62,64,66,68
+pid 1's current affinity list: 24,26,28,30,76,78,80,82
+pid 1's current affinity list: 8,60
+pid 1's current affinity list: 32,84
+pid 1's current affinity list: 6,58
+pid 1's current affinity list: 18,70
+pid 1's current affinity list: 20,72
+pid 1's current affinity list: 21,23,25,27,73,75,77,79
+pid 1's current affinity list: 41,43,45,47,93,95,97,99
+pid 1's current affinity list: 4,56
+pid 1's current affinity list: 22,74
+pid 1's current affinity list: 9,11,61,63
+pid 1's current affinity list: 49,51,101,103
+
+[root@my-cluster-worker0 ~]# kubectl exec -it nettool -- taskset -cp 1 
+pid 1's current affinity list: 0-3,42,44,46,48,50,52-55,94,96,98,100,102
+[root@my-cluster-worker0 ~]# 
+
