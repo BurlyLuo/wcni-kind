@@ -1,6 +1,9 @@
 #!/bin/bash
 set -v
 
+# host version [22.04.3] https://fridge.ubuntu.com/2023/08/11/ubuntu-22-04-3-lts-released/
+# dock version [23.0.1 ] https://download.docker.com/linux/ubuntu/dists/focal/pool/stable/amd64/
+
 # clab version [v0.59.0] https://github.com/srl-labs/containerlab/releases/download/v0.59.0/containerlab_0.59.0_linux_amd64.tar.gz
 # vyos version [v1.4.9 ] docker pull burlyluo/vyos:1.4.9
 
@@ -9,7 +12,9 @@ set -v
 
 # phub version [v2.7.1 ] docker pull docker.io/registry:2  
   # run p_hub: [docker run -d --network=host --restart=always --name phub registry:2]
+
 # nettool imge [v1.1.11] docker pull burlyluo/nettool:latest
+# iptables fwd [iptables -L | grep policy || and then: systemctl cat docker >> ExecStartPost=/sbin/iptables -P FORWARD ACCEPT]
 
 # 1. Prepare NoCNI environment:
 cat <<EOF | kind create cluster --name=flannel-udp --image=kindest/node:v1.27.3 --config=-
