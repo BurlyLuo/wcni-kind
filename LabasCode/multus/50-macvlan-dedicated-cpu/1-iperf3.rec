@@ -1,3 +1,5 @@
+# https://doc.dpdk.org/guides/linux_gsg/enable_func.html
+
 # taskset -cp 1 
 pid 1's current affinity list: 0-3,52-55
 # iperf3 -s -B 10.2.149.101
