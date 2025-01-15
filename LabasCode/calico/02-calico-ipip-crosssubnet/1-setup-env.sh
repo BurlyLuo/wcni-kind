@@ -1,5 +1,18 @@
 #!/bin/bash
 set -v
+
+# lo calico-ipip-crosssubnet-control-plane calicoctl node status
+# Calico process is running.
+# 
+# IPv4 BGP status
+# +--------------+-------------------+-------+----------+-------------+
+# | PEER ADDRESS |     PEER TYPE     | STATE |  SINCE   |    INFO     |
+# +--------------+-------------------+-------+----------+-------------+
+# | 10.1.8.10    | node-to-node mesh | up    | 02:36:35 | Established |
+# | 10.1.8.11    | node-to-node mesh | up    | 02:36:35 | Established |
+# | 10.1.5.11    | node-to-node mesh | up    | 02:36:42 | Established |
+# +--------------+-------------------+-------+----------+-------------+
+
 # 1. Prepare NoCNI environment
 cat <<EOF | kind create cluster --name=calico-ipip-crosssubnet --image=kindest/node:v1.27.3 --config=-
 kind: Cluster
