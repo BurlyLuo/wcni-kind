@@ -47,7 +47,6 @@ topology:
       - ip addr add 10.1.8.11/24 dev net0
       - ip route replace default via 10.1.8.1
 
-
   links:
     - endpoints: ["br-pool0:br-pool0-net0", "server1:net0"]
     - endpoints: ["br-pool0:br-pool0-net1", "server2:net0"]
