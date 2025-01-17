@@ -1,10 +1,12 @@
 #!/bin/bash
 set -v
 
-{ ip l s br-pool0 down;ip l d br-pool0; } > /dev/null 2>&1
-{ ip l s br-pool1 down;ip l d br-pool1; } > /dev/null 2>&1
-ip l a br-pool0 type bridge && ip l s br-pool0 up
-ip l a br-pool1 type bridge && ip l s br-pool1 up
+for br in br-pool0 br-pool1; do
+    ip l s $br down > /dev/null 2>&1
+    ip l d $br
+    ip l a $br type bridge
+    ip l s $br up
+done
 
 cat <<EOF>clab.yaml | clab deploy -t clab.yaml -
 name: flannel-vxlan-directrouting
@@ -70,5 +72,4 @@ topology:
       mtu: 1500
     - endpoints: ["gw0:eth2", "br-pool1:br-pool1-net2"]
       mtu: 1500
-
 EOF
