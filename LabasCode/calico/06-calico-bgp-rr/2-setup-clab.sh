@@ -1,11 +1,12 @@
 #!/bin/bash
 set -v
 
-brctl addbr br-leaf0
-ifconfig br-leaf0 up
-
-brctl addbr br-leaf1
-ifconfig br-leaf1 up
+for br in br-leaf0 br-leaf1; do
+    ip l s $br down > /dev/null 2>&1
+    ip l d $br
+    ip l a $br type bridge
+    ip l s $br up
+done
 
 cat <<EOF>clab.yaml | clab deploy -t clab.yaml -
 name: calico-bgp-rr
@@ -83,17 +84,26 @@ topology:
 
   links:
     - endpoints: ["br-leaf0:br-leaf0-net0", "server1:net0"]
+      mtu: 1500
     - endpoints: ["br-leaf0:br-leaf0-net1", "server2:net0"]
+      mtu: 1500
 
     - endpoints: ["br-leaf1:br-leaf1-net0", "server3:net0"]
+      mtu: 1500
     - endpoints: ["br-leaf1:br-leaf1-net1", "server4:net0"]
+      mtu: 1500
 
     - endpoints: ["leaf0:eth1", "spine0:eth1"]
+      mtu: 1500
     - endpoints: ["leaf0:eth2", "spine1:eth1"]
+      mtu: 1500
     - endpoints: ["leaf0:eth3", "br-leaf0:br-leaf0-net2"]
+      mtu: 1500
 
     - endpoints: ["leaf1:eth1", "spine0:eth2"]
+      mtu: 1500
     - endpoints: ["leaf1:eth2", "spine1:eth2"]
+      mtu: 1500
     - endpoints: ["leaf1:eth3", "br-leaf1:br-leaf1-net2"]
-
+      mtu: 1500
 EOF
