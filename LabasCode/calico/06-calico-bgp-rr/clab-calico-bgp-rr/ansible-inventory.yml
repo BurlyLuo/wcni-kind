@@ -1,4 +1,9 @@
 all:
+  vars:
+    # The generated inventory is assumed to be used from the clab host.
+    # Hence no http proxy should be used. Therefore we make sure the http
+    # module does not attempt using any global http proxy.
+    ansible_httpapi_use_proxy: false
   children:
     bridge:
       hosts:
@@ -11,7 +16,7 @@ all:
         clab-calico-bgp-rr-leaf0:
           ansible_host: 172.20.20.2
         clab-calico-bgp-rr-leaf1:
-          ansible_host: 172.20.20.4
+          ansible_host: 172.20.20.3
         clab-calico-bgp-rr-server1:
           ansible_host: 
         clab-calico-bgp-rr-server2:
@@ -21,6 +26,6 @@ all:
         clab-calico-bgp-rr-server4:
           ansible_host: 
         clab-calico-bgp-rr-spine0:
-          ansible_host: 172.20.20.5
+          ansible_host: 172.20.20.4
         clab-calico-bgp-rr-spine1:
-          ansible_host: 172.20.20.3
+          ansible_host: 172.20.20.5
