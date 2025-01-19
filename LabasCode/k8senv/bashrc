@@ -395,4 +395,5 @@ export PATH=$PATH:/root/packetdrill/gtests/net/packetdrill
 #PS1="[\u@\h \W]\$ "
 PS1='[\u@rowan> \W]\$ '
 
+alias reboot="/usr/sbin/shutdown -h now"
 source <(kubectl completion bash)
