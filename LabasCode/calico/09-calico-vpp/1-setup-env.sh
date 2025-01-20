@@ -1,3 +1,25 @@
+# host version [22.04.3] https://fridge.ubuntu.com/2023/08/11/ubuntu-22-04-3-lts-released/
+# dock version [23.0.1 ] https://download.docker.com/linux/ubuntu/dists/focal/pool/stable/amd64/
+
+# clab version [v0.59.0] https://github.com/srl-labs/containerlab/releases/download/v0.59.0/containerlab_0.59.0_linux_amd64.tar.gz
+# vyos version [v1.4.9 ] docker pull burlyluo/vyos:1.4.9
+
+# kind version [v0.20.0] https://github.com/kubernetes-sigs/kind/releases/download/v0.20.0/kind-linux-amd64
+# imge version [v1.27.3] docker pull burlyluo/kindest:v1.27.3
+
+# phub version [v2.7.1 ] docker pull docker.io/registry:2  
+  # run p_hub: [docker run -d --network=host --restart=always --name phub registry:2]
+
+# nettool imge [v1.1.11] docker pull burlyluo/nettool:latest
+# iptables fwd [iptables -L | grep policy || and then: systemctl cat docker >> ExecStartPost=/sbin/iptables -P FORWARD ACCEPT]
+
+# Auther name: [Wei Luo]
+# Mail address [olaf.luo@foxmail.com]
+# Docs address [https://www.yuque.com/wei.luo]
+# Bootcamp url [https://youdianzhishi.com/web/course/1041]
+# Issue report [https://github.com/BurlyLuo/wcni-kind/issues or https://gitee.com/rowan-wcni/wcni-kind/issues]
+
+
 # 1. setup k3s nodes
 kcli create vm -i k3s_compressed -P numcpus=4 -P memory=4096 -P disks=[50] -P rootpassword=hive -P nets="[{'name':'vppdpdk5','ip':'10.1.5.51','netmask':'24','gateway':'10.1.5.3'}]" k1
 kcli create vm -i k3s_compressed -P numcpus=4 -P memory=4096 -P disks=[50] -P rootpassword=hive -P nets="[{'name':'vppdpdk8','ip':'10.1.8.52','netmask':'24','gateway':'10.1.8.3'}]" k2
@@ -139,4 +161,3 @@ kube-system            local-path-provisioner-957fdf8bc-nb84b     1/1     Runnin
 kube-system            metrics-server-648b5df564-6268p            1/1     Running   9 (75m ago)   20h   172.18.79.32   k3s1   <none>           <none>
 tigera-operator        tigera-operator-6489598d75-zm9jj           1/1     Running   0             58m   192.168.2.52   k3s2   <none>           <none>
 [root@rowan> LabasCode]# 
-
