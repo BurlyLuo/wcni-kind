@@ -16,6 +16,13 @@ set -v
 # nettool imge [v1.1.11] docker pull burlyluo/nettool:latest
 # iptables fwd [iptables -L | grep policy || and then: systemctl cat docker >> ExecStartPost=/sbin/iptables -P FORWARD ACCEPT]
 
+# Auther name: [Wei Luo]
+# Mail address [olaf.luo@foxmail.com]
+# Docs address [https://www.yuque.com/wei.luo]
+# Bootcamp url [https://youdianzhishi.com/web/course/1041]
+# Issue report [https://github.com/BurlyLuo/wcni-kind/issues or https://gitee.com/rowan-wcni/wcni-kind/issues]
+
+
 # 1. Prepare NoCNI environment:
 cat <<EOF | kind create cluster --name=flannel-udp --image=kindest/node:v1.27.3 --config=-
 kind: Cluster
