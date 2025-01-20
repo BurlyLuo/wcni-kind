@@ -106,7 +106,6 @@ alias scc='count_today_commits() {
 }
 count_today_commits'
 
-
 alias svcd='kubectl delete pods client server && kubectl delete svc clientsvc serversvc'
 
 alias pp=packetdrill
