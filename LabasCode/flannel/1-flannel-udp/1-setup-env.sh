@@ -22,9 +22,50 @@ set -v
 # Bootcamp url [https://youdianzhishi.com/web/course/1041]
 # Issue report [https://github.com/BurlyLuo/wcni-kind/issues or https://gitee.com/rowan-wcni/wcni-kind/issues]
 
+for tool in {wget,kind,kubectl,helm,docker,clab};do
+  if command -v $tool &> /dev/null; then
+    echo $tool install done!
+  else
+    case $tool in
+      wget)
+        command -v yum &> /dev/null && yum -y install wget || command -v apt &> /dev/null && apt -y update && apt -y install wget || echo "pls install manually"
+        ;;
+      kind)
+        wget https://github.com/kubernetes-sigs/kind/releases/download/v0.20.0/kind-linux-amd64 -O /usr/bin/kind && chmod +x /usr/bin/kind || exit 1
+        ;;
+      kubectl)
+        wget https://dl.k8s.io/release/v1.27.3/bin/linux/amd64/kubectl -O /usr/bin/kubectl && chmod +x /usr/bin/kubectl || exit 1
+        ;;
+      helm)
+        curl https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3 | bash || exit 1
+        ;;
+      docker)
+        curl -fsSL https://get.docker.com | sh -s -- --version 23.0 && systemctl daemon-reload && systemctl restart docker && iptables -P FORWARD ACCEPT || exit 1
+        ;;
+      clab)
+        bash -c "$(curl -sL https://get.containerlab.dev)" -- -v 0.59.0
+        ;;
+      *)
+        echo "Unknown tool, pls check the spelling."
+	exit 1
+        ;;
+    esac
+  fi
+done
+
+curl -I http://192.168.2.100:5000/v2/ || docker run -d --network=host --restart=always --name phub registry:2 || exit 1
+
+if [ "$(sysctl -n fs.inotify.max_user_watches)" != "524288" ]; then
+  echo "fs.inotify.max_user_watches = 524288" >> /etc/sysctl.conf
+fi
+if [ "$(sysctl -n fs.inotify.max_user_instances)" != "512" ]; then
+  echo "fs.inotify.max_user_instances = 512" >> /etc/sysctl.conf 
+fi
+sysctl -p 2>/dev/null | grep "fs.inotify.max_user_"
+
 
 # 1. Prepare NoCNI environment:
-cat <<EOF | kind create cluster --name=flannel-udp --image=kindest/node:v1.27.3 --config=-
+cat <<EOF | kind create cluster --name=flannel-udp --image=burlyluo/kindest:v1.27.3 --config=-
 kind: Cluster
 apiVersion: kind.x-k8s.io/v1alpha4
 networking:
