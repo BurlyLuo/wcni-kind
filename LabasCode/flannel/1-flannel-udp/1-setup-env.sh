@@ -54,7 +54,13 @@ for tool in {wget,kind,kubectl,helm,docker,clab};do
   fi
 done
 
-curl -I http://192.168.2.100:5000/v2/ || docker run -d --network=host --restart=always --name phub registry:2 || exit 1
+phub=192.168.2.100
+if ping -c 1 -W 1 "$phub" > /dev/null 2>&1; then
+  sshpass -p hive ssh-copy-id -o StrictHostKeyChecking=no -p 22 root@$phub > /dev/null 2>&1
+  curl -I http://$phub:5000/v2/ || ssh $phub "docker run -d --network=host --restart=always --name phub registry:2" || exit 1
+else
+  echo "Network unreachable: $phub"
+fi
 
 if [ "$(sysctl -n fs.inotify.max_user_watches)" != "524288" ]; then
   echo "fs.inotify.max_user_watches = 524288" >> /etc/sysctl.conf
