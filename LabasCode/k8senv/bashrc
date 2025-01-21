@@ -348,7 +348,7 @@ if [[ -n $SSH_CONNECTION ]]; then
    echo "************************************************"
    echo "git clone git@gitee.com:rowan-wcni/wcni-kind.git"
    echo "Website: www.yuque.com/wei.luo|youdianzhishi.com"
-   echo -e "\033[1m+\033[0m""WeChat: clabernetes"
+   echo -e "\033[1m+\033[0m""WeChat: LabasCode"
    echo "************************************************"
 fi
 
