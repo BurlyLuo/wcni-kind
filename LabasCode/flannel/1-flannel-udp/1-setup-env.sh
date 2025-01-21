@@ -24,7 +24,7 @@ set -v
 
 for tool in {wget,kind,kubectl,helm,docker,clab};do
   if command -v $tool &> /dev/null; then
-    echo $tool install done!
+    echo $tool already install done!
   else
     case $tool in
       wget)
@@ -40,6 +40,7 @@ for tool in {wget,kind,kubectl,helm,docker,clab};do
         curl https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3 | bash || exit 1
         ;;
       docker)
+        echo "Strongly recommend Ubuntu or Debian distro|https://github.com/docker/docker-install"
         curl -fsSL https://get.docker.com | sh -s -- --version 23.0 && systemctl daemon-reload && systemctl restart docker && iptables -P FORWARD ACCEPT || exit 1
         ;;
       clab)
@@ -64,7 +65,7 @@ fi
 sysctl -p 2>/dev/null | grep "fs.inotify.max_user_"
 
 
-# 1. Prepare NoCNI environment:
+# 1. Prepare NoCNI kubernetes environment:
 cat <<EOF | kind create cluster --name=flannel-udp --image=burlyluo/kindest:v1.27.3 --config=-
 kind: Cluster
 apiVersion: kind.x-k8s.io/v1alpha4
