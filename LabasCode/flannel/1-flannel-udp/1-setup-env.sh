@@ -88,8 +88,9 @@ for tool in {wget,kind,kubectl,helm,docker,clab};do
 done
 
 phub=192.168.2.100
+phub_passwd=hive
 if ping -c 1 -W 1 "$phub" > /dev/null 2>&1; then
-  sshpass -p hive ssh-copy-id -o StrictHostKeyChecking=no -p 22 root@$phub > /dev/null 2>&1
+  sshpass -p $phub_passwd ssh-copy-id -o StrictHostKeyChecking=no -p 22 root@$phub > /dev/null 2>&1
   curl -I http://$phub:5000/v2/ > /dev/null 2>&1 && echo "phub: $phub OK!" || ssh $phub "docker run -d --network=host --restart=always --name phub registry:2" || exit 1
 else
   echo "Network unreachable: $phub"
