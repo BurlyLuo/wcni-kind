@@ -11,7 +11,7 @@ set -v
 # imge version [v1.27.3] docker pull burlyluo/kindest:v1.27.3
 
 # phub version [v2.7.1 ] docker pull docker.io/registry:2  
-  # run p_hub: [docker run -d --network=host --restart=always --name phub registry:2]
+  # setup phub [docker run -d --network=host --restart=always --name phub registry:2]
 
 # nettool imge [v1.1.11] docker pull burlyluo/nettool:latest
 # iptables fwd [iptables -L | grep policy || and then: systemctl cat docker >> ExecStartPost=/sbin/iptables -P FORWARD ACCEPT]
