@@ -1,5 +1,5 @@
 #!/bin/bash
-set -v
+set -v 
 
 # host version [22.04.3] https://fridge.ubuntu.com/2023/08/11/ubuntu-22-04-3-lts-released/
 # dock version [23.0.1 ] https://download.docker.com/linux/ubuntu/dists/focal/pool/stable/amd64/
@@ -21,6 +21,28 @@ set -v
 # Docs address [https://www.yuque.com/wei.luo]
 # Bootcamp url [https://youdianzhishi.com/web/course/1041]
 # Issue report [https://github.com/BurlyLuo/wcni-kind/issues or https://gitee.com/rowan-wcni/wcni-kind/issues]
+
+# Lab topo
+cat <<EOF
+# Lab topo:
+**************************************************
+# lsb_release -a 
+No LSB modules are available.
+Distributor ID: Ubuntu
+Description:    Ubuntu 22.04.3 LTS
+Release:        22.04
+Codename:       jammy
+**************************************************
+            192.168.2.100/24   192.168.2.99/24                   
+                   |                 |
+                 [phub]        [HOME_LAB_VM]
+                   |                 |
+                   |-------[win-x][Bridge Network]
+                              192.168.2.11/24
+                                     |
+            192.168.2.10/24[Client]--|
+**************************************************
+EOF
 
 for tool in {wget,kind,kubectl,helm,docker,clab};do
   if command -v $tool &> /dev/null; then
@@ -57,7 +79,7 @@ done
 phub=192.168.2.100
 if ping -c 1 -W 1 "$phub" > /dev/null 2>&1; then
   sshpass -p hive ssh-copy-id -o StrictHostKeyChecking=no -p 22 root@$phub > /dev/null 2>&1
-  curl -I http://$phub:5000/v2/ || ssh $phub "docker run -d --network=host --restart=always --name phub registry:2" || exit 1
+  curl -I http://$phub:5000/v2/ > /dev/null 2>&1 && echo "phub: $phub OK!" || ssh $phub "docker run -d --network=host --restart=always --name phub registry:2" || exit 1
 else
   echo "Network unreachable: $phub"
 fi
