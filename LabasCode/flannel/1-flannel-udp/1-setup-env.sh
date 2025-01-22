@@ -22,9 +22,8 @@ set -v
 # Bootcamp url [https://youdianzhishi.com/web/course/1041]
 # Issue report [https://github.com/BurlyLuo/wcni-kind/issues or https://gitee.com/rowan-wcni/wcni-kind/issues]
 
-# Lab topo
+
 cat <<EOF
-# Lab topo:
 ***********************************************************
 # lsb_release -a 
 No LSB modules are available.
@@ -33,6 +32,7 @@ Description:    Ubuntu 22.04.3 LTS
 Release:        22.04
 Codename:       jammy
 ***********************************************************
+# Lab topo:
             192.168.2.100/24   192.168.2.99/24                   
                    |                 |
                  [phub]        [HOME_LAB_VM]
@@ -43,9 +43,9 @@ Codename:       jammy
             192.168.2.10/24[Client]--|
 ***********************************************************
 # KinD topo:
-                             172.18.0.4/16
-                            KinD_Container3
-	   172.18.0.2/16	   |         172.18.0.3/16        
+                            172.18.0.4/16
+                           KinD_Container3
+	   172.18.0.2/16	  |          172.18.0.3/16        
           KinD_Container1----HOME_LAB_VM----KinD_Container2
 		            172.18.0.1/16
 			          |
