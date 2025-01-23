@@ -20,7 +20,7 @@ set -v
 # Mail address [olaf.luo@foxmail.com]
 # Docs address [https://www.yuque.com/wei.luo]
 # Bootcamp url [https://youdianzhishi.com/web/course/1041]
-# Issue report [https://github.com/BurlyLuo/wcni-kind/issues or https://gitee.com/rowan-wcni/wcni-kind/issues]
+# Issue report [https://github.com/BurlyLuo/wcni-kind/issues || https://gitee.com/rowan-wcni/wcni-kind/issues]
 
 
 cat <<EOF
@@ -56,7 +56,7 @@ Codename:       jammy
 ***********************************************************
 EOF
 
-for tool in {wget,kind,kubectl,helm,docker,clab};do
+for tool in {wget,kind,kubectl,helm,docker,clab}; do
   if command -v $tool &> /dev/null; then
     echo $tool already install done!
   else
@@ -78,11 +78,10 @@ for tool in {wget,kind,kubectl,helm,docker,clab};do
         curl -fsSL https://get.docker.com | sh -s -- --version 23.0 && systemctl daemon-reload && systemctl restart docker && iptables -P FORWARD ACCEPT || exit 1
         ;;
       clab)
-        bash -c "$(curl -sL https://get.containerlab.dev)" -- -v 0.59.0
+        bash -c "$(curl -sL https://get.containerlab.dev)" -- -v 0.59.0 || exit 1
         ;;
       *)
-        echo "Unknown tool, pls check the spelling."
-	exit 1
+        echo "Unknown tool, pls check the spelling." && exit 1
         ;;
     esac
   fi
