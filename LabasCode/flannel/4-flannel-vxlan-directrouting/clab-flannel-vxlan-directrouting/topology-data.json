@@ -6,7 +6,7 @@
       "prefix": "clab",
       "mgmt": {
         "network": "clab",
-        "bridge": "br-77c30c48757c",
+        "bridge": "br-8d97580c76bf",
         "ipv4-subnet": "172.20.20.0/24",
         "ipv4-gw": "172.20.20.1",
         "ipv6-subnet": "3fff:172:20:20::/64",
@@ -34,7 +34,7 @@
       "mgmt-ipv6-prefix-length": 0,
       "mac-address": "",
       "labels": {
-        "clab-mgmt-net-bridge": "br-77c30c48757c",
+        "clab-mgmt-net-bridge": "br-8d97580c76bf",
         "clab-node-group": "",
         "clab-node-kind": "bridge",
         "clab-node-lab-dir": "/root/wcni-kind/LabasCode/flannel/4-flannel-vxlan-directrouting/clab-flannel-vxlan-directrouting/br-pool0",
@@ -64,7 +64,7 @@
       "mgmt-ipv6-prefix-length": 0,
       "mac-address": "",
       "labels": {
-        "clab-mgmt-net-bridge": "br-77c30c48757c",
+        "clab-mgmt-net-bridge": "br-8d97580c76bf",
         "clab-node-group": "",
         "clab-node-kind": "bridge",
         "clab-node-lab-dir": "/root/wcni-kind/LabasCode/flannel/4-flannel-vxlan-directrouting/clab-flannel-vxlan-directrouting/br-pool1",
@@ -94,7 +94,7 @@
       "mgmt-ipv6-prefix-length": 64,
       "mac-address": "",
       "labels": {
-        "clab-mgmt-net-bridge": "br-77c30c48757c",
+        "clab-mgmt-net-bridge": "br-8d97580c76bf",
         "clab-node-group": "",
         "clab-node-kind": "linux",
         "clab-node-lab-dir": "/root/wcni-kind/LabasCode/flannel/4-flannel-vxlan-directrouting/clab-flannel-vxlan-directrouting/gw0",
@@ -124,7 +124,7 @@
       "mgmt-ipv6-prefix-length": 0,
       "mac-address": "",
       "labels": {
-        "clab-mgmt-net-bridge": "br-77c30c48757c",
+        "clab-mgmt-net-bridge": "br-8d97580c76bf",
         "clab-node-group": "",
         "clab-node-kind": "linux",
         "clab-node-lab-dir": "/root/wcni-kind/LabasCode/flannel/4-flannel-vxlan-directrouting/clab-flannel-vxlan-directrouting/server1",
@@ -154,7 +154,7 @@
       "mgmt-ipv6-prefix-length": 0,
       "mac-address": "",
       "labels": {
-        "clab-mgmt-net-bridge": "br-77c30c48757c",
+        "clab-mgmt-net-bridge": "br-8d97580c76bf",
         "clab-node-group": "",
         "clab-node-kind": "linux",
         "clab-node-lab-dir": "/root/wcni-kind/LabasCode/flannel/4-flannel-vxlan-directrouting/clab-flannel-vxlan-directrouting/server2",
@@ -184,7 +184,7 @@
       "mgmt-ipv6-prefix-length": 0,
       "mac-address": "",
       "labels": {
-        "clab-mgmt-net-bridge": "br-77c30c48757c",
+        "clab-mgmt-net-bridge": "br-8d97580c76bf",
         "clab-node-group": "",
         "clab-node-kind": "linux",
         "clab-node-lab-dir": "/root/wcni-kind/LabasCode/flannel/4-flannel-vxlan-directrouting/clab-flannel-vxlan-directrouting/server3",
@@ -214,7 +214,7 @@
       "mgmt-ipv6-prefix-length": 0,
       "mac-address": "",
       "labels": {
-        "clab-mgmt-net-bridge": "br-77c30c48757c",
+        "clab-mgmt-net-bridge": "br-8d97580c76bf",
         "clab-node-group": "",
         "clab-node-kind": "linux",
         "clab-node-lab-dir": "/root/wcni-kind/LabasCode/flannel/4-flannel-vxlan-directrouting/clab-flannel-vxlan-directrouting/server4",
@@ -233,13 +233,13 @@
       "a": {
         "node": "br-pool0",
         "interface": "br-pool0-net0",
-        "mac": "aa:c1:ab:68:6c:fb",
+        "mac": "aa:c1:ab:87:79:aa",
         "peer": "z"
       },
       "z": {
         "node": "server1",
         "interface": "net0",
-        "mac": "aa:c1:ab:77:0b:1f",
+        "mac": "aa:c1:ab:4d:a1:f6",
         "peer": "a"
       }
     },
@@ -247,13 +247,13 @@
       "a": {
         "node": "br-pool0",
         "interface": "br-pool0-net1",
-        "mac": "aa:c1:ab:de:30:74",
+        "mac": "aa:c1:ab:38:20:4e",
         "peer": "z"
       },
       "z": {
         "node": "server2",
         "interface": "net0",
-        "mac": "aa:c1:ab:c1:6b:d4",
+        "mac": "aa:c1:ab:ce:12:9a",
         "peer": "a"
       }
     },
@@ -261,13 +261,13 @@
       "a": {
         "node": "br-pool1",
         "interface": "br-pool1-net0",
-        "mac": "aa:c1:ab:fc:ce:9b",
+        "mac": "aa:c1:ab:e2:9d:24",
         "peer": "z"
       },
       "z": {
         "node": "server3",
         "interface": "net0",
-        "mac": "aa:c1:ab:da:a5:dd",
+        "mac": "aa:c1:ab:80:30:3d",
         "peer": "a"
       }
     },
@@ -275,13 +275,13 @@
       "a": {
         "node": "br-pool1",
         "interface": "br-pool1-net1",
-        "mac": "aa:c1:ab:5f:7d:e7",
+        "mac": "aa:c1:ab:1a:33:45",
         "peer": "z"
       },
       "z": {
         "node": "server4",
         "interface": "net0",
-        "mac": "aa:c1:ab:20:fb:7e",
+        "mac": "aa:c1:ab:f0:85:f2",
         "peer": "a"
       }
     },
@@ -289,13 +289,13 @@
       "a": {
         "node": "gw0",
         "interface": "eth1",
-        "mac": "aa:c1:ab:87:da:8e",
+        "mac": "aa:c1:ab:07:5c:a6",
         "peer": "z"
       },
       "z": {
         "node": "br-pool0",
         "interface": "br-pool0-net2",
-        "mac": "aa:c1:ab:25:31:11",
+        "mac": "aa:c1:ab:1a:8e:3c",
         "peer": "a"
       }
     },
@@ -303,13 +303,13 @@
       "a": {
         "node": "gw0",
         "interface": "eth2",
-        "mac": "aa:c1:ab:95:3d:15",
+        "mac": "aa:c1:ab:48:36:1e",
         "peer": "z"
       },
       "z": {
         "node": "br-pool1",
         "interface": "br-pool1-net2",
-        "mac": "aa:c1:ab:da:6b:e0",
+        "mac": "aa:c1:ab:b9:c5:e9",
         "peer": "a"
       }
     }
