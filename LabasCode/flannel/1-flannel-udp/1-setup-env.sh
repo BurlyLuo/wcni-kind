@@ -58,7 +58,7 @@ EOF
 
 for tool in {wget,kind,kubectl,helm,docker,clab}; do
   if command -v $tool &> /dev/null; then
-    echo $tool already install done!
+    echo $tool is already installed!
   else
     case $tool in
       wget)
