@@ -61,4 +61,3 @@ topology:
       mtu: 1500
     - endpoints: ["gw0:eth2", "br-pool1:br-pool1-net2"]
       mtu: 1500
-
