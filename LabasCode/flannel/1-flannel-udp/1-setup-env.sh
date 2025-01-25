@@ -50,7 +50,7 @@ Codename:       jammy
           KinD_Container1----HOME_LAB_VM----KinD_Container2
                             172.18.0.1/16
                                   |
-                                 SNAT
+                              MASQUERADE
                                   |
                   192.168.2.99/24->192.168.2.1/24->www
 *****************************************************************
