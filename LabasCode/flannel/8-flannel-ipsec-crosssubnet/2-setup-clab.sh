@@ -3,7 +3,7 @@ set -v
 
 for br in br-pool0 br-pool1; do
     ip l s $br down > /dev/null 2>&1
-    ip l d $br
+    ip l d $br > /dev/null 2>&1
     ip l a $br type bridge
     ip l s $br up
 done
@@ -73,4 +73,3 @@ topology:
     - endpoints: ["gw0:eth2", "br-pool1:br-pool1-net2"]
       mtu: 1500
 EOF
-
