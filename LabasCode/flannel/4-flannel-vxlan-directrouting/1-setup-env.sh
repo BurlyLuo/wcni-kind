@@ -57,11 +57,11 @@ Codename:       jammy
                                  GWX
                                  /|\
                       10.1.5.1/24 | 10.1.8.1/24
-                            172.20.20.2/24
+                              MASQUERADE
                                   |
-                            172.20.20.1/24
+                    172.20.20.2/24->172.20.20.1/24
                                   |
-                                 SNAT
+                              MASQUERADE
                                   |
                   192.168.2.99/24->192.168.2.1/24->www
 *****************************************************************
@@ -171,32 +171,6 @@ EOF
 controller_node_ip=`kubectl get node -o wide --no-headers | grep -E "control-plane|bpf1" | awk -F " " '{print $6}'`
 kubectl taint nodes $(kubectl get nodes -o name | grep control-plane) node-role.kubernetes.io/control-plane:NoSchedule-
 kubectl get nodes -o wide
-
-cat <<EOF
-# kind+clab topo:
-                    172.18.0.4/16     172.18.0.5/16
-                       worker1           worker2
-                   KinD_Container3   KinD_Container4
-                       server3          server4
-                    10.1.8.10/24      10.1.8.11/24
-                              \       /
-                               \     / 
-           172.18.0.2/16        \   /         172.18.0.3/16
-           control-plane         \ /             worker
-          KinD_Container1----HOME_LAB_VM----KinD_Container2
-              server1             |             server2
-           10.1.5.10/24           |           10.1.5.11/24
-                                 GWX
-                                 /|\
-                      10.1.5.1/24 | 10.1.8.1/24
-                            172.20.20.2/24
-                                  |
-                            172.20.20.1/24
-                                  |
-                                 SNAT
-                                  |
-                  192.168.2.99/24->192.168.2.1/24->www
-EOF
 
 ./2-setup-clab.sh
 

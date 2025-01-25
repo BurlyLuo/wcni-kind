@@ -11,7 +11,7 @@ set -v
 # imge version [v1.27.3] docker pull burlyluo/kindest:v1.27.3
 
 # phub version [v2.7.1 ] docker pull docker.io/registry:2  
-  # run p_hub: [docker run -d --network=host --restart=always --name phub registry:2]
+  # setup phub [docker run -d --network=host --restart=always --name phub registry:2]
 
 # nettool imge [v1.1.11] docker pull burlyluo/nettool:latest
 # iptables fwd [iptables -L | grep policy || and then: systemctl cat docker >> ExecStartPost=/sbin/iptables -P FORWARD ACCEPT]
@@ -20,11 +20,105 @@ set -v
 # Mail address [olaf.luo@foxmail.com]
 # Docs address [https://www.yuque.com/wei.luo]
 # Bootcamp url [https://youdianzhishi.com/web/course/1041]
-# Issue report [https://github.com/BurlyLuo/wcni-kind/issues or https://gitee.com/rowan-wcni/wcni-kind/issues]
+# Issue report [https://github.com/BurlyLuo/wcni-kind/issues || https://gitee.com/rowan-wcni/wcni-kind/issues]
 
 
-# 1. Prepare NoCNI environment
-cat <<EOF | kind create cluster --name=flannel-wireguard-crosssubnet --image=kindest/node:v1.27.3 --config=-
+cat <<EOF
+*****************************************************************
+# lsb_release -a 
+Distributor ID: Ubuntu
+Description:    Ubuntu 22.04.3 LTS
+Release:        22.04
+Codename:       jammy
+*****************************************************************
+# Lab topo:
+            192.168.2.100/24   192.168.2.99/24 
+                   |                 |
+                 [phub]        [HOME_LAB_VM]
+                   |                 |
+                   |-------[win-x][Bridge Network]
+                              192.168.2.11/24
+                                     |
+            192.168.2.10/24[Client]--|
+*****************************************************************
+# kind+clab topo:
+                    172.18.0.4/16     172.18.0.5/16
+                       worker1           worker2
+                   KinD_Container3   KinD_Container4
+                       server3          server4
+                    10.1.8.10/24      10.1.8.11/24
+                              \       /
+                               \     /
+           172.18.0.2/16        \   /         172.18.0.3/16
+           control-plane         \ /             worker
+          KinD_Container1----HOME_LAB_VM----KinD_Container2
+              server1             |             server2
+           10.1.5.10/24           |           10.1.5.11/24
+                                 GWX
+                                 /|\
+                      10.1.5.1/24 | 10.1.8.1/24
+                              MASQUERADE
+                                  |
+                    172.20.20.2/24->172.20.20.1/24
+                                  |
+                              MASQUERADE
+                                  |
+                  192.168.2.99/24->192.168.2.1/24->www
+*****************************************************************
+EOF
+
+for tool in {wget,kind,kubectl,helm,docker,clab}; do
+  if command -v $tool &> /dev/null; then
+    echo $tool is already installed!
+  else
+    case $tool in
+      wget)
+        command -v yum &> /dev/null && yum -y install wget || command -v apt &> /dev/null && apt -y update && apt -y install wget || echo "pls install manually"
+        ;;
+      kind)
+        wget https://github.com/kubernetes-sigs/kind/releases/download/v0.20.0/kind-linux-amd64 -O /usr/bin/kind && chmod +x /usr/bin/kind || exit 1
+        ;;
+      kubectl)
+        wget https://dl.k8s.io/release/v1.27.3/bin/linux/amd64/kubectl -O /usr/bin/kubectl && chmod +x /usr/bin/kubectl || exit 1
+        ;;
+      helm)
+        curl https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3 | bash || exit 1
+        ;;
+      docker)
+        echo "Strongly recommend Ubuntu or Debian distro|https://github.com/docker/docker-install"
+        curl -fsSL https://get.docker.com | sh -s -- --version 23.0 && systemctl daemon-reload && systemctl restart docker && iptables -P FORWARD ACCEPT || exit 1
+        ;;
+      clab)
+        bash -c "$(curl -sL https://get.containerlab.dev)" -- -v 0.59.0 || exit 1
+        ;;
+      *)
+        echo "Unknown tool, pls check the spelling." && exit 1
+        ;;
+    esac
+  fi
+done
+
+phub=192.168.2.100
+phub_passwd=hive
+if ping -c 1 -W 1 "$phub" > /dev/null 2>&1; then
+  sshpass -p $phub_passwd ssh-copy-id -o StrictHostKeyChecking=no -p 22 root@$phub > /dev/null 2>&1
+  curl -I http://$phub:5000/v2/ > /dev/null 2>&1 && echo "phub: $phub OK!" || ssh $phub "docker run -d --network=host --restart=always --name phub registry:2" || exit 1
+else
+  echo "Network unreachable: $phub"
+fi
+
+if [ "$(sysctl -n fs.inotify.max_user_watches)" != "524288" ]; then
+  echo "fs.inotify.max_user_watches = 524288" >> /etc/sysctl.conf
+fi
+if [ "$(sysctl -n fs.inotify.max_user_instances)" != "512" ]; then
+  echo "fs.inotify.max_user_instances = 512" >> /etc/sysctl.conf 
+fi
+sysctl -p 2>/dev/null | grep "fs.inotify.max_user_"
+
+
+# 1. Prepare NoCNI kubernetes environment
+docker network list | grep -iw kind || docker network create --driver bridge --subnet=172.18.0.0/16 --gateway=172.18.0.1 --ipv6 --subnet=172:18:0:1::/64 kind || exit 1
+cat <<EOF | KIND_EXPERIMENTAL_DOCKER_NETWORK=kind kind create cluster --name=flannel-wireguard-crosssubnet --image=kindest/node:v1.27.3 --config=-
 kind: Cluster
 apiVersion: kind.x-k8s.io/v1alpha4
 networking:
