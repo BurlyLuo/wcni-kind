@@ -96,11 +96,11 @@ else
   echo "Network unreachable: $phub"
 fi
 
-if [ "$(sysctl -n fs.inotify.max_user_watches)" != "524288" ]; then
+if [ "$(sysctl -p > /dev/null 2>&1 || true && sysctl -n fs.inotify.max_user_watches 2>/dev/null)" != "524288" ]; then
   sed -i '/fs.inotify.max_user_watches/d' /etc/sysctl.conf 
   echo "fs.inotify.max_user_watches = 524288" >> /etc/sysctl.conf
 fi
-if [ "$(sysctl -n fs.inotify.max_user_instances)" != "512" ]; then
+if [ "$(sysctl -p > /dev/null 2>&1 || true && sysctl -n fs.inotify.max_user_instances 2>/dev/null)" != "512" ]; then
   sed -i '/fs.inotify.max_user_instances/d' /etc/sysctl.conf
   echo "fs.inotify.max_user_instances = 512" >> /etc/sysctl.conf 
 fi
