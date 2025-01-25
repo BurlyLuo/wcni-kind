@@ -97,9 +97,11 @@ else
 fi
 
 if [ "$(sysctl -n fs.inotify.max_user_watches)" != "524288" ]; then
+  sed -i '/fs.inotify.max_user_watches/d' /etc/sysctl.conf 
   echo "fs.inotify.max_user_watches = 524288" >> /etc/sysctl.conf
 fi
 if [ "$(sysctl -n fs.inotify.max_user_instances)" != "512" ]; then
+  sed -i '/fs.inotify.max_user_instances/d' /etc/sysctl.conf
   echo "fs.inotify.max_user_instances = 512" >> /etc/sysctl.conf 
 fi
 sysctl -p 2>/dev/null | grep "fs.inotify.max_user_"
