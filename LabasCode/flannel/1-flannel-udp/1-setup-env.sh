@@ -58,7 +58,7 @@ EOF
 
 for tool in {wget,kind,kubectl,helm,docker,clab,sshpass}; do
   if command -v $tool &> /dev/null; then
-    echo $tool is already installed!
+    echo "$tool is already installed!"
   else
     case $tool in
       wget)
@@ -90,9 +90,7 @@ for tool in {wget,kind,kubectl,helm,docker,clab,sshpass}; do
   fi
 done
 
-phub_ip=192.168.2.100
-phub_user=root
-phub_passwd=hive
+phub_ip=192.168.2.100; phub_user=root; phub_passwd=hive
 if ping -c 1 -W 1 "$phub_ip" > /dev/null 2>&1; then
   sshpass -p $phub_passwd ssh-copy-id -o StrictHostKeyChecking=no -p 22 $phub_user@$phub_ip > /dev/null 2>&1
   if ! curl -I http://$phub_ip:5000/v2/ > /dev/null 2>&1; then
@@ -116,8 +114,8 @@ sysctl -p 2>/dev/null | grep "fs.inotify.max_user_"
 
 
 # 1. Prepare NoCNI kubernetes environment:
-docker network list | grep -iw kind || docker network create --driver bridge --subnet=172.18.0.0/16 --gateway=172.18.0.1 --ipv6 --subnet=172:18:0:1::/64 kind || exit 1
-# cat <<EOF | KIND_EXPERIMENTAL_DOCKER_NETWORK=kind kind create cluster --name=flannel-udp --image=burlyluo/kindest:v1.27.3 -v=9 --config=-
+ipv4_subnet="172.18.0.0/16"; ipv4_gateway="172.18.0.1"; ipv6_subnet="172:18:0:1::/64"
+docker network list | grep -iw kind || docker network create --driver bridge --subnet=$ipv4_subnet --gateway=$ipv4_gateway --ipv6 --subnet=$ipv6_subnet kind || exit 1
 cat <<EOF | KIND_EXPERIMENTAL_DOCKER_NETWORK=kind kind create cluster --name=flannel-udp --image=burlyluo/kindest:v1.27.3 --config=-
 kind: Cluster
 apiVersion: kind.x-k8s.io/v1alpha4
