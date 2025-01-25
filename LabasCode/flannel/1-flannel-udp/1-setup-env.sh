@@ -62,9 +62,7 @@ for tool in {wget,kind,kubectl,helm,docker,clab,sshpass}; do
   else
     case $tool in
       wget)
-        { command -v yum &> /dev/null && yum -y install wget; } || \
-        { command -v apt &> /dev/null && apt -y update && apt -y install wget; } || \
-        { echo "wget installation failed" && exit 1; }
+        command -v apt &> /dev/null && apt -y update && apt -y install wget || { echo "wget installation failed" && exit 1; }
         ;;
       kind)
         wget https://github.com/kubernetes-sigs/kind/releases/download/v0.20.0/kind-linux-amd64 -O /usr/bin/kind && chmod +x /usr/bin/kind || exit 1
@@ -83,9 +81,7 @@ for tool in {wget,kind,kubectl,helm,docker,clab,sshpass}; do
         bash -c "$(curl -sL https://get.containerlab.dev)" -- -v 0.59.0 || exit 1
         ;;
       sshpass)
-        { command -v yum &> /dev/null && yum -y install sshpass; } || \
-        { command -v apt &> /dev/null && apt -y update && apt -y install sshpass; } || \
-        { echo "sshpass installation failed" && exit 1; }
+        command -v apt &> /dev/null && apt -y update && apt -y install sshpass || { echo "sshpass installation failed" && exit 1; }
         ;;
       *)
         echo "Unknown tool, pls check the spelling." && exit 1
