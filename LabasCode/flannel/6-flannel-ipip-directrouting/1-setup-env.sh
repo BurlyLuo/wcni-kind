@@ -118,7 +118,7 @@ sysctl -p 2>/dev/null | grep "fs.inotify.max_user_"
 
 # 1. Prepare NoCNI kubernetes environment
 docker network list | grep -iw kind || docker network create --driver bridge --subnet=172.18.0.0/16 --gateway=172.18.0.1 --ipv6 --subnet=172:18:0:1::/64 kind || exit 1
-cat <<EOF | KIND_EXPERIMENTAL_DOCKER_NETWORK=kind kind create cluster --name=flannel-ipip-directrouting --image=kindest/node:v1.27.3 --config=-
+cat <<EOF | KIND_EXPERIMENTAL_DOCKER_NETWORK=kind kind create cluster --name=flannel-ipip-directrouting --image=burlyluo/kindest:v1.27.3 --config=-
 kind: Cluster
 apiVersion: kind.x-k8s.io/v1alpha4
 networking:
