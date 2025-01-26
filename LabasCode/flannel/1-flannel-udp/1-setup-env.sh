@@ -90,7 +90,7 @@ for tool in {wget,kind,kubectl,helm,docker,clab,sshpass}; do
   fi
 done
 
-phub_ip=192.168.2.100; phub_user=root; phub_passwd=hive
+phub_ip=192.168.2.101; phub_user=root; phub_passwd=hive
 if ping -c 1 -W 1 "$phub_ip" > /dev/null 2>&1; then
   sshpass -p $phub_passwd ssh-copy-id -o StrictHostKeyChecking=no -p 22 $phub_user@$phub_ip > /dev/null 2>&1
   if ! curl -I http://$phub_ip:5000/v2/ > /dev/null 2>&1; then
@@ -99,7 +99,7 @@ if ping -c 1 -W 1 "$phub_ip" > /dev/null 2>&1; then
     echo "phub: $phub_ip:5000 docker registry is fine!"
   fi
 else
-  echo "Network unreachable: $phub_ip"
+  { echo "Network unreachable: $phub_ip" && exit 1; }
 fi
 
 if [ "$(sysctl -p > /dev/null 2>&1 || true && sysctl -n fs.inotify.max_user_watches 2>/dev/null)" != "524288" ]; then
