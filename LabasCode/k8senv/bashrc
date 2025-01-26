@@ -305,9 +305,9 @@ delk3svms-cluster'
 
 #kcli
 alias vm="cd /root/wcni-kind/LabasCode/k8senv/vmenv"
-alias kclissh='ssh-keygen -f "/root/.ssh/known_hosts" -R "192.168.2.96" > /dev/null 2>&1'
 alias vms='ssh-keygen -f "/root/.ssh/known_hosts" -R "192.168.2.127" > /dev/null 2>&1 && ssh -o StrictHostKeyChecking=no 192.168.2.127'
 alias 98='ssh -o StrictHostKeyChecking=no 192.168.2.98'
+alias 96='ssh -o StrictHostKeyChecking=no 192.168.2.96'
 alias 51='ssh -o StrictHostKeyChecking=no 10.1.5.51'
 alias 52='ssh -o StrictHostKeyChecking=no 10.1.8.52'
 alias 53='ssh -o StrictHostKeyChecking=no 10.1.8.53'
