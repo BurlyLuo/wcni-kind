@@ -16,7 +16,7 @@ set -v
 # nettool imge [v1.1.11] docker pull burlyluo/nettool:latest
 # iptables fwd [iptables -L | grep policy || and then: systemctl cat docker >> ExecStartPost=/sbin/iptables -P FORWARD ACCEPT]
 
-# Auther name: [Wei Luo]
+# Author name: [Wei Luo]
 # Mail address [olaf.luo@foxmail.com]
 # Docs address [https://www.yuque.com/wei.luo]
 # Bootcamp url [https://youdianzhishi.com/web/course/1041]
@@ -65,10 +65,10 @@ for tool in {wget,kind,kubectl,helm,docker,clab,sshpass}; do
         command -v apt &> /dev/null && apt -y update && apt -y install wget || { echo "wget installation failed" && exit 1; }
         ;;
       kind)
-        wget https://github.com/kubernetes-sigs/kind/releases/download/v0.20.0/kind-linux-amd64 -O /usr/bin/kind && chmod +x /usr/bin/kind || exit 1
+        wget --tries=3 https://github.com/kubernetes-sigs/kind/releases/download/v0.20.0/kind-linux-amd64 -O /usr/bin/kind && chmod +x /usr/bin/kind || exit 1
         ;;
       kubectl)
-        wget https://dl.k8s.io/release/v1.27.3/bin/linux/amd64/kubectl -O /usr/bin/kubectl && chmod +x /usr/bin/kubectl || exit 1
+        wget --tries=3 https://dl.k8s.io/release/v1.27.3/bin/linux/amd64/kubectl -O /usr/bin/kubectl && chmod +x /usr/bin/kubectl || exit 1
         ;;
       helm)
         curl https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3 | bash || exit 1
