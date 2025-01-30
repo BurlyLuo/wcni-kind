@@ -151,6 +151,9 @@ containerdConfigPatches:
     [plugins."io.containerd.grpc.v1.cri".registry.mirrors."192.168.2.100:5000"]
       endpoint = ["http://192.168.2.100:5000"]
 EOF
+if [[ $? -ne 0 ]]; then
+  { echo "ERROR: Failed to create Kubernetes cluster."; exit 1; }
+fi
 
 # 2. Remove control-plane taints
 controller_node_ip=$(kubectl get node -o wide --no-headers | grep -E "control-plane|bpf1" | awk -F " " '{print $6}')
