@@ -57,7 +57,7 @@ Codename:       jammy
 EOF
 
 if [[ $EUID -ne 0 ]]; then
-  { echo "This script must be run as root." && exit 1; }
+  { echo "Error: This script must be run as root." && exit 1; }
 fi
 
 DISTRO=$(grep '^ID=' /etc/os-release | cut -d= -f2 | tr -d '"')
