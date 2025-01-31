@@ -108,7 +108,7 @@ if ping -c 1 -W 1 "$phub_ip" > /dev/null 2>&1; then
     echo "phub: $phub_ip:5000 docker registry is fine!"
   fi
 else
-  { echo "Network unreachable: $phub_ip" && exit 1; }
+  { echo "ERROR: Network unreachable: $phub_ip" && exit 1; }
 fi
 
 if [ "$(sysctl -p > /dev/null 2>&1 || true && sysctl -n fs.inotify.max_user_watches 2>/dev/null)" != "524288" ]; then
@@ -124,9 +124,10 @@ sysctl -p 2>/dev/null | grep "fs.inotify.max_user_"
 
 # 1. Prepare NoCNI kubernetes environment:
 ipv4_subnet="172.18.0.0/16"; ipv4_gateway="172.18.0.1"; ipv6_subnet="172:18:0:1::/64"
-docker network list | grep -iw kind || docker network create --driver bridge --subnet=$ipv4_subnet --gateway=$ipv4_gateway --ipv6 --subnet=$ipv6_subnet kind || exit 1
+docker network list | grep -w kind || docker network create --driver bridge --subnet=$ipv4_subnet --gateway=$ipv4_gateway --ipv6 --subnet=$ipv6_subnet kind || exit 1
 
-cat <<EOF | KIND_EXPERIMENTAL_DOCKER_NETWORK=kind kind create cluster --name=flannel-udp --image=burlyluo/kindest:v1.27.3 --config=-
+k8s_name=flannel-udp; image_name="burlyluo/kindest:v1.27.3"
+kind get clusters | grep -w $k8s_name || cat <<EOF | KIND_EXPERIMENTAL_DOCKER_NETWORK=kind kind create cluster --name=$k8s_name --image=$image_name --config=-
 kind: Cluster
 apiVersion: kind.x-k8s.io/v1alpha4
 networking:
