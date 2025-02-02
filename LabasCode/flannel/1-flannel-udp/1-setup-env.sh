@@ -60,9 +60,9 @@ if [[ $EUID -ne 0 ]]; then
   { echo "Error: This script must be run as root." && exit 1; }
 fi
 
-DISTRO=$(grep '^ID=' /etc/os-release | cut -d= -f2 | tr -d '"')
+DISTRO=$(grep '^ID=' /etc/os-release | cut -d= -f2 | tr -d '"' | tr '[:upper:]' '[:lower:]')
 if [ "$DISTRO" != "ubuntu" ] && [ "$DISTRO" != "debian" ]; then
-  { echo "Error: This script only supports Ubuntu or Debian systems." && exit 1; }
+  { echo "ERROR: This script only supports Ubuntu or Debian systems." && exit 1; }
 fi
 
 for tool in {wget,kind,kubectl,helm,docker,clab,sshpass}; do
