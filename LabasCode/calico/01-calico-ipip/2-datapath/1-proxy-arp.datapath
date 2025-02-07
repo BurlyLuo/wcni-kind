@@ -29,13 +29,16 @@ ip netns exec ns1 ip r a default via 169.254.1.1 dev c-eth0
 
 2. test to-gw is available[Enable Proxy_ARP]
 echo 1 > /proc/sys/net/ipv4/conf/veth/proxy_arp 
+ip addr add 169.254.1.1/32 dev veth
 ip netns exec ns1 arping 169.254.1.1 -i c-eth0
 ARPING 169.254.0.1
 42 bytes from 92:58:7a:3c:ec:d8 (169.254.0.1): index=0 time=206.419 msec
 
 3. test to host's address[192.168.2.66/99]
 $ Add a backhaul route on the host side[route -n tell the host how to fwd the packet to the ns1]
+3.1 add reverse route
 ip r a 1.1.1.0/24 dev veth scope link
+
 ip netns exec ns1 arping 192.168.2.66 -i c-eth0
 
 4. test to external network[114.114.114.114]
