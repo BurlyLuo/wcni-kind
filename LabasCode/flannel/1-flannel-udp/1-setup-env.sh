@@ -131,8 +131,13 @@ docker network list | grep -wq kind || docker network create --driver bridge --s
 k8s_name=flannel-udp; image_name="burlyluo/kindest:v1.27.3"
 if kind get clusters | grep -wq $k8s_name; then
   echo "# The cluster $k8s_name is already exists."
-  kubectl config use-context kind-$k8s_name && echo "# kubectl get nodes -owide" && kubectl get nodes -owide
-  exit 0
+  if kubectl config use-context kind-$k8s_name > /dev/null 2>&1; then
+    echo "# kubectl get nodes -owide" && kubectl get nodes -owide
+    exit 0
+  else
+    echo "Error: $k8s_name context is missing. Re-Creating...$k8s_name"
+    kind delete clusters $k8s_name
+  fi
 fi
 kind get clusters | grep -wq $k8s_name || cat <<EOF | KIND_EXPERIMENTAL_DOCKER_NETWORK=kind kind create cluster --name=$k8s_name --image=$image_name --config=-
 kind: Cluster
