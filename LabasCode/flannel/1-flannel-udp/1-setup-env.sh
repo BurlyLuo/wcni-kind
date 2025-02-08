@@ -57,12 +57,14 @@ Codename:       jammy
 EOF
 
 if [[ $EUID -ne 0 ]]; then
-  { echo "Error: This script must be run as root." && exit 1; }
+  echo "Error: This script must be run as root."
+  exit 1
 fi
 
 DISTRO=$(grep '^ID=' /etc/os-release | cut -d= -f2 | tr -d '"' | tr '[:upper:]' '[:lower:]')
 if [ "$DISTRO" != "ubuntu" ] && [ "$DISTRO" != "debian" ]; then
-  { echo "ERROR: This script only supports Ubuntu or Debian systems." && exit 1; }
+  echo "ERROR: This script only supports Ubuntu or Debian systems."
+  exit 1
 fi
 
 for tool in {wget,kind,kubectl,helm,docker,clab,sshpass}; do
@@ -83,7 +85,6 @@ for tool in {wget,kind,kubectl,helm,docker,clab,sshpass}; do
         curl https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3 | bash || exit 1
         ;;
       docker)
-        echo "Strongly recommend Ubuntu or Debian distro|https://github.com/docker/docker-install"
         curl -fsSL https://get.docker.com | sh -s -- --version 23.0 && systemctl daemon-reload && systemctl restart docker && iptables -P FORWARD ACCEPT || exit 1
         ;;
       clab)
@@ -93,7 +94,7 @@ for tool in {wget,kind,kubectl,helm,docker,clab,sshpass}; do
         command -v apt &> /dev/null && apt -y update && apt -y install sshpass || { echo "Error: sshpass installation failed" && exit 1; }
         ;;
       *)
-        echo "Unknown tool, pls check the spelling." && exit 1
+        echo "ERROR: Unknown tool, Pls check the spelling." && exit 1
         ;;
     esac
   fi
@@ -108,7 +109,8 @@ if ping -c 1 -W 1 "$phub_ip" > /dev/null 2>&1; then
     echo "phub: $phub_ip:5000 docker registry is fine!"
   fi
 else
-  { echo "ERROR: Network unreachable: $phub_ip" && exit 1; }
+  echo "ERROR: Network unreachable: $phub_ip"
+  exit 1
 fi
 
 if [ "$(sysctl -p > /dev/null 2>&1 || true && sysctl -n fs.inotify.max_user_watches 2>/dev/null)" != "524288" ]; then
@@ -124,10 +126,15 @@ sysctl -p 2>/dev/null | grep "fs.inotify.max_user_"
 
 # 1. Prepare NoCNI kubernetes environment:
 ipv4_subnet="172.18.0.0/16"; ipv4_gateway="172.18.0.1"; ipv6_subnet="172:18:0:1::/64"
-docker network list | grep -w kind || docker network create --driver bridge --subnet=$ipv4_subnet --gateway=$ipv4_gateway --ipv6 --subnet=$ipv6_subnet kind || exit 1
+docker network list | grep -wq kind || docker network create --driver bridge --subnet=$ipv4_subnet --gateway=$ipv4_gateway --ipv6 --subnet=$ipv6_subnet kind || exit 1
 
 k8s_name=flannel-udp; image_name="burlyluo/kindest:v1.27.3"
-kind get clusters | grep -w $k8s_name || cat <<EOF | KIND_EXPERIMENTAL_DOCKER_NETWORK=kind kind create cluster --name=$k8s_name --image=$image_name --config=-
+if kind get clusters | grep -wq $k8s_name; then
+  echo "# The cluster $k8s_name is already exists."
+  kubectl config use-context kind-$k8s_name && echo "# kubectl get nodes -owide" && kubectl get nodes -owide
+  exit 0
+fi
+kind get clusters | grep -wq $k8s_name || cat <<EOF | KIND_EXPERIMENTAL_DOCKER_NETWORK=kind kind create cluster --name=$k8s_name --image=$image_name --config=-
 kind: Cluster
 apiVersion: kind.x-k8s.io/v1alpha4
 networking:
@@ -153,11 +160,12 @@ containerdConfigPatches:
       endpoint = ["http://192.168.2.100:5000"]
 EOF
 if [[ $? -ne 0 ]]; then
-  { echo "ERROR: Failed to create Kubernetes cluster."; exit 1; }
+  echo "ERROR: Failed to create Kubernetes cluster."
+  exit 1
 fi
 
 # 2. Remove control-plane taints
-controller_node_ip=$(kubectl get node -o wide --no-headers | grep -E "control-plane|bpf1" | awk -F " " '{print $6}')
+controller_node_ip=$(kubectl get node -o wide --no-headers | grep "control-plane" | awk '{print $6}') && echo "controller_node_ip=$controller_node_ip"
 kubectl taint nodes $(kubectl get nodes -o name | grep control-plane) node-role.kubernetes.io/control-plane:NoSchedule-
 kubectl get nodes -o wide
 
@@ -170,7 +178,7 @@ ip -ts monitor all > /root/startup_monitor.txt 2>&1
 EOF
 chmod +x /root/monitor_startup.sh && /root/monitor_startup.sh'
 else
-  echo "ERROR: No such controller_node!"
+  echo "ERROR: No such controller node!"
 fi
 
 # 4. Install CNI(flannel udp mode) [https://github.com/flannel-io/flannel#deploying-flannel-with-kubectl]
