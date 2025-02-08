@@ -164,6 +164,7 @@ containerdConfigPatches:
     [plugins."io.containerd.grpc.v1.cri".registry.mirrors."192.168.2.100:5000"]
       endpoint = ["http://192.168.2.100:5000"]
 EOF
+
 if [[ $? -ne 0 ]]; then
   echo "ERROR: Failed to create Kubernetes cluster."
   exit 1
