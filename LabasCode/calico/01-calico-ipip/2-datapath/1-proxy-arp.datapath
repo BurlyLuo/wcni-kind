@@ -22,7 +22,7 @@ ip l a veth type veth peer name c-eth0
 ip l s veth up
 
 ip l s c-eth0 netns ns1
-ip netns exce ns1 ip l s c-eth0 up
+ip netns exec ns1 ip l s c-eth0 up
 ip netns exec ns1 ip a a 1.1.1.2/24 dev c-eth0 
 ip netns exec ns1 ip r a 169.254.1.1 dev c-eth0 scope link 
 ip netns exec ns1 ip r a default via 169.254.1.1 dev c-eth0
