@@ -136,9 +136,15 @@ if kind get clusters | grep -wq $k8s_name; then
     exit 0
   else
     echo "Error: $k8s_name context is missing. Re-Creating...$k8s_name"
-    kind delete clusters $k8s_name
+    if ! kind delete clusters $k8s_name; then
+      echo "Error: Failed to delete cluster $k8s_name"
+      exit 1
+    fi
   fi
+else
+  echo "Info: No such k8s cluster $k8s_name. Creating..."
 fi
+
 kind get clusters | grep -wq $k8s_name || cat <<EOF | KIND_EXPERIMENTAL_DOCKER_NETWORK=kind kind create cluster --name=$k8s_name --image=$image_name --config=-
 kind: Cluster
 apiVersion: kind.x-k8s.io/v1alpha4
