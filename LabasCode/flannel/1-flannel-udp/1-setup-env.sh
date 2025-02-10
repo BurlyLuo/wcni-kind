@@ -135,7 +135,7 @@ if kind get clusters | grep -wq $k8s_name; then
     echo "# kubectl get nodes -owide" && kubectl get nodes -owide
     exit 0
   else
-    echo "Error: $k8s_name context is missing. Re-Creating...$k8s_name"
+    echo "Error: $k8s_name context missed. Re-Creating...$k8s_name"
     if ! kind delete clusters $k8s_name; then
       echo "Error: Failed to delete cluster $k8s_name"
       exit 1
