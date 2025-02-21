@@ -173,6 +173,7 @@ EOF
 
 if [[ $? -ne 0 ]]; then
   echo "ERROR: Failed to create Kubernetes cluster."
+  kind delete clusters "$k8s_name" 2>/dev/null
   exit 1
 fi
 

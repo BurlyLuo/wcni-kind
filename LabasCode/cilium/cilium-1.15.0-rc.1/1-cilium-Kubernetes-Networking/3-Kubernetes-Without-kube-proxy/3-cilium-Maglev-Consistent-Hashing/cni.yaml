@@ -6,7 +6,7 @@ metadata:
     app: wluo
   name: wluo
 spec:
-  replicas: 1
+  replicas: 4
   selector:
     matchLabels:
       app: wluo
