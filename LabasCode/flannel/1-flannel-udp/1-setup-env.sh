@@ -19,8 +19,8 @@ set -v
 # Author name: [Wei Luo]
 # Mail address [olaf.luo@foxmail.com]
 # Docs address [https://www.yuque.com/wei.luo]
-# Bootcamp url [https://youdianzhishi.com/web/course/1041]
-# Issue report [https://github.com/BurlyLuo/wcni-kind/issues || https://gitee.com/rowan-wcni/wcni-kind/issues]
+# Bootcamp url [https://youdianzhishi.com/web]
+# Issue report [https://github.com/BurlyLuo/wcni-kind/issues]
 
 
 cat <<EOF
