@@ -196,3 +196,7 @@ fi
 
 # 4. Install CNI(flannel udp mode) [https://github.com/flannel-io/flannel#deploying-flannel-with-kubectl]
 kubectl apply -f ./flannel.yaml
+kubectl apply -f ./cni.yaml
+kubectl wait --timeout=100s --for=condition=Ready=true pods --all -A
+
+kubectl -nkube-system exec -it etcd-flannel-udp-control-plane -- sh -c "ETCDCTL_API=3 etcdctl   --endpoints=https://$controller_node_ip:2379   --cacert=/etc/kubernetes/pki/etcd/ca.crt   --cert=/etc/kubernetes/pki/etcd/server.crt   --key=/etc/kubernetes/pki/etcd/server.key   get / --prefix" > Flanneld-udp.txt
