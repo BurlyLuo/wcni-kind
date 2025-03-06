@@ -1,10 +1,5 @@
 #!/bin/bash
 set -v 
-date
-
-controller_node=`kubectl get nodes --no-headers  -o custom-columns=NAME:.metadata.name| grep control-plane`
-worker_node=`kubectl get nodes --no-headers  -o custom-columns=NAME:.metadata.name| grep worker2`
-
 cat <<EOF | kubectl apply -f -
 apiVersion: "k8s.cni.cncf.io/v1"
 kind: NetworkAttachmentDefinition
@@ -15,7 +10,7 @@ spec:
       "cniVersion": "0.3.0",
       "name": "whereaboutsexample",
       "type": "macvlan",
-      "master": "eth0",
+      "master": "ens257",
       "mode": "bridge",
       "ipam": {
         "type": "whereabouts",
@@ -40,7 +35,6 @@ spec:
       capabilities:
         drop: ["ALL"]
         add: ["CAP_DAC_OVERRIDE", "CAP_CHOWN", "CAP_NET_BIND_SERVICE"]
-  nodeName: ${controller_node}
 EOF
 
 
@@ -60,6 +54,5 @@ spec:
       capabilities:
         drop: ["ALL"]
         add: ["CAP_DAC_OVERRIDE", "CAP_CHOWN", "CAP_NET_BIND_SERVICE"]
-  nodeName: ${worker_node}
 EOF
 
