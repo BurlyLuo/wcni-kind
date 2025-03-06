@@ -56,3 +56,8 @@ spec:
         add: ["CAP_DAC_OVERRIDE", "CAP_CHOWN", "CAP_NET_BIND_SERVICE"]
 EOF
 
+# capsh --decode=xxxxxxxxxxxxxxx
+# [root@rowan> 99-kind-multus-caps]# capsh --decode=0000000000000403
+# 0x0000000000000403=cap_chown,cap_dac_override,cap_net_bind_service
+# [root@rowan> 99-kind-multus-caps]# 
+
