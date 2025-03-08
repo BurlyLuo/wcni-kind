@@ -17,7 +17,8 @@ topology:
       exec:
       - ip addr add 10.1.5.10/24 dev eth2
       - ip r a 10.1.8.0/24 via 10.1.5.1 dev eth2
-
+     
+      # https://www.rfc-editor.org/rfc/rfc4543.txt
       - ip xfrm state add src 10.1.5.10 dst 10.1.8.10 proto esp spi 0xfe51d977 reqid 0xfe51d977 mode transport aead 'rfc4543(gcm(aes))' 0x40d3a54c5ae9ee8f23f73729975a3db58eb5cdbb 128
       - ip xfrm state add src 10.1.8.10 dst 10.1.5.10 proto esp spi 0xfe51d977 reqid 0xfe51d977 mode transport aead 'rfc4543(gcm(aes))' 0x40d3a54c5ae9ee8f23f73729975a3db58eb5cdbb 128
 
