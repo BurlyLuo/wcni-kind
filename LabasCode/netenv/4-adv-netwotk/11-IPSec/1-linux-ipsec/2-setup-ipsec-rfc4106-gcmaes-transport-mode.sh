@@ -63,6 +63,7 @@ topology:
       - ip addr add 10.1.5.10/24 dev eth2
       - ip r a 10.1.8.0/24 via 10.1.5.1 dev eth2
       - ip r a 10.1.9.0/24 via 10.1.5.1 dev eth2
+      - bash -c "ip x m all > /ip-xfrm-monitor.txt &"
 
       - ip xfrm state add src 10.1.5.10 dst 10.1.8.10 proto esp spi 0xfe51d977 reqid 0xfe51d977 mode transport aead 'rfc4106(gcm(aes))' 0xfa42aa6bc685beb4d967057134dd8e327ca17977 128
       - ip xfrm state add src 10.1.8.10 dst 10.1.5.10 proto esp spi 0xfe51d977 reqid 0xfe51d977 mode transport aead 'rfc4106(gcm(aes))' 0xfa42aa6bc685beb4d967057134dd8e327ca17977 128
@@ -84,6 +85,7 @@ topology:
       - ip addr add 10.1.8.10/24 dev eth2
       - ip r a 10.1.5.0/24 via 10.1.8.1 dev eth2
       - ip r a 10.1.9.0/24 via 10.1.8.1 dev eth2
+      - bash -c "ip x m all > /ip-xfrm-monitor.txt &"
 
       - ip xfrm state add src 10.1.8.10 dst 10.1.5.10 proto esp spi 0xfe51d977 reqid 0xfe51d977 mode transport aead 'rfc4106(gcm(aes))' 0xfa42aa6bc685beb4d967057134dd8e327ca17977 128
       - ip xfrm state add src 10.1.5.10 dst 10.1.8.10 proto esp spi 0xfe51d977 reqid 0xfe51d977 mode transport aead 'rfc4106(gcm(aes))' 0xfa42aa6bc685beb4d967057134dd8e327ca17977 128
