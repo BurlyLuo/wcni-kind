@@ -33,6 +33,9 @@ nodes:
   - role: control-plane
   - role: worker
   - role: worker
+  - role: worker
+  - role: worker
+  - role: worker
 
 containerdConfigPatches:
 - |-
@@ -44,6 +47,9 @@ EOF
 controller_node_ip=`kubectl get node -o wide --no-headers | grep -E "control-plane|bpf1" | awk -F " " '{print $6}'`
 kubectl taint nodes $(kubectl get nodes -o name | grep control-plane) node-role.kubernetes.io/control-plane:NoSchedule-
 kubectl get nodes -o wide
+for node in $(kubectl get nodes -oname); do
+  kubectl label $node host=kind
+done
 
 # 3. Install CNI[Calico v3.23.2+multus]
 kubectl apply -f ./k8snetworkplumbingwg
