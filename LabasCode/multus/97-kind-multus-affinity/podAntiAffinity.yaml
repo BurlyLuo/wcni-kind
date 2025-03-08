@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: x
+spec:
+  selector:
+    matchLabels:
+      app: x
+  replicas: 3
+  template:
+    metadata:
+      labels:
+        app: x
+    spec:
+      nodeSelector:
+        host: kind
+      affinity:
+        podAntiAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+          - labelSelector:
+              matchExpressions:
+              - key: app
+                operator: In
+                values:
+                - x
+            topologyKey: "kubernetes.io/hostname"
+      containers:
+      - name: nettool
+        image: 192.168.2.100:5000/nettool
