@@ -10,6 +10,6 @@ all:
         clab-ipsec-tunnel-mode-aes-gcm-gwx:
           ansible_host: 172.20.20.2
         clab-ipsec-tunnel-mode-aes-gcm-ipsec1:
-          ansible_host: 172.20.20.4
-        clab-ipsec-tunnel-mode-aes-gcm-ipsec2:
           ansible_host: 172.20.20.3
+        clab-ipsec-tunnel-mode-aes-gcm-ipsec2:
+          ansible_host: 172.20.20.4
