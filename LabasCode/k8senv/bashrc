@@ -121,6 +121,7 @@ alias cld="kind delete clusters $1"
 alias clda="kind delete clusters -A"
 alias dip="kubectl get node -o wide"
 alias kk="kubectl -nkube-system"
+alias aa="kubectl get pods -owide"
 #alias ds="docker ps | grep -Ev 'registry|gostwire|edgeshark|openwrt'"
 alias ds='docker ps --format "table {{.ID}}\t{{.Image}}\t{{.Command}}\t{{.Status}}\t{{.Names}}" | grep -Ev '\''registry|gostwire|edgeshark|openwrt'\'' | awk NF'
 alias op="docker exec -ti openwrt bash"
