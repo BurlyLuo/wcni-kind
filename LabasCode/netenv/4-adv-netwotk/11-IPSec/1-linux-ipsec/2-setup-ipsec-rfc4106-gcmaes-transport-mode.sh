@@ -64,7 +64,7 @@ topology:
       - ip r a 10.1.8.0/24 via 10.1.5.1 dev eth2
       - ip r a 10.1.9.0/24 via 10.1.5.1 dev eth2
       - bash -c "ip x m all > /ip-xfrm-monitor.txt &"
-
+ 
       # AES-GCM-ESP with a 128 bit key The KEYMAT requested for each AES-GCM key is 20 octets. The first 16 octets are the 128-bit AES key, and the remaining four octets are used as the salt value in the nonce.
       # ip xfrm state add src 10.1.5.10 dst 10.1.8.10 proto esp spi 0xfe51d977 reqid 0xfe51d977 mode transport aead 'rfc4106(gcm(aes))' 0xfa42aa6bc685beb4d967057134dd8e327ca17977 128
       # 0xfa42aa6bc685beb4d967057134dd8e327ca17977 [fa42aa6bc685beb4d967057134dd8e32 7ca17977]
@@ -72,11 +72,11 @@ topology:
       # 7ca17977 >>>[salt length: 8*4=32]
       # 128 >>>[128 mean ICV Length. The ICV consists solely of the AES-GCM Authentication Tag. Implementations MUST support a full-length 16-octet ICV, and MAY support 8 or 12 octet ICVs, and MUST NOT support other ICV lengths. Although ESP does not require that an ICV be present, AES-GCM-ESP intentionally does not allow a zero-length ICV. This is because GCM provides no integrity protection whatsoever when used with a zero-length Authentication Tag. <> {16-octet=16*8=128||8-octet=8*8=64||12-octet=12*8=96}]
 
-      - ip xfrm state add src 10.1.5.10 dst 10.1.8.10 proto esp spi 0xfe51d977 reqid 0xfe51d977 mode transport aead 'rfc4106(gcm(aes))' 0xfa42aa6bc685beb4d967057134dd8e327ca17977 128
-      - ip xfrm state add src 10.1.8.10 dst 10.1.5.10 proto esp spi 0xfe51d977 reqid 0xfe51d977 mode transport aead 'rfc4106(gcm(aes))' 0xfa42aa6bc685beb4d967057134dd8e327ca17977 128
+      - ip xfrm state add src 10.1.5.10 dst 10.1.8.10 proto esp spi 0xfe51d977 reqid 0xfe51d977 mode transport aead 'rfc4106(gcm(aes))' 0x1234566bc685beb4d967057134dd8e327ca17977 128
+      - ip xfrm state add src 10.1.8.10 dst 10.1.5.10 proto esp spi 0xfe51d978 reqid 0xfe51d978 mode transport aead 'rfc4106(gcm(aes))' 0x6543216bc685beb4d967057134dd8e327ca17978 128
 
       - ip xfrm policy add src 10.1.5.10/24 dst 10.1.8.10/24 proto tcp sport 81 dport 80 dir out tmpl src 0.0.0.0 dst 0.0.0.0 proto esp reqid 0xfe51d977 mode transport
-      - ip xfrm policy add src 10.1.8.10/24 dst 10.1.5.10/24 proto tcp sport 81 dport 80 dir in  tmpl src 0.0.0.0 dst 0.0.0.0 proto esp reqid 0xfe51d977 mode transport
+      - ip xfrm policy add src 10.1.8.10/24 dst 10.1.5.10/24 proto tcp sport 81 dport 80 dir in  tmpl src 0.0.0.0 dst 0.0.0.0 proto esp reqid 0xfe51d978 mode transport
 
       - iptables -t nat -A POSTROUTING -s 10.1.0.0/16 -o eth0 -j MASQUERADE
       
@@ -84,6 +84,9 @@ topology:
 
       binds:
         - ./ipsecdump.sh:/ipsecdump.sh
+      
+      env:
+        TZ: Asia/Shanghai
 
     ipsec2:
       kind: linux
@@ -94,9 +97,10 @@ topology:
       - ip r a 10.1.9.0/24 via 10.1.8.1 dev eth2
       - bash -c "ip x m all > /ip-xfrm-monitor.txt &"
 
-      - ip xfrm state add src 10.1.8.10 dst 10.1.5.10 proto esp spi 0xfe51d977 reqid 0xfe51d977 mode transport aead 'rfc4106(gcm(aes))' 0xfa42aa6bc685beb4d967057134dd8e327ca17977 128
-      - ip xfrm state add src 10.1.5.10 dst 10.1.8.10 proto esp spi 0xfe51d977 reqid 0xfe51d977 mode transport aead 'rfc4106(gcm(aes))' 0xfa42aa6bc685beb4d967057134dd8e327ca17977 128
-      - ip xfrm policy add src 10.1.8.10/24 dst 10.1.5.10/24 proto tcp sport 80 dport 81 dir out tmpl src 0.0.0.0 dst 0.0.0.0 proto esp reqid 0xfe51d977 mode transport
+      - ip xfrm state add src 10.1.8.10 dst 10.1.5.10 proto esp spi 0xfe51d978 reqid 0xfe51d978 mode transport aead 'rfc4106(gcm(aes))' 0x6543216bc685beb4d967057134dd8e327ca17978 128
+      - ip xfrm state add src 10.1.5.10 dst 10.1.8.10 proto esp spi 0xfe51d977 reqid 0xfe51d977 mode transport aead 'rfc4106(gcm(aes))' 0x1234566bc685beb4d967057134dd8e327ca17977 128
+
+      - ip xfrm policy add src 10.1.8.10/24 dst 10.1.5.10/24 proto tcp sport 80 dport 81 dir out tmpl src 0.0.0.0 dst 0.0.0.0 proto esp reqid 0xfe51d978 mode transport
       - ip xfrm policy add src 10.1.5.10/24 dst 10.1.8.10/24 proto tcp sport 80 dport 81 dir in  tmpl src 0.0.0.0 dst 0.0.0.0 proto esp reqid 0xfe51d977 mode transport
 
       - iptables -t nat -A POSTROUTING -s 10.1.0.0/16 -o eth0 -j MASQUERADE
@@ -105,6 +109,9 @@ topology:
 
       binds:
         - ./ipsecdump.sh:/ipsecdump.sh
+
+      env:
+        TZ: Asia/Shanghai
 
 
   links:
