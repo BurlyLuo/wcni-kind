@@ -68,5 +68,7 @@ topology:
 
   links:
     - endpoints: ["ipsec1:eth2", "gwx:net1"]
+      mtu: 1500
+
     - endpoints: ["ipsec2:eth2", "gwx:net2"]
-    
+      mtu: 1500
