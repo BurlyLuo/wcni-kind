@@ -1,0 +1,19 @@
+strace -e trace=network -o un_spec_srcIP_ping_trace.txt ping -c 1 192.168.2.1
+
+socket(AF_INET, SOCK_DGRAM, IPPROTO_ICMP) = 3
+socket(AF_INET6, SOCK_DGRAM, IPPROTO_ICMPV6) = 4
+socket(AF_INET, SOCK_DGRAM, IPPROTO_IP) = 5
+connect(5, {sa_family=AF_INET, sin_port=htons(1025), sin_addr=inet_addr("192.168.2.1")}, 16) = 0
+getsockname(5, {sa_family=AF_INET, sin_port=htons(53681), sin_addr=inet_addr("192.168.2.99")}, [16]) = 0
+setsockopt(3, SOL_IP, IP_RECVERR, [1], 4) = 0
+setsockopt(3, SOL_IP, IP_RECVTTL, [1], 4) = 0
+setsockopt(3, SOL_IP, IP_RETOPTS, [1], 4) = 0
+setsockopt(3, SOL_SOCKET, SO_SNDBUF, [324], 4) = 0
+setsockopt(3, SOL_SOCKET, SO_RCVBUF, [65536], 4) = 0
+getsockopt(3, SOL_SOCKET, SO_RCVBUF, [131072], [4]) = 0
+setsockopt(3, SOL_SOCKET, SO_TIMESTAMP_OLD, [1], 4) = 0
+setsockopt(3, SOL_SOCKET, SO_SNDTIMEO_OLD, "\1\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0", 16) = 0
+setsockopt(3, SOL_SOCKET, SO_RCVTIMEO_OLD, "\1\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0", 16) = 0
+sendto(3, "\10\0\203\215\0\0\0\1[c\316g\0\0\0\0\207\323\4\0\0\0\0\0\20\21\22\23\24\25\26\27"..., 64, 0, {sa_family=AF_INET, sin_port=htons(0), sin_addr=inet_addr("192.168.2.1")}, 16) = 64
+recvmsg(3, {msg_name={sa_family=AF_INET, sin_port=htons(0), sin_addr=inet_addr("192.168.2.1")}, msg_namelen=128 => 16, msg_iov=[{iov_base="\0\0\213\206\0\7\0\1[c\316g\0\0\0\0\207\323\4\0\0\0\0\0\20\21\22\23\24\25\26\27"..., iov_len=192}], msg_iovlen=1, msg_control=[{cmsg_len=32, cmsg_level=SOL_SOCKET, cmsg_type=SO_TIMESTAMP_OLD, cmsg_data={tv_sec=1741579099, tv_usec=317202}}, {cmsg_len=20, cmsg_level=SOL_IP, cmsg_type=IP_TTL, cmsg_data=[64]}], msg_controllen=56, msg_flags=0}, 0) = 64
++++ exited with 0 +++
