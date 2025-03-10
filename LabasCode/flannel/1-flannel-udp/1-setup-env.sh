@@ -56,6 +56,12 @@ Codename:       jammy
 *****************************************************************
 EOF
 
+if [[ $(uname -m) != "x86_64" ]]; then
+  echo "Error: Only support x86_64 system."
+  echo "Current arch: $(uname -m)"
+  exit 1
+fi
+
 if [[ $EUID -ne 0 ]]; then
   echo "Error: This script must be run as root."
   exit 1
