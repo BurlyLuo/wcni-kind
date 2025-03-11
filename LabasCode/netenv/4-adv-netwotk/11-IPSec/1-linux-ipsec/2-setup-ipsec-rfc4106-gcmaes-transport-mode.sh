@@ -75,8 +75,8 @@ topology:
       - ip xfrm state add src 10.1.5.10 dst 10.1.8.10 proto esp spi 0xfe51d977 reqid 0xfe51d977 mode transport aead 'rfc4106(gcm(aes))' 0x1234566bc685beb4d967057134dd8e327ca17977 128
       - ip xfrm state add src 10.1.8.10 dst 10.1.5.10 proto esp spi 0xfe51d978 reqid 0xfe51d978 mode transport aead 'rfc4106(gcm(aes))' 0x6543216bc685beb4d967057134dd8e327ca17978 128
 
-      - ip xfrm policy add src 10.1.5.10/24 dst 10.1.8.10/24 proto tcp sport 81 dport 80 dir out tmpl src 0.0.0.0 dst 0.0.0.0 proto esp reqid 0xfe51d977 mode transport
-      - ip xfrm policy add src 10.1.8.10/24 dst 10.1.5.10/24 proto tcp sport 81 dport 80 dir in  tmpl src 0.0.0.0 dst 0.0.0.0 proto esp reqid 0xfe51d978 mode transport
+      - ip xfrm policy add src 10.1.5.10/24 dst 10.1.8.10/24 sport 81 dport 80 dir out tmpl src 0.0.0.0 dst 0.0.0.0 proto esp reqid 0xfe51d977 mode transport
+      - ip xfrm policy add src 10.1.8.10/24 dst 10.1.5.10/24 sport 81 dport 80 dir in  tmpl src 0.0.0.0 dst 0.0.0.0 proto esp reqid 0xfe51d978 mode transport
 
       - iptables -t nat -A POSTROUTING -s 10.1.0.0/16 -o eth0 -j MASQUERADE
       
@@ -100,8 +100,8 @@ topology:
       - ip xfrm state add src 10.1.8.10 dst 10.1.5.10 proto esp spi 0xfe51d978 reqid 0xfe51d978 mode transport aead 'rfc4106(gcm(aes))' 0x6543216bc685beb4d967057134dd8e327ca17978 128
       - ip xfrm state add src 10.1.5.10 dst 10.1.8.10 proto esp spi 0xfe51d977 reqid 0xfe51d977 mode transport aead 'rfc4106(gcm(aes))' 0x1234566bc685beb4d967057134dd8e327ca17977 128
 
-      - ip xfrm policy add src 10.1.8.10/24 dst 10.1.5.10/24 proto tcp sport 80 dport 81 dir out tmpl src 0.0.0.0 dst 0.0.0.0 proto esp reqid 0xfe51d978 mode transport
-      - ip xfrm policy add src 10.1.5.10/24 dst 10.1.8.10/24 proto tcp sport 80 dport 81 dir in  tmpl src 0.0.0.0 dst 0.0.0.0 proto esp reqid 0xfe51d977 mode transport
+      - ip xfrm policy add src 10.1.8.10/24 dst 10.1.5.10/24 sport 80 dport 81 dir out tmpl src 0.0.0.0 dst 0.0.0.0 proto esp reqid 0xfe51d978 mode transport
+      - ip xfrm policy add src 10.1.5.10/24 dst 10.1.8.10/24 sport 80 dport 81 dir in  tmpl src 0.0.0.0 dst 0.0.0.0 proto esp reqid 0xfe51d977 mode transport
 
       - iptables -t nat -A POSTROUTING -s 10.1.0.0/16 -o eth0 -j MASQUERADE
 

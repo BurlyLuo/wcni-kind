@@ -1,3 +1,6 @@
+#!/bin/bash
+set -v
+cat <<EOF>clab.yaml | clab deploy -t clab.yaml -
 name: ipsec-tunnel-mode-aes-gcm
 topology:
   nodes:
@@ -19,8 +22,8 @@ topology:
       - ip xfrm state add src 10.1.5.10 dst 10.1.8.10 proto esp spi 0xfe51d977 reqid 0xfe51d977 mode transport aead 'rfc4106(gcm(aes))' 0xfa42aa6bc685beb4d967057134dd8e327ca17977 128
       - ip xfrm state add src 10.1.8.10 dst 10.1.5.10 proto esp spi 0xfe51d977 reqid 0xfe51d977 mode transport aead 'rfc4106(gcm(aes))' 0xfa42aa6bc685beb4d967057134dd8e327ca17977 128
 
-      - ip xfrm policy add src 10.1.5.10/24 dst 10.1.8.10/24 proto udp sport 81 dport 80 dir out tmpl src 0.0.0.0 dst 0.0.0.0 proto esp reqid 0xfe51d977 mode transport
-      - ip xfrm policy add src 10.1.8.10/24 dst 10.1.5.10/24 proto udp sport 81 dport 80 dir in  tmpl src 0.0.0.0 dst 0.0.0.0 proto esp reqid 0xfe51d977 mode transport
+      - ip xfrm policy add src 10.1.5.10/24 dst 10.1.8.10/24 sport 81 dport 80 dir out tmpl src 0.0.0.0 dst 0.0.0.0 proto esp reqid 0xfe51d977 mode transport
+      - ip xfrm policy add src 10.1.8.10/24 dst 10.1.5.10/24 sport 81 dport 80 dir in  tmpl src 0.0.0.0 dst 0.0.0.0 proto esp reqid 0xfe51d977 mode transport
 
       - iptables -t nat -A POSTROUTING -s 10.1.0.0/16 -o eth0 -j MASQUERADE
       
@@ -41,8 +44,8 @@ topology:
 
       - ip xfrm state add src 10.1.8.10 dst 10.1.5.10 proto esp spi 0xfe51d977 reqid 0xfe51d977 mode transport aead 'rfc4106(gcm(aes))' 0xfa42aa6bc685beb4d967057134dd8e327ca17977 128
       - ip xfrm state add src 10.1.5.10 dst 10.1.8.10 proto esp spi 0xfe51d977 reqid 0xfe51d977 mode transport aead 'rfc4106(gcm(aes))' 0xfa42aa6bc685beb4d967057134dd8e327ca17977 128
-      - ip xfrm policy add src 10.1.8.10/24 dst 10.1.5.10/24 proto udp sport 80 dport 81 dir out tmpl src 0.0.0.0 dst 0.0.0.0 proto esp reqid 0xfe51d977 mode transport
-      - ip xfrm policy add src 10.1.5.10/24 dst 10.1.8.10/24 proto udp sport 80 dport 81 dir in  tmpl src 0.0.0.0 dst 0.0.0.0 proto esp reqid 0xfe51d977 mode transport
+      - ip xfrm policy add src 10.1.8.10/24 dst 10.1.5.10/24 sport 80 dport 81 dir out tmpl src 0.0.0.0 dst 0.0.0.0 proto esp reqid 0xfe51d977 mode transport
+      - ip xfrm policy add src 10.1.5.10/24 dst 10.1.8.10/24 sport 80 dport 81 dir in  tmpl src 0.0.0.0 dst 0.0.0.0 proto esp reqid 0xfe51d977 mode transport
 
       - iptables -t nat -A POSTROUTING -s 10.1.0.0/16 -o eth0 -j MASQUERADE
 
@@ -56,3 +59,4 @@ topology:
     - endpoints: ["ipsec1:eth2", "gwx:net1"]
     - endpoints: ["ipsec2:eth2", "gwx:net2"]
     
+EOF
