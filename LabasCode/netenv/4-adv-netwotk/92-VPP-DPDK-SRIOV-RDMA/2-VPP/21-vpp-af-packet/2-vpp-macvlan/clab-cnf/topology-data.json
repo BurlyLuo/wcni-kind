@@ -6,7 +6,7 @@
       "prefix": "clab",
       "mgmt": {
         "network": "clab",
-        "bridge": "br-f02f76ec99e1",
+        "bridge": "br-cdb279cdb159",
         "ipv4-subnet": "172.20.20.0/24",
         "ipv4-gw": "172.20.20.1",
         "ipv6-subnet": "3fff:172:20:20::/64",
@@ -34,7 +34,7 @@
       "mgmt-ipv6-prefix-length": 64,
       "mac-address": "",
       "labels": {
-        "clab-mgmt-net-bridge": "br-f02f76ec99e1",
+        "clab-mgmt-net-bridge": "br-cdb279cdb159",
         "clab-node-group": "",
         "clab-node-kind": "linux",
         "clab-node-lab-dir": "/root/wcni-kind/LabasCode/netenv/4-adv-netwotk/92-VPP-DPDK-SRIOV-RDMA/2-VPP/21-vpp-af-packet/2-vpp-macvlan/clab-cnf/vpp1",
@@ -64,7 +64,7 @@
       "mgmt-ipv6-prefix-length": 64,
       "mac-address": "",
       "labels": {
-        "clab-mgmt-net-bridge": "br-f02f76ec99e1",
+        "clab-mgmt-net-bridge": "br-cdb279cdb159",
         "clab-node-group": "",
         "clab-node-kind": "linux",
         "clab-node-lab-dir": "/root/wcni-kind/LabasCode/netenv/4-adv-netwotk/92-VPP-DPDK-SRIOV-RDMA/2-VPP/21-vpp-af-packet/2-vpp-macvlan/clab-cnf/vpp2",
@@ -83,7 +83,7 @@
       "a": {
         "node": "vpp1",
         "interface": "eth1",
-        "mac": "aa:c1:ab:e1:9b:19",
+        "mac": "aa:c1:ab:0a:82:9f",
         "peer": "z"
       },
       "z": {
@@ -97,7 +97,7 @@
       "a": {
         "node": "vpp2",
         "interface": "eth1",
-        "mac": "aa:c1:ab:5e:5a:1a",
+        "mac": "aa:c1:ab:bf:89:8e",
         "peer": "z"
       },
       "z": {
