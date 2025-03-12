@@ -1,0 +1,12 @@
+digraph "ip6_udp_lookup_subgraph" {
+  rankdir=LR;
+  node [shape=box, style=filled, fontsize=10, color=lightgray, fontcolor=black, fillcolor=lightgray];
+  "ip6-udp-lookup" [color=black, fontcolor=black, fillcolor=lightgray];
+  edge [fontsize=8];
+  "ip6-local" -> "ip6-udp-lookup";
+  "ip6-local-end-of-arc" -> "ip6-udp-lookup";
+  "ip6-udp-lookup" -> "ip6-punt";
+  "ip6-udp-lookup" -> "ip6-drop";
+  "ip6-udp-lookup" -> "ip6-icmp-error";
+  "udp-ping-local" -> "ip6-udp-lookup";
+}

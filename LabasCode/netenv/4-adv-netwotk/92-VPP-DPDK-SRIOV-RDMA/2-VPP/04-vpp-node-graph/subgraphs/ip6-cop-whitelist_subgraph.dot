@@ -1,0 +1,15 @@
+digraph "ip6_cop_whitelist_subgraph" {
+  rankdir=LR;
+  node [shape=box, style=filled, fontsize=10, color=lightgray, fontcolor=black, fillcolor=lightgray];
+  "ip6-cop-whitelist" [color=black, fontcolor=black, fillcolor=lightgray];
+  edge [fontsize=8];
+  "cop-input" -> "ip6-cop-whitelist";
+  "ip4-cop-whitelist" -> "ip6-cop-whitelist";
+  "ip6-cop-whitelist" -> "ip4-cop-whitelist";
+  "ip6-cop-whitelist" -> "ip6-cop-whitelist";
+  "ip6-cop-whitelist" -> "default-cop-whitelist";
+  "ip6-cop-whitelist" -> "ip4-input";
+  "ip6-cop-whitelist" -> "ip6-input";
+  "ip6-cop-whitelist" -> "ethernet-input";
+  "ip6-cop-whitelist" -> "error-drop";
+}

@@ -1,0 +1,7 @@
+digraph "adj_l2_rewrite_subgraph" {
+  rankdir=LR;
+  node [shape=box, style=filled, fontsize=10, color=lightgray, fontcolor=black, fillcolor=lightgray];
+  "adj-l2-rewrite" [color=black, fontcolor=black, fillcolor=lightgray];
+  edge [fontsize=8];
+  "adj-l2-rewrite" -> "error-drop";
+}

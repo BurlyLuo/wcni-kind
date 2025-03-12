@@ -1,0 +1,13 @@
+digraph "udp_ping_local_subgraph" {
+  rankdir=LR;
+  node [shape=box, style=filled, fontsize=10, color=lightgray, fontcolor=black, fillcolor=lightgray];
+  "udp-ping-local" [color=black, fontcolor=black, fillcolor=lightgray];
+  edge [fontsize=8];
+  "ip6-local-hop-by-hop" -> "udp-ping-local";
+  "udp-ping-local" -> "error-drop";
+  "udp-ping-local" -> "error-punt";
+  "udp-ping-local" -> "ip6-udp-lookup";
+  "udp-ping-local" -> "ip6-icmp-input";
+  "udp-ping-local" -> "ip6-lookup";
+  "udp-ping-local" -> "ip6-drop";
+}

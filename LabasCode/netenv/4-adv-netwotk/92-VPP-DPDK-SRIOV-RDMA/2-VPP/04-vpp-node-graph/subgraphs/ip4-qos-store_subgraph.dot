@@ -1,0 +1,7 @@
+digraph "ip4_qos_store_subgraph" {
+  rankdir=LR;
+  node [shape=box, style=filled, fontsize=10, color=lightgray, fontcolor=black, fillcolor=lightgray];
+  "ip4-qos-store" [color=black, fontcolor=black, fillcolor=lightgray];
+  edge [fontsize=8];
+  "ip4-qos-store" -> "ip4-drop";
+}

@@ -1,0 +1,13 @@
+digraph "dpdk_crypto_input_subgraph" {
+  rankdir=LR;
+  node [shape=box, style=filled, fontsize=10, color=lightgray, fontcolor=black, fillcolor=lightgray];
+  "dpdk-crypto-input" [color=black, fontcolor=black, fillcolor=lightgray];
+  edge [fontsize=8];
+  "dpdk-crypto-input" -> "error-drop";
+  "dpdk-crypto-input" -> "ip4-lookup";
+  "dpdk-crypto-input" -> "ip6-lookup";
+  "dpdk-crypto-input" -> "interface-output";
+  "dpdk-crypto-input" -> "adj-midchain-tx";
+  "dpdk-crypto-input" -> "dpdk-esp4-decrypt-post";
+  "dpdk-crypto-input" -> "dpdk-esp6-decrypt-post";
+}

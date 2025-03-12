@@ -1,0 +1,21 @@
+digraph "nsh_proxy_subgraph" {
+  rankdir=LR;
+  node [shape=box, style=filled, fontsize=10, color=lightgray, fontcolor=black, fillcolor=lightgray];
+  "nsh-proxy" [color=black, fontcolor=black, fillcolor=lightgray];
+  edge [fontsize=8];
+  "gre4-input" -> "nsh-proxy";
+  "gre6-input" -> "nsh-proxy";
+  "nsh-proxy" -> "error-drop";
+  "nsh-proxy" -> "gre4-input";
+  "nsh-proxy" -> "gre6-input";
+  "nsh-proxy" -> "vxlan-gpe-encap";
+  "nsh-proxy" -> "vxlan4-encap";
+  "nsh-proxy" -> "vxlan6-encap";
+  "nsh-proxy" -> "ethernet-input";
+  "nsh-proxy" -> "interface-output";
+  "nsh-proxy" -> "nsh-eth-output";
+  "vxlan4-gpe-input" -> "nsh-proxy";
+  "vxlan4-input" -> "nsh-proxy";
+  "vxlan6-gpe-input" -> "nsh-proxy";
+  "vxlan6-input" -> "nsh-proxy";
+}

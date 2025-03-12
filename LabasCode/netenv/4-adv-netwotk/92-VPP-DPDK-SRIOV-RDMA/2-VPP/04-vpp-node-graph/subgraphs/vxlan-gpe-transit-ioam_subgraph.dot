@@ -1,0 +1,8 @@
+digraph "vxlan_gpe_transit_ioam_subgraph" {
+  rankdir=LR;
+  node [shape=box, style=filled, fontsize=10, color=lightgray, fontcolor=black, fillcolor=lightgray];
+  "vxlan-gpe-transit-ioam" [color=black, fontcolor=black, fillcolor=lightgray];
+  edge [fontsize=8];
+  "vxlan-gpe-transit-ioam" -> "interface-output";
+  "vxlan-gpe-transit-ioam" -> "error-drop";
+}

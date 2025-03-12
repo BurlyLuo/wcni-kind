@@ -1,0 +1,8 @@
+digraph "ip6_geneve_bypass_subgraph" {
+  rankdir=LR;
+  node [shape=box, style=filled, fontsize=10, color=lightgray, fontcolor=black, fillcolor=lightgray];
+  "ip6-geneve-bypass" [color=black, fontcolor=black, fillcolor=lightgray];
+  edge [fontsize=8];
+  "ip6-geneve-bypass" -> "error-drop";
+  "ip6-geneve-bypass" -> "geneve6-input";
+}

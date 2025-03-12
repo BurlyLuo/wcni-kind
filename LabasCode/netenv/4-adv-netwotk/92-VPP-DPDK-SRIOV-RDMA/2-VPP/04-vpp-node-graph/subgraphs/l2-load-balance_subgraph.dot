@@ -1,0 +1,8 @@
+digraph "l2_load_balance_subgraph" {
+  rankdir=LR;
+  node [shape=box, style=filled, fontsize=10, color=lightgray, fontcolor=black, fillcolor=lightgray];
+  "l2-load-balance" [color=black, fontcolor=black, fillcolor=lightgray];
+  edge [fontsize=8];
+  "l2-load-balance" -> "error-drop";
+  "l2-load-balance" -> "lisp-cp-lookup-l2";
+}

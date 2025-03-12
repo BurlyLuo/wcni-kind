@@ -1,0 +1,10 @@
+digraph "nat44_det_in2out_subgraph" {
+  rankdir=LR;
+  node [shape=box, style=filled, fontsize=10, color=lightgray, fontcolor=black, fillcolor=lightgray];
+  "nat44-det-in2out" [color=black, fontcolor=black, fillcolor=lightgray];
+  edge [fontsize=8];
+  "nat44-det-classify" -> "nat44-det-in2out";
+  "nat44-det-in2out" -> "ip4-lookup";
+  "nat44-det-in2out" -> "error-drop";
+  "nat44-det-in2out" -> "ip4-icmp-error";
+}

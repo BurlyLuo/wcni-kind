@@ -1,0 +1,8 @@
+digraph "l2tp_decap_subgraph" {
+  rankdir=LR;
+  node [shape=box, style=filled, fontsize=10, color=lightgray, fontcolor=black, fillcolor=lightgray];
+  "l2tp-decap" [color=black, fontcolor=black, fillcolor=lightgray];
+  edge [fontsize=8];
+  "l2tp-decap" -> "error-drop";
+  "l2tp-decap" -> "l2-input";
+}

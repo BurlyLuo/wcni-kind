@@ -1,0 +1,10 @@
+digraph "ip6_local_hop_by_hop_subgraph" {
+  rankdir=LR;
+  node [shape=box, style=filled, fontsize=10, color=lightgray, fontcolor=black, fillcolor=lightgray];
+  "ip6-local-hop-by-hop" [color=black, fontcolor=black, fillcolor=lightgray];
+  edge [fontsize=8];
+  "ip6-local" -> "ip6-local-hop-by-hop";
+  "ip6-local-end-of-arc" -> "ip6-local-hop-by-hop";
+  "ip6-local-hop-by-hop" -> "error-drop";
+  "ip6-local-hop-by-hop" -> "udp-ping-local";
+}

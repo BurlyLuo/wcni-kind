@@ -1,0 +1,8 @@
+digraph "srv6_end_m_gtp4_e_subgraph" {
+  rankdir=LR;
+  node [shape=box, style=filled, fontsize=10, color=lightgray, fontcolor=black, fillcolor=lightgray];
+  "srv6-end-m-gtp4-e" [color=black, fontcolor=black, fillcolor=lightgray];
+  edge [fontsize=8];
+  "srv6-end-m-gtp4-e" -> "error-drop";
+  "srv6-end-m-gtp4-e" -> "ip4-lookup";
+}

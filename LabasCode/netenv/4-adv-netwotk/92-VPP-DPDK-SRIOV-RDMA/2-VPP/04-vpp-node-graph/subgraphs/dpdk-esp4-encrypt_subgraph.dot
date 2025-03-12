@@ -1,0 +1,7 @@
+digraph "dpdk_esp4_encrypt_subgraph" {
+  rankdir=LR;
+  node [shape=box, style=filled, fontsize=10, color=lightgray, fontcolor=black, fillcolor=lightgray];
+  "dpdk-esp4-encrypt" [color=black, fontcolor=black, fillcolor=lightgray];
+  edge [fontsize=8];
+  "dpdk-esp4-encrypt" -> "error-drop";
+}

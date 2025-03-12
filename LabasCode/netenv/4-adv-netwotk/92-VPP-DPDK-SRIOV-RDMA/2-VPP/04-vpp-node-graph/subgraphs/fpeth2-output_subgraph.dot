@@ -1,0 +1,10 @@
+digraph "fpeth2_output_subgraph" {
+  rankdir=LR;
+  node [shape=box, style=filled, fontsize=10, color=lightgray, fontcolor=black, fillcolor=lightgray];
+  "fpeth2-output" [color=black, fontcolor=black, fillcolor=lightgray];
+  edge [fontsize=8];
+  "fpeth2-output" -> "error-drop";
+  "fpeth2-output" -> "fpeth2-tx";
+  "interface-output" -> "fpeth2-output";
+  "ip4-glean" -> "fpeth2-output";
+}

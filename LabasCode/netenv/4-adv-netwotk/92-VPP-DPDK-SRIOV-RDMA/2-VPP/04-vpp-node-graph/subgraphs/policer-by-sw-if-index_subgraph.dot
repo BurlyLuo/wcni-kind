@@ -1,0 +1,8 @@
+digraph "policer_by_sw_if_index_subgraph" {
+  rankdir=LR;
+  node [shape=box, style=filled, fontsize=10, color=lightgray, fontcolor=black, fillcolor=lightgray];
+  "policer-by-sw-if-index" [color=black, fontcolor=black, fillcolor=lightgray];
+  edge [fontsize=8];
+  "policer-by-sw-if-index" -> "ethernet-input";
+  "policer-by-sw-if-index" -> "error-drop";
+}

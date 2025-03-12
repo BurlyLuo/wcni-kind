@@ -1,0 +1,11 @@
+digraph "nat44_in2out_output_subgraph" {
+  rankdir=LR;
+  node [shape=box, style=filled, fontsize=10, color=lightgray, fontcolor=black, fillcolor=lightgray];
+  "nat44-in2out-output" [color=black, fontcolor=black, fillcolor=lightgray];
+  edge [fontsize=8];
+  "nat44-hairpin-src" -> "nat44-in2out-output";
+  "nat44-in2out-output" -> "interface-output";
+  "nat44-in2out-output" -> "error-drop";
+  "nat44-in2out-output" -> "ip4-icmp-error";
+  "nat44-in2out-output" -> "nat44-in2out-output-slowpath";
+}

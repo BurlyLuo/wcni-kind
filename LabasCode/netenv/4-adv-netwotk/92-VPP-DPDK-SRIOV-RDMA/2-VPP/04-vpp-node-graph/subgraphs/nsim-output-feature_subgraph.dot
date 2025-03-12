@@ -1,0 +1,7 @@
+digraph "nsim_output_feature_subgraph" {
+  rankdir=LR;
+  node [shape=box, style=filled, fontsize=10, color=lightgray, fontcolor=black, fillcolor=lightgray];
+  "nsim-output-feature" [color=black, fontcolor=black, fillcolor=lightgray];
+  edge [fontsize=8];
+  "nsim-output-feature" -> "error-drop";
+}

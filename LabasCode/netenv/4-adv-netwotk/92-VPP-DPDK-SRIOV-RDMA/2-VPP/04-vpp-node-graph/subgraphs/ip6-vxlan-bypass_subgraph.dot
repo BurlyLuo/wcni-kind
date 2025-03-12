@@ -1,0 +1,8 @@
+digraph "ip6_vxlan_bypass_subgraph" {
+  rankdir=LR;
+  node [shape=box, style=filled, fontsize=10, color=lightgray, fontcolor=black, fillcolor=lightgray];
+  "ip6-vxlan-bypass" [color=black, fontcolor=black, fillcolor=lightgray];
+  edge [fontsize=8];
+  "ip6-vxlan-bypass" -> "error-drop";
+  "ip6-vxlan-bypass" -> "vxlan6-input";
+}

@@ -1,0 +1,8 @@
+digraph "srv6_as4_rewrite_subgraph" {
+  rankdir=LR;
+  node [shape=box, style=filled, fontsize=10, color=lightgray, fontcolor=black, fillcolor=lightgray];
+  "srv6-as4-rewrite" [color=black, fontcolor=black, fillcolor=lightgray];
+  edge [fontsize=8];
+  "srv6-as4-rewrite" -> "error-drop";
+  "srv6-as4-rewrite" -> "ip6-lookup";
+}

@@ -1,0 +1,9 @@
+digraph "nat44_det_classify_subgraph" {
+  rankdir=LR;
+  node [shape=box, style=filled, fontsize=10, color=lightgray, fontcolor=black, fillcolor=lightgray];
+  "nat44-det-classify" [color=black, fontcolor=black, fillcolor=lightgray];
+  edge [fontsize=8];
+  "nat44-det-classify" -> "nat44-det-in2out";
+  "nat44-det-classify" -> "nat44-det-out2in";
+  "nat44-det-classify" -> "error-drop";
+}

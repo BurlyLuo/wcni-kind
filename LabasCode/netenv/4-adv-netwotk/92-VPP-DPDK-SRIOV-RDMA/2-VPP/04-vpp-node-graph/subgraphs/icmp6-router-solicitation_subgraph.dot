@@ -1,0 +1,10 @@
+digraph "icmp6_router_solicitation_subgraph" {
+  rankdir=LR;
+  node [shape=box, style=filled, fontsize=10, color=lightgray, fontcolor=black, fillcolor=lightgray];
+  "icmp6-router-solicitation" [color=black, fontcolor=black, fillcolor=lightgray];
+  edge [fontsize=8];
+  "icmp6-router-solicitation" -> "ip6-drop";
+  "icmp6-router-solicitation" -> "ip6-rewrite-mcast";
+  "icmp6-router-solicitation" -> "interface-output";
+  "ip6-icmp-input" -> "icmp6-router-solicitation";
+}

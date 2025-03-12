@@ -1,0 +1,13 @@
+digraph "ip4_udp_lookup_subgraph" {
+  rankdir=LR;
+  node [shape=box, style=filled, fontsize=10, color=lightgray, fontcolor=black, fillcolor=lightgray];
+  "ip4-udp-lookup" [color=black, fontcolor=black, fillcolor=lightgray];
+  edge [fontsize=8];
+  "ip4-dhcp-client-detect" -> "ip4-udp-lookup";
+  "ip4-local" -> "ip4-udp-lookup";
+  "ip4-local-end-of-arc" -> "ip4-udp-lookup";
+  "ip4-udp-lookup" -> "ip4-punt";
+  "ip4-udp-lookup" -> "ip4-drop";
+  "ip4-udp-lookup" -> "ip4-icmp-error";
+  "ip4-udp-lookup" -> "ikev2";
+}

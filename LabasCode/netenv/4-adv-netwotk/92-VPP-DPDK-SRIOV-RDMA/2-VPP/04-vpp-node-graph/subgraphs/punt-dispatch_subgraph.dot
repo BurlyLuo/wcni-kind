@@ -1,0 +1,14 @@
+digraph "punt_dispatch_subgraph" {
+  rankdir=LR;
+  node [shape=box, style=filled, fontsize=10, color=lightgray, fontcolor=black, fillcolor=lightgray];
+  "punt-dispatch" [color=black, fontcolor=black, fillcolor=lightgray];
+  edge [fontsize=8];
+  "ipsec4-input-feature" -> "punt-dispatch";
+  "ipsec4-tun-input" -> "punt-dispatch";
+  "ipsec6-input-feature" -> "punt-dispatch";
+  "ipsec6-tun-input" -> "punt-dispatch";
+  "punt-dispatch" -> "drop";
+  "punt-dispatch" -> "gbp-vxlan4";
+  "vxlan4-gbp-input" -> "punt-dispatch";
+  "vxlan6-gbp-input" -> "punt-dispatch";
+}

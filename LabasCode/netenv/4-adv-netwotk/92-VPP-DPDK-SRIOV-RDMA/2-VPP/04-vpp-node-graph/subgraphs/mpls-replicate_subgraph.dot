@@ -1,0 +1,12 @@
+digraph "mpls_replicate_subgraph" {
+  rankdir=LR;
+  node [shape=box, style=filled, fontsize=10, color=lightgray, fontcolor=black, fillcolor=lightgray];
+  "mpls-replicate" [color=black, fontcolor=black, fillcolor=lightgray];
+  edge [fontsize=8];
+  "bier-load-balance" -> "mpls-replicate";
+  "lookup-mpls-dst" -> "mpls-replicate";
+  "lookup-mpls-dst-itf" -> "mpls-replicate";
+  "mpls-load-balance" -> "mpls-replicate";
+  "mpls-lookup" -> "mpls-replicate";
+  "mpls-replicate" -> "mpls-drop";
+}
