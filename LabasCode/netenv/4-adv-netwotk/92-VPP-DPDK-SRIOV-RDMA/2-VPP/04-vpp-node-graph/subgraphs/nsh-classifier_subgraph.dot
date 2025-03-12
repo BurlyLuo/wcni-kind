@@ -1,0 +1,30 @@
+digraph "nsh_classifier_subgraph" {
+  rankdir=LR;
+  node [shape=box, style=filled, fontsize=10, color=lightgray, fontcolor=black, fillcolor=lightgray];
+  "nsh-classifier" [color=black, fontcolor=black, fillcolor=lightgray];
+  edge [fontsize=8];
+  "ip4-classify" -> "nsh-classifier";
+  "ip4-load-balance" -> "nsh-classifier";
+  "ip4-lookup" -> "nsh-classifier";
+  "ip6-classify" -> "nsh-classifier";
+  "ip6-hop-by-hop" -> "nsh-classifier";
+  "ip6-load-balance" -> "nsh-classifier";
+  "ip6-lookup" -> "nsh-classifier";
+  "ip6-pop-hop-by-hop" -> "nsh-classifier";
+  "l2-input-classify" -> "nsh-classifier";
+  "lookup-ip4-dst" -> "nsh-classifier";
+  "lookup-ip4-dst-itf" -> "nsh-classifier";
+  "lookup-ip4-src" -> "nsh-classifier";
+  "lookup-ip6-dst" -> "nsh-classifier";
+  "lookup-ip6-dst-itf" -> "nsh-classifier";
+  "lookup-ip6-src" -> "nsh-classifier";
+  "nsh-classifier" -> "error-drop";
+  "nsh-classifier" -> "gre4-input";
+  "nsh-classifier" -> "gre6-input";
+  "nsh-classifier" -> "vxlan-gpe-encap";
+  "nsh-classifier" -> "vxlan4-encap";
+  "nsh-classifier" -> "vxlan6-encap";
+  "nsh-classifier" -> "ethernet-input";
+  "nsh-classifier" -> "interface-output";
+  "nsh-classifier" -> "nsh-eth-output";
+}

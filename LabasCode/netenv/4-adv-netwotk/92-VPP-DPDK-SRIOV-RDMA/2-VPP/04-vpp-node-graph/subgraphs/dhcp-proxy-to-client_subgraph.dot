@@ -1,0 +1,9 @@
+digraph "dhcp_proxy_to_client_subgraph" {
+  rankdir=LR;
+  node [shape=box, style=filled, fontsize=10, color=lightgray, fontcolor=black, fillcolor=lightgray];
+  "dhcp-proxy-to-client" [color=black, fontcolor=black, fillcolor=lightgray];
+  edge [fontsize=8];
+  "dhcp-proxy-to-client" -> "error-drop";
+  "dhcp-proxy-to-client" -> "interface-output";
+  "dhcp-proxy-to-server" -> "dhcp-proxy-to-client";
+}

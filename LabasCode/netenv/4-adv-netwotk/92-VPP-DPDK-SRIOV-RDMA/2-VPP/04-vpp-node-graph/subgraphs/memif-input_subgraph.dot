@@ -1,0 +1,12 @@
+digraph "memif_input_subgraph" {
+  rankdir=LR;
+  node [shape=box, style=filled, fontsize=10, color=lightgray, fontcolor=black, fillcolor=lightgray];
+  "memif-input" [color=black, fontcolor=black, fillcolor=lightgray];
+  edge [fontsize=8];
+  "memif-input" -> "ip4-input-no-checksum";
+  "memif-input" -> "ip4-input";
+  "memif-input" -> "ip6-input";
+  "memif-input" -> "mpls-input";
+  "memif-input" -> "ethernet-input";
+  "memif-input" -> "error-drop";
+}

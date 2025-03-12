@@ -1,0 +1,12 @@
+digraph "device_input_subgraph" {
+  rankdir=LR;
+  node [shape=box, style=filled, fontsize=10, color=lightgray, fontcolor=black, fillcolor=lightgray];
+  "device-input" [color=black, fontcolor=black, fillcolor=lightgray];
+  edge [fontsize=8];
+  "device-input" -> "ip4-input-no-checksum";
+  "device-input" -> "ip4-input";
+  "device-input" -> "ip6-input";
+  "device-input" -> "mpls-input";
+  "device-input" -> "ethernet-input";
+  "device-input" -> "error-drop";
+}

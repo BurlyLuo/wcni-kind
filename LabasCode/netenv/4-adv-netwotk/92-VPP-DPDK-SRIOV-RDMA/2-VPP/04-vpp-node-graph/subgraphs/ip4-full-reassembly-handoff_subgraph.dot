@@ -1,0 +1,8 @@
+digraph "ip4_full_reassembly_handoff_subgraph" {
+  rankdir=LR;
+  node [shape=box, style=filled, fontsize=10, color=lightgray, fontcolor=black, fillcolor=lightgray];
+  "ip4-full-reassembly-handoff" [color=black, fontcolor=black, fillcolor=lightgray];
+  edge [fontsize=8];
+  "ip4-full-reassembly" -> "ip4-full-reassembly-handoff";
+  "ip4-full-reassembly-handoff" -> "error-drop";
+}

@@ -1,0 +1,10 @@
+digraph "ip6_sv_reassembly_feature_subgraph" {
+  rankdir=LR;
+  node [shape=box, style=filled, fontsize=10, color=lightgray, fontcolor=black, fillcolor=lightgray];
+  "ip6-sv-reassembly-feature" [color=black, fontcolor=black, fillcolor=lightgray];
+  edge [fontsize=8];
+  "ip6-sv-reassembly-feature" -> "ip6-input";
+  "ip6-sv-reassembly-feature" -> "ip6-drop";
+  "ip6-sv-reassembly-feature" -> "ip6-icmp-error";
+  "ip6-sv-reassembly-feature" -> "ip6-sv-reass-feature-hoff";
+}

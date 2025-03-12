@@ -1,0 +1,9 @@
+digraph "vxlan_gpe_encap_ioam_v4_subgraph" {
+  rankdir=LR;
+  node [shape=box, style=filled, fontsize=10, color=lightgray, fontcolor=black, fillcolor=lightgray];
+  "vxlan-gpe-encap-ioam-v4" [color=black, fontcolor=black, fillcolor=lightgray];
+  edge [fontsize=8];
+  "vxlan-gpe-encap" -> "vxlan-gpe-encap-ioam-v4";
+  "vxlan-gpe-encap-ioam-v4" -> "ip4-lookup";
+  "vxlan-gpe-encap-ioam-v4" -> "error-drop";
+}

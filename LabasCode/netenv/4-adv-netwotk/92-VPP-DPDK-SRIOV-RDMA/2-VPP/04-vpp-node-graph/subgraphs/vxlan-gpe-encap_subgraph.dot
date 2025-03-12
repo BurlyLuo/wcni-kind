@@ -1,0 +1,15 @@
+digraph "vxlan_gpe_encap_subgraph" {
+  rankdir=LR;
+  node [shape=box, style=filled, fontsize=10, color=lightgray, fontcolor=black, fillcolor=lightgray];
+  "vxlan-gpe-encap" [color=black, fontcolor=black, fillcolor=lightgray];
+  edge [fontsize=8];
+  "nsh-aware-vnf-proxy" -> "vxlan-gpe-encap";
+  "nsh-classifier" -> "vxlan-gpe-encap";
+  "nsh-input" -> "vxlan-gpe-encap";
+  "nsh-pop" -> "vxlan-gpe-encap";
+  "nsh-proxy" -> "vxlan-gpe-encap";
+  "vxlan-gpe-encap" -> "ip4-lookup";
+  "vxlan-gpe-encap" -> "ip6-lookup";
+  "vxlan-gpe-encap" -> "error-drop";
+  "vxlan-gpe-encap" -> "vxlan-gpe-encap-ioam-v4";
+}

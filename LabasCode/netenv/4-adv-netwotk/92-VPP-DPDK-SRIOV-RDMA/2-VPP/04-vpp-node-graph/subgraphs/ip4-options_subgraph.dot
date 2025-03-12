@@ -1,0 +1,12 @@
+digraph "ip4_options_subgraph" {
+  rankdir=LR;
+  node [shape=box, style=filled, fontsize=10, color=lightgray, fontcolor=black, fillcolor=lightgray];
+  "ip4-options" [color=black, fontcolor=black, fillcolor=lightgray];
+  edge [fontsize=8];
+  "ip4-input" -> "ip4-options";
+  "ip4-input-no-checksum" -> "ip4-options";
+  "ip4-mpls-label-disposition-pipe" -> "ip4-options";
+  "ip4-mpls-label-disposition-uniform" -> "ip4-options";
+  "ip4-options" -> "ip4-punt";
+  "ip4-options" -> "ip4-local";
+}

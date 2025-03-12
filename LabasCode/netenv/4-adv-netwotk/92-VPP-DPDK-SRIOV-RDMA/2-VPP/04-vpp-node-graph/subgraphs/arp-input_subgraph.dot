@@ -1,0 +1,15 @@
+digraph "arp_input_subgraph" {
+  rankdir=LR;
+  node [shape=box, style=filled, fontsize=10, color=lightgray, fontcolor=black, fillcolor=lightgray];
+  "arp-input" [color=black, fontcolor=black, fillcolor=lightgray];
+  edge [fontsize=8];
+  "arp-input" -> "error-drop";
+  "arp-input" -> "arp-disabled";
+  "arp-input" -> "arp-reply";
+  "ethernet-input" -> "arp-input";
+  "ethernet-input-not-l2" -> "arp-input";
+  "ethernet-input-type" -> "arp-input";
+  "l2-flood" -> "arp-input";
+  "l2-fwd" -> "arp-input";
+  "pipe-rx" -> "arp-input";
+}

@@ -1,0 +1,7 @@
+digraph "syn_filter_4_subgraph" {
+  rankdir=LR;
+  node [shape=box, style=filled, fontsize=10, color=lightgray, fontcolor=black, fillcolor=lightgray];
+  "syn-filter-4" [color=black, fontcolor=black, fillcolor=lightgray];
+  edge [fontsize=8];
+  "syn-filter-4" -> "error-drop";
+}

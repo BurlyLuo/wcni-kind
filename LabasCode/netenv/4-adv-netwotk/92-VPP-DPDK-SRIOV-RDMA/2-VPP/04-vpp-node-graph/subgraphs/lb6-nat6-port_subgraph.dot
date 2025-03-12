@@ -1,0 +1,8 @@
+digraph "lb6_nat6_port_subgraph" {
+  rankdir=LR;
+  node [shape=box, style=filled, fontsize=10, color=lightgray, fontcolor=black, fillcolor=lightgray];
+  "lb6-nat6-port" [color=black, fontcolor=black, fillcolor=lightgray];
+  edge [fontsize=8];
+  "lb6-nat6-port" -> "error-drop";
+  "lb6-nodeport" -> "lb6-nat6-port";
+}

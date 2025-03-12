@@ -1,0 +1,7 @@
+digraph "ip4_dvr_reinject_subgraph" {
+  rankdir=LR;
+  node [shape=box, style=filled, fontsize=10, color=lightgray, fontcolor=black, fillcolor=lightgray];
+  "ip4-dvr-reinject" [color=black, fontcolor=black, fillcolor=lightgray];
+  edge [fontsize=8];
+  "ip4-dvr-reinject" -> "l2-output";
+}

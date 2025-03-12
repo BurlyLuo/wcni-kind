@@ -1,0 +1,7 @@
+digraph "vxlan6_gbp_encap_subgraph" {
+  rankdir=LR;
+  node [shape=box, style=filled, fontsize=10, color=lightgray, fontcolor=black, fillcolor=lightgray];
+  "vxlan6-gbp-encap" [color=black, fontcolor=black, fillcolor=lightgray];
+  edge [fontsize=8];
+  "vxlan6-gbp-encap" -> "error-drop";
+}

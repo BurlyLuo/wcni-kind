@@ -1,0 +1,13 @@
+digraph "ip4_not_enabled_subgraph" {
+  rankdir=LR;
+  node [shape=box, style=filled, fontsize=10, color=lightgray, fontcolor=black, fillcolor=lightgray];
+  "ip4-not-enabled" [color=black, fontcolor=black, fillcolor=lightgray];
+  edge [fontsize=8];
+  "ip4-input" -> "ip4-not-enabled";
+  "ip4-input-no-checksum" -> "ip4-not-enabled";
+  "ip4-mpls-label-disposition-pipe" -> "ip4-not-enabled";
+  "ip4-mpls-label-disposition-uniform" -> "ip4-not-enabled";
+  "ip4-not-enabled" -> "error-drop";
+  "ip4-not-enabled" -> "ip4-lookup";
+  "ip4-not-enabled" -> "ip4-mfib-forward-lookup";
+}

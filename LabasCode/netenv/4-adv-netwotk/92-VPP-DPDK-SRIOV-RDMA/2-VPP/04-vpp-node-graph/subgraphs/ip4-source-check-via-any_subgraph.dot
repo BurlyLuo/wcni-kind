@@ -1,0 +1,7 @@
+digraph "ip4_source_check_via_any_subgraph" {
+  rankdir=LR;
+  node [shape=box, style=filled, fontsize=10, color=lightgray, fontcolor=black, fillcolor=lightgray];
+  "ip4-source-check-via-any" [color=black, fontcolor=black, fillcolor=lightgray];
+  edge [fontsize=8];
+  "ip4-source-check-via-any" -> "ip4-drop";
+}

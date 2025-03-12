@@ -1,0 +1,9 @@
+digraph "ipsec6_tun_input_subgraph" {
+  rankdir=LR;
+  node [shape=box, style=filled, fontsize=10, color=lightgray, fontcolor=black, fillcolor=lightgray];
+  "ipsec6-tun-input" [color=black, fontcolor=black, fillcolor=lightgray];
+  edge [fontsize=8];
+  "ipsec6-tun-input" -> "punt-dispatch";
+  "ipsec6-tun-input" -> "ip6-drop";
+  "ipsec6-tun-input" -> "esp6-decrypt-tun";
+}

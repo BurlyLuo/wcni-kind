@@ -1,0 +1,9 @@
+digraph "ip4_punt_redirect_subgraph" {
+  rankdir=LR;
+  node [shape=box, style=filled, fontsize=10, color=lightgray, fontcolor=black, fillcolor=lightgray];
+  "ip4-punt-redirect" [color=black, fontcolor=black, fillcolor=lightgray];
+  edge [fontsize=8];
+  "ip4-punt-redirect" -> "ip4-drop";
+  "ip4-punt-redirect" -> "ip4-rewrite";
+  "ip4-punt-redirect" -> "ip4-arp";
+}

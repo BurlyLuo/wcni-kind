@@ -1,0 +1,8 @@
+digraph "nat44_ed_hairpin_dst_subgraph" {
+  rankdir=LR;
+  node [shape=box, style=filled, fontsize=10, color=lightgray, fontcolor=black, fillcolor=lightgray];
+  "nat44-ed-hairpin-dst" [color=black, fontcolor=black, fillcolor=lightgray];
+  edge [fontsize=8];
+  "nat44-ed-hairpin-dst" -> "ip4-lookup";
+  "nat44-ed-hairpin-dst" -> "error-drop";
+}

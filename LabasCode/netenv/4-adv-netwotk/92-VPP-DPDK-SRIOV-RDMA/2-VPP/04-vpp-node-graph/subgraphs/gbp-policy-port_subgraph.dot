@@ -1,0 +1,27 @@
+digraph "gbp_policy_port_subgraph" {
+  rankdir=LR;
+  node [shape=box, style=filled, fontsize=10, color=lightgray, fontcolor=black, fillcolor=lightgray];
+  "gbp-policy-port" [color=black, fontcolor=black, fillcolor=lightgray];
+  edge [fontsize=8];
+  "gbp-policy-lpm" -> "gbp-policy-port";
+  "gbp-policy-mac" -> "gbp-policy-port";
+  "gbp-policy-port" -> "error-drop";
+  "gbp-policy-port" -> "interface-output";
+  "gbp-policy-port" -> "span-l2-output";
+  "gbp-policy-port" -> "gbp-policy-lpm";
+  "gbp-policy-port" -> "gbp-policy-port";
+  "gbp-policy-port" -> "gbp-policy-mac";
+  "gbp-policy-port" -> "feature-bitmap-drop";
+  "gbp-policy-port" -> "l2-output-acl";
+  "gbp-policy-port" -> "l2-efp-filter";
+  "gbp-policy-port" -> "l2-output-classify";
+  "gbp-policy-port" -> "l2-output-feat-arc";
+  "gbp-policy-port" -> "l2-xcrw";
+  "l2-efp-filter" -> "gbp-policy-port";
+  "l2-output-classify" -> "gbp-policy-port";
+  "l2-output" -> "gbp-policy-port";
+  "l2-output-acl" -> "gbp-policy-port";
+  "l2-output-feat-arc" -> "gbp-policy-port";
+  "l2-output-feat-arc-end" -> "gbp-policy-port";
+  "span-l2-output" -> "gbp-policy-port";
+}

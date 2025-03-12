@@ -1,0 +1,17 @@
+digraph "nat44_in2out_output_worker_handoff_subgraph" {
+  rankdir=LR;
+  node [shape=box, style=filled, fontsize=10, color=lightgray, fontcolor=black, fillcolor=lightgray];
+  "nat44-in2out-output-worker-handoff" [color=black, fontcolor=black, fillcolor=lightgray];
+  edge [fontsize=8];
+  "nat44-ed-hairpin-src" -> "nat44-in2out-output-worker-handoff";
+  "nat44-hairpin-src" -> "nat44-in2out-output-worker-handoff";
+  "nat44-in2out-output-worker-handoff" -> "error-drop";
+  "nat44-in2out-output-worker-handoff" -> "ip4-icmp-error";
+  "nat44-in2out-output-worker-handoff" -> "nat-pre-in2out";
+  "nat44-in2out-output-worker-handoff" -> "nat-pre-out2in";
+  "nat44-in2out-output-worker-handoff" -> "nat44-ed-in2out";
+  "nat44-in2out-output-worker-handoff" -> "nat44-ed-in2out-slowpath";
+  "nat44-in2out-output-worker-handoff" -> "nat44-ed-in2out-output-slowpath";
+  "nat44-in2out-output-worker-handoff" -> "nat44-ed-out2in";
+  "nat44-in2out-output-worker-handoff" -> "nat44-ed-out2in-slowpath";
+}

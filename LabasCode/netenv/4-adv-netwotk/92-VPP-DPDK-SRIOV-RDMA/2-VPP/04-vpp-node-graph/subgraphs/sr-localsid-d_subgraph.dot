@@ -1,0 +1,12 @@
+digraph "sr_localsid_d_subgraph" {
+  rankdir=LR;
+  node [shape=box, style=filled, fontsize=10, color=lightgray, fontcolor=black, fillcolor=lightgray];
+  "sr-localsid-d" [color=black, fontcolor=black, fillcolor=lightgray];
+  edge [fontsize=8];
+  "sr-localsid-d" -> "error-drop";
+  "sr-localsid-d" -> "ip6-lookup";
+  "sr-localsid-d" -> "ip4-lookup";
+  "sr-localsid-d" -> "ip6-rewrite";
+  "sr-localsid-d" -> "ip4-rewrite";
+  "sr-localsid-d" -> "interface-output";
+}

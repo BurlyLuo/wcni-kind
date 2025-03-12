@@ -1,0 +1,24 @@
+digraph "ip6_punt_subgraph" {
+  rankdir=LR;
+  node [shape=box, style=filled, fontsize=10, color=lightgray, fontcolor=black, fillcolor=lightgray];
+  "ip6-punt" [color=black, fontcolor=black, fillcolor=lightgray];
+  edge [fontsize=8];
+  "ip4-udp-punt" -> "ip6-punt";
+  "ip6-classify" -> "ip6-punt";
+  "ip6-hop-by-hop" -> "ip6-punt";
+  "ip6-icmp-echo-reply" -> "ip6-punt";
+  "ip6-icmp-input" -> "ip6-punt";
+  "ip6-load-balance" -> "ip6-punt";
+  "ip6-local" -> "ip6-punt";
+  "ip6-local-end-of-arc" -> "ip6-punt";
+  "ip6-lookup" -> "ip6-punt";
+  "ip6-pop-hop-by-hop" -> "ip6-punt";
+  "ip6-punt" -> "error-punt";
+  "ip6-udp-lookup" -> "ip6-punt";
+  "ip6-udp-punt" -> "ip6-punt";
+  "lookup-ip6-dst" -> "ip6-punt";
+  "lookup-ip6-dst-itf" -> "ip6-punt";
+  "lookup-ip6-src" -> "ip6-punt";
+  "tcp6-input-nolookup" -> "ip6-punt";
+  "tcp6-input" -> "ip6-punt";
+}

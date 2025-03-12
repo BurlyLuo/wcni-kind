@@ -1,0 +1,12 @@
+digraph "esp4_decrypt_subgraph" {
+  rankdir=LR;
+  node [shape=box, style=filled, fontsize=10, color=lightgray, fontcolor=black, fillcolor=lightgray];
+  "esp4-decrypt" [color=black, fontcolor=black, fillcolor=lightgray];
+  edge [fontsize=8];
+  "esp4-decrypt" -> "ip4-drop";
+  "esp4-decrypt" -> "ip4-input-no-checksum";
+  "esp4-decrypt" -> "ip6-input";
+  "esp4-decrypt" -> "l2-input";
+  "esp4-decrypt" -> "esp4-decrypt-handoff";
+  "ipsec4-input-feature" -> "esp4-decrypt";
+}

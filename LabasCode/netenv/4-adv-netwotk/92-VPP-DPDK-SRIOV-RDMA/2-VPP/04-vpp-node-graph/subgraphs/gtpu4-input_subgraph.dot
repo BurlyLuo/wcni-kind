@@ -1,0 +1,11 @@
+digraph "gtpu4_input_subgraph" {
+  rankdir=LR;
+  node [shape=box, style=filled, fontsize=10, color=lightgray, fontcolor=black, fillcolor=lightgray];
+  "gtpu4-input" [color=black, fontcolor=black, fillcolor=lightgray];
+  edge [fontsize=8];
+  "gtpu4-input" -> "error-drop";
+  "gtpu4-input" -> "l2-input";
+  "gtpu4-input" -> "ip4-input";
+  "gtpu4-input" -> "ip6-input";
+  "ip4-gtpu-bypass" -> "gtpu4-input";
+}

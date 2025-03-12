@@ -1,0 +1,19 @@
+digraph "ip4_arp_subgraph" {
+  rankdir=LR;
+  node [shape=box, style=filled, fontsize=10, color=lightgray, fontcolor=black, fillcolor=lightgray];
+  "ip4-arp" [color=black, fontcolor=black, fillcolor=lightgray];
+  edge [fontsize=8];
+  "bfd-udp-echo4-input" -> "ip4-arp";
+  "bfd-udp4-input" -> "ip4-arp";
+  "ip4-arp" -> "ip4-drop";
+  "ip4-classify" -> "ip4-arp";
+  "ip4-load-balance" -> "ip4-arp";
+  "ip4-lookup" -> "ip4-arp";
+  "ip4-punt-redirect" -> "ip4-arp";
+  "lookup-ip4-dst" -> "ip4-arp";
+  "lookup-ip4-dst-itf" -> "ip4-arp";
+  "lookup-ip4-src" -> "ip4-arp";
+  "mpls-adj-incomplete" -> "ip4-arp";
+  "nsh-adj-incomplete" -> "ip4-arp";
+  "tcp4-output" -> "ip4-arp";
+}

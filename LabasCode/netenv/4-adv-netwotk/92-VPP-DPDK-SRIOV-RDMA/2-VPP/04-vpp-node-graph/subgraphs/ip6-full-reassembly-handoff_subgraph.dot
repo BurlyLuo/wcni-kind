@@ -1,0 +1,8 @@
+digraph "ip6_full_reassembly_handoff_subgraph" {
+  rankdir=LR;
+  node [shape=box, style=filled, fontsize=10, color=lightgray, fontcolor=black, fillcolor=lightgray];
+  "ip6-full-reassembly-handoff" [color=black, fontcolor=black, fillcolor=lightgray];
+  edge [fontsize=8];
+  "ip6-full-reassembly" -> "ip6-full-reassembly-handoff";
+  "ip6-full-reassembly-handoff" -> "error-drop";
+}
