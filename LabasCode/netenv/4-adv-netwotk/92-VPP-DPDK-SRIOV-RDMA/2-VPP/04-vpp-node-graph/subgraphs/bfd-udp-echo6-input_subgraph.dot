@@ -1,0 +1,9 @@
+digraph "bfd_udp_echo6_input_subgraph" {
+  rankdir=LR;
+  node [shape=box, style=filled, fontsize=10, color=lightgray, fontcolor=black, fillcolor=lightgray];
+  "bfd-udp-echo6-input" [color=black, fontcolor=black, fillcolor=lightgray];
+  edge [fontsize=8];
+  "bfd-udp-echo6-input" -> "error-drop";
+  "bfd-udp-echo6-input" -> "ip6-discover-neighbor";
+  "bfd-udp-echo6-input" -> "ip6-lookup";
+}

@@ -1,0 +1,12 @@
+digraph "esp6_decrypt_tun_subgraph" {
+  rankdir=LR;
+  node [shape=box, style=filled, fontsize=10, color=lightgray, fontcolor=black, fillcolor=lightgray];
+  "esp6-decrypt-tun" [color=black, fontcolor=black, fillcolor=lightgray];
+  edge [fontsize=8];
+  "esp6-decrypt-tun" -> "ip6-drop";
+  "esp6-decrypt-tun" -> "ip4-input-no-checksum";
+  "esp6-decrypt-tun" -> "ip6-input";
+  "esp6-decrypt-tun" -> "l2-input";
+  "esp6-decrypt-tun" -> "esp6-decrypt-tun-handoff";
+  "ipsec6-tun-input" -> "esp6-decrypt-tun";
+}

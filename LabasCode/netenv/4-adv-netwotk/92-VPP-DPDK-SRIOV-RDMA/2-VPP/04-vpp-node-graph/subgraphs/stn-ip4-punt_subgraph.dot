@@ -1,0 +1,7 @@
+digraph "stn_ip4_punt_subgraph" {
+  rankdir=LR;
+  node [shape=box, style=filled, fontsize=10, color=lightgray, fontcolor=black, fillcolor=lightgray];
+  "stn-ip4-punt" [color=black, fontcolor=black, fillcolor=lightgray];
+  edge [fontsize=8];
+  "stn-ip4-punt" -> "error-drop";
+}

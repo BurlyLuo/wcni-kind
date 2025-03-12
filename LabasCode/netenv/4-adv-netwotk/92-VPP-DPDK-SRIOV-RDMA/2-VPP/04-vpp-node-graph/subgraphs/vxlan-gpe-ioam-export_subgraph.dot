@@ -1,0 +1,7 @@
+digraph "vxlan_gpe_ioam_export_subgraph" {
+  rankdir=LR;
+  node [shape=box, style=filled, fontsize=10, color=lightgray, fontcolor=black, fillcolor=lightgray];
+  "vxlan-gpe-ioam-export" [color=black, fontcolor=black, fillcolor=lightgray];
+  edge [fontsize=8];
+  "vxlan-gpe-ioam-export" -> "vxlan-gpe-pop-ioam-v4";
+}

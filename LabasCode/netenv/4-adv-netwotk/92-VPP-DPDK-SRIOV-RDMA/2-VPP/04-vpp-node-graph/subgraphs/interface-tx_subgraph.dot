@@ -1,0 +1,7 @@
+digraph "interface_tx_subgraph" {
+  rankdir=LR;
+  node [shape=box, style=filled, fontsize=10, color=lightgray, fontcolor=black, fillcolor=lightgray];
+  "interface-tx" [color=black, fontcolor=black, fillcolor=lightgray];
+  edge [fontsize=8];
+  "interface-tx" -> "error-drop";
+}

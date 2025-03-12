@@ -1,0 +1,7 @@
+digraph "mpls_qos_mark_subgraph" {
+  rankdir=LR;
+  node [shape=box, style=filled, fontsize=10, color=lightgray, fontcolor=black, fillcolor=lightgray];
+  "mpls-qos-mark" [color=black, fontcolor=black, fillcolor=lightgray];
+  edge [fontsize=8];
+  "mpls-qos-mark" -> "mpls-drop";
+}

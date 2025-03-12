@@ -1,0 +1,12 @@
+digraph "tcp4_syn_sent_subgraph" {
+  rankdir=LR;
+  node [shape=box, style=filled, fontsize=10, color=lightgray, fontcolor=black, fillcolor=lightgray];
+  "tcp4-syn-sent" [color=black, fontcolor=black, fillcolor=lightgray];
+  edge [fontsize=8];
+  "tcp4-input-nolookup" -> "tcp4-syn-sent";
+  "tcp4-input" -> "tcp4-syn-sent";
+  "tcp4-syn-sent" -> "ip4-drop";
+  "tcp4-syn-sent" -> "ip6-drop";
+  "tcp4-syn-sent" -> "tcp4-output";
+  "tcp4-syn-sent" -> "tcp6-output";
+}

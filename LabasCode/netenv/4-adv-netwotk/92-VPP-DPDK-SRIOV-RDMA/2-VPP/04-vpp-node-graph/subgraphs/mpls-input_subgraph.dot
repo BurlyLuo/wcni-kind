@@ -1,0 +1,29 @@
+digraph "mpls_input_subgraph" {
+  rankdir=LR;
+  node [shape=box, style=filled, fontsize=10, color=lightgray, fontcolor=black, fillcolor=lightgray];
+  "mpls-input" [color=black, fontcolor=black, fillcolor=lightgray];
+  edge [fontsize=8];
+  "af-packet-input" -> "mpls-input";
+  "avf-input" -> "mpls-input";
+  "device-input" -> "mpls-input";
+  "dpdk-input" -> "mpls-input";
+  "ethernet-input" -> "mpls-input";
+  "ethernet-input-not-l2" -> "mpls-input";
+  "ethernet-input-type" -> "mpls-input";
+  "gre4-input" -> "mpls-input";
+  "gre6-input" -> "mpls-input";
+  "l2-flood" -> "mpls-input";
+  "l2-fwd" -> "mpls-input";
+  "memif-input" -> "mpls-input";
+  "mpls-input" -> "error-drop";
+  "mpls-input" -> "mpls-lookup";
+  "mpls-input" -> "mpls-not-enabled";
+  "netmap-input" -> "mpls-input";
+  "pg-input" -> "mpls-input";
+  "pipe-rx" -> "mpls-input";
+  "rdma-input" -> "mpls-input";
+  "tuntap-rx" -> "mpls-input";
+  "vhost-user-input" -> "mpls-input";
+  "virtio-input" -> "mpls-input";
+  "vmxnet3-input" -> "mpls-input";
+}

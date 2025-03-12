@@ -1,0 +1,8 @@
+digraph "dns46_reply_subgraph" {
+  rankdir=LR;
+  node [shape=box, style=filled, fontsize=10, color=lightgray, fontcolor=black, fillcolor=lightgray];
+  "dns46_reply" [color=black, fontcolor=black, fillcolor=lightgray];
+  edge [fontsize=8];
+  "dns46_reply" -> "error-drop";
+  "dns46_reply" -> "error-punt";
+}

@@ -1,0 +1,12 @@
+digraph "virtio_input_subgraph" {
+  rankdir=LR;
+  node [shape=box, style=filled, fontsize=10, color=lightgray, fontcolor=black, fillcolor=lightgray];
+  "virtio-input" [color=black, fontcolor=black, fillcolor=lightgray];
+  edge [fontsize=8];
+  "virtio-input" -> "ip4-input-no-checksum";
+  "virtio-input" -> "ip4-input";
+  "virtio-input" -> "ip6-input";
+  "virtio-input" -> "mpls-input";
+  "virtio-input" -> "ethernet-input";
+  "virtio-input" -> "error-drop";
+}

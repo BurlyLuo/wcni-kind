@@ -1,0 +1,7 @@
+digraph "ip4_source_and_port_range_check_rx_subgraph" {
+  rankdir=LR;
+  node [shape=box, style=filled, fontsize=10, color=lightgray, fontcolor=black, fillcolor=lightgray];
+  "ip4-source-and-port-range-check-rx" [color=black, fontcolor=black, fillcolor=lightgray];
+  edge [fontsize=8];
+  "ip4-source-and-port-range-check-rx" -> "ip4-drop";
+}

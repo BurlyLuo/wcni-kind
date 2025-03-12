@@ -1,0 +1,12 @@
+digraph "tuntap_rx_subgraph" {
+  rankdir=LR;
+  node [shape=box, style=filled, fontsize=10, color=lightgray, fontcolor=black, fillcolor=lightgray];
+  "tuntap-rx" [color=black, fontcolor=black, fillcolor=lightgray];
+  edge [fontsize=8];
+  "tuntap-rx" -> "ip4-input-no-checksum";
+  "tuntap-rx" -> "ip4-input";
+  "tuntap-rx" -> "ip6-input";
+  "tuntap-rx" -> "mpls-input";
+  "tuntap-rx" -> "ethernet-input";
+  "tuntap-rx" -> "error-drop";
+}

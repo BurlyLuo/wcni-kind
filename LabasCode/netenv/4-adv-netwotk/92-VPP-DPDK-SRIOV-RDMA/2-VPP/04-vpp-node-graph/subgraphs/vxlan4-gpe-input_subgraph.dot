@@ -1,0 +1,15 @@
+digraph "vxlan4_gpe_input_subgraph" {
+  rankdir=LR;
+  node [shape=box, style=filled, fontsize=10, color=lightgray, fontcolor=black, fillcolor=lightgray];
+  "vxlan4-gpe-input" [color=black, fontcolor=black, fillcolor=lightgray];
+  edge [fontsize=8];
+  "ip4-vxlan-gpe-bypass" -> "vxlan4-gpe-input";
+  "vxlan4-gpe-input" -> "error-drop";
+  "vxlan4-gpe-input" -> "ip4-input";
+  "vxlan4-gpe-input" -> "ip6-input";
+  "vxlan4-gpe-input" -> "l2-input";
+  "vxlan4-gpe-input" -> "vxlan-gpe-decap-ioam-v4";
+  "vxlan4-gpe-input" -> "nsh-input";
+  "vxlan4-gpe-input" -> "nsh-proxy";
+  "vxlan4-gpe-input" -> "nsh-aware-vnf-proxy";
+}

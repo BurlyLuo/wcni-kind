@@ -1,0 +1,23 @@
+digraph "ip4_punt_subgraph" {
+  rankdir=LR;
+  node [shape=box, style=filled, fontsize=10, color=lightgray, fontcolor=black, fillcolor=lightgray];
+  "ip4-punt" [color=black, fontcolor=black, fillcolor=lightgray];
+  edge [fontsize=8];
+  "ip4-classify" -> "ip4-punt";
+  "ip4-icmp-echo-reply" -> "ip4-punt";
+  "ip4-icmp-input" -> "ip4-punt";
+  "ip4-load-balance" -> "ip4-punt";
+  "ip4-local" -> "ip4-punt";
+  "ip4-local-end-of-arc" -> "ip4-punt";
+  "ip4-lookup" -> "ip4-punt";
+  "ip4-options" -> "ip4-punt";
+  "ip4-punt" -> "error-punt";
+  "ip4-udp-lookup" -> "ip4-punt";
+  "ip4-udp-punt" -> "ip4-punt";
+  "ip6-udp-punt" -> "ip4-punt";
+  "lookup-ip4-dst" -> "ip4-punt";
+  "lookup-ip4-dst-itf" -> "ip4-punt";
+  "lookup-ip4-src" -> "ip4-punt";
+  "tcp4-input-nolookup" -> "ip4-punt";
+  "tcp4-input" -> "ip4-punt";
+}
