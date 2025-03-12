@@ -1,0 +1,19 @@
+digraph "pipe_rx_subgraph" {
+  rankdir=LR;
+  node [shape=box, style=filled, fontsize=10, color=lightgray, fontcolor=black, fillcolor=lightgray];
+  "pipe-rx" [color=black, fontcolor=black, fillcolor=lightgray];
+  edge [fontsize=8];
+  "pipe-rx" -> "error-punt";
+  "pipe-rx" -> "error-drop";
+  "pipe-rx" -> "llc-input";
+  "pipe-rx" -> "ip4-input";
+  "pipe-rx" -> "ip4-input-no-checksum";
+  "pipe-rx" -> "l2-input";
+  "pipe-rx" -> "mpls-input";
+  "pipe-rx" -> "ip6-input";
+  "pipe-rx" -> "arp-input";
+  "pipe-rx" -> "nsh-input";
+  "pipe-rx" -> "pppoe-input";
+  "pipe-rx" -> "pppoe-cp-dispatch";
+  "pipe-rx" -> "lldp-input";
+}

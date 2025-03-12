@@ -1,0 +1,13 @@
+digraph "bier_drop_subgraph" {
+  rankdir=LR;
+  node [shape=box, style=filled, fontsize=10, color=lightgray, fontcolor=black, fillcolor=lightgray];
+  "bier-drop" [color=black, fontcolor=black, fillcolor=lightgray];
+  edge [fontsize=8];
+  "bier-disp-dispatch" -> "bier-drop";
+  "bier-disp-lookup" -> "bier-drop";
+  "bier-drop" -> "error-drop";
+  "bier-imp-ip4" -> "bier-drop";
+  "bier-input" -> "bier-drop";
+  "bier-lookup" -> "bier-drop";
+  "bier-output" -> "bier-drop";
+}

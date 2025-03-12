@@ -1,0 +1,8 @@
+digraph "ip6_add_syn_hop_by_hop_subgraph" {
+  rankdir=LR;
+  node [shape=box, style=filled, fontsize=10, color=lightgray, fontcolor=black, fillcolor=lightgray];
+  "ip6-add-syn-hop-by-hop" [color=black, fontcolor=black, fillcolor=lightgray];
+  edge [fontsize=8];
+  "ip6-add-syn-hop-by-hop" -> "ip6-lookup";
+  "ip6-add-syn-hop-by-hop" -> "error-drop";
+}

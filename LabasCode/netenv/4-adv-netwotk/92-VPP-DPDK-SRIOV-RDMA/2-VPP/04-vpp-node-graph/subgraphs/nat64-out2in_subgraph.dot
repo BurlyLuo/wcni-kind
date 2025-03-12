@@ -1,0 +1,9 @@
+digraph "nat64_out2in_subgraph" {
+  rankdir=LR;
+  node [shape=box, style=filled, fontsize=10, color=lightgray, fontcolor=black, fillcolor=lightgray];
+  "nat64-out2in" [color=black, fontcolor=black, fillcolor=lightgray];
+  edge [fontsize=8];
+  "nat64-out2in" -> "ip6-lookup";
+  "nat64-out2in" -> "ip4-lookup";
+  "nat64-out2in" -> "error-drop";
+}

@@ -1,0 +1,7 @@
+digraph "ethernet_mpls_label_imposition_uniform_subgraph" {
+  rankdir=LR;
+  node [shape=box, style=filled, fontsize=10, color=lightgray, fontcolor=black, fillcolor=lightgray];
+  "ethernet-mpls-label-imposition-uniform" [color=black, fontcolor=black, fillcolor=lightgray];
+  edge [fontsize=8];
+  "ethernet-mpls-label-imposition-uniform" -> "error-drop";
+}

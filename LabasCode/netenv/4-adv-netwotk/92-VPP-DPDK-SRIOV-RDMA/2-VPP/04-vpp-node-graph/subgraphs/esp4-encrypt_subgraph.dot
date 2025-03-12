@@ -1,0 +1,10 @@
+digraph "esp4_encrypt_subgraph" {
+  rankdir=LR;
+  node [shape=box, style=filled, fontsize=10, color=lightgray, fontcolor=black, fillcolor=lightgray];
+  "esp4-encrypt" [color=black, fontcolor=black, fillcolor=lightgray];
+  edge [fontsize=8];
+  "esp4-encrypt" -> "ip4-drop";
+  "esp4-encrypt" -> "esp4-encrypt-handoff";
+  "esp4-encrypt" -> "interface-output";
+  "ipsec4-output-feature" -> "esp4-encrypt";
+}

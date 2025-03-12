@@ -1,0 +1,19 @@
+digraph "ip4_local_subgraph" {
+  rankdir=LR;
+  node [shape=box, style=filled, fontsize=10, color=lightgray, fontcolor=black, fillcolor=lightgray];
+  "ip4-local" [color=black, fontcolor=black, fillcolor=lightgray];
+  edge [fontsize=8];
+  "ip4-classify" -> "ip4-local";
+  "ip4-load-balance" -> "ip4-local";
+  "ip4-local" -> "ip4-drop";
+  "ip4-local" -> "ip4-punt";
+  "ip4-local" -> "ip4-udp-lookup";
+  "ip4-local" -> "ip4-icmp-input";
+  "ip4-local" -> "ip4-full-reassembly";
+  "ip4-local" -> "igmp-input";
+  "ip4-lookup" -> "ip4-local";
+  "ip4-options" -> "ip4-local";
+  "lookup-ip4-dst" -> "ip4-local";
+  "lookup-ip4-dst-itf" -> "ip4-local";
+  "lookup-ip4-src" -> "ip4-local";
+}

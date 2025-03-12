@@ -1,0 +1,12 @@
+digraph "tcp4_established_subgraph" {
+  rankdir=LR;
+  node [shape=box, style=filled, fontsize=10, color=lightgray, fontcolor=black, fillcolor=lightgray];
+  "tcp4-established" [color=black, fontcolor=black, fillcolor=lightgray];
+  edge [fontsize=8];
+  "tcp4-established" -> "ip4-drop";
+  "tcp4-established" -> "ip6-drop";
+  "tcp4-established" -> "tcp4-output";
+  "tcp4-established" -> "tcp6-output";
+  "tcp4-input-nolookup" -> "tcp4-established";
+  "tcp4-input" -> "tcp4-established";
+}

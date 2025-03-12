@@ -1,0 +1,9 @@
+digraph "bfd_udp_echo4_input_subgraph" {
+  rankdir=LR;
+  node [shape=box, style=filled, fontsize=10, color=lightgray, fontcolor=black, fillcolor=lightgray];
+  "bfd-udp-echo4-input" [color=black, fontcolor=black, fillcolor=lightgray];
+  edge [fontsize=8];
+  "bfd-udp-echo4-input" -> "error-drop";
+  "bfd-udp-echo4-input" -> "ip4-arp";
+  "bfd-udp-echo4-input" -> "ip4-lookup";
+}

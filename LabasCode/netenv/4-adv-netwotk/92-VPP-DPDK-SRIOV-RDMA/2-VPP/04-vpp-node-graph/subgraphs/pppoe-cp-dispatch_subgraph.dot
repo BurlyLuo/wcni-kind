@@ -1,0 +1,15 @@
+digraph "pppoe_cp_dispatch_subgraph" {
+  rankdir=LR;
+  node [shape=box, style=filled, fontsize=10, color=lightgray, fontcolor=black, fillcolor=lightgray];
+  "pppoe-cp-dispatch" [color=black, fontcolor=black, fillcolor=lightgray];
+  edge [fontsize=8];
+  "ethernet-input" -> "pppoe-cp-dispatch";
+  "ethernet-input-not-l2" -> "pppoe-cp-dispatch";
+  "ethernet-input-type" -> "pppoe-cp-dispatch";
+  "l2-flood" -> "pppoe-cp-dispatch";
+  "l2-fwd" -> "pppoe-cp-dispatch";
+  "pipe-rx" -> "pppoe-cp-dispatch";
+  "pppoe-cp-dispatch" -> "error-drop";
+  "pppoe-cp-dispatch" -> "interface-output";
+  "pppoe-input" -> "pppoe-cp-dispatch";
+}

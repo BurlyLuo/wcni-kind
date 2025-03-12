@@ -1,0 +1,27 @@
+digraph "l2_output_acl_subgraph" {
+  rankdir=LR;
+  node [shape=box, style=filled, fontsize=10, color=lightgray, fontcolor=black, fillcolor=lightgray];
+  "l2-output-acl" [color=black, fontcolor=black, fillcolor=lightgray];
+  edge [fontsize=8];
+  "gbp-policy-lpm" -> "l2-output-acl";
+  "gbp-policy-mac" -> "l2-output-acl";
+  "gbp-policy-port" -> "l2-output-acl";
+  "l2-efp-filter" -> "l2-output-acl";
+  "l2-output-classify" -> "l2-output-acl";
+  "l2-output" -> "l2-output-acl";
+  "l2-output-acl" -> "error-drop";
+  "l2-output-acl" -> "interface-output";
+  "l2-output-acl" -> "span-l2-output";
+  "l2-output-acl" -> "gbp-policy-lpm";
+  "l2-output-acl" -> "gbp-policy-port";
+  "l2-output-acl" -> "gbp-policy-mac";
+  "l2-output-acl" -> "feature-bitmap-drop";
+  "l2-output-acl" -> "l2-output-acl";
+  "l2-output-acl" -> "l2-efp-filter";
+  "l2-output-acl" -> "l2-output-classify";
+  "l2-output-acl" -> "l2-output-feat-arc";
+  "l2-output-acl" -> "l2-xcrw";
+  "l2-output-feat-arc" -> "l2-output-acl";
+  "l2-output-feat-arc-end" -> "l2-output-acl";
+  "span-l2-output" -> "l2-output-acl";
+}

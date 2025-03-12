@@ -1,0 +1,27 @@
+digraph "l2_efp_filter_subgraph" {
+  rankdir=LR;
+  node [shape=box, style=filled, fontsize=10, color=lightgray, fontcolor=black, fillcolor=lightgray];
+  "l2-efp-filter" [color=black, fontcolor=black, fillcolor=lightgray];
+  edge [fontsize=8];
+  "gbp-policy-lpm" -> "l2-efp-filter";
+  "gbp-policy-mac" -> "l2-efp-filter";
+  "gbp-policy-port" -> "l2-efp-filter";
+  "l2-efp-filter" -> "error-drop";
+  "l2-efp-filter" -> "interface-output";
+  "l2-efp-filter" -> "span-l2-output";
+  "l2-efp-filter" -> "gbp-policy-lpm";
+  "l2-efp-filter" -> "gbp-policy-port";
+  "l2-efp-filter" -> "gbp-policy-mac";
+  "l2-efp-filter" -> "feature-bitmap-drop";
+  "l2-efp-filter" -> "l2-output-acl";
+  "l2-efp-filter" -> "l2-efp-filter";
+  "l2-efp-filter" -> "l2-output-classify";
+  "l2-efp-filter" -> "l2-output-feat-arc";
+  "l2-efp-filter" -> "l2-xcrw";
+  "l2-output-classify" -> "l2-efp-filter";
+  "l2-output" -> "l2-efp-filter";
+  "l2-output-acl" -> "l2-efp-filter";
+  "l2-output-feat-arc" -> "l2-efp-filter";
+  "l2-output-feat-arc-end" -> "l2-efp-filter";
+  "span-l2-output" -> "l2-efp-filter";
+}

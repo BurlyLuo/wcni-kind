@@ -1,0 +1,13 @@
+digraph "cop_input_subgraph" {
+  rankdir=LR;
+  node [shape=box, style=filled, fontsize=10, color=lightgray, fontcolor=black, fillcolor=lightgray];
+  "cop-input" [color=black, fontcolor=black, fillcolor=lightgray];
+  edge [fontsize=8];
+  "cop-input" -> "ip4-cop-whitelist";
+  "cop-input" -> "ip6-cop-whitelist";
+  "cop-input" -> "default-cop-whitelist";
+  "cop-input" -> "ip4-input";
+  "cop-input" -> "ip6-input";
+  "cop-input" -> "ethernet-input";
+  "cop-input" -> "error-drop";
+}

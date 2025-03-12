@@ -1,0 +1,8 @@
+digraph "lookup_mpls_dst_itf_subgraph" {
+  rankdir=LR;
+  node [shape=box, style=filled, fontsize=10, color=lightgray, fontcolor=black, fillcolor=lightgray];
+  "lookup-mpls-dst-itf" [color=black, fontcolor=black, fillcolor=lightgray];
+  edge [fontsize=8];
+  "lookup-mpls-dst-itf" -> "mpls-drop";
+  "lookup-mpls-dst-itf" -> "mpls-replicate";
+}

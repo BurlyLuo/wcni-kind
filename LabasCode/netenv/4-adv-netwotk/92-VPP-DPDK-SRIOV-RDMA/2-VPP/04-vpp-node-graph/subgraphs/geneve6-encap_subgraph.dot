@@ -1,0 +1,7 @@
+digraph "geneve6_encap_subgraph" {
+  rankdir=LR;
+  node [shape=box, style=filled, fontsize=10, color=lightgray, fontcolor=black, fillcolor=lightgray];
+  "geneve6-encap" [color=black, fontcolor=black, fillcolor=lightgray];
+  edge [fontsize=8];
+  "geneve6-encap" -> "error-drop";
+}

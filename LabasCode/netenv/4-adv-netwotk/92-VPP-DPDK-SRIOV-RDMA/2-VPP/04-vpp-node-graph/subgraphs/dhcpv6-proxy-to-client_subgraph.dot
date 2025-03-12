@@ -1,0 +1,7 @@
+digraph "dhcpv6_proxy_to_client_subgraph" {
+  rankdir=LR;
+  node [shape=box, style=filled, fontsize=10, color=lightgray, fontcolor=black, fillcolor=lightgray];
+  "dhcpv6-proxy-to-client" [color=black, fontcolor=black, fillcolor=lightgray];
+  edge [fontsize=8];
+  "dhcpv6-proxy-to-server" -> "dhcpv6-proxy-to-client";
+}

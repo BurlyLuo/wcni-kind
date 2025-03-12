@@ -1,0 +1,21 @@
+digraph "ethernet_input_not_l2_subgraph" {
+  rankdir=LR;
+  node [shape=box, style=filled, fontsize=10, color=lightgray, fontcolor=black, fillcolor=lightgray];
+  "ethernet-input-not-l2" [color=black, fontcolor=black, fillcolor=lightgray];
+  edge [fontsize=8];
+  "ethernet-input-not-l2" -> "error-punt";
+  "ethernet-input-not-l2" -> "error-drop";
+  "ethernet-input-not-l2" -> "llc-input";
+  "ethernet-input-not-l2" -> "ip4-input";
+  "ethernet-input-not-l2" -> "ip4-input-no-checksum";
+  "ethernet-input-not-l2" -> "l2-input";
+  "ethernet-input-not-l2" -> "mpls-input";
+  "ethernet-input-not-l2" -> "ip6-input";
+  "ethernet-input-not-l2" -> "arp-input";
+  "ethernet-input-not-l2" -> "nsh-input";
+  "ethernet-input-not-l2" -> "pppoe-input";
+  "ethernet-input-not-l2" -> "pppoe-cp-dispatch";
+  "ethernet-input-not-l2" -> "lldp-input";
+  "l2-input-classify" -> "ethernet-input-not-l2";
+  "li-hit" -> "ethernet-input-not-l2";
+}

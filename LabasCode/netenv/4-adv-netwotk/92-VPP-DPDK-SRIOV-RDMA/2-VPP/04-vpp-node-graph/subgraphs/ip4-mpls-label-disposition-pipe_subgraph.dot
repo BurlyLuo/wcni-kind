@@ -1,0 +1,14 @@
+digraph "ip4_mpls_label_disposition_pipe_subgraph" {
+  rankdir=LR;
+  node [shape=box, style=filled, fontsize=10, color=lightgray, fontcolor=black, fillcolor=lightgray];
+  "ip4-mpls-label-disposition-pipe" [color=black, fontcolor=black, fillcolor=lightgray];
+  edge [fontsize=8];
+  "ip4-mpls-label-disposition-pipe" -> "error-drop";
+  "ip4-mpls-label-disposition-pipe" -> "error-punt";
+  "ip4-mpls-label-disposition-pipe" -> "ip4-options";
+  "ip4-mpls-label-disposition-pipe" -> "ip4-lookup";
+  "ip4-mpls-label-disposition-pipe" -> "ip4-mfib-forward-lookup";
+  "ip4-mpls-label-disposition-pipe" -> "ip4-icmp-error";
+  "ip4-mpls-label-disposition-pipe" -> "ip4-full-reassembly";
+  "ip4-mpls-label-disposition-pipe" -> "ip4-not-enabled";
+}

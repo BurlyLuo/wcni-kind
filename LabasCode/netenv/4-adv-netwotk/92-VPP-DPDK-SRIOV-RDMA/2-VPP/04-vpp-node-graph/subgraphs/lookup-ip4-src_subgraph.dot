@@ -1,0 +1,18 @@
+digraph "lookup_ip4_src_subgraph" {
+  rankdir=LR;
+  node [shape=box, style=filled, fontsize=10, color=lightgray, fontcolor=black, fillcolor=lightgray];
+  "lookup-ip4-src" [color=black, fontcolor=black, fillcolor=lightgray];
+  edge [fontsize=8];
+  "lookup-ip4-src" -> "ip4-drop";
+  "lookup-ip4-src" -> "ip4-punt";
+  "lookup-ip4-src" -> "ip4-local";
+  "lookup-ip4-src" -> "ip4-arp";
+  "lookup-ip4-src" -> "ip4-glean";
+  "lookup-ip4-src" -> "ip4-rewrite";
+  "lookup-ip4-src" -> "ip4-midchain";
+  "lookup-ip4-src" -> "ip4-icmp-error";
+  "lookup-ip4-src" -> "ip4-rewrite-mcast";
+  "lookup-ip4-src" -> "ip4-rewrite-bcast";
+  "lookup-ip4-src" -> "ip4-mcast-midchain";
+  "lookup-ip4-src" -> "nsh-classifier";
+}

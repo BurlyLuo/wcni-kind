@@ -1,0 +1,12 @@
+digraph "pg_input_subgraph" {
+  rankdir=LR;
+  node [shape=box, style=filled, fontsize=10, color=lightgray, fontcolor=black, fillcolor=lightgray];
+  "pg-input" [color=black, fontcolor=black, fillcolor=lightgray];
+  edge [fontsize=8];
+  "pg-input" -> "ip4-input-no-checksum";
+  "pg-input" -> "ip4-input";
+  "pg-input" -> "ip6-input";
+  "pg-input" -> "mpls-input";
+  "pg-input" -> "ethernet-input";
+  "pg-input" -> "error-drop";
+}

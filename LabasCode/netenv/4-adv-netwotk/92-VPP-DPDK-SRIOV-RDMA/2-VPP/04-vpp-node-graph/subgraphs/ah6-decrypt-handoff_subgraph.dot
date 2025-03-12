@@ -1,0 +1,8 @@
+digraph "ah6_decrypt_handoff_subgraph" {
+  rankdir=LR;
+  node [shape=box, style=filled, fontsize=10, color=lightgray, fontcolor=black, fillcolor=lightgray];
+  "ah6-decrypt-handoff" [color=black, fontcolor=black, fillcolor=lightgray];
+  edge [fontsize=8];
+  "ah6-decrypt-handoff" -> "error-drop";
+  "ah6-decrypt" -> "ah6-decrypt-handoff";
+}

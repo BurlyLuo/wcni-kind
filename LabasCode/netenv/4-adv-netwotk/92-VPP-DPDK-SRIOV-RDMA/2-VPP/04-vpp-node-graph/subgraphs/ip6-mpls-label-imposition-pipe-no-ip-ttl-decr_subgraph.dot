@@ -1,0 +1,7 @@
+digraph "ip6_mpls_label_imposition_pipe_no_ip_ttl_decr_subgraph" {
+  rankdir=LR;
+  node [shape=box, style=filled, fontsize=10, color=lightgray, fontcolor=black, fillcolor=lightgray];
+  "ip6-mpls-label-imposition-pipe-no-ip-ttl-decr" [color=black, fontcolor=black, fillcolor=lightgray];
+  edge [fontsize=8];
+  "ip6-mpls-label-imposition-pipe-no-ip-ttl-decr" -> "ip6-drop";
+}

@@ -1,0 +1,27 @@
+digraph "nsh_input_subgraph" {
+  rankdir=LR;
+  node [shape=box, style=filled, fontsize=10, color=lightgray, fontcolor=black, fillcolor=lightgray];
+  "nsh-input" [color=black, fontcolor=black, fillcolor=lightgray];
+  edge [fontsize=8];
+  "ethernet-input" -> "nsh-input";
+  "ethernet-input-not-l2" -> "nsh-input";
+  "ethernet-input-type" -> "nsh-input";
+  "gre4-input" -> "nsh-input";
+  "gre6-input" -> "nsh-input";
+  "l2-flood" -> "nsh-input";
+  "l2-fwd" -> "nsh-input";
+  "lisp-gpe-ip4-input" -> "nsh-input";
+  "lisp-gpe-ip6-input" -> "nsh-input";
+  "nsh-input" -> "error-drop";
+  "nsh-input" -> "gre4-input";
+  "nsh-input" -> "gre6-input";
+  "nsh-input" -> "vxlan-gpe-encap";
+  "nsh-input" -> "vxlan4-encap";
+  "nsh-input" -> "vxlan6-encap";
+  "nsh-input" -> "ethernet-input";
+  "nsh-input" -> "interface-output";
+  "nsh-input" -> "nsh-eth-output";
+  "pipe-rx" -> "nsh-input";
+  "vxlan4-gpe-input" -> "nsh-input";
+  "vxlan6-gpe-input" -> "nsh-input";
+}

@@ -1,0 +1,10 @@
+digraph "ip6_map_t_subgraph" {
+  rankdir=LR;
+  node [shape=box, style=filled, fontsize=10, color=lightgray, fontcolor=black, fillcolor=lightgray];
+  "ip6-map-t" [color=black, fontcolor=black, fillcolor=lightgray];
+  edge [fontsize=8];
+  "ip6-map-t" -> "ip6-map-t-tcp-udp";
+  "ip6-map-t" -> "ip6-map-t-icmp";
+  "ip6-map-t" -> "ip6-map-t-fragmented";
+  "ip6-map-t" -> "error-drop";
+}

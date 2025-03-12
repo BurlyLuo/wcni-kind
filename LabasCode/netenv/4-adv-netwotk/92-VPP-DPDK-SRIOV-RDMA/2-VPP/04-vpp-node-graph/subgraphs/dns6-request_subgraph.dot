@@ -1,0 +1,9 @@
+digraph "dns6_request_subgraph" {
+  rankdir=LR;
+  node [shape=box, style=filled, fontsize=10, color=lightgray, fontcolor=black, fillcolor=lightgray];
+  "dns6-request" [color=black, fontcolor=black, fillcolor=lightgray];
+  edge [fontsize=8];
+  "dns6-request" -> "error-drop";
+  "dns6-request" -> "ip6-lookup";
+  "dns6-request" -> "error-punt";
+}
