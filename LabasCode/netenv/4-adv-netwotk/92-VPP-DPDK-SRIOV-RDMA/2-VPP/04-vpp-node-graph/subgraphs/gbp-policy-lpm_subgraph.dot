@@ -1,0 +1,27 @@
+digraph "gbp_policy_lpm_subgraph" {
+  rankdir=LR;
+  node [shape=box, style=filled, fontsize=10, color=lightgray, fontcolor=black, fillcolor=lightgray];
+  "gbp-policy-lpm" [color=black, fontcolor=black, fillcolor=lightgray];
+  edge [fontsize=8];
+  "gbp-policy-lpm" -> "error-drop";
+  "gbp-policy-lpm" -> "interface-output";
+  "gbp-policy-lpm" -> "span-l2-output";
+  "gbp-policy-lpm" -> "gbp-policy-lpm";
+  "gbp-policy-lpm" -> "gbp-policy-port";
+  "gbp-policy-lpm" -> "gbp-policy-mac";
+  "gbp-policy-lpm" -> "feature-bitmap-drop";
+  "gbp-policy-lpm" -> "l2-output-acl";
+  "gbp-policy-lpm" -> "l2-efp-filter";
+  "gbp-policy-lpm" -> "l2-output-classify";
+  "gbp-policy-lpm" -> "l2-output-feat-arc";
+  "gbp-policy-lpm" -> "l2-xcrw";
+  "gbp-policy-mac" -> "gbp-policy-lpm";
+  "gbp-policy-port" -> "gbp-policy-lpm";
+  "l2-efp-filter" -> "gbp-policy-lpm";
+  "l2-output-classify" -> "gbp-policy-lpm";
+  "l2-output" -> "gbp-policy-lpm";
+  "l2-output-acl" -> "gbp-policy-lpm";
+  "l2-output-feat-arc" -> "gbp-policy-lpm";
+  "l2-output-feat-arc-end" -> "gbp-policy-lpm";
+  "span-l2-output" -> "gbp-policy-lpm";
+}

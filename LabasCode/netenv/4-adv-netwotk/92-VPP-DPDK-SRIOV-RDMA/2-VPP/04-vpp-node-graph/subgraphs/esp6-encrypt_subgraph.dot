@@ -1,0 +1,10 @@
+digraph "esp6_encrypt_subgraph" {
+  rankdir=LR;
+  node [shape=box, style=filled, fontsize=10, color=lightgray, fontcolor=black, fillcolor=lightgray];
+  "esp6-encrypt" [color=black, fontcolor=black, fillcolor=lightgray];
+  edge [fontsize=8];
+  "esp6-encrypt" -> "ip6-drop";
+  "esp6-encrypt" -> "esp6-encrypt-handoff";
+  "esp6-encrypt" -> "interface-output";
+  "ipsec6-output-feature" -> "esp6-encrypt";
+}

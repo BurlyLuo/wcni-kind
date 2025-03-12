@@ -1,0 +1,7 @@
+digraph "ip4_outacl_subgraph" {
+  rankdir=LR;
+  node [shape=box, style=filled, fontsize=10, color=lightgray, fontcolor=black, fillcolor=lightgray];
+  "ip4-outacl" [color=black, fontcolor=black, fillcolor=lightgray];
+  edge [fontsize=8];
+  "ip4-outacl" -> "ip4-drop";
+}

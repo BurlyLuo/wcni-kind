@@ -1,0 +1,20 @@
+digraph "ip6_rewrite_mcast_subgraph" {
+  rankdir=LR;
+  node [shape=box, style=filled, fontsize=10, color=lightgray, fontcolor=black, fillcolor=lightgray];
+  "ip6-rewrite-mcast" [color=black, fontcolor=black, fillcolor=lightgray];
+  edge [fontsize=8];
+  "icmp6-router-solicitation" -> "ip6-rewrite-mcast";
+  "ip6-classify" -> "ip6-rewrite-mcast";
+  "ip6-discover-neighbor" -> "ip6-rewrite-mcast";
+  "ip6-glean" -> "ip6-rewrite-mcast";
+  "ip6-hop-by-hop" -> "ip6-rewrite-mcast";
+  "ip6-load-balance" -> "ip6-rewrite-mcast";
+  "ip6-lookup" -> "ip6-rewrite-mcast";
+  "ip6-pop-hop-by-hop" -> "ip6-rewrite-mcast";
+  "ip6-rewrite-mcast" -> "ip6-drop";
+  "ip6-rewrite-mcast" -> "ip6-icmp-error";
+  "ip6-rewrite-mcast" -> "ip6-frag";
+  "lookup-ip6-dst" -> "ip6-rewrite-mcast";
+  "lookup-ip6-dst-itf" -> "ip6-rewrite-mcast";
+  "lookup-ip6-src" -> "ip6-rewrite-mcast";
+}

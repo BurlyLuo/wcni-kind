@@ -1,0 +1,10 @@
+digraph "nat44_hairpin_src_subgraph" {
+  rankdir=LR;
+  node [shape=box, style=filled, fontsize=10, color=lightgray, fontcolor=black, fillcolor=lightgray];
+  "nat44-hairpin-src" [color=black, fontcolor=black, fillcolor=lightgray];
+  edge [fontsize=8];
+  "nat44-hairpin-src" -> "error-drop";
+  "nat44-hairpin-src" -> "nat44-in2out-output";
+  "nat44-hairpin-src" -> "nat44-in2out-output-worker-handoff";
+  "nat44-hairpin-src" -> "interface-output";
+}

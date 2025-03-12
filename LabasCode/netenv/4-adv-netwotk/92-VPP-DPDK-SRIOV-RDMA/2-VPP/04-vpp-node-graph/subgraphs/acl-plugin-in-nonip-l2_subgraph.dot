@@ -1,0 +1,7 @@
+digraph "acl_plugin_in_nonip_l2_subgraph" {
+  rankdir=LR;
+  node [shape=box, style=filled, fontsize=10, color=lightgray, fontcolor=black, fillcolor=lightgray];
+  "acl-plugin-in-nonip-l2" [color=black, fontcolor=black, fillcolor=lightgray];
+  edge [fontsize=8];
+  "acl-plugin-in-nonip-l2" -> "error-drop";
+}

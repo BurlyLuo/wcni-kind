@@ -1,0 +1,7 @@
+digraph "nsh_load_balance_subgraph" {
+  rankdir=LR;
+  node [shape=box, style=filled, fontsize=10, color=lightgray, fontcolor=black, fillcolor=lightgray];
+  "nsh-load-balance" [color=black, fontcolor=black, fillcolor=lightgray];
+  edge [fontsize=8];
+  "nsh-load-balance" -> "error-drop";
+}

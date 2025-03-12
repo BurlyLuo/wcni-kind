@@ -1,0 +1,7 @@
+digraph "udp4_input_subgraph" {
+  rankdir=LR;
+  node [shape=box, style=filled, fontsize=10, color=lightgray, fontcolor=black, fillcolor=lightgray];
+  "udp4-input" [color=black, fontcolor=black, fillcolor=lightgray];
+  edge [fontsize=8];
+  "udp4-input" -> "error-drop";
+}

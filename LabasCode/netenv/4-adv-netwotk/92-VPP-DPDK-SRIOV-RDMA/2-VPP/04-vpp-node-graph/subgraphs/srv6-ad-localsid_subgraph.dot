@@ -1,0 +1,10 @@
+digraph "srv6_ad_localsid_subgraph" {
+  rankdir=LR;
+  node [shape=box, style=filled, fontsize=10, color=lightgray, fontcolor=black, fillcolor=lightgray];
+  "srv6-ad-localsid" [color=black, fontcolor=black, fillcolor=lightgray];
+  edge [fontsize=8];
+  "srv6-ad-localsid" -> "error-drop";
+  "srv6-ad-localsid" -> "ip4-rewrite";
+  "srv6-ad-localsid" -> "ip6-rewrite";
+  "srv6-ad-localsid" -> "interface-output";
+}

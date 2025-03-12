@@ -1,0 +1,14 @@
+digraph "ip6_map_subgraph" {
+  rankdir=LR;
+  node [shape=box, style=filled, fontsize=10, color=lightgray, fontcolor=black, fillcolor=lightgray];
+  "ip6-map" [color=black, fontcolor=black, fillcolor=lightgray];
+  edge [fontsize=8];
+  "ip6-map" -> "ip4-lookup";
+  "ip6-map" -> "ip4-load-balance";
+  "ip6-map" -> "ip4-sv-reassembly-custom-next";
+  "ip6-map" -> "ip4-frag";
+  "ip6-map" -> "ip6-map-icmp-relay";
+  "ip6-map" -> "ip6-local";
+  "ip6-map" -> "error-drop";
+  "ip6-map" -> "ip6-icmp-error";
+}

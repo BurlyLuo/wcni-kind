@@ -1,0 +1,10 @@
+digraph "ipip6_input_subgraph" {
+  rankdir=LR;
+  node [shape=box, style=filled, fontsize=10, color=lightgray, fontcolor=black, fillcolor=lightgray];
+  "ipip6-input" [color=black, fontcolor=black, fillcolor=lightgray];
+  edge [fontsize=8];
+  "ipip6-input" -> "error-punt";
+  "ipip6-input" -> "error-drop";
+  "ipip6-input" -> "ip4-input";
+  "ipip6-input" -> "ip6-input";
+}

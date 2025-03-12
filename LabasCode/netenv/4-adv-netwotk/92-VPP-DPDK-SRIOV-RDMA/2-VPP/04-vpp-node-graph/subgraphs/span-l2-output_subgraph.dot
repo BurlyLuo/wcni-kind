@@ -1,0 +1,26 @@
+digraph "span_l2_output_subgraph" {
+  rankdir=LR;
+  node [shape=box, style=filled, fontsize=10, color=lightgray, fontcolor=black, fillcolor=lightgray];
+  "span-l2-output" [color=black, fontcolor=black, fillcolor=lightgray];
+  edge [fontsize=8];
+  "gbp-policy-lpm" -> "span-l2-output";
+  "gbp-policy-mac" -> "span-l2-output";
+  "gbp-policy-port" -> "span-l2-output";
+  "l2-efp-filter" -> "span-l2-output";
+  "l2-output-classify" -> "span-l2-output";
+  "l2-output" -> "span-l2-output";
+  "l2-output-acl" -> "span-l2-output";
+  "l2-output-feat-arc" -> "span-l2-output";
+  "l2-output-feat-arc-end" -> "span-l2-output";
+  "span-l2-output" -> "interface-output";
+  "span-l2-output" -> "span-l2-output";
+  "span-l2-output" -> "gbp-policy-lpm";
+  "span-l2-output" -> "gbp-policy-port";
+  "span-l2-output" -> "gbp-policy-mac";
+  "span-l2-output" -> "feature-bitmap-drop";
+  "span-l2-output" -> "l2-output-acl";
+  "span-l2-output" -> "l2-efp-filter";
+  "span-l2-output" -> "l2-output-classify";
+  "span-l2-output" -> "l2-output-feat-arc";
+  "span-l2-output" -> "l2-xcrw";
+}

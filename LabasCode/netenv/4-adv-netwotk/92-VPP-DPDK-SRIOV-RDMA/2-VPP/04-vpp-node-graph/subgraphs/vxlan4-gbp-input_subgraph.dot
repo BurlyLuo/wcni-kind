@@ -1,0 +1,12 @@
+digraph "vxlan4_gbp_input_subgraph" {
+  rankdir=LR;
+  node [shape=box, style=filled, fontsize=10, color=lightgray, fontcolor=black, fillcolor=lightgray];
+  "vxlan4-gbp-input" [color=black, fontcolor=black, fillcolor=lightgray];
+  edge [fontsize=8];
+  "ip4-vxlan-gbp-bypass" -> "vxlan4-gbp-input";
+  "vxlan4-gbp-input" -> "error-drop";
+  "vxlan4-gbp-input" -> "punt-dispatch";
+  "vxlan4-gbp-input" -> "l2-input";
+  "vxlan4-gbp-input" -> "ip4-input";
+  "vxlan4-gbp-input" -> "ip6-input";
+}

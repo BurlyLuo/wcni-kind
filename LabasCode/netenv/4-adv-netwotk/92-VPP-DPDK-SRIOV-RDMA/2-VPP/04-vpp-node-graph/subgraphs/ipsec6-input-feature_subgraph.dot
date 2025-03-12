@@ -1,0 +1,10 @@
+digraph "ipsec6_input_feature_subgraph" {
+  rankdir=LR;
+  node [shape=box, style=filled, fontsize=10, color=lightgray, fontcolor=black, fillcolor=lightgray];
+  "ipsec6-input-feature" [color=black, fontcolor=black, fillcolor=lightgray];
+  edge [fontsize=8];
+  "ipsec6-input-feature" -> "punt-dispatch";
+  "ipsec6-input-feature" -> "error-drop";
+  "ipsec6-input-feature" -> "ah6-decrypt";
+  "ipsec6-input-feature" -> "esp6-decrypt";
+}

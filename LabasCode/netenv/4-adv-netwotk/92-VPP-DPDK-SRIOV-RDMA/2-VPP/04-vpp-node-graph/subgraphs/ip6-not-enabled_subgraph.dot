@@ -1,0 +1,12 @@
+digraph "ip6_not_enabled_subgraph" {
+  rankdir=LR;
+  node [shape=box, style=filled, fontsize=10, color=lightgray, fontcolor=black, fillcolor=lightgray];
+  "ip6-not-enabled" [color=black, fontcolor=black, fillcolor=lightgray];
+  edge [fontsize=8];
+  "ip6-input" -> "ip6-not-enabled";
+  "ip6-mpls-label-disposition-pipe" -> "ip6-not-enabled";
+  "ip6-mpls-label-disposition-uniform" -> "ip6-not-enabled";
+  "ip6-not-enabled" -> "error-drop";
+  "ip6-not-enabled" -> "ip6-lookup";
+  "ip6-not-enabled" -> "ip6-mfib-forward-lookup";
+}

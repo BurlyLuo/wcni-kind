@@ -1,0 +1,8 @@
+digraph "igmp_parse_query_subgraph" {
+  rankdir=LR;
+  node [shape=box, style=filled, fontsize=10, color=lightgray, fontcolor=black, fillcolor=lightgray];
+  "igmp-parse-query" [color=black, fontcolor=black, fillcolor=lightgray];
+  edge [fontsize=8];
+  "igmp-input" -> "igmp-parse-query";
+  "igmp-parse-query" -> "error-drop";
+}

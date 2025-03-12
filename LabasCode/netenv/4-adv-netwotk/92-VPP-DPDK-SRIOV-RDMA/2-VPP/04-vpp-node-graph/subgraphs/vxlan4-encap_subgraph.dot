@@ -1,0 +1,12 @@
+digraph "vxlan4_encap_subgraph" {
+  rankdir=LR;
+  node [shape=box, style=filled, fontsize=10, color=lightgray, fontcolor=black, fillcolor=lightgray];
+  "vxlan4-encap" [color=black, fontcolor=black, fillcolor=lightgray];
+  edge [fontsize=8];
+  "nsh-aware-vnf-proxy" -> "vxlan4-encap";
+  "nsh-classifier" -> "vxlan4-encap";
+  "nsh-input" -> "vxlan4-encap";
+  "nsh-pop" -> "vxlan4-encap";
+  "nsh-proxy" -> "vxlan4-encap";
+  "vxlan4-encap" -> "error-drop";
+}

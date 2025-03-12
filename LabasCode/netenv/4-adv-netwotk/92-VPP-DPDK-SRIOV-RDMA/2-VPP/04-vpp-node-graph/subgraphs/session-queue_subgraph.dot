@@ -1,0 +1,10 @@
+digraph "session_queue_subgraph" {
+  rankdir=LR;
+  node [shape=box, style=filled, fontsize=10, color=lightgray, fontcolor=black, fillcolor=lightgray];
+  "session-queue" [color=black, fontcolor=black, fillcolor=lightgray];
+  edge [fontsize=8];
+  "session-queue" -> "ip4-lookup";
+  "session-queue" -> "ip6-lookup";
+  "session-queue" -> "tcp4-output";
+  "session-queue" -> "tcp6-output";
+}

@@ -1,0 +1,8 @@
+digraph "ip4_full_reass_feature_hoff_subgraph" {
+  rankdir=LR;
+  node [shape=box, style=filled, fontsize=10, color=lightgray, fontcolor=black, fillcolor=lightgray];
+  "ip4-full-reass-feature-hoff" [color=black, fontcolor=black, fillcolor=lightgray];
+  edge [fontsize=8];
+  "ip4-full-reass-feature-hoff" -> "error-drop";
+  "ip4-full-reassembly-feature" -> "ip4-full-reass-feature-hoff";
+}

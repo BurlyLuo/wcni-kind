@@ -1,0 +1,12 @@
+digraph "mpls_frag_subgraph" {
+  rankdir=LR;
+  node [shape=box, style=filled, fontsize=10, color=lightgray, fontcolor=black, fillcolor=lightgray];
+  "mpls-frag" [color=black, fontcolor=black, fillcolor=lightgray];
+  edge [fontsize=8];
+  "mpls-frag" -> "mpls-output";
+  "mpls-frag" -> "mpls-midchain";
+  "mpls-frag" -> "ip4-icmp-error";
+  "mpls-frag" -> "mpls-drop";
+  "mpls-midchain" -> "mpls-frag";
+  "mpls-output" -> "mpls-frag";
+}

@@ -1,0 +1,8 @@
+digraph "interface_rx_dpo_ip6_subgraph" {
+  rankdir=LR;
+  node [shape=box, style=filled, fontsize=10, color=lightgray, fontcolor=black, fillcolor=lightgray];
+  "interface-rx-dpo-ip6" [color=black, fontcolor=black, fillcolor=lightgray];
+  edge [fontsize=8];
+  "interface-rx-dpo-ip6" -> "ip6-drop";
+  "interface-rx-dpo-ip6" -> "ip6-input";
+}

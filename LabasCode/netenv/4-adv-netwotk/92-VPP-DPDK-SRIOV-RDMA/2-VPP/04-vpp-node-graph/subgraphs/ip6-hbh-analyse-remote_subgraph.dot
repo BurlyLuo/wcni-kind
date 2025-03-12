@@ -1,0 +1,8 @@
+digraph "ip6_hbh_analyse_remote_subgraph" {
+  rankdir=LR;
+  node [shape=box, style=filled, fontsize=10, color=lightgray, fontcolor=black, fillcolor=lightgray];
+  "ip6-hbh-analyse-remote" [color=black, fontcolor=black, fillcolor=lightgray];
+  edge [fontsize=8];
+  "ip6-hbh-analyse-remote" -> "ip4-lookup";
+  "ip6-hbh-analyse-remote" -> "ip4-drop";
+}
