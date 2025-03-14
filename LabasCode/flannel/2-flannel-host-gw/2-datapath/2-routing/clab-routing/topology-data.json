@@ -1,0 +1,132 @@
+{
+  "name": "routing",
+  "type": "clab",
+  "clab": {
+    "config": {
+      "prefix": "clab",
+      "mgmt": {
+        "network": "clab",
+        "bridge": "br-7be86b936d9e",
+        "ipv4-subnet": "172.20.20.0/24",
+        "ipv4-gw": "172.20.20.1",
+        "ipv6-subnet": "2001:172:20:20::/64",
+        "ipv6-gw": "2001:172:20:20::1",
+        "mtu": "1500",
+        "external-access": true
+      }
+    }
+  },
+  "nodes": {
+    "gw0": {
+      "index": "0",
+      "shortname": "gw0",
+      "longname": "clab-routing-gw0",
+      "fqdn": "gw0.routing.io",
+      "group": "",
+      "labdir": "/root/wcni-kind/network/4-basic-netwotk/2-ip/2-routing/clab-routing/gw0",
+      "kind": "linux",
+      "image": "192.168.2.100:5000/vyos/vyos:1.4.7",
+      "mgmt-net": "",
+      "mgmt-intf": "",
+      "mgmt-ipv4-address": "172.20.20.2",
+      "mgmt-ipv4-prefix-length": 24,
+      "mgmt-ipv6-address": "2001:172:20:20::2",
+      "mgmt-ipv6-prefix-length": 64,
+      "mac-address": "",
+      "labels": {
+        "clab-mgmt-net-bridge": "br-7be86b936d9e",
+        "clab-node-group": "",
+        "clab-node-kind": "linux",
+        "clab-node-lab-dir": "/root/wcni-kind/network/4-basic-netwotk/2-ip/2-routing/clab-routing/gw0",
+        "clab-node-name": "gw0",
+        "clab-node-type": "",
+        "clab-topo-file": "/root/wcni-kind/network/4-basic-netwotk/2-ip/2-routing/clab.yaml",
+        "containerlab": "routing"
+      }
+    },
+    "server1": {
+      "index": "1",
+      "shortname": "server1",
+      "longname": "clab-routing-server1",
+      "fqdn": "server1.routing.io",
+      "group": "",
+      "labdir": "/root/wcni-kind/network/4-basic-netwotk/2-ip/2-routing/clab-routing/server1",
+      "kind": "linux",
+      "image": "192.168.2.100:5000/nettool",
+      "mgmt-net": "",
+      "mgmt-intf": "",
+      "mgmt-ipv4-address": "172.20.20.3",
+      "mgmt-ipv4-prefix-length": 24,
+      "mgmt-ipv6-address": "2001:172:20:20::3",
+      "mgmt-ipv6-prefix-length": 64,
+      "mac-address": "",
+      "labels": {
+        "clab-mgmt-net-bridge": "br-7be86b936d9e",
+        "clab-node-group": "",
+        "clab-node-kind": "linux",
+        "clab-node-lab-dir": "/root/wcni-kind/network/4-basic-netwotk/2-ip/2-routing/clab-routing/server1",
+        "clab-node-name": "server1",
+        "clab-node-type": "",
+        "clab-topo-file": "/root/wcni-kind/network/4-basic-netwotk/2-ip/2-routing/clab.yaml",
+        "containerlab": "routing"
+      }
+    },
+    "server2": {
+      "index": "2",
+      "shortname": "server2",
+      "longname": "clab-routing-server2",
+      "fqdn": "server2.routing.io",
+      "group": "",
+      "labdir": "/root/wcni-kind/network/4-basic-netwotk/2-ip/2-routing/clab-routing/server2",
+      "kind": "linux",
+      "image": "192.168.2.100:5000/nettool",
+      "mgmt-net": "",
+      "mgmt-intf": "",
+      "mgmt-ipv4-address": "172.20.20.4",
+      "mgmt-ipv4-prefix-length": 24,
+      "mgmt-ipv6-address": "2001:172:20:20::4",
+      "mgmt-ipv6-prefix-length": 64,
+      "mac-address": "",
+      "labels": {
+        "clab-mgmt-net-bridge": "br-7be86b936d9e",
+        "clab-node-group": "",
+        "clab-node-kind": "linux",
+        "clab-node-lab-dir": "/root/wcni-kind/network/4-basic-netwotk/2-ip/2-routing/clab-routing/server2",
+        "clab-node-name": "server2",
+        "clab-node-type": "",
+        "clab-topo-file": "/root/wcni-kind/network/4-basic-netwotk/2-ip/2-routing/clab.yaml",
+        "containerlab": "routing"
+      }
+    }
+  },
+  "links": [
+    {
+      "a": {
+        "node": "gw0",
+        "interface": "eth1",
+        "mac": "aa:c1:ab:42:cc:8a",
+        "peer": "z"
+      },
+      "z": {
+        "node": "server1",
+        "interface": "net0",
+        "mac": "aa:c1:ab:39:7d:cf",
+        "peer": "a"
+      }
+    },
+    {
+      "a": {
+        "node": "gw0",
+        "interface": "eth2",
+        "mac": "aa:c1:ab:c5:87:b0",
+        "peer": "z"
+      },
+      "z": {
+        "node": "server2",
+        "interface": "net0",
+        "mac": "aa:c1:ab:f3:ad:3d",
+        "peer": "a"
+      }
+    }
+  ]
+}
