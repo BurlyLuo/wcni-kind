@@ -1,6 +1,7 @@
 #!/bin/bash
 set -v 
 
+# 0. Tools
 # host version [22.04.3] https://fridge.ubuntu.com/2023/08/11/ubuntu-22-04-3-lts-released/
 # dock version [23.0.1 ] https://download.docker.com/linux/ubuntu/dists/focal/pool/stable/amd64/
 
@@ -20,9 +21,10 @@ set -v
 # Mail address [olaf.luo@foxmail.com]
 # Docs address [https://www.yuque.com/wei.luo]
 # Bootcamp url [https://youdianzhishi.com/web]
-# Issue report [https://github.com/BurlyLuo/wcni-kind/issues]
+# Issue report [https://gitee.com/rowan-wcni/wcni-kind/issues]
 
 
+# 1. Topo about Lab and KinD
 cat <<EOF
 *****************************************************************
 # lsb_release -a 
@@ -56,23 +58,27 @@ Codename:       jammy
 *****************************************************************
 EOF
 
+# 2. Check arch about the environment
 if [[ $(uname -m) != "x86_64" ]]; then
   echo "ERROR: Only support x86_64 system."
   echo "Current arch: $(uname -m)"
   exit 1
 fi
 
+# 3. Check the run-user 
 if [[ $EUID -ne 0 ]]; then
   echo "ERROR: This script must be run as root."
   exit 1
 fi
 
+# 4. Check distro type
 DISTRO=$(grep '^ID=' /etc/os-release | cut -d= -f2 | tr -d '"' | tr '[:upper:]' '[:lower:]')
 if [ "$DISTRO" != "ubuntu" ] && [ "$DISTRO" != "debian" ]; then
   echo "ERROR: This script only supports Ubuntu or Debian systems."
   exit 1
 fi
 
+# 5. Install necessary tools
 for tool in {wget,kind,kubectl,helm,docker,clab,sshpass}; do
   if command -v $tool &> /dev/null; then
     echo "$tool is already installed!"
@@ -106,6 +112,7 @@ for tool in {wget,kind,kubectl,helm,docker,clab,sshpass}; do
   fi
 done
 
+# 6. Setup private docker registry
 phub_ip=192.168.2.100; phub_user=root; phub_passwd=hive
 if ping -c 1 -W 1 "$phub_ip" > /dev/null 2>&1; then
   sshpass -p $phub_passwd ssh-copy-id -o StrictHostKeyChecking=no -p 22 $phub_user@$phub_ip > /dev/null 2>&1 || exit 1
@@ -119,6 +126,7 @@ else
   exit 1
 fi
 
+# 7. Config kernel parameter
 if [ "$(sysctl -p > /dev/null 2>&1 || true && sysctl -n fs.inotify.max_user_watches 2>/dev/null)" != "524288" ]; then
   sed -i '/fs.inotify.max_user_watches/d' /etc/sysctl.conf 
   echo "fs.inotify.max_user_watches = 524288" >> /etc/sysctl.conf
@@ -130,7 +138,7 @@ fi
 sysctl -p 2>/dev/null | grep "fs.inotify.max_user_"
 
 
-# 1. Prepare NoCNI kubernetes environment:
+# 8. Prepare NoCNI kubernetes environment:
 ipv4_subnet="172.18.0.0/16"; ipv4_gateway="172.18.0.1"; ipv6_subnet="172:18:0:1::/64"
 docker network list | grep -wq kind || docker network create --driver bridge --subnet=$ipv4_subnet --gateway=$ipv4_gateway --ipv6 --subnet=$ipv6_subnet kind || exit 1
 
@@ -183,12 +191,12 @@ if [[ $? -ne 0 ]]; then
   exit 1
 fi
 
-# 2. Remove control-plane taints
+# 9. Remove control-plane taints
 controller_node_ip=$(kubectl get node -o wide --no-headers | grep "control-plane" | awk '{print $6}') && echo "controller_node_ip=$controller_node_ip"
 kubectl taint nodes $(kubectl get nodes -o name | grep control-plane) node-role.kubernetes.io/control-plane:NoSchedule-
 kubectl get nodes -o wide
 
-# 3. Collect startup message
+# 10. Collect startup message
 controller_node_name=$(kubectl get nodes -o jsonpath='{range .items[*]}{.metadata.name}{"\n"}{end}' | grep control-plane)
 if [ -n "$controller_node_name" ]; then
   timeout 1 docker exec -t $controller_node_name bash -c 'cat << EOF > /root/monitor_startup.sh
@@ -200,7 +208,7 @@ else
   echo "ERROR: No such controller node!"
 fi
 
-# 4. Install CNI(flannel udp mode) [https://github.com/flannel-io/flannel#deploying-flannel-with-kubectl]
+# 11. Install CNI(flannel udp mode) [https://github.com/flannel-io/flannel#deploying-flannel-with-kubectl]
 kubectl apply -f ./flannel.yaml
 kubectl apply -f ./cni.yaml
 kubectl wait --timeout=100s --for=condition=Ready=true pods --all -A
