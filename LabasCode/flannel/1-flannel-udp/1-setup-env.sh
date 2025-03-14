@@ -159,17 +159,17 @@ networking:
   podSubnet: "10.244.0.0/16"
 nodes:
   - role: control-plane
-    extraMounts:
-    - hostPath: ./udp
-      containerPath: /root/udp
-    - hostPath: ./http-proxy.conf
-      containerPath: /etc/systemd/system/containerd.service.d/http-proxy.conf
+    #extraMounts:
+    #- hostPath: ./udp
+    #  containerPath: /root/udp
+    #- hostPath: ./http-proxy.conf
+    #  containerPath: /etc/systemd/system/containerd.service.d/http-proxy.conf
   - role: worker
-    extraMounts:
-    - hostPath: ./udp
-      containerPath: /root/udp
-    - hostPath: ./http-proxy.conf
-      containerPath: /etc/systemd/system/containerd.service.d/http-proxy.conf
+    #extraMounts:
+    #- hostPath: ./udp
+    #  containerPath: /root/udp
+    #- hostPath: ./http-proxy.conf
+    #  containerPath: /etc/systemd/system/containerd.service.d/http-proxy.conf
 
 containerdConfigPatches:
   - |-
