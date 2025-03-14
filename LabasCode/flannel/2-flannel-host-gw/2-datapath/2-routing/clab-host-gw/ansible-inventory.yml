@@ -7,9 +7,11 @@ all:
   children:
     linux:
       hosts:
-        clab-ipsec-tunnel-mode-aes-gcm-gwx:
+        clab-host-gw-gw0:
           ansible_host: 172.20.20.2
-        clab-ipsec-tunnel-mode-aes-gcm-ipsec1:
-          ansible_host: 172.20.20.4
-        clab-ipsec-tunnel-mode-aes-gcm-ipsec2:
+        clab-host-gw-gw1:
+          ansible_host: 172.20.20.5
+        clab-host-gw-server1:
           ansible_host: 172.20.20.3
+        clab-host-gw-server2:
+          ansible_host: 172.20.20.4
