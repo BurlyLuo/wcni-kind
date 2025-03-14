@@ -1,0 +1,10 @@
+all:
+  children:
+    linux:
+      hosts:
+        clab-routing-gw0:
+          ansible_host: 172.20.20.2
+        clab-routing-server1:
+          ansible_host: 172.20.20.3
+        clab-routing-server2:
+          ansible_host: 172.20.20.4
