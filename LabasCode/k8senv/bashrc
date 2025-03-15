@@ -87,8 +87,9 @@ alias push='custom_push() {
   if [ -z "$(git status --porcelain)" ]; then
     return 0 
   fi
+  find /root/wcni-kind/LabasCode \( -name "*.yml.bak" -o -name "*.yaml.bak" \) -type f -exec rm -f {} \;
   git add .
-  git commit -m "${1:-"Adjust/Rename the Directory/File"}"
+  git commit -m "${1:-"Rename the Directory/File"}"
   git push gitee master
   git push github master 
 } 
