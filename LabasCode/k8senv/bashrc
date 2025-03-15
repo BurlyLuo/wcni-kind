@@ -87,9 +87,17 @@ alias push='custom_push() {
   if [ -z "$(git status --porcelain)" ]; then
     return 0 
   fi
-  find /root/wcni-kind/LabasCode \( -name "*.yml.bak" -o -name "*.yaml.bak" \) -type f -exec rm -f {} \;
+  find /root/wcni-kind/LabasCode -type f \
+  \( \
+    -name "ansible-inventory.yml" \
+    -o -name "authorized_keys" \
+    -o -name "topology-data.json" \
+    -o -name "*.yml.bak" \
+    -o -name "*.yaml.bak" \
+  \) -exec rm -f {} \;
+
   git add .
-  git commit -m "${1:-"Rename the Directory/File"}"
+  git commit -m "${1:-"chore(project): refactor directory/file naming convention"}"
   git push gitee master
   git push github master 
 } 
