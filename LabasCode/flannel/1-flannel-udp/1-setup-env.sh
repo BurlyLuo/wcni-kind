@@ -156,7 +156,7 @@ if kind get clusters | grep -wq $k8s_name; then
     fi
   fi
 else
-  echo "Info: No such k8s cluster $k8s_name. Creating..."
+  echo "INFO: No such k8s cluster $k8s_name. Creating..."
 fi
 
 kind get clusters | grep -wq $k8s_name || cat <<EOF | KIND_EXPERIMENTAL_DOCKER_NETWORK=kind kind create cluster --name=$k8s_name --image=$image_name --config=-
