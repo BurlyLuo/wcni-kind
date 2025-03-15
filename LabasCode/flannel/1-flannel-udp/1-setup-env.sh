@@ -168,8 +168,10 @@ networking:
 nodes:
   - role: control-plane
     #extraMounts:
+    # 8.1: udp test
     #- hostPath: ./udp
     #  containerPath: /root/udp
+    # 8.2: containerd proxy configuration
     #- hostPath: ./http-proxy.conf
     #  containerPath: /etc/systemd/system/containerd.service.d/http-proxy.conf
   - role: worker
