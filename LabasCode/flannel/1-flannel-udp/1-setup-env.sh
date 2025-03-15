@@ -6,12 +6,15 @@ set -v
 # dock version [23.0.1 ] https://download.docker.com/linux/ubuntu/dists/focal/pool/stable/amd64/
 
 # clab version [v0.59.0] https://github.com/srl-labs/containerlab/releases/download/v0.59.0/containerlab_0.59.0_linux_amd64.tar.gz
+# clab website [v0.59.0] https://containerlab.dev/rn/0.59/
 # vyos version [v1.4.9 ] docker pull burlyluo/vyos:1.4.9
 
 # kind version [v0.20.0] https://github.com/kubernetes-sigs/kind/releases/download/v0.20.0/kind-linux-amd64
+# kind website [v0.20.0] https://kind.sigs.k8s.io/docs/user/quick-start/
 # imge version [v1.27.3] docker pull burlyluo/kindest:v1.27.3
 
-# phub version [v2.7.1 ] docker pull docker.io/registry:2  
+# phub version [v2.7.1 ] docker pull docker.io/registry:2
+# phbu website [v2.7.1 ] https://distribution.github.io/distribution/
   # setup phub [docker run -d --network=host --restart=always --name phub registry:2]
 
 # nettool imge [v1.1.11] docker pull burlyluo/nettool:latest
