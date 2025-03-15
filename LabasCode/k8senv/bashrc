@@ -82,7 +82,7 @@ alias la='ls -A'
 alias l='ls -CF'
 alias vi="vim"
 
-# Github/Gitee
+# Github/Gitee push
 alias push='custom_push() { 
   if [ -z "$(git status --porcelain)" ]; then
     return 0 
