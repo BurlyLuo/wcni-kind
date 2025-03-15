@@ -71,10 +71,10 @@ if [[ $EUID -ne 0 ]]; then
   exit 1
 fi
 
-# 4. Check distro type
-DISTRO=$(grep '^ID=' /etc/os-release | cut -d= -f2 | tr -d '"' | tr '[:upper:]' '[:lower:]')
-if [ "$DISTRO" != "ubuntu" ] && [ "$DISTRO" != "debian" ]; then
-  echo "ERROR: This script only supports Ubuntu or Debian systems."
+# 4. Check vm distro and version
+readarray -t vm < <(grep -Ew 'VERSION_ID|ID' /etc/os-release | cut -d= -f2 | tr -d '"')
+if [ "${vm[0]}" != "22.04" ] && [ "${vm[1]}" != "ubuntu" ]; then
+  echo "ERROR: This script only support Ubuntu2204."
   exit 1
 fi
 
