@@ -6,7 +6,7 @@
       "prefix": "clab",
       "mgmt": {
         "network": "clab",
-        "bridge": "br-f8f9f4cb38b8",
+        "bridge": "br-e750b92985a1",
         "ipv4-subnet": "172.20.20.0/24",
         "ipv4-gw": "172.20.20.1",
         "ipv6-subnet": "3fff:172:20:20::/64",
@@ -28,13 +28,13 @@
       "image": "192.168.2.100:5000/vyos/vyos:1.4.9",
       "mgmt-net": "",
       "mgmt-intf": "",
-      "mgmt-ipv4-address": "172.20.20.2",
+      "mgmt-ipv4-address": "172.20.20.5",
       "mgmt-ipv4-prefix-length": 24,
-      "mgmt-ipv6-address": "3fff:172:20:20::2",
+      "mgmt-ipv6-address": "3fff:172:20:20::5",
       "mgmt-ipv6-prefix-length": 64,
       "mac-address": "",
       "labels": {
-        "clab-mgmt-net-bridge": "br-f8f9f4cb38b8",
+        "clab-mgmt-net-bridge": "br-e750b92985a1",
         "clab-node-group": "",
         "clab-node-kind": "linux",
         "clab-node-lab-dir": "/root/wcni-kind/LabasCode/flannel/2-flannel-host-gw/2-datapath/2-routing/clab-host-gw/gw0",
@@ -58,13 +58,13 @@
       "image": "192.168.2.100:5000/vyos/vyos:1.4.9",
       "mgmt-net": "",
       "mgmt-intf": "",
-      "mgmt-ipv4-address": "172.20.20.5",
+      "mgmt-ipv4-address": "172.20.20.3",
       "mgmt-ipv4-prefix-length": 24,
-      "mgmt-ipv6-address": "3fff:172:20:20::5",
+      "mgmt-ipv6-address": "3fff:172:20:20::3",
       "mgmt-ipv6-prefix-length": 64,
       "mac-address": "",
       "labels": {
-        "clab-mgmt-net-bridge": "br-f8f9f4cb38b8",
+        "clab-mgmt-net-bridge": "br-e750b92985a1",
         "clab-node-group": "",
         "clab-node-kind": "linux",
         "clab-node-lab-dir": "/root/wcni-kind/LabasCode/flannel/2-flannel-host-gw/2-datapath/2-routing/clab-host-gw/gw1",
@@ -88,13 +88,13 @@
       "image": "192.168.2.100:5000/nettool",
       "mgmt-net": "",
       "mgmt-intf": "",
-      "mgmt-ipv4-address": "172.20.20.3",
+      "mgmt-ipv4-address": "172.20.20.4",
       "mgmt-ipv4-prefix-length": 24,
-      "mgmt-ipv6-address": "3fff:172:20:20::3",
+      "mgmt-ipv6-address": "3fff:172:20:20::4",
       "mgmt-ipv6-prefix-length": 64,
       "mac-address": "",
       "labels": {
-        "clab-mgmt-net-bridge": "br-f8f9f4cb38b8",
+        "clab-mgmt-net-bridge": "br-e750b92985a1",
         "clab-node-group": "",
         "clab-node-kind": "linux",
         "clab-node-lab-dir": "/root/wcni-kind/LabasCode/flannel/2-flannel-host-gw/2-datapath/2-routing/clab-host-gw/server1",
@@ -124,13 +124,13 @@
       "image": "192.168.2.100:5000/nettool",
       "mgmt-net": "",
       "mgmt-intf": "",
-      "mgmt-ipv4-address": "172.20.20.4",
+      "mgmt-ipv4-address": "172.20.20.2",
       "mgmt-ipv4-prefix-length": 24,
-      "mgmt-ipv6-address": "3fff:172:20:20::4",
+      "mgmt-ipv6-address": "3fff:172:20:20::2",
       "mgmt-ipv6-prefix-length": 64,
       "mac-address": "",
       "labels": {
-        "clab-mgmt-net-bridge": "br-f8f9f4cb38b8",
+        "clab-mgmt-net-bridge": "br-e750b92985a1",
         "clab-node-group": "",
         "clab-node-kind": "linux",
         "clab-node-lab-dir": "/root/wcni-kind/LabasCode/flannel/2-flannel-host-gw/2-datapath/2-routing/clab-host-gw/server2",
@@ -155,13 +155,13 @@
       "a": {
         "node": "gw0",
         "interface": "eth1",
-        "mac": "aa:c1:ab:b9:76:6e",
+        "mac": "aa:c1:ab:f2:66:e4",
         "peer": "z"
       },
       "z": {
         "node": "server1",
         "interface": "net0",
-        "mac": "aa:c1:ab:14:e0:a1",
+        "mac": "aa:c1:ab:63:bb:a0",
         "peer": "a"
       }
     },
@@ -169,13 +169,13 @@
       "a": {
         "node": "gw1",
         "interface": "eth1",
-        "mac": "aa:c1:ab:fd:05:08",
+        "mac": "aa:c1:ab:72:e2:6c",
         "peer": "z"
       },
       "z": {
         "node": "server2",
         "interface": "net0",
-        "mac": "aa:c1:ab:10:99:e7",
+        "mac": "aa:c1:ab:a2:36:f5",
         "peer": "a"
       }
     },
@@ -183,13 +183,13 @@
       "a": {
         "node": "gw0",
         "interface": "eth2",
-        "mac": "aa:c1:ab:a4:4f:6d",
+        "mac": "aa:c1:ab:52:02:8e",
         "peer": "z"
       },
       "z": {
         "node": "gw1",
         "interface": "eth2",
-        "mac": "aa:c1:ab:33:f5:42",
+        "mac": "aa:c1:ab:d0:3b:97",
         "peer": "a"
       }
     }
