@@ -25,8 +25,8 @@ topology:
 
       - ip r a 10.244.2.0/24 via 10.244.2.0 dev vxlan0 onlink
       - ip r a 10.244.3.0/24 via 10.244.3.0 dev vxlan0 onlink
-      - arp -s 10.244.2.0 02:42:8f:11:22:20 -i vxlan0
-      - arp -s 10.244.3.0 02:42:8f:11:22:30 -i vxlan0  
+      - ip neigh add 10.244.2.0 lladdr 02:42:8f:11:22:20 dev vxlan0 nud permanent
+      - ip neigh add 10.244.3.0 lladdr 02:42:8f:11:22:30 dev vxlan0 nud permanent
 
       - bridge fdb add 02:42:8f:11:22:20 dev vxlan0 dst 10.1.8.10 self permanent
       - bridge fdb add 02:42:8f:11:22:30 dev vxlan0 dst 10.1.9.10 self permanent
@@ -47,8 +47,8 @@ topology:
 
       - ip r a 10.244.1.0/24 via 10.244.1.0 dev vxlan0 onlink
       - ip r a 10.244.3.0/24 via 10.244.3.0 dev vxlan0 onlink
-      - arp -s 10.244.1.0 02:42:8f:11:22:10 -i vxlan0
-      - arp -s 10.244.3.0 02:42:8f:11:22:30 -i vxlan0
+      - ip neigh add 10.244.1.0 lladdr 02:42:8f:11:22:10 dev vxlan0 nud permanent
+      - ip neigh add 10.244.3.0 lladdr 02:42:8f:11:22:30 dev vxlan0 nud permanent
        
       - bridge fdb add 02:42:8f:11:22:10 dev vxlan0 dst 10.1.5.10 self permanent
       - bridge fdb add 02:42:8f:11:22:30 dev vxlan0 dst 10.1.9.10 self permanent
@@ -69,8 +69,8 @@ topology:
 
       - ip r a 10.244.1.0/24 via 10.244.1.0 dev vxlan0 onlink
       - ip r a 10.244.2.0/24 via 10.244.2.0 dev vxlan0 onlink
-      - arp -s 10.244.1.0 02:42:8f:11:22:10 -i vxlan0
-      - arp -s 10.244.2.0 02:42:8f:11:22:20 -i vxlan0
+      - ip neigh add 10.244.1.0 lladdr 02:42:8f:11:22:10 dev vxlan0 nud permanent
+      - ip neigh add 10.244.2.0 lladdr 02:42:8f:11:22:20 dev vxlan0 nud permanent
 
       - bridge fdb add 02:42:8f:11:22:10 dev vxlan0 dst 10.1.5.10 self permanent
       - bridge fdb add 02:42:8f:11:22:20 dev vxlan0 dst 10.1.8.10 self permanent
