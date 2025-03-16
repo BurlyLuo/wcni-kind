@@ -92,8 +92,8 @@ alias push='custom_push() {
     -name "ansible-inventory.yml" \
     -o -name "authorized_keys" \
     -o -name "topology-data.json" \
-    -o -name "*.yml.bak" \
-    -o -name "*.yaml.bak" \
+    -o -name "*.clab.yml.bak" \
+    -o -name "*.clab.yaml.bak" \
   \) -exec rm -f {} \;
 
   git add .
