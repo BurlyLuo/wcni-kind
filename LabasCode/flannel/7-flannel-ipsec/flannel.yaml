@@ -84,7 +84,7 @@ data:
       "Network": "10.244.0.0/16",
       "Backend": {
         "Type": "ipsec",
-        "PSK": "fcab16ff02c9c77c016b8721f489c0524d7d67b457dd24c5c2f0291704cfaf52b7ec12b4bb25f28955c536e88801eb93"
+        "PSK": "a6cf5cb53ac7cb0ace73be8a60a1d4e3040517ed61b00a4eb142387caa25cded24c57311a32419033900cdc7d7373122"
       }
     }
 ---
