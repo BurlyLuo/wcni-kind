@@ -84,9 +84,6 @@ alias vi="vim"
 
 # Github/Gitee push
 alias push='custom_push() { 
-  if [ -z "$(git status --porcelain)" ]; then
-    return 0 
-  fi
   find /root/wcni-kind/LabasCode -type f \
   \( \
     -name "ansible-inventory.yml" \
@@ -95,6 +92,10 @@ alias push='custom_push() {
     -o -name "*.clab.yml.bak" \
     -o -name "*.clab.yaml.bak" \
   \) -exec rm -f {} \;
+
+  if [ -z "$(git status --porcelain)" ]; then
+    return 0
+  fi
 
   git add .
   git commit -m "${1:-"chore(project): refactor directory/file naming convention"}"
@@ -141,6 +142,7 @@ alias lo="docker exec -it $1 $2"
 alias all="kubectl get pods -A"
 alias clabrm="clab destroy -t clab.yaml"
 alias clabrma="containerlab destroy -a"
+alias clabcc='find /root/wcni-kind/LabasCode -type f \( -name "ansible-inventory.yml" -o -name "authorized_keys" -o -name "topology-data.json" -o -name "*.clab.yml.bak" -o -name "*.clab.yaml.bak" \) -exec rm -f {} \;'
 
 alias ms="kubectl -nmetallb-system"
 alias net="cd /root/wcni-kind/network"
