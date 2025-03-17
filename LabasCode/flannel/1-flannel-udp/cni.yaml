@@ -16,7 +16,9 @@ spec:
         app: wluo
     spec:
       containers:
-      - image: 192.168.2.100:5000/nettool
+      - name: nettoolbox
+       #image: burlyluo/nettool:latest
+        image: 192.168.2.100:5000/nettool
         name: nettoolbox
         env:
           - name: NETTOOL_NODE_NAME
