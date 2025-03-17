@@ -7,7 +7,7 @@ set -v
 
 # clab version [v0.59.0] https://github.com/srl-labs/containerlab/releases/download/v0.59.0/containerlab_0.59.0_linux_amd64.tar.gz
 # clab website [v0.59.0] https://containerlab.dev/rn/0.59/
-# vyos version [v1.4.9 ] docker pull burlyluo/vyos:1.4.9
+# vyos version [v1.4.9 ] docker pull burlyluo/vyos:1.4.9  #[192.168.2.100:5000/vyos/vyos:1.4.9]
 
 # kind version [v0.20.0] https://github.com/kubernetes-sigs/kind/releases/download/v0.20.0/kind-linux-amd64
 # kind website [v0.20.0] https://kind.sigs.k8s.io/docs/user/quick-start/
@@ -15,10 +15,13 @@ set -v
 
 # phub version [v2.7.1 ] docker pull docker.io/registry:2
 # phbu website [v2.7.1 ] https://distribution.github.io/distribution/
-  # setup phub [docker run -d --network=host --restart=always --name phub registry:2]
 
-# nettool imge [v1.1.11] docker pull burlyluo/nettool:latest
+# nettool imge [v1.1.11] docker pull burlyluo/nettool:latest  #[192.168.2.100:5000/nettool]
 # iptables fwd [iptables -L | grep policy || and then: systemctl cat docker >> ExecStartPost=/sbin/iptables -P FORWARD ACCEPT]
+
+# flannel imge [v1.1.0 ] docker pull burlyluo/mirrored-flannelcni-flannel-cni-plugin:v1.1.0  #[192.168.2.100:5000/rancher/mirrored-flannelcni-flannel-cni-plugin:v1.1.0]
+# flannel imge [v1.19.2] docker pull burlyluo/mirrored-flannelcni-flannel:v0.19.2  #[192.168.2.100:5000/rancher/mirrored-flannelcni-flannel:v0.19.2]
+
 
 # Author name: [Wei Luo]
 # Mail address [olaf.luo@foxmail.com]
