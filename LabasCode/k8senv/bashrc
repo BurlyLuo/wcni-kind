@@ -112,7 +112,7 @@ alias scc='count_today_commits() {
     
   COMMIT_COUNT=$(cd /root/wcni-kind/LabasCode && git log --since="$START_TIME" --until="$END_TIME" --pretty=format:"%ad %h" --date=short | grep "$DATE" | wc -l)
     
-  echo "$DATE git_commit_times: $COMMIT_COUNT"
+  echo "[$DATE] Commits: ${COMMIT_COUNT}"
 }
 count_today_commits'
 
