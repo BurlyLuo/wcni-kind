@@ -1,3 +1,4 @@
+# 192.168.2.100:5000/openssl_playground
 FROM debian:10
 
 WORKDIR /
