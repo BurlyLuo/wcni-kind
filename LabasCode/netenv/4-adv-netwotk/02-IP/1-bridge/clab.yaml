@@ -16,7 +16,6 @@ topology:
       exec:
       - ip addr add 10.1.5.11/24 dev net0
 
-
   links:
     - endpoints: ["br-pool0:eth1", "server1:net0"]
     - endpoints: ["br-pool0:eth2", "server2:net0"]
