@@ -1,5 +1,9 @@
 #!/bin/bash
 set -v
+
+openssl ecparam -name prime256v1 -genkey -noout -out ecdsa.key
+openssl req -new -x509 -key ecdsa.key -out ecdsa.crt -days 36500 -subj "/CN=wei.luo"
+
 cat <<EOF>clab.yaml | clab deploy -t clab.yaml -
 name: lab
 topology:
