@@ -21,6 +21,7 @@ set -v
 
 # flannel imge [v1.1.0 ] docker pull burlyluo/mirrored-flannelcni-flannel-cni-plugin:v1.1.0  #[192.168.2.100:5000/rancher/mirrored-flannelcni-flannel-cni-plugin:v1.1.0]
 # flannel imge [v1.19.2] docker pull burlyluo/mirrored-flannelcni-flannel:v0.19.2  #[192.168.2.100:5000/rancher/mirrored-flannelcni-flannel:v0.19.2]
+# flannel docs [v1.19.2] https://raw.githubusercontent.com/flannel-io/flannel/refs/heads/master/Documentation/backends.md
 
 
 # Author name: [Wei Luo]
