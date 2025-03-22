@@ -8,6 +8,7 @@ topology:
       - ip a a 10.1.5.1/24 dev net0
       - ip a a 10.1.8.1/24 dev net1
       - ip a a 10.1.9.1/24 dev net2
+      - iptables -t nat -A POSTROUTING -s 10.1.0.0/16 -o eth0 -j MASQUERADE
 
     vtep1:
       kind: linux
@@ -99,9 +100,14 @@ topology:
 
   links:
     - endpoints: ["vtep1:eth1", "server1:net0"]
+      mtu: 1500
     - endpoints: ["vtep2:eth1", "server2:net0"]
+      mtu: 1500
     - endpoints: ["vtep3:eth1", "server3:net0"]
+      mtu: 1500
     - endpoints: ["vtep1:eth2", "gw0:net0"]
+      mtu: 1500
     - endpoints: ["vtep2:eth2", "gw0:net1"]
+      mtu: 1500
     - endpoints: ["vtep3:eth2", "gw0:net2"]
-    
+      mtu: 1500
