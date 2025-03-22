@@ -11,6 +11,7 @@ topology:
       - ip a a 10.1.5.1/24 dev net1
       - ip a a 10.1.8.1/24 dev net2
       - ip a a 10.1.9.1/24 dev net3
+      - iptables -t nat -A POSTROUTING -s 10.1.0.0/16 -o eth0 -j MASQUERADE
 
 
     ipip1:
@@ -29,8 +30,6 @@ topology:
       # add dst_routing table
       - ip r a 10.244.2.0/24 via 10.1.8.10 dev ipip0 onlink
       - ip r a 10.244.3.0/24 via 10.1.9.10 dev ipip0 onlink
-      # ip masq
-      - iptables -t nat -A POSTROUTING -s 10.1.0.0/16 -o eth0 -j MASQUERADE
 
 
     ipip2:
@@ -49,8 +48,6 @@ topology:
       - ip r a 10.244.1.0/24 via 10.1.5.10 dev ipip0 onlink
       - ip r a 10.244.3.0/24 via 10.1.9.10 dev ipip0 onlink
 
-      - iptables -t nat -A POSTROUTING -s 10.1.0.0/16 -o eth0 -j MASQUERADE
-
 
     ipip3:
       kind: linux
@@ -67,8 +64,6 @@ topology:
 
       - ip r a 10.244.1.0/24 via 10.1.5.10 dev ipip0 onlink
       - ip r a 10.244.2.0/24 via 10.1.8.10 dev ipip0 onlink
-
-      - iptables -t nat -A POSTROUTING -s 10.1.0.0/16 -o eth0 -j MASQUERADE
 
 
     server1:
