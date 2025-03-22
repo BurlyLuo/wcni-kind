@@ -1,4 +1,4 @@
-name: ipsec-transport-mode-aes-gcm
+name: ipsec-tunnel-mode-aes-gcm
 topology:
   nodes:
     gwx:
