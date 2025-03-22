@@ -140,7 +140,7 @@ else
 fi
 
 # 4. Install CNI(flannel ipsec mode) [https://github.com/flannel-io/flannel#deploying-flannel-with-kubectl]
-PSK=`dd if=/dev/urandom count=48 bs=1 status=none | xxd -p -c 48` && sed -i "s/\"PSK\": \".*\"/\"PSK\": \"$PSK\"/" ./flannel.yaml
+# PSK=`dd if=/dev/urandom count=48 bs=1 status=none | xxd -p -c 48` && sed -i "s/\"PSK\": \".*\"/\"PSK\": \"$PSK\"/" ./flannel.yaml
 kubectl apply -f ./flannel.yaml
 
 # 5. Wait all pods ready
