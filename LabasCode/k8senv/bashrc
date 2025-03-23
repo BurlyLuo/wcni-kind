@@ -82,6 +82,7 @@ alias la='ls -A'
 alias l='ls -CF'
 alias vi="vim"
 
+alias gsz="du -sh /root/wcni-kind/.git 2>/dev/null | cut -f1"
 # Github/Gitee push
 alias push='custom_push() { 
   find /root/wcni-kind/LabasCode -type f \
