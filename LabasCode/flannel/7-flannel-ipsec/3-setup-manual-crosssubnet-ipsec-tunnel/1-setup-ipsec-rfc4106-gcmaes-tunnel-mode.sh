@@ -21,7 +21,7 @@ topology:
       - ip r a 10.1.8.0/24 via 10.1.5.1 dev eth2
       - ip r a 10.1.9.0/24 via 10.1.5.1 dev eth2
 
-
+      # https://datatracker.ietf.org/doc/html/rfc4106
       # 0xfa42aa6bc685beb4d967057134dd8e327ca17977 [fa42aa6bc685beb4d967057134dd8e32 7ca17977]
       # fa42aa6bc685beb4d967057134dd8e32 >>>[key length: 32*4=128]
       # 7ca17977 >>>[salt length: 8*4=32]
