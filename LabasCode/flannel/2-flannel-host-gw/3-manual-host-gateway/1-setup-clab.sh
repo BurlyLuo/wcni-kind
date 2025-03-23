@@ -37,8 +37,10 @@ topology:
 
   links:
     - endpoints: ["gw0:eth1", "server1:net0"]
+      mtu: 1500
     - endpoints: ["gw1:eth1", "server2:net0"]
-
+      mtu: 1500
     - endpoints: ["gw0:eth2", "gw1:eth2"]
+      mtu: 1500
 EOF
 
