@@ -17,6 +17,7 @@ set -v
 # phbu website [v2.7.1 ] https://distribution.github.io/distribution/
 
 # nettool imge [v1.1.11] docker pull burlyluo/nettool:latest  #[192.168.2.100:5000/nettool]
+# xcni   image [v1.1.10] docker pull burlyluo/xcni:latest  #[192.168.2.100:5000/xcni]
 # iptables fwd [iptables -L | grep policy || and then: systemctl cat docker >> ExecStartPost=/sbin/iptables -P FORWARD ACCEPT]
 
 # flannel imge [v1.1.0 ] docker pull burlyluo/mirrored-flannelcni-flannel-cni-plugin:v1.1.0  #[192.168.2.100:5000/rancher/mirrored-flannelcni-flannel-cni-plugin:v1.1.0]
