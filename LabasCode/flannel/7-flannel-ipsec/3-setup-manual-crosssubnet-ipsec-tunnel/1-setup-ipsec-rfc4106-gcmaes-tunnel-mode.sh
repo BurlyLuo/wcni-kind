@@ -148,4 +148,3 @@ topology:
     - endpoints: ["ipsec3:eth2", "gwx:net3"]
       mtu: 1500
 EOF
-
