@@ -49,10 +49,15 @@ topology:
 
   links:
     - endpoints: ["br-pool0:br-pool0-net0", "server1:net0"]
+      mtu: 1500
     - endpoints: ["br-pool0:br-pool0-net1", "server2:net0"]
+      mtu: 1500
     - endpoints: ["br-pool1:br-pool1-net0", "server3:net0"]
+      mtu: 1500
     - endpoints: ["br-pool1:br-pool1-net1", "server4:net0"]
+      mtu: 1500
 
     - endpoints: ["gw0:eth1", "br-pool0:br-pool0-net2"]
+      mtu: 1500
     - endpoints: ["gw0:eth2", "br-pool1:br-pool1-net2"]
-
+      mtu: 1500
