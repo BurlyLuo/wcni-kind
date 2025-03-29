@@ -1,15 +1,7 @@
 #!/bin/bash
-10.2.5.10                  10.1.8.10
-         1.1.1.1  1.1.1.2    
-#    Client    ---     Server
-#
-#
-#   Server---Client
-#   
-#
 set -v
 cat <<EOF>clab.yaml | clab deploy -t clab.yaml -
-name: gre
+name: gre-ipv4
 topology:
   nodes:
     gwx:
@@ -96,11 +88,15 @@ topology:
 
   links:
     - endpoints: ["gre1:eth1", "server1:net0"]
+      mtu: 1500
     - endpoints: ["gre2:eth1", "server2:net0"]
+      mtu: 1500
     - endpoints: ["gre3:eth1", "server3:net0"]
+      mtu: 1500
     - endpoints: ["gre1:eth2", "gwx:net1"]
+      mtu: 1500
     - endpoints: ["gre2:eth2", "gwx:net2"]
+      mtu: 1500
     - endpoints: ["gre3:eth2", "gwx:net3"]
-    
+      mtu: 1500
 EOF
-
