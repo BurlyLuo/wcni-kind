@@ -1,3 +1,6 @@
+#!/bin/bash
+set -v
+cat <<EOF>clab.yaml | clab deploy -t clab.yaml -
 name: gre-ipv4
 topology:
   nodes:
@@ -18,13 +21,11 @@ topology:
 
       - ip l a gre00 type gre local 10.1.5.10 remote 10.1.8.10
       - ip l s gre00 up
-      - ip a a 10.244.1.0/24 dev gre00
-
-      - ip r a 10.244.2.0/24 via 10.244.2.0 dev gre00 onlink
+      - ip r a 10.244.2.0/24 via 10.1.8.10 dev gre00 onlink
 
       - ip l a gre01 type gre local 10.1.5.10 remote 10.1.9.10
       - ip l s gre01 up
-      - ip r a 10.244.3.0/24 via 10.244.3.0 dev gre01 onlink
+      - ip r a 10.244.3.0/24 via 10.1.9.10 dev gre01 onlink
 
       - ip route replace default via 10.1.5.1 dev eth2 
 
@@ -37,12 +38,11 @@ topology:
 
       - ip l a gre00 type gre local 10.1.8.10 remote 10.1.5.10
       - ip l s gre00 up
-      - ip a a 10.244.2.0/24 dev gre00
-      - ip r a 10.244.1.0/24 via 10.244.1.0 dev gre00 onlink
+      - ip r a 10.244.1.0/24 via 10.1.5.10 dev gre00 onlink
 
       - ip l a gre01 type gre local 10.1.8.10 remote 10.1.9.10
       - ip l s gre01 up
-      - ip r a 10.244.3.0/24 via 10.244.3.0 dev gre01 onlink
+      - ip r a 10.244.3.0/24 via 10.1.9.10 dev gre01 onlink
 
       - ip route replace default via 10.1.8.1 dev eth2
 
@@ -56,13 +56,12 @@ topology:
 
       - ip l a gre00 type gre local 10.1.9.10 remote 10.1.5.10
       - ip l s gre00 up
-      - ip a a 10.244.3.0/24 dev gre00
       
-      - ip r a 10.244.1.0/24 via 10.244.1.0 dev gre00 onlink
+      - ip r a 10.244.1.0/24 via 10.1.5.10 dev gre00 onlink
 
       - ip l a gre01 type gre local 10.1.9.10 remote 10.1.8.10
       - ip l s gre01 up
-      - ip r a 10.244.2.0/24 via 10.244.2.0 dev gre01 onlink
+      - ip r a 10.244.2.0/24 via 10.1.8.10 dev gre01 onlink
 
       - ip route replace default via 10.1.9.1 dev eth2
 
@@ -101,3 +100,4 @@ topology:
       mtu: 1500
     - endpoints: ["gre3:eth2", "gwx:net3"]
       mtu: 1500
+EOF
