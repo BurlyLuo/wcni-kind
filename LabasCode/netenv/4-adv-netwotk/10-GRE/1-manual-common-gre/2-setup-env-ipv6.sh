@@ -17,7 +17,7 @@ topology:
       exec:
       - ip a a 10:244:1::1/64 dev eth1
       - ip addr add 10.1.5.10/24 dev eth2
-
+      # P-to-P GRE Tunnel:
       - ip l a gre00 type gre local 10.1.5.10 remote 10.1.8.10
       - ip l s gre00 up
       - ip a a 1:1:1::1/64 dev gre00
