@@ -18,7 +18,7 @@ topology:
       cmd: /sbin/init
       binds:
         - /lib/modules:/lib/modules
-        - ./startup-conf/gre1.cfg:/opt/vyatta/etc/config/config.boot
+        - ./ipv4-startup-conf/gre1.cfg:/opt/vyatta/etc/config/config.boot
 
     gre2:
       kind: linux
@@ -26,7 +26,7 @@ topology:
       cmd: /sbin/init
       binds:
         - /lib/modules:/lib/modules
-        - ./startup-conf/gre2.cfg:/opt/vyatta/etc/config/config.boot
+        - ./ipv4-startup-conf/gre2.cfg:/opt/vyatta/etc/config/config.boot
 
     gre3:
       kind: linux
@@ -34,7 +34,7 @@ topology:
       cmd: /sbin/init
       binds:
         - /lib/modules:/lib/modules
-        - ./startup-conf/gre3.cfg:/opt/vyatta/etc/config/config.boot
+        - ./ipv4-startup-conf/gre3.cfg:/opt/vyatta/etc/config/config.boot
 
     server1:
       kind: linux

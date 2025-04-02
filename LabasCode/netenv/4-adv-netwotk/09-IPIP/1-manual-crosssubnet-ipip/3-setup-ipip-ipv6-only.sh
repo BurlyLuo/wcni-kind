@@ -1,3 +1,6 @@
+#!/bin/bash
+set -v
+cat <<EOF>clab.yaml | clab deploy -t clab.yaml -
 name: ipip-ipv6
 topology:
   nodes:
@@ -58,3 +61,4 @@ topology:
     - endpoints: ["ipip1:eth2", "gwx:net1"]
     - endpoints: ["ipip2:eth2", "gwx:net2"]
     
+EOF
