@@ -1,7 +1,7 @@
 #!/bin/bash
 set -v
 cat <<EOF>clab.yaml | clab deploy -t clab.yaml -
-name: ipip
+name: ipip-ipv4
 topology:
   nodes:
     gwx:
@@ -65,15 +65,15 @@ topology:
       kind: linux
       image: 192.168.2.100:5000/nettool
       exec:
-      - ip addr add 10.244.1.10/24 dev net0
-      - ip route replace default via 10.244.1.1
+      - ip addr add 10:244:1::10/64 dev net0
+      - ip route replace default via 10:244:1::1
 
     server2:
       kind: linux
       image: 192.168.2.100:5000/nettool
       exec:
-      - ip addr add 10.244.2.10/24 dev net0
-      - ip route replace default via 10.244.2.1
+      - ip addr add 10:244:2::10/64 dev net0
+      - ip route replace default via 10:244:2::1
 
     server3:
       kind: linux
