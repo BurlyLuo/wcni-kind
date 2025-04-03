@@ -1,7 +1,7 @@
 #!/bin/bash
 set -v
 cat <<EOF>clab.yaml | clab deploy -t clab.yaml -
-name: ipip-ipv4
+name: ipip6-ipv4
 topology:
   nodes:
     gwx:
