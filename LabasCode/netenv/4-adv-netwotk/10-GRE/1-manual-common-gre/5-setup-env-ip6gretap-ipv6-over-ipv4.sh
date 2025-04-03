@@ -1,7 +1,7 @@
 #!/bin/bash
 set -v
 cat <<EOF>clab.yaml | clab deploy -t clab.yaml -
-name: gretap-ipv6-ipv4
+name: ip6gretap-ipv6-ipv4
 topology:
   nodes:
     gwx:
