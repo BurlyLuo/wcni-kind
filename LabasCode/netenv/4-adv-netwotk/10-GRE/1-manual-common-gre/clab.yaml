@@ -1,4 +1,4 @@
-name: gretap-ipv6-ipv4
+name: ip6gretap-ipv6-ipv4
 topology:
   nodes:
     gwx:
