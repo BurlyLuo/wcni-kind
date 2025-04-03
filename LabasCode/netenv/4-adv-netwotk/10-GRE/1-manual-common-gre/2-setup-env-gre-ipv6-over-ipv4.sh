@@ -1,7 +1,7 @@
 #!/bin/bash
 set -v
 cat <<EOF>clab.yaml | clab deploy -t clab.yaml -
-name: gre-ipv6
+name: gre-ipv6-ipv4
 topology:
   nodes:
     gwx:
