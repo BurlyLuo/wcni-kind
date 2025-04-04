@@ -6,11 +6,12 @@ topology:
   nodes:
     gwx:
       kind: linux
-      image: 192.168.2.100:5000/vyos/vyos:1.4.7
-      cmd: /sbin/init
-      binds:
-        - /lib/modules:/lib/modules
-        - ./startup-conf/gwx-boot.cfg:/opt/vyatta/etc/config/config.boot
+      image: 192.168.2.100:5000/nettool
+      exec:
+      - ip a a 10.1.5.1/24 dev eth1
+      - ip a a 10.1.8.1/24 dev eth2
+      - ip a a 10.1.9.1/24 dev eth3
+      - iptables -t nat -A POSTROUTING -s 10.1.0.0/16 -o eth0 -j MASQUERADE
 
     sbr1:
       kind: linux
@@ -53,8 +54,10 @@ topology:
 
   links:
     - endpoints: ["sbr1:net1", "gwx:eth1"]
+      mtu: 1500
     - endpoints: ["sbr2:net1", "gwx:eth2"]
+      mtu: 1500
     - endpoints: ["sbr3:net1", "gwx:eth3"]
-    
+      mtu: 1500
 EOF
 
