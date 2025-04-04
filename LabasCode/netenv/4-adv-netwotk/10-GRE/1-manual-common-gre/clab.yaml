@@ -66,6 +66,7 @@ topology:
       exec:
       - ip addr add 10:244:1::10/64 dev net0
       - ip route replace default via 10:244:1::1
+      # - curl [10:244:2::10]
 
     server2:
       kind: linux
