@@ -10,7 +10,6 @@ topology:
       image: 192.168.2.100:5000/nettool
       exec:
       - ip link add br1 type bridge vlan_filtering 1
-      - ip l a br1 type bridge
       - ip l s br1 up
       - ip l s eth1 master br1
       - ip l s eth2 master br1
@@ -31,7 +30,6 @@ topology:
       image: 192.168.2.100:5000/nettool
       exec:
       - ip link add br2 type bridge vlan_filtering 1
-      - ip l a br2 type bridge
       - ip l s br2 up
       - ip l s eth1 master br2
       - ip l s eth2 master br2
@@ -75,10 +73,14 @@ topology:
       - ip addr add 10.1.8.11/24 dev net0
       - ip route replace default via 10.1.8.1
 
-
   links:
     - endpoints: ["br1:eth1", "server1:net0"]
+      mtu: 1500
     - endpoints: ["br1:eth2", "server2:net0"]
+      mtu: 1500
     - endpoints: ["br1:eth3", "br2:eth3"]
+      mtu: 1500
     - endpoints: ["br2:eth1", "server3:net0"] 
+      mtu: 1500
     - endpoints: ["br2:eth2", "server4:net0"]
+      mtu: 1500
