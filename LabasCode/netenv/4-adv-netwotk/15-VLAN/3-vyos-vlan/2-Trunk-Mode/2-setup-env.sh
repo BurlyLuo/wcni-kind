@@ -76,12 +76,15 @@ topology:
       - ip addr add 10.1.8.11/24 dev net0
       - ip route replace default via 10.1.8.1
 
-
   links:
     - endpoints: ["br1:eth1", "server1:net0"]
+      mtu: 1500
     - endpoints: ["br1:eth2", "server2:net0"]
+      mtu: 1500
     - endpoints: ["br1:eth3", "br2:eth3"]
+      mtu: 1500
     - endpoints: ["br2:eth1", "server3:net0"] 
+      mtu: 1500
     - endpoints: ["br2:eth2", "server4:net0"]
+      mtu: 1500
 EOF
-
