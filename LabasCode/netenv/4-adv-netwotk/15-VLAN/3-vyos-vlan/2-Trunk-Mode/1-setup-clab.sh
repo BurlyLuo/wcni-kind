@@ -58,6 +58,5 @@ topology:
     - endpoints: ["br1:eth3", "br2:eth3"]
     - endpoints: ["br2:eth1", "server3:net0"] 
     - endpoints: ["br2:eth2", "server4:net0"]
-
 EOF
 

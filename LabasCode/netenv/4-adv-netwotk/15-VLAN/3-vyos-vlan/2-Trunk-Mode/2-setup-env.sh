@@ -1,3 +1,6 @@
+#!/bin/bash
+set -v
+cat <<EOF>clab.yaml | clab deploy -t clab.yaml -
 name: manual-vlan-trunk
 mgmt:
   ipv6-subnet: ""
@@ -10,7 +13,6 @@ topology:
       image: 192.168.2.100:5000/nettool
       exec:
       - ip link add br1 type bridge vlan_filtering 1
-      - ip l a br1 type bridge
       - ip l s br1 up
       - ip l s eth1 master br1
       - ip l s eth2 master br1
@@ -31,7 +33,6 @@ topology:
       image: 192.168.2.100:5000/nettool
       exec:
       - ip link add br2 type bridge vlan_filtering 1
-      - ip l a br2 type bridge
       - ip l s br2 up
       - ip l s eth1 master br2
       - ip l s eth2 master br2
@@ -82,3 +83,5 @@ topology:
     - endpoints: ["br1:eth3", "br2:eth3"]
     - endpoints: ["br2:eth1", "server3:net0"] 
     - endpoints: ["br2:eth2", "server4:net0"]
+EOF
+
