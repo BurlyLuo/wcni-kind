@@ -19,9 +19,6 @@ data:
 
   # The CNI network configuration to install on each node. The special
   # values in this config will be automatically populated.
- 
-
-  # https://github.com/projectcalico/calico/issues/7840
   cni_network_config: |-
     {
       "name": "k8s-pod-network",
