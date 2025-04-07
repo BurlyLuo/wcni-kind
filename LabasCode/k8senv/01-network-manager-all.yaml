@@ -39,7 +39,7 @@ network:
     brnet:
       interfaces:
         - ens33
-      addresses: [192.168.2.99/24, 1010:501::99/64]
+      addresses: [192.168.2.99/24, 192:168:2::99/64]
       gateway4: 192.168.2.1
       nameservers:
         addresses: [192.168.2.1, 8.8.8.8, 223.6.6.6]
