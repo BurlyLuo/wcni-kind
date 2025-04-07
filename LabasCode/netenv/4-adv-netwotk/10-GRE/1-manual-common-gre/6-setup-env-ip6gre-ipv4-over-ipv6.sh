@@ -1,3 +1,6 @@
+#!/bin/bash
+set -v
+cat <<EOF>clab.yaml | clab deploy -t clab.yaml -
 name: gre-ipv4-ipv6
 topology:
   nodes:
@@ -66,3 +69,4 @@ topology:
       mtu: 1500
     - endpoints: ["gre2:eth2", "gwx:net2"]
       mtu: 1500
+EOF
