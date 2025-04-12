@@ -1,0 +1,27 @@
+set logging class linux-cp rate-limit 1000 level warn syslog-level notice
+
+lcp default netns dataplane
+lcp lcp-sync on
+lcp lcp-auto-subint on
+
+comment { Create a loopback interface }
+create loopback interface instance 0
+lcp create loop0 host-if loop0
+set interface state loop0 up
+
+comment { Create one LinuxCP Interface Pair for fpeth7 }
+lcp create fpeth7 host-if fpeth7
+set interface ip address fpeth7 10.1.9.11/24
+set interface state fpeth7 up 
+
+comment { Create test interface }
+create tap id 5 host-ip4-addr 10.1.5.11/24 host-ip4-gw 10.1.5.1
+set interface state tap5 up
+set interface ip address tap5 10.1.5.1/24
+
+comment { Create GRE tunnnel }
+create gre tunnel src 10.1.9.11 dst 10.1.9.12 instance 256
+set interface state gre256 up
+set interface unnumbered gre256 use fpeth7
+ip route add 10.1.8.0/24 via gre256
+
