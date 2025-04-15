@@ -2,19 +2,9 @@
 set -v
 
 # host version [22.04.3] https://fridge.ubuntu.com/2023/08/11/ubuntu-22-04-3-lts-released/
-# dock version [23.0.1 ] https://download.docker.com/linux/ubuntu/dists/focal/pool/stable/amd64/
-
-# clab version [v0.59.0] https://github.com/srl-labs/containerlab/releases/download/v0.59.0/containerlab_0.59.0_linux_amd64.tar.gz
-# vyos version [v1.4.9 ] docker pull burlyluo/vyos:1.4.9
-
-# kind version [v0.20.0] https://github.com/kubernetes-sigs/kind/releases/download/v0.20.0/kind-linux-amd64
-# imge version [v1.27.3] docker pull burlyluo/kindest:v1.27.3
-
-# phub version [v2.7.1 ] docker pull docker.io/registry:2  
-  # run p_hub: [docker run -d --network=host --restart=always --name phub registry:2]
-
+# multipass vr [1.15.1 ] https://canonical.com/multipass/install
 # nettool imge [v1.1.11] docker pull burlyluo/nettool:latest
-# iptables fwd [iptables -L | grep policy || and then: systemctl cat docker >> ExecStartPost=/sbin/iptables -P FORWARD ACCEPT]
+# k3sup  tools [0.13.7 ] https://github.com/alexellis/k3sup/releases/download/0.13.8/k3sup
 
 # Auther name: [Wei Luo]
 # Mail address [olaf.luo@foxmail.com]
@@ -22,9 +12,27 @@ set -v
 # Bootcamp url [https://youdianzhishi.com/web/course/1041]
 # Issue report [https://github.com/BurlyLuo/wcni-kind/issues or https://gitee.com/rowan-wcni/wcni-kind/issues]
 
+# 0. Install necessary tools
+for tool in {multipass,k3sup}; do
+  if command -v $tool &> /dev/null; then
+    echo $tool is already there.
+  else
+    case $tool in
+      multipass)
+        command -v apt &> /dev/null && apt -y update && snap install multipass || { echo "ERROR: wget installation failed" && exit 1; }
+        ;;
+      k3sup)
+        wget --tries=3 https://github.com/alexellis/k3sup/releases/download/0.13.8/k3sup -O /usr/bin/k3sup && chmod +x /usr/bin/k3sup || exit 1
+        ;;
+      *)
+        echo "ERROR: Unknown tool, Pls check the spelling." && exit 1
+        ;;
+    esac
+  fi
+done
 
-# 1. Deploy multipass vmk(kubeProxyReplacement=true)
-for ((i=0; i<${1:-3}; i++))
+# 1. Deploy multipass vmk
+for ((i=0; i<${1:-2}; i++))
 do
   multipass launch 22.04 -n vmk"$i" -c 3 -m 3G -d 30G --cloud-init - <<EOF
   # cloud-config
@@ -59,13 +67,14 @@ done
 
 # 3. replace calico-bpf.yaml's KUBERNETES_SERVICE_HOST
 KUBERNETES_SERVICE_HOST=`kubectl get nodes --selector=node-role.kubernetes.io/control-plane -o jsonpath='{$.items[*].status.addresses[?(@.type=="InternalIP")].address}'`
-sed -i "s/kubernetes_service_host: \"\"/kubernetes_service_host: \"${KUBERNETES_SERVICE_HOST}\"/g" calico-bpf.yaml
+kubectl get nodes -owide
+echo $KUBERNETES_SERVICE_HOST
+sed -i "s/kubernetes_service_host: \".*\"/kubernetes_service_host: \"${KUBERNETES_SERVICE_HOST}\"/" calico-bpf.yaml
 
 kubectl apply -f ./calico-bpf.yaml
+kubectl wait --timeout=150s --for=condition=Ready=true pods --all -A
 
+# 4. Enable calico bpf feature
 calicoctl --allow-version-mismatch patch felixconfiguration default --patch='{"spec": {"bpfEnabled": true}}'
-
 kubectl -nkube-system rollout restart ds/calico-node
-
 kubectl -nkube-system wait --timeout=160s --for=condition=Ready=true pod -l k8s-app=calico-node
-
