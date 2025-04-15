@@ -10,7 +10,7 @@ spec:
   - name: backend
     image: 192.168.2.100:5000/nettool
   restartPolicy: Always
-  nodeName: vmk0
+  nodeName: vmk1
 
 ---
 apiVersion: v1
@@ -24,7 +24,7 @@ spec:
   - name: client
     image: 192.168.2.100:5000/nettool
   restartPolicy: Always
-  nodeName: vmk1
+  nodeName: vmk0
 
 ---
 apiVersion: v1
