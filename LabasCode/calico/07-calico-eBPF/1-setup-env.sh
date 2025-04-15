@@ -32,7 +32,7 @@ for tool in {multipass,k3sup}; do
 done
 
 # 1. Deploy multipass vmk
-for ((i=0; i<${1:-2}; i++))
+for ((i=0; i<${1:-3}; i++))
 do
   multipass launch 22.04 -n vmk"$i" -c 3 -m 3G -d 30G --cloud-init - <<EOF
   # cloud-config
