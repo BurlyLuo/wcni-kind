@@ -75,6 +75,6 @@ kubectl apply -f ./calico-bpf.yaml
 kubectl wait --timeout=150s --for=condition=Ready=true pods --all -A
 
 # 4. Enable calico bpf feature
-calicoctl --allow-version-mismatch patch felixconfiguration default --patch='{"spec": {"bpfEnabled": true}}'
+calicoctl patch felixconfiguration default --patch='{"spec": {"bpfEnabled": true}}'
 kubectl -nkube-system rollout restart ds/calico-node
 kubectl -nkube-system wait --timeout=160s --for=condition=Ready=true pod -l k8s-app=calico-node
