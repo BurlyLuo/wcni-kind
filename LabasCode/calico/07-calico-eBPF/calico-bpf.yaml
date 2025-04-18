@@ -39,7 +39,7 @@ metadata:
 data:
   # Set these to the IP and port of your API server; In BPF mode, we need to connect directly to the
   # API server because we take over kube-proxy's role.
-  kubernetes_service_host: "11.1.1.200"
+  kubernetes_service_host: "11.1.1.31"
   kubernetes_service_port: "6443"
 
   # Typha is disabled.
