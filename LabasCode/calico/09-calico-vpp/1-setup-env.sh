@@ -6,7 +6,7 @@
 
 
 # 1. setup k3s nodes
-lias addk3svms='addk3svms-cluster() {
+alias addk3svms='addk3svms-cluster() {
     echo "[*] Settingup k3s node..."
     if [ -z "$(kcli list vms | egrep k1\|k2\|k3)" ]; then
         kcli create vm -i k3s_compressed -P numcpus=6 -P memory=8192 -P disks=[50] -P rootpassword=hive -P nets="[{\"name\":\"vppdpdk5\",\"ip\":\"10.1.5.51\",\"netmask\":\"24\",\"gateway\":\"10.1.5.3\"},{\"name\":\"vppdpdk5\"},{\"name\":\"vppdpdk8\"},{\"name\":\"vppdpdk9\"}]" k1
