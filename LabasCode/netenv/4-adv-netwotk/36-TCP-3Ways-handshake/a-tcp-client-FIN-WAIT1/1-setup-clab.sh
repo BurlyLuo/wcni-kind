@@ -14,7 +14,7 @@ topology:
       exec:
       - ip a a 10.1.5.1/24 dev eth1
       - ip a a 10.1.8.1/24 dev eth2
-      # [why 2 iptables: it's due to the fin ack can come client 1st or sever 1st, not sure. so add both!]
+      # [why 2 iptables: it's due to the fin ack can come client 1st or server 1st, not sure. so add both!]
       - iptables -A FORWARD -s 10.1.8.10 -d 10.1.5.10 -p tcp --tcp-flags FIN,ACK FIN,ACK -j DROP
       - iptables -A FORWARD -s 10.1.5.10 -d 10.1.8.10 -p tcp --tcp-flags FIN,ACK FIN,ACK -j DROP
 
