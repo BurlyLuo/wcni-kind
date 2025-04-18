@@ -15,32 +15,32 @@ topology:
       - ip a a 10.1.5.1/24 dev eth1
       - ip a a 10.1.8.1/24 dev eth2
       - iptables -A FORWARD -s 10.1.8.10/32 -d 10.1.5.10/32 -p tcp -m tcp --tcp-flags SYN,ACK SYN,ACK -j ACCEPT
-      - iptables -A FORWARD -s 10.1.8.10 -d 10.1.5.10 -p tcp --tcp-flags ACK ACK -j DROP
+      - iptables -A FORWARD -s 10.1.8.10/32 -d 10.1.5.10/32 -p tcp -m tcp --tcp-flags RST,ACK RST,ACK -j DROP
+      - iptables -A FORWARD -s 10.1.8.10/32 -d 10.1.5.10/32 -p tcp -m tcp --tcp-flags ACK ACK -j DROP
 
       env:
         TZ: Asia/Shanghai
 
-    server1:
+    client:
       kind: linux
       image: 192.168.2.100:5000/xcni_http_keepalive_timeout_500s
       exec:
       - ip addr add 10.1.5.10/24 dev net0
       - ip r a 10.1.8.0/24 via 10.1.5.1 dev net0
-      - >
-        bash -c '
-        bash -c "sysctl net.ipv4.tcp_keepalive_time=50" && bash -c "sysctl net.ipv4.tcp_keepalive_probes=2" && bash -c "sysctl net.ipv4.tcp_keepalive_intvl=6"'
+      - rm -rf /usr/bin/curl
       binds:
         - ./client:/client
 
       env:
         TZ: Asia/Shanghai
 
-    server2:
+    server:
       kind: linux
       image: 192.168.2.100:5000/xcni_http_keepalive_timeout_500s
       exec:
       - ip addr add 10.1.8.10/24 dev net0
       - ip r a 10.1.5.0/24 via 10.1.8.1 dev net0
+      # - echo "server run with parm: SO_KEEPALIVE. and trigger the TCP_KEEPALIVE from Server when capture at server side."
       - bash -c "/server &"
       - >
         bash -c '
@@ -51,10 +51,9 @@ topology:
       env:
         TZ: Asia/Shanghai
 
-
   links:
-    - endpoints: ["gw1:eth1", "server1:net0"]
-    - endpoints: ["gw1:eth2", "server2:net0"]
+    - endpoints: ["gw1:eth1", "client:net0"]
+    - endpoints: ["gw1:eth2", "server:net0"]
 
 EOF
 
