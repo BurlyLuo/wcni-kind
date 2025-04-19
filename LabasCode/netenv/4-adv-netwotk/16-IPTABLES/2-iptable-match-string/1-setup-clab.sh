@@ -30,7 +30,7 @@ topology:
       exec:
       - ip a a 10.1.5.1/24 dev eth1
       - ip a a 10.1.8.1/24 dev eth2
-      # block string: Host: 10.1.8.10\r\n
+      # block string: 10.1.8.10
       - iptables -A FORWARD -m string --hex-string "|0a01080a|" --algo bm --to 65535 -j DROP
 
     client:
