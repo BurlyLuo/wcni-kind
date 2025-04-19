@@ -1,5 +1,21 @@
 #!/bin/bash
 set -v
+
+cat <<EOF
+1. Block ip address: HEX:0A16296C. 10.22.41.108
+iptables -A INPUT -m string --hex-string "|0A16296C|" --algo bm --to 65535 -j DROP
+
+2. Block dns NAPTR SRV A rec
+NAPTR rec:
+iptables -A INPUT -p udp --dport 53 -m string --hex-string "|00230001|" --algo bm --to 65535 -j DROP
+
+SRV rec:
+iptables -A INPUT -p udp --dport 53 -m string --hex-string "|00210001|" --algo bm --to 65535 -j DROP
+
+A rec:
+iptables -A INPUT -p udp --dport 53 -m string --hex-string "|00010001|" --algo bm --to 65535 -j DROP
+EOF
+
 cat <<EOF>clab.yaml | clab deploy -t clab.yaml -
 name: tcp-match-string
 mgmt:
@@ -15,7 +31,7 @@ topology:
       - ip a a 10.1.5.1/24 dev eth1
       - ip a a 10.1.8.1/24 dev eth2
       # block string: Host: 10.1.8.10\r\n
-      - iptables -A FORWARD -m string --hex-string "|486f73743a2031302e382e31300d0a|" --algo bm --to 65535 -j DROP
+      - iptables -A FORWARD -m string --hex-string "|0a01080a|" --algo bm --to 65535 -j DROP
 
     client:
       kind: linux
