@@ -1,0 +1,31 @@
+[root@bpf1 2-cilium-nokpr-svc]$ k get pods -owide 
+NAME     READY   STATUS    RESTARTS   AGE   IP           NODE   NOMINATED NODE   READINESS GATES
+client   1/1     Running   0          8s    10.0.0.164   bpf1   <none>           <none>
+server   1/1     Running   0          7s    10.0.1.124   bpf2   <none>           <none>
+[root@bpf1 2-cilium-nokpr-svc]$ k exec -it client -- curl 10.96.94.95:9495
+PodName: server | PodIP: eth0 10.0.1.124/32
+[root@bpf1 2-cilium-nokpr-svc]$ 
+
+
+kubectl exec [POD] [COMMAND] is DEPRECATED and will be removed in a future version. Use kubectl exec [POD] -- [COMMAND] instead.
+[root@client /]# cd   
+[root@client ~]# iptables -nvL
+Chain INPUT (policy ACCEPT 0 packets, 0 bytes)
+ pkts bytes target     prot opt in     out     source               destination         
+
+Chain FORWARD (policy ACCEPT 0 packets, 0 bytes)
+ pkts bytes target     prot opt in     out     source               destination         
+
+Chain OUTPUT (policy ACCEPT 0 packets, 0 bytes)
+ pkts bytes target     prot opt in     out     source               destination         
+[root@client ~]# iptables-tracer -f "-s 10.0.0.164 -p tcp"
+01:38:06.283801 filter OUTPUT  0x00000000       0x00000000 IP 10.0.0.164.39516 > 10.96.94.95.9495: Flags [S], seq 1683457, win 64240, options [mss 1460,sackOK,TS val 2675005762 ecr 0,nop,wscale 7], length 0  [In: Out:eth0]
+01:38:06.284928 filter OUTPUT  0x00000000       0x00000000 IP 10.0.0.164.39516 > 10.96.94.95.9495: Flags [.], ack 2184774618, win 502, options [nop,nop,TS val 2675005763 ecr 3272233621], length 0  [In: Out:eth0]
+01:38:06.285974 filter OUTPUT  0x00000000       0x00000000 IP 10.0.0.164.39516 > 10.96.94.95.9495: Flags [P.], seq 1683458:1683538, ack 2184774618, win 502, options [nop,nop,TS val 2675005763 ecr 3272233621], length 80  [In: Out:eth0]
+01:38:06.287482 filter OUTPUT  0x00000000       0x00000000 IP 10.0.0.164.39516 > 10.96.94.95.9495: Flags [.], ack 2184774854, win 501, options [nop,nop,TS val 2675005764 ecr 3272233622], length 0  [In: Out:eth0]
+01:38:06.287939 filter OUTPUT  0x00000000       0x00000000 IP 10.0.0.164.39516 > 10.96.94.95.9495: Flags [.], ack 2184774898, win 501, options [nop,nop,TS val 2675005764 ecr 3272233622], length 0  [In: Out:eth0]
+01:38:06.288305 filter OUTPUT  0x00000000       0x00000000 IP 10.0.0.164.39516 > 10.96.94.95.9495: Flags [F.], seq 1683538, ack 2184774898, win 501, options [nop,nop,TS val 2675005765 ecr 3272233622], length 0  [In: Out:eth0]
+01:38:06.289127 filter OUTPUT  0x00000000       0x00000000 IP 10.0.0.164.39516 > 10.96.94.95.9495: Flags [.], ack 2184774899, win 501, options [nop,nop,TS val 2675005765 ecr 3272233623], length 0  [In: Out:eth0]
+^C
+[root@client ~]# 
+
