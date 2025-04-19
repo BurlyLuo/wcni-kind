@@ -2,10 +2,6 @@
 set -v
 cat <<EOF>clab.yaml | clab deploy -t clab.yaml -
 name: tcp-client-time-wait
-mgmt:
-  ipv6-subnet: ""
-  ipv4-subnet: 172.20.20.0/24
-
 topology:
   nodes:
     gw1:
@@ -15,14 +11,14 @@ topology:
       - ip a a 10.1.5.1/24 dev eth1
       - ip a a 10.1.8.1/24 dev eth2
 
-    server1:
+    client:
       kind: linux
       image: 192.168.2.100:5000/xcni-http-keepalive-500s
       exec:
       - ip addr add 10.1.5.10/24 dev net0
       - ip r r default via 10.1.5.1 dev net0
 
-    server2:
+    server:
       kind: linux
       image: 192.168.2.100:5000/xcni-http-keepalive-500s
       exec:
@@ -30,21 +26,20 @@ topology:
       - ip r r default via 10.1.8.1 dev net0
 
   links:
-    - endpoints: ["gw1:eth1", "server1:net0"]
-    - endpoints: ["gw1:eth2", "server2:net0"]
-
+    - endpoints: ["gw1:eth1", "client:net0"]
+    - endpoints: ["gw1:eth2", "server:net0"]
 EOF
 
 # 1.cmd:
 # n/a
  
 # 2.test
-# [root@server1 /]# curl 10.1.8.10 
+# [root@client /]# curl 10.1.8.10 
 # ...  waiting...
 
 # 3. monitor netstat outputs[server1]
-# [root@server1 ~]# curl --local-port 12345 10.1.8.10 && while true;do sum=$(netstat -anp | grep TIME_WAIT | wc -l);if [ $sum -eq 1 ]; then date;else break;fi;sleep 2;done
-# PodName: server2 | PodIP: eth0 172.20.20.2/24
+# [root@client ~]# curl --local-port 12345 10.1.8.10 && while true;do sum=$(netstat -anp | grep TIME_WAIT | wc -l);if [ $sum -eq 1 ]; then date;else break;fi;sleep 2;done
+# PodName: server | PodIP: eth0 172.20.20.2/24
 # Wed Nov 22 13:53:21 UTC 2023
 # Wed Nov 22 13:53:23 UTC 2023
 # Wed Nov 22 13:53:25 UTC 2023
@@ -75,4 +70,3 @@ EOF
 # Wed Nov 22 13:54:15 UTC 2023
 # Wed Nov 22 13:54:17 UTC 2023
 # Wed Nov 22 13:54:19 UTC 2023
-# [root@server1 ~]# 
