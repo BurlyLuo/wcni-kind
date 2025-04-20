@@ -1,0 +1,62 @@
+#!/bin/bash
+set -v
+
+cat <<EOF>clab.yaml | clab deploy -t clab.yaml -
+name: mptcp-sbr
+topology:
+  nodes:
+    gw:
+      kind: linux
+      image: 192.168.2.100:5000/ucni
+      exec:
+      - ip addr add 10.1.5.1/24 dev net1
+      - ip addr add 10.1.7.1/24 dev net2
+
+      - ip addr add 10.1.8.1/24 dev net3
+      - ip addr add 10.1.9.1/24 dev net4
+
+    client:
+      kind: linux
+      image: 192.168.2.100:5000/ucni
+      exec:
+      - ip addr add 10.1.5.10/24 dev net1
+      - ip addr add 10.1.8.10/24 dev net2
+      
+      - ip rule add from 10.1.5.0/24 table 5
+      - ip rule add from 10.1.8.0/24 table 8
+      - ip r a default via 10.1.5.1 dev net1 table 5
+      - ip r a default via 10.1.8.1 dev net2 table 8
+
+      - sysctl -w net.mptcp.pm_type=1
+      - sysctl -w net.mptcp.add_addr_timeout=0
+      - ip mptcp limits set subflow 4 add_addr_accepted 4
+      - ip mptcp endpoint add 10.1.5.10 dev net1 signal
+      - ip mptcp endpoint add 10.1.8.10 dev net2 signal
+
+      # mptcpize run iperf3 -c 10.1.9.10 --mptcp -P 2
+
+    server:
+      kind: linux
+      image: 192.168.2.100:5000/ucni
+      exec:
+      - ip addr add 10.1.7.10/24 dev net1
+      - ip addr add 10.1.9.10/24 dev net2
+
+      - ip rule add from 10.1.7.0/24 table 7
+      - ip rule add from 10.1.9.0/24 table 9
+      - ip r a default via 10.1.7.1 dev net1 table 7
+      - ip r a default via 10.1.9.1 dev net2 table 9
+
+      - sysctl -w net.mptcp.pm_type=1
+      - sysctl -w net.mptcp.add_addr_timeout=0
+      - ip mptcp limits set subflow 4 add_addr_accepted 4
+      - ip mptcp endpoint add 10.1.7.10 dev net1 signal
+
+      - bash -c "mptcpize run iperf3 -s &"
+
+  links:
+    - endpoints: ["gw:net1", "client:net1"]
+    - endpoints: ["gw:net2", "server:net1"]
+    - endpoints: ["gw:net3", "client:net2"]
+    - endpoints: ["gw:net4", "server:net2"]
+EOF
