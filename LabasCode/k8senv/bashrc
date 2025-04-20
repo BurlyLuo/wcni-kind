@@ -127,7 +127,7 @@ alias pp=packetdrill
 alias cap1="tcpdump -pne -i any -w previous-packetdrill.cap"
 alias cap2="tcpdump -pne -i any -w current-packetdrill.cap"
 alias 8080="netstat -anp | grep 8080"
-alias tcp="cd /root/wcni-kind/LabasCode/netenv/4-adv-netwotk/"
+alias tcp="cd /root/wcni-kind/LabasCode/netenv/4-adv-network"
 
 alias wp="cd /root/wcni-kind/LabasCode/"
 alias k="kubectl"
@@ -223,7 +223,7 @@ alias mmrs="systemctl stop snap.multipass.multipassd.service && systemctl start 
 alias key="cat /root/wcni-kind/LabasCode/weiluo/env.x"
 
 # vpp
-alias vpp="cd /root/wcni-kind/LabasCode/netenv/4-adv-netwotk/92-VPP-DPDK-SRIOV-RDMA/2-VPP"
+alias vpp="cd /root/wcni-kind/LabasCode/netenv/4-adv-network/92-VPP-DPDK-SRIOV-RDMA/2-VPP"
 alias image="cd /var/lib/libvirt/images && ls -lrth"
 alias vppcc='echo "sed \"/^\s*#/d; /^$/d\" "'
 alias vppdump='echo pcap trace rx tx max 300000 intfc any'
