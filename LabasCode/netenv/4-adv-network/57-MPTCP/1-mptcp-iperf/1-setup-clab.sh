@@ -1,5 +1,14 @@
 #!/bin/bash
 set -v
+cat <<EOF
+The two fe80 addresses are the IPv6 link local addresses configured on the Ethernet (enp2s0) and Wi-Fi (wlp3s0) interfaces of our client host. There are three flags which can be associated with each endpoint identifier:
+
+subflow. When this flag is set, the path manager will try to create a subflow over this interface when a Multipath TCP is created or the interface becomes active while there was an ongoing Multipath TCP connection. This flag is mainly useful for clients.
+
+signal. When this flag is set, the path manager will announce the address of the endpoint over any Multipath TCP connection created using other addresses. This flag can be used on clients or servers. It is mainly useful on servers that have multiple addresses.
+
+backup. This flag can be combined with the two other flags. When combined with the subflow flag, it indicates that a backup subflow will be created. When combined with the signal flag, it indicates that the address will be advertised as a backup address.
+EOF
 
 cat <<EOF>clab.yaml | clab deploy -t clab.yaml -
 name: mptcp
