@@ -1,0 +1,53 @@
+#!/bin/bash
+set -v
+
+for br in br0; do
+    ip l s $br down > /dev/null 2>&1
+    ip l d $br
+    ip l a $br type bridge
+    ip l s $br up
+done
+
+cat <<EOF>clab.yaml | clab deploy -t clab.yaml -
+name: mptcp
+topology:
+  nodes:
+    br0:
+      kind: bridge
+
+    gw:
+      kind: linux
+      image: 192.168.2.100:5000/ucni
+      exec:
+      - ip addr add 10.1.5.1/24 dev net1
+      - iptables -t nat -A POSTROUTING -s 10.1.0.0/16 -o eth0 -j MASQUERADE
+
+    client:
+      kind: linux
+      image: 192.168.2.100:5000/ucni
+      exec:
+      - ip addr add 10.1.5.10/24 dev net1
+      - ip addr add 10.1.5.11/24 dev net2
+
+      - ip route add default via 10.1.5.1 dev net1 metric 100
+      - ip route add default via 10.1.5.1 dev net2 metric 200
+
+      - ip rule add from 10.1.5.10 table 1
+      - ip rule add from 10.1.5.11 table 2 
+
+      - ip r a 10.1.5.0/24 dev net1 scope link table 1
+      - ip r a default via 10.1.5.1 dev net1 table 1
+
+      - ip r a 10.1.5.0/24 dev net2 scope link table 2
+      - ip r a default via 10.1.5.1 dev net2 table 2 
+ 
+      - ip r r default scope global nexthop via 10.1.5.1 dev net1
+
+      - ip mptcp endpoint add 10.1.5.10 id 10 dev net1
+      - ip mptcp endpoint add 10.1.5.11 id 11 dev net2 signal
+      
+  links:
+    - endpoints: ["br0:net1", "client:net1"]
+    - endpoints: ["br0:net2", "client:net2"]
+    - endpoints: ["gw:net1", "br0:net3"]
+EOF
