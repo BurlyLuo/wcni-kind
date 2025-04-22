@@ -76,15 +76,7 @@ done
 # 6. Check linux bridges
 readarray -t br < <(brctl show | grep -E 'vppdpdk[589]' | awk '{print $1}')
 if [[ "${br[0]}" != "vppdpdk5" ]] && [[ "${br[1]}" != "vppdpdk8" ]] && [[ "${br[2]}" != "vppdpdk9" ]]; then
-  for bridge in vppdpdk5 vppdpdk8 vppdpdk9; do
-      ip l s $bridge down >/dev/null 2>&1
-      ip l d $bridge >/dev/null 2>&1
-      ip l a $bridge type bridge
-      ip l a veth-$bridge type veth peer name root-veth-$bridge
-      ip l s veth-$bridge up
-      ip l s veth-$bridge master $bridge
-      ip l s $bridge up
-  done
+    echo "ERROR: Please create linux bridge: vppdpdk5,vppdpdk8,vppdpdk9."
 fi
 
 # 7. Check vpp image
