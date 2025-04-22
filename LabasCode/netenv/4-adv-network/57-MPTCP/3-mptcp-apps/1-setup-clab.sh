@@ -43,8 +43,10 @@ topology:
  
       - ip r r default scope global nexthop via 10.1.5.1 dev net1
 
-      - ip mptcp endpoint add 10.1.5.10 id 10 dev net1
-      - ip mptcp endpoint add 10.1.5.11 id 11 dev net2 signal
+      - ip mptcp endpoint add 10.1.5.10 id 10 dev net1 subflow
+      - ip mptcp endpoint add 10.1.5.11 id 11 dev net2 subflow
+
+      # mptcpize run curl https://check.mptcp.dev/
       
   links:
     - endpoints: ["br0:net1", "client:net1"]
