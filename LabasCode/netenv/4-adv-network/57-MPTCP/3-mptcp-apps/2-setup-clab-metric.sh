@@ -9,7 +9,7 @@ for br in br0; do
 done
 
 cat <<EOF>clab.yaml | clab deploy -t clab.yaml -
-name: mptcp
+name: mptcp-metric
 topology:
   nodes:
     br0:
@@ -30,12 +30,9 @@ topology:
       - ip addr add 10.1.5.10/24 dev net1
       - ip addr add 10.1.8.10/24 dev net2
 
-      - ip rule add from 10.1.5.10 table 5
-      - ip rule add from 10.1.8.10 table 8
+      - ip r a default via 10.1.5.1 dev net1 metric 5
 
-      - ip r a default via 10.1.5.1 dev net1 table 5
-
-      - ip r a default via 10.1.8.1 dev net2 table 8 
+      - ip r a default via 10.1.8.1 dev net2 metric 8
 
       - ip mptcp endpoint add 10.1.5.10 id 5 dev net1 subflow
       - ip mptcp endpoint add 10.1.8.10 id 8 dev net2 subflow

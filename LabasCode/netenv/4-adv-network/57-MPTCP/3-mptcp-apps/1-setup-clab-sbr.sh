@@ -1,3 +1,14 @@
+#!/bin/bash
+set -v
+
+for br in br0; do
+    ip l s $br down > /dev/null 2>&1
+    ip l d $br
+    ip l a $br type bridge
+    ip l s $br up
+done
+
+cat <<EOF>clab.yaml | clab deploy -t clab.yaml -
 name: mptcp-sbr
 topology:
   nodes:
@@ -35,3 +46,4 @@ topology:
     - endpoints: ["br0:net1", "client:net1"]
     - endpoints: ["br0:net2", "client:net2"]
     - endpoints: ["gw:net1", "br0:net3"]
+EOF
