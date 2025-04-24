@@ -1,0 +1,12 @@
+apiVersion: "cilium.io/v2"
+kind: CiliumNetworkPolicy
+metadata:
+  name: "requires-rule"
+specs:
+    endpointSelector:
+      matchLabels:
+        env: prod
+    ingress:
+    - fromEndpoints:
+      - matchLabels:
+          env: dev
