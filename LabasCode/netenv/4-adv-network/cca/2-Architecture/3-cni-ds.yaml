@@ -1,0 +1,42 @@
+apiVersion: apps/v1
+kind: DaemonSet
+#kind: Deployment
+metadata:
+  labels:
+    app: wluo-ds
+  name: wluo
+spec:
+  #replicas: 5
+  selector:
+    matchLabels:
+      app: wluo-ds
+  template:
+    metadata:
+      labels:
+        app: wluo-ds
+    spec:
+      containers:
+      - name: nettoolbox
+       #image: burlyluo/nettool:latest
+        image: 192.168.2.100:5000/nettool
+        env:
+          - name: NETTOOL_NODE_NAME
+            valueFrom:
+              fieldRef:
+                fieldPath: spec.nodeName
+        securityContext:
+          privileged: true
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: wluo-ds
+spec:
+  type: NodePort
+  selector:
+    app: wluo-ds
+  ports:
+  - name: wluo-ds
+    port: 80
+    targetPort: 80
