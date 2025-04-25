@@ -53,4 +53,3 @@ kubectl wait --timeout=100s --for=condition=Ready=true pods --all -A
 
 # 5. clusterip service
 kubectl apply -f cni.yaml
-
