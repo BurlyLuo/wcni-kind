@@ -1,0 +1,49 @@
+# 1. client-dev pod
+apiVersion: v1
+kind: Pod
+metadata:
+  labels:
+    env: client-dev
+  name: client-dev
+spec:
+  containers:
+  - image: 192.168.2.100:5000/nettool
+    name: client-dev
+
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  labels:
+    env: client-prod
+  name: client-prod
+spec:
+  containers:
+  - image: 192.168.2.100:5000/nettool
+    name: client-prod
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  labels:
+    env: nettool
+  name: nettool
+spec:
+  containers:
+  - image: 192.168.2.100:5000/nettool
+    name: nettool
+
+---
+apiVersion: cilium.io/v2
+kind: CiliumNetworkPolicy
+metadata:
+  name: restrict-to-env-nettool-kinds-endpoints
+spec:
+  endpointSelector:
+    matchLabels:
+      env: nettool  # 1. 考量带有env=nettool的endpoints. 也就是说:访问这种endpoint的Pod的时候. 然后看下边定义的规则.
+  ingress:
+  - fromEndpoints:
+    - matchLabels:
+        env: client-dev  # 2. 考量规则的ingress，这里仅允许env=client-dev的源Pod去访问带有env=nettool的endpoints.
+
