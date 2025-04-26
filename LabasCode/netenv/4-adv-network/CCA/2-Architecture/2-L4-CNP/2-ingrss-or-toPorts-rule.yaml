@@ -1,0 +1,54 @@
+# https://github.com/cilium/cilium/blob/main/examples/policies/l4/multi_rule.yaml
+# 1. client-dev pod
+apiVersion: v1
+kind: Pod
+metadata:
+  labels:
+    env: client-dev
+  name: client-dev
+spec:
+  containers:
+  - image: 192.168.2.100:5000/nettool
+    name: client-dev
+
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  labels:
+    env: client-prod
+  name: client-prod
+spec:
+  containers:
+  - image: 192.168.2.100:5000/nettool
+    name: client-prod
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  labels:
+    env: nettool
+  name: nettool
+spec:
+  containers:
+  - image: 192.168.2.100:5000/nettool
+    name: nettool
+
+---
+apiVersion: "cilium.io/v2"
+kind: CiliumNetworkPolicy
+metadata:
+  name: "l4-rules"
+spec:
+  endpointSelector:
+    matchLabels:
+      env: client-prod
+  ingress:
+  - fromEndpoints:
+    - matchLabels:
+        env: client-dev
+  - toPorts:
+    - ports:
+      - port: "81"
+        protocol: TCP
+
