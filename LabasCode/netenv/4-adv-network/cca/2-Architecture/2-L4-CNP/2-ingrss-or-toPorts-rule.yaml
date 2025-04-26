@@ -1,3 +1,4 @@
+# https://github.com/cilium/cilium/blob/main/examples/policies/l4/multi_rule.yaml
 # 1. client-dev pod
 apiVersion: v1
 kind: Pod

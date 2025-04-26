@@ -1,3 +1,4 @@
+# https://github.com/cilium/cilium/blob/main/examples/policies/l3/simple/l3_egress.yaml
 # 1. client-dev pod
 apiVersion: v1
 kind: Pod
