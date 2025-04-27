@@ -1,0 +1,53 @@
+apiVersion: "k8s.cni.cncf.io/v1"
+kind: NetworkAttachmentDefinition
+metadata:
+  name: macvlan-whereabouts-conf
+spec:
+  config: '{
+      "cniVersion": "0.3.0",
+      "name": "whereaboutsexample",
+      "type": "macvlan",
+      "master": "ens38",
+      "mode": "bridge",
+      "ipam": {
+        "type": "whereabouts",
+        "range": "192.168.2.21-192.168.2.21/24"
+      }
+    }'
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: vm
+  annotations:
+    k8s.v1.cni.cncf.io/networks: macvlan-whereabouts-conf@eth1
+spec:
+  containers:
+  - name: supervisor-container
+    image: pod2vm:v2
+    imagePullPolicy: IfNotPresent 
+    securityContext:
+      privileged: true
+    volumeMounts:
+    - name: supervisor-config
+      mountPath: /etc/supervisor.d/sshd.conf
+      readOnly: true
+    - name: redis7001-config
+      mountPath: /etc/redis7001.conf
+      readOnly: true
+    - name: redis7002-config
+      mountPath: /etc/redis7002.conf
+      readOnly: true
+  volumes:
+  - name: supervisor-config
+    hostPath:
+      path: /root/sshd.conf
+      type: File
+  - name: redis7001-config
+    hostPath:
+      path: /root/redis7001.conf
+      type: File
+  - name: redis7002-config
+    hostPath:
+      path: /root/redis7002.conf
+      type: File
