@@ -235,7 +235,8 @@ alias envkind='echo "# kind version" && kind version; echo "# docker info" && do
 # k3s
 alias k3sconfig="export KUBECONFIG=/etc/rancher/k3s/k3s.yaml"
 
-alias addk3s="INSTALL_K3S_SKIP_DOWNLOAD=true INSTALL_K3S_EXEC='--docker --flannel-backend=none --disable=traefik --disable=servicelb --cluster-cidr=10.42.0.0/16,2001:cafe:42::/56 --service-cidr=10.43.0.0/16,2001:cafe:43::/112 --node-ip=192.168.2.99,1010:501::99' /usr/local/bin/k3s-install.sh && export KUBECONFIG=/etc/rancher/k3s/k3s.yaml"
+#alias addk3s="INSTALL_K3S_SKIP_DOWNLOAD=true INSTALL_K3S_EXEC='--docker --flannel-backend=none --disable=traefik --disable=servicelb --cluster-cidr=10.42.0.0/16,2001:cafe:42::/56 --service-cidr=10.43.0.0/16,2001:cafe:43::/112 --node-ip=192.168.2.99,192:168:2::99' /usr/local/bin/k3s-install.sh && export KUBECONFIG=/etc/rancher/k3s/k3s.yaml"
+alias addk3s="INSTALL_K3S_SKIP_DOWNLOAD=true INSTALL_K3S_EXEC='--docker --flannel-backend=none --disable=traefik --disable=servicelb --cluster-cidr=10.42.0.0/16 --service-cidr=10.43.0.0/16 --node-ip=192.168.2.99' /usr/local/bin/k3s-install.sh && export KUBECONFIG=/etc/rancher/k3s/k3s.yaml"
 
 alias kpraddk3s="INSTALL_K3S_SKIP_DOWNLOAD=true INSTALL_K3S_EXEC='--docker --flannel-backend=none --disable-kube-proxy --disable=traefik --disable=servicelb --cluster-cidr=10.42.0.0/16 --service-cidr=10.43.0.0/16 --node-ip=192.168.2.99' /usr/local/bin/k3s-install.sh && export KUBECONFIG=/etc/rancher/k3s/k3s.yaml"
 
