@@ -24,7 +24,8 @@ metadata:
 spec:
   containers:
   - name: supervisor-container
-    image: pod2vm:v2
+    #image: pod2vm:v2
+    image: burlyluo/pod2vm:v2
     imagePullPolicy: IfNotPresent 
     securityContext:
       privileged: true
