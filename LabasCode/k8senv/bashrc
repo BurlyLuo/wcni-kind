@@ -128,7 +128,7 @@ alias cap1="tcpdump -pne -i any -w previous-packetdrill.cap"
 alias cap2="tcpdump -pne -i any -w current-packetdrill.cap"
 alias 8080="netstat -anp | grep 8080"
 alias tcp="cd /root/wcni-kind/LabasCode/netenv/4-adv-network"
-alias cca="cd /root/wcni-kind/LabasCode/netenv/4-adv-network/cca"
+alias cca="cd /root/wcni-kind/LabasCode/netenv/4-adv-network/CCA"
 
 alias wp="cd /root/wcni-kind/LabasCode/"
 alias k="kubectl"
