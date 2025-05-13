@@ -26,7 +26,7 @@ kubectl get nodes -o wide
 cilium_version=v1.15.0-rc.1
 docker pull quay.io/cilium/cilium:$cilium_version && docker pull quay.io/cilium/operator-generic:$cilium_version
 kind load docker-image quay.io/cilium/cilium:$cilium_version quay.io/cilium/operator-generic:$cilium_version --name cilium-kpr
-{ helm repo add cilium https://helm.cilium.io ; helm repo update; } > /dev/null 2>&1
+#{ helm repo add cilium https://helm.cilium.io ; helm repo update; } > /dev/null 2>&1
 
 # 3.0: https://docs.cilium.io/en/v1.15/operations/system_requirements/#admin-system-reqs
        # 1. Linux kernel >= 4.19.57 or equivalent (e.g., 4.18 on RHEL8) [uname -r |#|Local: 6.5.0-15-generic]
