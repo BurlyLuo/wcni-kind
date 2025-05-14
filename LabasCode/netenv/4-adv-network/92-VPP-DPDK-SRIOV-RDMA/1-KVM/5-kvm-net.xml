@@ -1,0 +1,11 @@
+<network>
+  <name>kvmnet</name>
+  <forward mode='nat'/>
+  <autostart>on</autostart>
+  <bridge name='kvmnet' stp='on' delay='0'/>
+  <ip address='2.1.1.1' netmask='255.255.255.0'>
+    <dhcp>
+      <range start='2.1.1.2' end='2.1.1.250'/>
+    </dhcp>
+  </ip>
+</network>
