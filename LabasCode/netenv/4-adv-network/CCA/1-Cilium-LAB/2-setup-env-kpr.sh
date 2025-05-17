@@ -79,7 +79,7 @@ kubectl -nkube-system exec -it ds/cilium -- cilium status
 for container in $(docker ps -a --format "table {{.Names}}" | grep cilium-kpr);do docker exec $container ls -al /proc/self/ns/cgroup;done
 mount -l | grep cgroup && docker info | grep "Cgroup Version" | awk '$1=$1'
 
-# 7. Kube-Proxy mode iptables rules
+# 7. Kube-Proxy Replacement mode iptables rules
 kubectl get pods -owide
 
 controller_node_name=$(kubectl get node -o wide --no-headers | grep "control-plane" | awk -F " " '{print $1}')
