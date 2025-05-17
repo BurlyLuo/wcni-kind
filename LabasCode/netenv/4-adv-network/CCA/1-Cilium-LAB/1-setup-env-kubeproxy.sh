@@ -30,6 +30,7 @@ kind load docker-image quay.io/cilium/cilium:$cilium_version quay.io/cilium/oper
 
 # Direct Routing Options(--set routingMode=native --set autoDirectNodeRoutes=true --set ipv4NativeRoutingCIDR="10.0.0.0/8")
 helm install cilium cilium/cilium --set k8sServiceHost=$controller_node_ip --set k8sServicePort=6443 --version 1.15.0-rc.1 --namespace kube-system --set image.pullPolicy=IfNotPresent --set debug.enabled=true --set debug.verbose="datapath flow kvstore envoy policy" --set bpf.monitorAggregation=none --set monitor.enabled=true --set ipam.mode=cluster-pool --set cluster.name=cilium-kubeproxy --set routingMode=native --set autoDirectNodeRoutes=true --set ipv4NativeRoutingCIDR="10.0.0.0/8"
+kubectl apply -f ./cni.yaml
 
 # 4. Wait all pods ready
 kubectl wait --timeout=100s --for=condition=Ready=true pods --all -A
@@ -40,4 +41,14 @@ kubectl -nkube-system exec -it ds/cilium -- cilium status
 # 6. Separate namesapce and cgroup v2 verify [https://github.com/cilium/cilium/pull/16259 && https://docs.cilium.io/en/stable/installation/kind/#install-cilium]
 for container in $(docker ps -a --format "table {{.Names}}" | grep cilium-kubeproxy);do docker exec $container ls -al /proc/self/ns/cgroup;done
 mount -l | grep cgroup && docker info | grep "Cgroup Version" | awk '$1=$1'
+
+# 7. Kube-Proxy mode iptables rules
+kubectl get pods -owide
+
+controller_node_name=$(kubectl get node -o wide --no-headers | grep "control-plane" | awk -F " " '{print $1}')
+docker exec -it $controller_node_name iptables -t nat -nvL PREROUTING
+
+docker exec -it $controller_node_name iptables -t nat -nvL KUBE-SERVICES
+
+docker exec -it $controller_node_name iptables -t nat -nvL $(docker exec -it $controller_node_name iptables -t nat -nvL KUBE-SERVICES | grep wluo | awk '{print $3}')
 
