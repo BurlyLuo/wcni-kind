@@ -1,0 +1,490 @@
+.
+├── 10-cilium-Overview-of-Network-Policy
+│   └── cilium-L3-Policy
+│       └── cilium-Endpoints-Based
+│           └── cilium-Endpoints-Based-Ingress
+│               ├── 1-setup-env.sh
+│               ├── 2-policy.yaml
+│               └── pod.yaml
+├── 11-cilium-Performance-and-Scalability
+│   └── 2-cilium-BIG-TCP-IPv4-IPv6
+│       ├── 1-setup-env.sh
+│       ├── 2-test.sh
+│       └── netperf.yaml
+├── 1-cilium-Kubernetes-Networking
+│   ├── 1-cilium-Requirements
+│   │   └── cilium.requirements
+│   ├── 2-cilium-Configuration
+│   │   └── cilium-configuration.conf
+│   ├── 3-Kubernetes-Without-kube-proxy
+│   │   ├── 00-cilium-KPR-Known-Issues-and-Limitations
+│   │   │   └── 1-cilium-KPR-Known-Issues-and-Limitations.md
+│   │   ├── 10-cilium-Session-Affinity
+│   │   │   ├── 1-setup-env.sh
+│   │   │   └── cni.yaml
+│   │   ├── 11-cilium-Neighbor-Discovery
+│   │   │   ├── 1-setup-env.sh
+│   │   │   ├── 2-test.sh
+│   │   │   ├── cni.yaml
+│   │   │   └── Neighbor-Discovery.md
+│   │   ├── 12-cilium-External-Access-To-ClusterIP-Services
+│   │   │   ├── 1-setup-env.sh
+│   │   │   ├── 2-test.sh
+│   │   │   └── cni.yaml
+│   │   ├── 1-cilium-KPR
+│   │   │   ├── 1-native-routing
+│   │   │   │   ├── 1-setup-env.sh
+│   │   │   │   ├── cilium-status.verbose
+│   │   │   │   └── cni.yaml
+│   │   │   └── 2-tunnel-mode
+│   │   │       ├── 1-vxlan
+│   │   │       │   ├── 1-setup-env.sh
+│   │   │       │   └── cni.yaml
+│   │   │       └── 2-geneve
+│   │   │           ├── 1-setup-env.sh
+│   │   │           └── cni.yaml
+│   │   ├── 2-cilium-Client-Source-IP-Preservation
+│   │   │   ├── 1-setup-env.sh
+│   │   │   ├── 2-test.sh
+│   │   │   └── cni.yaml
+│   │   ├── 3-cilium-Maglev-Consistent-Hashing
+│   │   │   ├── 1-setup-env-random.sh
+│   │   │   ├── 1-setup-env.sh
+│   │   │   ├── 2-metallb
+│   │   │   │   ├── 1-metallb.yaml
+│   │   │   │   └── 2-metallb-l2-config.yaml
+│   │   │   ├── 44824.pdf
+│   │   │   ├── cilium-status.verbose
+│   │   │   └── cni.yaml
+│   │   ├── 4-cilium-DSR
+│   │   │   ├── cilium-LB-DSR-dsrDispatch-geneve
+│   │   │   │   ├── 1-cilium-dsrDispatch-native-routing
+│   │   │   │   │   ├── 1-setup-env.sh
+│   │   │   │   │   └── cni.yaml
+│   │   │   │   ├── 2-cilium-dsrDispatch-geneve
+│   │   │   │   │   ├── 1-setup-env.sh
+│   │   │   │   │   └── cni.yaml
+│   │   │   │   └── cni.yaml
+│   │   │   ├── cilium-LB-DSR-dsrDispatch-opt
+│   │   │   │   ├── 1-setup-env.sh
+│   │   │   │   └── cni.yaml
+│   │   │   ├── cilium-LB-hybrid
+│   │   │   │   ├── 1-setup-env.sh
+│   │   │   │   └── cni.yaml
+│   │   │   └── ReadME.md
+│   │   ├── 5-cilium-Socket-LoadBalancer
+│   │   │   ├── 1-setup-env.sh
+│   │   │   ├── 2-test.sh
+│   │   │   └── cni.yaml
+│   │   ├── 6-cilium-Socket-LoadBalancer-Bypass-in-PodNamespace
+│   │   │   ├── 1-setup-env.sh
+│   │   │   ├── 2-test.sh
+│   │   │   └── cni.yaml
+│   │   ├── 7-cilium-LoadBalancer-and-NodePort-XDP-Acceleration
+│   │   │   ├── 1-setup-env.sh
+│   │   │   ├── 2-test.md
+│   │   │   ├── cni.yaml
+│   │   │   ├── tcpdump.cap
+│   │   │   └── xdpdump.cap
+│   │   ├── 8-cilium-Container-HostPort-Support
+│   │   │   ├── 1-setup-env.sh
+│   │   │   ├── 2-test.sh
+│   │   │   └── cni.yaml
+│   │   └── 9-cilium-Graceful-Termination
+│   │       └── ReadME.md
+│   ├── 4-cilium-Endpoint-CRD
+│   │   ├── 1-setup-env.sh
+│   │   ├── 2-test.md
+│   │   └── cni.yaml
+│   ├── 5-cilium-CiliumEndpointSlice
+│   │   ├── 1-setup-env.sh
+│   │   ├── 2-test.md
+│   │   └── cni.yaml
+│   └── 6-cilium-Bandwidth-Manager
+│       ├── cilium-Bandwidth-Manager
+│       │   ├── 1-setup-env.sh
+│       │   ├── 2-10M.yaml
+│       │   └── 3-test-bandwidth.sh
+│       └── cilium-BBR
+│           ├── 1-setup-env.sh
+│           ├── BBR_vs_CUBIC.png
+│           ├── BBR_vs_CUBIC_rawdata.txt
+│           └── Server-23.106.143.33-5201.md
+├── 2-cilium-BGP
+│   ├── cilium-BGP-Control-Plane
+│   │   ├── 1-setup-env.sh
+│   │   ├── 2-setup-clab.sh
+│   │   ├── 3-install-cilium.sh
+│   │   ├── 4-enable-bgp-peer.sh
+│   │   ├── clab-cilium-bgp
+│   │   │   └── .tls
+│   │   │       └── ca
+│   │   │           ├── ca.key
+│   │   │           └── ca.pem
+│   │   ├── clab.yaml
+│   │   ├── cni.yaml
+│   │   ├── pcap-routes-update
+│   │   │   ├── eth1.cap
+│   │   │   ├── eth2.cap
+│   │   │   └── eth3.cap
+│   │   └── startup-conf
+│   │       ├── leaf0-boot.cfg
+│   │       ├── leaf1-boot.cfg
+│   │       ├── spine0-boot.cfg
+│   │       └── spine1-boot.cfg
+│   ├── cilium-BGP-Control-Plane-Service-Announcements-with-LB-IPAM
+│   │   ├── 1-setup-env.sh
+│   │   ├── 2-setup-clab.sh
+│   │   ├── 3-install-cilium.sh
+│   │   ├── 4-enable-service-announcements.sh
+│   │   ├── clab-cilium-bgp
+│   │   │   └── .tls
+│   │   │       └── ca
+│   │   │           ├── ca.key
+│   │   │           └── ca.pem
+│   │   ├── clab.yaml
+│   │   ├── cni.yaml
+│   │   └── startup-conf
+│   │       ├── leaf0-boot.cfg
+│   │       ├── leaf1-boot.cfg
+│   │       ├── spine0-boot.cfg
+│   │       └── spine1-boot.cfg
+│   ├── cilium-BGP-Control-Plane-Service-Announcements-with-Metallb-L2-Mode
+│   │   ├── 1-setup-env.sh
+│   │   ├── 2-setup-clab.sh
+│   │   ├── 3-install-cilium.sh
+│   │   ├── 4-enable-service-announcements.sh
+│   │   ├── 5-metallb
+│   │   │   ├── 1-metallb.yaml
+│   │   │   └── 2-metallb-l2-config.yaml
+│   │   ├── clab-cilium-bgp
+│   │   │   └── .tls
+│   │   │       └── ca
+│   │   │           ├── ca.key
+│   │   │           └── ca.pem
+│   │   ├── clab.yaml
+│   │   ├── cni.yaml
+│   │   └── startup-conf
+│   │       ├── leaf0-boot.cfg
+│   │       ├── leaf1-boot.cfg
+│   │       ├── spine0-boot.cfg
+│   │       └── spine1-boot.cfg
+│   ├── cilium-BGP-Control-Plane-VyOS-1.4-LTS
+│   │   ├── 1-setup-env.sh
+│   │   ├── 2-setup-clab.sh
+│   │   ├── 3-install-cilium.sh
+│   │   ├── 4-enable-bgp-peer.sh
+│   │   ├── clab-cilium-bgp
+│   │   │   └── .tls
+│   │   │       └── ca
+│   │   │           ├── ca.key
+│   │   │           └── ca.pem
+│   │   ├── clab.yaml
+│   │   ├── cni.yaml
+│   │   └── startup-conf
+│   │       ├── leaf0-boot.cfg
+│   │       ├── leaf1-boot.cfg
+│   │       ├── spine0-boot.cfg
+│   │       └── spine1-boot.cfg
+│   ├── cilium-LB-IPAM
+│   │   ├── 1-setup-env.sh
+│   │   ├── 2-test.sh
+│   │   └── cni.yaml
+│   └── ReadME.md
+├── 3-cilium-eBPF-DataPath
+│   ├── 1-eBPF-DataPath
+│   │   └── cilium.md
+│   ├── 2-cilium-KubeProxy-NativeRouting
+│   │   ├── 1-setup-env.sh
+│   │   ├── 2-test.sh
+│   │   ├── 3-ping_datapath
+│   │   │   ├── ping.datapath
+│   │   │   └── ping.pcap
+│   │   │       ├── cilium-kubeproxy-control-plane-eth0.cap
+│   │   │       └── lxc67aa047ddad3.cap
+│   │   ├── 4-service_datapath
+│   │   │   ├── 1-setup-env-multipass.sh
+│   │   │   ├── 2-test.sh
+│   │   │   ├── .2-test.sh.swp
+│   │   │   └── service.datapath
+│   │   └── non-SocketLB.datapath
+│   ├── 3-cilium-KubeProxy-VxLAN
+│   │   ├── 1-setup-env.sh
+│   │   ├── cni.yaml
+│   │   ├── datapath.wluo
+│   │   └── pcap
+│   │       ├── cilium-kubeproxy-vxlan-control-plane_cilium_vxlan.cap
+│   │       ├── cilium-kubeproxy-vxlan-control-plane_eth0.cap
+│   │       └── eth0.cap
+│   ├── 4-cilium-KPR-NativeRouting
+│   │   ├── 1-setup-env.sh
+│   │   ├── 2-test.sh
+│   │   ├── 3-ping_datapath
+│   │   │   └── ping.datapath
+│   │   ├── 4-service_datapath
+│   │   │   ├── 1-setup-env-multipass.sh
+│   │   │   ├── 2-test.sh
+│   │   │   ├── .2-test.sh.swp
+│   │   │   └── service.datapath
+│   │   └── SocketLB.datapath
+│   ├── 5-cilium-KPR-VxLAN
+│   │   └── simliar-with-3-cilium-KubeProxy-VxLAN.datapath#Service-based-on-eBPF-maps
+│   ├── 6-cilium-KPR-HostRouting-NativeRouting
+│   │   ├── 1-setup-env.sh
+│   │   ├── 2-test.sh
+│   │   ├── 3-ping_datapath
+│   │   │   ├── ping.datapath
+│   │   │   └── ping.pcap
+│   │   │       ├── cilium-kpr-ebpf-control-plane_eth0.cap
+│   │   │       └── lxc0bf6b6e5cb13_eth0.cap
+│   │   └── 4-service_datapath
+│   │       └── service.datapath
+│   ├── 7-cilium-KPR-HostRouting-VxLAN
+│   │   └── similiar-with-previous-logical
+│   ├── 8-cilium-IPSec
+│   │   ├── 0-ipsec-logical
+│   │   │   └── 1-setup-ipsec.sh
+│   │   ├── 1-setup-env.sh
+│   │   ├── 2-test.sh
+│   │   └── 3-pcap
+│   │       ├── cilium-ipsec-control-plane_eth0.cap
+│   │       ├── L3_VPN_vs_L2_VPN.solution
+│   │       ├── vxlan.png
+│   │       └── xfrm.spi
+│   └── 9-cilium-WireGuard
+│       ├── 1-setup-env.sh
+│       ├── 2-test.sh
+│       └── 3-pcap
+│           ├── e_decrypted_keylog.png
+│           └── vxlan.png
+├── 4-cilium-Multi-cluster-Networking
+│   ├── 1-setup-clustermesh-cluster1.sh
+│   ├── 2-setup-clustermesh-cluster2.sh
+│   ├── 3-enable-cilium-servicemesh.sh
+│   ├── 4-clustermesh-verify.sh
+│   ├── 5-ClusterMesh-Service-Affinity
+│   │   ├── 1-cilium-clustermesh-ServiceAffinity.sh
+│   │   ├── echoserver-service.yaml
+│   │   └── netshoot-ds.yaml
+│   ├── cluster1.yaml
+│   └── cluster2.yaml
+├── 5-cilium-External-Networking
+│   └── cilium-Egress-Gateway
+│       ├── 1-setup-env.sh
+│       ├── 2-setup-clab.sh
+│       ├── 3-test-and-logical.sh
+│       ├── clab-cilium-egress-gateway
+│       │   └── .tls
+│       │       └── ca
+│       │           ├── ca.key
+│       │           └── ca.pem
+│       ├── clab.yaml
+│       ├── egressip.png
+│       └── startup-conf
+│           └── firewall-boot.cfg
+├── 6-cilium-Service-Mesh
+│   ├── cilium-Envoy-DaemonSet
+│   │   ├── 1-setup-env.sh
+│   │   ├── 2-metallb
+│   │   │   ├── 1-metallb.yaml
+│   │   │   └── 2-metallb-l2-config.yaml
+│   │   ├── 3-deploy-demo-bookinfo.yaml
+│   │   ├── 4-http-gateway-rules.yaml
+│   │   └── 5-test.sh
+│   ├── cilium-Gateway-API-Support
+│   │   ├── cilium-Gateway-API-HTTP
+│   │   │   ├── 1-setup-env.sh
+│   │   │   ├── 2-metallb
+│   │   │   │   ├── 1-metallb.yaml
+│   │   │   │   └── 2-metallb-l2-config.yaml
+│   │   │   ├── 3-deploy-demo-bookinfo.yaml
+│   │   │   ├── 4-http-gateway-rules.yaml
+│   │   │   └── 5-test.sh
+│   │   ├── cilium-Gateway-API#HTTP-Header-Modifier
+│   │   │   ├── 1-setup-env.sh
+│   │   │   ├── 2-metallb
+│   │   │   │   ├── 1-metallb.yaml
+│   │   │   │   └── 2-metallb-l2-config.yaml
+│   │   │   ├── 3-echo.yaml
+│   │   │   ├── 4-gateway-rule-request-header.yaml
+│   │   │   ├── 5-test.sh
+│   │   │   └── cilium-gtw-add-a-request-header.cap
+│   │   ├── cilium-Gateway-API-HTTPS
+│   │   │   ├── cilium-Gateway-API-HTTPS#Cert-Manager
+│   │   │   │   ├── 1-setup-env.sh
+│   │   │   │   ├── 2-certmanager
+│   │   │   │   │   ├── ca-issuer.yaml
+│   │   │   │   │   └── demo-cert.yaml
+│   │   │   │   ├── 3-metallb
+│   │   │   │   │   ├── 1-metallb.yaml
+│   │   │   │   │   └── 2-metallb-l2-config.yaml
+│   │   │   │   ├── 4-deploy-demo-bookinfo.yaml
+│   │   │   │   ├── 5-https-gateway-rules.yaml
+│   │   │   │   ├── 6-test.sh
+│   │   │   │   ├── ecapture_masterkey.log
+│   │   │   │   └── ingress-https.cap
+│   │   │   └── cilium-Gateway-API-HTTPS#Self-signed-Certificate
+│   │   │       ├── 1-setup-env.sh
+│   │   │       ├── 2-metallb
+│   │   │       │   ├── 1-metallb.yaml
+│   │   │       │   └── 2-metallb-l2-config.yaml
+│   │   │       ├── 3-deploy-demo-bookinfo.yaml
+│   │   │       ├── 4-https-gateway-rules.yaml
+│   │   │       ├── 5-test.sh
+│   │   │       └── minica
+│   │   │           ├── _.cilium.rocks
+│   │   │           │   ├── cert.pem
+│   │   │           │   └── key.pem
+│   │   │           ├── go.mod
+│   │   │           ├── LICENSE.txt
+│   │   │           ├── main.go
+│   │   │           ├── minica
+│   │   │           ├── minica-key.pem
+│   │   │           ├── minica.pem
+│   │   │           └── README.md
+│   │   └── cilium-Gateway-API#Traffic-Splitting
+│   │       ├── 1-setup-env.sh
+│   │       ├── 2-metallb
+│   │       │   ├── 1-metallb.yaml
+│   │       │   └── 2-metallb-l2-config.yaml
+│   │       ├── 3-echo.yaml
+│   │       ├── 4-splitting.yaml
+│   │       └── 5-test.sh
+│   └── cilium-Mutual-Authentication
+│       ├── 1-setup-env.sh
+│       ├── 2-test.sh
+│       └── mutual-auth
+│           ├── cnp-with-mutual-auth.yaml
+│           ├── cnp-without-mutual-auth.yaml
+│           └── mutual-auth-example.yaml
+├── 7-cilium-L2-Announcements#L2-Aware-LB
+│   ├── cilium-L2-Announcements_L2-Aware-LB#ExternalIPs
+│   │   ├── 1-setup-env.sh
+│   │   ├── 2-cilium-l2ann-policy.sh
+│   │   ├── cni-with-externalIPs.yaml
+│   │   ├── garp.cap
+│   │   └── Pcap-cilium-L2-Announcements#L2-Aware-LB.png
+│   ├── cilium-L2-Announcements_L2-Aware-LB#LoadBalancer-IP-Address#LB-IPAM
+│   │   ├── 1-setup-env.sh
+│   │   ├── 2-cilium-l2ann-policy.sh
+│   │   └── cni.yaml
+│   ├── cilium-L2-Pod-Announcements
+│   │   ├── 1-setup-env.sh
+│   │   ├── 2-test.md
+│   │   └── cni.yaml
+│   └── ReadME.md
+├── 8-cilium-Securing-Networks-with-Cilium
+│   ├── 1-cilium-Locking-Down-External-Access-with-DNS-Based-Policies
+│   │   ├── 1-Basic-DNS-Egress-Policy
+│   │   │   ├── 1-setup-env.sh
+│   │   │   ├── 2-test.sh
+│   │   │   ├── cilium-DNS-Egress-policy.yaml
+│   │   │   └── dns-sw-app.yaml
+│   │   ├── 2-DNS-Policies-Using-Patterns
+│   │   │   ├── 1-setup-env.sh
+│   │   │   ├── 2-test.sh
+│   │   │   ├── cilium-DNS-Policies-Using-Patterns.yaml
+│   │   │   └── dns-sw-app.yaml
+│   │   └── 3-Combining-DNS#Port-and-L7-Rules
+│   │       ├── 1-setup-env.sh
+│   │       ├── 2-test.sh
+│   │       ├── cilium-Combining-DNS#Port-and-L7-Rules.yaml
+│   │       └── dns-sw-app.yaml
+│   └── 2-cilium-Inspecting-TLS-Encrypted-Connections-with-Cilium
+│       ├── 1-setup-env.sh
+│       ├── 2-Generating-and-Installing-TLS-Keys-and-Certificates
+│       │   ├── ca-certificates.crt
+│       │   ├── internal-artii.crt
+│       │   ├── internal-artii.csr
+│       │   ├── internal-artii.key
+│       │   ├── myCA.crt
+│       │   └── myCA.key
+│       ├── 3-test.sh.step
+│       ├── Azure-防火墙高级版功能.html
+│       ├── dns-sw-app.yaml
+│       ├── Dockerfile
+│       │   ├── default.conf
+│       │   ├── Dockerfile
+│       │   ├── entrypoint.sh
+│       │   ├── readme.txt
+│       │   └── .tmux.conf
+│       └── l7-visibility-tls.yaml
+├── 9-cilium-Overview-of-Network-Security
+│   └── cilium-IPSec
+│       ├── 1-setup-env.sh
+│       └── cni.yaml
+├── cilium-1.15.0-environment.md
+├── cilium-1.15.0-rc.1.tgz
+├── cilium-DualStack
+│   ├── 1-setup-env.sh
+│   └── cni.yaml
+├── cilium-Host-Firewall
+│   ├── 1-setup-env.sh
+│   ├── 2-setup-clab.sh
+│   ├── 3-test.sh
+│   ├── clab-cilium-host-firewall
+│   │   └── .tls
+│   │       └── ca
+│   │           ├── ca.key
+│   │           └── ca.pem
+│   ├── clab.yaml
+│   └── startup-conf
+│       └── gw0-boot.cfg
+├── cilium-Hubble
+│   ├── 1-setup-env.sh
+│   └── cni.yaml
+├── cilium-KPR
+│   ├── 1-native-routing
+│   │   ├── 1-setup-env.sh
+│   │   └── cni.yaml
+│   └── 2-tunnel-mode
+│       ├── 1-vxlan
+│       │   ├── 1-setup-env.sh
+│       │   └── cni.yaml
+│       └── 2-geneve
+│           ├── 1-setup-env.sh
+│           └── cni.yaml
+├── cilium-KPR-EBPF
+│   ├── 1-native-routing
+│   │   ├── 1-setup-env.sh
+│   │   └── cni.yaml
+│   └── 2-tunnel-mode
+│       ├── 1-vxlan
+│       │   ├── 1-setup-env.sh
+│       │   └── cni.yaml
+│       └── 2-geneve
+│           ├── 1-setup-env.sh
+│           └── cni.yaml
+├── cilium-KPR-Features
+│   ├── cilium-externalTrafficPolicy
+│   │   ├── 1-setup-env.sh
+│   │   └── cni.yaml
+│   ├── cilium-kpr-known-issues-and-limitations
+│   │   └── ReadME.md
+│   ├── cilium-LoadBalancer-and-NodePort-XDP-Acceleration
+│   │   ├── 1-setup-env.sh
+│   │   ├── cni.yaml
+│   │   └── NOK-20230220
+│   └── cilium-Maglev-Consistent-Hashing
+│       ├── 1-setup-env.sh
+│       └── cni.yaml
+├── cilium-KubeProxy
+│   ├── 1-direct-routing
+│   │   ├── 1-setup-env.sh
+│   │   └── cni.yaml
+│   └── 2-tunnel-mode
+│       ├── 1-vxlan
+│       │   ├── 1-setup-env.sh
+│       │   └── cni.yaml
+│       └── 2-geneve
+│           ├── 1-setup-env.sh
+│           └── cni.yaml
+├── cilium-SCTP
+│   ├── 1-setup-env.sh
+│   ├── 2-sctp-demo.yaml
+│   ├── 3-test.sh
+│   └── pcap
+│       └── cilium-sctp.pcapng
+└── cilium.txt
+
+155 directories, 332 files
