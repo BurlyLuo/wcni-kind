@@ -49,5 +49,6 @@ kubectl exec -it pod-deny-client -- curl -m 3 -s -o /dev/null -w "%{http_code}" 
 # 3.0: Check logs
 echo_pod_node_name=$(kubectl get pods -oname -o wide | grep echo | awk -F " " '{print $7}')
 cilium_ds_pod_name=$(kubectl -nkube-system get pods -o wide | grep -w $echo_pod_node_name | grep -v cilium-operator- | grep cilium- | awk -F " " '{print $1}')
+
 kubectl -nkube-system logs $cilium_ds_pod_name -c cilium-agent --timestamps=true | grep "Policy is requiring authentication\|Validating Server SNI\|Validated certificate\|Successfully authenticated"
 

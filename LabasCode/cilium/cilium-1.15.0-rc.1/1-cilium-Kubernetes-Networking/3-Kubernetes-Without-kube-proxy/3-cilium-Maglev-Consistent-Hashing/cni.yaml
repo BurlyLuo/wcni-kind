@@ -1,12 +1,10 @@
 apiVersion: apps/v1
-#kind: DaemonSet
-kind: Deployment
+kind: DaemonSet
 metadata:
   labels:
     app: wluo
   name: wluo
 spec:
-  replicas: 4
   selector:
     matchLabels:
       app: wluo
@@ -31,7 +29,8 @@ kind: Service
 metadata:
   name: wluo
 spec:
-  type: NodePort
+  type: LoadBalancer
+  externalTrafficPolicy: Cluster
   selector:
     app: wluo
   ports:
