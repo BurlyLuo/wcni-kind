@@ -13,7 +13,7 @@ metadata:
 spec:
   containers:
   - name: client
-    image: 192.168.2.100:5000/nettool:9494
+    image: burlyluo/nettool:9494
     imagePullPolicy: Always
   restartPolicy: Always
   nodeName: ${controller_node_name}
@@ -49,7 +49,7 @@ metadata:
 spec:
   containers:
   - name: server
-    image: 192.168.2.100:5000/nettool:9495
+    image: burlyluo/nettool:9495
     imagePullPolicy: Always
   restartPolicy: Always
   nodeName: ${worker_node_name}
