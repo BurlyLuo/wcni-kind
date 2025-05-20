@@ -36,13 +36,14 @@ kind load docker-image quay.io/cilium/cilium:$cilium_version quay.io/cilium/oper
 kubectl create -n kube-system secret generic cilium-ipsec-keys --from-literal=keys="3 rfc4106(gcm(aes)) $(echo $(dd if=/dev/urandom count=20 bs=1 2> /dev/null | xxd -p -c 64)) 128"
  
 # IPSec is L3 Protocol. So there is no need concern the MAC layer[Not same with VxLAN L2 solution].
-helm install cilium cilium/cilium --set k8sServiceHost=$controller_node_ip --set k8sServicePort=6443 --version 1.15.0-rc.1 --namespace kube-system --set image.pullPolicy=IfNotPresent --set debug.enabled=true --set debug.verbose="datapath flow kvstore envoy policy" --set bpf.monitorAggregation=none --set monitor.enabled=true --set ipam.mode=cluster-pool --set cluster.name=cilium-ipsec --set routingMode=native --set autoDirectNodeRoutes=true --set ipv4NativeRoutingCIDR="10.0.0.0/8" --set encryption.enabled=true --set encryption.type=ipsec --set encryption.ipsec.interface=eth0
+helm install cilium cilium/cilium --set k8sServiceHost=$controller_node_ip --set k8sServicePort=6443 --version 1.15.0-rc.1 --namespace kube-system --set image.pullPolicy=IfNotPresent --set debug.enabled=true --set debug.verbose="datapath flow kvstore envoy policy" --set bpf.monitorAggregation=none --set monitor.enabled=true --set ipam.mode=cluster-pool --set cluster.name=cilium-ipsec --set routingMode=native --set autoDirectNodeRoutes=true --set ipv4NativeRoutingCIDR="10.0.0.0/8" --set encryption.enabled=true --set encryption.type=ipsec --set encryption.ipsec.interface=eth0 --set hubble.relay.enabled=true --set hubble.ui.enabled=true
 
 # 4. Wait all pods ready
 kubectl wait --timeout=100s --for=condition=Ready=true pods --all -A
 
 # 5. Cilium status(cilium status --verbose)
 kubectl -nkube-system exec -it ds/cilium -- cilium status
+kubectl -nkube-system patch svc hubble-ui -p '{"spec": {"type": "NodePort"}}'
 
 # 6. Separate namesapce and cgroup v2 verify [https://github.com/cilium/cilium/pull/16259 && https://docs.cilium.io/en/stable/installation/kind/#install-cilium]
 for container in $(docker ps -a --format "table {{.Names}}" | grep cilium-ipsec);do docker exec $container ls -al /proc/self/ns/cgroup;done
