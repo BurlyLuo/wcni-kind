@@ -18,4 +18,4 @@ spec:
         effect: NoSchedule
       containers:
       - name: netshoot
-        image: 192.168.2.100:5000/nettool
+        image: burlyluo/nettool

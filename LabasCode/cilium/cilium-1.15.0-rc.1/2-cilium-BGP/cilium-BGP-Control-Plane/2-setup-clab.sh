@@ -9,7 +9,7 @@ topology:
   nodes:
     spine0:
       kind: linux
-      image: 192.168.2.100:5000/vyos/vyos:1.4.7
+      image: 192.168.2.100:5000/vyos/vyos:1.4.9
       cmd: /sbin/init
       binds:
         - /lib/modules:/lib/modules
@@ -17,7 +17,7 @@ topology:
 
     spine1:
       kind: linux
-      image: 192.168.2.100:5000/vyos/vyos:1.4.7
+      image: 192.168.2.100:5000/vyos/vyos:1.4.9
       cmd: /sbin/init
       binds:
         - /lib/modules:/lib/modules
@@ -25,7 +25,7 @@ topology:
 
     leaf0:
       kind: linux
-      image: 192.168.2.100:5000/vyos/vyos:1.4.7
+      image: 192.168.2.100:5000/vyos/vyos:1.4.9
       cmd: /sbin/init
       binds:
         - /lib/modules:/lib/modules
@@ -33,7 +33,7 @@ topology:
 
     leaf1:
       kind: linux
-      image: 192.168.2.100:5000/vyos/vyos:1.4.7
+      image: 192.168.2.100:5000/vyos/vyos:1.4.9
       cmd: /sbin/init
       binds:
         - /lib/modules:/lib/modules

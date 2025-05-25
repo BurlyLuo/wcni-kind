@@ -25,7 +25,7 @@ kubectl get nodes -o wide
 # 3. install CNI
 helm repo add cilium https://helm.cilium.io > /dev/null 2>&1
 
-helm install cilium cilium/cilium --set k8sServiceHost=$controller_node_ip --set k8sServicePort=6443 --version 1.14.0-rc.0 --namespace kube-system --set debug.enabled=true --set debug.verbose=datapath --set monitorAggregation=none --set cluster.id=1 --set cluster.name=cilium-dual-stack --set encryption.nodeEncryption=false --set ipam.mode=cluster-pool --set ipv6.enabled=true --set kubeProxyReplacement=disabled --set operator.replicas=1 --set serviceAccounts.cilium.name=cilium --set serviceAccounts.operator.name=cilium-operator --set tunnel=vxlan
+helm install cilium cilium/cilium --set k8sServiceHost=$controller_node_ip --set k8sServicePort=6443 --version 1.14.0-rc.0 --namespace kube-system --set debug.enabled=true --set debug.verbose=datapath --set monitorAggregation=none --set cluster.id=1 --set cluster.name=cilium-dual-stack --set encryption.nodeEncryption=false --set ipam.mode=cluster-pool --set ipv6.enabled=true --set kubeProxyReplacement=disabled --set operator.replicas=1 --set serviceAccounts.cilium.name=cilium --set serviceAccounts.operator.name=cilium-operator --set tunnel=vxlan --set hubble.relay.enabled=true --set hubble.ui.enabled=true
 
 # 4. wait all pods ready[need the image support ipv6!!! nettool not support]
 kubectl wait --timeout=100s --for=condition=Ready=true pods --all -A

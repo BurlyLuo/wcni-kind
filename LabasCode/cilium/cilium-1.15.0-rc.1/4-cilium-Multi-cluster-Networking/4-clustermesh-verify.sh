@@ -1,7 +1,8 @@
 #/bin/bash
 set -v
-# wget https://raw.githubusercontent.com/cilium/cilium/1.11.2/examples/kubernetes/clustermesh/global-service-example/cluster1.yaml
-# wget https://raw.githubusercontent.com/cilium/cilium/1.11.2/examples/kubernetes/clustermesh/global-service-example/cluster2.yaml
+rm -rf cluster1.yaml cluster2.yaml
+wget https://raw.githubusercontent.com/cilium/cilium/1.11.2/examples/kubernetes/clustermesh/global-service-example/cluster1.yaml
+wget https://raw.githubusercontent.com/cilium/cilium/1.11.2/examples/kubernetes/clustermesh/global-service-example/cluster2.yaml
 # sed -i "s/image: docker.io/image: 192.168.2.100:5000/g" cluster1.yaml 
 # sed -i "s/image: docker.io/image: 192.168.2.100:5000/g" cluster2.yaml
 
