@@ -4,7 +4,7 @@ metadata:
   name: "red-pool"
 spec:
   cidrs:
-  - cidr: "30.0.10.0/24"
+  - cidr: "40.0.10.0/24"
   serviceSelector:
     matchLabels:
       color: red

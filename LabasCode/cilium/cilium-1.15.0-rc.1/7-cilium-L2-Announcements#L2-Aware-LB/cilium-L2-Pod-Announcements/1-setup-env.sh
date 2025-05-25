@@ -22,8 +22,8 @@ controller_node_ip=`kubectl get node -o wide --no-headers | grep -E "control-pla
 kubectl taint nodes $(kubectl get nodes -o name | grep control-plane) node-role.kubernetes.io/control-plane:NoSchedule-
 kubectl get nodes -o wide
 
-# 3. Install CNI[Cilium 1.15.0-rc.1]
-cilium_version=v1.15.0-rc.1
+# 3. Install CNI[Cilium v1.15.17]
+cilium_version=v1.15.17
 docker pull quay.io/cilium/cilium:$cilium_version && docker pull quay.io/cilium/operator-generic:$cilium_version
 kind load docker-image quay.io/cilium/cilium:$cilium_version quay.io/cilium/operator-generic:$cilium_version --name cilium-l2-announcements-l2lb-pod-announcements
 { helm repo add cilium https://helm.cilium.io ; helm repo update; } > /dev/null 2>&1
@@ -75,7 +75,7 @@ kind load docker-image quay.io/cilium/cilium:$cilium_version quay.io/cilium/oper
 
 
 # 1.3: L2 Pod Announcements(--set l2podAnnouncements.enabled=true --set l2podAnnouncements.interface=eth0) 
-helm install cilium cilium/cilium --set k8sServiceHost=$controller_node_ip --set k8sServicePort=6443 --version 1.15.0-rc.1 --namespace kube-system --set image.pullPolicy=IfNotPresent --set debug.enabled=true --set debug.verbose="datapath flow kvstore envoy policy" --set bpf.monitorAggregation=none --set monitor.enabled=true --set ipam.mode=cluster-pool --set cluster.name=cilium-l2-announcements-l2lb-pod-announcements --set kubeProxyReplacement=true --set routingMode=native --set autoDirectNodeRoutes=true --set ipv4NativeRoutingCIDR="10.0.0.0/8" --set bpf.masquerade=true --set l2announcements.enabled=true --set devices='{eth0}' --set externalIPs.enabled=true --set l2podAnnouncements.enabled=true --set l2podAnnouncements.interface=eth0
+helm install cilium cilium/cilium --set k8sServiceHost=$controller_node_ip --set k8sServicePort=6443 --version 1.15.17 --namespace kube-system --set image.pullPolicy=IfNotPresent --set debug.enabled=true --set debug.verbose="datapath flow kvstore envoy policy" --set bpf.monitorAggregation=none --set monitor.enabled=true --set ipam.mode=cluster-pool --set cluster.name=cilium-l2-announcements-l2lb-pod-announcements --set kubeProxyReplacement=true --set routingMode=native --set autoDirectNodeRoutes=true --set ipv4NativeRoutingCIDR="10.0.0.0/8" --set bpf.masquerade=true --set l2announcements.enabled=true --set devices='{eth0}' --set externalIPs.enabled=true --set l2podAnnouncements.enabled=true --set l2podAnnouncements.interface=eth0
 
 # 4. Wait all pods ready
 kubectl wait --timeout=100s --for=condition=Ready=true pods --all -A

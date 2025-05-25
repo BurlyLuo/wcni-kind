@@ -72,3 +72,4 @@ spec:
         restartTimeSeconds: 120
 EOF
 
+sleep 300

@@ -1,0 +1,48 @@
+apiVersion: "cilium.io/v2alpha1"
+kind: CiliumLoadBalancerIPPool
+metadata:
+  name: "red-pool"
+spec:
+  cidrs:
+  - cidr: "30.0.10.0/24"
+  serviceSelector:
+    matchLabels:
+      color: red
+---
+
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: service-lb-ipam
+  labels:
+    color: red
+spec:
+  type: LoadBalancer
+  selector:
+    color: red
+  ports:
+  - port: 80
+---
+
+apiVersion: apps/v1
+kind: DaemonSet
+metadata:
+  labels:
+    color: red
+  name: lb-ipam
+spec:
+  selector:
+    matchLabels:
+      color: red
+  template:
+    metadata:
+      labels:
+        color: red
+    spec:
+      containers:
+      - image: 192.168.2.100:5000/nettool
+        name: nettoolbox
+        securityContext:
+          privileged: true
+
