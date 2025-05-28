@@ -49,3 +49,14 @@ containerdConfigPatches:
   [plugins."io.containerd.grpc.v1.cri".registry.mirrors."192.168.2.100:5000"]
     endpoint = ["http://192.168.2.100:5000"]
 EOF
+
+
+./2-setup-clab.sh
+
+sleep 10
+
+./3-install-cilium.sh
+
+sleep 10
+
+./4-enable-service-announcements.sh
