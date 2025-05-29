@@ -1,1 +1,1 @@
-calicoctl patch BGPConfig default --patch '{"spec": {"serviceClusterIPs": [{"cidr": "10.96.0.0/16"}]}}'
+calicoctl --allow-version-mismatch patch BGPConfig default --patch '{"spec": {"serviceClusterIPs": [{"cidr": "10.96.0.0/16"}]}}'
