@@ -24,6 +24,9 @@ nodeSelector: Nodes which are selected by this label selector will apply the giv
 
 kubectl delete ciliumbgppeeringpolicies rack0 rack1 > /dev/null 2>&1
 
+# https://docs.cilium.io/en/stable/network/bgp-control-plane/#service-announcements
+# By default, virtual routers will not announce services. Virtual routers will announce the ingress IPs of any LoadBalancer services that matches the .serviceSelector of the virtual router and has loadBalancerClass unspecified or set to io.cilium/bgp-control-plane.
+
 cat <<EOF | kubectl apply -f -
 ---
 apiVersion: "cilium.io/v2alpha1"
@@ -43,9 +46,6 @@ spec:
       gracefulRestart:
         enabled: true
         restartTimeSeconds: 120
-      families:
-      - afi: ipv4
-        safi: unicast
 ---
 apiVersion: "cilium.io/v2alpha1"
 kind: CiliumBGPPeeringPolicy
@@ -64,8 +64,4 @@ spec:
       gracefulRestart:
         enabled: true
         restartTimeSeconds: 120
-      families:
-      - afi: ipv4
-        safi: unicast
 EOF
-
