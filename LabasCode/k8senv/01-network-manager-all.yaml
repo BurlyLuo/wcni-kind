@@ -26,14 +26,14 @@ network:
     ens257:
       dhcp4: no
 
-  vlans:
-    ens40.10:
-      id: 10
-      link: ens40
-
-    ens40.20:
-      id: 20
-      link: ens40
+  #vlans:
+  #  ens40.10:
+  #    id: 10
+  #    link: ens40
+   
+  #  ens40.20:
+  #    id: 20
+  #    link: ens40
  
   bridges:
     brnet:
