@@ -1,0 +1,61 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: wluo
+spec:
+  serviceName: wluo
+  replicas: 2
+  selector:
+    matchLabels:
+      app: wluo
+  template:
+    metadata:
+      labels:
+        app: wluo
+    spec:
+      containers:
+      - image: 192.168.2.100:5000/nettool
+        imagePullPolicy: IfNotPresent
+        name: wluo
+
+        ports:
+        - containerPort: 80
+        securityContext:
+          privileged: true
+        resources:
+          limits:
+            cpu: 1
+            memory: 1Gi
+          requests:
+            cpu: 1
+            memory: 1Gi
+  
+        env:
+        - name: PORT
+          value: "80"
+        volumeMounts:
+        - name: sys
+          mountPath: /sys
+
+      volumes:
+      - name: sys
+        hostPath: 
+          path: /sys
+          type: Directory
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: wluo
+spec:
+  clusterIP: None
+  ipFamilyPolicy: PreferDualStack
+  ipFamilies:
+  - IPv4
+  ports:
+    - port: 80
+      targetPort: 80
+      protocol: TCP
+  type: ClusterIP
+  selector:
+    app: wluo
