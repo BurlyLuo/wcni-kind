@@ -1,3 +1,4 @@
+# https://docs.tigera.io/archive/v3.23/networking/advertise-service-ips#advertise-service-load-balancer-ip-addresses
 # 1. Advertise serviceClusterIPs
 calicoctl --allow-version-mismatch patch BGPConfig default --patch '{"spec": {"serviceClusterIPs": [{"cidr": "10.96.0.0/16"}]}}'
 
