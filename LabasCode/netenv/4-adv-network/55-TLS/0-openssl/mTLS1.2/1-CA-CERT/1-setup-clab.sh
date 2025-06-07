@@ -6,7 +6,7 @@ topology:
   nodes:
     gwx:
       kind: linux
-      image: 192.168.2.100:5000/nettool
+      image: 192.168.2.100:5000/xcni
       exec:
       - ip a a 10.1.5.1/24 dev eth1
       - ip a a 10.1.8.1/24 dev eth2
@@ -14,7 +14,7 @@ topology:
 
     openssl_client:
       kind: linux
-      image: 192.168.2.100:5000/nettool
+      image: 192.168.2.100:5000/xcni
       exec:
       - ip addr add 10.1.5.10/24 dev net0
       - ip route replace default via 10.1.5.1
