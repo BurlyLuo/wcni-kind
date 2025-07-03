@@ -8,7 +8,7 @@ for intf in $interfaces; do
     if [[ "$intf" != "lo" && ! "$intf" =~ ^veth  && ! "$intf" =~ ^tunl0 ]]; then
         ipv4_addr=$(ip -4 addr show $intf | grep inet | awk '{print $2}')
         ipv6_addr=$(ip -6 addr show $intf | grep inet6 | awk '{print $2}' | grep -v '^fe80::')
-        
+
         if [ -n "$ipv4_addr" ] || [ -n "$ipv6_addr" ]; then
             intf_length=${#intf}
             if [ $intf_length -gt $max_length ]; then
@@ -21,22 +21,20 @@ done
 extra_width=7
 total_width=$((max_length + extra_width))
 
+printf "%-${total_width}s %-20s %-20s %-10s %-10s %s\n" "Interface" "IPv4 Address" "IPv6 Address" "Status" "MTU" "MAC Address"
+
 for intf in $interfaces; do
     if [[ "$intf" != "lo" && ! "$intf" =~ ^veth && ! "$intf" =~ ^tunl0 ]]; then
         ipv4_addr=$(ip -4 addr show $intf | grep inet | awk '{print $2}')
         ipv6_addr=$(ip -6 addr show $intf | grep inet6 | awk '{print $2}' | grep -v '^fe80::')
         mac_addr=$(ip link show $intf | awk '/ether/ {print $2}')
-        
-        if [ -n "$ipv4_addr" ] || [ -n "$ipv6_addr" ]; then
-            if [ -n "$ipv4_addr" ]; then
-                printf "%-${total_width}s %-20s %s\n" "$intf:" "$ipv4_addr" "$mac_addr"
-            else
-                printf "%-${total_width}s %-20s %s\n" "$intf:" "No IPv4 address" "$mac_addr"
-            fi
-            
-            if [ -n "$ipv6_addr" ]; then
-                printf "%-${total_width}s %-20s %s\n" " " "$ipv6_addr" " "
-            fi
+        status=$(ip -o link show $intf | awk '{print $9}') 
+        mtu=$(ip -o link show $intf | awk '{print $5}')
+
+        if [ -z "$ipv4_addr" ] && [ -z "$ipv6_addr" ]; then
+            continue
         fi
+
+        printf "%-${total_width}s %-20s %-20s %-10s %-10s %s\n" "$intf" "$ipv4_addr" "$ipv6_addr" "$status" "$mtu" "$mac_addr"
     fi
 done
