@@ -1,0 +1,21 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: cni
+spec:
+  containers:
+  - name: cpu-pin
+    image: 192.168.2.100:5000/centos:8
+    command: [ "/sbin/init"  ]
+    env:
+    - name: CPULIMIT
+      value: 3000m
+    imagePullPolicy: IfNotPresent
+    resources:
+      requests:
+        memory: "200Mi"
+        cpu: "3"
+      limits:
+        memory: "200Mi"
+        cpu: "3"
+
