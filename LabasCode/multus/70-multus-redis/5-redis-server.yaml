@@ -1,0 +1,132 @@
+apiVersion: "k8s.cni.cncf.io/v1"
+kind: NetworkAttachmentDefinition
+metadata:
+  name: macvlan-db-redis5
+spec:
+  config: '{
+      "cniVersion": "0.3.0",
+      "name": "whereaboutsexample",
+      "type": "macvlan",
+      "master": "eth0",
+      "mode": "bridge",
+      "ipam": {
+         "datastore": "kubernetes",
+         "type": "static",
+         "addresses": [
+           { "address": "192.168.1.195/24" }
+         ]
+      }
+    }'
+
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: redis5-config
+data:
+  redis.conf: |
+    port 6379
+    cluster-enabled yes
+    cluster-config-file nodes-6379.conf
+    cluster-node-timeout 5000
+    maxmemory 8gb
+    maxmemory-policy allkeys-lru
+    appendonly no
+    save ""
+    dir /var/lib/redis/6379
+    pidfile /var/run/redis/redis-6379.pid
+    logfile /var/log/redis/redis-6379.log
+    bind 0.0.0.0
+    daemonize no
+    protected-mode no
+    io-threads 1
+    io-threads-do-reads no
+    client-output-buffer-limit normal 0 0 0
+    client-output-buffer-limit slave 256mb 64mb 60
+    client-output-buffer-limit pubsub 32mb 8mb 60
+    repl-backlog-size 1mb
+    repl-timeout 60
+
+---
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: redis5
+spec:
+  serviceName: redis5
+  replicas: 1
+  selector:
+    matchLabels:
+      app: redis5
+  template:
+    metadata:
+      labels:
+        app: redis5
+      annotations:
+        k8s.v1.cni.cncf.io/networks: macvlan-db-redis5@eth1
+    spec:
+      containers:
+        - name: redis
+          image: redis
+          ports:
+            - containerPort: 6379
+              name: client
+            - containerPort: 16379
+              name: cluster
+          command:
+            - redis-server
+            - /etc/redis/redis.conf
+          volumeMounts:
+            - name: redis5-config
+              mountPath: /etc/redis/redis.conf
+              subPath: redis.conf
+            - name: redis-data
+              mountPath: /var/lib/redis/6379
+            - name: redis-log
+              mountPath: /var/log/redis
+            - name: redis-conf-dir
+              mountPath: /etc/redis 
+      volumes:
+        - name: redis-conf-dir
+          emptyDir: {}
+        - name: redis5-config
+          configMap:
+            name: redis5-config
+        - name: redis-data
+          persistentVolumeClaim:
+            claimName: redis-data-pvc
+        - name: redis-log
+          persistentVolumeClaim:
+            claimName: redis-log-pvc
+  volumeClaimTemplates:
+    - metadata:
+        name: redis-data
+      spec:
+        accessModes:
+          - ReadWriteOnce
+        resources:
+          requests:
+            storage: 20Gi
+    - metadata:
+        name: redis-log
+      spec:
+        accessModes:
+          - ReadWriteOnce
+        resources:
+          requests:
+            storage: 20Gi
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: redis5
+spec:
+  ports:
+    - port: 6379
+      name: client
+    - port: 16379
+      name: cluster
+  clusterIP: None
+  selector:
+    app: redis5
