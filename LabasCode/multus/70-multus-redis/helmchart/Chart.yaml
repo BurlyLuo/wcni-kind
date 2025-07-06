@@ -1,0 +1,5 @@
+# Chart.yaml
+apiVersion: v2
+name: redis-cluster
+version: 0.1.0
+description: Redis Cluster

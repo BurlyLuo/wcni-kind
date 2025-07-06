@@ -1,0 +1,16 @@
+{{- range .Values.nodes }}
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ .name }}
+spec:
+  ports:
+    - port: 6379
+      name: client
+    - port: 16379
+      name: cluster
+  clusterIP: None
+  selector:
+    app: {{ .name }}
+{{- end }}
