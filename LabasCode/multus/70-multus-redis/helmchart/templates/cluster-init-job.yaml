@@ -1,0 +1,19 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: redis-cluster-init
+spec:
+  template:
+    spec:
+      containers:
+        - name: redis-cli
+          image: redis
+          command:
+            - sh
+            - -c
+            - |
+              redis-cli --cluster create \
+                {{ range $index, $node := .Values.nodes }}{{ if not $index }}{{ else }} {{ end }}{{ $node.ip }}:6379{{ end }} \
+                --cluster-replicas 2 \
+                --cluster-yes
+      restartPolicy: OnFailure

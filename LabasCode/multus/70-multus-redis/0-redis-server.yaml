@@ -73,10 +73,11 @@ spec:
               name: client
             - containerPort: 16379
               name: cluster
-          command:
-            - redis-server
-            - /etc/redis/redis.conf
+          command: ["redis-server", "/etc/redis/redis.conf"]
+
           volumeMounts:
+            - name: redis-run
+              mountPath: /var/run/redis
             - name: redis0-config
               mountPath: /etc/redis/redis.conf
               subPath: redis.conf
@@ -86,18 +87,17 @@ spec:
               mountPath: /var/log/redis
             - name: redis-conf-dir
               mountPath: /etc/redis 
+          resources: { requests: { cpu: "1", memory: "1G" }, limits: { cpu: "1", memory: "1G" } }
+
       volumes:
+        - name: redis-run
+          emptyDir: {}
         - name: redis-conf-dir
           emptyDir: {}
         - name: redis0-config
           configMap:
             name: redis0-config
-        - name: redis-data
-          persistentVolumeClaim:
-            claimName: redis-data-pvc
-        - name: redis-log
-          persistentVolumeClaim:
-            claimName: redis-log-pvc
+
   volumeClaimTemplates:
     - metadata:
         name: redis-data
