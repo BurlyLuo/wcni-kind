@@ -1,0 +1,20 @@
+# values.yaml
+nodes:
+  - name: redis0
+    ip: 192.168.1.190
+  - name: redis1
+    ip: 192.168.1.191
+  - name: redis2
+    ip: 192.168.1.192
+  - name: redis3
+    ip: 192.168.1.193
+  - name: redis4
+    ip: 192.168.1.194
+  - name: redis5
+    ip: 192.168.1.195
+  - name: redis6
+    ip: 192.168.1.196
+  - name: redis7
+    ip: 192.168.1.197
+  - name: redis8
+    ip: 192.168.1.198

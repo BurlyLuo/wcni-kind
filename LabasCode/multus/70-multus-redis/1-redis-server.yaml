@@ -86,6 +86,8 @@ spec:
               mountPath: /var/log/redis
             - name: redis-conf-dir
               mountPath: /etc/redis 
+          resources: { requests: { cpu: "1", memory: "1G" }, limits: { cpu: "1", memory: "1G" } }
+
       volumes:
         - name: redis-conf-dir
           emptyDir: {}
