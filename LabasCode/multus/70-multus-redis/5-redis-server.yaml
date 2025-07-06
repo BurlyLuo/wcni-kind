@@ -5,7 +5,7 @@ metadata:
 spec:
   config: '{
       "cniVersion": "0.3.0",
-      "name": "whereaboutsexample",
+      "name": "nad",
       "type": "macvlan",
       "master": "eth0",
       "mode": "bridge",
