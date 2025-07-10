@@ -39,8 +39,8 @@ data:
     bind 0.0.0.0
     daemonize no
     protected-mode no
-    io-threads 1
-    io-threads-do-reads no
+    io-threads 3
+    io-threads-do-reads yes
     client-output-buffer-limit normal 0 0 0
     client-output-buffer-limit slave 256mb 64mb 60
     client-output-buffer-limit pubsub 32mb 8mb 60
