@@ -1,5 +1,4 @@
 # https://medium.com/@nextatharv123/fluxcd-on-kind-cluster-bc82cc13ad25
-
 flux check --pre
 
 flux bootstrap github --owner=$GITHUB_USER --repository=fleet-infra --branch=main --path=./clusters/my-cluster --personal
