@@ -1,6 +1,7 @@
 # https://medium.com/@nextatharv123/fluxcd-on-kind-cluster-bc82cc13ad25
 export GITHUB_USER=BurlyLuo
-export TOKEN_REMOVED=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
+export TOKEN_REMOVED=
+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
 
 flux check --pre
 
