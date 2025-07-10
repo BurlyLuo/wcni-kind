@@ -1,6 +1,4 @@
 # https://medium.com/@nextatharv123/fluxcd-on-kind-cluster-bc82cc13ad25
-# export GITHUB_USER=$(from git log  || git log --oneline | grep flux)
-# export TOKEN_REMOVED=$(from git log || git log --oneline | grep flux)
 
 flux check --pre
 
