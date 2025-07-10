@@ -8,4 +8,3 @@ flux create source git react --url=https://github.com/burlyluo/react-article-dis
 flux create kustomization react-app --target-namespace=default --source=react --path="./deploy/manifests" --prune=true --interval=5m
 
 kubectl get pods -owide 
-
