@@ -1,0 +1,17 @@
+https://www.yuque.com/wei.luo/kubernetes-cri/gva809
+[root@rowan> 62-multus-shm]# k exec -it shm -- df -h 
+Filesystem      Size  Used Avail Use% Mounted on
+overlay         688G  148G  510G  23% /
+tmpfs            64M     0   64M   0% /dev
+tmpfs          1000M     0 1000M   0% /dev/shm
+/dev/sda3       688G  148G  510G  23% /etc/hosts
+tmpfs            20G   12K   20G   1% /run/secrets/kubernetes.io/serviceaccount
+[root@rowan> 62-multus-shm]# k exec -it cni -- df -h 
+Filesystem      Size  Used Avail Use% Mounted on
+overlay         688G  148G  510G  23% /
+tmpfs            64M     0   64M   0% /dev
+/dev/sda3       688G  148G  510G  23% /etc/hosts
+shm              64M     0   64M   0% /dev/shm
+tmpfs            20G   12K   20G   1% /run/secrets/kubernetes.io/serviceaccount
+[root@rowan> 62-multus-shm]# 
+
