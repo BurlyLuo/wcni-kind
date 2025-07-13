@@ -1,7 +1,6 @@
 #!/bin/bash
 set -v 
 
-controller_node=`kubectl get nodes --no-headers  -o custom-columns=NAME:.metadata.name| grep control-plane`
 cat <<EOF | kubectl apply -f -
 apiVersion: "k8s.cni.cncf.io/v1"
 kind: NetworkAttachmentDefinition
@@ -23,6 +22,17 @@ EOF
 
 cat <<EOF | kubectl apply -f -
 apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: nginx-pvc
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 5Gi
+---
+apiVersion: v1
 kind: Pod
 metadata:
   name: mav
@@ -32,6 +42,9 @@ spec:
   containers:
   - name: nginx
     image: nginx
+    env:
+    - name: TZ
+      value: "Asia/Shanghai" 
     securityContext:
       privileged: false
       capabilities:
@@ -47,16 +60,33 @@ spec:
       failureThreshold: 5
       timeoutSeconds: 3
 
+    lifecycle:
+      preStop:
+        exec:
+          command: ["/bin/sh", "-c", "echo '$(date) preStop restart!' > /data/preStop.txt"]
+      postStart:
+        exec:
+          command: ["/bin/sh", "-c", "echo '$(date) postStart ok!' > /data/postStart.txt"]
+
     readinessProbe:
-      tcpSocket:
-        port: 80
+      exec:
+        command:
+        - cat
+        - /data/postStart.txt
       initialDelaySeconds: 35
       successThreshold: 1
       periodSeconds: 5
       failureThreshold: 5
       timeoutSeconds: 3
 
-  nodeName: ${controller_node}
+    volumeMounts:
+    - name: nginx-data
+      mountPath: /data
+
+  volumes:
+  - name: nginx-data
+    persistentVolumeClaim:
+      claimName: nginx-pvc
 EOF
 
 cat <<EOF
