@@ -58,6 +58,12 @@ spec:
       privileged: false
       capabilities:
         add: ["NET_ADMIN"]
+  securityContext:
+    sysctls:
+    - name: net.ipv4.ip_local_port_range
+      value: "32770 32970"
+    - name: net.ipv4.tcp_syncookies
+      value: "0"
   nodeName: ${controller_node}
 EOF
 
@@ -77,6 +83,13 @@ spec:
       privileged: false
       capabilities:
         add: ["NET_ADMIN"]
+  securityContext:
+    sysctls:
+    - name: net.ipv4.ip_local_port_range
+      value: "32770 32970"
+    - name: net.ipv4.tcp_syncookies
+      value: "0"
+
   nodeName: ${worker_node}
 EOF
 
