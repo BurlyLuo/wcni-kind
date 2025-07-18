@@ -33,8 +33,8 @@ metadata:
     k8s.v1.cni.cncf.io/networks: ipvlanl2-whereabouts-conf@eth1
 spec:
   containers:
-  - name: nettool
-    image: 192.168.2.100:5000/nettool
+  - name: xcni
+    image: 192.168.2.100:5000/xcni
     securityContext:
       privileged: false
       capabilities:
@@ -51,8 +51,8 @@ metadata:
     k8s.v1.cni.cncf.io/networks: ipvlanl2-whereabouts-conf@eth1
 spec:
   containers:
-  - name: nettool
-    image: 192.168.2.100:5000/nettool
+  - name: xcni
+    image: 192.168.2.100:5000/xcni
     securityContext:
       privileged: false
       capabilities:
