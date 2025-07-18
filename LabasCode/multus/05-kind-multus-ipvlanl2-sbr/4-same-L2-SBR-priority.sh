@@ -10,17 +10,17 @@ kubectl exec -it ipvlan-pod-sbr1 -- ip rule del table 1 > /dev/null 2>&1 &
 kubectl exec -it ipvlan-pod-sbr1 -- ip route del 0.0.0.0/0 via 172.18.0.1 table 1 > /dev/null 2>&1 &
 sleep 2
 kubectl exec -it ipvlan-pod-sbr1 -- ip route add 0.0.0.0/0 via 172.18.0.1 table 1
-kubectl exec -it ipvlan-pod-sbr1 -- ip rule add from 172.18.0.0/24 table 1
+kubectl exec -it ipvlan-pod-sbr1 -- ip rule add from 172.18.0.0/24 table 1 priority 42765
 
 # 3. ping test
 sbr1_eth1_ip=`kubectl exec -it ipvlan-pod-sbr1 -- ip address show dev eth1 | grep 'inet ' | awk '{print $2}' | cut -d '/' -f1`
 sbr2_eth1_ip=`kubectl exec -it ipvlan-pod-sbr2 -- ip address show dev eth1 | grep 'inet ' | awk '{print $2}' | cut -d '/' -f1`
 kubectl exec -it ipvlan-pod-sbr1 -- tcpdump -pne -i eth1 -c 2 icmp & > /dev/null 2>&1 &
-sleep 2
+sleep 3
 kubectl exec -it ipvlan-pod-sbr1 -- bash -c "ping -c 1 $sbr2_eth1_ip -I $sbr1_eth1_ip"
+# pod 初始部署出来的时候才能show出这个效果。
 
-
-
+cat <<EOF
 BUT!!!:
 we can see: the following packet will use the real peer's mac to encap the packet.
 [root@ipvlan-pod-sbr1 ~]# tcpdump -pne -i eth1
@@ -34,6 +34,6 @@ listening on eth1, link-type EN10MB (Ethernet), capture size 262144 bytes
 08:33:33.854661 02:42:ac:12:00:04 > 02:42:ac:12:00:02, ethertype IPv4 (0x0800), length 98: 172.18.0.201 > 172.18.0.200: ICMP echo reply, id 83, seq 2, length 64
 08:33:34.877727 02:42:ac:12:00:02 > 02:42:ac:12:00:04, ethertype IPv4 (0x0800), length 98: 172.18.0.200 > 172.18.0.201: ICMP echo request, id 83, seq 3, length 64
 08:33:34.877803 02:42:ac:12:00:04 > 02:42:ac:12:00:02, ethertype IPv4 (0x0800), length 98: 172.18.0.201 > 172.18.0.200: ICMP echo reply, id 83, seq 3, length 64
-
+EOF
 
 
