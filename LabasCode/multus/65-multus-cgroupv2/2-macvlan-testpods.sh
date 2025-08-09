@@ -34,12 +34,13 @@ metadata:
 spec:
   containers:
   - name: nettool
-    image: 192.168.2.100:5000/xcni
-    resources: { requests: { cpu: "1", memory: "1G" }, limits: { cpu: "1", memory: "1G" } }
+    image: rockylinux:8
+    command: ["/bin/sleep", "infinity"]
+    resources: { requests: { cpu: "2", memory: "1G" }, limits: { cpu: "2", memory: "1G" } }
     securityContext:
-      privileged: false
+      privileged: true
       capabilities:
-        add: ["NET_ADMIN"]
+        add: ["NET_ADMIN", "SYS_ADMIN"]
   nodeName: ${controller_node}
 EOF
 
@@ -52,14 +53,24 @@ metadata:
   annotations:
     k8s.v1.cni.cncf.io/networks: macvlan-whereabouts-conf@eth1
 spec:
+  volumes:
+  - name: sysfs
+    hostPath: 
+      path: /sys
+      type: Directory
+
   containers:
   - name: nettool
-    image: 192.168.2.100:5000/xcni
-    resources: { requests: { cpu: "1", memory: "1G" }, limits: { cpu: "1", memory: "1G" } }
+    image: rockylinux:8
+    command: ["/bin/sleep", "infinity"]
+    resources: { requests: { cpu: "2", memory: "1G" }, limits: { cpu: "2", memory: "1G" } }
+    volumeMounts:
+    - name: sysfs
+      mountPath: /sys
     securityContext:
       privileged: false
       capabilities:
-        add: ["NET_ADMIN"]
+        add: ["NET_ADMIN", "SYS_ADMIN"]
   nodeName: ${worker_node}
 EOF
 
