@@ -1,0 +1,23 @@
+annotations:
+  artifacthub.io/changes: |
+    - "[added]: `clusterDomain` to correctly apply fqdns for event and storage addresses"
+    - "[removed]: `eventsaddr` has been removed in favour of `clusterDomain`"
+    - "[fixed]: storage address in source controller assumed cluster domain was always `cluster.local`"
+    - "[changed]: change case of `helmcontroller` to `helmController`"
+    - "[changed]: change case of `imageautomationcontroller` to `imageAutomationController`"
+    - "[changed]: change case of `imagereflectioncontroller` to `imageReflectionController`"
+    - "[changed]: change case of `kustomizecontroller` to `kustomizeController`"
+    - "[changed]: change case of `notificationcontroller` to `notificationController`"
+    - "[changed]: change case of `sourcecontroller` to `sourceController`"
+    - "[changed]: change case of `serviceaccount` to `serviceAccount`"
+    - "[changed]: change case of `additionalargs` to `additionalArgs`"
+    - "[changed]: change case of `loglevel` to `logLevel`"
+    - "[changed]: change case of `watchallnamespaces` to `watchAllNamespaces`"
+apiVersion: v2
+appVersion: 0.36.0
+description: A Helm chart for flux2
+name: flux2
+sources:
+- https://github.com/fluxcd-community/helm-charts
+type: application
+version: 2.0.0
