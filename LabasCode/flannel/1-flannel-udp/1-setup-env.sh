@@ -167,6 +167,11 @@ else
   echo "INFO: No such k8s cluster $k8s_name. Creating..."
 fi
 
+if [[ "$image_name" != "burlyluo/kindest:v1.27.3" ]]; then
+  echo "Cluster init maybe failed"
+  exit 1
+fi
+
 kind get clusters | grep -wq $k8s_name || cat <<EOF | KIND_EXPERIMENTAL_DOCKER_NETWORK=kind kind create cluster --name=$k8s_name --image=$image_name -v=9 --config=-
 kind: Cluster
 apiVersion: kind.x-k8s.io/v1alpha4
