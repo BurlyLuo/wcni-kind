@@ -143,7 +143,11 @@ if [ "$(sysctl -p > /dev/null 2>&1 || true && sysctl -n fs.inotify.max_user_inst
   sed -i '/fs.inotify.max_user_instances/d' /etc/sysctl.conf
   echo "fs.inotify.max_user_instances = 512" >> /etc/sysctl.conf 
 fi
-sysctl -p 2>/dev/null | grep "fs.inotify.max_user_"
+if [ "$(sysctl -p > /dev/null 2>&1 || true && sysctl -n net.ipv4.ip_forward 2>/dev/null)" != "1" ]; then
+  sed -i '/net.ipv4.ip_forward/d' /etc/sysctl.conf
+  echo "net.ipv4.ip_forward = 1" >> /etc/sysctl.conf
+fi
+sysctl -p > /dev/null 2>&1 ; sysctl -a | grep -E "fs.inotify.max_user_|net.ipv4.ip_forward ="
 
 
 # 8. Prepare NoCNI kubernetes environment:
