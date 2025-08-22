@@ -1,0 +1,37 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: security-pod
+spec:
+  securityContext:
+    runAsNonRoot: true
+    runAsUser: 101
+    runAsGroup: 101
+    fsGroup: 101
+
+  containers:
+  - name: nginx
+    image: nginx:latest
+    securityContext:
+      readOnlyRootFilesystem: true
+      allowPrivilegeEscalation: false
+      capabilities:
+        add: ["NET_BIND_SERVICE"]
+    volumeMounts:
+    - name: nginx-confd
+      mountPath: /etc/nginx/conf.d
+      subPath: conf.d
+    - name: nginx-run
+      mountPath: /var/run
+      subPath: run
+    - name: nginx-cache
+      mountPath: /var/cache/nginx
+      subPath: cache
+
+  volumes:
+  - name: nginx-confd
+    emptyDir: {}
+  - name: nginx-run
+    emptyDir: {}
+  - name: nginx-cache
+    emptyDir: {}
