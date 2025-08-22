@@ -12,6 +12,15 @@ spec:
   containers:
   - name: nginx
     image: nginx:latest
+    resources:
+      requests:
+        cpu: 1
+        memory: 1G
+        ephemeral-storage: 100M
+      limits:
+        cpu: 1
+        memory: 1G
+        ephemeral-storage: 100M
     securityContext:
       readOnlyRootFilesystem: true
       allowPrivilegeEscalation: false
