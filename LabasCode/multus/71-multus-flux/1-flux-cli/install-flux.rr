@@ -1,8 +1,10 @@
 # https://medium.com/@nextatharv123/fluxcd-on-kind-cluster-bc82cc13ad25
 flux check --pre
 
-flux bootstrap github --owner=$GITHUB_USER --repository=fleet-infra --branch=main --path=./clusters/my-cluster --personal
+export GITHUB_USER=BurlyLuo
 
+
+flux bootstrap github --owner=$GITHUB_USER --repository=fleet-infra --branch=main --path=./clusters/my-cluster --personal
 flux create source git react --url=https://github.com/burlyluo/react-article-display.git --branch=main
 
 flux create kustomization react-app --target-namespace=default --source=react --path="./deploy/manifests" --prune=true --interval=5m

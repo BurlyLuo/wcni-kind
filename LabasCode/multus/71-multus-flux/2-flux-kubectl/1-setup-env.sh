@@ -104,15 +104,13 @@ if [ "$(sysctl -n fs.inotify.max_user_instances)" != "512" ]; then
 fi
 sysctl -p 2>/dev/null | grep "fs.inotify.max_user_"
 
-
 # 1.Prepare NoCNI kubernetes environment
 docker network list | grep -iw kind || docker network create --driver bridge --subnet=172.18.0.0/16 --gateway=172.18.0.1 --ipv6 --subnet=172:18:0:1::/64 kind || exit 1
-cat <<EOF | KIND_EXPERIMENTAL_DOCKER_NETWORK=kind kind create cluster --name=flannel-host-gw --image=burlyluo/kindest:v1.27.3 --config=-
+cat <<EOF | KIND_EXPERIMENTAL_DOCKER_NETWORK=kind kind create cluster --name=mav --image=burlyluo/kindest:v1.27.3 --config=-
 kind: Cluster
 apiVersion: kind.x-k8s.io/v1alpha4
 networking:
-  disableDefaultCNI: true
-  podSubnet: "10.244.0.0/16"
+  disableDefaultCNI: false
 nodes:
   - role: control-plane
   - role: worker
@@ -139,6 +137,3 @@ chmod +x /root/monitor_startup.sh && /root/monitor_startup.sh'
 else
   echo "No such controller_node!"
 fi
-
-# 4. Install CNI(flannel host-gateway mode) [https://github.com/flannel-io/flannel#deploying-flannel-with-kubectl]
-kubectl apply -f ./flannel.yaml

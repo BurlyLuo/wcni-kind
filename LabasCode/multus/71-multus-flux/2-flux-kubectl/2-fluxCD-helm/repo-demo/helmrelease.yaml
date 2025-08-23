@@ -1,0 +1,14 @@
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: k8s-demo
+  namespace: default
+spec:
+  interval: 30s
+  chart:
+    spec:
+      chart: ./deploy/helm  # 正确的 Chart 路径
+      sourceRef:
+        kind: GitRepository
+        name: k8s-demo
+        namespace: default

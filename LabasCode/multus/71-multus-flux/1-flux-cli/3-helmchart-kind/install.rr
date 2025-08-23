@@ -1,0 +1,18 @@
+# https://medium.com/@nextatharv123/fluxcd-on-kind-cluster-bc82cc13ad25
+flux check --pre
+
+export GITHUB_USER=BurlyLuo
+
+flux bootstrap github --owner=$GITHUB_USER --repository=fleet-infra --branch=main --path=./clusters/my-cluster --personal
+
+flux create source git react \
+  --url=https://github.com/BurlyLuo/react-article-display.git \
+  --branch=main \
+  --export > git-source-react.yaml
+
+flux create helmrelease react-helm \
+  --source=GitRepository/react \
+  --chart="./deploy/helm" \
+  --target-namespace=default \
+  --interval=5m \
+  --export > helmrelease-react.yaml

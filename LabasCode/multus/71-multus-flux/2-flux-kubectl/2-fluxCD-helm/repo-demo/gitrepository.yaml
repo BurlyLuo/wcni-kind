@@ -1,0 +1,22 @@
+# k8s-demo-git-repo.yaml
+apiVersion: source.toolkit.fluxcd.io/v1
+kind: GitRepository
+metadata:
+  name: k8s-demo
+spec:
+  url: https://github.com/BurlyLuo/react-article-display.git
+  timeout: 60s
+  interval: 30s
+  ref:
+    branch: main
+  secretRef:
+    name: k8s-demo
+---
+apiVersion: v1
+stringData:
+  password: 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
+  username: BurlyLuo
+kind: Secret
+metadata:
+  name: k8s-demo
+type: Opaque
