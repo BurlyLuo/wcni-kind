@@ -1,0 +1,21 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: tz
+  labels:
+    run: tz
+spec:
+  volumes:
+  - name: zoneinfo
+    hostPath:
+      path: /usr/share/zoneinfo
+  containers:
+  - name: tz
+    image: 192.168.2.100:5000/xcni
+    volumeMounts:
+    - name: zoneinfo
+      mountPath: /usr/share/zoneinfo
+      readOnly: true
+    env:
+    - name: TZ
+      value: "Asia/Shanghai"
