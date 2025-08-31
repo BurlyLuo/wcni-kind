@@ -1,0 +1,43 @@
+# Prep vault utils
+kubectl exec -it sts/vault sh
+
+vault auth enable kubernetes
+
+vault write auth/kubernetes/config token_reviewer_jwt="$(cat /var/run/secrets/kubernetes.io/serviceaccount/token)" kubernetes_host=https://${KUBERNETES_PORT_443_TCP_ADDR}:443 kubernetes_ca_cert=@/var/run/secrets/kubernetes.io/serviceaccount/ca.crt
+
+vault policy write internal-app - <<EOH
+path "internal/data/database/config" {
+ capabilities = ["read"]
+ }
+EOH
+
+vault write auth/kubernetes/role/internal-app bound_service_account_names=internal-app bound_service_account_namespaces=default policies=internal-app ttl=2400h
+
+# Setup vault demo
+kubectl create sa internal-app 
+
+cat <<EOF | kubectl apply -f -
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: vault-demo
+  labels:
+    app: vault-demo
+spec:
+  selector:
+    matchLabels:
+      app: vault-demo
+  template:
+    metadata:
+      annotations:
+        vault.hashicorp.com/agent-inject: "true"
+        vault.hashicorp.com/role: "internal-app"
+        vault.hashicorp.com/agent-inject-secret-database-config.txt: "internal/data/database/config"
+      labels:
+        app: vault-demo
+    spec:
+      serviceAccountName: internal-app 
+      containers:
+        - name: vault
+          image: cnych/vault-demo:0.0.1
+EOF
