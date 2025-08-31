@@ -1,0 +1,4 @@
+yes Y | flux bootstrap git   --url=ssh://git@10.2.23.170:222/root/fluxcd-uag.git   --private-key-file=/root/.ssh/id_rsa   --branch=main   --interval=1m   --timeout=10m
+
+git clone ssh://git@10.2.23.170:222/root/fluxcd-uag.git
+

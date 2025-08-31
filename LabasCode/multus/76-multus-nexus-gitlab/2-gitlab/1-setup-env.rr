@@ -1,0 +1,60 @@
+[root@rowan> 3-gitlab]# cat gitlab.rr 
+mkdir /data/gitlab; cd /data/gitlab
+cat << 'EOF' > run.sh
+#!/bin/bash
+docker run -td  \
+-p 443:443 \
+-p 80:80 \
+-p 222:22 \
+--name gitlab \
+--restart always \
+-v /data/gitlab/config:/etc/gitlab \
+-v /data/gitlab/logs:/var/log/gitlab \
+-v /data/gitlab/data:/var/opt/gitlab \
+gitlab/gitlab-ce
+EOF
+
+sh run.sh
+
+
+mkdir /data/gitlab/config/ssl ; cd /data/gitlab/config/ssl
+### 生成证书
+openssl req -new -newkey rsa:2048 -sha256 -nodes -out gitlab.super.com.csr -keyout gitlab.super.com.key -subj "/C=CN/ST=Beijing/L=Beijing/O=Super Inc./OU=Web Security/CN=gitlab.super.com"
+
+openssl x509 -req -days 365 -in gitlab.super.com.csr -signkey gitlab.super.com.key -out gitlab.super.com.crt
+
+vim /data/gitlab/config/gitlab.rb
+### 添加如下内容 ###
+external_url 'https://gitlab.super.com'
+nginx['redirect_http_to_https'] = true
+nginx['ssl_certificate'] = "/etc/gitlab/ssl/gitlab.super.com.crt"
+nginx['ssl_certificate_key'] = "/etc/gitlab/ssl/gitlab.super.com.key"
+
+nginx['proxy_set_headers'] = {
+  "X-Forwarded-Proto" => "https",
+  "X-Forwarded-Ssl" => "on"
+}
+
+172.18.0.2	gitlab.super.com
+
+
+docker exec -it gitlab bash
+# gitlab-rails console -e production  ### 这里会稍微等上一会，可能2分钟左右
+--------------------------------------------------------------------------------
+ Ruby:         ruby 2.7.5p203 (2021-11-24 revision f69aeb8314) [x86_64-linux]
+ GitLab:       15.4.2 (ef309cf1466) FOSS
+ GitLab Shell: 14.10.0
+ PostgreSQL:   13.6
+------------------------------------------------------------[ booted in 65.76s ]
+Loading production environment (Rails 6.1.6.1)
+irb(main):001:0> user = User.where(id: 1).first
+=> #<User id:1 @root>
+irb(main):002:0> user.password = 'Nsn1234!'
+=> "gitlab@super.com"
+irb(main):003:0> user.password_confirmation = 'Nsn1234!'
+=> "gitlab@super.com"
+irb(main):004:0> user.save!
+=> true
+irb(main):005:0> quit
+
+
