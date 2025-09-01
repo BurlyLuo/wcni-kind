@@ -21,6 +21,7 @@ topology:
       binds:
         - ./client.crt:/root/client.crt
         - ./client.key:/root/client.key
+        # mount CA_Server.crt to verify the server.crt
         - ./CA_Server.crt:/root/CA_Server.crt
 
       # 2. test step:
@@ -40,6 +41,7 @@ topology:
       binds:
         - ./server.crt:/root/server.crt
         - ./server.key:/root/server.key
+        # mount CA_Client.crt to verify the client.crt
         - ./CA_Client.crt:/root/CA_Client.crt
 
   links:
