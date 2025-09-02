@@ -1,5 +1,55 @@
 # Prep vault utils
+helm repo add hashicorp https://helm.releases.hashicorp.com
+helm install vault hashicorp/vault  --set "server.dev.enabled=true" 
+
+helm install vault-secrets-operator hashicorp/vault-secrets-operator
+
+
+kubectl wait --for=condition=Ready pod/vault-0 --timeout=120s
+ROOT_TOKEN=$(kubectl get secret vault-unseal-keys -o jsonpath='{.data}' | base64 --decode | jq -r '.root_token')
+echo root token: $ROOT_TOKEN
+kubectl port-forward svc/vault 8200:8200
+# WEB:
+http://127.0.0.1:8200
+# CLI
+export VAULT_ADDR='http://127.0.0.1:8200'
+vault login $ROOT_TOKEN
+# 检查状态
+vault status
+
+# 启用 KV 秘密引擎
+vault secrets enable -path=secret kv
+
+# 写入和读取一个测试秘密
+vault kv put secret/hello foo=world
+vault kv get secret/hello
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 kubectl exec -it sts/vault sh
+
+vault secrets enable -path=internal kv-v2
+vault kv put internal/database/config username="db-readonly-username" password="db-secret-password"
+vault kv get internal/database/config
 
 vault auth enable kubernetes
 
@@ -41,3 +91,5 @@ spec:
         - name: vault
           image: cnych/vault-demo:0.0.1
 EOF
+
+k exec -it deploy/vault-demo -c vault -- cat /vault/secrets/database-config.txt
