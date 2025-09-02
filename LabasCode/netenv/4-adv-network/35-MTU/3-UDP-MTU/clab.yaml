@@ -29,18 +29,23 @@ topology:
 
     server1:
       kind: linux
-      image: 192.168.2.100:5000/nettool
+      image: 192.168.2.100:5000/xcni
       exec:
       - ip addr add 10.1.5.10/24 dev net0
       - ip r a 10.1.8.0/24 via 10.1.5.1 dev net0
+      binds:
+      - ./udp_sender:/udp_sender
 
     server2:
       kind: linux
-      image: 192.168.2.100:5000/nettool
+      image: 192.168.2.100:5000/xcni
       exec:
       - ip addr add 10.1.8.10/24 dev net0
       - ip r a 10.1.5.0/24 via 10.1.8.1 dev net0
-
+      - bash -c "/udp_recv 10.1.8.10 8080 &"
+      binds:
+      - ./udp_recv:/udp_recv
+      
   links:
     - endpoints: ["gw1:eth1", "server1:net0"]
     - endpoints: ["gw2:eth1", "server2:net0"]
