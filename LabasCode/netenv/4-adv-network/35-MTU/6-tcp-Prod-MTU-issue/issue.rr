@@ -1,0 +1,14 @@
+这是simu发出来的。和FE上的MTU没有关系【simu上的mtu也是1500】。这个应该是网卡 的tso on造成的。
+2039	2024-04-19 17:53:45.929506	10.2.19.94	10.2.148.26	SIP/SDP	2476	0xc394 (50068)	1	1	2409	9020	5060	Request: INVITE sip:18898710139@sha-st.mavenir.com | 
+# 通常我们：在TCP的流程中，我们的[Don't fragment 都是1的，这也就是MSS的作用的。要不SYN过程协商MSS有啥用呢？]
+但是如果还能看到很大的包的话，那么就是说明此时包不是CPU在处理了，那应该就是网卡处理的：所以，我们需要查网卡的tso。
+010. .... = Flags: 0x2, Don't fragment
+    0... .... = Reserved bit: Not set
+    .1.. .... = Don't fragment: Set
+    ..0. .... = More fragments: Not set
+
+
+ethtool -K eth0 tso off
+
+tcp-segmentation-offload: off
+	tx-tcp-segmentation: off
