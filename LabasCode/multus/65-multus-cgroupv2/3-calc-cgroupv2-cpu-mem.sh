@@ -118,6 +118,8 @@ run_once() {
   print_header
   prev_cpu=$(read_cpu_usage)
   prev_anon=$(read_mem_anon)
+  prev_cpu_initial=$prev_cpu
+  prev_anon_initial=$prev_anon
   echo
   printf "%6s  %-20s  %12s  %10s  %7s  %13s  %13s  %10s  %10s\n" \
     "Sample" "Timestamp(UTC)" "delta_usec" "cores" "mCPU" "delta_anon(B)" "anon(B)" "mem_pct" "cpu_pct"
@@ -127,16 +129,38 @@ run_once() {
   sum_cpu_pct=0; sum_mem_pct=0
   valid_cpu=0; valid_mem=0
 
+  # arrays to store raw values for debug printing later
+  samples_prev_cpu=()
+  samples_cur_cpu=()
+  samples_delta_cpu=()
+  samples_prev_anon=()
+  samples_cur_anon=()
+  samples_delta_anon=()
+  samples_ts=()
+
   for i in $(seq 1 "$SAMPLES"); do
     sleep "$INTERVAL"
     now_ts=$(date -u +"%Y-%m-%dT%H:%M:%SZ")
+    # record prev before reading cur
+    prev_before=$prev_cpu
+    prev_anon_before=$prev_anon
+
     cur_cpu=$(read_cpu_usage)
     cur_anon=$(read_mem_anon)
 
-    delta_cpu=$((cur_cpu - prev_cpu))
-    delta_anon=$((cur_anon - prev_anon))
+    delta_cpu=$((cur_cpu - prev_before))
+    delta_anon=$((cur_anon - prev_anon_before))
     prev_cpu=$cur_cpu
     prev_anon=$cur_anon
+
+    # store sample raw values
+    samples_prev_cpu+=("$prev_before")
+    samples_cur_cpu+=("$cur_cpu")
+    samples_delta_cpu+=("$delta_cpu")
+    samples_prev_anon+=("$prev_anon_before")
+    samples_cur_anon+=("$cur_anon")
+    samples_delta_anon+=("$delta_anon")
+    samples_ts+=("$now_ts")
 
     cores=$(awk -v d="$delta_cpu" -v t="$INTERVAL" 'BEGIN{ if(t<=0){print "0.000000000"} else{ printf "%.9f", d/(t*1000000) } }')
     mCPU=$(awk -v c="$cores" 'BEGIN{ printf "%.3f", c*1000 }')
@@ -181,6 +205,33 @@ run_once() {
   echo "Summary (averages over $valid_cpu cpu samples, $valid_mem mem samples):"
   echo "  CPU_avg_of_limit: ${avg_cpu}%   (denom = cpu.max -> $CPU_LIMIT_CORES cores)"
   echo "  MEM_avg(anon/limit_or_host): ${avg_mem}%   (anon numerator, denom=memory.max or host MemTotal if memory.max==max)"
+  echo "---------------------------------------------------------------"
+
+  # Debug: print raw sampled values and their source files
+  echo
+  echo "Debug: raw sampled values and sources"
+  echo "  cpu usage value read from: $CGPATH/cpu.stat  (field: usage_usec)"
+  echo "  memory anon value read from: $CGPATH/memory.stat  (field: anon)"
+  echo "  cpu.max path: $CGPATH/cpu.max"
+  echo "  memory.max path: $CGPATH/memory.max"
+  echo
+  printf "%6s  %-20s  %15s  %15s  %12s  %15s  %15s  %12s\n" \
+    "Sample" "Timestamp(UTC)" "prev_cpu(usage_usec)" "cur_cpu(usage_usec)" "delta_cpu" "prev_anon(B)" "cur_anon(B)" "delta_anon"
+  printf "%6s  %-20s  %15s  %15s  %12s  %15s  %15s  %12s\n" \
+    "------" "--------------------" "---------------" "---------------" "----------" "---------------" "---------------" "----------"
+
+  for idx in "${!samples_ts[@]}"; do
+    s=$((idx+1))
+    printf "%6d  %-20s  %15s  %15s  %12s  %15s  %15s  %12s\n" \
+      "$s" "${samples_ts[$idx]}" "${samples_prev_cpu[$idx]}" "${samples_cur_cpu[$idx]}" "${samples_delta_cpu[$idx]}" \
+      "${samples_prev_anon[$idx]}" "${samples_cur_anon[$idx]}" "${samples_delta_anon[$idx]}"
+  done
+
+  echo
+  echo "Initial prev_cpu (before first sample): $prev_cpu_initial"
+  echo "Initial prev_anon (before first sample): $prev_anon_initial"
+  echo "Final prev_cpu (after last sample): $prev_cpu"
+  echo "Final prev_anon (after last sample): $prev_anon"
   echo "---------------------------------------------------------------"
 }
 
