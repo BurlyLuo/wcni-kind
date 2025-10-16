@@ -1,0 +1,66 @@
+Demo the Proxy ARP
+---------------------------------------------------------------------------------------------------------------
+--------------  
+|            |      
+| 1.1.1.2/24 |     
+|    ns1     |                     // man ip-route
+|     |      |      
+--------------
+| default gw | gw: 169.254.1.1/24  // man ip-route
+------|-------     
+   ens160           
+      |                   
+      ----------|                  // SNAT
+192.168.2.71    |
+                |
+         114.114.114.114      
+
+
+1. ready ns1's configuration 
+ip netns add ns1
+ip l a veth type veth peer name c-eth0 
+ip l s veth up
+
+ip l s c-eth0 netns ns1
+ip netns exec ns1 ip l s c-eth0 up
+ip netns exec ns1 ip a a 1.1.1.2/24 dev c-eth0 
+ip netns exec ns1 ip r a 169.254.1.1 dev c-eth0 scope link 
+ip netns exec ns1 ip r a default via 169.254.1.1 dev c-eth0
+
+2. test to-gw is available[Enable Proxy_ARP]
+echo 1 > /proc/sys/net/ipv4/conf/veth/proxy_arp 
+ip addr add 169.254.1.1/32 dev veth
+ip netns exec ns1 arping 169.254.1.1 -i c-eth0
+ARPING 169.254.0.1
+42 bytes from 92:58:7a:3c:ec:d8 (169.254.0.1): index=0 time=206.419 msec
+
+3. test to host's address[192.168.2.66/99]
+$ Add a backhaul route on the host side[route -n tell the host how to fwd the packet to the ns1]
+3.1 add reverse route
+ip r a 1.1.1.0/24 dev veth scope link
+
+ip netns exec ns1 arping 192.168.2.66 -i c-eth0
+
+4. test to external network[114.114.114.114]
+iptables -t nat -A POSTROUTING -s 1.1.0.0/16  -j MASQUERADE
+ip netns exec ns1 arping 114.114.114.114 -i c-eth0
+
+5. read more:
+[scope link type]
+man ip-rouote
+              scope SCOPE_VAL
+                     the scope of the destinations covered by the route prefix.  SCOPE_VAL may be a number or a string from the file /etc/iproute2/rt_scopes.  If
+                     this parameter is omitted, ip assumes scope global for all gatewayed unicast routes, scope link for direct unicast and broadcast routes and
+                     scope host for local routes.
+
+其中一个重要参数是"scope"（作用域），它指定适用于路由表条目的网络范围。该参数可以设置为数值或者从"/etc/iproute2/rt_scopes"文件中获取的字符串。下面是几个常见的作用域类型
+
+scope global：全局范围，适用于所有通过网关进行路由的单播流量。
+scope link：链路范围，适用于直接相连的子网或广播域上的单播和广播数据包。
+scope host：主机范围，适用于本地计算机上的本地接口流量。
+如果路由表条目未指定作用域，则默认情况下，iproute2工具将使用以下作用域：
+
+对于通过网关进行路由的单播流量，默认使用全局作用域(global)。
+对于直接相连的子网或广播域上的流量，默认使用链路作用域(link)。
+对于本地计算机上的本地接口流量，默认使用主机作用域(host)。
+
