@@ -1,0 +1,35 @@
+---------------------------------------------------------------------------------------------------------------
+Demo the IPIP mode
+---------------------------------------------------------------------------------------------------------------
+--------------       --------------
+|            |       |            |
+| 1.1.1.1/24 |       | 1.1.2.1/24 |
+|   ipip0    |       |   ipip0    |
+|     |      |       |     |      |
+|     |      |       |     |      |
+------|-------       ------|-------
+   ens160                ens160
+      |                    |
+      ----------------------
+192.168.2.71          192.168.2.73
+
+
+local_ip=`kubectl get nodes -o wide | grep -E "control-plane|bpf1" | awk -F " " '{print $6}'`
+remote_ip=`kubectl get nodes -o wide | grep -E "worker2|bpf3" | awk -F " " '{print $6}'`
+
+$ BPF1 Node or *control-plane[192.168.2.71 or *control-plane]:
+cat <<EOF 
+ip l a name ipip0 type ipip local $local_ip remote $remote_ip
+ip l s ipip0 up
+ip a a 1.1.1.1/24 dev ipip0
+ip r a 1.1.2.0/24 dev ipip0
+EOF
+
+$ BPF3 Node or *worker2[192.168.2.73 or *worker2]:
+cat <<EOF
+ip l a name ipip0 type ipip local $remote_ip remote $local_ip
+ip l s ipip0 up
+ip a a 1.1.2.1/24 dev ipip0 
+ip r a 1.1.1.0/24 dev ipip0
+EOF
+
