@@ -1,4 +1,4 @@
-topo:
+topo: [默认情况下，当一个BGP路由器（尤其是iBGP对等体）向其iBGP邻居通告从eBGP学到的路由时，不会修改该路由的下一跳地址。这个下一跳通常是原始eBGP邻居的IP地址（即外部AS的边界路由器）]
 10.1.5.10/24                                |              1.1.1.1/24  1.1.1.2/24    10.1.8.1/24     10.1.8.10.24
 [server1]                                   |        [gw1]:[eth12]-----[eth12]:[gw2]:[eth20]-----[server2]:[net0]
   [net0]                                    |          [eth13]                   [eth23]
@@ -9,5 +9,6 @@ topo:
     -----------------[eth40]:[gw4]:[eth43]--|--[eth43]:[gw3]:[eth23]-----------------
                                  4.4.4.1/24 |  4.4.4.2/24          3.3.3.1/24
                                             |                      -> Advertisement route 10.1.5.0/24 to gw2 need mod next-hop-self rather than with 4.4.4.1   
+                                            |                      -> Advertisement route 10.1.5.0/24 to gw1 need mod next-hop-self rather than with 4.4.4.1
                  BGP[AS 500]                |         BGP[AS 800]
 			                    |
