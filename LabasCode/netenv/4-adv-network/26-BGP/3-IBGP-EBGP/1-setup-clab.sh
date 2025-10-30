@@ -7,7 +7,7 @@ topology:
   nodes:
     gw1:
       kind: linux
-      image: 192.168.2.100:5000/vyos/vyos:1.4.7
+      image: 192.168.2.100:5000/vyos/vyos:1.4.9
       cmd: /sbin/init
       binds:
         - /lib/modules:/lib/modules
@@ -15,7 +15,7 @@ topology:
 
     gw2:
       kind: linux
-      image: 192.168.2.100:5000/vyos/vyos:1.4.7
+      image: 192.168.2.100:5000/vyos/vyos:1.4.9
       cmd: /sbin/init
       binds:
         - /lib/modules:/lib/modules
@@ -23,15 +23,17 @@ topology:
 
     gw3:
       kind: linux
-      image: 192.168.2.100:5000/vyos/vyos:1.4.7
+      image: 192.168.2.100:5000/vyos/vyos:1.4.9
       cmd: /sbin/init
       binds:
         - /lib/modules:/lib/modules
         - ./startup-conf/gw3.cfg:/opt/vyatta/etc/config/config.boot
+      #exec:
+      #- ip link set eth13 down 
 
     gw4:
       kind: linux
-      image: 192.168.2.100:5000/vyos/vyos:1.4.7
+      image: 192.168.2.100:5000/vyos/vyos:1.4.9
       cmd: /sbin/init
       binds:
         - /lib/modules:/lib/modules
