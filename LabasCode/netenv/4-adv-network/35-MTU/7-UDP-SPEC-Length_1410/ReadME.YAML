@@ -1,0 +1,34 @@
+115	2025-10-30 09:28:26.328037	192.178.7.61,10.2.55.22			192.178.7.101,10.2.55.100	255,64	IPv4	1514		0x1a9c (6812),0x5b30 (23344)	Fragmented IP protocol (proto=UDP 17, off=0, ID=5b30) [Reassembled in #116]
+116	2025-10-30 09:28:26.328097	192.178.7.61,10.2.55.22			192.178.7.101,10.2.55.100	255,64	SIP	454		0x1a9d (6813),0x5b30 (23344)	Request: REGISTER sip:sha-st.mavenir.com  (1 binding) | 
+117	2025-10-30 09:28:26.328172	10.2.55.22			10.2.55.100	63	IPv4	1410		0x0200 (512)	Fragmented IP protocol (proto=UDP 17, off=0, ID=0200) [Reassembled in #118]
+118	2025-10-30 09:28:26.328175	10.2.55.22			10.2.55.100	63	SIP	510		0x0200 (512)	Request: REGISTER sip:sha-st.mavenir.com  (1 binding) | 
+
+
+看这个pcap的 #115 #116 #117 #118:
+我们具体看：#117 #118 [前提我们的接口的MTU是1400，这是很重要！]
+这里是一个UDP的包，然后我们的程序是支持包的分片的：
+Internet Protocol Version 4, Src: 10.2.55.22, Dst: 10.2.55.100
+    0100 .... = Version: 4
+    .... 0101 = Header Length: 20 bytes (5)
+    Differentiated Services Field: 0x00 (DSCP: CS0, ECN: Not-ECT)
+    Total Length: 1396
+    Identification: 0x0200 (512)
+    001. .... = Flags: 0x1, More fragments
+        0... .... = Reserved bit: Not set
+        .0.. .... = Don't fragment: Not set
+        ..1. .... = More fragments: Set   # 这里就是表明程序是支持UDP的数据包分片的。
+    ...0 0000 0000 0000 = Fragment Offset: 0
+    Time to Live: 63
+    Protocol: UDP (17)
+    Header Checksum: 0xd1fb [validation disabled]
+    [Header checksum status: Unverified]
+    Source Address: 10.2.55.22
+    Destination Address: 10.2.55.100
+    [Reassembled IPv4 in frame: 118]
+
+# 这里的知识储备我们可以知道，这是OK的，但是我们有一个疑问是：为啥#117的包的长度是1410。而不是MTU(1400) + 14(L2的长度)=1414呢？这是因为我们的包的长度：
+IP 分片必须按 8 字节对齐
+而IP的头的长度是：20.
+所以，如果我们安按照1414的话，那么此时IP的分片长度就是：1414 - 14 - 20 = 1380， 此时1380/8=172.5.不是整数。
+所以：此时就是最近的一个8的倍数，就是172，所以：172*8 + 20 + 14 = 1410.
+所以我们看到的长度是：1410. 而不是简单的1414. 
