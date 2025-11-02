@@ -1,0 +1,160 @@
+#!/bin/bash
+set -v
+
+for br in br-group1-leaf1 br-group1-leaf2 br-group2-leaf1 br-group2-leaf2 br-group3-leaf1 br-group3-leaf2 br-sp1 br-sp2 br-ssp1; do
+    ip l s $br down > /dev/null 2>&1 || true
+    ip l d $br || true
+    ip l a $br type bridge
+    ip l s $br up
+done
+
+cat <<EOF>clab.yaml | clab deploy -d -t clab.yaml -
+name: clos
+topology:
+  nodes:
+    br-ssp1:
+      kind: bridge
+
+    br-sp1:
+      kind: bridge
+
+    br-sp2:
+      kind: bridge
+
+    br-group1-leaf1:
+      kind: bridge
+    br-group1-leaf2:
+      kind: bridge  
+
+    br-group2-leaf1:
+      kind: bridge
+    br-group2-leaf2:
+      kind: bridge
+
+    br-group3-leaf1:
+      kind: bridge
+    br-group3-leaf2:
+      kind: bridge
+
+    # group1-server1 inter-conn by leaf switch!
+    group1-server1-gpu1:
+      kind: linux
+      image: 192.168.2.100:5000/nettool
+      exec:
+      - ip addr add 10.1.5.10/24 dev net1
+      - ip route replace default via 10.1.5.1
+    group1-server1-gpu2:
+      kind: linux
+      image: 192.168.2.100:5000/nettool
+      exec:
+      - ip addr add 10.1.8.10/24 dev net2
+      - ip route replace default via 10.1.8.1
+    group1-server2-gpu1:
+      kind: linux
+      image: 192.168.2.100:5000/nettool
+      exec:
+      - ip addr add 10.1.5.11/24 dev net1
+      - ip route replace default via 10.1.5.1
+    group1-server2-gpu2:
+      kind: linux
+      image: 192.168.2.100:5000/nettool
+      exec:
+      - ip addr add 10.1.8.11/24 dev net1
+      - ip route replace default via 10.1.8.1
+
+
+    # group2 conn to [group1 and group3] with sp switch!
+    group2-server1-gpu1:
+      kind: linux
+      image: 192.168.2.100:5000/nettool
+      exec:
+      - ip addr add 10.1.5.12/24 dev net1
+      - ip route replace default via 10.1.5.1
+    group2-server2-gpu2:
+      kind: linux
+      image: 192.168.2.100:5000/nettool
+      exec:
+      - ip addr add 10.1.8.12/24 dev net2
+      - ip route replace default via 10.1.8.1
+
+
+    # group3 conn to [group1 and group2] with sp switch!
+    group3-server1-gpu1:
+      kind: linux
+      image: 192.168.2.100:5000/nettool
+      exec:
+      - ip addr add 10.1.5.13/24 dev net1
+      - ip route replace default via 10.1.5.1
+    group3-server2-gpu2:
+      kind: linux
+      image: 192.168.2.100:5000/nettool
+      exec:
+      - ip addr add 10.1.8.13/24 dev net2
+      - ip route replace default via 10.1.8.1
+
+
+
+  links:
+    # br-group1-leaf1 to group1 gpu1 hca
+    - endpoints: ["br-group1-leaf1:leaf1-group1-net1", "group1-server1-gpu1:net1"]
+      mtu: 9000
+    - endpoints: ["br-group1-leaf1:leaf1-group1-net2", "group1-server2-gpu1:net1"]
+      mtu: 9000
+    # br-group1-leaf2 to group1 gpu2 hca  
+    - endpoints: ["br-group1-leaf2:leaf2-group1-net1", "group1-server1-gpu2:net1"]
+      mtu: 9000
+    - endpoints: ["br-group1-leaf2:leaf2-group1-net2", "group1-server2-gpu2:net1"]
+      mtu: 9000
+
+
+    # br-group2-leaf1 to group2 gpu1 hca
+    - endpoints: ["br-group2-leaf1:leaf1-group2-net1", "group2-server1-gpu1:net1"]
+      mtu: 9000
+    # br-group2-leaf2 to group2 gpu2 hca
+    - endpoints: ["br-group2-leaf2:leaf2-group2-net2", "group2-server2-gpu2:net1"]
+      mtu: 9000
+
+
+    # br-group3-leaf1 to group3 gpu1 hca
+    - endpoints: ["br-group3-leaf1:leaf1-group3-net1", "group3-server1-gpu1:net1"]
+      mtu: 9000
+    # br-group3-leaf2 to group3 gpu2 hca
+    - endpoints: ["br-group3-leaf2:leaf2-group3-net2", "group3-server2-gpu2:net1"]
+      mtu: 9000
+   
+
+    # br-sp1 conn to br-group1-leaf1
+    - endpoints: ["br-sp1:sp1-net1", "br-group1-leaf1:br-group1-leaf1-net1"]
+      mtu: 9000
+    # br-sp1 conn to br-group2-leaf1
+    - endpoints: ["br-sp1:sp2-net2", "br-group2-leaf1:br-group2-leaf1-net1"]
+      mtu: 9000
+    # br-sp1 conn to br-group3-leaf1
+    - endpoints: ["br-sp1:sp2-net3", "br-group3-leaf1:br-group3-leaf1-net1"]
+      mtu: 9000
+
+
+    # br-sp2 conn to br-group1-leaf2
+    - endpoints: ["br-sp2:sp2-net11", "br-group1-leaf2:br-group1-leaf2-net2"]
+      mtu: 9000
+    # br-sp2 conn to br-group2-leaf2
+    - endpoints: ["br-sp2:sp2-net22", "br-group2-leaf2:br-group2-leaf2-net2"]
+      mtu: 9000
+    # br-sp2 conn to br-group3-leaf2
+    - endpoints: ["br-sp2:sp2-net33", "br-group3-leaf2:br-group3-leaf2-net2"]
+      mtu: 9000
+
+
+    # br-ssp1 conn br-group1-leaf1 
+    - endpoints: ["br-ssp1:br-group1-leaf1-ssp1", "br-group1-leaf1:net9"]
+      mtu: 9000 
+    # br-ssp1 conn br-group1-leaf2
+    - endpoints: ["br-ssp1:br-group1-leaf2-spp1", "br-group1-leaf2:net10"]
+      mtu: 9000 
+    # br-ssp1 conn br-group2-leaf1
+    - endpoints: ["br-ssp1:br-group2-leaf1-ssp1", "br-group2-leaf1:net11"]
+      mtu: 9000
+    # br-ssp1 conn br-group3-leaf1
+    - endpoints: ["br-ssp1:br-group3-leaf1-ssp1", "br-group3-leaf1:net12"]
+      mtu: 9000
+EOF
