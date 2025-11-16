@@ -24,8 +24,8 @@ spec:
             valueFrom:
               fieldRef:
                 fieldPath: spec.nodeName
-        securityContext:
-          privileged: true
+        #securityContext:
+        #  privileged: true
 
 ---
 apiVersion: v1
