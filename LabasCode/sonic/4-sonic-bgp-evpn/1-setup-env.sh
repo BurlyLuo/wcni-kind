@@ -43,6 +43,7 @@ REMOTE_PATH="/home/admin/"
 USERNAME="admin"
 PASSWORD="admin"
 CONFIG_BASE_DIR="startupconf"
+NODES=("sonic-bgp" "sonic1" "sonic2")
 
 wait_for_healthy() {
     local container=$1
@@ -60,7 +61,7 @@ wait_for_healthy() {
     return 1
 }
 
-for node in sonic-bgp sonic1 sonic2; do
+for node in "${NODES[@]}"; do
     container="clab-vs-$node"
     node_config_dir="$CONFIG_BASE_DIR/$node"
     
@@ -70,7 +71,7 @@ for node in sonic-bgp sonic1 sonic2; do
                 config_file="$node_config_dir/$file"
                 if [ -f "$config_file" ]; then
                     echo "transfer $config_file to $container..."
-                    if sshpass -p "$PASSWORD" scp -o StrictHostKeyChecking=no -o ConnectTimeout=10 "$config_file" "$USERNAME@$container:$REMOTE_PATH" 2>/dev/null; then
+                    if sshpass -p "$PASSWORD" scp -o StrictHostKeyChecking=no -o ConnectTimeout=5 "$config_file" "$USERNAME@$container:$REMOTE_PATH" 2>/dev/null; then
                         echo "success transfer $file to $container"
                     else
                         echo "transfer $file to $container failed"
