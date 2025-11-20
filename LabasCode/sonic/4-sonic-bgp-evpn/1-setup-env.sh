@@ -81,7 +81,7 @@ for node in "${NODES[@]}"; do
                 fi
             done
         else
-            echo "config directory $node_config_dir not exist，pass $container"
+            echo "config directory $node_config_dir not exist"
         fi
     fi
 done
