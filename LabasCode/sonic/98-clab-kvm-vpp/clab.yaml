@@ -1,0 +1,33 @@
+name: vs
+topology:
+  nodes:
+    vm1:
+      kind: generic_vm
+      image: 192.168.2.100:5000/ipng:vpp-proto-bookworm-20250607
+      env:
+        QEMU_SMP: 6
+        QEMU_MEMORY: 8192
+
+    vm2:
+      kind: generic_vm
+      image: 192.168.2.100:5000/ipng:vpp-proto-bookworm-20250607
+      env:
+        QEMU_SMP: 6
+        QEMU_MEMORY: 8192
+
+    server1:
+      kind: linux
+      image: 192.168.2.100:5000/nettool
+      exec:
+      - ip addr add 10.1.5.10/24 dev eth1
+
+    server2:
+      kind: linux
+      image: 192.168.2.100:5000/nettool
+      exec:
+      - ip addr add 10.1.8.10/24 dev eth1
+
+  links:
+    - endpoints: ["vm1:eth1", "vm2:eth1"]
+    - endpoints: ["vm1:eth2", "server1:eth1"]
+    - endpoints: ["vm2:eth2", "server2:eth1"]
