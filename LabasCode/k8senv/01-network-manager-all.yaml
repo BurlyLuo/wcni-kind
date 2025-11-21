@@ -58,9 +58,6 @@ network:
     empty:
       interfaces: []
 
-    mgtbr0:
-      interfaces: []
-
     vmbr0:
       interfaces: []
 
