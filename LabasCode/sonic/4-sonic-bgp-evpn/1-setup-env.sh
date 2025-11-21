@@ -66,6 +66,11 @@ for node in "${NODES[@]}"; do
     node_config_dir="$CONFIG_BASE_DIR/$node"
     
     if wait_for_healthy "$container"; then
+        container_id=$(docker ps --filter "name=$container" --format "{{.ID}}")
+        if [ -n "$container_id" ]; then
+            sed -i "/$container/s/$/ $container_id/" /etc/hosts
+            echo "append $container id $container_id to local hosts"
+        fi
         if [ -d "$node_config_dir" ]; then
             for file in sonic.conf vtysh.conf; do
                 config_file="$node_config_dir/$file"
