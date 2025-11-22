@@ -2,14 +2,14 @@ cat <<EOF>clab.yaml | clab deploy -t clab.yaml -
 name: vs
 topology:
   nodes:
-    vm1:
+    vpp1:
       kind: generic_vm
       image: 192.168.2.100:5000/ipng:vpp-proto-bookworm-20250607
       env:
         QEMU_SMP: 6
         QEMU_MEMORY: 8192
 
-    vm2:
+    vpp2:
       kind: generic_vm
       image: 192.168.2.100:5000/ipng:vpp-proto-bookworm-20250607
       env:
@@ -21,21 +21,27 @@ topology:
       image: 192.168.2.100:5000/nettool
       exec:
       - ip addr add 10.1.5.10/24 dev eth1
+      - ip r a 10.1.8.0/24 via 10.1.5.1
 
     server2:
       kind: linux
       image: 192.168.2.100:5000/nettool
       exec:
       - ip addr add 10.1.8.10/24 dev eth1
+      - ip r a 10.1.5.0/24 via 10.1.8.1
 
   links:
-    - endpoints: ["vm1:eth1", "vm2:eth1"]
-    - endpoints: ["vm1:eth2", "server1:eth1"]
-    - endpoints: ["vm2:eth2", "server2:eth1"]
+    - endpoints: ["vpp1:eth1", "vpp2:eth1"]
+    - endpoints: ["vpp1:eth2", "server1:eth1"]
+    - endpoints: ["vpp2:eth2", "server2:eth1"]
 EOF
 
 
-NODES=("vm1" "vm2")
+NODES=("vpp1" "vpp2")
+REMOTE_PATH="/etc/vpp/"
+USER="root"
+PASSWD="IPng loves VPP"
+CONFIG_BASE_DIR="startupconf"
 
 wait_for_healthy() {
     local container=$1
@@ -55,12 +61,40 @@ wait_for_healthy() {
 
 for node in "${NODES[@]}"; do
     container="clab-vs-$node"
-    
+    node_config_dir="$CONFIG_BASE_DIR/$node"
+ 
     if wait_for_healthy "$container"; then
         container_id=$(docker ps --filter "name=$container" --format "{{.ID}}")
         if [ -n "$container_id" ]; then
             sed -i "/$container/s/$/ $container_id/" /etc/hosts
             echo "append $container id $container_id to local hosts"
+        fi
+        if [ -d "$node_config_dir" ]; then
+            for file in bootstrap.vpp startup.conf; do
+                config_file="$node_config_dir/$file"
+                if [ -f "$config_file" ]; then
+                    echo "transfer $config_file to $container..."
+                    if sshpass -p "$PASSWD" scp -o StrictHostKeyChecking=no -o ConnectTimeout=10 "$config_file" "$USER@$container:$REMOTE_PATH" 2>/dev/null; then
+                        echo "success transfer $file to $container"
+                    else
+                        echo "transfer $file to $container failed"
+                    fi
+                else
+                    echo "file $config_file not exist,pass"
+                fi
+            done
+            if sshpass -p "$PASSWD" ssh -o StrictHostKeyChecking=no -o ConnectTimeout=10 "$USER@$container" "systemctl restart vpp" 2>/dev/null; then
+                echo "restart vpp success"
+            else
+                echo "restart vpp failed"
+            fi
+            if sshpass -p "$PASSWD" ssh -o StrictHostKeyChecking=no -o ConnectTimeout=10 "$USER@$container" "echo 'root:hive'|chpasswd" 2>/dev/null; then
+                echo "reset root passwd from  IPng loves VPP  to hive"
+            else
+                echo "reset root passwd failed"
+            fi
+        else
+            echo "config directory $node_config_dir not exist，pass $container"
         fi
     fi
 done
@@ -80,6 +114,6 @@ CPU Make sure the (virtualized) CPU supports AVX
 RAM The image needs at least 4GB of RAM, and the hypervisor should support hugepages and AVX
 
 Username: ipng with password: ipng loves vpp and is sudo-enabled
-Root Password: IPng loves VPP
+Root Password: IPng loves VPP   or  hive
 
 EOF
