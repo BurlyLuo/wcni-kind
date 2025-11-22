@@ -37,11 +37,12 @@ topology:
 EOF
 
 
-NODES=("vpp1" "vpp2")
 REMOTE_PATH="/etc/vpp/"
 USER="root"
 PASSWD="IPng loves VPP"
 CONFIG_BASE_DIR="startupconf"
+NODES=("vpp1" "vpp2")
+FILES=("bootstrap.vpp" "startup.conf")
 
 wait_for_healthy() {
     local container=$1
@@ -70,7 +71,7 @@ for node in "${NODES[@]}"; do
             echo "append $container id $container_id to local hosts"
         fi
         if [ -d "$node_config_dir" ]; then
-            for file in bootstrap.vpp startup.conf; do
+            for file in "${FILES[@]}"; do
                 config_file="$node_config_dir/$file"
                 if [ -f "$config_file" ]; then
                     echo "transfer $config_file to $container..."
