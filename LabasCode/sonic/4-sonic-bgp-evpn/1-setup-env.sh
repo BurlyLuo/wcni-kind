@@ -40,10 +40,11 @@ EOF
 
 
 REMOTE_PATH="/home/admin/"
-USERNAME="admin"
-PASSWORD="admin"
+USER="admin"
+PASSWD="admin"
 CONFIG_BASE_DIR="startupconf"
 NODES=("sonic-bgp" "sonic1" "sonic2")
+FILES=("sonic.conf" "vtysh.conf")
 
 wait_for_healthy() {
     local container=$1
@@ -72,11 +73,11 @@ for node in "${NODES[@]}"; do
             echo "append $container id $container_id to local hosts"
         fi
         if [ -d "$node_config_dir" ]; then
-            for file in sonic.conf vtysh.conf; do
+            for file in "${FILES[@]}"; do
                 config_file="$node_config_dir/$file"
                 if [ -f "$config_file" ]; then
                     echo "transfer $config_file to $container..."
-                    if sshpass -p "$PASSWORD" scp -o StrictHostKeyChecking=no -o ConnectTimeout=5 "$config_file" "$USERNAME@$container:$REMOTE_PATH" 2>/dev/null; then
+                    if sshpass -p "$PASSWD" scp -o StrictHostKeyChecking=no -o ConnectTimeout=5 "$config_file" "$USER@$container:$REMOTE_PATH" 2>/dev/null; then
                         echo "success transfer $file to $container"
                     else
                         echo "transfer $file to $container failed"
