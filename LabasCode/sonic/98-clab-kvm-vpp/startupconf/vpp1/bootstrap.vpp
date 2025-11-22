@@ -1,0 +1,23 @@
+set logging class linux-cp rate-limit 1000 level warn syslog-level notice
+
+lcp default netns dataplane
+lcp lcp-sync on
+lcp lcp-auto-subint on
+
+comment { Create a loopback interface }
+create loopback interface instance 0
+lcp create loop0 host-if loop0
+set interface state loop0 up
+
+comment { Create one LinuxCP Interface Pair for fpeth1 }
+lcp create fpeth1 host-if fpeth1
+set interface ip address fpeth1 1.1.1.11/24
+set interface state fpeth1 up 
+
+comment { Create to-server1 interface }
+lcp create fpeth2 host-if fpeth2
+set interface ip address fpeth2 10.1.5.1/24
+set interface state fpeth2 up
+
+comment { Create route to 10.1.8.0/24 }
+ip route add 10.1.8.0/24 via 1.1.1.12
