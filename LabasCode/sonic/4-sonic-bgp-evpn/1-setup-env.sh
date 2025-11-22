@@ -1,3 +1,26 @@
+cat <<'EOF'
+# https://sonic-net.github.io/SONiC/sonic_latest_images.html
+# https://medium.com/sonic-nos/evpn-route-reflector-with-sonic-using-frr-mgmt-framework-db6d12b85ce7
+# https://netbergtw.com/top-support/netberg-sonic/vlan-and-vlan-routing/
+# https://netbergtw.com/top-support/netberg-sonic/evpn-l2-vxlan/
+# https://containerlab.dev/manual/kinds/sonic-vm/
+# TOPO
+                     Loopback0 10.1.0.1
+                          BGP RR
+                      IPv4 L2 EVPN API
+                         sonic-bgp
+     Ethernet4: 10.0.0.8/31 / \ Ethernet8: 10.0.0.10/31 
+                          /     \
+ Ethernet4: 10.0.0.9/31 /         \ Ethernet4: 10.0.0.11/31
+                  soinc1          soinc2
+               BGP Clinet        BGP Clinet
+            VTEP: 10.1.0.2      VTEP: 10.1.0.3 
+         Loopback0 10.1.0.2    Loopback0 10.1.0.3
+              Ethernet0           Ethernet0
+               VLAN 10             VLAN 10 
+              VNI 1000            VNI 1000
+EOF
+
 cat <<EOF>clab.yaml | clab deploy -t clab.yaml -
 name: vs
 topology:
