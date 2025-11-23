@@ -4,10 +4,16 @@ topology:
     sonic1:
       kind: sonic-vm
       image: 192.168.2.100:5000/sonic:202305
+      env:
+        QEMU_SMP: 4
+        QEMU_MEMORY: 4096
 
     sonic2:
       kind: sonic-vm
       image: 192.168.2.100:5000/sonic:202305
+      env:
+        QEMU_SMP: 4
+        QEMU_MEMORY: 4096
 
     server1:
       kind: linux
@@ -21,13 +27,35 @@ topology:
       image: 192.168.2.100:5000/nettool
       exec:
       - ip addr add 10.1.5.11/24 dev eth1
+      - ip r r default via 10.1.5.1
 
+    server3:
+      kind: linux
+      image: 192.168.2.100:5000/nettool
+      exec:
+      - ip addr add 10.1.8.10/24 dev eth1
+      - ip r r default via 10.1.8.1
+
+    server4:
+      kind: linux
+      image: 192.168.2.100:5000/nettool
+      exec:
+      - ip addr add 10.1.8.11/24 dev eth1
+      - ip r r default via 10.1.8.1
   links:
+    # vrnetlab uses the qemu user mode networking to connect the VM's (guest) management interface to the host.
+    # https://containerlab.dev/manual/vrnetlab/#management-interface
+    # https://wiki.qemu.org/Documentation/Networking#User_Networking_(SLIRP) 
+
     # sonic-vm container uses the following mapping for its linux interfaces:
     # eth0 - management interface connected to the containerlab management network
     # eth1 - first data (front-panel port) interface that is mapped to Ethernet0 port
     # eth2 - second data interface that is mapped to Ethernet4 port. Any new port will result in a "previous interface + 4" (Ethernet4) mapping.
     # When containerlab launches sonic-vs node, it will assign IPv4/6 address to the eth0 interface. Data interface eth1 mapped to Ethernet0 port.
+
     - endpoints: ["sonic1:eth1", "sonic2:eth1"]
     - endpoints: ["sonic1:eth2", "server1:eth1"]
     - endpoints: ["sonic2:eth2", "server2:eth1"]
+
+    - endpoints: ["sonic1:eth3", "server3:eth1"]
+    - endpoints: ["sonic2:eth3", "server4:eth1"]

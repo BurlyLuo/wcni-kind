@@ -5,10 +5,16 @@ topology:
     sonic1:
       kind: sonic-vm
       image: 192.168.2.100:5000/sonic:202305
+      env:
+        QEMU_SMP: 4
+        QEMU_MEMORY: 4096
 
     sonic2:
       kind: sonic-vm
       image: 192.168.2.100:5000/sonic:202305
+      env:
+        QEMU_SMP: 4
+        QEMU_MEMORY: 4096
 
     server1:
       kind: linux
@@ -22,16 +28,38 @@ topology:
       image: 192.168.2.100:5000/nettool
       exec:
       - ip addr add 10.1.5.11/24 dev eth1
+      - ip r r default via 10.1.5.1
 
+    server3:
+      kind: linux
+      image: 192.168.2.100:5000/nettool
+      exec:
+      - ip addr add 10.1.8.10/24 dev eth1
+      - ip r r default via 10.1.8.1
+
+    server4:
+      kind: linux
+      image: 192.168.2.100:5000/nettool
+      exec:
+      - ip addr add 10.1.8.11/24 dev eth1
+      - ip r r default via 10.1.8.1
   links:
+    # vrnetlab uses the qemu user mode networking to connect the VM's (guest) management interface to the host.
+    # https://containerlab.dev/manual/vrnetlab/#management-interface
+    # https://wiki.qemu.org/Documentation/Networking#User_Networking_(SLIRP) 
+
     # sonic-vm container uses the following mapping for its linux interfaces:
     # eth0 - management interface connected to the containerlab management network
     # eth1 - first data (front-panel port) interface that is mapped to Ethernet0 port
     # eth2 - second data interface that is mapped to Ethernet4 port. Any new port will result in a "previous interface + 4" (Ethernet4) mapping.
     # When containerlab launches sonic-vs node, it will assign IPv4/6 address to the eth0 interface. Data interface eth1 mapped to Ethernet0 port.
+
     - endpoints: ["sonic1:eth1", "sonic2:eth1"]
     - endpoints: ["sonic1:eth2", "server1:eth1"]
     - endpoints: ["sonic2:eth2", "server2:eth1"]
+
+    - endpoints: ["sonic1:eth3", "server3:eth1"]
+    - endpoints: ["sonic2:eth3", "server4:eth1"]
 EOF
 
 REMOTE_PATH="/home/admin/"
@@ -41,31 +69,38 @@ CONFIG_BASE_DIR="startupconf"
 NODES=("sonic1" "sonic2")
 FILES=("sonic.conf" "vtysh.conf")
 
-declare -A config_cmds=(
-    ["sonic1"]="sudo config hostname sonic1
-sudo config vlan add 10
-sudo config interface ip remove Ethernet0 10.0.0.0/31
-sudo config interface ip remove Ethernet4 10.0.0.2/31
-sudo config vlan member add 10 Ethernet0
-sudo config vlan member add -u 10 Ethernet4
-sudo config interface ip add Vlan10 10.1.5.1/24
-sudo config save -y
-sudo chmod +x /usr/local/bin/sonic-cfggen
-sudo chmod 666 /etc/sonic/config_db.json
-sudo /usr/local/bin/sonic-cfggen -d --print-data > /etc/sonic/config_db.json
-sudo config reload -f -y"
+declare -A prep_vm=(
+    ["sonic1"]="echo 'export PYTHONWARNINGS=ignore::SyntaxWarning' >> ~/.bashrc"
 
-    ["sonic2"]="sudo config hostname sonic2
-sudo config vlan add 10
-sudo config interface ip remove Ethernet0 10.0.0.0/31
-sudo config interface ip remove Ethernet4 10.0.0.2/31
-sudo config vlan member add 10 Ethernet0
-sudo config vlan member add -u 10 Ethernet4
+    ["sonic2"]="echo 'export PYTHONWARNINGS=ignore::SyntaxWarning' >> ~/.bashrc"
+)
+
+declare -A config_cmds=(
+    ["sonic1"]="sudo config reload -f -y
+sudo config vlan add 5
+sudo config vlan add 8
+sudo config vlan member add 5 Ethernet0
+sudo config vlan member add 8 Ethernet0
+sudo config vlan member add -u 5 Ethernet4
+sudo config vlan member add -u 8 Ethernet8
+sudo config interface ip add Vlan5 10.1.5.1/24
+sudo config interface ip add Vlan8 10.1.8.1/24
 sudo config save -y
 sudo chmod +x /usr/local/bin/sonic-cfggen
 sudo chmod 666 /etc/sonic/config_db.json
-sudo /usr/local/bin/sonic-cfggen -d --print-data > /etc/sonic/config_db.json
-sudo config reload -f -y"
+sudo /usr/local/bin/sonic-cfggen -d --print-data > /etc/sonic/config_db.json"
+
+    ["sonic2"]="sudo config reload -f -y
+sudo config vlan add 5
+sudo config vlan add 8
+sudo config vlan member add 5 Ethernet0
+sudo config vlan member add 8 Ethernet0
+sudo config vlan member add -u 5 Ethernet4
+sudo config vlan member add -u 8 Ethernet8
+sudo config save -y
+sudo chmod +x /usr/local/bin/sonic-cfggen
+sudo chmod 666 /etc/sonic/config_db.json
+sudo /usr/local/bin/sonic-cfggen -d --print-data > /etc/sonic/config_db.json"
 )
 
 wait_for_healthy() {
@@ -76,7 +111,7 @@ wait_for_healthy() {
     while [ $attempt -le $max_attempts ]; do
         echo "[$(date '+%Y-%m-%d %H:%M:%S')] Wait $container come into healthy..."
         health_status=$(docker inspect --format='{{.State.Health.Status}}' "$container" 2>/dev/null | grep "healthy")
-        container_count=$(sshpass -p "$PASSWD" ssh -o StrictHostKeyChecking=no -o ConnectTimeout=10 "$USER@$container" "docker ps -aq | wc -l" 2>/dev/null)
+        container_count=$(sshpass -p "$PASSWD" ssh -o StrictHostKeyChecking=no -o ConnectTimeout=5 "$USER@$container" "docker ps -aq | wc -l" 2>/dev/null)
         if [ "$health_status" == "healthy"  ] && [ "$container_count" -eq 13 ] 2>/dev/null; then
             return 0
         fi
@@ -103,6 +138,11 @@ for node in "${NODES[@]}"; do
                     echo "transfer $config_file to $container..."
                     if sshpass -p "$PASSWD" scp -o StrictHostKeyChecking=no -o ConnectTimeout=5 "$config_file" "$USER@$container:$REMOTE_PATH" 2>/dev/null; then
                         echo "success transfer $file to $container"
+                        if sshpass -p "$PASSWD" ssh -o StrictHostKeyChecking=no -o ConnectTimeout=5 "$USER@$container" "sudo chmod 666 /etc/sonic/config_db.json && sudo cat $REMOTE_PATH/sonic.conf > /etc/sonic/config_db.json" 2>/dev/null; then
+                            echo "init sonic config success"
+                        else
+                            echo "init sonic config failed"
+                        fi
                     else
                         echo "transfer $file to $container failed"
                     fi
@@ -114,15 +154,16 @@ for node in "${NODES[@]}"; do
             echo "config directory $node_config_dir not exist"
         fi
 
+        echo "[$(date '+%Y-%m-%d %H:%M:%S')] Prepare and config for $container..."
         if sshpass -p "$PASSWD" ssh -o StrictHostKeyChecking=no -o ConnectTimeout=10 "$USER@$container" "
             set -xe
-            echo "$node current container list" 
+            ${prep_vm[$node]}
             sudo docker ps -a
             ${config_cmds[$node]}
         " 2>&1; then
-                echo "$node config success"
-            else
-                echo "$node config failed"
+            echo "$node node prep and config success"
+        else
+            echo "$node node prep and config failed"
         fi
     fi
 done
