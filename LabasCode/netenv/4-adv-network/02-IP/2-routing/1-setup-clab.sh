@@ -6,13 +6,12 @@ name: routing
 topology:
   nodes:
     gw0:
-      kind: sonic-vs
-      #image: 192.168.2.100:5000/vyos/vyos:1.4.9
-      image: docker-sonic-vs:20251116
-      #cmd: /sbin/init
-      #binds:
-      #  - /lib/modules:/lib/modules
-      #  - ./startup-conf/gw0-boot.cfg:/opt/vyatta/etc/config/config.boot
+      kind: linux
+      image: 192.168.2.100:5000/vyos/vyos:1.4.9
+      cmd: /sbin/init
+      binds:
+        - /lib/modules:/lib/modules
+        - ./startup-conf/gw0-boot.cfg:/opt/vyatta/etc/config/config.boot
 
     server1:
       kind: linux
