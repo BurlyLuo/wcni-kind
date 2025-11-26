@@ -240,7 +240,7 @@ sudo docker cp /tmp/vtysh.tmp bgp:/root/
 sudo docker exec bgp bash -c 'vtysh -f /root/vtysh.tmp'
 sudo vtysh -c 'show run'
 else
-    echo 'ERROR: bgp container did not start within 50 seconds'
+    echo 'ERROR: bgp container did not start within 20 seconds'
     exit 1
 fi"
 
@@ -298,7 +298,7 @@ sudo docker cp /tmp/vtysh.tmp bgp:/root/
 sudo docker exec bgp bash -c 'vtysh -f /root/vtysh.tmp'
 sudo vtysh -c 'show run'
 else
-    echo 'ERROR: bgp container did not start within 50 seconds'
+    echo 'ERROR: bgp container did not start within 20 seconds'
     exit 1
 fi"
 
@@ -356,7 +356,7 @@ sudo docker cp /tmp/vtysh.tmp bgp:/root/
 sudo docker exec bgp bash -c 'vtysh -f /root/vtysh.tmp'
 sudo vtysh -c 'show run'
 else
-    echo 'ERROR: bgp container did not start within 50 seconds'
+    echo 'ERROR: bgp container did not start within 20 seconds'
     exit 1
 fi"
 
@@ -414,7 +414,7 @@ sudo docker cp /tmp/vtysh.tmp bgp:/root/
 sudo docker exec bgp bash -c 'vtysh -f /root/vtysh.tmp'
 sudo vtysh -c 'show run'
 else
-    echo 'ERROR: bgp container did not start within 50 seconds'
+    echo 'ERROR: bgp container did not start within 20 seconds'
     exit 1
 fi"
 )
