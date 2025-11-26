@@ -101,7 +101,7 @@ CONFIG_BASE_DIR="startupconf"
 NODES=("spine1" "spine2" "leaf1" "leaf2")
 FILES=("sonic.conf" "vtysh.conf")
 
-declare -A prep_vm=(
+declare -A precfg_vm=(
     ["spine1"]="echo 'export PYTHONWARNINGS=ignore::SyntaxWarning' >> ~/.bashrc"
 	
     ["spine2"]="echo 'export PYTHONWARNINGS=ignore::SyntaxWarning' >> ~/.bashrc"
@@ -419,6 +419,20 @@ else
 fi"
 )
 
+declare -A postcfg_vm=(
+    ["spine1"]="vtysh -c 'no ip protocol bgp route-map RM_SET_SRC'
+vtysh -c 'no route-map RM_SET_SRC'"
+
+    ["spine2"]="vtysh -c 'no ip protocol bgp route-map RM_SET_SRC'
+vtysh -c 'no route-map RM_SET_SRC'"
+
+    ["leaf1"]="vtysh -c 'no ip protocol bgp route-map RM_SET_SRC'
+vtysh -c 'no route-map RM_SET_SRC'"
+
+    ["leaf2"]="vtysh -c 'no ip protocol bgp route-map RM_SET_SRC'
+vtysh -c 'no route-map RM_SET_SRC'"
+)
+
 wait_for_healthy() {
     local container=$1
     local max_attempts=20
@@ -473,7 +487,7 @@ for node in "${NODES[@]}"; do
         echo "[$(date '+%Y-%m-%d %H:%M:%S')] Prepare and config for $container..."
         if sshpass -p "$PASSWD" ssh -o StrictHostKeyChecking=no -o ConnectTimeout=5 "$USER@$container" "
             set -x
-            ${prep_vm[$node]}
+            ${precfg_vm[$node]}
             sudo docker ps -a
             ${config_cmds[$node]}
         " 2>&1; then
@@ -490,7 +504,17 @@ for node in "${NODES[@]}"; do
             echo "$node node apply configuration success"
         else
             echo "$node node apply configuration failed"
-        fi		
+        fi
+
+        echo "[$(date '+%Y-%m-%d %H:%M:%S')] PostCfg for $container..."
+        if sshpass -p "$PASSWD" ssh -o StrictHostKeyChecking=no -o ConnectTimeout=5 "$USER@$container" "
+            set -x
+            ${postcfg[$node]}
+        " 2>&1; then
+            echo "$node node postcfg success"
+        else
+            echo "$node node postcfg failed"
+        fi	
     fi
 done
 
