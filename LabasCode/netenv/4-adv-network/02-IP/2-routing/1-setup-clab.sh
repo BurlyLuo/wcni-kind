@@ -1,7 +1,7 @@
 #!/bin/bash
 set -v
 
-cat <<EOF>clab.yaml | clab deploy -t clab.yaml -
+cat <<EOF>clab.yaml | clab deploy -d -t clab.yaml -
 name: routing
 topology:
   nodes:
@@ -17,16 +17,18 @@ topology:
       kind: linux
       image: 192.168.2.100:5000/nettool
       exec:
-      - ip addr add 10.1.5.10/24 dev net0
-      - ip route replace default via 10.1.5.1
+        - ip addr add 10.1.5.10/24 dev net0
+        - ip route replace default via 10.1.5.1
 
     server2:
       kind: linux
       image: 192.168.2.100:5000/nettool
       exec:
-      - ip addr add 10.1.8.10/24 dev net0
-      - ip route replace default via 10.1.8.1
-
+        - ip addr add 10.1.8.10/24 dev net0
+        - ip route replace default via 10.1.8.1
+      env:
+        COLUMNS: "130"
+        LINES: "100"      
 
   links:
     - endpoints: ["gw0:eth1", "server1:net0"]
