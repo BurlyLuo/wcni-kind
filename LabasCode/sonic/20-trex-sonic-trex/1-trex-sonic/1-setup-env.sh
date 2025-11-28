@@ -1,3 +1,6 @@
+# https://blog.hacksbrain.com/cisco-trex-packet-generator-step-by-step
+# https://trex-tgn.cisco.com/trex/release/
+# https://trex-tgn.cisco.com/trex/doc/trex_preso.html#slide-9
 cat <<EOF>clab.yaml | clab deploy -t clab.yaml -
 name: vs
 topology:
