@@ -1,0 +1,42 @@
+name: bond
+topology:
+  nodes:
+    br-pool0:
+      kind: bridge
+
+    br-pool1:
+      kind: bridge
+
+    br-poolx:
+      kind: bridge
+
+    gw:
+      kind: linux
+      image: 192.168.2.100:5000/nettool
+      exec:
+      - ip a a 10.1.5.1/24 dev eth1
+
+    server1:
+      kind: linux
+      image: 192.168.2.100:5000/nettool
+      binds:
+        - /lib/modules:/lib/modules
+      exec:
+      - bash -c "modprobe bonding"
+      - ip link add bond0 type bond mode 802.3ad miimon 100
+      - ip l s eth1 down
+      - ip l s eth2 down
+      - ip l s eth1 master bond0
+      - ip l s eth2 master bond0
+      - ip l s bond0 up
+      - ip a a 10.1.5.10/24 dev bond0
+      - ip r r default via 10.1.5.1
+
+  links:
+    - endpoints: ["br-pool0:net1", "server1:eth1"]
+    - endpoints: ["br-pool1:net2", "server1:eth2"]
+
+    - endpoints: ["br-pool0:net3", "br-poolx:net5"]
+    - endpoints: ["br-pool1:net4", "br-poolx:net6"]
+
+    - endpoints: ["br-poolx:net7", "gw:eth1"]
