@@ -3,19 +3,19 @@ topology:
   nodes:
     spine1:
       kind: sonic-vm
-      image: 192.168.2.100:5000/sonic:202305
+      image: 192.168.2.100:5000/sonic:master
 
     spine2:
       kind: sonic-vm
-      image: 192.168.2.100:5000/sonic:202305
+      image: 192.168.2.100:5000/sonic:master
 
     leaf1:
       kind: sonic-vm
-      image: 192.168.2.100:5000/sonic:202305
+      image: 192.168.2.100:5000/sonic:master
 
     leaf2:
       kind: sonic-vm
-      image: 192.168.2.100:5000/sonic:202305
+      image: 192.168.2.100:5000/sonic:master
 
     server1:
       kind: linux
