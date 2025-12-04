@@ -12,19 +12,19 @@ topology:
   nodes:
     spine1:
       kind: sonic-vm
-      image: 192.168.2.100:5000/sonic:202305
+      image: 192.168.2.100:5000/sonic:master
 
     spine2:
       kind: sonic-vm
-      image: 192.168.2.100:5000/sonic:202305
+      image: 192.168.2.100:5000/sonic:master
 
     leaf1:
       kind: sonic-vm
-      image: 192.168.2.100:5000/sonic:202305
+      image: 192.168.2.100:5000/sonic:master
 
     leaf2:
       kind: sonic-vm
-      image: 192.168.2.100:5000/sonic:202305
+      image: 192.168.2.100:5000/sonic:master
 
     server1:
       kind: linux
@@ -442,7 +442,7 @@ wait_for_healthy() {
         echo "[$(date '+%Y-%m-%d %H:%M:%S')] Wait $container come into healthy..."
         health_status=$(docker inspect --format='{{.State.Health.Status}}' "$container" 2>/dev/null | grep "healthy")
         container_count=$(sshpass -p "$PASSWD" ssh -o StrictHostKeyChecking=no -o ConnectTimeout=5 "$USER@$container" "docker ps -aq | wc -l" 2>/dev/null)
-        if [ "$health_status" == "healthy"  ] && [ "$container_count" -eq 13 ] 2>/dev/null; then
+        if [ "$health_status" == "healthy"  ] && [ "$container_count" -eq 14 ] 2>/dev/null; then
             return 0
         fi
         sleep 8
