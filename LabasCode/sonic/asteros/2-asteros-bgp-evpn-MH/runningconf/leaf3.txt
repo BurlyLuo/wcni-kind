@@ -1,0 +1,258 @@
+leaf3# show running-config 
+!
+evpn mh mac-holdtime 0
+evpn mh neigh-holdtime 0
+evpn mh redirect-off
+!
+interface vxlan 0
+ source 10.1.0.214
+exit
+!
+vrf 456
+ vni 1000 vxlan 0
+exit-vrf
+!
+vlan 300
+ vni 300
+!
+vlan range 300
+!
+interface link-aggregation 7
+ lacp system-id 00:00:01:00:00:03
+ switchport access vlan 300
+ evpn mh es-id 300
+ evpn mh es-sys-mac 00:00:01:00:00:03
+exit
+!
+interface ethernet 0/0
+ no shutdown
+ mtu 9216
+
+exit
+!
+interface ethernet 0/1
+ no shutdown
+ mtu 9216
+
+ switchport
+ link-aggregation-group 7
+exit
+!
+interface ethernet 0/2
+ no shutdown
+ mtu 9216
+
+ ip address 172.16.13.2/24
+ evpn mh uplink
+exit
+!
+interface ethernet 0/3
+ no shutdown
+ mtu 9216
+
+ ip address 172.16.17.2/24
+ evpn mh uplink
+exit
+!
+interface ethernet 0/4
+ no shutdown
+ mtu 9216
+
+exit
+!
+interface ethernet 0/5
+ no shutdown
+ mtu 9216
+
+exit
+!
+interface ethernet 0/6
+ no shutdown
+ mtu 9216
+
+exit
+!
+interface ethernet 0/7
+ no shutdown
+ mtu 9216
+
+exit
+!
+interface ethernet 0/8
+ no shutdown
+ mtu 9216
+
+exit
+!
+interface ethernet 0/9
+ no shutdown
+ mtu 9216
+
+exit
+!
+interface ethernet 0/10
+ no shutdown
+ mtu 9216
+
+exit
+!
+interface ethernet 0/11
+ no shutdown
+ mtu 9216
+
+exit
+!
+interface ethernet 0/12
+ no shutdown
+ mtu 9216
+
+exit
+!
+interface ethernet 0/13
+ no shutdown
+ mtu 9216
+
+exit
+!
+interface ethernet 0/14
+ no shutdown
+ mtu 9216
+
+exit
+!
+interface ethernet 0/15
+ no shutdown
+ mtu 9216
+
+exit
+!
+interface ethernet 0/16
+ no shutdown
+ mtu 9216
+
+exit
+!
+interface ethernet 0/17
+ no shutdown
+ mtu 9216
+
+exit
+!
+interface ethernet 0/18
+ no shutdown
+ mtu 9216
+
+exit
+!
+interface ethernet 0/19
+ no shutdown
+ mtu 9216
+
+exit
+!
+interface ethernet 0/20
+ no shutdown
+ mtu 9216
+
+exit
+!
+interface ethernet 0/21
+ no shutdown
+ mtu 9216
+
+exit
+!
+interface ethernet 0/22
+ no shutdown
+ mtu 9216
+
+exit
+!
+interface ethernet 0/23
+ no shutdown
+ mtu 9216
+
+exit
+!
+interface ethernet 0/24
+ no shutdown
+ mtu 9216
+
+exit
+!
+interface ethernet 0/25
+ no shutdown
+ mtu 9216
+
+exit
+!
+interface ethernet 0/26
+ no shutdown
+ mtu 9216
+
+exit
+!
+interface ethernet 0/27
+ no shutdown
+ mtu 9216
+
+exit
+!
+interface ethernet 0/28
+ no shutdown
+ mtu 9216
+
+exit
+!
+interface ethernet 0/29
+ no shutdown
+ mtu 9216
+
+exit
+!
+interface ethernet 0/30
+ no shutdown
+ mtu 9216
+
+exit
+!
+interface ethernet 0/31
+ no shutdown
+ mtu 9216
+
+exit
+!
+interface loopback 0
+ ip address 10.1.0.214/32
+exit
+!
+interface vlan 300
+ mac-address 00:11:22:33:44:77
+ vrf 456
+ ip address 120.0.0.1/24
+exit
+!
+hostname leaf3
+!
+router bgp 65204
+ bgp router-id 10.1.0.214
+ no bgp ebgp-requires-policy
+ neighbor PEER_V4_EBGP peer-group
+ neighbor 172.16.13.1 remote-as 65200
+ neighbor 172.16.13.1 peer-group PEER_V4_EBGP
+ neighbor 172.16.17.1 remote-as 65201
+ neighbor 172.16.17.1 peer-group PEER_V4_EBGP
+ !
+ address-family ipv4 unicast
+  network 10.1.0.214/32
+  redistribute connected
+ exit-address-family
+ !
+ address-family l2vpn evpn
+  neighbor PEER_V4_EBGP activate
+  advertise-all-vni
+ exit-address-family
+exit
+!
+end
+leaf3# 

@@ -1,0 +1,230 @@
+spine2# show running-config 
+!
+interface ethernet 0/0
+ no shutdown
+ mtu 9216
+
+exit
+!
+interface ethernet 0/1
+ no shutdown
+ mtu 9216
+
+ ip address 172.16.15.1/24
+exit
+!
+interface ethernet 0/2
+ no shutdown
+ mtu 9216
+
+ ip address 172.16.16.1/24
+exit
+!
+interface ethernet 0/3
+ no shutdown
+ mtu 9216
+
+ ip address 172.16.17.1/24
+exit
+!
+interface ethernet 0/4
+ no shutdown
+ mtu 9216
+
+ ip address 172.16.18.1/24
+exit
+!
+interface ethernet 0/5
+ no shutdown
+ mtu 9216
+
+exit
+!
+interface ethernet 0/6
+ no shutdown
+ mtu 9216
+
+exit
+!
+interface ethernet 0/7
+ no shutdown
+ mtu 9216
+
+exit
+!
+interface ethernet 0/8
+ no shutdown
+ mtu 9216
+
+exit
+!
+interface ethernet 0/9
+ no shutdown
+ mtu 9216
+
+exit
+!
+interface ethernet 0/10
+ no shutdown
+ mtu 9216
+
+exit
+!
+interface ethernet 0/11
+ no shutdown
+ mtu 9216
+
+exit
+!
+interface ethernet 0/12
+ no shutdown
+ mtu 9216
+
+exit
+!
+interface ethernet 0/13
+ no shutdown
+ mtu 9216
+
+exit
+!
+interface ethernet 0/14
+ no shutdown
+ mtu 9216
+
+exit
+!
+interface ethernet 0/15
+ no shutdown
+ mtu 9216
+
+exit
+!
+interface ethernet 0/16
+ no shutdown
+ mtu 9216
+
+exit
+!
+interface ethernet 0/17
+ no shutdown
+ mtu 9216
+
+exit
+!
+interface ethernet 0/18
+ no shutdown
+ mtu 9216
+
+exit
+!
+interface ethernet 0/19
+ no shutdown
+ mtu 9216
+
+exit
+!
+interface ethernet 0/20
+ no shutdown
+ mtu 9216
+
+exit
+!
+interface ethernet 0/21
+ no shutdown
+ mtu 9216
+
+exit
+!
+interface ethernet 0/22
+ no shutdown
+ mtu 9216
+
+exit
+!
+interface ethernet 0/23
+ no shutdown
+ mtu 9216
+
+exit
+!
+interface ethernet 0/24
+ no shutdown
+ mtu 9216
+
+exit
+!
+interface ethernet 0/25
+ no shutdown
+ mtu 9216
+
+exit
+!
+interface ethernet 0/26
+ no shutdown
+ mtu 9216
+
+exit
+!
+interface ethernet 0/27
+ no shutdown
+ mtu 9216
+
+exit
+!
+interface ethernet 0/28
+ no shutdown
+ mtu 9216
+
+exit
+!
+interface ethernet 0/29
+ no shutdown
+ mtu 9216
+
+exit
+!
+interface ethernet 0/30
+ no shutdown
+ mtu 9216
+
+exit
+!
+interface ethernet 0/31
+ no shutdown
+ mtu 9216
+
+exit
+!
+interface loopback 0
+ ip address 10.1.0.211/32
+exit
+!
+hostname spine2
+!
+router bgp 65201
+ bgp router-id 10.1.0.211
+ no bgp ebgp-requires-policy
+ neighbor PEER_V4_EBGP peer-group
+ neighbor 172.16.15.2 remote-as 65202
+ neighbor 172.16.15.2 peer-group PEER_V4_EBGP
+ neighbor 172.16.16.2 remote-as 65203
+ neighbor 172.16.16.2 peer-group PEER_V4_EBGP
+ neighbor 172.16.17.2 remote-as 65204
+ neighbor 172.16.17.2 peer-group PEER_V4_EBGP
+ neighbor 172.16.18.2 remote-as 65205
+ neighbor 172.16.18.2 peer-group PEER_V4_EBGP
+ !
+ address-family ipv4 unicast
+  network 10.1.0.211/32
+  redistribute connected
+ exit-address-family
+ !
+ address-family l2vpn evpn
+  neighbor PEER_V4_EBGP activate
+  advertise-all-vni
+ exit-address-family
+exit
+!
+end
+spine2# 
