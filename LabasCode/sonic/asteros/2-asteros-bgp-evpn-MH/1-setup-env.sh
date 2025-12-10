@@ -4,6 +4,7 @@ cat <<'EOF'
 # https://netbergtw.com/top-support/netberg-sonic/vlan-and-vlan-routing/
 # https://netbergtw.com/top-support/netberg-sonic/evpn-l2-vxlan/
 # https://containerlab.dev/manual/kinds/sonic-vm/
+# https://asterfusion.com/blog20240801-evpn-multihoming/?srsltid=AfmBOoo82Lmdfx_zxNymGJCbpUtTsI7CL1rwhWVLKKOaHi2AgG6uXz4v
 EOF
 
 cat <<EOF>clab.yaml | clab deploy -t clab.yaml -
