@@ -1,67 +1,86 @@
-name: gre-ipv4-ipv6
+name: gre-ipv6-ipv4-ipsec
 topology:
   nodes:
     gwx:
       kind: linux
       image: 192.168.2.100:5000/nettool
       exec:
-      - ip a a 10:1:5::1/64 dev net1
-      - ip a a 10:1:8::1/64 dev net2
-      - bash -c "sysctl -w net.ipv6.conf.all.forwarding=1"
+      - ip a a 10.1.5.1/24 dev net1
+      - ip a a 10.1.8.1/24 dev net2
 
     gre1:
       kind: linux
       image: 192.168.2.100:5000/nettool
       exec:
-      - ip a a 10.244.1.1/24 dev eth1
-      - ip addr add 10:1:5::10/64 dev eth2
-
-      - ip l a gre00 type ip6gre local 10:1:5::10 remote 10:1:8::10
-      - ip a a 10.244.1.0/32 dev gre00
+      - ip a a 10:244:1::1/64 dev eth1
+      - ip addr add 10.1.5.10/24 dev eth2
+      # P-to-P GRE Tunnel:
+      - ip l a gre00 type gre local 10.1.5.10 remote 10.1.8.10
       - ip l s gre00 up
+      - ip a a 1:1:1::1/64 dev gre00
+     
+      - ip r a 10:244:2::/64 via 1:1:1::2 dev gre00 onlink
 
-      - ip -6 route replace default via 10:1:5::1 dev eth2 
+      - ip route replace default via 10.1.5.1 dev eth2 
 
-      - ip r a 10.244.2.0/24 via 10.244.2.0 dev gre00 onlink
-      
       - bash -c "sysctl -w net.ipv6.conf.all.forwarding=1"
+
+
+      # ipsec
+      - ip xfrm state add src 10.1.5.10 dst 10.1.8.10 proto esp spi 0xfe51d977 reqid 0xfe51d977 mode transport aead 'rfc4106(gcm(aes))' 0x1234566bc685beb4d967057134dd8e327ca17977 128
+      - ip xfrm state add src 10.1.8.10 dst 10.1.5.10 proto esp spi 0xfe51d978 reqid 0xfe51d978 mode transport aead 'rfc4106(gcm(aes))' 0x6543216bc685beb4d967057134dd8e327ca17978 128
+
+      - ip xfrm policy add src 10.1.5.10/24 dst 10.1.8.10/24 dir out tmpl src 0.0.0.0 dst 0.0.0.0 proto esp reqid 0xfe51d977 mode transport
+      - ip xfrm policy add src 10.1.8.10/24 dst 10.1.5.10/24 dir in  tmpl src 0.0.0.0 dst 0.0.0.0 proto esp reqid 0xfe51d978 mode transport
+
+      - iptables -t nat -A POSTROUTING -s 10.1.0.0/16 -o eth0 -j MASQUERADE
 
     gre2:
       kind: linux
       image: 192.168.2.100:5000/nettool
       exec:
-      - ip a a 10.244.2.1/24 dev eth1
-      - ip addr add 10:1:8::10/64 dev eth2
+      - ip a a 10:244:2::1/64 dev eth1
+      - ip addr add 10.1.8.10/24 dev eth2
 
-      - ip l a gre00 type ip6gre local 10:1:8::10 remote 10:1:5::10
-      - ip a a 10.244.2.0/32 dev gre00
+      - ip l a gre00 type gre local 10.1.8.10 remote 10.1.5.10
       - ip l s gre00 up
+      - ip a a 1:1:1::2/64 dev gre00
 
-      - ip -6 route replace default via 10:1:8::1 dev eth2
+      - ip r a 10:244:1::/64 via 1:1:1::1 dev gre00 onlink
 
-      - ip r a 10.244.1.0/24 via 10.244.1.0 dev gre00 onlink
-
+      - ip route replace default via 10.1.8.1 dev eth2
+      
       - bash -c "sysctl -w net.ipv6.conf.all.forwarding=1"
+
+      - ip xfrm state add src 10.1.8.10 dst 10.1.5.10 proto esp spi 0xfe51d978 reqid 0xfe51d978 mode transport aead 'rfc4106(gcm(aes))' 0x6543216bc685beb4d967057134dd8e327ca17978 128
+      - ip xfrm state add src 10.1.5.10 dst 10.1.8.10 proto esp spi 0xfe51d977 reqid 0xfe51d977 mode transport aead 'rfc4106(gcm(aes))' 0x1234566bc685beb4d967057134dd8e327ca17977 128
+
+      - ip xfrm policy add src 10.1.8.10/24 dst 10.1.5.10/24 dir out tmpl src 0.0.0.0 dst 0.0.0.0 proto esp reqid 0xfe51d978 mode transport
+      - ip xfrm policy add src 10.1.5.10/24 dst 10.1.8.10/24 dir in  tmpl src 0.0.0.0 dst 0.0.0.0 proto esp reqid 0xfe51d977 mode transport
+
+      - iptables -t nat -A POSTROUTING -s 10.1.0.0/16 -o eth0 -j MASQUERADE
 
     server1:
       kind: linux
       image: 192.168.2.100:5000/nettool
       exec:
-      - ip addr add 10.244.1.10/24 dev net0
-      - ip route replace default via 10.244.1.1
+      - ip addr add 10:244:1::10/64 dev net0
+      - ip route replace default via 10:244:1::1
+      # - curl [10:244:2::10]
 
     server2:
       kind: linux
       image: 192.168.2.100:5000/nettool
       exec:
-      - ip addr add 10.244.2.10/24 dev net0
-      - ip route replace default via 10.244.2.1
+      - ip addr add 10:244:2::10/64 dev net0
+      - ip route replace default via 10:244:2::1
 
   links:
     - endpoints: ["gre1:eth1", "server1:net0"]
       mtu: 1500
     - endpoints: ["gre2:eth1", "server2:net0"]
       mtu: 1500
+
     - endpoints: ["gre1:eth2", "gwx:net1"]
       mtu: 1500
     - endpoints: ["gre2:eth2", "gwx:net2"]
