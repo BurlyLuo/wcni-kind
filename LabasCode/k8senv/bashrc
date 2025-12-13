@@ -140,6 +140,7 @@ alias kk="kubectl -nkube-system"
 alias aa="kubectl get pods -owide"
 alias fs="kubectl -nflux-system"
 #alias ds="docker ps | grep -Ev 'registry|gostwire|edgeshark|openwrt'"
+alias dcr='docker system df --verbose | awk '\''/^Local Volumes space usage:$/{flag=1; next} /^Build cache usage:$/{flag=0} flag && $2 == 0 {print $1}'\'' | xargs -r docker volume rm; docker volume ls'
 alias ds='docker ps --format "table {{.ID}}\t{{.Image}}\t{{.Command}}\t{{.Status}}\t{{.Names}}" | grep -Ev '\''registry|gostwire|edgeshark|openwrt'\'' | awk NF'
 alias dsd='docker ps --format "table {{.ID}}\t{{.Image}}\t{{.Command}}\t{{.Status}}\t{{.Names}}" | grep -Ev '\''registry|gostwire|edgeshark|openwrt'\'' | awk NF | tail -n +2 | awk '\''{print $1}'\'' | xargs -r docker rm -f'
 alias op="docker exec -ti openwrt bash"
