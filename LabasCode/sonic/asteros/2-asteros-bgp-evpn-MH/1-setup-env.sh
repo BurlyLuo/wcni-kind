@@ -195,7 +195,6 @@ wait_for_healthy() {
     
     while [ $attempt -le $max_attempts ]; do
         health_status=$(docker inspect --format='{{.State.Health.Status}}' "$container" 2>/dev/null)
-        sshpass -p "$PASSWD" ssh -o StrictHostKeyChecking=no -o ConnectTimeout=5 "$USER@$container" "sudo rm -rf /etc/shell_mode_cli" 2>/dev/null
 
         container_count=$(sshpass -p "$PASSWD" ssh -o StrictHostKeyChecking=no -o ConnectTimeout=5 "$USER@$container" "docker ps -aq | wc -l" 2>/dev/null)
         container_count=${container_count//[[:space:]]/}
@@ -206,6 +205,7 @@ wait_for_healthy() {
         echo "[$(date '+%Y-%m-%d %H:%M:%S')] [$container] Waiting for into healthy... || health_status: $health_status and interface_status: ${interface_status:-n/a} and container_count: $container_count"
 
         if [ "$health_status" == "healthy"  ] && [ "$container_count" -ge 17 ] && [ "$interface_status" == "Ethernet0" ] 2>/dev/null; then
+            sshpass -p "$PASSWD" ssh -o StrictHostKeyChecking=no -o ConnectTimeout=5 "$USER@$container" "sudo rm -rf /etc/shell_mode_cli" 2>/dev/null
             return 0
         fi
 
