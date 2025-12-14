@@ -1,0 +1,18 @@
+name: vs
+topology:
+  nodes:
+    sonic:
+      kind: sonic-vm
+      image: 192.168.2.100:5000/asteros_p03
+
+    vyos:
+      kind: linux
+      image: 192.168.2.100:5000/vyos/vyos:1.4.9
+      cmd: /sbin/init
+      binds:
+        - /lib/modules:/lib/modules 
+        - ./startup-conf/vyos.cfg:/opt/vyatta/etc/config/config.boot
+
+  links:
+    - endpoints: ["sonic:eth1", "vyos:eth1"]
+    - endpoints: ["sonic:eth2", "vyos:eth2"]
