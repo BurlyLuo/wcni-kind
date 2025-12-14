@@ -1,0 +1,19 @@
+cat <<EOF>clab.yaml | clab deploy -t clab.yaml -
+name: vs
+topology:
+  nodes:
+    sonic:
+      kind: sonic-vm
+      image: 192.168.2.100:5000/asteros_p03
+
+    net:
+      kind: linux
+      image: 192.168.2.100:5000/nettool
+      exec:
+        - ip a a 10.1.5.11/24 dev eth1
+        - ip a a 10.1.8.11/24 dev eth2
+
+  links:
+    - endpoints: ["sonic:eth1", "net:eth1"]
+    - endpoints: ["sonic:eth2", "net:eth2"]
+EOF
