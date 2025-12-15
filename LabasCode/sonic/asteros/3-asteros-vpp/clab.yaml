@@ -1,0 +1,21 @@
+name: vpp
+topology:
+  nodes:
+    sonic:
+      kind: sonic-vm
+      #image: 192.168.2.100:5000/asteros_vpp:V6.1_R0100P06
+      image: 192.168.2.100:5000/sonic-vpp:latest
+
+    net:
+      kind: linux
+      image: 192.168.2.100:5000/nettool
+      exec:
+        - ip a a 10.1.5.11/24 dev net1
+        - ip a a 10.1.8.11/24 dev net2
+
+  links:
+    - endpoints: ["sonic:eth1", "net:net1"]
+    - endpoints: ["sonic:eth2", "net:net2"]
+    - endpoints: ["sonic:eth3", "net:net3"]
+    - endpoints: ["sonic:eth4", "net:net4"]
+    - endpoints: ["sonic:eth5", "net:net5"]
