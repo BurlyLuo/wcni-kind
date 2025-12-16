@@ -1,21 +1,33 @@
-name: vpp
+name: vs
 topology:
   nodes:
-    sonic:
+    sonic1:
       kind: sonic-vm
-      #image: 192.168.2.100:5000/asteros_vpp:V6.1_R0100P06
+      #image: 192.168.2.100:5000/asteros_vpp:V6.1_R0100P06 [# https://gitee.com/rowan-wcni/wcni-kind/issues/IDD55L]
       image: 192.168.2.100:5000/sonic-vpp:latest
 
-    net:
+    sonic2:
+      kind: sonic-vm
+      #image: 192.168.2.100:5000/asteros_vpp:V6.1_R0100P06 [# https://gitee.com/rowan-wcni/wcni-kind/issues/IDD55L]
+      image: 192.168.2.100:5000/sonic-vpp:latest
+
+    net1:
       kind: linux
       image: 192.168.2.100:5000/nettool
       exec:
-        - ip a a 10.1.5.11/24 dev net1
-        - ip a a 10.1.8.11/24 dev net2
+        - ip a a 10.1.5.10/24 dev eth1
+        - ip r a 10.1.8.0/24 via 10.1.5.1
+
+    net2:
+      kind: linux
+      image: 192.168.2.100:5000/nettool
+      exec:
+        - ip a a 10.1.8.10/24 dev eth1
+        - ip r a 10.1.5.0/24 via 10.1.8.1
 
   links:
-    - endpoints: ["sonic:eth1", "net:net1"]
-    - endpoints: ["sonic:eth2", "net:net2"]
-    - endpoints: ["sonic:eth3", "net:net3"]
-    - endpoints: ["sonic:eth4", "net:net4"]
-    - endpoints: ["sonic:eth5", "net:net5"]
+    # eth1 <> Ethernet0
+    # eth2 <> Ethernet4
+    - endpoints: ["sonic1:eth2", "sonic2:eth2"]
+    - endpoints: ["sonic1:eth1", "net1:eth1"]
+    - endpoints: ["sonic2:eth1", "net2:eth1"]
