@@ -1,0 +1,81 @@
+apiVersion: inv.sdcio.dev/v1alpha1
+kind: Schema
+metadata:
+  name: srl.nokia.sdcio.dev-24.3.2
+  namespace: default
+spec:
+  repoURL: https://github.com/sdcio/yang
+  provider: srl.nokia.sdcio.dev
+  version: 24.3.2
+  kind: branch
+  ref: v24.3.2
+  dirs:
+  - src: .
+    dst: .
+  schema:
+    models:
+    - srl_nokia/models
+    includes:
+    - ietf
+    - openconfig/extensions
+    - openconfig/openconfig-extensions.yang
+    excludes:
+    - .*tools.*
+
+---
+apiVersion: inv.sdcio.dev/v1alpha1
+kind: TargetConnectionProfile
+metadata:
+  name: conn-gnmi-skipverify
+  namespace: default
+spec:
+  port: 57400
+  protocol: gnmi
+  encoding: ASCII
+  skipVerify: true
+  insecure: false
+---
+apiVersion: inv.sdcio.dev/v1alpha1
+kind: TargetSyncProfile
+metadata:
+  name: sync-gnmi-get
+  namespace: default
+spec:
+  buffer: 0
+  workers: 10
+  validate: true
+  sync:
+  - name: config
+    protocol: gnmi
+    paths:
+    - /
+    mode: get
+    interval: 30s
+
+---
+apiVersion: inv.sdcio.dev/v1alpha1
+kind: DiscoveryRule
+metadata:
+  name: dr-dynamic
+  namespace: default
+spec:
+  period: 1m
+  concurrentScans: 2
+  prefixes:
+  - prefix: 172.21.0.0/28
+    excludes:
+    - 172.21.0.0
+    - 172.21.0.1
+    - 172.21.0.15
+  discoveryProfile:
+    credentials: srl.nokia.sdcio.dev 
+    connectionProfiles:
+    - conn-gnmi-skipverify
+  targetConnectionProfiles:
+  - credentials: srl.nokia.sdcio.dev 
+    connectionProfile: conn-gnmi-skipverify
+    syncProfile: sync-gnmi-get
+  targetTemplate:
+    labels:
+      sdcio.dev/region: us-east
+
