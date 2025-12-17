@@ -102,7 +102,7 @@ for node in "${NODES[@]}"; do
         if [ -n "$container_id" ]; then
             sed -i "/$container/s/$/ $container_id/" /etc/hosts
             echo "append $container id $container_id to local hosts"
-            sshpass -p "$PASSWD" ssh-copy-id $USER@$container
+            sshpass -p "$PASSWD" ssh-copy-id $USER@$container 2>/dev/null
         fi
 
         echo "[$(date '+%Y-%m-%d %H:%M:%S')] Applying configuration for $container..."
