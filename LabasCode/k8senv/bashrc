@@ -83,6 +83,18 @@ alias l='ls -CF'
 alias vi="vim"
 
 alias gsz="du -sh /root/wcni-kind/.git 2>/dev/null | cut -f1"
+alias gbig='{
+  git rev-list --objects --all |
+  git cat-file --batch-check="%(objecttype) %(objectname) %(objectsize) %(rest)" |
+  sed -n "s/^blob //p" |
+  sort --numeric-sort --key=2 |
+  tail -20 |
+  cut -c 1-12,41- |
+  $(command -v gnumfmt || echo numfmt) --field=2 --to=iec-i --suffix=B --padding=7 --round=nearest
+  
+  echo -e "\ngit filter-repo --force --path-match \"allk8s\" --invert-paths\ngit push -f gitee master\ngit push -f github master"
+}'
+
 # Github/Gitee push
 alias push='custom_push() { 
   find /root/wcni-kind/LabasCode -type f \
