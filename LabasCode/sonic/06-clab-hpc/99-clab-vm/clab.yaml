@@ -1,16 +1,24 @@
-name: vs
+name: vm
+prefix: ""
 topology:
   nodes:
     vm1:
       kind: generic_vm
-      image: 192.168.2.100:5000/ipng:vpp-proto-bookworm-20250607
+      image: 192.168.2.100:5000/debian13
       env:
         QEMU_SMP: 6
         QEMU_MEMORY: 8192
+        USERNAME: root
+        PASSWORD: hive
 
     vm2:
       kind: generic_vm
-      image: 192.168.2.100:5000/clab_ubuntu:2204
+      image: 192.168.2.100:5000/debian13
+      env:
+        QEMU_SMP: 6
+        QEMU_MEMORY: 8192
+        USERNAME: root
+        PASSWORD: hive
 
     server1:
       kind: linux
