@@ -1,0 +1,40 @@
+name: vs
+topology:
+  nodes:
+    sonic1:
+      kind: sonic-vm
+      image: 192.168.2.100:5000/sonic:latest
+    
+    # Vrf5
+    # Vrf5 10.1.5.10 - default Vrf 10.1.5.11
+    server1:
+      kind: linux
+      image: 192.168.2.100:5000/nettool
+      exec:
+        - ip a a 10.1.5.10/24 dev eth1
+        - ip r r default via 10.1.5.1
+        - ip link set dev eth1 address 52:54:10:01:05:10
+
+    # Vrf8
+    # Vrf5 to Vrf8[10.1.5.1 - 10.1.8.1]
+    server2:
+      kind: linux
+      image: 192.168.2.100:5000/nettool
+      exec:
+        - ip a a 10.1.8.10/24 dev eth1
+        - ip r r default via 10.1.8.1
+        - ip link set dev eth1 address 52:54:10:01:08:10
+
+    server3:
+      # default VRF:
+      kind: linux
+      image: 192.168.2.100:5000/nettool
+      exec:
+        - ip a a 10.1.5.11/24 dev eth1
+        - ip r r default via 10.1.5.1
+        - ip link set dev eth1 address 52:54:10:01:05:11
+
+  links:
+    - endpoints: ["sonic1:eth1", "server1:eth1"]
+    - endpoints: ["sonic1:eth2", "server2:eth1"]
+    - endpoints: ["sonic1:eth3", "server3:eth1"]

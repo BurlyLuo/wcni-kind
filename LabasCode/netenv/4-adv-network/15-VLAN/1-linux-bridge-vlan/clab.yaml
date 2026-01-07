@@ -1,57 +1,70 @@
 name: vlan
 topology:
   nodes:
-    br-vlan:
-      kind: bridge
-
-    gwx:
+    br-vlan581:
       kind: linux
-      image: 192.168.2.100:5000/vyos/vyos:1.4.9
-      cmd: /sbin/init
+      image: 192.168.2.100:5000/nettool
       binds:
-        - /lib/modules:/lib/modules
-        - ./startup-conf/gwx-boot.cfg:/opt/vyatta/etc/config/config.boot
+         - /lib/modules:/lib/modules
+      exec:
+        - modprobe 8021q
+        - ip link add name br-trunk type bridge
+        - ip link set br-trunk up 
+        - ip link set br-trunk type bridge vlan_filtering 1
+        - ip link set net581 master br-trunk
+        - ip link set net1 master br-trunk
+        - ip link set net2 master br-trunk
+        - bridge vlan add dev net581 vid 5
+        - bridge vlan add dev net1 vid 5 pvid untagged 
+        - bridge vlan add dev net581 vid 8
+        - bridge vlan add dev net2 vid 8 pvid untagged
 
-    vlan1:
+    br-vlan582:
+      kind: linux
+      image: 192.168.2.100:5000/nettool
+      binds:
+         - /lib/modules:/lib/modules
+      exec:
+        - modprobe 8021q 
+        - ip link add name br-trunk type bridge
+        - ip link set br-trunk up 
+        - ip link set br-trunk type bridge vlan_filtering 1
+        - ip link set net582 master br-trunk 
+        - ip link set net1 master br-trunk
+        - ip link set net2 master br-trunk		
+        - bridge vlan add dev net582 vid 5
+        - bridge vlan add dev net1 vid 5 pvid untagged
+        - bridge vlan add dev net582 vid 8
+        - bridge vlan add dev net2 vid 8 pvid untagged
+
+    server1:
       kind: linux
       image: 192.168.2.100:5000/nettool
       exec:
-      # N-S Traffic:
-        - >
-          bash -c '
-          vconfig add net1 5 &&
-          ip l s net1.5 up &&
-          ip a a 10.1.5.10/24 dev net1.5 &&
-          ip r r default via 10.1.5.1 dev net1.5'
+        - ip a a 10.1.5.10/24 dev net1
  
-    vlan2:
+    server2:
       kind: linux
       image: 192.168.2.100:5000/nettool
       exec:
-      # E-W Traffic:
-        - >
-          bash -c '
-          vconfig add net1 8 &&
-          ip l s net1.8 up &&
-          ip a a 10.1.8.10/24 dev net1.8 &&
-          ip r r default via 10.1.8.1 dev net1.8'
+        - ip a a 10.1.8.10/24 dev net1
 
-    vlan3:
+    server3:
       kind: linux
       image: 192.168.2.100:5000/nettool
       exec:
-      # E-W Traffic:
-        - >
-          bash -c '
-          vconfig add net1 9 &&
-          ip l s net1.9 up &&
-          ip a a 10.1.9.10/24 dev net1.9 &&
-          ip r r default via 10.1.9.1 dev net1.9'
+        - ip a a 10.1.5.11/24 dev net1
 
+    server4:
+      kind: linux
+      image: 192.168.2.100:5000/nettool
+      exec:
+        -  ip a a 10.1.8.11/24 dev net1
 
   links:
-    - endpoints: ["vlan1:net1", "br-vlan:net2"]
-    - endpoints: ["vlan2:net1", "br-vlan:net3"]
-    - endpoints: ["vlan3:net1", "br-vlan:net4"]
-    - endpoints: ["br-vlan:net1", "gwx:eth1"]
-
+    - endpoints: ["server1:net1", "br-vlan581:net1"]
+    - endpoints: ["server2:net1", "br-vlan581:net2"]
+    - endpoints: ["server3:net1", "br-vlan582:net1"]
+    - endpoints: ["server4:net1", "br-vlan582:net2"]
+    
+    - endpoints: ["br-vlan581:net581", "br-vlan582:net582"]

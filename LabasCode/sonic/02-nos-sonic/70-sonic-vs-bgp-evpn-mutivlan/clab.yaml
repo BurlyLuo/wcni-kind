@@ -1,0 +1,145 @@
+name: vs
+topology:
+  nodes:
+    spine1:
+      kind: sonic-vm
+      image: 192.168.2.100:5000/sonic:latest
+
+    spine2:
+      kind: sonic-vm
+      image: 192.168.2.100:5000/sonic:latest
+
+    leaf1:
+      kind: sonic-vm
+      image: 192.168.2.100:5000/sonic:latest
+
+    leaf2:
+      kind: sonic-vm
+      image: 192.168.2.100:5000/sonic:latest
+    
+    brvlan581:
+      kind: linux
+      image: 192.168.2.100:5000/nettool
+      binds:
+         - /lib/modules:/lib/modules
+      exec:
+        - modprobe 8021q
+        - ip link add name br-trunk type bridge
+        - ip link set br-trunk up 
+        - ip link set br-trunk type bridge vlan_filtering 1
+        - ip link set net581 master br-trunk
+        - ip link set eth1 master br-trunk
+        - ip link set eth2 master br-trunk
+        - bridge vlan add dev net581 vid 5
+        - bridge vlan add dev eth1 vid 5 pvid untagged 
+        - bridge vlan add dev net581 vid 8
+        - bridge vlan add dev eth2 vid 8 pvid untagged
+
+    brvlan582:
+      kind: linux
+      image: 192.168.2.100:5000/nettool
+      binds:
+         - /lib/modules:/lib/modules
+      exec:
+        - modprobe 8021q 
+        - ip link add name br-trunk type bridge
+        - ip link set br-trunk up 
+        - ip link set br-trunk type bridge vlan_filtering 1
+        - ip link set net582 master br-trunk 
+        - ip link set eth1 master br-trunk
+        - ip link set eth2 master br-trunk
+        - bridge vlan add dev net582 vid 5
+        - bridge vlan add dev eth1 vid 5 pvid untagged
+        - bridge vlan add dev net582 vid 8
+        - bridge vlan add dev eth2 vid 8 pvid untagged
+
+    server1:
+      kind: linux
+      image: 192.168.2.100:5000/nettool
+      exec:
+      - ip addr add 10.1.5.10/24 dev eth1
+      - ip link set dev eth1 address 52:54:10:01:05:10
+
+    server2:
+      kind: linux
+      image: 192.168.2.100:5000/nettool
+      exec:
+      - ip addr add 10.1.8.10/24 dev eth1
+      - ip link set dev eth1 address 52:54:10:01:08:10
+
+    server3:
+      kind: linux
+      image: 192.168.2.100:5000/nettool
+      exec:
+      - ip addr add 10.1.5.11/24 dev eth1
+      - ip link set dev eth1 address 52:54:10:01:05:11
+
+    server4:
+      kind: linux
+      image: 192.168.2.100:5000/nettool
+      exec:
+      - ip addr add 10.1.8.11/24 dev eth1
+      - ip link set dev eth1 address 52:54:10:01:08:11
+
+    server1-vlan5:
+      kind: linux
+      image: 192.168.2.100:5000/nettool
+      exec:
+      - ip addr add 10.1.5.12/24 dev eth1
+      - ip link set dev eth1 address 52:54:10:01:05:12
+
+  links:
+    # sonic-vm container uses the following mapping for its linux interfaces:
+    # eth0 - management interface connected to the containerlab management network
+    # eth1 - first data (front-panel port) interface that is mapped to Ethernet0 port
+    # eth2 - second data interface that is mapped to Ethernet4 port. Any new port will result in a "previous interface + 4" (Ethernet4) mapping.
+    # When containerlab launches sonic-vs node, it will assign IPv4/6 address to the eth0 interface. Data interface eth1 mapped to Ethernet0 port.
+    # eth1 <> Ethernet0
+    # eth2 <> Ethernet4
+    # eth3 <> Ethernet8
+    # eth4 <> Ethernet12
+    # eth5 <> Ethernet16
+    
+    # spine1 <> leaf1
+    # 10.1.10.2/24 <> 10.1.10.1/24
+    - endpoints: ["spine1:eth1", "leaf1:eth1"]
+
+    # spine1 <> leaf2
+    # 10.1.34.2/24 <> 10.1.34.1/24
+    - endpoints: ["spine1:eth2", "leaf2:eth1"]
+
+    # spine2 <> leaf1
+    # 10.1.12.2/24 <> 10.1.12.1/24 
+    - endpoints: ["spine2:eth1", "leaf1:eth2"]
+
+    # spine2 <> leaf2
+    # 10.1.11.2/24 <> 10.1.11.1/24
+    - endpoints: ["spine2:eth2", "leaf2:eth2"]
+
+    # brvlan581 <> server1
+    # 10.1.5.10/24 vlan5
+    - endpoints: ["brvlan581:eth1", "server1:eth1"]
+
+    # brvlan581 <> server2
+    # 10.1.8.10/23 vlan8
+    - endpoints: ["brvlan581:eth2", "server2:eth1"]
+
+    # brvlan581 <> server1-vlan5
+    # 10.1.5.12/24
+    - endpoints: ["brvlan581:eth3", "server1-vlan5:eth1"]
+
+    # brvlan582 <> server3
+    # 10.1.5.11 vlan5
+    - endpoints: ["brvlan582:eth1", "server3:eth1"]
+
+    # brvlan582 <> server4
+    # 10.1.8.11 vlan8
+    - endpoints: ["brvlan582:eth2", "server4:eth1"]
+
+    # leaf1 <> br581 
+    # vlan 5 8 <> vlan 5 8
+    - endpoints: ["leaf1:eth3", "brvlan581:net581"]
+
+    # leaf2 <> br582
+    # vlan 5 8 <> vlan 5 8
+    - endpoints: ["leaf2:eth3", "brvlan582:net582"]
