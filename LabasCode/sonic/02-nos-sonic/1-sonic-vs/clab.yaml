@@ -1,0 +1,21 @@
+name: vs
+topology:
+  nodes:
+    sonic1:
+      kind: sonic-vm
+      image: 192.168.2.100:5000/sonic:latest
+
+    server1:
+      kind: linux
+      image: 192.168.2.100:5000/nettool
+      exec:
+        - ip a a 10.1.5.11/24 dev eth1
+        - ip a a 10.1.8.11/24 dev eth2
+
+  links:
+    # sonic1:eth1 <> server1:eth1
+    # 10.1.5.10/24 <> 10.1.5.11/24
+    - endpoints: ["sonic1:eth1", "server1:eth1"]
+    # sonic1:eth2 <> server1:eth2
+    # 10.1.8.10/24 <> 10.1.8.11/24
+    - endpoints: ["sonic1:eth2", "server1:eth2"]

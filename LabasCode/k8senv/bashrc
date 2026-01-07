@@ -161,7 +161,8 @@ alias cc="kubectl config get-contexts"
 alias sc="kubectl config use-context $1" 
 alias lo="docker exec -it $1 $2"
 alias all="kubectl get pods -A"
-alias clabrm="clab destroy -t clab.yaml"
+alias clc='clab deploy -t $(grep -l "topology:" *.yaml *.yml 2>/dev/null | head -1)'
+alias clabrm='clab destroy -t $(grep -l "topology:" *.yaml *.yml 2>/dev/null | head -1)'
 alias clabrma="containerlab destroy -a"
 alias clabcc='find /root/wcni-kind/LabasCode -type f \( -name "ansible-inventory.yml" -o -name "authorized_keys" -o -name "topology-data.json" -o -name "*.clab.yml.bak" -o -name "*.clab.yaml.bak" \) -exec rm -f {} \;'
 
