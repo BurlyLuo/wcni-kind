@@ -1,0 +1,68 @@
+name: vs
+topology:
+  nodes:
+    frrbr:
+      kind: bridge
+   
+    spine1:
+      kind: linux
+      image: frr:v1
+      cmd: sh -c "sed -i 's/bgpd=no/bgpd=yes/g' /etc/frr/daemons && /usr/lib/frr/docker-start"
+      binds:
+        - /lib/modules:/lib/modules
+        - ./startup-conf/spine1.conf:/etc/frr/frr.conf
+      exec:
+        - ip a a 192.168.59.130/24 dev eth1
+
+    leaf1:
+      kind: linux
+      image: frr:v1
+      cmd: sh -c "sed -i 's/bgpd=no/bgpd=yes/g' /etc/frr/daemons && /usr/lib/frr/docker-start"
+      binds:
+        - /lib/modules:/lib/modules
+        - ./startup-conf/leaf1.conf:/etc/frr/frr.conf
+      exec:
+        - ip a a 192.168.59.128/24 dev eth1 
+        - ip link add br10 type bridge
+        - ip link add vxlan10 type vxlan id 10 local 192.168.59.128 dstport 4789 nolearning
+        - ip link set br10 up
+        - ip link set vxlan10 up
+        - ip l s eth2 master br10
+        - ip l s vxlan10 master br10
+
+    leaf2:
+      kind: linux
+      image: frr:v1
+      cmd: sh -c "sed -i 's/bgpd=no/bgpd=yes/g' /etc/frr/daemons && /usr/lib/frr/docker-start"
+      binds:
+        - /lib/modules:/lib/modules
+        - ./startup-conf/leaf2.conf:/etc/frr/frr.conf
+      exec:
+        - ip a a 192.168.59.129/24 dev eth1
+        - ip link add br10 type bridge
+        - ip link add vxlan10 type vxlan id 10 local 192.168.59.129 dstport 4789 nolearning
+        - ip link set br10 up
+        - ip link set vxlan10 up
+        - ip l s eth2 master br10
+        - ip l s vxlan10 master br10
+
+    vm1:
+      kind: linux
+      image: 192.168.2.100:5000/nettool
+      exec:
+        - ip addr add 10.1.5.10/24 dev eth1
+        - ip link set dev eth1 address 52:54:10:01:05:10
+
+    vm2:
+      kind: linux
+      image: 192.168.2.100:5000/nettool
+      exec:
+        - ip addr add 10.1.5.11/24 dev eth1
+        - ip link set dev eth1 address 52:54:10:01:05:11
+
+  links:
+    - endpoints: ["spine1:eth1", "frrbr:xth1"]
+    - endpoints: ["leaf1:eth1", "frrbr:xth2"]
+    - endpoints: ["leaf2:eth1", "frrbr:xth3"]
+    - endpoints: ["leaf1:eth2", "vm1:eth1"]
+    - endpoints: ["leaf2:eth2", "vm2:eth1"]
