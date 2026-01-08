@@ -10,7 +10,7 @@ data:
         "configList": [{
              "resourceName": "hca_shared_devices_a",
              "rdmaHcaMax": 1000,
-             "devices": ["ens38", "ens39"]
+             "devices": ["rxe_ens257"]
            }
         ]
     }
