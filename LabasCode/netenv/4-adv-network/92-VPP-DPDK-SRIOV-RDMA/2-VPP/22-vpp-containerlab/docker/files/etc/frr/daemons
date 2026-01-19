@@ -1,0 +1,17 @@
+# These are the daemons that FRR will use for VPP Containerlab
+# NOTE: we need to run in the 'dataplane' network namespace, and use the `dplane_fpm_nl` plugin
+bgpd=yes
+ospfd=yes
+ospf6d=yes
+bfdd=yes
+ldpd=yes
+
+vtysh_enable=yes
+watchfrr_options="--netns=dataplane"
+zebra_options="  -A 127.0.0.1 -s 67108864 -M dplane_fpm_nl"
+bgpd_options="   -A 127.0.0.1"
+ospfd_options="  -A 127.0.0.1"
+ospf6d_options=" -A ::1"
+staticd_options="-A 127.0.0.1"
+bfdd_options="   -A 127.0.0.1"
+ldpd_options="   -A 127.0.0.1"
