@@ -1,0 +1,21 @@
+---
+vpp1:
+    username: root
+    password: vpp
+    platform: fdio_vpp
+    hostname: 172.20.20.2
+vpp2:
+    username: root
+    password: vpp
+    platform: fdio_vpp
+    hostname: 172.20.20.4
+h1:
+    username: 
+    password: 
+    platform: linux
+    hostname: 172.20.20.3
+h2:
+    username: 
+    password: 
+    platform: linux
+    hostname: 172.20.20.5

@@ -1,0 +1,2 @@
+exec /etc/vpp/clab.vpp
+exec /etc/vpp/vppcfg.vpp
