@@ -1,0 +1,11 @@
+---
+r1:
+    username: clab
+    password: clab@123
+    platform: generic_vm
+    hostname: 172.20.20.3
+r2:
+    username: clab
+    password: clab@123
+    platform: generic_vm
+    hostname: 172.20.20.2
