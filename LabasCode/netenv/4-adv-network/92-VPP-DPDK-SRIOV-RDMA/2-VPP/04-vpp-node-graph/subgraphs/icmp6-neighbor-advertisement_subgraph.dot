@@ -1,8 +1,0 @@
-digraph "icmp6_neighbor_advertisement_subgraph" {
-  rankdir=LR;
-  node [shape=box, style=filled, fontsize=10, color=lightgray, fontcolor=black, fillcolor=lightgray];
-  "icmp6-neighbor-advertisement" [color=black, fontcolor=black, fillcolor=lightgray];
-  edge [fontsize=8];
-  "icmp6-neighbor-advertisement" -> "ip6-drop";
-  "ip6-icmp-input" -> "icmp6-neighbor-advertisement";
-}

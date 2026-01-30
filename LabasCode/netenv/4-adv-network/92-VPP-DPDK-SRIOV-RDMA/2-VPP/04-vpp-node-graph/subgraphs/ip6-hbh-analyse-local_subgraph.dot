@@ -1,8 +1,0 @@
-digraph "ip6_hbh_analyse_local_subgraph" {
-  rankdir=LR;
-  node [shape=box, style=filled, fontsize=10, color=lightgray, fontcolor=black, fillcolor=lightgray];
-  "ip6-hbh-analyse-local" [color=black, fontcolor=black, fillcolor=lightgray];
-  edge [fontsize=8];
-  "ip6-hbh-analyse-local" -> "ip4-lookup";
-  "ip6-hbh-analyse-local" -> "ip4-drop";
-}

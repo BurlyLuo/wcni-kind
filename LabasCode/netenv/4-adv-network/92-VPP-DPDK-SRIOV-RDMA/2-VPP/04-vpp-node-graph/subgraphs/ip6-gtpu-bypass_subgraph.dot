@@ -1,8 +1,0 @@
-digraph "ip6_gtpu_bypass_subgraph" {
-  rankdir=LR;
-  node [shape=box, style=filled, fontsize=10, color=lightgray, fontcolor=black, fillcolor=lightgray];
-  "ip6-gtpu-bypass" [color=black, fontcolor=black, fillcolor=lightgray];
-  edge [fontsize=8];
-  "ip6-gtpu-bypass" -> "error-drop";
-  "ip6-gtpu-bypass" -> "gtpu6-input";
-}

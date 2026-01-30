@@ -1,8 +1,0 @@
-digraph "bier_output_subgraph" {
-  rankdir=LR;
-  node [shape=box, style=filled, fontsize=10, color=lightgray, fontcolor=black, fillcolor=lightgray];
-  "bier-output" [color=black, fontcolor=black, fillcolor=lightgray];
-  edge [fontsize=8];
-  "bier-lookup" -> "bier-output";
-  "bier-output" -> "bier-drop";
-}

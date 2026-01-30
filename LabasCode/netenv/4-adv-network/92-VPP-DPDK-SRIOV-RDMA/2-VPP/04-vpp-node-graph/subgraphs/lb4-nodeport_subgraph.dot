@@ -1,8 +1,0 @@
-digraph "lb4_nodeport_subgraph" {
-  rankdir=LR;
-  node [shape=box, style=filled, fontsize=10, color=lightgray, fontcolor=black, fillcolor=lightgray];
-  "lb4-nodeport" [color=black, fontcolor=black, fillcolor=lightgray];
-  edge [fontsize=8];
-  "lb4-nodeport" -> "lb4-nat4-port";
-  "lb4-nodeport" -> "error-drop";
-}

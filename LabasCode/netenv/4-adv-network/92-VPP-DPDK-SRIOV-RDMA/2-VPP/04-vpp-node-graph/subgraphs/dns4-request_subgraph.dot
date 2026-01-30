@@ -1,9 +1,0 @@
-digraph "dns4_request_subgraph" {
-  rankdir=LR;
-  node [shape=box, style=filled, fontsize=10, color=lightgray, fontcolor=black, fillcolor=lightgray];
-  "dns4-request" [color=black, fontcolor=black, fillcolor=lightgray];
-  edge [fontsize=8];
-  "dns4-request" -> "error-drop";
-  "dns4-request" -> "ip4-lookup";
-  "dns4-request" -> "error-punt";
-}

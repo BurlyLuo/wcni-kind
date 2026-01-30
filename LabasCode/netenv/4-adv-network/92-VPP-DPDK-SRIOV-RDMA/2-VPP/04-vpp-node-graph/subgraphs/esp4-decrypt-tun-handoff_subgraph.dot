@@ -1,8 +1,0 @@
-digraph "esp4_decrypt_tun_handoff_subgraph" {
-  rankdir=LR;
-  node [shape=box, style=filled, fontsize=10, color=lightgray, fontcolor=black, fillcolor=lightgray];
-  "esp4-decrypt-tun-handoff" [color=black, fontcolor=black, fillcolor=lightgray];
-  edge [fontsize=8];
-  "esp4-decrypt-tun-handoff" -> "error-drop";
-  "esp4-decrypt-tun" -> "esp4-decrypt-tun-handoff";
-}

@@ -1,9 +1,0 @@
-digraph "ip4_sv_reassembly_handoff_subgraph" {
-  rankdir=LR;
-  node [shape=box, style=filled, fontsize=10, color=lightgray, fontcolor=black, fillcolor=lightgray];
-  "ip4-sv-reassembly-handoff" [color=black, fontcolor=black, fillcolor=lightgray];
-  edge [fontsize=8];
-  "ip4-sv-reassembly" -> "ip4-sv-reassembly-handoff";
-  "ip4-sv-reassembly-custom-next" -> "ip4-sv-reassembly-handoff";
-  "ip4-sv-reassembly-handoff" -> "error-drop";
-}

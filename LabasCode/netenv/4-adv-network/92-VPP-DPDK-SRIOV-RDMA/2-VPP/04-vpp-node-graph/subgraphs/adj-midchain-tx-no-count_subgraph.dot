@@ -1,7 +1,0 @@
-digraph "adj_midchain_tx_no_count_subgraph" {
-  rankdir=LR;
-  node [shape=box, style=filled, fontsize=10, color=lightgray, fontcolor=black, fillcolor=lightgray];
-  "adj-midchain-tx-no-count" [color=black, fontcolor=black, fillcolor=lightgray];
-  edge [fontsize=8];
-  "adj-midchain-tx-no-count" -> "error-drop";
-}

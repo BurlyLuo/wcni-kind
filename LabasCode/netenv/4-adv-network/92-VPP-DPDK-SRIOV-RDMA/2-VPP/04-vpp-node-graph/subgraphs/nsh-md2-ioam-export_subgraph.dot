@@ -1,7 +1,0 @@
-digraph "nsh_md2_ioam_export_subgraph" {
-  rankdir=LR;
-  node [shape=box, style=filled, fontsize=10, color=lightgray, fontcolor=black, fillcolor=lightgray];
-  "nsh-md2-ioam-export" [color=black, fontcolor=black, fillcolor=lightgray];
-  edge [fontsize=8];
-  "nsh-md2-ioam-export" -> "nsh-pop";
-}

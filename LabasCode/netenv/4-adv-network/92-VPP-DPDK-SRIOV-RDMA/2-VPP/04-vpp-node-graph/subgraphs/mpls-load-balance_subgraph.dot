@@ -1,8 +1,0 @@
-digraph "mpls_load_balance_subgraph" {
-  rankdir=LR;
-  node [shape=box, style=filled, fontsize=10, color=lightgray, fontcolor=black, fillcolor=lightgray];
-  "mpls-load-balance" [color=black, fontcolor=black, fillcolor=lightgray];
-  edge [fontsize=8];
-  "mpls-load-balance" -> "mpls-drop";
-  "mpls-load-balance" -> "mpls-replicate";
-}

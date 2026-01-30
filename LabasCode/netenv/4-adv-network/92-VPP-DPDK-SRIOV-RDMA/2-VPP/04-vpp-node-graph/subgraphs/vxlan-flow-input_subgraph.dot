@@ -1,8 +1,0 @@
-digraph "vxlan_flow_input_subgraph" {
-  rankdir=LR;
-  node [shape=box, style=filled, fontsize=10, color=lightgray, fontcolor=black, fillcolor=lightgray];
-  "vxlan-flow-input" [color=black, fontcolor=black, fillcolor=lightgray];
-  edge [fontsize=8];
-  "vxlan-flow-input" -> "error-drop";
-  "vxlan-flow-input" -> "l2-input";
-}

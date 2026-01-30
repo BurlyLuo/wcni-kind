@@ -1,7 +1,0 @@
-digraph "ip4_dhcp_client_detect_subgraph" {
-  rankdir=LR;
-  node [shape=box, style=filled, fontsize=10, color=lightgray, fontcolor=black, fillcolor=lightgray];
-  "ip4-dhcp-client-detect" [color=black, fontcolor=black, fillcolor=lightgray];
-  edge [fontsize=8];
-  "ip4-dhcp-client-detect" -> "ip4-udp-lookup";
-}

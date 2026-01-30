@@ -1,9 +1,0 @@
-digraph "ip4_icmp_echo_reply_subgraph" {
-  rankdir=LR;
-  node [shape=box, style=filled, fontsize=10, color=lightgray, fontcolor=black, fillcolor=lightgray];
-  "ip4-icmp-echo-reply" [color=black, fontcolor=black, fillcolor=lightgray];
-  edge [fontsize=8];
-  "ip4-icmp-echo-reply" -> "ip4-drop";
-  "ip4-icmp-echo-reply" -> "ip4-punt";
-  "ip4-icmp-input" -> "ip4-icmp-echo-reply";
-}

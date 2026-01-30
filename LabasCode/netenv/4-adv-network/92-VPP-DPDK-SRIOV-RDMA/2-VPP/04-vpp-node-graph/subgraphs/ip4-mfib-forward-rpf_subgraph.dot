@@ -1,9 +1,0 @@
-digraph "ip4_mfib_forward_rpf_subgraph" {
-  rankdir=LR;
-  node [shape=box, style=filled, fontsize=10, color=lightgray, fontcolor=black, fillcolor=lightgray];
-  "ip4-mfib-forward-rpf" [color=black, fontcolor=black, fillcolor=lightgray];
-  edge [fontsize=8];
-  "ip4-mfib-forward-lookup" -> "ip4-mfib-forward-rpf";
-  "ip4-mfib-forward-rpf" -> "ip4-drop";
-  "lookup-ip4-dst-mcast" -> "ip4-mfib-forward-rpf";
-}

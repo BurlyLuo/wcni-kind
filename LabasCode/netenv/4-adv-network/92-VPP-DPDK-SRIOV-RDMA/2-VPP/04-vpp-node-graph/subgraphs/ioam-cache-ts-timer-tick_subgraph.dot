@@ -1,7 +1,0 @@
-digraph "ioam_cache_ts_timer_tick_subgraph" {
-  rankdir=LR;
-  node [shape=box, style=filled, fontsize=10, color=lightgray, fontcolor=black, fillcolor=lightgray];
-  "ioam-cache-ts-timer-tick" [color=black, fontcolor=black, fillcolor=lightgray];
-  edge [fontsize=8];
-  "ioam-cache-ts-timer-tick" -> "error-drop";
-}

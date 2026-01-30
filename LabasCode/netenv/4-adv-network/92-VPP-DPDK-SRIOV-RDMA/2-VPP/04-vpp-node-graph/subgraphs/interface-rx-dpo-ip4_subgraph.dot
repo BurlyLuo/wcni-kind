@@ -1,8 +1,0 @@
-digraph "interface_rx_dpo_ip4_subgraph" {
-  rankdir=LR;
-  node [shape=box, style=filled, fontsize=10, color=lightgray, fontcolor=black, fillcolor=lightgray];
-  "interface-rx-dpo-ip4" [color=black, fontcolor=black, fillcolor=lightgray];
-  edge [fontsize=8];
-  "interface-rx-dpo-ip4" -> "ip4-drop";
-  "interface-rx-dpo-ip4" -> "ip4-input";
-}

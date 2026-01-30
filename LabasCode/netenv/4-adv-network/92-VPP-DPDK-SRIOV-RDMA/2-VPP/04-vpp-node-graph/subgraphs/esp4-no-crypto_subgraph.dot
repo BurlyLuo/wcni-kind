@@ -1,7 +1,0 @@
-digraph "esp4_no_crypto_subgraph" {
-  rankdir=LR;
-  node [shape=box, style=filled, fontsize=10, color=lightgray, fontcolor=black, fillcolor=lightgray];
-  "esp4-no-crypto" [color=black, fontcolor=black, fillcolor=lightgray];
-  edge [fontsize=8];
-  "esp4-no-crypto" -> "ip4-drop";
-}

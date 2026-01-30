@@ -1,8 +1,0 @@
-digraph "lookup_ip4_dst_mcast_subgraph" {
-  rankdir=LR;
-  node [shape=box, style=filled, fontsize=10, color=lightgray, fontcolor=black, fillcolor=lightgray];
-  "lookup-ip4-dst-mcast" [color=black, fontcolor=black, fillcolor=lightgray];
-  edge [fontsize=8];
-  "lookup-ip4-dst-mcast" -> "ip4-drop";
-  "lookup-ip4-dst-mcast" -> "ip4-mfib-forward-rpf";
-}

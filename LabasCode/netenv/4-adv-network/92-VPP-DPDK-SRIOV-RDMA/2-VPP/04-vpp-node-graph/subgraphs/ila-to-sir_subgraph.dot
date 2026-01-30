@@ -1,7 +1,0 @@
-digraph "ila_to_sir_subgraph" {
-  rankdir=LR;
-  node [shape=box, style=filled, fontsize=10, color=lightgray, fontcolor=black, fillcolor=lightgray];
-  "ila-to-sir" [color=black, fontcolor=black, fillcolor=lightgray];
-  edge [fontsize=8];
-  "ila-to-sir" -> "error-drop";
-}

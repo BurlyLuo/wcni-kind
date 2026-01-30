@@ -1,8 +1,0 @@
-digraph "adj_l2_midchain_subgraph" {
-  rankdir=LR;
-  node [shape=box, style=filled, fontsize=10, color=lightgray, fontcolor=black, fillcolor=lightgray];
-  "adj-l2-midchain" [color=black, fontcolor=black, fillcolor=lightgray];
-  edge [fontsize=8];
-  "adj-l2-midchain" -> "error-drop";
-  "gre-encap" -> "adj-l2-midchain";
-}

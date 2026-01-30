@@ -1,8 +1,0 @@
-digraph "lisp_cp_lookup_nsh_subgraph" {
-  rankdir=LR;
-  node [shape=box, style=filled, fontsize=10, color=lightgray, fontcolor=black, fillcolor=lightgray];
-  "lisp-cp-lookup-nsh" [color=black, fontcolor=black, fillcolor=lightgray];
-  edge [fontsize=8];
-  "lisp-cp-lookup-nsh" -> "error-drop";
-  "lisp-cp-lookup-nsh" -> "interface-output";
-}

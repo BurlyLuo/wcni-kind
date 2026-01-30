@@ -1,7 +1,0 @@
-digraph "ip6_gbp_policy_dpo_subgraph" {
-  rankdir=LR;
-  node [shape=box, style=filled, fontsize=10, color=lightgray, fontcolor=black, fillcolor=lightgray];
-  "ip6-gbp-policy-dpo" [color=black, fontcolor=black, fillcolor=lightgray];
-  edge [fontsize=8];
-  "ip6-gbp-policy-dpo" -> "ip6-drop";
-}

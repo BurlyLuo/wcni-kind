@@ -1,9 +1,0 @@
-digraph "arp_disabled_subgraph" {
-  rankdir=LR;
-  node [shape=box, style=filled, fontsize=10, color=lightgray, fontcolor=black, fillcolor=lightgray];
-  "arp-disabled" [color=black, fontcolor=black, fillcolor=lightgray];
-  edge [fontsize=8];
-  "arp-disabled" -> "error-drop";
-  "arp-input" -> "arp-disabled";
-  "arp-reply" -> "arp-disabled";
-}

@@ -1,7 +1,0 @@
-digraph "ip4_mpls_label_imposition_pipe_subgraph" {
-  rankdir=LR;
-  node [shape=box, style=filled, fontsize=10, color=lightgray, fontcolor=black, fillcolor=lightgray];
-  "ip4-mpls-label-imposition-pipe" [color=black, fontcolor=black, fillcolor=lightgray];
-  edge [fontsize=8];
-  "ip4-mpls-label-imposition-pipe" -> "ip4-drop";
-}

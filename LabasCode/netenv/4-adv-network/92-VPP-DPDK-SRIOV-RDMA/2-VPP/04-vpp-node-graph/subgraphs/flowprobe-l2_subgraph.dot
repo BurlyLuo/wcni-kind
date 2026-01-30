@@ -1,8 +1,0 @@
-digraph "flowprobe_l2_subgraph" {
-  rankdir=LR;
-  node [shape=box, style=filled, fontsize=10, color=lightgray, fontcolor=black, fillcolor=lightgray];
-  "flowprobe-l2" [color=black, fontcolor=black, fillcolor=lightgray];
-  edge [fontsize=8];
-  "flowprobe-l2" -> "error-drop";
-  "flowprobe-l2" -> "ip4-lookup";
-}
