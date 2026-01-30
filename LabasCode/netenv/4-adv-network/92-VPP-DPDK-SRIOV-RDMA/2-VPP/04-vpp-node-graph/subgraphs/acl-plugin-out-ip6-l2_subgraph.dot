@@ -1,7 +1,0 @@
-digraph "acl_plugin_out_ip6_l2_subgraph" {
-  rankdir=LR;
-  node [shape=box, style=filled, fontsize=10, color=lightgray, fontcolor=black, fillcolor=lightgray];
-  "acl-plugin-out-ip6-l2" [color=black, fontcolor=black, fillcolor=lightgray];
-  edge [fontsize=8];
-  "acl-plugin-out-ip6-l2" -> "error-drop";
-}

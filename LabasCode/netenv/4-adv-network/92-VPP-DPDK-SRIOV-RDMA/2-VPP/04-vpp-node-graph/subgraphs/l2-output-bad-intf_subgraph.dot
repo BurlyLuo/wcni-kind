@@ -1,8 +1,0 @@
-digraph "l2_output_bad_intf_subgraph" {
-  rankdir=LR;
-  node [shape=box, style=filled, fontsize=10, color=lightgray, fontcolor=black, fillcolor=lightgray];
-  "l2-output-bad-intf" [color=black, fontcolor=black, fillcolor=lightgray];
-  edge [fontsize=8];
-  "l2-output" -> "l2-output-bad-intf";
-  "l2-output-bad-intf" -> "error-drop";
-}

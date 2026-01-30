@@ -1,8 +1,0 @@
-digraph "srv6_am_rewrite_subgraph" {
-  rankdir=LR;
-  node [shape=box, style=filled, fontsize=10, color=lightgray, fontcolor=black, fillcolor=lightgray];
-  "srv6-am-rewrite" [color=black, fontcolor=black, fillcolor=lightgray];
-  edge [fontsize=8];
-  "srv6-am-rewrite" -> "error-drop";
-  "srv6-am-rewrite" -> "ip6-lookup";
-}

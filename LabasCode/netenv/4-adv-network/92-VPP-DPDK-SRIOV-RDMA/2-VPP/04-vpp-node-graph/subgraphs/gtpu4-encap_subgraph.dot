@@ -1,9 +1,0 @@
-digraph "gtpu4_encap_subgraph" {
-  rankdir=LR;
-  node [shape=box, style=filled, fontsize=10, color=lightgray, fontcolor=black, fillcolor=lightgray];
-  "gtpu4-encap" [color=black, fontcolor=black, fillcolor=lightgray];
-  edge [fontsize=8];
-  "gtpu4-encap" -> "error-drop";
-  "gtpu4-encap" -> "ip4-lookup";
-  "gtpu4-encap" -> "ip6-lookup";
-}

@@ -1,9 +1,0 @@
-digraph "default_cop_whitelist_subgraph" {
-  rankdir=LR;
-  node [shape=box, style=filled, fontsize=10, color=lightgray, fontcolor=black, fillcolor=lightgray];
-  "default-cop-whitelist" [color=black, fontcolor=black, fillcolor=lightgray];
-  edge [fontsize=8];
-  "cop-input" -> "default-cop-whitelist";
-  "ip4-cop-whitelist" -> "default-cop-whitelist";
-  "ip6-cop-whitelist" -> "default-cop-whitelist";
-}

@@ -1,8 +1,0 @@
-digraph "ip4_null_subgraph" {
-  rankdir=LR;
-  node [shape=box, style=filled, fontsize=10, color=lightgray, fontcolor=black, fillcolor=lightgray];
-  "ip4-null" [color=black, fontcolor=black, fillcolor=lightgray];
-  edge [fontsize=8];
-  "ip4-null" -> "ip4-drop";
-  "ip4-null" -> "ip4-icmp-error";
-}

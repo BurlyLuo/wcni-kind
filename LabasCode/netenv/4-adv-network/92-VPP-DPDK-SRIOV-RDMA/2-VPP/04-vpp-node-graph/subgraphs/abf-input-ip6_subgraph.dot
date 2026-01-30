@@ -1,7 +1,0 @@
-digraph "abf_input_ip6_subgraph" {
-  rankdir=LR;
-  node [shape=box, style=filled, fontsize=10, color=lightgray, fontcolor=black, fillcolor=lightgray];
-  "abf-input-ip6" [color=black, fontcolor=black, fillcolor=lightgray];
-  edge [fontsize=8];
-  "abf-input-ip6" -> "error-drop";
-}

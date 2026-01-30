@@ -1,9 +1,0 @@
-digraph "dpdk_esp6_decrypt_subgraph" {
-  rankdir=LR;
-  node [shape=box, style=filled, fontsize=10, color=lightgray, fontcolor=black, fillcolor=lightgray];
-  "dpdk-esp6-decrypt" [color=black, fontcolor=black, fillcolor=lightgray];
-  edge [fontsize=8];
-  "dpdk-esp6-decrypt" -> "error-drop";
-  "dpdk-esp6-decrypt" -> "ip4-input-no-checksum";
-  "dpdk-esp6-decrypt" -> "ip6-input";
-}

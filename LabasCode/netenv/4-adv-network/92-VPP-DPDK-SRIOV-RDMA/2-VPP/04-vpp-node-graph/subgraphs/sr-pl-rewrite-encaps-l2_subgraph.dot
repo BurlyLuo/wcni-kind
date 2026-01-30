@@ -1,8 +1,0 @@
-digraph "sr_pl_rewrite_encaps_l2_subgraph" {
-  rankdir=LR;
-  node [shape=box, style=filled, fontsize=10, color=lightgray, fontcolor=black, fillcolor=lightgray];
-  "sr-pl-rewrite-encaps-l2" [color=black, fontcolor=black, fillcolor=lightgray];
-  edge [fontsize=8];
-  "sr-pl-rewrite-encaps-l2" -> "ip6-lookup";
-  "sr-pl-rewrite-encaps-l2" -> "error-drop";
-}

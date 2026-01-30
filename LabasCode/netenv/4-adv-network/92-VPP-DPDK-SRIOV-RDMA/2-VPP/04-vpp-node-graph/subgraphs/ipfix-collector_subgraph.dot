@@ -1,7 +1,0 @@
-digraph "ipfix_collector_subgraph" {
-  rankdir=LR;
-  node [shape=box, style=filled, fontsize=10, color=lightgray, fontcolor=black, fillcolor=lightgray];
-  "ipfix-collector" [color=black, fontcolor=black, fillcolor=lightgray];
-  edge [fontsize=8];
-  "ipfix-collector" -> "error-drop";
-}

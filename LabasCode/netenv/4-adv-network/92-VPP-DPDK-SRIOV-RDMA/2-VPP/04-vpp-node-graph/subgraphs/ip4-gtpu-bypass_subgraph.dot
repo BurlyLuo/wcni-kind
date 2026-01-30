@@ -1,8 +1,0 @@
-digraph "ip4_gtpu_bypass_subgraph" {
-  rankdir=LR;
-  node [shape=box, style=filled, fontsize=10, color=lightgray, fontcolor=black, fillcolor=lightgray];
-  "ip4-gtpu-bypass" [color=black, fontcolor=black, fillcolor=lightgray];
-  edge [fontsize=8];
-  "ip4-gtpu-bypass" -> "error-drop";
-  "ip4-gtpu-bypass" -> "gtpu4-input";
-}

@@ -1,7 +1,0 @@
-digraph "dpdk_esp6_encrypt_tun_subgraph" {
-  rankdir=LR;
-  node [shape=box, style=filled, fontsize=10, color=lightgray, fontcolor=black, fillcolor=lightgray];
-  "dpdk-esp6-encrypt-tun" [color=black, fontcolor=black, fillcolor=lightgray];
-  edge [fontsize=8];
-  "dpdk-esp6-encrypt-tun" -> "error-drop";
-}

@@ -1,9 +1,0 @@
-digraph "punt_socket_rx_subgraph" {
-  rankdir=LR;
-  node [shape=box, style=filled, fontsize=10, color=lightgray, fontcolor=black, fillcolor=lightgray];
-  "punt-socket-rx" [color=black, fontcolor=black, fillcolor=lightgray];
-  edge [fontsize=8];
-  "punt-socket-rx" -> "interface-output";
-  "punt-socket-rx" -> "ip4-lookup";
-  "punt-socket-rx" -> "ip6-lookup";
-}

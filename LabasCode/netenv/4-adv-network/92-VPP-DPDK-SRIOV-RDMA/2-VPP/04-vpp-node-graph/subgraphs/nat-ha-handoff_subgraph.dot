@@ -1,7 +1,0 @@
-digraph "nat_ha_handoff_subgraph" {
-  rankdir=LR;
-  node [shape=box, style=filled, fontsize=10, color=lightgray, fontcolor=black, fillcolor=lightgray];
-  "nat-ha-handoff" [color=black, fontcolor=black, fillcolor=lightgray];
-  edge [fontsize=8];
-  "nat-ha-handoff" -> "error-drop";
-}

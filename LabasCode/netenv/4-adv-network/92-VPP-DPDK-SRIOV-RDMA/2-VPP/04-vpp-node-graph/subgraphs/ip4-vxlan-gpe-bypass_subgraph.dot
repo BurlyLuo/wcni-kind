@@ -1,8 +1,0 @@
-digraph "ip4_vxlan_gpe_bypass_subgraph" {
-  rankdir=LR;
-  node [shape=box, style=filled, fontsize=10, color=lightgray, fontcolor=black, fillcolor=lightgray];
-  "ip4-vxlan-gpe-bypass" [color=black, fontcolor=black, fillcolor=lightgray];
-  edge [fontsize=8];
-  "ip4-vxlan-gpe-bypass" -> "error-drop";
-  "ip4-vxlan-gpe-bypass" -> "vxlan4-gpe-input";
-}

@@ -1,7 +1,0 @@
-digraph "lb4_gre4_subgraph" {
-  rankdir=LR;
-  node [shape=box, style=filled, fontsize=10, color=lightgray, fontcolor=black, fillcolor=lightgray];
-  "lb4-gre4" [color=black, fontcolor=black, fillcolor=lightgray];
-  edge [fontsize=8];
-  "lb4-gre4" -> "error-drop";
-}

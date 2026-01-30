@@ -1,8 +1,0 @@
-digraph "esp6_encrypt_handoff_subgraph" {
-  rankdir=LR;
-  node [shape=box, style=filled, fontsize=10, color=lightgray, fontcolor=black, fillcolor=lightgray];
-  "esp6-encrypt-handoff" [color=black, fontcolor=black, fillcolor=lightgray];
-  edge [fontsize=8];
-  "esp6-encrypt-handoff" -> "error-drop";
-  "esp6-encrypt" -> "esp6-encrypt-handoff";
-}

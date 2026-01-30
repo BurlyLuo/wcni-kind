@@ -1,8 +1,0 @@
-digraph "igmp_parse_report_subgraph" {
-  rankdir=LR;
-  node [shape=box, style=filled, fontsize=10, color=lightgray, fontcolor=black, fillcolor=lightgray];
-  "igmp-parse-report" [color=black, fontcolor=black, fillcolor=lightgray];
-  edge [fontsize=8];
-  "igmp-input" -> "igmp-parse-report";
-  "igmp-parse-report" -> "error-drop";
-}

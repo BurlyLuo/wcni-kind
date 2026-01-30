@@ -1,8 +1,0 @@
-digraph "arp_proxy_subgraph" {
-  rankdir=LR;
-  node [shape=box, style=filled, fontsize=10, color=lightgray, fontcolor=black, fillcolor=lightgray];
-  "arp-proxy" [color=black, fontcolor=black, fillcolor=lightgray];
-  edge [fontsize=8];
-  "arp-proxy" -> "error-drop";
-  "arp-proxy" -> "interface-output";
-}

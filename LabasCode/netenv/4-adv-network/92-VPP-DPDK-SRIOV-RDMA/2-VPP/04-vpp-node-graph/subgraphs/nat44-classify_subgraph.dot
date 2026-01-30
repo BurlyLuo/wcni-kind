@@ -1,9 +1,0 @@
-digraph "nat44_classify_subgraph" {
-  rankdir=LR;
-  node [shape=box, style=filled, fontsize=10, color=lightgray, fontcolor=black, fillcolor=lightgray];
-  "nat44-classify" [color=black, fontcolor=black, fillcolor=lightgray];
-  edge [fontsize=8];
-  "nat44-classify" -> "nat44-in2out";
-  "nat44-classify" -> "nat44-out2in";
-  "nat44-classify" -> "error-drop";
-}

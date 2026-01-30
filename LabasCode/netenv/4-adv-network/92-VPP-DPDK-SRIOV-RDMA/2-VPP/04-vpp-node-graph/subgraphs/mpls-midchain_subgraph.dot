@@ -1,9 +1,0 @@
-digraph "mpls_midchain_subgraph" {
-  rankdir=LR;
-  node [shape=box, style=filled, fontsize=10, color=lightgray, fontcolor=black, fillcolor=lightgray];
-  "mpls-midchain" [color=black, fontcolor=black, fillcolor=lightgray];
-  edge [fontsize=8];
-  "mpls-frag" -> "mpls-midchain";
-  "mpls-midchain" -> "mpls-drop";
-  "mpls-midchain" -> "mpls-frag";
-}

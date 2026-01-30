@@ -1,8 +1,0 @@
-digraph "nat44_hairpinning_subgraph" {
-  rankdir=LR;
-  node [shape=box, style=filled, fontsize=10, color=lightgray, fontcolor=black, fillcolor=lightgray];
-  "nat44-hairpinning" [color=black, fontcolor=black, fillcolor=lightgray];
-  edge [fontsize=8];
-  "nat44-hairpinning" -> "ip4-lookup";
-  "nat44-hairpinning" -> "error-drop";
-}

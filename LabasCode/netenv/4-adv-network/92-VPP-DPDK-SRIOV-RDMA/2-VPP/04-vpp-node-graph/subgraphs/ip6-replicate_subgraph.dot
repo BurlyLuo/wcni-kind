@@ -1,9 +1,0 @@
-digraph "ip6_replicate_subgraph" {
-  rankdir=LR;
-  node [shape=box, style=filled, fontsize=10, color=lightgray, fontcolor=black, fillcolor=lightgray];
-  "ip6-replicate" [color=black, fontcolor=black, fillcolor=lightgray];
-  edge [fontsize=8];
-  "ip6-mfib-forward-rpf" -> "ip6-replicate";
-  "ip6-replicate" -> "ip6-drop";
-  "ip6-replicate" -> "ip6-local";
-}

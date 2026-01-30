@@ -1,7 +1,0 @@
-digraph "p2p_ethernet_input_subgraph" {
-  rankdir=LR;
-  node [shape=box, style=filled, fontsize=10, color=lightgray, fontcolor=black, fillcolor=lightgray];
-  "p2p-ethernet-input" [color=black, fontcolor=black, fillcolor=lightgray];
-  edge [fontsize=8];
-  "p2p-ethernet-input" -> "error-drop";
-}

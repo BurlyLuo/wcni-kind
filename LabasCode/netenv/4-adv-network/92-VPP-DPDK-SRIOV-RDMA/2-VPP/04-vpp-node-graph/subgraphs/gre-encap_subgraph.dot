@@ -1,7 +1,0 @@
-digraph "gre_encap_subgraph" {
-  rankdir=LR;
-  node [shape=box, style=filled, fontsize=10, color=lightgray, fontcolor=black, fillcolor=lightgray];
-  "gre-encap" [color=black, fontcolor=black, fillcolor=lightgray];
-  edge [fontsize=8];
-  "gre-encap" -> "adj-l2-midchain";
-}

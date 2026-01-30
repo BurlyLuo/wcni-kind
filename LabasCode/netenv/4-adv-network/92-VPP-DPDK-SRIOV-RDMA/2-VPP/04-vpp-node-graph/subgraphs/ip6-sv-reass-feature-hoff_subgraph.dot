@@ -1,8 +1,0 @@
-digraph "ip6_sv_reass_feature_hoff_subgraph" {
-  rankdir=LR;
-  node [shape=box, style=filled, fontsize=10, color=lightgray, fontcolor=black, fillcolor=lightgray];
-  "ip6-sv-reass-feature-hoff" [color=black, fontcolor=black, fillcolor=lightgray];
-  edge [fontsize=8];
-  "ip6-sv-reass-feature-hoff" -> "error-drop";
-  "ip6-sv-reassembly-feature" -> "ip6-sv-reass-feature-hoff";
-}

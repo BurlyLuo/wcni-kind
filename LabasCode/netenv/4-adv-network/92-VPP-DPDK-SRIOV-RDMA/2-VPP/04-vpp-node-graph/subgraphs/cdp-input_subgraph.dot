@@ -1,7 +1,0 @@
-digraph "cdp_input_subgraph" {
-  rankdir=LR;
-  node [shape=box, style=filled, fontsize=10, color=lightgray, fontcolor=black, fillcolor=lightgray];
-  "cdp-input" [color=black, fontcolor=black, fillcolor=lightgray];
-  edge [fontsize=8];
-  "cdp-input" -> "error-drop";
-}

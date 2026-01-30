@@ -1,9 +1,0 @@
-digraph "mpls_adj_incomplete_subgraph" {
-  rankdir=LR;
-  node [shape=box, style=filled, fontsize=10, color=lightgray, fontcolor=black, fillcolor=lightgray];
-  "mpls-adj-incomplete" [color=black, fontcolor=black, fillcolor=lightgray];
-  edge [fontsize=8];
-  "mpls-adj-incomplete" -> "error-drop";
-  "mpls-adj-incomplete" -> "ip4-arp";
-  "mpls-adj-incomplete" -> "ip6-discover-neighbor";
-}

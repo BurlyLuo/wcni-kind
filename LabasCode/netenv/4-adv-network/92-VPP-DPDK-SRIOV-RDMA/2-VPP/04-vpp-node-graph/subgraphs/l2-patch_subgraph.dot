@@ -1,7 +1,0 @@
-digraph "l2_patch_subgraph" {
-  rankdir=LR;
-  node [shape=box, style=filled, fontsize=10, color=lightgray, fontcolor=black, fillcolor=lightgray];
-  "l2-patch" [color=black, fontcolor=black, fillcolor=lightgray];
-  edge [fontsize=8];
-  "l2-patch" -> "error-drop";
-}

@@ -1,7 +1,0 @@
-digraph "mpls_qos_record_subgraph" {
-  rankdir=LR;
-  node [shape=box, style=filled, fontsize=10, color=lightgray, fontcolor=black, fillcolor=lightgray];
-  "mpls-qos-record" [color=black, fontcolor=black, fillcolor=lightgray];
-  edge [fontsize=8];
-  "mpls-qos-record" -> "mpls-drop";
-}

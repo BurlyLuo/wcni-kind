@@ -1,9 +1,0 @@
-digraph "vxlan_gpe_decap_ioam_v4_subgraph" {
-  rankdir=LR;
-  node [shape=box, style=filled, fontsize=10, color=lightgray, fontcolor=black, fillcolor=lightgray];
-  "vxlan-gpe-decap-ioam-v4" [color=black, fontcolor=black, fillcolor=lightgray];
-  edge [fontsize=8];
-  "vxlan-gpe-decap-ioam-v4" -> "vxlan-gpe-pop-ioam-v4";
-  "vxlan-gpe-decap-ioam-v4" -> "error-drop";
-  "vxlan4-gpe-input" -> "vxlan-gpe-decap-ioam-v4";
-}

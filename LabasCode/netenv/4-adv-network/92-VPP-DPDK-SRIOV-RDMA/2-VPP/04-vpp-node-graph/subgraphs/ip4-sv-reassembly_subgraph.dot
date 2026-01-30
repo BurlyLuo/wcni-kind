@@ -1,9 +1,0 @@
-digraph "ip4_sv_reassembly_subgraph" {
-  rankdir=LR;
-  node [shape=box, style=filled, fontsize=10, color=lightgray, fontcolor=black, fillcolor=lightgray];
-  "ip4-sv-reassembly" [color=black, fontcolor=black, fillcolor=lightgray];
-  edge [fontsize=8];
-  "ip4-sv-reassembly" -> "ip4-input";
-  "ip4-sv-reassembly" -> "ip4-drop";
-  "ip4-sv-reassembly" -> "ip4-sv-reassembly-handoff";
-}

@@ -1,7 +1,0 @@
-digraph "lb4_l3dsr_port_subgraph" {
-  rankdir=LR;
-  node [shape=box, style=filled, fontsize=10, color=lightgray, fontcolor=black, fillcolor=lightgray];
-  "lb4-l3dsr-port" [color=black, fontcolor=black, fillcolor=lightgray];
-  edge [fontsize=8];
-  "lb4-l3dsr-port" -> "error-drop";
-}

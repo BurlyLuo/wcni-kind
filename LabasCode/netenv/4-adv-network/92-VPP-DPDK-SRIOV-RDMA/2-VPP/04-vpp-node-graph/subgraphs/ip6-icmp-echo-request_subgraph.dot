@@ -1,9 +1,0 @@
-digraph "ip6_icmp_echo_request_subgraph" {
-  rankdir=LR;
-  node [shape=box, style=filled, fontsize=10, color=lightgray, fontcolor=black, fillcolor=lightgray];
-  "ip6-icmp-echo-request" [color=black, fontcolor=black, fillcolor=lightgray];
-  edge [fontsize=8];
-  "ip6-icmp-echo-request" -> "ip6-lookup";
-  "ip6-icmp-echo-request" -> "interface-output";
-  "ip6-icmp-input" -> "ip6-icmp-echo-request";
-}

@@ -1,9 +1,0 @@
-digraph "esp6_encrypt_tun_subgraph" {
-  rankdir=LR;
-  node [shape=box, style=filled, fontsize=10, color=lightgray, fontcolor=black, fillcolor=lightgray];
-  "esp6-encrypt-tun" [color=black, fontcolor=black, fillcolor=lightgray];
-  edge [fontsize=8];
-  "esp6-encrypt-tun" -> "ip6-drop";
-  "esp6-encrypt-tun" -> "esp6-encrypt-tun-handoff";
-  "esp6-encrypt-tun" -> "error-drop";
-}

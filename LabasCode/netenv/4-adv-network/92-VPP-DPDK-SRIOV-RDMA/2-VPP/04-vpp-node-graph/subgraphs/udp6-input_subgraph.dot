@@ -1,7 +1,0 @@
-digraph "udp6_input_subgraph" {
-  rankdir=LR;
-  node [shape=box, style=filled, fontsize=10, color=lightgray, fontcolor=black, fillcolor=lightgray];
-  "udp6-input" [color=black, fontcolor=black, fillcolor=lightgray];
-  edge [fontsize=8];
-  "udp6-input" -> "error-drop";
-}
