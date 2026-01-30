@@ -1,0 +1,21 @@
+name: vs
+prefix: ""
+topology:
+  nodes:
+    sonic1:
+      kind: sonic-vm
+      image: 192.168.2.100:5000/asteros_p03
+
+    h1:
+      kind: generic_vm
+      image: 192.168.2.100:5000/debian13
+      #ip a a 10.1.5.10/24 dev eth1
+
+    h2:
+      kind: generic_vm
+      image: 192.168.2.100:5000/debian13
+      #ip a a 10.1.8.10/24 dev eth1
+
+  links:
+    - endpoints: ["sonic1:eth1", "h1:eth1"]
+    - endpoints: ["sonic1:eth2", "h2:eth1"]

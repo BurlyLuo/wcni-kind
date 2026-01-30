@@ -1,0 +1,43 @@
+! Startup-config last modified at Sat Jan 10 04:15:23 2026 by root
+! device: ceos2 (cEOSLab, EOS-4.35.1F-45319759.4351F (engineering build))
+!
+no aaa root
+!
+username admin privilege 15 role network-admin secret sha512 $6$sT9qLZM.6xC0kXjh$TQVLX2lGKLKs2ZrDdiA4N8hqDg0HBahgViWWqBHOXw.GCq42BRa4Qe2Pml3Qc1KS/eezZSZfi8NcoJPDSgWfB0
+!
+management api http-commands
+   no shutdown
+!
+no service interface inactive port-id allocation disabled
+!
+service routing protocols model multi-agent
+!
+hostname ceos2
+!
+spanning-tree mode mstp
+!
+system l1
+   unsupported speed action error
+   unsupported error-correction action error
+!
+management api gnmi
+   transport grpc default
+!
+management api netconf
+   transport ssh default
+!
+interface Ethernet1
+!
+interface Ethernet2
+!
+interface Management0
+   ip address 172.20.20.2/24
+   ipv6 address 3fff:172:20:20::2/64
+!
+no ip routing
+!
+ip route 0.0.0.0/0 172.20.20.1
+!
+ipv6 route ::/0 3fff:172:20:20::1
+!
+end

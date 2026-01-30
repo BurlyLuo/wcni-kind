@@ -1,0 +1,11 @@
+---
+server1:
+    username: 
+    password: 
+    platform: linux
+    hostname: 172.20.20.3
+sonic1:
+    username: admin
+    password: admin
+    platform: sonic-vm
+    hostname: 172.20.20.2

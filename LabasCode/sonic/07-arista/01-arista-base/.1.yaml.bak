@@ -1,0 +1,15 @@
+name: ceos
+prefix: ""
+topology:
+  nodes:
+    ceos1:
+      kind: arista_ceos
+      image: 192.168.2.100:5000/ceos:v4.35.1f
+
+    ceos2:
+      kind: arista_ceos
+      image: 192.168.2.100:5000/ceos:v4.35.1f
+
+  links:
+    - endpoints: ["ceos1:eth1", "ceos2:eth1"]
+    - endpoints: ["ceos1:eth2", "ceos2:eth2"]

@@ -1,0 +1,49 @@
+name: vs
+prefix: ""
+topology:
+  nodes:
+    sonic1:
+      kind: sonic-vm
+      image: 192.168.2.100:5000/sonic:latest
+
+    sonic2:
+      kind: sonic-vm
+      image: 192.168.2.100:5000/sonic:latest
+
+    vm1:
+      kind: linux
+      image: 192.168.2.100:5000/nettool
+      exec:
+        - ip a a 10.1.5.10/24 dev eth1
+        - ip r r default via 10.1.5.254
+
+    vm2:
+      kind: linux
+      image: 192.168.2.100:5000/nettool
+      exec:
+        - ip a a 10.1.5.11/24 dev eth1
+        - ip r r default via 10.1.5.254
+
+    vm3:
+      kind: linux
+      image: 192.168.2.100:5000/nettool
+      exec:
+        - ip a a 10.1.8.10/24 dev eth1
+        - ip r r default via 10.1.8.254
+
+    vm4:
+      kind: linux
+      image: 192.168.2.100:5000/nettool
+      exec:
+        - ip a a 10.1.8.11/24 dev eth1
+        - ip r r default via 10.1.8.254
+
+
+  links:
+    # sonic1:eth1 <> sonic2:eth1
+    - endpoints: ["sonic1:eth1", "sonic2:eth1"]
+
+    - endpoints: ["sonic1:eth2", "vm1:eth1"]
+    - endpoints: ["sonic2:eth2", "vm2:eth1"]
+    - endpoints: ["sonic1:eth3", "vm3:eth1"]
+    - endpoints: ["sonic2:eth3", "vm4:eth1"]

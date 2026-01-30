@@ -1,0 +1,36 @@
+---
+br1:
+    username: 
+    password: 
+    platform: linux
+    hostname: 172.20.20.11
+br12:
+    username: 
+    password: 
+    platform: linux
+    hostname: 172.20.20.13
+br2:
+    username: 
+    password: 
+    platform: linux
+    hostname: 172.20.20.12
+server1:
+    username: 
+    password: 
+    platform: linux
+    hostname: 172.20.20.15
+server2:
+    username: 
+    password: 
+    platform: linux
+    hostname: 172.20.20.16
+server3:
+    username: 
+    password: 
+    platform: linux
+    hostname: 172.20.20.14
+server4:
+    username: 
+    password: 
+    platform: linux
+    hostname: 172.20.20.17

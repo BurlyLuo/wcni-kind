@@ -8,7 +8,7 @@ vpp2:
     username: root
     password: vpp
     platform: fdio_vpp
-    hostname: 172.20.20.4
+    hostname: 172.20.20.5
 h1:
     username: 
     password: 
@@ -18,4 +18,4 @@ h2:
     username: 
     password: 
     platform: linux
-    hostname: 172.20.20.5
+    hostname: 172.20.20.4

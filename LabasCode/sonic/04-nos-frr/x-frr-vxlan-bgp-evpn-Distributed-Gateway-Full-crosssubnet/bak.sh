@@ -8,7 +8,7 @@ for bridge in frrbrx; do
 done
 
 cat <<EOF>clab.yaml | clab deploy -t clab.yaml -
-name: l3-l2-evpn
+name: x
 prefix: ""
 
 topology:

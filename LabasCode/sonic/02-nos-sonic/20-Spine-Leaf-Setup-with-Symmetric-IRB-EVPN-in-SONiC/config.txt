@@ -1,0 +1,319 @@
+leaf1:
+admin@sonic:~$ sudo config vlan add 10
+admin@sonic:~$ sudo config vlan add 20
+admin@sonic:~$ sudo config vlan add 100
+admin@sonic:~$ sudo config vlan add 101
+admin@sonic:~$ sudo config vlan member add -u 10 Ethernet8
+admin@sonic:~$ sudo config vlan member add -u 20 Ethernet12
+
+admin@sonic:~$ sudo config interface ip add Ethernet0 192.168.11.1/24
+admin@sonic:~$ sudo config interface ip add Ethernet4 192.168.12.1/24
+admin@sonic:~$ sudo config interface ip add Loopback10 1.1.1.1/32
+
+
+
+admin@sonic:~$ sudo config vrf add Vrf-red
+admin@sonic:~$ sudo config vrf add Vrf-green
+admin@sonic:~$ sudo config interface vrf bind Vlan10 Vrf-red
+admin@sonic:~$ sudo config interface vrf bind Vlan20 Vrf-green
+admin@sonic:~$ sudo config interface vrf bind Vlan100 Vrf-red
+admin@sonic:~$ sudo config interface vrf bind Vlan101 Vrf-green
+admin@sonic:~$ sudo config interface ip add Vlan10 192.168.10.254/24
+admin@sonic:~$ sudo config interface ip add Vlan20 192.168.17.254/24
+
+
+
+admin@sonic:~$ sudo config vxlan add vtep 1.1.1.1
+admin@sonic:~$ sudo config vxlan evpn_nvo add nvo vtep
+admin@sonic:~$ sudo config vxlan map add vtep 10 10
+admin@sonic:~$ sudo config vxlan map add vtep 20 20
+admin@sonic:~$ sudo config vxlan map add vtep 100 100
+admin@sonic:~$ sudo config vxlan map add vtep 101 101
+
+
+
+sonic# configure
+sonic(config)# no router bgp 65100
+sonic(config)# router bgp 65000
+sonic(config-router)# bgp bestpath as-path multipath-relax
+sonic(config-router)# neighbor 192.168.11.2 remote-as 65000
+sonic(config-router)# neighbor 192.168.12.2 remote-as 65000
+sonic(config-router)# neighbor 192.168.13.1 remote-as 65000
+sonic(config-router)# neighbor 192.168.15.1 remote-as 65000
+sonic(config-router)# neighbor 192.168.14.1 remote-as 65000
+sonic(config-router)# neighbor 192.168.16.1 remote-as 65000
+sonic(config-router)# neighbor 192.168.13.1 update-source 192.168.11.1
+sonic(config-router)# neighbor 192.168.15.1 update-source 192.168.12.1
+sonic(config-router)# neighbor 192.168.14.1 update-source 192.168.11.1
+sonic(config-router)# neighbor 192.168.16.1 update-source 192.168.12.1
+sonic(config-router)# address-family l2vpn evpn
+sonic(config-router-af)# neighbor 192.168.13.1 activate
+sonic(config-router-af)# neighbor 192.168.15.1 activate
+sonic(config-router-af)# neighbor 192.168.14.1 activate
+sonic(config-router-af)# neighbor 192.168.16.1 activate
+sonic(config-router-af)# advertise-all-vni
+sonic(config-router-af)# exit
+sonic(config-router)# exit
+sonic(config)# router bgp 65000
+sonic(config-router)# address-family ipv4 unicast
+sonic(config-router-af)# network 1.1.1.1/32
+sonic(config-router-af)# network 192.168.11.0/24
+sonic(config-router-af)# network 192.168.12.0/24
+sonic(config)# vrf Vrf-red
+sonic(config-vrf)# vni 100
+sonic(config-vrf)# exit
+sonic(config)# vrf Vrf-green
+sonic(config-vrf)# vni 101
+sonic(config-vrf)# end
+sonic# configure terminal
+sonic(config)# router bgp 65000 vrf Vrf-red
+sonic(config-router)# address-family ipv4 unicast
+sonic(config-router-af)# redistribute connected
+sonic(config-router-af)# exit
+sonic(config-router)# address-family l2vpn evpn
+sonic(config-router-af)# advertise ipv4 unicast
+sonic(config-router-af)# end
+sonic# configure
+sonic(config)# router bgp 65000 vrf Vrf-green
+sonic(config-router)# address-family ipv4 unicast
+sonic(config-router-af)# redistribute connected
+sonic(config-router-af)# exit
+sonic(config-router)# address-family l2vpn evpn
+sonic(config-router-af)# advertise ipv4 unicast
+sonic(config-router-af)# end
+sonic# wr
+
+
+
+
+
+admin@sonic:~$ sudo config vlan add 30
+admin@sonic:~$ sudo config vlan add 40
+admin@sonic:~$ sudo config vlan add 100
+admin@sonic:~$ sudo config vlan add 101
+admin@sonic:~$ sudo config vlan member add -u 30 Ethernet8
+admin@sonic:~$ sudo config vlan member add -u 40 Ethernet12
+
+
+admin@sonic:~$ sudo config interface ip add Ethernet0 192.168.13.1/24
+admin@sonic:~$ sudo config interface ip add Ethernet4 192.168.15.1/24
+admin@sonic:~$ sudo config interface ip add Loopback10 2.2.2.2/32
+
+
+admin@sonic:~$ sudo config vrf add Vrf-red
+admin@sonic:~$ sudo config vrf add Vrf-green
+admin@sonic:~$ sudo config interface vrf bind Vlan30 Vrf-red
+admin@sonic:~$ sudo config interface vrf bind Vlan40 Vrf-green
+admin@sonic:~$ sudo config interface vrf bind Vlan100 Vrf-red
+admin@sonic:~$ sudo config interface vrf bind Vlan101 Vrf-green
+admin@sonic:~$ sudo config interface ip add Vlan30 192.168.18.254/24
+admin@sonic:~$ sudo config interface ip add Vlan40 192.168.19.254/24
+
+
+admin@sonic:~$ sudo config vxlan add vtep 2.2.2.2
+admin@sonic:~$ sudo config vxlan evpn_nvo add nvo vtep
+admin@sonic:~$ sudo config vxlan map add vtep 30 30
+admin@sonic:~$ sudo config vxlan map add vtep 40 40
+admin@sonic:~$ sudo config vxlan map add vtep 100 100
+admin@sonic:~$ sudo config vxlan map add vtep 101 101
+
+
+admin@sonic:~$ sudo config vrf add_vrf_vni_map Vrf-red 100
+admin@sonic:~$ sudo config vrf add_vrf_vni_map Vrf-green 101
+
+
+
+sonic# configure
+sonic(config)# no router bgp 65100
+sonic(config)# router bgp 65000
+sonic(config-router)# bgp bestpath as-path multipath-relax
+sonic(config-router)# neighbor 192.168.13.2 remote-as 65000
+sonic(config-router)# neighbor 192.168.15.2 remote-as 65000
+sonic(config-router)# neighbor 192.168.11.1 remote-as 65000
+sonic(config-router)# neighbor 192.168.12.1 remote-as 65000
+sonic(config-router)# neighbor 192.168.14.1 remote-as 65000
+sonic(config-router)# neighbor 192.168.16.1 remote-as 65000
+sonic(config-router)# neighbor 192.168.11.1 update-source 192.168.13.1
+sonic(config-router)# neighbor 192.168.12.1 update-source 192.168.15.1
+sonic(config-router)# neighbor 192.168.14.1 update-source 192.168.13.1
+sonic(config-router)# neighbor 192.168.16.1 update-source 192.168.15.1
+sonic(config-router)# address-family l2vpn evpn
+sonic(config-router-af)# neighbor 192.168.11.1 activate
+sonic(config-router-af)# neighbor 192.168.12.1 activate
+sonic(config-router-af)# neighbor 192.168.14.1 activate
+sonic(config-router-af)# neighbor 192.168.16.1 activate
+sonic(config-router-af)# advertise-all-vni
+sonic(config-router-af)# end
+sonic(config)# router bgp 65000
+sonic(config-router)# address-family ipv4 unicast
+sonic(config-router-af)# network 2.2.2.2/32
+sonic(config-router-af)# network 192.168.13.0/24
+sonic(config-router-af)# network 192.168.15.0/24
+sonic(config-router-af)# end
+sonic(config)# vrf Vrf-red
+sonic(config-vrf)# vni 100
+sonic(config-vrf)# exit
+sonic(config)# vrf Vrf-green
+sonic(config-vrf)# vni 101
+sonic# configure
+sonic(config)# router bgp 65000 vrf Vrf-red
+sonic(config-router)# address-family ipv4 unicast
+sonic(config-router-af)# redistribute connected
+sonic(config-router-af)# exit
+sonic(config-router)# address-family l2vpn evpn
+sonic(config-router-af)# advertise ipv4 unicast
+sonic(config-router-af)# exit
+sonic(config-router)# exit
+sonic(config)# router bgp 65000 vrf Vrf-green
+sonic(config-router)# address-family ipv4 unicast
+sonic(config-router-af)# redistribute connected
+sonic(config-router-af)# exit
+sonic(config-router)# address-family l2vpn evpn
+sonic(config-router-af)# advertise ipv4 unicast
+sonic(config-router-af)# end
+sonic# wr
+
+
+
+
+
+admin@sonic:~$ sudo config vlan add 50
+admin@sonic:~$ sudo config vlan add 60
+admin@sonic:~$ sudo config vlan add 100
+admin@sonic:~$ sudo config vlan add 101
+admin@sonic:~$ sudo config vlan member add -u 50 Ethernet8
+admin@sonic:~$ sudo config vlan member add -u 60 Ethernet12
+
+
+admin@sonic:~$ sudo config interface ip add Ethernet0 192.168.14.1/24
+admin@sonic:~$ sudo config interface ip add Ethernet4 192.168.16.1/24
+admin@sonic:~$ sudo config interface ip add Loopback10 3.3.3.3/32
+
+
+admin@sonic:~$ sudo config vrf add Vrf-red
+admin@sonic:~$ sudo config vrf add Vrf-green
+admin@sonic:~$ sudo config interface vrf bind Vlan50 Vrf-red
+admin@sonic:~$ sudo config interface vrf bind Vlan60 Vrf-green
+admin@sonic:~$ sudo config interface vrf bind Vlan100 Vrf-red
+admin@sonic:~$ sudo config interface vrf bind Vlan101 Vrf-green
+admin@sonic:~$ sudo config interface ip add Vlan50 192.168.20.254/24
+admin@sonic:~$ sudo config interface ip add Vlan60 192.168.21.254/24
+
+
+admin@sonic:~$ sudo config vxlan add vtep 3.3.3.3
+admin@sonic:~$ sudo config vxlan evpn_nvo add nvo vtep
+admin@sonic:~$ sudo config vxlan map add vtep 50 50
+admin@sonic:~$ sudo config vxlan map add vtep 60 60
+admin@sonic:~$ sudo config vxlan map add vtep 100 100
+admin@sonic:~$ sudo config vxlan map add vtep 101 101
+
+admin@sonic:~$ sudo config vrf add_vrf_vni_map Vrf-red 100
+admin@sonic:~$ sudo config vrf add_vrf_vni_map Vrf-green 101
+
+sonic# configure
+sonic(config)# no router bgp 65100
+sonic(config)# router bgp 65000
+sonic(config-router)# bgp bestpath as-path multipath-relax
+sonic(config-router)# neighbor 192.168.14.2 remote-as 65000
+sonic(config-router)# neighbor 192.168.16.2 remote-as 65000
+sonic(config-router)# neighbor 192.168.11.1 remote-as 65000
+sonic(config-router)# neighbor 192.168.12.1 remote-as 65000
+sonic(config-router)# neighbor 192.168.13.1 remote-as 65000
+sonic(config-router)# neighbor 192.168.15.1 remote-as 65000
+sonic(config-router)# neighbor 192.168.11.1 update-source 192.168.14.1
+sonic(config-router)# neighbor 192.168.12.1 update-source 192.168.16.1
+sonic(config-router)# neighbor 192.168.13.1 update-source 192.168.14.1
+sonic(config-router)# neighbor 192.168.15.1 update-source 192.168.16.1
+sonic(config-router)# address-family ipv4 unicast
+sonic(config-router-af)# network 3.3.3.3/32
+sonic(config-router-af)# network 192.168.14.0/24
+sonic(config-router-af)# network 192.168.16.0/24
+sonic(config-router-af)# exit
+sonic(config-router)# address-family l2vpn evpn
+sonic(config-router-af)# neighbor 192.168.11.1 activate
+sonic(config-router-af)# neighbor 192.168.12.1 activate
+sonic(config-router-af)# neighbor 192.168.13.1 activate
+sonic(config-router-af)# neighbor 192.168.15.1 activate
+sonic(config-router-af)# end
+sonic# configure
+sonic(config)# vrf Vrf-red
+sonic(config-vrf)# vni 100
+sonic(config-vrf)# exit
+sonic(config)# vrf Vrf-green
+sonic(config-vrf)# vni 101
+sonic(config-vrf)# end
+sonic# configure
+sonic(config)# router bgp 65000 vrf Vrf-red
+sonic(config-router)# address-family ipv4 unicast
+sonic(config-router-af)# redistribute connected
+sonic(config-router-af)# exit
+sonic(config-router)# address-family l2vpn evpn
+sonic(config-router-af)# advertise ipv4 unicast
+sonic(config-router-af)# exit
+sonic(config-router)# exit
+sonic(config)# router bgp 65000 vrf Vrf-green
+sonic(config-router)# address-family ipv4 unicast
+sonic(config-router-af)# redistribute connected
+sonic(config-router-af)# exit
+sonic(config-router)# address-family l2vpn evpn
+sonic(config-router-af)# advertise ipv4 unicast
+sonic(config-router-af)# end
+sonic# wr
+
+
+
+
+admin@sonic:~$ sudo config interface ip add Ethernet0 192.168.11.2/24
+admin@sonic:~$ sudo config interface ip add Ethernet4 192.168.13.2/24
+admin@sonic:~$ sudo config interface ip add Ethernet8 192.168.14.2/24
+
+sonic# configure
+sonic(config)# no router bgp 65100
+sonic(config)# router bgp 65000
+sonic(config-router)# bgp bestpath as-path multipath-relax
+sonic(config-router)# neighbor 192.168.11.1 remote-as 65000
+sonic(config-router)# neighbor 192.168.13.1 remote-as 65000
+sonic(config-router)# neighbor 192.168.14.1 remote-as 65000
+sonic(config-router)# neighbor 192.168.11.1 route-reflector-client
+sonic(config-router)# neighbor 192.168.13.1 route-reflector-client
+sonic(config-router)# neighbor 192.168.14.1 route-reflector-client
+sonic(config-router)# address-family ipv4 unicast
+sonic(config-router-af)# network 192.168.11.0/24
+sonic(config-router-af)# network 192.168.13.0/24
+sonic(config-router-af)# network 192.168.14.0/24
+sonic(config-router-af)# exit
+sonic(config-router)# address-family l2vpn evpn
+sonic(config-router-af)# neighbor 192.168.11.1 route-reflector-client
+sonic(config-router-af)# neighbor 192.168.13.1 route-reflector-client
+sonic(config-router-af)# neighbor 192.168.14.1 route-reflector-client
+sonic(config-router-af)# end
+sonic# wr
+
+
+
+admin@sonic:~$ sudo config interface ip add Ethernet0 192.168.12.2/24
+admin@sonic:~$ sudo config interface ip add Ethernet4 192.168.15.2/24
+admin@sonic:~$ sudo config interface ip add Ethernet8 192.168.16.2/24
+
+
+sonic# configure
+sonic(config)# no router bgp 65100
+sonic(config)# router bgp 65000
+sonic(config-router)# bgp bestpath as-path multipath-relax
+sonic(config-router)# neighbor 192.168.12.1 remote-as 65000
+sonic(config-router)# neighbor 192.168.15.1 remote-as 65000
+sonic(config-router)# neighbor 192.168.16.1 remote-as 65000
+sonic(config-router)# neighbor 192.168.12.1 route-reflector-client
+sonic(config-router)# neighbor 192.168.15.1 route-reflector-client
+sonic(config-router)# neighbor 192.168.16.1 route-reflector-client
+sonic(config-router)# address-family ipv4 unicast
+sonic(config-router-af)# network 192.168.12.0/24
+sonic(config-router-af)# network 192.168.15.0/24
+sonic(config-router-af)# network 192.168.16.0/24
+sonic(config-router-af)# exit
+sonic(config-router)# address-family l2vpn evpn
+sonic(config-router-af)# neighbor 192.168.12.1 route-reflector-client
+sonic(config-router-af)# neighbor 192.168.15.1 route-reflector-client
+sonic(config-router-af)# neighbor 192.168.16.1 route-reflector-client
+sonic(config-router-af)# end
+sonic# wr
