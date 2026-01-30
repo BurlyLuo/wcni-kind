@@ -117,6 +117,18 @@ alias push='custom_push() {
 } 
 custom_push'
 
+alias vpush='v_push() {
+  if [ -z "$(git status --porcelain)" ]; then
+    return 0
+  fi
+
+  git add .
+  git commit -m "${1:-"chore(project): refactor directory/file naming convention"}"
+  git push origin master
+}
+v_push'
+
+
 alias scc='count_today_commits() {
   DATE=$(date +"%Y-%m-%d")
     
@@ -161,9 +173,9 @@ alias cc="kubectl config get-contexts"
 alias sc="kubectl config use-context $1" 
 alias lo="docker exec -it $1 $2"
 alias all="kubectl get pods -A"
-alias clc='clab deploy -t $(grep -l "topology:" *.yaml *.yml 2>/dev/null | head -1)'
-alias clabrm='clab destroy -t $(grep -l "topology:" *.yaml *.yml 2>/dev/null | head -1)'
-alias clabrma="containerlab destroy -a"
+alias clabrm='clab destroy -t $(grep -l "topology:" *.yaml *.yml 2>/dev/null | head -1); rm -rf clab-* >/dev/null 2>&1'
+alias clc='clabrm && clab deploy -t $(grep -l "topology:" *.yaml *.yml 2>/dev/null | head -1)'
+alias clabrma="containerlab destroy -a -y"
 alias clabcc='find /root/wcni-kind/LabasCode -type f \( -name "ansible-inventory.yml" -o -name "authorized_keys" -o -name "topology-data.json" -o -name "*.clab.yml.bak" -o -name "*.clab.yaml.bak" \) -exec rm -f {} \;'
 
 alias ms="kubectl -nmetallb-system"

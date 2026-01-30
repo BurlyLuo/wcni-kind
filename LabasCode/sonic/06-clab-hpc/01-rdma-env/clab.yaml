@@ -4,7 +4,7 @@ topology:
   nodes:
     r1:
       kind: generic_vm
-      image: 192.168.2.100:5000/ubuntu:2204
+      image: 192.168.2.100:5000/debian13
       env:
         QEMU_SMP: 6
         QEMU_MEMORY: 8192

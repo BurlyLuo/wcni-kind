@@ -1,0 +1,21 @@
+name: vs
+prefix: ""
+topology:
+  nodes:
+    sonic1:
+      kind: sonic-vm
+      image: 192.168.2.100:5000/broadcom:sonic-4.4.1-enterprise_base
+      env:
+        QEMU_SMP: 6
+        QEMU_MEMORY: 8192
+
+    sonic2:
+      kind: sonic-vm
+      image: 192.168.2.100:5000/broadcom:sonic-4.4.1-enterprise_base
+      env:
+        QEMU_SMP: 6
+        QEMU_MEMORY: 8192
+
+  links:
+    - endpoints: ["sonic1:eth1", "sonic2:eth1"]
+    - endpoints: ["sonic1:eth2", "sonic2:eth2"]

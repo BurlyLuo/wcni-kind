@@ -1,0 +1,60 @@
+name: bgp-evpn-vxlan
+prefix: ""
+topology:
+  nodes:
+    spine1:
+      kind: arista_ceos
+      image: 192.168.2.100:5000/ceos:v4.35.1f
+
+    spine2:
+      kind: arista_ceos
+      image: 192.168.2.100:5000/ceos:v4.35.1f
+
+    leaf1:
+      kind: arista_ceos
+      image: 192.168.2.100:5000/ceos:v4.35.1f
+
+    leaf2:
+      kind: arista_ceos
+      image: 192.168.2.100:5000/ceos:v4.35.1f
+
+    host1:
+      kind: linux
+      image: 192.168.2.100:5000/nettool
+      exec:
+        - ip addr add 10.1.5.10/24 dev eth1
+        - ip route r default via 10.1.5.1
+
+    host2:
+      kind: linux
+      image: 192.168.2.100:5000/nettool
+      exec:
+        - ip addr add 10.1.8.10/24 dev eth1
+        - ip route r default via 10.1.8.1
+
+    host3:
+      kind: linux
+      image: 192.168.2.100:5000/nettool
+      exec:
+        - ip addr add 10.1.5.11/24 dev eth1
+        - ip route r default via 10.1.5.1
+
+    host4:
+      kind: linux
+      image: 192.168.2.100:5000/nettool
+      exec:
+        - ip addr add 10.1.8.11/24 dev eth1
+        - ip route r default via 10.1.8.1
+
+  links:
+    # Spine-Leaf Underlay
+    - endpoints: ["spine1:eth1", "leaf1:eth1"]
+    - endpoints: ["spine1:eth2", "leaf2:eth1"]
+    - endpoints: ["spine2:eth1", "leaf1:eth2"]
+    - endpoints: ["spine2:eth2", "leaf2:eth2"]
+    
+    # Leaf-Host connections
+    - endpoints: ["leaf1:eth3", "host1:eth1"]
+    - endpoints: ["leaf1:eth4", "host2:eth1"]
+    - endpoints: ["leaf2:eth3", "host3:eth1"]
+    - endpoints: ["leaf2:eth4", "host4:eth1"]
