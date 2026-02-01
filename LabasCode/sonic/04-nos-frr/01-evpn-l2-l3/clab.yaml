@@ -6,7 +6,8 @@ topology:
     leaf1:
       kind: linux
       image: quay.io/weiluo/frrouting/frr:10.5.0
-      cmd: sh -c "sed -i 's/bgpd=no/bgpd=yes/;s/zebra=no/zebra=yes/' /etc/frr/daemons && /usr/lib/frr/docker-start"
+      cmd: sh -c "sed -i '/^bgpd=/s/no/yes/;/^ospfd=/s/no/yes/;/^ospf6d=/s/no/yes/;/^isisd=/s/no/yes/' /etc/frr/daemons && /usr/lib/frr/docker-start"
+      #cmd: sh -c "sed -i 's/bgpd=no/bgpd=yes/;s/zebra=no/zebra=yes/' /etc/frr/daemons && /usr/lib/frr/docker-start"
       binds:
         - /lib/modules:/lib/modules
         - ./frr/leaf1.conf:/etc/frr/frr.conf
