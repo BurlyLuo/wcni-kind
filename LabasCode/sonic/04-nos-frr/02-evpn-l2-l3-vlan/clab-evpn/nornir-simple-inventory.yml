@@ -1,0 +1,46 @@
+---
+leaf1:
+    username: 
+    password: 
+    platform: linux
+    hostname: 172.20.20.4
+leaf2:
+    username: 
+    password: 
+    platform: linux
+    hostname: 172.20.20.7
+spine:
+    username: 
+    password: 
+    platform: linux
+    hostname: 172.20.20.3
+vm1:
+    username: 
+    password: 
+    platform: linux
+    hostname: 172.20.20.9
+vm2:
+    username: 
+    password: 
+    platform: linux
+    hostname: 172.20.20.6
+vm3:
+    username: 
+    password: 
+    platform: linux
+    hostname: 172.20.20.8
+vm4:
+    username: 
+    password: 
+    platform: linux
+    hostname: 172.20.20.5
+vm5:
+    username: 
+    password: 
+    platform: linux
+    hostname: 172.20.20.2
+vm6:
+    username: 
+    password: 
+    platform: linux
+    hostname: 172.20.20.10
