@@ -1,4 +1,4 @@
-# LabasCode: Advanced Cloud-Native Infrastructure Laboratory
+# LabasCode
 
 <div align="center">
 
