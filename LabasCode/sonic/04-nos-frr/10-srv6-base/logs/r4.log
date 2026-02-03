@@ -1,0 +1,1566 @@
+2026/02/01 08:37:18.059 debugging: ISIS: ISIS-Sr ((null)): Initialize Segment Routing SRDB
+2026/02/01 08:37:18.059 debugging: ISIS: ISIS-SRv6 ((null)): Initialize Segment Routing SRv6 DB
+2026/02/01 08:37:18.062 debugging: ISIS: Configured SRv6 locator Loc0 for IS-IS area 1
+2026/02/01 08:37:18.062 debugging: ISIS: Trying to get locator Loc0 for IS-IS area 1
+2026/02/01 08:37:18.062 informational: ISIS: Configuration Read in Took: 00:00:00
+2026/02/01 08:37:18.062 debugging: ISIS: end_config: VTY:0x7d44f58e51b0, pending SET-CFG: 0
+2026/02/01 08:37:18.073 informational: BGP: Configuration Read in Took: 00:00:00
+2026/02/01 08:37:18.073 debugging: BGP: end_config: VTY:0x75974a4140b0, pending SET-CFG: 0
+2026/02/01 08:37:18.225 debugging: ISIS: SRv6 locator deleted in zebra: name Loc0, prefix 2001:db8:4::/48, block_len 32, node_len 16, func_len 16, arg_len 0
+2026/02/01 08:37:18.225 informational: ISIS: isis_zebra_process_srv6_locator_internal: Received SRv6 locator Loc0 2001:db8:4::/48, loc-block-len=32, loc-node-len=16 func-len=16, arg-len=0
+2026/02/01 08:37:18.225 debugging: ISIS: SRv6 locator (locator Loc0, prefix 2001:db8:4::/48) set for IS-IS area 1
+2026/02/01 08:37:18.225 debugging: ISIS: Requesting SRv6 SIDs for IS-IS area 1
+2026/02/01 08:37:18.226 debugging: ISIS: SRv6 locator deleted in zebra: name Loc0, prefix 2001:db8:4::/48, block_len 32, node_len 16, func_len 16, arg_len 0
+2026/02/01 08:37:18.226 informational: ISIS: isis_zebra_process_srv6_locator_internal: Received SRv6 locator Loc0 2001:db8:4::/48, loc-block-len=32, loc-node-len=16 func-len=16, arg-len=0
+2026/02/01 08:37:18.226 debugging: ISIS: SRv6 locator (locator Loc0, prefix 2001:db8:4::/48) set for IS-IS area 1
+2026/02/01 08:37:18.226 debugging: ISIS: Requesting SRv6 SIDs for IS-IS area 1
+2026/02/01 08:37:18.226 debugging: ISIS: isis_zebra_srv6_sid_notify: received SRv6 SID notify: ctx End USP sid_value 2001:db8:4:: sid_func 0 note ZAPI_SRV6_SID_ALLOCATED
+2026/02/01 08:37:18.226 debugging: ISIS: SRv6 SID 2001:db8:4:: End USP ALLOCATED
+2026/02/01 08:37:18.226 debugging: ISIS: ISIS-SRv6 (1): setting SRv6 SID 2001:db8:4::
+2026/02/01 08:37:18.226 warnings: ISIS: Failed to install SRv6 SID 2001:db8:4::: sr0 interface not found
+2026/02/01 08:37:18.227 debugging: ISIS: SRv6 locator deleted in zebra: name Loc0, prefix 2001:db8:4::/48, block_len 32, node_len 16, func_len 16, arg_len 0
+2026/02/01 08:37:18.227 debugging: ISIS: Deleting SRv6 SID (locator Loc0, sid 2001:db8:4::) from IS-IS area 1
+2026/02/01 08:37:18.227 debugging: ISIS: ISIS-SRv6 (1): delete SID 2001:db8:4::
+2026/02/01 08:37:18.227 warnings: ISIS: sr0 interface not found: nothing to uninstall
+2026/02/01 08:37:18.227 informational: ISIS: isis_zebra_process_srv6_locator_internal: Received SRv6 locator Loc0 2001:db8:4::/48, loc-block-len=32, loc-node-len=16 func-len=16, arg-len=0
+2026/02/01 08:37:18.227 debugging: ISIS: SRv6 locator (locator Loc0, prefix 2001:db8:4::/48) set for IS-IS area 1
+2026/02/01 08:37:18.227 debugging: ISIS: Requesting SRv6 SIDs for IS-IS area 1
+2026/02/01 08:37:18.227 debugging: ISIS: isis_zebra_srv6_sid_notify: received SRv6 SID notify: ctx End USP sid_value 2001:db8:4:: sid_func 0 note ZAPI_SRV6_SID_ALLOCATED
+2026/02/01 08:37:18.227 debugging: ISIS: SRv6 SID 2001:db8:4:: End USP ALLOCATED
+2026/02/01 08:37:18.227 debugging: ISIS: ISIS-SRv6 (1): setting SRv6 SID 2001:db8:4::
+2026/02/01 08:37:18.227 warnings: ISIS: Failed to install SRv6 SID 2001:db8:4::: sr0 interface not found
+2026/02/01 08:37:18.227 debugging: ISIS: isis_zebra_srv6_sid_notify: received SRv6 SID notify: ctx End USP sid_value 2001:db8:4:: sid_func 0 note ZAPI_SRV6_SID_ALLOCATED
+2026/02/01 08:37:18.227 debugging: ISIS: SRv6 SID 2001:db8:4:: End USP ALLOCATED
+2026/02/01 08:37:18.227 debugging: ISIS: ISIS-SRv6 (1): delete SID 2001:db8:4::
+2026/02/01 08:37:18.227 warnings: ISIS: sr0 interface not found: nothing to uninstall
+2026/02/01 08:37:18.227 debugging: ISIS: ISIS-SRv6 (1): setting SRv6 SID 2001:db8:4::
+2026/02/01 08:37:18.227 warnings: ISIS: Failed to install SRv6 SID 2001:db8:4::: sr0 interface not found
+2026/02/01 08:37:18.944 warnings: ZEBRA: FD Limit set: 1048576 is stupidly large.  Is this what you intended?  Consider using --limit-fds also limiting size to 100000
+2026/02/01 08:37:18.946 notifications: ZEBRA: client 41 says hello and bids fair to announce only bgp routes vrf=0
+2026/02/01 08:37:18.952 warnings: ZEBRA: FD Limit set: 1048576 is stupidly large.  Is this what you intended?  Consider using --limit-fds also limiting size to 100000
+2026/02/01 08:37:18.953 warnings: ZEBRA: FD Limit set: 1048576 is stupidly large.  Is this what you intended?  Consider using --limit-fds also limiting size to 100000
+2026/02/01 08:37:18.954 notifications: ZEBRA: client 47 says hello and bids fair to announce only bgp routes vrf=0
+2026/02/01 08:37:18.955 notifications: ZEBRA: client 50 says hello and bids fair to announce only vnc routes vrf=0
+2026/02/01 08:37:19.587 debugging: ISIS: Interface sr0 went up. Installing SIDs for area 1 in data plane
+2026/02/01 08:37:19.588 debugging: ISIS: Installing SID 2001:db8:4:: from the data plane
+2026/02/01 08:37:19.588 debugging: ISIS: ISIS-SRv6 (1): setting SRv6 SID 2001:db8:4::
+2026/02/01 08:37:21.920 debugging: ZEBRA: srv6_manager_get_sid_internal: getting SRv6 SID for ctx End.X nh6 fe80::a8c1:abff:fe31:c3d9, sid_value=::, locator_name=Loc0
+2026/02/01 08:37:21.920 debugging: ZEBRA: get_srv6_sid: received SRv6 SID alloc request: SID ctx End.X nh6 fe80::a8c1:abff:fe31:c3d9 ((null)), mode=dynamic
+2026/02/01 08:37:21.920 debugging: ZEBRA: alloc_srv6_sid_func_dynamic: trying to allocate dynamic SID function from block 2001:db8::/32
+2026/02/01 08:37:21.920 debugging: ZEBRA: alloc_srv6_sid_func_dynamic: allocated dynamic SID function 57344 from block 2001:db8::/32
+2026/02/01 08:37:21.920 debugging: ZEBRA: get_srv6_sid_dynamic: allocated new dynamic SRv6 SID 57344 for context End.X nh6 fe80::a8c1:abff:fe31:c3d9
+2026/02/01 08:37:21.920 debugging: ZEBRA: srv6_manager_get_sid_internal: got new SRv6 SID for ctx End.X nh6 fe80::a8c1:abff:fe31:c3d9: sid_value=(null) (func=57344) (proto=9, instance=0, sessionId=0), notifying all clients
+2026/02/01 08:37:21.921 debugging: ISIS: isis_zebra_srv6_sid_notify: received SRv6 SID notify: ctx End.X nh6 fe80::a8c1:abff:fe31:c3d9 sid_value 2001:db8:4:e000:: sid_func 57344 note ZAPI_SRV6_SID_ALLOCATED
+2026/02/01 08:37:21.921 debugging: ISIS: SRv6 SID 2001:db8:4:e000:: End.X nh6 fe80::a8c1:abff:fe31:c3d9 ALLOCATED
+2026/02/01 08:37:21.921 debugging: ISIS: ISIS-SRv6 (1): Add Primary End.X SID
+2026/02/01 08:37:21.921 debugging: ISIS: ISIS-SRv6 (1): setting adjacency SID 2001:db8:4:e000::
+2026/02/01 08:37:22.592 debugging: ZEBRA: srv6_manager_get_sid_internal: getting SRv6 SID for ctx End.X nh6 fe80::a8c1:abff:fee3:c02e, sid_value=::, locator_name=Loc0
+2026/02/01 08:37:22.592 debugging: ZEBRA: get_srv6_sid: received SRv6 SID alloc request: SID ctx End.X nh6 fe80::a8c1:abff:fee3:c02e ((null)), mode=dynamic
+2026/02/01 08:37:22.592 debugging: ZEBRA: alloc_srv6_sid_func_dynamic: trying to allocate dynamic SID function from block 2001:db8::/32
+2026/02/01 08:37:22.592 debugging: ZEBRA: alloc_srv6_sid_func_dynamic: allocated dynamic SID function 57345 from block 2001:db8::/32
+2026/02/01 08:37:22.592 debugging: ZEBRA: get_srv6_sid_dynamic: allocated new dynamic SRv6 SID 57345 for context End.X nh6 fe80::a8c1:abff:fee3:c02e
+2026/02/01 08:37:22.592 debugging: ZEBRA: srv6_manager_get_sid_internal: got new SRv6 SID for ctx End.X nh6 fe80::a8c1:abff:fee3:c02e: sid_value=(null) (func=57345) (proto=9, instance=0, sessionId=0), notifying all clients
+2026/02/01 08:37:22.593 debugging: ISIS: isis_zebra_srv6_sid_notify: received SRv6 SID notify: ctx End.X nh6 fe80::a8c1:abff:fee3:c02e sid_value 2001:db8:4:e001:: sid_func 57345 note ZAPI_SRV6_SID_ALLOCATED
+2026/02/01 08:37:22.593 debugging: ISIS: SRv6 SID 2001:db8:4:e001:: End.X nh6 fe80::a8c1:abff:fee3:c02e ALLOCATED
+2026/02/01 08:37:22.593 debugging: ISIS: ISIS-SRv6 (1): Add Primary End.X SID
+2026/02/01 08:37:22.593 debugging: ISIS: ISIS-SRv6 (1): setting adjacency SID 2001:db8:4:e001::
+2026/02/01 08:37:23.991 debugging: ZEBRA: srv6_manager_get_sid_internal: getting SRv6 SID for ctx End.X nh6 fe80::a8c1:abff:fe08:3204, sid_value=::, locator_name=Loc0
+2026/02/01 08:37:23.991 debugging: ZEBRA: get_srv6_sid: received SRv6 SID alloc request: SID ctx End.X nh6 fe80::a8c1:abff:fe08:3204 ((null)), mode=dynamic
+2026/02/01 08:37:23.991 debugging: ZEBRA: alloc_srv6_sid_func_dynamic: trying to allocate dynamic SID function from block 2001:db8::/32
+2026/02/01 08:37:23.991 debugging: ZEBRA: alloc_srv6_sid_func_dynamic: allocated dynamic SID function 57346 from block 2001:db8::/32
+2026/02/01 08:37:23.991 debugging: ZEBRA: get_srv6_sid_dynamic: allocated new dynamic SRv6 SID 57346 for context End.X nh6 fe80::a8c1:abff:fe08:3204
+2026/02/01 08:37:23.991 debugging: ZEBRA: srv6_manager_get_sid_internal: got new SRv6 SID for ctx End.X nh6 fe80::a8c1:abff:fe08:3204: sid_value=(null) (func=57346) (proto=9, instance=0, sessionId=0), notifying all clients
+2026/02/01 08:37:23.992 debugging: ISIS: isis_zebra_srv6_sid_notify: received SRv6 SID notify: ctx End.X nh6 fe80::a8c1:abff:fe08:3204 sid_value 2001:db8:4:e002:: sid_func 57346 note ZAPI_SRV6_SID_ALLOCATED
+2026/02/01 08:37:23.992 debugging: ISIS: SRv6 SID 2001:db8:4:e002:: End.X nh6 fe80::a8c1:abff:fe08:3204 ALLOCATED
+2026/02/01 08:37:23.992 debugging: ISIS: ISIS-SRv6 (1): Add Primary End.X SID
+2026/02/01 08:37:23.992 debugging: ISIS: ISIS-SRv6 (1): setting adjacency SID 2001:db8:4:e002::
+2026/02/01 08:37:48.215 debugging: ISIS: ISIS-Rte (1) route created: 2001:db8:4::/48
+2026/02/01 08:37:48.215 debugging: ISIS: ISIS-Rte (1) route created: 2001:db8:4::1/128
+2026/02/01 08:37:48.215 debugging: ISIS: ISIS-Rte (1) route created: 2001:c0de:1:1::/64
+2026/02/01 08:37:48.215 debugging: ISIS: ISIS-Rte (1) route created: 2001:c0de:1:3::/64
+2026/02/01 08:37:48.215 debugging: ISIS: ISIS-Rte (1) route created: 2001:c0de:1:6::/64
+2026/02/01 08:37:49.449 debugging: ISIS: ISIS-Rte (1) route created: 2001:db8:6::/48
+2026/02/01 08:37:49.450 debugging: ISIS: ISIS-Rte (1) route created: 2001:c0de:1:4::/64
+2026/02/01 08:37:49.450 debugging: ISIS: ISIS-Rte (1) route created: 2001:db8:6::1/128
+2026/02/01 08:37:49.450 debugging: ISIS: ISIS-Rte (1) route created: 2001:c0de:1:8::/64
+2026/02/01 08:37:49.450 debugging: ISIS: ISIS-Rte (1) route created: 2001:db8:2::/48
+2026/02/01 08:37:49.450 debugging: ISIS: ISIS-Rte (1) route created: 2001:c0de:1:7::/64
+2026/02/01 08:37:49.450 debugging: ISIS: ISIS-Rte (1) route created: 2001:db8:2::1/128
+2026/02/01 08:37:50.515 debugging: ISIS: ISIS-Rte (1) route created: 2001:db8:5::/48
+2026/02/01 08:37:50.515 debugging: ISIS: ISIS-Rte (1) route created: 2001:c0de:1:2::/64
+2026/02/01 08:37:50.515 debugging: ISIS: ISIS-Rte (1) route created: 2001:db8:5::1/128
+2026/02/01 08:37:50.515 debugging: ISIS: ISIS-Rte (1): route changed: 2001:c0de:1:7::/64, change: cost (old: 50, new: 40)
+2026/02/01 08:37:51.572 debugging: ISIS: ISIS-Rte (1) route created: 2001:db8:3::/48
+2026/02/01 08:37:51.572 debugging: ISIS: ISIS-Rte (1): route changed: 2001:c0de:1:2::/64, change: cost (old: 40, new: 20)
+2026/02/01 08:37:51.572 debugging: ISIS: ISIS-Rte (1) route created: 2001:c0de:1:5::/64
+2026/02/01 08:37:51.572 debugging: ISIS: ISIS-Rte (1) route created: 2001:db8:3::1/128
+2026/02/01 08:37:51.572 debugging: ISIS: ISIS-Rte (1) route created: 2001:db8:1::/48
+2026/02/01 08:37:51.572 debugging: ISIS: ISIS-Rte (1): route changed: 2001:db8:5::/48, change: cost (old: 30, new: 20)
+2026/02/01 08:37:51.572 debugging: ISIS: ISIS-Rte (1): route changed: 2001:c0de:1:4::/64, change: nhops num (old: 1, new: 2)
+2026/02/01 08:37:51.572 debugging: ISIS: ISIS-Rte (1) route created: 2001:db8:1::1/128
+2026/02/01 08:37:51.572 debugging: ISIS: ISIS-Rte (1): route changed: 2001:db8:5::1/128, change: cost (old: 40, new: 30)
+2026/02/01 08:37:51.572 debugging: ISIS: ISIS-Rte (1): route changed: 2001:c0de:1:7::/64, change: cost (old: 40, new: 30)
+2026/02/01 08:37:51.572 debugging: ISIS: ISIS-Rte (1): route changed: 2001:db8:2::/48, change: cost (old: 40, new: 30)
+2026/02/01 08:37:51.572 debugging: ISIS: ISIS-Rte (1): route changed: 2001:db8:2::1/128, change: cost (old: 50, new: 40)
+2026/02/01 10:01:34.393 debugging: ISIS: ISIS-SRv6 (1): Delete SRv6 End.X SID
+2026/02/01 10:01:34.393 debugging: ISIS: ISIS-SRv6 (1): delete End.X SID 2001:db8:4:e000::
+2026/02/01 10:01:34.393 warnings: ISIS: IS-IS pfpacket: could not transmit packet on eth2: Network is down
+2026/02/01 10:01:34.394 errors: ISIS: [EC 67108865] ISIS-Adj (1): Send L2 IIH on eth2 failed
+2026/02/01 10:01:34.400 errors: ZEBRA: [EC 4043309074] 0:254:2001:c0de:1:8::/64: Failed to enqueue dataplane install
+2026/02/01 10:01:34.401 errors: ZEBRA: [EC 4043309074] 0:254:2001:db8:6::1/128: Failed to enqueue dataplane install
+2026/02/01 10:01:34.401 errors: ZEBRA: [EC 4043309074] 0:254:2001:db8:6::/48: Failed to enqueue dataplane install
+2026/02/01 10:01:34.401 errors: ZEBRA: [EC 4043309074] 0:254:2001:db8:4:e000::/64: Failed to enqueue dataplane install
+2026/02/01 10:01:34.548 errors: ZEBRA: [EC 4043309074] 0:254:2001:c0de:1:7::/64: Failed to enqueue dataplane install
+2026/02/01 10:01:34.549 errors: ZEBRA: [EC 4043309074] 0:254:2001:c0de:1:5::/64: Failed to enqueue dataplane install
+2026/02/01 10:01:34.549 errors: ZEBRA: [EC 4043309074] 0:254:2001:c0de:1:2::/64: Failed to enqueue dataplane install
+2026/02/01 10:01:34.549 errors: ZEBRA: [EC 4043309074] 0:254:2001:db8:5::1/128: Failed to enqueue dataplane install
+2026/02/01 10:01:34.549 errors: ZEBRA: [EC 4043309074] 0:254:2001:db8:5::/48: Failed to enqueue dataplane install
+2026/02/01 10:01:34.549 errors: ZEBRA: [EC 4043309074] 0:254:2001:db8:3::1/128: Failed to enqueue dataplane install
+2026/02/01 10:01:34.549 errors: ZEBRA: [EC 4043309074] 0:254:2001:db8:3::/48: Failed to enqueue dataplane install
+2026/02/01 10:01:34.549 errors: ZEBRA: [EC 4043309074] 0:254:2001:db8:2::1/128: Failed to enqueue dataplane install
+2026/02/01 10:01:34.549 errors: ZEBRA: [EC 4043309074] 0:254:2001:db8:2::/48: Failed to enqueue dataplane install
+2026/02/01 10:01:34.549 errors: ZEBRA: [EC 4043309074] 0:254:2001:c0de:1:4::/64: Failed to enqueue dataplane install
+2026/02/01 10:01:34.549 errors: ZEBRA: [EC 4043309074] 0:254:2001:db8:4:e001::/64: Failed to enqueue dataplane install
+2026/02/01 10:01:34.553 warnings: ISIS: isis_recv_pdu_bcast: ifname eth1, fd 17, bytesread -1, recvfrom(): Network is down
+2026/02/01 10:01:34.554 warnings: ISIS: packet is received on multiple interfaces: socket interface 0, circuit interface 1300, packet type 0
+2026/02/01 10:01:34.554 warnings: ISIS: isis_recv_pdu_bcast: recvfrom() failed
+2026/02/01 10:01:34.555 debugging: ISIS: ISIS-SRv6 (1): Delete SRv6 End.X SID
+2026/02/01 10:01:34.555 debugging: ISIS: ISIS-SRv6 (1): delete End.X SID 2001:db8:4:e001::
+2026/02/01 10:01:34.555 warnings: ISIS: IS-IS pfpacket: could not transmit packet on eth1: No such device or address
+2026/02/01 10:01:34.555 errors: ISIS: [EC 67108865] ISIS-Adj (1): Send L2 IIH on eth1 failed
+2026/02/01 10:01:34.625 debugging: ISIS: ISIS-SRv6 (1): Delete SRv6 End.X SID
+2026/02/01 10:01:34.625 debugging: ISIS: ISIS-SRv6 (1): delete End.X SID 2001:db8:4:e002::
+2026/02/01 10:01:34.625 warnings: ISIS: IS-IS pfpacket: could not transmit packet on eth3: Network is down
+2026/02/01 10:01:34.625 errors: ISIS: [EC 67108865] ISIS-Adj (1): Send L2 IIH on eth3 failed
+2026/02/01 10:01:34.633 errors: ZEBRA: [EC 4043309074] 0:254:2001:db8:1::1/128: Failed to enqueue dataplane install
+2026/02/01 10:01:34.634 errors: ZEBRA: [EC 4043309074] 0:254:2001:db8:1::/48: Failed to enqueue dataplane install
+2026/02/01 10:01:34.634 errors: ZEBRA: [EC 4043309074] 0:254:2001:db8:4:e002::/64: Failed to enqueue dataplane install
+2026/02/01 10:01:47.586 informational: BGP: Configuration Read in Took: 00:00:00
+2026/02/01 10:01:47.586 debugging: BGP: end_config: VTY:0x7487cec520b0, pending SET-CFG: 0
+2026/02/01 10:01:47.599 informational: STATIC: Configuration Read in Took: 00:00:00
+2026/02/01 10:01:47.599 debugging: STATIC: end_config: VTY:0x7ccdbe549040, pending SET-CFG: 0
+2026/02/01 10:01:47.587 debugging: ISIS: ISIS-Sr ((null)): Initialize Segment Routing SRDB
+2026/02/01 10:01:47.587 debugging: ISIS: ISIS-SRv6 ((null)): Initialize Segment Routing SRv6 DB
+2026/02/01 10:01:47.609 debugging: ISIS: Configured SRv6 locator Loc0 for IS-IS area 1
+2026/02/01 10:01:47.609 debugging: ISIS: Trying to get locator Loc0 for IS-IS area 1
+2026/02/01 10:01:47.610 informational: ISIS: Configuration Read in Took: 00:00:00
+2026/02/01 10:01:47.610 debugging: ISIS: end_config: VTY:0x7b8fe7a891b0, pending SET-CFG: 0
+2026/02/01 10:01:47.615 informational: ISIS: isis_zebra_process_srv6_locator_internal: Received SRv6 locator Loc0 2001:db8:4::/48, loc-block-len=32, loc-node-len=16 func-len=16, arg-len=0
+2026/02/01 10:01:47.615 debugging: ISIS: SRv6 locator (locator Loc0, prefix 2001:db8:4::/48) set for IS-IS area 1
+2026/02/01 10:01:47.615 debugging: ISIS: Requesting SRv6 SIDs for IS-IS area 1
+2026/02/01 10:01:47.615 debugging: ZEBRA: srv6_manager_get_sid_internal: getting SRv6 SID for ctx End USP, sid_value=::, locator_name=Loc0
+2026/02/01 10:01:47.616 debugging: ZEBRA: get_srv6_sid: received SRv6 SID alloc request: SID ctx End USP ((null)), mode=dynamic
+2026/02/01 10:01:47.616 debugging: ZEBRA: get_srv6_sid_dynamic: allocated new dynamic SRv6 SID 0 for context End USP
+2026/02/01 10:01:47.616 debugging: ZEBRA: srv6_manager_get_sid_internal: got new SRv6 SID for ctx End USP: sid_value=(null) (func=0) (proto=9, instance=0, sessionId=0), notifying all clients
+2026/02/01 10:01:47.616 debugging: ISIS: isis_zebra_srv6_sid_notify: received SRv6 SID notify: ctx End USP sid_value 2001:db8:4:: sid_func 0 note ZAPI_SRV6_SID_ALLOCATED
+2026/02/01 10:01:47.616 debugging: ISIS: SRv6 SID 2001:db8:4:: End USP ALLOCATED
+2026/02/01 10:01:47.616 debugging: ISIS: ISIS-SRv6 (1): setting SRv6 SID 2001:db8:4::
+2026/02/01 10:01:48.277 warnings: ZEBRA: FD Limit set: 1048576 is stupidly large.  Is this what you intended?  Consider using --limit-fds also limiting size to 100000
+2026/02/01 10:01:48.280 notifications: ZEBRA: client 51 says hello and bids fair to announce only bgp routes vrf=0
+2026/02/01 10:01:49.639 debugging: ZEBRA: srv6_manager_get_sid_internal: getting SRv6 SID for ctx End.X nh6 fe80::a8c1:abff:fe49:21d7, sid_value=::, locator_name=Loc0
+2026/02/01 10:01:49.639 debugging: ZEBRA: get_srv6_sid: received SRv6 SID alloc request: SID ctx End.X nh6 fe80::a8c1:abff:fe49:21d7 ((null)), mode=dynamic
+2026/02/01 10:01:49.639 debugging: ZEBRA: alloc_srv6_sid_func_dynamic: trying to allocate dynamic SID function from block 2001:db8::/32
+2026/02/01 10:01:49.639 debugging: ZEBRA: alloc_srv6_sid_func_dynamic: allocated dynamic SID function 57344 from block 2001:db8::/32
+2026/02/01 10:01:49.639 debugging: ZEBRA: get_srv6_sid_dynamic: allocated new dynamic SRv6 SID 57344 for context End.X nh6 fe80::a8c1:abff:fe49:21d7
+2026/02/01 10:01:49.639 debugging: ZEBRA: srv6_manager_get_sid_internal: got new SRv6 SID for ctx End.X nh6 fe80::a8c1:abff:fe49:21d7: sid_value=(null) (func=57344) (proto=9, instance=0, sessionId=0), notifying all clients
+2026/02/01 10:01:49.639 debugging: ISIS: isis_zebra_srv6_sid_notify: received SRv6 SID notify: ctx End.X nh6 fe80::a8c1:abff:fe49:21d7 sid_value 2001:db8:4:e000:: sid_func 57344 note ZAPI_SRV6_SID_ALLOCATED
+2026/02/01 10:01:49.639 debugging: ISIS: SRv6 SID 2001:db8:4:e000:: End.X nh6 fe80::a8c1:abff:fe49:21d7 ALLOCATED
+2026/02/01 10:01:49.639 debugging: ISIS: ISIS-SRv6 (1): Add Primary End.X SID
+2026/02/01 10:01:49.640 debugging: ISIS: ISIS-SRv6 (1): setting adjacency SID 2001:db8:4:e000::
+2026/02/01 10:01:49.711 debugging: ZEBRA: srv6_manager_get_sid_internal: getting SRv6 SID for ctx End.X nh6 fe80::a8c1:abff:fee7:ff09, sid_value=::, locator_name=Loc0
+2026/02/01 10:01:49.711 debugging: ZEBRA: get_srv6_sid: received SRv6 SID alloc request: SID ctx End.X nh6 fe80::a8c1:abff:fee7:ff09 ((null)), mode=dynamic
+2026/02/01 10:01:49.711 debugging: ZEBRA: alloc_srv6_sid_func_dynamic: trying to allocate dynamic SID function from block 2001:db8::/32
+2026/02/01 10:01:49.711 debugging: ZEBRA: alloc_srv6_sid_func_dynamic: allocated dynamic SID function 57345 from block 2001:db8::/32
+2026/02/01 10:01:49.711 debugging: ZEBRA: get_srv6_sid_dynamic: allocated new dynamic SRv6 SID 57345 for context End.X nh6 fe80::a8c1:abff:fee7:ff09
+2026/02/01 10:01:49.711 debugging: ZEBRA: srv6_manager_get_sid_internal: got new SRv6 SID for ctx End.X nh6 fe80::a8c1:abff:fee7:ff09: sid_value=(null) (func=57345) (proto=9, instance=0, sessionId=0), notifying all clients
+2026/02/01 10:01:49.714 debugging: ISIS: isis_zebra_srv6_sid_notify: received SRv6 SID notify: ctx End.X nh6 fe80::a8c1:abff:fee7:ff09 sid_value 2001:db8:4:e001:: sid_func 57345 note ZAPI_SRV6_SID_ALLOCATED
+2026/02/01 10:01:49.714 debugging: ISIS: SRv6 SID 2001:db8:4:e001:: End.X nh6 fe80::a8c1:abff:fee7:ff09 ALLOCATED
+2026/02/01 10:01:49.714 debugging: ISIS: ISIS-SRv6 (1): Add Primary End.X SID
+2026/02/01 10:01:49.714 debugging: ISIS: ISIS-SRv6 (1): setting adjacency SID 2001:db8:4:e001::
+2026/02/01 10:01:49.756 debugging: ZEBRA: srv6_manager_get_sid_internal: getting SRv6 SID for ctx End.X nh6 fe80::a8c1:abff:fed6:4d9c, sid_value=::, locator_name=Loc0
+2026/02/01 10:01:49.756 debugging: ZEBRA: get_srv6_sid: received SRv6 SID alloc request: SID ctx End.X nh6 fe80::a8c1:abff:fed6:4d9c ((null)), mode=dynamic
+2026/02/01 10:01:49.756 debugging: ZEBRA: alloc_srv6_sid_func_dynamic: trying to allocate dynamic SID function from block 2001:db8::/32
+2026/02/01 10:01:49.756 debugging: ZEBRA: alloc_srv6_sid_func_dynamic: allocated dynamic SID function 57346 from block 2001:db8::/32
+2026/02/01 10:01:49.756 debugging: ZEBRA: get_srv6_sid_dynamic: allocated new dynamic SRv6 SID 57346 for context End.X nh6 fe80::a8c1:abff:fed6:4d9c
+2026/02/01 10:01:49.756 debugging: ZEBRA: srv6_manager_get_sid_internal: got new SRv6 SID for ctx End.X nh6 fe80::a8c1:abff:fed6:4d9c: sid_value=(null) (func=57346) (proto=9, instance=0, sessionId=0), notifying all clients
+2026/02/01 10:01:49.757 debugging: ISIS: isis_zebra_srv6_sid_notify: received SRv6 SID notify: ctx End.X nh6 fe80::a8c1:abff:fed6:4d9c sid_value 2001:db8:4:e002:: sid_func 57346 note ZAPI_SRV6_SID_ALLOCATED
+2026/02/01 10:01:49.757 debugging: ISIS: SRv6 SID 2001:db8:4:e002:: End.X nh6 fe80::a8c1:abff:fed6:4d9c ALLOCATED
+2026/02/01 10:01:49.757 debugging: ISIS: ISIS-SRv6 (1): Add Primary End.X SID
+2026/02/01 10:01:49.757 debugging: ISIS: ISIS-SRv6 (1): setting adjacency SID 2001:db8:4:e002::
+2026/02/01 10:02:17.718 debugging: ISIS: ISIS-Rte (1) route created: 2001:db8:4::/48
+2026/02/01 10:02:17.718 debugging: ISIS: ISIS-Rte (1) route created: 2001:c0de:1:1::/64
+2026/02/01 10:02:17.718 debugging: ISIS: ISIS-Rte (1) route created: 2001:c0de:1:3::/64
+2026/02/01 10:02:17.718 debugging: ISIS: ISIS-Rte (1) route created: 2001:c0de:1:6::/64
+2026/02/01 10:02:17.718 debugging: ISIS: ISIS-Rte (1) route created: 2001:db8:4::1/128
+2026/02/01 10:02:17.718 debugging: ISIS: ISIS-Rte (1) route created: 2001:db8:3::/48
+2026/02/01 10:02:17.718 debugging: ISIS: ISIS-Rte (1) route created: 2001:c0de:1:2::/64
+2026/02/01 10:02:17.718 debugging: ISIS: ISIS-Rte (1) route created: 2001:c0de:1:5::/64
+2026/02/01 10:02:17.718 debugging: ISIS: ISIS-Rte (1) route created: 2001:db8:3::1/128
+2026/02/01 10:02:17.718 debugging: ISIS: ISIS-Rte (1) route created: 2001:db8:6::/48
+2026/02/01 10:02:17.718 debugging: ISIS: ISIS-Rte (1) route created: 2001:db8:1::/48
+2026/02/01 10:02:17.718 debugging: ISIS: ISIS-Rte (1) route created: 2001:db8:5::/48
+2026/02/01 10:02:17.718 debugging: ISIS: ISIS-Rte (1) route created: 2001:c0de:1:4::/64
+2026/02/01 10:02:17.718 debugging: ISIS: ISIS-Rte (1) route created: 2001:db8:6::1/128
+2026/02/01 10:02:17.718 debugging: ISIS: ISIS-Rte (1) route created: 2001:db8:1::1/128
+2026/02/01 10:02:17.718 debugging: ISIS: ISIS-Rte (1) route created: 2001:c0de:1:7::/64
+2026/02/01 10:02:17.718 debugging: ISIS: ISIS-Rte (1) route created: 2001:db8:5::1/128
+2026/02/01 10:02:17.718 debugging: ISIS: ISIS-Rte (1) route created: 2001:db8:2::/48
+2026/02/01 10:02:17.718 debugging: ISIS: ISIS-Rte (1) route created: 2001:c0de:1:8::/64
+2026/02/01 10:02:17.718 debugging: ISIS: ISIS-Rte (1) route created: 2001:db8:2::1/128
+2026/02/01 10:05:58.541 debugging: ISIS: ISIS-SRv6 (1): Delete SRv6 End.X SID
+2026/02/01 10:05:58.541 debugging: ISIS: ISIS-SRv6 (1): delete End.X SID 2001:db8:4:e000::
+2026/02/01 10:05:58.541 warnings: ISIS: IS-IS pfpacket: could not transmit packet on eth1: Network is down
+2026/02/01 10:05:58.541 errors: ISIS: [EC 67108865] ISIS-Adj (1): Send L2 IIH on eth1 failed
+2026/02/01 10:05:58.550 errors: ZEBRA: [EC 4043309074] 0:254:2001:c0de:1:7::/64: Failed to enqueue dataplane install
+2026/02/01 10:05:58.550 errors: ZEBRA: [EC 4043309074] 0:254:2001:c0de:1:5::/64: Failed to enqueue dataplane install
+2026/02/01 10:05:58.550 errors: ZEBRA: [EC 4043309074] 0:254:2001:c0de:1:2::/64: Failed to enqueue dataplane install
+2026/02/01 10:05:58.550 errors: ZEBRA: [EC 4043309074] 0:254:2001:db8:5::1/128: Failed to enqueue dataplane install
+2026/02/01 10:05:58.550 errors: ZEBRA: [EC 4043309074] 0:254:2001:db8:5::/48: Failed to enqueue dataplane install
+2026/02/01 10:05:58.550 errors: ZEBRA: [EC 4043309074] 0:254:2001:db8:3::1/128: Failed to enqueue dataplane install
+2026/02/01 10:05:58.550 errors: ZEBRA: [EC 4043309074] 0:254:2001:db8:3::/48: Failed to enqueue dataplane install
+2026/02/01 10:05:58.550 errors: ZEBRA: [EC 4043309074] 0:254:2001:db8:2::1/128: Failed to enqueue dataplane install
+2026/02/01 10:05:58.550 errors: ZEBRA: [EC 4043309074] 0:254:2001:db8:2::/48: Failed to enqueue dataplane install
+2026/02/01 10:05:58.550 errors: ZEBRA: [EC 4043309074] 0:254:2001:db8:4:e000::/64: Failed to enqueue dataplane install
+2026/02/01 10:05:58.550 errors: ZEBRA: [EC 4043309074] 0:254:2001:c0de:1:8::/64: Failed to enqueue dataplane install
+2026/02/01 10:05:58.550 errors: ZEBRA: [EC 4043309074] 0:254:2001:db8:6::1/128: Failed to enqueue dataplane install
+2026/02/01 10:05:58.550 errors: ZEBRA: [EC 4043309074] 0:254:2001:db8:6::/48: Failed to enqueue dataplane install
+2026/02/01 10:05:58.551 errors: ZEBRA: [EC 4043309074] 0:254:2001:c0de:1:4::/64: Failed to enqueue dataplane install
+2026/02/01 10:05:58.551 errors: ZEBRA: [EC 4043309074] 0:254:2001:db8:4:e002::/64: Failed to enqueue dataplane install
+2026/02/01 10:05:58.615 warnings: ISIS: isis_recv_pdu_bcast: ifname eth2, fd 17, bytesread -1, recvfrom(): Network is down
+2026/02/01 10:05:58.616 warnings: ISIS: packet is received on multiple interfaces: socket interface 0, circuit interface 1358, packet type 0
+2026/02/01 10:05:58.616 warnings: ISIS: isis_recv_pdu_bcast: recvfrom() failed
+2026/02/01 10:05:58.616 debugging: ISIS: ISIS-SRv6 (1): Delete SRv6 End.X SID
+2026/02/01 10:05:58.616 debugging: ISIS: ISIS-SRv6 (1): delete End.X SID 2001:db8:4:e002::
+2026/02/01 10:05:58.616 warnings: ISIS: IS-IS pfpacket: could not transmit packet on eth2: No such device or address
+2026/02/01 10:05:58.616 errors: ISIS: [EC 67108865] ISIS-Adj (1): Send L2 IIH on eth2 failed
+2026/02/01 10:05:58.653 warnings: ISIS: isis_recv_pdu_bcast: ifname eth3, fd 18, bytesread -1, recvfrom(): Network is down
+2026/02/01 10:05:58.654 warnings: ISIS: packet is received on multiple interfaces: socket interface 0, circuit interface 1360, packet type 0
+2026/02/01 10:05:58.654 warnings: ISIS: isis_recv_pdu_bcast: recvfrom() failed
+2026/02/01 10:05:58.660 debugging: ISIS: ISIS-SRv6 (1): Delete SRv6 End.X SID
+2026/02/01 10:05:58.660 debugging: ISIS: ISIS-SRv6 (1): delete End.X SID 2001:db8:4:e001::
+2026/02/01 10:05:58.660 warnings: ISIS: IS-IS pfpacket: could not transmit packet on eth3: No such device or address
+2026/02/01 10:05:58.660 errors: ISIS: [EC 67108865] ISIS-Adj (1): Send L2 IIH on eth3 failed
+2026/02/01 10:05:58.668 errors: ZEBRA: [EC 4043309074] 0:254:2001:db8:1::1/128: Failed to enqueue dataplane install
+2026/02/01 10:05:58.668 errors: ZEBRA: [EC 4043309074] 0:254:2001:db8:1::/48: Failed to enqueue dataplane install
+2026/02/01 10:05:58.668 errors: ZEBRA: [EC 4043309074] 0:254:2001:db8:4:e001::/64: Failed to enqueue dataplane install
+2026/02/01 10:06:23.246 informational: BGP: Configuration Read in Took: 00:00:00
+2026/02/01 10:06:23.246 debugging: BGP: end_config: VTY:0x73efd42e50b0, pending SET-CFG: 0
+2026/02/01 10:06:23.257 debugging: ISIS: ISIS-Sr ((null)): Initialize Segment Routing SRDB
+2026/02/01 10:06:23.257 debugging: ISIS: ISIS-SRv6 ((null)): Initialize Segment Routing SRv6 DB
+2026/02/01 10:06:23.257 warnings: ISIS: ISIS-LFA: failed to unregister RLFA with LDP
+2026/02/01 10:06:23.257 warnings: ISIS: ISIS-LFA: failed to unregister RLFA with LDP
+2026/02/01 10:06:23.257 warnings: ISIS: ISIS-LFA: failed to unregister RLFA with LDP
+2026/02/01 10:06:23.260 debugging: ISIS: Configured SRv6 locator Loc0 for IS-IS area 1
+2026/02/01 10:06:23.260 debugging: ISIS: Trying to get locator Loc0 for IS-IS area 1
+2026/02/01 10:06:23.260 errors: ISIS: [EC 100663302] srv6_manager_get_locator: invalid zclient socket
+2026/02/01 10:06:23.261 errors: ISIS: [EC 100663337] error processing configuration change: error [generic error] event [apply] operation [modify] xpath [/frr-isisd:isis/instance[area-tag='1'][vrf='default']/segment-routing-srv6/locator]
+2026/02/01 10:06:23.261 informational: ISIS: Configuration Read in Took: 00:00:00
+2026/02/01 10:06:23.261 debugging: ISIS: end_config: VTY:0x753a9db9a1b0, pending SET-CFG: 0
+2026/02/01 10:06:24.457 warnings: ZEBRA: FD Limit set: 1048576 is stupidly large.  Is this what you intended?  Consider using --limit-fds also limiting size to 100000
+2026/02/01 10:06:24.458 warnings: ZEBRA: FD Limit set: 1048576 is stupidly large.  Is this what you intended?  Consider using --limit-fds also limiting size to 100000
+2026/02/01 10:06:24.459 notifications: ZEBRA: client 31 says hello and bids fair to announce only bgp routes vrf=0
+2026/02/01 10:06:24.459 warnings: ZEBRA: FD Limit set: 1048576 is stupidly large.  Is this what you intended?  Consider using --limit-fds also limiting size to 100000
+2026/02/01 10:06:24.475 notifications: ZEBRA: client 35 says hello and bids fair to announce only isis routes vrf=0
+2026/02/01 10:06:24.477 warnings: ZEBRA: FD Limit set: 1048576 is stupidly large.  Is this what you intended?  Consider using --limit-fds also limiting size to 100000
+2026/02/01 10:06:24.478 informational: ISIS: isis_zebra_process_srv6_locator_internal: Received SRv6 locator Loc0 2001:db8:4::/48, loc-block-len=32, loc-node-len=16 func-len=16, arg-len=0
+2026/02/01 10:06:24.478 debugging: ISIS: SRv6 locator (locator Loc0, prefix 2001:db8:4::/48) set for IS-IS area 1
+2026/02/01 10:06:24.478 debugging: ISIS: Requesting SRv6 SIDs for IS-IS area 1
+2026/02/01 10:06:24.478 notifications: ZEBRA: client 42 says hello and bids fair to announce only static routes vrf=0
+2026/02/01 10:06:24.480 debugging: ISIS: isis_zebra_srv6_sid_notify: received SRv6 SID notify: ctx End USP sid_value 2001:db8:4:: sid_func 0 note ZAPI_SRV6_SID_ALLOCATED
+2026/02/01 10:06:24.480 debugging: ISIS: SRv6 SID 2001:db8:4:: End USP ALLOCATED
+2026/02/01 10:06:24.480 debugging: ISIS: ISIS-SRv6 (1): setting SRv6 SID 2001:db8:4::
+2026/02/01 10:06:24.480 warnings: ISIS: Failed to install SRv6 SID 2001:db8:4::: sr0 interface not found
+2026/02/01 10:06:24.479 debugging: ZEBRA: srv6_manager_get_sid_internal: getting SRv6 SID for ctx End USP, sid_value=::, locator_name=Loc0
+2026/02/01 10:06:24.479 debugging: ZEBRA: get_srv6_sid: received SRv6 SID alloc request: SID ctx End USP ((null)), mode=dynamic
+2026/02/01 10:06:24.480 debugging: ZEBRA: get_srv6_sid_dynamic: allocated new dynamic SRv6 SID 0 for context End USP
+2026/02/01 10:06:24.480 debugging: ZEBRA: srv6_manager_get_sid_internal: got new SRv6 SID for ctx End USP: sid_value=(null) (func=0) (proto=9, instance=0, sessionId=0), notifying all clients
+2026/02/01 10:06:24.480 warnings: ZEBRA: FD Limit set: 1048576 is stupidly large.  Is this what you intended?  Consider using --limit-fds also limiting size to 100000
+2026/02/01 10:06:24.481 notifications: ZEBRA: client 47 says hello and bids fair to announce only bgp routes vrf=0
+2026/02/01 10:06:24.482 notifications: ZEBRA: client 52 says hello and bids fair to announce only vnc routes vrf=0
+2026/02/01 10:06:25.342 debugging: ISIS: Interface sr0 went up. Installing SIDs for area 1 in data plane
+2026/02/01 10:06:25.342 debugging: ISIS: Installing SID 2001:db8:4:: from the data plane
+2026/02/01 10:06:25.342 debugging: ISIS: ISIS-SRv6 (1): setting SRv6 SID 2001:db8:4::
+2026/02/01 10:06:25.813 warnings: ISIS: packet is received on multiple interfaces: socket interface 1371, circuit interface 1396, packet type 2
+2026/02/01 10:06:25.813 warnings: ISIS: packet is received on multiple interfaces: socket interface 1385, circuit interface 1396, packet type 2
+2026/02/01 10:06:26.095 debugging: ZEBRA: srv6_manager_get_sid_internal: getting SRv6 SID for ctx End.X nh6 fe80::a8c1:abff:fe65:46b6, sid_value=::, locator_name=Loc0
+2026/02/01 10:06:26.095 debugging: ZEBRA: get_srv6_sid: received SRv6 SID alloc request: SID ctx End.X nh6 fe80::a8c1:abff:fe65:46b6 ((null)), mode=dynamic
+2026/02/01 10:06:26.095 debugging: ZEBRA: alloc_srv6_sid_func_dynamic: trying to allocate dynamic SID function from block 2001:db8::/32
+2026/02/01 10:06:26.095 debugging: ZEBRA: alloc_srv6_sid_func_dynamic: allocated dynamic SID function 57344 from block 2001:db8::/32
+2026/02/01 10:06:26.095 debugging: ZEBRA: get_srv6_sid_dynamic: allocated new dynamic SRv6 SID 57344 for context End.X nh6 fe80::a8c1:abff:fe65:46b6
+2026/02/01 10:06:26.095 debugging: ZEBRA: srv6_manager_get_sid_internal: got new SRv6 SID for ctx End.X nh6 fe80::a8c1:abff:fe65:46b6: sid_value=(null) (func=57344) (proto=9, instance=0, sessionId=0), notifying all clients
+2026/02/01 10:06:26.103 debugging: ISIS: isis_zebra_srv6_sid_notify: received SRv6 SID notify: ctx End.X nh6 fe80::a8c1:abff:fe65:46b6 sid_value 2001:db8:4:e000:: sid_func 57344 note ZAPI_SRV6_SID_ALLOCATED
+2026/02/01 10:06:26.103 debugging: ISIS: SRv6 SID 2001:db8:4:e000:: End.X nh6 fe80::a8c1:abff:fe65:46b6 ALLOCATED
+2026/02/01 10:06:26.103 debugging: ISIS: ISIS-SRv6 (1): Add Primary End.X SID
+2026/02/01 10:06:26.103 debugging: ISIS: ISIS-SRv6 (1): setting adjacency SID 2001:db8:4:e000::
+2026/02/01 10:06:27.316 debugging: ZEBRA: srv6_manager_get_sid_internal: getting SRv6 SID for ctx End.X nh6 fe80::a8c1:abff:fe94:ee56, sid_value=::, locator_name=Loc0
+2026/02/01 10:06:27.316 debugging: ZEBRA: get_srv6_sid: received SRv6 SID alloc request: SID ctx End.X nh6 fe80::a8c1:abff:fe94:ee56 ((null)), mode=dynamic
+2026/02/01 10:06:27.316 debugging: ZEBRA: alloc_srv6_sid_func_dynamic: trying to allocate dynamic SID function from block 2001:db8::/32
+2026/02/01 10:06:27.316 debugging: ZEBRA: alloc_srv6_sid_func_dynamic: allocated dynamic SID function 57345 from block 2001:db8::/32
+2026/02/01 10:06:27.316 debugging: ZEBRA: get_srv6_sid_dynamic: allocated new dynamic SRv6 SID 57345 for context End.X nh6 fe80::a8c1:abff:fe94:ee56
+2026/02/01 10:06:27.316 debugging: ZEBRA: srv6_manager_get_sid_internal: got new SRv6 SID for ctx End.X nh6 fe80::a8c1:abff:fe94:ee56: sid_value=(null) (func=57345) (proto=9, instance=0, sessionId=0), notifying all clients
+2026/02/01 10:06:27.317 debugging: ISIS: isis_zebra_srv6_sid_notify: received SRv6 SID notify: ctx End.X nh6 fe80::a8c1:abff:fe94:ee56 sid_value 2001:db8:4:e001:: sid_func 57345 note ZAPI_SRV6_SID_ALLOCATED
+2026/02/01 10:06:27.317 debugging: ISIS: SRv6 SID 2001:db8:4:e001:: End.X nh6 fe80::a8c1:abff:fe94:ee56 ALLOCATED
+2026/02/01 10:06:27.317 debugging: ISIS: ISIS-SRv6 (1): Add Primary End.X SID
+2026/02/01 10:06:27.317 debugging: ISIS: ISIS-SRv6 (1): setting adjacency SID 2001:db8:4:e001::
+2026/02/01 10:06:28.373 debugging: ZEBRA: srv6_manager_get_sid_internal: getting SRv6 SID for ctx End.X nh6 fe80::a8c1:abff:fe58:dcbd, sid_value=::, locator_name=Loc0
+2026/02/01 10:06:28.373 debugging: ZEBRA: get_srv6_sid: received SRv6 SID alloc request: SID ctx End.X nh6 fe80::a8c1:abff:fe58:dcbd ((null)), mode=dynamic
+2026/02/01 10:06:28.373 debugging: ZEBRA: alloc_srv6_sid_func_dynamic: trying to allocate dynamic SID function from block 2001:db8::/32
+2026/02/01 10:06:28.373 debugging: ZEBRA: alloc_srv6_sid_func_dynamic: allocated dynamic SID function 57346 from block 2001:db8::/32
+2026/02/01 10:06:28.373 debugging: ZEBRA: get_srv6_sid_dynamic: allocated new dynamic SRv6 SID 57346 for context End.X nh6 fe80::a8c1:abff:fe58:dcbd
+2026/02/01 10:06:28.373 debugging: ZEBRA: srv6_manager_get_sid_internal: got new SRv6 SID for ctx End.X nh6 fe80::a8c1:abff:fe58:dcbd: sid_value=(null) (func=57346) (proto=9, instance=0, sessionId=0), notifying all clients
+2026/02/01 10:06:28.374 debugging: ISIS: isis_zebra_srv6_sid_notify: received SRv6 SID notify: ctx End.X nh6 fe80::a8c1:abff:fe58:dcbd sid_value 2001:db8:4:e002:: sid_func 57346 note ZAPI_SRV6_SID_ALLOCATED
+2026/02/01 10:06:28.374 debugging: ISIS: SRv6 SID 2001:db8:4:e002:: End.X nh6 fe80::a8c1:abff:fe58:dcbd ALLOCATED
+2026/02/01 10:06:28.374 debugging: ISIS: ISIS-SRv6 (1): Add Primary End.X SID
+2026/02/01 10:06:28.374 debugging: ISIS: ISIS-SRv6 (1): setting adjacency SID 2001:db8:4:e002::
+2026/02/01 10:06:52.969 debugging: ISIS: ISIS-Rte (1) route created: 2001:db8:4::/48
+2026/02/01 10:06:52.969 debugging: ISIS: ISIS-Rte (1) route created: 2001:c0de:1:1::/64
+2026/02/01 10:06:52.969 debugging: ISIS: ISIS-Rte (1) route created: 2001:c0de:1:3::/64
+2026/02/01 10:06:52.969 debugging: ISIS: ISIS-Rte (1) route created: 2001:db8:4::1/128
+2026/02/01 10:06:52.969 debugging: ISIS: ISIS-Rte (1) route created: 2001:c0de:1:6::/64
+2026/02/01 10:06:52.969 debugging: ISIS: ISIS-Rte (1) route created: 2001:db8:3::1/128
+2026/02/01 10:06:52.969 debugging: ISIS: ISIS-Rte (1) route created: 2001:db8:6::/48
+2026/02/01 10:06:52.969 debugging: ISIS: ISIS-Rte (1) route created: 2001:c0de:1:4::/64
+2026/02/01 10:06:52.969 debugging: ISIS: ISIS-Rte (1) route created: 2001:db8:6::1/128
+2026/02/01 10:06:52.969 debugging: ISIS: ISIS-Rte (1) route created: 2001:c0de:1:8::/64
+2026/02/01 10:06:54.396 debugging: ISIS: ISIS-Rte (1) route created: 2001:db8:1::/48
+2026/02/01 10:06:54.396 debugging: ISIS: ISIS-Rte (1) route created: 2001:c0de:1:5::/64
+2026/02/01 10:06:54.396 debugging: ISIS: ISIS-Rte (1) route created: 2001:db8:1::1/128
+2026/02/01 10:06:56.918 debugging: ISIS: ISIS-Rte (1) route created: 2001:db8:3::/48
+2026/02/01 10:06:56.918 debugging: ISIS: ISIS-Rte (1) route created: 2001:c0de:1:2::/64
+2026/02/01 10:06:56.918 debugging: ISIS: ISIS-Rte (1): route changed: 2001:c0de:1:5::/64, change: cost (old: 30, new: 20)
+2026/02/01 10:06:56.918 debugging: ISIS: ISIS-Rte (1): route changed: 2001:db8:1::/48, change: nhops num (old: 1, new: 2)
+2026/02/01 10:06:56.918 debugging: ISIS: ISIS-Rte (1) route created: 2001:db8:5::/48
+2026/02/01 10:06:56.919 debugging: ISIS: ISIS-Rte (1): route changed: 2001:c0de:1:4::/64, change: nhops num (old: 1, new: 2)
+2026/02/01 10:06:56.919 debugging: ISIS: ISIS-Rte (1): route changed: 2001:db8:1::1/128, change: nhops num (old: 1, new: 2)
+2026/02/01 10:06:56.919 debugging: ISIS: ISIS-Rte (1) route created: 2001:c0de:1:7::/64
+2026/02/01 10:06:56.919 debugging: ISIS: ISIS-Rte (1) route created: 2001:db8:5::1/128
+2026/02/01 10:06:56.919 debugging: ISIS: ISIS-Rte (1) route created: 2001:db8:2::/48
+2026/02/01 10:06:56.919 debugging: ISIS: ISIS-Rte (1) route created: 2001:db8:2::1/128
+2026/02/01 10:51:01.988 debugging: ISIS: ISIS-SRv6 (1): Delete SRv6 End.X SID
+2026/02/01 10:51:01.988 debugging: ISIS: ISIS-SRv6 (1): delete End.X SID 2001:db8:4:e002::
+2026/02/01 10:51:01.989 warnings: ISIS: IS-IS pfpacket: could not transmit packet on eth1: Network is down
+2026/02/01 10:51:01.989 errors: ISIS: [EC 67108865] ISIS-Adj (1): Send L2 IIH on eth1 failed
+2026/02/01 10:51:01.997 errors: ZEBRA: [EC 4043309074] 0:254:2001:c0de:1:7::/64: Failed to enqueue dataplane install
+2026/02/01 10:51:01.997 errors: ZEBRA: [EC 4043309074] 0:254:2001:c0de:1:5::/64: Failed to enqueue dataplane install
+2026/02/01 10:51:01.997 errors: ZEBRA: [EC 4043309074] 0:254:2001:c0de:1:2::/64: Failed to enqueue dataplane install
+2026/02/01 10:51:01.997 errors: ZEBRA: [EC 4043309074] 0:254:2001:db8:5::1/128: Failed to enqueue dataplane install
+2026/02/01 10:51:01.997 errors: ZEBRA: [EC 4043309074] 0:254:2001:db8:5::/48: Failed to enqueue dataplane install
+2026/02/01 10:51:01.997 errors: ZEBRA: [EC 4043309074] 0:254:2001:db8:3::/48: Failed to enqueue dataplane install
+2026/02/01 10:51:01.997 errors: ZEBRA: [EC 4043309074] 0:254:2001:db8:2::1/128: Failed to enqueue dataplane install
+2026/02/01 10:51:01.997 errors: ZEBRA: [EC 4043309074] 0:254:2001:db8:2::/48: Failed to enqueue dataplane install
+2026/02/01 10:51:01.997 errors: ZEBRA: [EC 4043309074] 0:254:2001:db8:3::1/128: Failed to enqueue dataplane install
+2026/02/01 10:51:01.997 errors: ZEBRA: [EC 4043309074] 0:254:2001:db8:4:e002::/64: Failed to enqueue dataplane install
+2026/02/01 10:51:02.103 errors: ZEBRA: [EC 4043309074] 0:254:2001:c0de:1:8::/64: Failed to enqueue dataplane install
+2026/02/01 10:51:02.103 errors: ZEBRA: [EC 4043309074] 0:254:2001:db8:6::1/128: Failed to enqueue dataplane install
+2026/02/01 10:51:02.103 errors: ZEBRA: [EC 4043309074] 0:254:2001:db8:6::/48: Failed to enqueue dataplane install
+2026/02/01 10:51:02.103 errors: ZEBRA: [EC 4043309074] 0:254:2001:c0de:1:4::/64: Failed to enqueue dataplane install
+2026/02/01 10:51:02.103 errors: ZEBRA: [EC 4043309074] 0:254:2001:db8:4:e000::/64: Failed to enqueue dataplane install
+2026/02/01 10:51:02.104 warnings: ISIS: isis_recv_pdu_bcast: ifname eth2, fd 16, bytesread -1, recvfrom(): Network is down
+2026/02/01 10:51:02.104 warnings: ISIS: packet is received on multiple interfaces: socket interface 0, circuit interface 1385, packet type 0
+2026/02/01 10:51:02.104 warnings: ISIS: isis_recv_pdu_bcast: recvfrom() failed
+2026/02/01 10:51:02.105 debugging: ISIS: ISIS-SRv6 (1): Delete SRv6 End.X SID
+2026/02/01 10:51:02.105 debugging: ISIS: ISIS-SRv6 (1): delete End.X SID 2001:db8:4:e000::
+2026/02/01 10:51:02.105 warnings: ISIS: IS-IS pfpacket: could not transmit packet on eth2: No such device or address
+2026/02/01 10:51:02.105 errors: ISIS: [EC 67108865] ISIS-Adj (1): Send L2 IIH on eth2 failed
+2026/02/01 10:51:02.136 warnings: ISIS: isis_recv_pdu_bcast: ifname eth3, fd 17, bytesread -1, recvfrom(): Network is down
+2026/02/01 10:51:02.136 warnings: ISIS: packet is received on multiple interfaces: socket interface 0, circuit interface 1396, packet type 0
+2026/02/01 10:51:02.136 warnings: ISIS: isis_recv_pdu_bcast: recvfrom() failed
+2026/02/01 10:51:02.189 errors: ZEBRA: Extended Error: Nexthop id does not exist
+2026/02/01 10:51:02.189 errors: ZEBRA: [EC 4043309093] netlink-dp (NS 0) error: Invalid argument, type=RTM_NEWROUTE(24), seq=140, pid=3883281160
+2026/02/01 10:51:02.189 errors: ZEBRA: Extended Error: Nexthop id does not exist
+2026/02/01 10:51:02.189 errors: ZEBRA: [EC 4043309093] netlink-dp (NS 0) error: Invalid argument, type=RTM_NEWROUTE(24), seq=141, pid=3883281160
+2026/02/01 10:51:02.191 debugging: ISIS: ISIS-SRv6 (1): Delete SRv6 End.X SID
+2026/02/01 10:51:02.191 debugging: ISIS: ISIS-SRv6 (1): delete End.X SID 2001:db8:4:e001::
+2026/02/01 10:51:02.191 warnings: ISIS: IS-IS pfpacket: could not transmit packet on eth3: No such device or address
+2026/02/01 10:51:02.191 errors: ISIS: [EC 67108865] ISIS-Adj (1): Send L2 IIH on eth3 failed
+2026/02/01 10:51:02.220 errors: ZEBRA: Extended Error: Nexthop id does not exist
+2026/02/01 10:51:02.220 errors: ZEBRA: [EC 4043309093] netlink-dp (NS 0) error: Invalid argument, type=RTM_NEWROUTE(24), seq=142, pid=3883281160
+2026/02/01 10:53:19.202 informational: BGP: Configuration Read in Took: 00:00:00
+2026/02/01 10:53:19.202 debugging: BGP: end_config: VTY:0x7b2065ec00b0, pending SET-CFG: 0
+2026/02/01 10:53:19.225 debugging: ISIS: ISIS-Sr ((null)): Initialize Segment Routing SRDB
+2026/02/01 10:53:19.225 debugging: ISIS: ISIS-SRv6 ((null)): Initialize Segment Routing SRv6 DB
+2026/02/01 10:53:19.226 warnings: ISIS: ISIS-LFA: failed to unregister RLFA with LDP
+2026/02/01 10:53:19.226 warnings: ISIS: ISIS-LFA: failed to unregister RLFA with LDP
+2026/02/01 10:53:19.226 warnings: ISIS: ISIS-LFA: failed to unregister RLFA with LDP
+2026/02/01 10:53:19.230 debugging: ISIS: Configured SRv6 locator Loc0 for IS-IS area 1
+2026/02/01 10:53:19.230 debugging: ISIS: Trying to get locator Loc0 for IS-IS area 1
+2026/02/01 10:53:19.230 errors: ISIS: [EC 100663302] srv6_manager_get_locator: invalid zclient socket
+2026/02/01 10:53:19.230 errors: ISIS: [EC 100663337] error processing configuration change: error [generic error] event [apply] operation [modify] xpath [/frr-isisd:isis/instance[area-tag='1'][vrf='default']/segment-routing-srv6/locator]
+2026/02/01 10:53:19.231 informational: ISIS: Configuration Read in Took: 00:00:00
+2026/02/01 10:53:19.231 debugging: ISIS: end_config: VTY:0x7bd3d4d231b0, pending SET-CFG: 0
+2026/02/01 10:53:19.882 warnings: BGP: bgp_zebra_label_manager_connect: failed connecting synchronous zclient!
+2026/02/01 10:53:20.883 warnings: ZEBRA: FD Limit set: 1048576 is stupidly large.  Is this what you intended?  Consider using --limit-fds also limiting size to 100000
+2026/02/01 10:53:20.884 notifications: ZEBRA: client 31 says hello and bids fair to announce only bgp routes vrf=0
+2026/02/01 10:53:21.013 warnings: ZEBRA: FD Limit set: 1048576 is stupidly large.  Is this what you intended?  Consider using --limit-fds also limiting size to 100000
+2026/02/01 10:53:21.014 warnings: ZEBRA: FD Limit set: 1048576 is stupidly large.  Is this what you intended?  Consider using --limit-fds also limiting size to 100000
+2026/02/01 10:53:21.015 notifications: ZEBRA: client 37 says hello and bids fair to announce only bgp routes vrf=0
+2026/02/01 10:53:21.016 notifications: ZEBRA: client 40 says hello and bids fair to announce only vnc routes vrf=0
+2026/02/01 10:53:21.095 warnings: ZEBRA: FD Limit set: 1048576 is stupidly large.  Is this what you intended?  Consider using --limit-fds also limiting size to 100000
+2026/02/01 10:53:21.096 notifications: ZEBRA: client 47 says hello and bids fair to announce only isis routes vrf=0
+2026/02/01 10:53:21.149 warnings: ZEBRA: FD Limit set: 1048576 is stupidly large.  Is this what you intended?  Consider using --limit-fds also limiting size to 100000
+2026/02/01 10:53:21.150 notifications: ZEBRA: client 52 says hello and bids fair to announce only static routes vrf=0
+2026/02/01 10:53:21.800 informational: ISIS: isis_zebra_process_srv6_locator_internal: Received SRv6 locator Loc0 2001:db8:4::/48, loc-block-len=32, loc-node-len=16 func-len=16, arg-len=0
+2026/02/01 10:53:21.800 debugging: ISIS: SRv6 locator (locator Loc0, prefix 2001:db8:4::/48) set for IS-IS area 1
+2026/02/01 10:53:21.800 debugging: ISIS: Requesting SRv6 SIDs for IS-IS area 1
+2026/02/01 10:53:21.800 debugging: ZEBRA: srv6_manager_get_sid_internal: getting SRv6 SID for ctx End USP, sid_value=::, locator_name=Loc0
+2026/02/01 10:53:21.800 debugging: ZEBRA: get_srv6_sid: received SRv6 SID alloc request: SID ctx End USP ((null)), mode=dynamic
+2026/02/01 10:53:21.800 debugging: ZEBRA: get_srv6_sid_dynamic: allocated new dynamic SRv6 SID 0 for context End USP
+2026/02/01 10:53:21.800 debugging: ZEBRA: srv6_manager_get_sid_internal: got new SRv6 SID for ctx End USP: sid_value=(null) (func=0) (proto=9, instance=0, sessionId=0), notifying all clients
+2026/02/01 10:53:21.821 warnings: ISIS: packet is received on multiple interfaces: socket interface 1414, circuit interface 1430, packet type 2
+2026/02/01 10:53:21.823 debugging: ISIS: isis_zebra_srv6_sid_notify: received SRv6 SID notify: ctx End USP sid_value 2001:db8:4:: sid_func 0 note ZAPI_SRV6_SID_ALLOCATED
+2026/02/01 10:53:21.823 debugging: ISIS: SRv6 SID 2001:db8:4:: End USP ALLOCATED
+2026/02/01 10:53:21.823 debugging: ISIS: ISIS-SRv6 (1): setting SRv6 SID 2001:db8:4::
+2026/02/01 10:53:21.823 warnings: ISIS: Failed to install SRv6 SID 2001:db8:4::: sr0 interface not found
+2026/02/01 10:53:22.192 debugging: ISIS: Interface sr0 went up. Installing SIDs for area 1 in data plane
+2026/02/01 10:53:22.192 debugging: ISIS: Installing SID 2001:db8:4:: from the data plane
+2026/02/01 10:53:22.192 debugging: ISIS: ISIS-SRv6 (1): setting SRv6 SID 2001:db8:4::
+2026/02/01 10:53:24.601 debugging: ZEBRA: srv6_manager_get_sid_internal: getting SRv6 SID for ctx End.X nh6 fe80::a8c1:abff:fe64:1d85, sid_value=::, locator_name=Loc0
+2026/02/01 10:53:24.601 debugging: ZEBRA: get_srv6_sid: received SRv6 SID alloc request: SID ctx End.X nh6 fe80::a8c1:abff:fe64:1d85 ((null)), mode=dynamic
+2026/02/01 10:53:24.601 debugging: ZEBRA: alloc_srv6_sid_func_dynamic: trying to allocate dynamic SID function from block 2001:db8::/32
+2026/02/01 10:53:24.601 debugging: ZEBRA: alloc_srv6_sid_func_dynamic: allocated dynamic SID function 57344 from block 2001:db8::/32
+2026/02/01 10:53:24.601 debugging: ZEBRA: get_srv6_sid_dynamic: allocated new dynamic SRv6 SID 57344 for context End.X nh6 fe80::a8c1:abff:fe64:1d85
+2026/02/01 10:53:24.601 debugging: ZEBRA: srv6_manager_get_sid_internal: got new SRv6 SID for ctx End.X nh6 fe80::a8c1:abff:fe64:1d85: sid_value=(null) (func=57344) (proto=9, instance=0, sessionId=0), notifying all clients
+2026/02/01 10:53:24.601 debugging: ISIS: isis_zebra_srv6_sid_notify: received SRv6 SID notify: ctx End.X nh6 fe80::a8c1:abff:fe64:1d85 sid_value 2001:db8:4:e000:: sid_func 57344 note ZAPI_SRV6_SID_ALLOCATED
+2026/02/01 10:53:24.601 debugging: ISIS: SRv6 SID 2001:db8:4:e000:: End.X nh6 fe80::a8c1:abff:fe64:1d85 ALLOCATED
+2026/02/01 10:53:24.601 debugging: ISIS: ISIS-SRv6 (1): Add Primary End.X SID
+2026/02/01 10:53:24.601 debugging: ISIS: ISIS-SRv6 (1): setting adjacency SID 2001:db8:4:e000::
+2026/02/01 10:53:24.687 debugging: ZEBRA: srv6_manager_get_sid_internal: getting SRv6 SID for ctx End.X nh6 fe80::a8c1:abff:fe08:8ee5, sid_value=::, locator_name=Loc0
+2026/02/01 10:53:24.687 debugging: ZEBRA: get_srv6_sid: received SRv6 SID alloc request: SID ctx End.X nh6 fe80::a8c1:abff:fe08:8ee5 ((null)), mode=dynamic
+2026/02/01 10:53:24.687 debugging: ZEBRA: alloc_srv6_sid_func_dynamic: trying to allocate dynamic SID function from block 2001:db8::/32
+2026/02/01 10:53:24.687 debugging: ZEBRA: alloc_srv6_sid_func_dynamic: allocated dynamic SID function 57345 from block 2001:db8::/32
+2026/02/01 10:53:24.687 debugging: ZEBRA: get_srv6_sid_dynamic: allocated new dynamic SRv6 SID 57345 for context End.X nh6 fe80::a8c1:abff:fe08:8ee5
+2026/02/01 10:53:24.687 debugging: ZEBRA: srv6_manager_get_sid_internal: got new SRv6 SID for ctx End.X nh6 fe80::a8c1:abff:fe08:8ee5: sid_value=(null) (func=57345) (proto=9, instance=0, sessionId=0), notifying all clients
+2026/02/01 10:53:24.688 debugging: ISIS: isis_zebra_srv6_sid_notify: received SRv6 SID notify: ctx End.X nh6 fe80::a8c1:abff:fe08:8ee5 sid_value 2001:db8:4:e001:: sid_func 57345 note ZAPI_SRV6_SID_ALLOCATED
+2026/02/01 10:53:24.688 debugging: ISIS: SRv6 SID 2001:db8:4:e001:: End.X nh6 fe80::a8c1:abff:fe08:8ee5 ALLOCATED
+2026/02/01 10:53:24.688 debugging: ISIS: ISIS-SRv6 (1): Add Primary End.X SID
+2026/02/01 10:53:24.688 debugging: ISIS: ISIS-SRv6 (1): setting adjacency SID 2001:db8:4:e001::
+2026/02/01 10:53:26.081 debugging: ZEBRA: srv6_manager_get_sid_internal: getting SRv6 SID for ctx End.X nh6 fe80::a8c1:abff:fe29:187e, sid_value=::, locator_name=Loc0
+2026/02/01 10:53:26.081 debugging: ZEBRA: get_srv6_sid: received SRv6 SID alloc request: SID ctx End.X nh6 fe80::a8c1:abff:fe29:187e ((null)), mode=dynamic
+2026/02/01 10:53:26.081 debugging: ZEBRA: alloc_srv6_sid_func_dynamic: trying to allocate dynamic SID function from block 2001:db8::/32
+2026/02/01 10:53:26.081 debugging: ZEBRA: alloc_srv6_sid_func_dynamic: allocated dynamic SID function 57346 from block 2001:db8::/32
+2026/02/01 10:53:26.081 debugging: ZEBRA: get_srv6_sid_dynamic: allocated new dynamic SRv6 SID 57346 for context End.X nh6 fe80::a8c1:abff:fe29:187e
+2026/02/01 10:53:26.081 debugging: ZEBRA: srv6_manager_get_sid_internal: got new SRv6 SID for ctx End.X nh6 fe80::a8c1:abff:fe29:187e: sid_value=(null) (func=57346) (proto=9, instance=0, sessionId=0), notifying all clients
+2026/02/01 10:53:26.081 debugging: ISIS: isis_zebra_srv6_sid_notify: received SRv6 SID notify: ctx End.X nh6 fe80::a8c1:abff:fe29:187e sid_value 2001:db8:4:e002:: sid_func 57346 note ZAPI_SRV6_SID_ALLOCATED
+2026/02/01 10:53:26.081 debugging: ISIS: SRv6 SID 2001:db8:4:e002:: End.X nh6 fe80::a8c1:abff:fe29:187e ALLOCATED
+2026/02/01 10:53:26.081 debugging: ISIS: ISIS-SRv6 (1): Add Primary End.X SID
+2026/02/01 10:53:26.081 debugging: ISIS: ISIS-SRv6 (1): setting adjacency SID 2001:db8:4:e002::
+2026/02/01 10:53:49.802 debugging: ISIS: ISIS-Rte (1) route created: 2001:db8:4::/48
+2026/02/01 10:53:49.802 debugging: ISIS: ISIS-Rte (1) route created: 2001:c0de:1:1::/64
+2026/02/01 10:53:49.802 debugging: ISIS: ISIS-Rte (1) route created: 2001:c0de:1:3::/64
+2026/02/01 10:53:49.802 debugging: ISIS: ISIS-Rte (1) route created: 2001:db8:4::1/128
+2026/02/01 10:53:49.802 debugging: ISIS: ISIS-Rte (1) route created: 2001:c0de:1:6::/64
+2026/02/01 10:53:49.802 debugging: ISIS: ISIS-Rte (1) route created: 2001:db8:1::/48
+2026/02/01 10:53:49.802 debugging: ISIS: ISIS-Rte (1) route created: 2001:c0de:1:5::/64
+2026/02/01 10:53:49.802 debugging: ISIS: ISIS-Rte (1) route created: 2001:db8:1::1/128
+2026/02/01 10:53:51.708 debugging: ISIS: ISIS-Rte (1) route created: 2001:db8:3::/48
+2026/02/01 10:53:51.708 debugging: ISIS: ISIS-Rte (1) route created: 2001:c0de:1:2::/64
+2026/02/01 10:53:51.708 debugging: ISIS: ISIS-Rte (1) route created: 2001:db8:3::1/128
+2026/02/01 10:53:51.708 debugging: ISIS: ISIS-Rte (1): route changed: 2001:c0de:1:5::/64, change: cost (old: 30, new: 20)
+2026/02/01 10:53:51.708 debugging: ISIS: ISIS-Rte (1): route changed: 2001:db8:1::/48, change: nhops num (old: 1, new: 2)
+2026/02/01 10:53:51.708 debugging: ISIS: ISIS-Rte (1): route changed: 2001:db8:1::1/128, change: nhops num (old: 1, new: 2)
+2026/02/01 10:53:52.797 debugging: ISIS: ISIS-Rte (1) route created: 2001:db8:5::/48
+2026/02/01 10:53:52.797 debugging: ISIS: ISIS-Rte (1) route created: 2001:db8:5::1/128
+2026/02/01 10:53:52.797 debugging: ISIS: ISIS-Rte (1) route created: 2001:c0de:1:4::/64
+2026/02/01 10:53:52.797 debugging: ISIS: ISIS-Rte (1) route created: 2001:c0de:1:7::/64
+2026/02/01 10:53:52.797 debugging: ISIS: ISIS-Rte (1) route created: 2001:db8:2::/48
+2026/02/01 10:53:52.797 debugging: ISIS: ISIS-Rte (1) route created: 2001:db8:2::1/128
+2026/02/01 10:53:52.797 debugging: ISIS: ISIS-Rte (1) route created: 2001:c0de:1:8::/64
+2026/02/01 10:53:53.573 debugging: ISIS: ISIS-Rte (1) route created: 2001:db8:6::/48
+2026/02/01 10:53:53.573 debugging: ISIS: ISIS-Rte (1): route changed: 2001:c0de:1:4::/64, change: depth (old: 3, new: 2)
+2026/02/01 10:53:53.573 debugging: ISIS: ISIS-Rte (1) route created: 2001:db8:6::1/128
+2026/02/01 10:53:53.573 debugging: ISIS: ISIS-Rte (1): route changed: 2001:c0de:1:8::/64, change: cost (old: 50, new: 40)
+2026/02/01 10:56:06.800 debugging: ISIS: ISIS-SRv6 (1): Delete SRv6 End.X SID
+2026/02/01 10:56:06.800 debugging: ISIS: ISIS-SRv6 (1): delete End.X SID 2001:db8:4:e000::
+2026/02/01 10:56:06.800 warnings: ISIS: IS-IS pfpacket: could not transmit packet on eth1: Network is down
+2026/02/01 10:56:06.800 errors: ISIS: [EC 67108865] ISIS-Adj (1): Send L2 IIH on eth1 failed
+2026/02/01 10:56:06.812 errors: ZEBRA: [EC 4043309074] 0:254:2001:c0de:1:7::/64: Failed to enqueue dataplane install
+2026/02/01 10:56:06.812 errors: ZEBRA: [EC 4043309074] 0:254:2001:db8:5::1/128: Failed to enqueue dataplane install
+2026/02/01 10:56:06.812 errors: ZEBRA: [EC 4043309074] 0:254:2001:db8:5::/48: Failed to enqueue dataplane install
+2026/02/01 10:56:06.812 errors: ZEBRA: [EC 4043309074] 0:254:2001:db8:2::1/128: Failed to enqueue dataplane install
+2026/02/01 10:56:06.812 errors: ZEBRA: [EC 4043309074] 0:254:2001:db8:2::/48: Failed to enqueue dataplane install
+2026/02/01 10:56:06.812 errors: ZEBRA: [EC 4043309074] 0:254:2001:c0de:1:5::/64: Failed to enqueue dataplane install
+2026/02/01 10:56:06.812 errors: ZEBRA: [EC 4043309074] 0:254:2001:c0de:1:2::/64: Failed to enqueue dataplane install
+2026/02/01 10:56:06.812 errors: ZEBRA: [EC 4043309074] 0:254:2001:db8:3::1/128: Failed to enqueue dataplane install
+2026/02/01 10:56:06.812 errors: ZEBRA: [EC 4043309074] 0:254:2001:db8:3::/48: Failed to enqueue dataplane install
+2026/02/01 10:56:06.812 errors: ZEBRA: [EC 4043309074] 0:254:2001:db8:4:e000::/64: Failed to enqueue dataplane install
+2026/02/01 10:56:06.982 debugging: ISIS: ISIS-SRv6 (1): Delete SRv6 End.X SID
+2026/02/01 10:56:06.982 debugging: ISIS: ISIS-SRv6 (1): delete End.X SID 2001:db8:4:e002::
+2026/02/01 10:56:06.983 warnings: ISIS: IS-IS pfpacket: could not transmit packet on eth2: Network is down
+2026/02/01 10:56:06.984 errors: ISIS: [EC 67108865] ISIS-Adj (1): Send L2 IIH on eth2 failed
+2026/02/01 10:56:06.991 errors: ZEBRA: [EC 4043309074] 0:254:2001:c0de:1:8::/64: Failed to enqueue dataplane install
+2026/02/01 10:56:06.991 errors: ZEBRA: [EC 4043309074] 0:254:2001:db8:6::1/128: Failed to enqueue dataplane install
+2026/02/01 10:56:06.991 errors: ZEBRA: [EC 4043309074] 0:254:2001:db8:6::/48: Failed to enqueue dataplane install
+2026/02/01 10:56:06.991 errors: ZEBRA: [EC 4043309074] 0:254:2001:c0de:1:4::/64: Failed to enqueue dataplane install
+2026/02/01 10:56:06.991 errors: ZEBRA: [EC 4043309074] 0:254:2001:db8:4:e002::/64: Failed to enqueue dataplane install
+2026/02/01 10:56:07.019 warnings: ISIS: isis_recv_pdu_bcast: ifname eth3, fd 17, bytesread -1, recvfrom(): Network is down
+2026/02/01 10:56:07.019 warnings: ISIS: packet is received on multiple interfaces: socket interface 0, circuit interface 1430, packet type 0
+2026/02/01 10:56:07.019 warnings: ISIS: isis_recv_pdu_bcast: recvfrom() failed
+2026/02/01 10:56:07.023 debugging: ISIS: ISIS-SRv6 (1): Delete SRv6 End.X SID
+2026/02/01 10:56:07.023 debugging: ISIS: ISIS-SRv6 (1): delete End.X SID 2001:db8:4:e001::
+2026/02/01 10:56:07.023 warnings: ISIS: IS-IS pfpacket: could not transmit packet on eth3: No such device or address
+2026/02/01 10:56:07.024 errors: ISIS: [EC 67108865] ISIS-Adj (1): Send L2 IIH on eth3 failed
+2026/02/01 10:56:07.044 errors: ZEBRA: [EC 4043309074] 0:254:2001:db8:1::1/128: Failed to enqueue dataplane install
+2026/02/01 10:56:07.044 errors: ZEBRA: [EC 4043309074] 0:254:2001:db8:1::/48: Failed to enqueue dataplane install
+2026/02/01 10:56:07.044 errors: ZEBRA: [EC 4043309074] 0:254:2001:db8:4:e001::/64: Failed to enqueue dataplane install
+2026/02/01 11:31:17.510 informational: BGP: Configuration Read in Took: 00:00:00
+2026/02/01 11:31:17.510 debugging: BGP: end_config: VTY:0x70cd330a60b0, pending SET-CFG: 0
+2026/02/01 11:31:17.498 debugging: ISIS: ISIS-Sr ((null)): Initialize Segment Routing SRDB
+2026/02/01 11:31:17.498 debugging: ISIS: ISIS-SRv6 ((null)): Initialize Segment Routing SRv6 DB
+2026/02/01 11:31:17.535 debugging: ISIS: Configured SRv6 locator Loc0 for IS-IS area 1
+2026/02/01 11:31:17.535 debugging: ISIS: Trying to get locator Loc0 for IS-IS area 1
+2026/02/01 11:31:17.536 informational: ISIS: Configuration Read in Took: 00:00:00
+2026/02/01 11:31:17.536 debugging: ISIS: end_config: VTY:0x7984a86451b0, pending SET-CFG: 0
+2026/02/01 11:31:17.543 informational: ISIS: isis_zebra_process_srv6_locator_internal: Received SRv6 locator Loc0 2001:db8:4::/48, loc-block-len=32, loc-node-len=16 func-len=16, arg-len=0
+2026/02/01 11:31:17.543 debugging: ISIS: SRv6 locator (locator Loc0, prefix 2001:db8:4::/48) set for IS-IS area 1
+2026/02/01 11:31:17.543 debugging: ISIS: Requesting SRv6 SIDs for IS-IS area 1
+2026/02/01 11:31:17.543 debugging: ZEBRA: srv6_manager_get_sid_internal: getting SRv6 SID for ctx End USP, sid_value=::, locator_name=Loc0
+2026/02/01 11:31:17.543 debugging: ZEBRA: get_srv6_sid: received SRv6 SID alloc request: SID ctx End USP ((null)), mode=dynamic
+2026/02/01 11:31:17.543 debugging: ZEBRA: get_srv6_sid_dynamic: allocated new dynamic SRv6 SID 0 for context End USP
+2026/02/01 11:31:17.543 debugging: ZEBRA: srv6_manager_get_sid_internal: got new SRv6 SID for ctx End USP: sid_value=(null) (func=0) (proto=9, instance=0, sessionId=0), notifying all clients
+2026/02/01 11:31:17.544 debugging: ISIS: isis_zebra_srv6_sid_notify: received SRv6 SID notify: ctx End USP sid_value 2001:db8:4:: sid_func 0 note ZAPI_SRV6_SID_ALLOCATED
+2026/02/01 11:31:17.544 debugging: ISIS: SRv6 SID 2001:db8:4:: End USP ALLOCATED
+2026/02/01 11:31:17.544 debugging: ISIS: ISIS-SRv6 (1): setting SRv6 SID 2001:db8:4::
+2026/02/01 11:31:17.544 warnings: ISIS: Failed to install SRv6 SID 2001:db8:4::: sr0 interface not found
+2026/02/01 11:31:18.154 debugging: ISIS: Interface sr0 went up. Installing SIDs for area 1 in data plane
+2026/02/01 11:31:18.154 debugging: ISIS: Installing SID 2001:db8:4:: from the data plane
+2026/02/01 11:31:18.154 debugging: ISIS: ISIS-SRv6 (1): setting SRv6 SID 2001:db8:4::
+2026/02/01 11:31:18.212 warnings: ZEBRA: FD Limit set: 1048576 is stupidly large.  Is this what you intended?  Consider using --limit-fds also limiting size to 100000
+2026/02/01 11:31:18.213 notifications: ZEBRA: client 51 says hello and bids fair to announce only bgp routes vrf=0
+2026/02/01 11:31:18.542 debugging: ISIS: ISIS-Rte (1) route created: 2001:db8:4::1/128
+2026/02/01 11:31:19.634 debugging: ZEBRA: srv6_manager_get_sid_internal: getting SRv6 SID for ctx End.X nh6 fe80::a8c1:abff:fec5:24a0, sid_value=::, locator_name=Loc0
+2026/02/01 11:31:19.634 debugging: ZEBRA: get_srv6_sid: received SRv6 SID alloc request: SID ctx End.X nh6 fe80::a8c1:abff:fec5:24a0 ((null)), mode=dynamic
+2026/02/01 11:31:19.634 debugging: ZEBRA: alloc_srv6_sid_func_dynamic: trying to allocate dynamic SID function from block 2001:db8::/32
+2026/02/01 11:31:19.634 debugging: ZEBRA: alloc_srv6_sid_func_dynamic: allocated dynamic SID function 57344 from block 2001:db8::/32
+2026/02/01 11:31:19.634 debugging: ZEBRA: get_srv6_sid_dynamic: allocated new dynamic SRv6 SID 57344 for context End.X nh6 fe80::a8c1:abff:fec5:24a0
+2026/02/01 11:31:19.634 debugging: ZEBRA: srv6_manager_get_sid_internal: got new SRv6 SID for ctx End.X nh6 fe80::a8c1:abff:fec5:24a0: sid_value=(null) (func=57344) (proto=9, instance=0, sessionId=0), notifying all clients
+2026/02/01 11:31:19.635 debugging: ISIS: isis_zebra_srv6_sid_notify: received SRv6 SID notify: ctx End.X nh6 fe80::a8c1:abff:fec5:24a0 sid_value 2001:db8:4:e000:: sid_func 57344 note ZAPI_SRV6_SID_ALLOCATED
+2026/02/01 11:31:19.635 debugging: ISIS: SRv6 SID 2001:db8:4:e000:: End.X nh6 fe80::a8c1:abff:fec5:24a0 ALLOCATED
+2026/02/01 11:31:19.635 debugging: ISIS: ISIS-SRv6 (1): Add Primary End.X SID
+2026/02/01 11:31:19.635 debugging: ISIS: ISIS-SRv6 (1): setting adjacency SID 2001:db8:4:e000::
+2026/02/01 11:31:19.671 debugging: ZEBRA: srv6_manager_get_sid_internal: getting SRv6 SID for ctx End.X nh6 fe80::a8c1:abff:fe04:8ce3, sid_value=::, locator_name=Loc0
+2026/02/01 11:31:19.671 debugging: ZEBRA: get_srv6_sid: received SRv6 SID alloc request: SID ctx End.X nh6 fe80::a8c1:abff:fe04:8ce3 ((null)), mode=dynamic
+2026/02/01 11:31:19.671 debugging: ZEBRA: alloc_srv6_sid_func_dynamic: trying to allocate dynamic SID function from block 2001:db8::/32
+2026/02/01 11:31:19.671 debugging: ZEBRA: alloc_srv6_sid_func_dynamic: allocated dynamic SID function 57345 from block 2001:db8::/32
+2026/02/01 11:31:19.671 debugging: ZEBRA: get_srv6_sid_dynamic: allocated new dynamic SRv6 SID 57345 for context End.X nh6 fe80::a8c1:abff:fe04:8ce3
+2026/02/01 11:31:19.671 debugging: ZEBRA: srv6_manager_get_sid_internal: got new SRv6 SID for ctx End.X nh6 fe80::a8c1:abff:fe04:8ce3: sid_value=(null) (func=57345) (proto=9, instance=0, sessionId=0), notifying all clients
+2026/02/01 11:31:19.673 debugging: ISIS: isis_zebra_srv6_sid_notify: received SRv6 SID notify: ctx End.X nh6 fe80::a8c1:abff:fe04:8ce3 sid_value 2001:db8:4:e001:: sid_func 57345 note ZAPI_SRV6_SID_ALLOCATED
+2026/02/01 11:31:19.673 debugging: ISIS: SRv6 SID 2001:db8:4:e001:: End.X nh6 fe80::a8c1:abff:fe04:8ce3 ALLOCATED
+2026/02/01 11:31:19.673 debugging: ISIS: ISIS-SRv6 (1): Add Primary End.X SID
+2026/02/01 11:31:19.673 debugging: ISIS: ISIS-SRv6 (1): setting adjacency SID 2001:db8:4:e001::
+2026/02/01 11:31:20.128 debugging: ZEBRA: srv6_manager_get_sid_internal: getting SRv6 SID for ctx End.X nh6 fe80::a8c1:abff:fe00:f0d4, sid_value=::, locator_name=Loc0
+2026/02/01 11:31:20.128 debugging: ZEBRA: get_srv6_sid: received SRv6 SID alloc request: SID ctx End.X nh6 fe80::a8c1:abff:fe00:f0d4 ((null)), mode=dynamic
+2026/02/01 11:31:20.128 debugging: ZEBRA: alloc_srv6_sid_func_dynamic: trying to allocate dynamic SID function from block 2001:db8::/32
+2026/02/01 11:31:20.128 debugging: ZEBRA: alloc_srv6_sid_func_dynamic: allocated dynamic SID function 57346 from block 2001:db8::/32
+2026/02/01 11:31:20.128 debugging: ZEBRA: get_srv6_sid_dynamic: allocated new dynamic SRv6 SID 57346 for context End.X nh6 fe80::a8c1:abff:fe00:f0d4
+2026/02/01 11:31:20.128 debugging: ZEBRA: srv6_manager_get_sid_internal: got new SRv6 SID for ctx End.X nh6 fe80::a8c1:abff:fe00:f0d4: sid_value=(null) (func=57346) (proto=9, instance=0, sessionId=0), notifying all clients
+2026/02/01 11:31:20.128 debugging: ISIS: isis_zebra_srv6_sid_notify: received SRv6 SID notify: ctx End.X nh6 fe80::a8c1:abff:fe00:f0d4 sid_value 2001:db8:4:e002:: sid_func 57346 note ZAPI_SRV6_SID_ALLOCATED
+2026/02/01 11:31:20.128 debugging: ISIS: SRv6 SID 2001:db8:4:e002:: End.X nh6 fe80::a8c1:abff:fe00:f0d4 ALLOCATED
+2026/02/01 11:31:20.128 debugging: ISIS: ISIS-SRv6 (1): Add Primary End.X SID
+2026/02/01 11:31:20.128 debugging: ISIS: ISIS-SRv6 (1): setting adjacency SID 2001:db8:4:e002::
+2026/02/01 11:31:48.193 debugging: ISIS: ISIS-Rte (1) route created: 2001:db8:4::/48
+2026/02/01 11:31:48.193 debugging: ISIS: ISIS-Rte (1) route created: 2001:c0de:1:1::/64
+2026/02/01 11:31:48.193 debugging: ISIS: ISIS-Rte (1) route created: 2001:c0de:1:3::/64
+2026/02/01 11:31:48.193 debugging: ISIS: ISIS-Rte (1) route created: 2001:c0de:1:6::/64
+2026/02/01 11:31:48.193 debugging: ISIS: ISIS-Rte (1) route created: 2001:db8:3::/48
+2026/02/01 11:31:48.193 debugging: ISIS: ISIS-Rte (1) route created: 2001:c0de:1:2::/64
+2026/02/01 11:31:48.193 debugging: ISIS: ISIS-Rte (1) route created: 2001:c0de:1:5::/64
+2026/02/01 11:31:48.193 debugging: ISIS: ISIS-Rte (1) route created: 2001:db8:3::1/128
+2026/02/01 11:31:48.193 debugging: ISIS: ISIS-Rte (1) route created: 2001:db8:6::/48
+2026/02/01 11:31:48.193 debugging: ISIS: ISIS-Rte (1) route created: 2001:db8:1::/48
+2026/02/01 11:31:48.193 debugging: ISIS: ISIS-Rte (1) route created: 2001:db8:5::/48
+2026/02/01 11:31:48.193 debugging: ISIS: ISIS-Rte (1) route created: 2001:c0de:1:4::/64
+2026/02/01 11:31:48.193 debugging: ISIS: ISIS-Rte (1) route created: 2001:db8:6::1/128
+2026/02/01 11:31:48.193 debugging: ISIS: ISIS-Rte (1) route created: 2001:db8:1::1/128
+2026/02/01 11:31:48.193 debugging: ISIS: ISIS-Rte (1) route created: 2001:c0de:1:7::/64
+2026/02/01 11:31:48.193 debugging: ISIS: ISIS-Rte (1) route created: 2001:db8:5::1/128
+2026/02/01 11:31:48.193 debugging: ISIS: ISIS-Rte (1) route created: 2001:db8:2::/48
+2026/02/01 11:31:48.193 debugging: ISIS: ISIS-Rte (1) route created: 2001:c0de:1:8::/64
+2026/02/01 11:31:48.193 debugging: ISIS: ISIS-Rte (1) route created: 2001:db8:2::1/128
+2026/02/01 11:34:53.135 debugging: ISIS: ISIS-SRv6 (1): Delete SRv6 End.X SID
+2026/02/01 11:34:53.135 debugging: ISIS: ISIS-SRv6 (1): delete End.X SID 2001:db8:4:e001::
+2026/02/01 11:34:53.136 warnings: ISIS: IS-IS pfpacket: could not transmit packet on eth1: Network is down
+2026/02/01 11:34:53.136 errors: ISIS: [EC 67108865] ISIS-Adj (1): Send L2 IIH on eth1 failed
+2026/02/01 11:34:53.144 errors: ZEBRA: [EC 4043309074] 0:254:2001:c0de:1:7::/64: Failed to enqueue dataplane install
+2026/02/01 11:34:53.144 errors: ZEBRA: [EC 4043309074] 0:254:2001:c0de:1:5::/64: Failed to enqueue dataplane install
+2026/02/01 11:34:53.144 errors: ZEBRA: [EC 4043309074] 0:254:2001:c0de:1:2::/64: Failed to enqueue dataplane install
+2026/02/01 11:34:53.144 errors: ZEBRA: [EC 4043309074] 0:254:2001:db8:5::1/128: Failed to enqueue dataplane install
+2026/02/01 11:34:53.144 errors: ZEBRA: [EC 4043309074] 0:254:2001:db8:5::/48: Failed to enqueue dataplane install
+2026/02/01 11:34:53.144 errors: ZEBRA: [EC 4043309074] 0:254:2001:db8:3::1/128: Failed to enqueue dataplane install
+2026/02/01 11:34:53.144 errors: ZEBRA: [EC 4043309074] 0:254:2001:db8:3::/48: Failed to enqueue dataplane install
+2026/02/01 11:34:53.144 errors: ZEBRA: [EC 4043309074] 0:254:2001:db8:2::1/128: Failed to enqueue dataplane install
+2026/02/01 11:34:53.144 errors: ZEBRA: [EC 4043309074] 0:254:2001:db8:2::/48: Failed to enqueue dataplane install
+2026/02/01 11:34:53.145 errors: ZEBRA: [EC 4043309074] 0:254:2001:db8:4:e001::/64: Failed to enqueue dataplane install
+2026/02/01 11:34:53.189 errors: ZEBRA: Extended Error: Nexthop id does not exist
+2026/02/01 11:34:53.189 errors: ZEBRA: [EC 4043309093] netlink-dp (NS 0) error: Invalid argument, type=RTM_NEWROUTE(24), seq=95, pid=3180537364
+2026/02/01 11:34:53.189 errors: ZEBRA: Extended Error: Nexthop id does not exist
+2026/02/01 11:34:53.189 errors: ZEBRA: [EC 4043309093] netlink-dp (NS 0) error: Invalid argument, type=RTM_NEWROUTE(24), seq=96, pid=3180537364
+2026/02/01 11:34:53.189 errors: ZEBRA: Extended Error: Nexthop id does not exist
+2026/02/01 11:34:53.189 errors: ZEBRA: [EC 4043309093] netlink-dp (NS 0) error: Invalid argument, type=RTM_NEWROUTE(24), seq=97, pid=3180537364
+2026/02/01 11:34:53.189 errors: ZEBRA: Extended Error: Nexthop id does not exist
+2026/02/01 11:34:53.189 errors: ZEBRA: [EC 4043309093] netlink-dp (NS 0) error: Invalid argument, type=RTM_NEWROUTE(24), seq=98, pid=3180537364
+2026/02/01 11:34:53.189 errors: ZEBRA: Extended Error: Nexthop id does not exist
+2026/02/01 11:34:53.189 errors: ZEBRA: [EC 4043309093] netlink-dp (NS 0) error: Invalid argument, type=RTM_NEWROUTE(24), seq=99, pid=3180537364
+2026/02/01 11:34:53.190 warnings: ZEBRA: default(0:254):2001:c0de:1:8::/64: Route install failed
+2026/02/01 11:34:53.190 warnings: ZEBRA: default(0:254):2001:db8:6::1/128: Route install failed
+2026/02/01 11:34:53.190 warnings: ZEBRA: default(0:254):2001:db8:6::/48: Route install failed
+2026/02/01 11:34:53.190 warnings: ZEBRA: default(0:254):2001:c0de:1:4::/64: Route install failed
+2026/02/01 11:34:53.190 warnings: ZEBRA: default(0:254):2001:db8:4:e000::/64: Route install failed
+2026/02/01 11:34:53.192 warnings: ISIS: isis_recv_pdu_bcast: ifname eth2, fd 17, bytesread -1, recvfrom(): Network is down
+2026/02/01 11:34:53.192 warnings: ISIS: packet is received on multiple interfaces: socket interface 0, circuit interface 1661, packet type 0
+2026/02/01 11:34:53.192 warnings: ISIS: isis_recv_pdu_bcast: recvfrom() failed
+2026/02/01 11:34:53.193 debugging: ISIS: ISIS-SRv6 (1): Delete SRv6 End.X SID
+2026/02/01 11:34:53.193 debugging: ISIS: ISIS-SRv6 (1): delete End.X SID 2001:db8:4:e000::
+2026/02/01 11:34:53.193 warnings: ISIS: IS-IS pfpacket: could not transmit packet on eth2: No such device or address
+2026/02/01 11:34:53.194 errors: ISIS: [EC 67108865] ISIS-Adj (1): Send L2 IIH on eth2 failed
+2026/02/01 11:34:53.241 warnings: ISIS: isis_recv_pdu_bcast: ifname eth3, fd 18, bytesread -1, recvfrom(): Network is down
+2026/02/01 11:34:53.241 warnings: ISIS: packet is received on multiple interfaces: socket interface 0, circuit interface 1663, packet type 0
+2026/02/01 11:34:53.241 warnings: ISIS: isis_recv_pdu_bcast: recvfrom() failed
+2026/02/01 11:34:53.247 debugging: ISIS: ISIS-SRv6 (1): Delete SRv6 End.X SID
+2026/02/01 11:34:53.247 debugging: ISIS: ISIS-SRv6 (1): delete End.X SID 2001:db8:4:e002::
+2026/02/01 11:34:53.247 warnings: ISIS: IS-IS pfpacket: could not transmit packet on eth3: No such device or address
+2026/02/01 11:34:53.247 errors: ZEBRA: [EC 4043309074] 0:254:2001:db8:1::1/128: Failed to enqueue dataplane install
+2026/02/01 11:34:53.248 errors: ZEBRA: [EC 4043309074] 0:254:2001:db8:1::/48: Failed to enqueue dataplane install
+2026/02/01 11:34:53.248 errors: ZEBRA: [EC 4043309074] 0:254:2001:db8:4:e002::/64: Failed to enqueue dataplane install
+2026/02/01 11:34:53.248 errors: ISIS: [EC 67108865] ISIS-Adj (1): Send L2 IIH on eth3 failed
+2026/02/01 11:36:36.967 informational: STATIC: Configuration Read in Took: 00:00:00
+2026/02/01 11:36:36.967 debugging: STATIC: end_config: VTY:0x77d773b0d040, pending SET-CFG: 0
+2026/02/01 11:36:36.977 debugging: ISIS: ISIS-Sr ((null)): Initialize Segment Routing SRDB
+2026/02/01 11:36:36.977 debugging: ISIS: ISIS-SRv6 ((null)): Initialize Segment Routing SRv6 DB
+2026/02/01 11:36:36.978 warnings: ISIS: ISIS-LFA: failed to unregister RLFA with LDP
+2026/02/01 11:36:36.978 warnings: ISIS: ISIS-LFA: failed to unregister RLFA with LDP
+2026/02/01 11:36:36.978 warnings: ISIS: ISIS-LFA: failed to unregister RLFA with LDP
+2026/02/01 11:36:36.981 debugging: ISIS: Configured SRv6 locator Loc0 for IS-IS area 1
+2026/02/01 11:36:36.981 debugging: ISIS: Trying to get locator Loc0 for IS-IS area 1
+2026/02/01 11:36:36.981 errors: ISIS: [EC 100663302] srv6_manager_get_locator: invalid zclient socket
+2026/02/01 11:36:36.981 errors: ISIS: [EC 100663337] error processing configuration change: error [generic error] event [apply] operation [modify] xpath [/frr-isisd:isis/instance[area-tag='1'][vrf='default']/segment-routing-srv6/locator]
+2026/02/01 11:36:36.982 informational: BGP: Configuration Read in Took: 00:00:00
+2026/02/01 11:36:36.982 debugging: BGP: end_config: VTY:0x76558f42b0b0, pending SET-CFG: 0
+2026/02/01 11:36:36.982 informational: ISIS: Configuration Read in Took: 00:00:00
+2026/02/01 11:36:36.982 debugging: ISIS: end_config: VTY:0x788ec133d1b0, pending SET-CFG: 0
+2026/02/01 11:36:38.163 warnings: ZEBRA: FD Limit set: 1048576 is stupidly large.  Is this what you intended?  Consider using --limit-fds also limiting size to 100000
+2026/02/01 11:36:38.168 notifications: ZEBRA: client 31 says hello and bids fair to announce only bgp routes vrf=0
+2026/02/01 11:36:38.169 warnings: ZEBRA: FD Limit set: 1048576 is stupidly large.  Is this what you intended?  Consider using --limit-fds also limiting size to 100000
+2026/02/01 11:36:38.171 warnings: ZEBRA: FD Limit set: 1048576 is stupidly large.  Is this what you intended?  Consider using --limit-fds also limiting size to 100000
+2026/02/01 11:36:38.173 debugging: ISIS: SRv6 locator deleted in zebra: name Loc0, prefix 2001:db8:4::/48, block_len 32, node_len 16, func_len 16, arg_len 0
+2026/02/01 11:36:38.172 debugging: ZEBRA: zebra_srv6_locator_format_set: Locator Loc0 format has changed, old=(null) new=(null)
+2026/02/01 11:36:38.172 debugging: ZEBRA: zebra_srv6_locator_format_set: Locator Loc0 format has changed, send SRV6_LOCATOR_DEL notification to zclients
+2026/02/01 11:36:38.172 debugging: ZEBRA: zebra_srv6_locator_format_set: Locator Loc0 format has changed, send SRV6_LOCATOR_ADD notification to zclients
+2026/02/01 11:36:38.174 notifications: ZEBRA: client 37 says hello and bids fair to announce only isis routes vrf=0
+2026/02/01 11:36:38.174 informational: ISIS: isis_zebra_process_srv6_locator_internal: Received SRv6 locator Loc0 2001:db8:4::/48, loc-block-len=32, loc-node-len=16 func-len=16, arg-len=0
+2026/02/01 11:36:38.174 debugging: ISIS: SRv6 locator (locator Loc0, prefix 2001:db8:4::/48) set for IS-IS area 1
+2026/02/01 11:36:38.174 debugging: ISIS: Requesting SRv6 SIDs for IS-IS area 1
+2026/02/01 11:36:38.176 notifications: ZEBRA: client 42 says hello and bids fair to announce only static routes vrf=0
+2026/02/01 11:36:38.177 warnings: ZEBRA: FD Limit set: 1048576 is stupidly large.  Is this what you intended?  Consider using --limit-fds also limiting size to 100000
+2026/02/01 11:36:38.179 debugging: ZEBRA: srv6_manager_get_sid_internal: getting SRv6 SID for ctx End USP, sid_value=::, locator_name=Loc0
+2026/02/01 11:36:38.179 debugging: ZEBRA: get_srv6_sid: received SRv6 SID alloc request: SID ctx End USP ((null)), mode=dynamic
+2026/02/01 11:36:38.179 debugging: ZEBRA: get_srv6_sid_dynamic: allocated new dynamic SRv6 SID 0 for context End USP
+2026/02/01 11:36:38.179 debugging: ZEBRA: srv6_manager_get_sid_internal: got new SRv6 SID for ctx End USP: sid_value=(null) (func=0) (proto=9, instance=0, sessionId=0), notifying all clients
+2026/02/01 11:36:38.180 debugging: ZEBRA: zebra_srv6_locator_format_set: Locator Loc0 format has changed, old=(null) new=usid-f3216
+2026/02/01 11:36:38.181 debugging: ZEBRA: zebra_srv6_locator_format_set: Locator Loc0 format has changed, send SRV6_LOCATOR_DEL notification to zclients
+2026/02/01 11:36:38.181 debugging: ZEBRA: zebra_srv6_locator_format_set: Locator Loc0 format has changed, send SRV6_LOCATOR_ADD notification to zclients
+2026/02/01 11:36:38.182 warnings: ZEBRA: FD Limit set: 1048576 is stupidly large.  Is this what you intended?  Consider using --limit-fds also limiting size to 100000
+2026/02/01 11:36:38.183 notifications: ZEBRA: client 47 says hello and bids fair to announce only bgp routes vrf=0
+2026/02/01 11:36:38.184 notifications: ZEBRA: client 52 says hello and bids fair to announce only vnc routes vrf=0
+2026/02/01 11:36:38.187 informational: ISIS: isis_zebra_process_srv6_locator_internal: Received SRv6 locator Loc0 2001:db8:4::/48, loc-block-len=32, loc-node-len=16 func-len=16, arg-len=0
+2026/02/01 11:36:38.187 debugging: ISIS: SRv6 locator (locator Loc0, prefix 2001:db8:4::/48) set for IS-IS area 1
+2026/02/01 11:36:38.187 debugging: ISIS: Requesting SRv6 SIDs for IS-IS area 1
+2026/02/01 11:36:38.187 debugging: ISIS: SRv6 locator deleted in zebra: name Loc0, prefix 2001:db8:4::/48, block_len 32, node_len 16, func_len 16, arg_len 0
+2026/02/01 11:36:38.187 informational: ISIS: isis_zebra_process_srv6_locator_internal: Received SRv6 locator Loc0 2001:db8:4::/48, loc-block-len=32, loc-node-len=16 func-len=16, arg-len=0
+2026/02/01 11:36:38.187 debugging: ISIS: SRv6 locator (locator Loc0, prefix 2001:db8:4::/48) set for IS-IS area 1
+2026/02/01 11:36:38.187 debugging: ISIS: Requesting SRv6 SIDs for IS-IS area 1
+2026/02/01 11:36:38.187 debugging: ISIS: isis_zebra_srv6_sid_notify: received SRv6 SID notify: ctx End USP sid_value 2001:db8:4:: sid_func 0 note ZAPI_SRV6_SID_ALLOCATED
+2026/02/01 11:36:38.187 debugging: ISIS: SRv6 SID 2001:db8:4:: End USP ALLOCATED
+2026/02/01 11:36:38.187 debugging: ISIS: ISIS-SRv6 (1): setting SRv6 SID 2001:db8:4::
+2026/02/01 11:36:38.187 warnings: ISIS: Failed to install SRv6 SID 2001:db8:4::: sr0 interface not found
+2026/02/01 11:36:38.187 debugging: ISIS: SRv6 locator deleted in zebra: name Loc0, prefix 2001:db8:4::/48, block_len 32, node_len 16, func_len 16, arg_len 0
+2026/02/01 11:36:38.187 debugging: ISIS: Deleting SRv6 SID (locator Loc0, sid 2001:db8:4::) from IS-IS area 1
+2026/02/01 11:36:38.187 debugging: ISIS: ISIS-SRv6 (1): delete SID 2001:db8:4::
+2026/02/01 11:36:38.188 warnings: ISIS: sr0 interface not found: nothing to uninstall
+2026/02/01 11:36:38.187 debugging: ZEBRA: srv6_manager_get_sid_internal: getting SRv6 SID for ctx End USP, sid_value=::, locator_name=Loc0
+2026/02/01 11:36:38.187 debugging: ZEBRA: get_srv6_sid: received SRv6 SID alloc request: SID ctx End USP ((null)), mode=dynamic
+2026/02/01 11:36:38.187 debugging: ZEBRA: get_srv6_sid_dynamic: allocated new dynamic SRv6 SID 0 for context End USP
+2026/02/01 11:36:38.187 debugging: ZEBRA: srv6_manager_get_sid_internal: got new SRv6 SID for ctx End USP: sid_value=(null) (func=0) (proto=9, instance=0, sessionId=0), notifying all clients
+2026/02/01 11:36:38.188 informational: ISIS: isis_zebra_process_srv6_locator_internal: Received SRv6 locator Loc0 2001:db8:4::/48, loc-block-len=32, loc-node-len=16 func-len=16, arg-len=0
+2026/02/01 11:36:38.188 debugging: ISIS: SRv6 locator (locator Loc0, prefix 2001:db8:4::/48) set for IS-IS area 1
+2026/02/01 11:36:38.188 debugging: ISIS: Requesting SRv6 SIDs for IS-IS area 1
+2026/02/01 11:36:38.188 debugging: ISIS: isis_zebra_srv6_sid_notify: received SRv6 SID notify: ctx End USP sid_value 2001:db8:4:: sid_func 0 note ZAPI_SRV6_SID_ALLOCATED
+2026/02/01 11:36:38.188 debugging: ISIS: SRv6 SID 2001:db8:4:: End USP ALLOCATED
+2026/02/01 11:36:38.188 debugging: ISIS: ISIS-SRv6 (1): setting SRv6 SID 2001:db8:4::
+2026/02/01 11:36:38.188 warnings: ISIS: Failed to install SRv6 SID 2001:db8:4::: sr0 interface not found
+2026/02/01 11:36:38.188 debugging: ZEBRA: srv6_manager_get_sid_internal: getting SRv6 SID for ctx End USP, sid_value=::, locator_name=Loc0
+2026/02/01 11:36:38.188 debugging: ZEBRA: get_srv6_sid: received SRv6 SID alloc request: SID ctx End USP ((null)), mode=dynamic
+2026/02/01 11:36:38.188 debugging: ZEBRA: srv6_manager_get_sid_internal: got existing SRv6 SID for ctx End USP: sid_value=(null) (func=0) (proto=9, instance=0, sessionId=0), notify client
+2026/02/01 11:36:38.188 debugging: ZEBRA: srv6_manager_get_sid_internal: getting SRv6 SID for ctx End USP, sid_value=::, locator_name=Loc0
+2026/02/01 11:36:38.188 debugging: ZEBRA: get_srv6_sid: received SRv6 SID alloc request: SID ctx End USP ((null)), mode=dynamic
+2026/02/01 11:36:38.188 debugging: ZEBRA: srv6_manager_get_sid_internal: got existing SRv6 SID for ctx End USP: sid_value=(null) (func=0) (proto=9, instance=0, sessionId=0), notify client
+2026/02/01 11:36:38.189 debugging: ISIS: isis_zebra_srv6_sid_notify: received SRv6 SID notify: ctx End USP sid_value 2001:db8:4:: sid_func 0 note ZAPI_SRV6_SID_ALLOCATED
+2026/02/01 11:36:38.189 debugging: ISIS: SRv6 SID 2001:db8:4:: End USP ALLOCATED
+2026/02/01 11:36:38.189 debugging: ISIS: ISIS-SRv6 (1): delete SID 2001:db8:4::
+2026/02/01 11:36:38.189 warnings: ISIS: sr0 interface not found: nothing to uninstall
+2026/02/01 11:36:38.189 debugging: ISIS: ISIS-SRv6 (1): setting SRv6 SID 2001:db8:4::
+2026/02/01 11:36:38.189 warnings: ISIS: Failed to install SRv6 SID 2001:db8:4::: sr0 interface not found
+2026/02/01 11:36:38.189 debugging: ISIS: isis_zebra_srv6_sid_notify: received SRv6 SID notify: ctx End USP sid_value 2001:db8:4:: sid_func 0 note ZAPI_SRV6_SID_ALLOCATED
+2026/02/01 11:36:38.189 debugging: ISIS: SRv6 SID 2001:db8:4:: End USP ALLOCATED
+2026/02/01 11:36:38.189 debugging: ISIS: ISIS-SRv6 (1): delete SID 2001:db8:4::
+2026/02/01 11:36:38.189 warnings: ISIS: sr0 interface not found: nothing to uninstall
+2026/02/01 11:36:38.189 debugging: ISIS: ISIS-SRv6 (1): setting SRv6 SID 2001:db8:4::
+2026/02/01 11:36:38.189 warnings: ISIS: Failed to install SRv6 SID 2001:db8:4::: sr0 interface not found
+2026/02/01 11:36:38.190 informational: ZEBRA: Configuration Read in Took: 00:00:01
+2026/02/01 11:36:38.190 debugging: ZEBRA: end_config: VTY:0x7de6c84b4080, pending SET-CFG: 0
+2026/02/01 11:36:39.835 debugging: ISIS: Interface sr0 went up. Installing SIDs for area 1 in data plane
+2026/02/01 11:36:39.835 debugging: ISIS: Installing SID 2001:db8:4:: from the data plane
+2026/02/01 11:36:39.835 debugging: ISIS: ISIS-SRv6 (1): setting SRv6 SID 2001:db8:4::
+2026/02/01 11:36:41.029 debugging: ZEBRA: srv6_manager_get_sid_internal: getting SRv6 SID for ctx End.X nh6 fe80::a8c1:abff:fe58:e004, sid_value=::, locator_name=Loc0
+2026/02/01 11:36:41.029 debugging: ZEBRA: get_srv6_sid: received SRv6 SID alloc request: SID ctx End.X nh6 fe80::a8c1:abff:fe58:e004 ((null)), mode=dynamic
+2026/02/01 11:36:41.029 debugging: ZEBRA: alloc_srv6_sid_func_dynamic: trying to allocate dynamic SID function from block 2001:db8::/32
+2026/02/01 11:36:41.029 debugging: ZEBRA: alloc_srv6_sid_func_dynamic: allocated dynamic SID function 57344 from block 2001:db8::/32
+2026/02/01 11:36:41.029 debugging: ZEBRA: get_srv6_sid_dynamic: allocated new dynamic SRv6 SID 57344 for context End.X nh6 fe80::a8c1:abff:fe58:e004
+2026/02/01 11:36:41.029 debugging: ZEBRA: srv6_manager_get_sid_internal: got new SRv6 SID for ctx End.X nh6 fe80::a8c1:abff:fe58:e004: sid_value=(null) (func=57344) (proto=9, instance=0, sessionId=0), notifying all clients
+2026/02/01 11:36:41.030 debugging: ISIS: isis_zebra_srv6_sid_notify: received SRv6 SID notify: ctx End.X nh6 fe80::a8c1:abff:fe58:e004 sid_value 2001:db8:4:e000:: sid_func 57344 note ZAPI_SRV6_SID_ALLOCATED
+2026/02/01 11:36:41.030 debugging: ISIS: SRv6 SID 2001:db8:4:e000:: End.X nh6 fe80::a8c1:abff:fe58:e004 ALLOCATED
+2026/02/01 11:36:41.030 debugging: ISIS: ISIS-SRv6 (1): Add Primary End.X SID
+2026/02/01 11:36:41.030 debugging: ISIS: ISIS-SRv6 (1): setting adjacency SID 2001:db8:4:e000::
+2026/02/01 11:36:41.166 debugging: ZEBRA: srv6_manager_get_sid_internal: getting SRv6 SID for ctx End.X nh6 fe80::a8c1:abff:fe0c:fcdc, sid_value=::, locator_name=Loc0
+2026/02/01 11:36:41.166 debugging: ZEBRA: get_srv6_sid: received SRv6 SID alloc request: SID ctx End.X nh6 fe80::a8c1:abff:fe0c:fcdc ((null)), mode=dynamic
+2026/02/01 11:36:41.166 debugging: ZEBRA: alloc_srv6_sid_func_dynamic: trying to allocate dynamic SID function from block 2001:db8::/32
+2026/02/01 11:36:41.166 debugging: ZEBRA: alloc_srv6_sid_func_dynamic: allocated dynamic SID function 57345 from block 2001:db8::/32
+2026/02/01 11:36:41.166 debugging: ZEBRA: get_srv6_sid_dynamic: allocated new dynamic SRv6 SID 57345 for context End.X nh6 fe80::a8c1:abff:fe0c:fcdc
+2026/02/01 11:36:41.166 debugging: ZEBRA: srv6_manager_get_sid_internal: got new SRv6 SID for ctx End.X nh6 fe80::a8c1:abff:fe0c:fcdc: sid_value=(null) (func=57345) (proto=9, instance=0, sessionId=0), notifying all clients
+2026/02/01 11:36:41.166 debugging: ISIS: isis_zebra_srv6_sid_notify: received SRv6 SID notify: ctx End.X nh6 fe80::a8c1:abff:fe0c:fcdc sid_value 2001:db8:4:e001:: sid_func 57345 note ZAPI_SRV6_SID_ALLOCATED
+2026/02/01 11:36:41.166 debugging: ISIS: SRv6 SID 2001:db8:4:e001:: End.X nh6 fe80::a8c1:abff:fe0c:fcdc ALLOCATED
+2026/02/01 11:36:41.166 debugging: ISIS: ISIS-SRv6 (1): Add Primary End.X SID
+2026/02/01 11:36:41.166 debugging: ISIS: ISIS-SRv6 (1): setting adjacency SID 2001:db8:4:e001::
+2026/02/01 11:36:41.888 debugging: ZEBRA: srv6_manager_get_sid_internal: getting SRv6 SID for ctx End.X nh6 fe80::a8c1:abff:fe68:4cd3, sid_value=::, locator_name=Loc0
+2026/02/01 11:36:41.888 debugging: ZEBRA: get_srv6_sid: received SRv6 SID alloc request: SID ctx End.X nh6 fe80::a8c1:abff:fe68:4cd3 ((null)), mode=dynamic
+2026/02/01 11:36:41.888 debugging: ZEBRA: alloc_srv6_sid_func_dynamic: trying to allocate dynamic SID function from block 2001:db8::/32
+2026/02/01 11:36:41.888 debugging: ZEBRA: alloc_srv6_sid_func_dynamic: allocated dynamic SID function 57346 from block 2001:db8::/32
+2026/02/01 11:36:41.888 debugging: ZEBRA: get_srv6_sid_dynamic: allocated new dynamic SRv6 SID 57346 for context End.X nh6 fe80::a8c1:abff:fe68:4cd3
+2026/02/01 11:36:41.888 debugging: ZEBRA: srv6_manager_get_sid_internal: got new SRv6 SID for ctx End.X nh6 fe80::a8c1:abff:fe68:4cd3: sid_value=(null) (func=57346) (proto=9, instance=0, sessionId=0), notifying all clients
+2026/02/01 11:36:41.888 debugging: ISIS: isis_zebra_srv6_sid_notify: received SRv6 SID notify: ctx End.X nh6 fe80::a8c1:abff:fe68:4cd3 sid_value 2001:db8:4:e002:: sid_func 57346 note ZAPI_SRV6_SID_ALLOCATED
+2026/02/01 11:36:41.888 debugging: ISIS: SRv6 SID 2001:db8:4:e002:: End.X nh6 fe80::a8c1:abff:fe68:4cd3 ALLOCATED
+2026/02/01 11:36:41.888 debugging: ISIS: ISIS-SRv6 (1): Add Primary End.X SID
+2026/02/01 11:36:41.888 debugging: ISIS: ISIS-SRv6 (1): setting adjacency SID 2001:db8:4:e002::
+2026/02/01 11:37:06.174 debugging: ISIS: ISIS-Rte (1) route created: 2001:db8:4::/48
+2026/02/01 11:37:06.174 debugging: ISIS: ISIS-Rte (1) route created: 2001:c0de:1:1::/64
+2026/02/01 11:37:06.174 debugging: ISIS: ISIS-Rte (1) route created: 2001:c0de:1:3::/64
+2026/02/01 11:37:06.174 debugging: ISIS: ISIS-Rte (1) route created: 2001:c0de:1:6::/64
+2026/02/01 11:37:06.174 debugging: ISIS: ISIS-Rte (1) route created: 2001:db8:4::1/128
+2026/02/01 11:37:06.174 debugging: ISIS: ISIS-Rte (1) route created: 2001:db8:1::1/128
+2026/02/01 11:37:07.855 debugging: ISIS: ISIS-Rte (1) route created: 2001:db8:6::/48
+2026/02/01 11:37:07.855 debugging: ISIS: ISIS-Rte (1) route created: 2001:c0de:1:4::/64
+2026/02/01 11:37:07.855 debugging: ISIS: ISIS-Rte (1) route created: 2001:db8:6::1/128
+2026/02/01 11:37:07.856 debugging: ISIS: ISIS-Rte (1) route created: 2001:c0de:1:8::/64
+2026/02/01 11:37:08.581 debugging: ISIS: ISIS-Rte (1) route created: 2001:db8:3::/48
+2026/02/01 11:37:08.581 debugging: ISIS: ISIS-Rte (1) route created: 2001:c0de:1:2::/64
+2026/02/01 11:37:08.581 debugging: ISIS: ISIS-Rte (1) route created: 2001:c0de:1:5::/64
+2026/02/01 11:37:08.581 debugging: ISIS: ISIS-Rte (1) route created: 2001:db8:3::1/128
+2026/02/01 11:37:08.581 debugging: ISIS: ISIS-Rte (1): route changed: 2001:db8:1::1/128, change: nhops num (old: 1, new: 2)
+2026/02/01 11:37:10.269 debugging: ISIS: ISIS-Rte (1) route created: 2001:db8:2::/48
+2026/02/01 11:37:10.269 debugging: ISIS: ISIS-Rte (1) route created: 2001:c0de:1:7::/64
+2026/02/01 11:37:10.269 debugging: ISIS: ISIS-Rte (1) route created: 2001:db8:2::1/128
+2026/02/01 11:37:11.281 debugging: ISIS: ISIS-Rte (1) route created: 2001:db8:1::/48
+2026/02/01 11:37:11.281 debugging: ISIS: ISIS-Rte (1) route created: 2001:db8:5::/48
+2026/02/01 11:37:11.281 debugging: ISIS: ISIS-Rte (1): route changed: 2001:c0de:1:4::/64, change: nhops num (old: 1, new: 2)
+2026/02/01 11:37:11.281 debugging: ISIS: ISIS-Rte (1): route changed: 2001:c0de:1:7::/64, change: cost (old: 50, new: 30)
+2026/02/01 11:37:11.281 debugging: ISIS: ISIS-Rte (1) route created: 2001:db8:5::1/128
+2026/02/01 11:37:11.281 debugging: ISIS: ISIS-Rte (1): route changed: 2001:db8:2::/48, change: cost (old: 40, new: 30)
+2026/02/01 11:37:11.281 debugging: ISIS: ISIS-Rte (1): route changed: 2001:db8:2::1/128, change: cost (old: 50, new: 40)
+2026/02/01 11:37:48.900 debugging: ISIS: ISIS-SRv6 (1): Delete SRv6 End.X SID
+2026/02/01 11:37:48.900 debugging: ISIS: ISIS-SRv6 (1): delete End.X SID 2001:db8:4:e001::
+2026/02/01 11:37:48.901 warnings: ISIS: IS-IS pfpacket: could not transmit packet on eth1: Network is down
+2026/02/01 11:37:48.901 errors: ISIS: [EC 67108865] ISIS-Adj (1): Send L2 IIH on eth1 failed
+2026/02/01 11:37:48.909 errors: ZEBRA: [EC 4043309074] 0:254:2001:c0de:1:7::/64: Failed to enqueue dataplane install
+2026/02/01 11:37:48.909 errors: ZEBRA: [EC 4043309074] 0:254:2001:db8:5::1/128: Failed to enqueue dataplane install
+2026/02/01 11:37:48.909 errors: ZEBRA: [EC 4043309074] 0:254:2001:db8:5::/48: Failed to enqueue dataplane install
+2026/02/01 11:37:48.909 errors: ZEBRA: [EC 4043309074] 0:254:2001:db8:2::1/128: Failed to enqueue dataplane install
+2026/02/01 11:37:48.909 errors: ZEBRA: [EC 4043309074] 0:254:2001:db8:2::/48: Failed to enqueue dataplane install
+2026/02/01 11:37:48.909 errors: ZEBRA: [EC 4043309074] 0:254:2001:c0de:1:5::/64: Failed to enqueue dataplane install
+2026/02/01 11:37:48.909 errors: ZEBRA: [EC 4043309074] 0:254:2001:c0de:1:2::/64: Failed to enqueue dataplane install
+2026/02/01 11:37:48.909 errors: ZEBRA: [EC 4043309074] 0:254:2001:db8:3::1/128: Failed to enqueue dataplane install
+2026/02/01 11:37:48.909 errors: ZEBRA: [EC 4043309074] 0:254:2001:db8:3::/48: Failed to enqueue dataplane install
+2026/02/01 11:37:48.909 errors: ZEBRA: [EC 4043309074] 0:254:2001:db8:4:e001::/64: Failed to enqueue dataplane install
+2026/02/01 11:37:49.126 warnings: ISIS: isis_recv_pdu_bcast: ifname eth2, fd 17, bytesread -1, recvfrom(): Network is down
+2026/02/01 11:37:49.126 warnings: ISIS: packet is received on multiple interfaces: socket interface 0, circuit interface 1692, packet type 0
+2026/02/01 11:37:49.126 warnings: ISIS: isis_recv_pdu_bcast: recvfrom() failed
+2026/02/01 11:37:49.147 errors: ZEBRA: Extended Error: Nexthop id does not exist
+2026/02/01 11:37:49.147 errors: ZEBRA: [EC 4043309093] netlink-dp (NS 0) error: Invalid argument, type=RTM_NEWROUTE(24), seq=114, pid=3984063910
+2026/02/01 11:37:49.147 errors: ZEBRA: Extended Error: Nexthop id does not exist
+2026/02/01 11:37:49.148 errors: ZEBRA: [EC 4043309093] netlink-dp (NS 0) error: Invalid argument, type=RTM_NEWROUTE(24), seq=115, pid=3984063910
+2026/02/01 11:37:49.148 errors: ZEBRA: Extended Error: Nexthop id does not exist
+2026/02/01 11:37:49.148 errors: ZEBRA: [EC 4043309093] netlink-dp (NS 0) error: Invalid argument, type=RTM_NEWROUTE(24), seq=116, pid=3984063910
+2026/02/01 11:37:49.148 errors: ZEBRA: Extended Error: Nexthop id does not exist
+2026/02/01 11:37:49.148 errors: ZEBRA: [EC 4043309093] netlink-dp (NS 0) error: Invalid argument, type=RTM_NEWROUTE(24), seq=117, pid=3984063910
+2026/02/01 11:37:49.148 errors: ZEBRA: Extended Error: Nexthop id does not exist
+2026/02/01 11:37:49.148 errors: ZEBRA: [EC 4043309093] netlink-dp (NS 0) error: Invalid argument, type=RTM_NEWROUTE(24), seq=118, pid=3984063910
+2026/02/01 11:37:49.149 debugging: ISIS: ISIS-SRv6 (1): Delete SRv6 End.X SID
+2026/02/01 11:37:49.149 debugging: ISIS: ISIS-SRv6 (1): delete End.X SID 2001:db8:4:e000::
+2026/02/01 11:37:49.150 warnings: ISIS: IS-IS pfpacket: could not transmit packet on eth2: No such device or address
+2026/02/01 11:37:49.150 errors: ISIS: [EC 67108865] ISIS-Adj (1): Send L2 IIH on eth2 failed
+2026/02/01 11:37:49.150 warnings: ZEBRA: default(0:254):2001:c0de:1:8::/64: Route install failed
+2026/02/01 11:37:49.150 warnings: ZEBRA: default(0:254):2001:db8:6::1/128: Route install failed
+2026/02/01 11:37:49.150 warnings: ZEBRA: default(0:254):2001:db8:6::/48: Route install failed
+2026/02/01 11:37:49.150 warnings: ZEBRA: default(0:254):2001:c0de:1:4::/64: Route install failed
+2026/02/01 11:37:49.150 warnings: ZEBRA: default(0:254):2001:db8:4:e000::/64: Route install failed
+2026/02/01 11:37:49.191 warnings: ISIS: isis_recv_pdu_bcast: ifname eth3, fd 18, bytesread -1, recvfrom(): Network is down
+2026/02/01 11:37:49.192 warnings: ISIS: packet is received on multiple interfaces: socket interface 0, circuit interface 1701, packet type 0
+2026/02/01 11:37:49.192 warnings: ISIS: isis_recv_pdu_bcast: recvfrom() failed
+2026/02/01 11:37:49.197 debugging: ISIS: ISIS-SRv6 (1): Delete SRv6 End.X SID
+2026/02/01 11:37:49.197 debugging: ISIS: ISIS-SRv6 (1): delete End.X SID 2001:db8:4:e002::
+2026/02/01 11:37:49.197 warnings: ISIS: IS-IS pfpacket: could not transmit packet on eth3: No such device or address
+2026/02/01 11:37:49.197 errors: ISIS: [EC 67108865] ISIS-Adj (1): Send L2 IIH on eth3 failed
+2026/02/01 11:37:49.199 errors: ZEBRA: [EC 4043309074] 0:254:2001:db8:1::/48: Failed to enqueue dataplane install
+2026/02/01 11:37:49.199 errors: ZEBRA: [EC 4043309074] 0:254:2001:db8:1::1/128: Failed to enqueue dataplane install
+2026/02/01 11:37:49.199 errors: ZEBRA: [EC 4043309074] 0:254:2001:db8:4:e002::/64: Failed to enqueue dataplane install
+2026/02/01 11:38:08.866 informational: BGP: Configuration Read in Took: 00:00:00
+2026/02/01 11:38:08.866 debugging: BGP: end_config: VTY:0x7ac942a610b0, pending SET-CFG: 0
+2026/02/01 11:38:08.880 debugging: ISIS: ISIS-Sr ((null)): Initialize Segment Routing SRDB
+2026/02/01 11:38:08.880 debugging: ISIS: ISIS-SRv6 ((null)): Initialize Segment Routing SRv6 DB
+2026/02/01 11:38:08.880 warnings: ISIS: ISIS-LFA: failed to unregister RLFA with LDP
+2026/02/01 11:38:08.880 warnings: ISIS: ISIS-LFA: failed to unregister RLFA with LDP
+2026/02/01 11:38:08.880 warnings: ISIS: ISIS-LFA: failed to unregister RLFA with LDP
+2026/02/01 11:38:08.883 debugging: ISIS: Configured SRv6 locator Loc0 for IS-IS area 1
+2026/02/01 11:38:08.883 debugging: ISIS: Trying to get locator Loc0 for IS-IS area 1
+2026/02/01 11:38:08.883 errors: ISIS: [EC 100663302] srv6_manager_get_locator: invalid zclient socket
+2026/02/01 11:38:08.883 errors: ISIS: [EC 100663337] error processing configuration change: error [generic error] event [apply] operation [modify] xpath [/frr-isisd:isis/instance[area-tag='1'][vrf='default']/segment-routing-srv6/locator]
+2026/02/01 11:38:08.883 informational: ISIS: Configuration Read in Took: 00:00:00
+2026/02/01 11:38:08.883 debugging: ISIS: end_config: VTY:0x7a6e92d021b0, pending SET-CFG: 0
+2026/02/01 11:38:09.596 warnings: BGP: bgp_zebra_label_manager_connect: failed connecting synchronous zclient!
+2026/02/01 11:38:10.596 warnings: BGP: bgp_zebra_label_manager_connect: failed connecting synchronous zclient!
+2026/02/01 11:38:11.600 warnings: ZEBRA: FD Limit set: 1048576 is stupidly large.  Is this what you intended?  Consider using --limit-fds also limiting size to 100000
+2026/02/01 11:38:11.604 notifications: ZEBRA: client 31 says hello and bids fair to announce only bgp routes vrf=0
+2026/02/01 11:38:11.687 warnings: ZEBRA: FD Limit set: 1048576 is stupidly large.  Is this what you intended?  Consider using --limit-fds also limiting size to 100000
+2026/02/01 11:38:11.687 warnings: ZEBRA: FD Limit set: 1048576 is stupidly large.  Is this what you intended?  Consider using --limit-fds also limiting size to 100000
+2026/02/01 11:38:11.688 notifications: ZEBRA: client 40 says hello and bids fair to announce only vnc routes vrf=0
+2026/02/01 11:38:11.690 notifications: ZEBRA: client 37 says hello and bids fair to announce only bgp routes vrf=0
+2026/02/01 11:38:11.763 warnings: ZEBRA: FD Limit set: 1048576 is stupidly large.  Is this what you intended?  Consider using --limit-fds also limiting size to 100000
+2026/02/01 11:38:11.764 notifications: ZEBRA: client 47 says hello and bids fair to announce only isis routes vrf=0
+2026/02/01 11:38:11.784 informational: ISIS: isis_zebra_process_srv6_locator_internal: Received SRv6 locator Loc0 2001:db8:4::/48, loc-block-len=32, loc-node-len=16 func-len=16, arg-len=0
+2026/02/01 11:38:11.784 debugging: ISIS: SRv6 locator (locator Loc0, prefix 2001:db8:4::/48) set for IS-IS area 1
+2026/02/01 11:38:11.784 debugging: ISIS: Requesting SRv6 SIDs for IS-IS area 1
+2026/02/01 11:38:11.785 debugging: ISIS: isis_zebra_srv6_sid_notify: received SRv6 SID notify: ctx End USP sid_value 2001:db8:4:: sid_func 0 note ZAPI_SRV6_SID_ALLOCATED
+2026/02/01 11:38:11.785 debugging: ISIS: SRv6 SID 2001:db8:4:: End USP ALLOCATED
+2026/02/01 11:38:11.785 debugging: ISIS: ISIS-SRv6 (1): setting SRv6 SID 2001:db8:4::
+2026/02/01 11:38:11.785 debugging: ZEBRA: srv6_manager_get_sid_internal: getting SRv6 SID for ctx End USP, sid_value=::, locator_name=Loc0
+2026/02/01 11:38:11.785 debugging: ZEBRA: get_srv6_sid: received SRv6 SID alloc request: SID ctx End USP ((null)), mode=dynamic
+2026/02/01 11:38:11.785 debugging: ZEBRA: get_srv6_sid_dynamic: allocated new dynamic SRv6 SID 0 for context End USP
+2026/02/01 11:38:11.785 debugging: ZEBRA: srv6_manager_get_sid_internal: got new SRv6 SID for ctx End USP: sid_value=(null) (func=0) (proto=9, instance=0, sessionId=0), notifying all clients
+2026/02/01 11:38:11.814 warnings: ZEBRA: FD Limit set: 1048576 is stupidly large.  Is this what you intended?  Consider using --limit-fds also limiting size to 100000
+2026/02/01 11:38:11.816 notifications: ZEBRA: client 52 says hello and bids fair to announce only static routes vrf=0
+2026/02/01 11:38:14.689 debugging: ZEBRA: srv6_manager_get_sid_internal: getting SRv6 SID for ctx End.X nh6 fe80::a8c1:abff:fef4:a10b, sid_value=::, locator_name=Loc0
+2026/02/01 11:38:14.689 debugging: ZEBRA: get_srv6_sid: received SRv6 SID alloc request: SID ctx End.X nh6 fe80::a8c1:abff:fef4:a10b ((null)), mode=dynamic
+2026/02/01 11:38:14.689 debugging: ZEBRA: alloc_srv6_sid_func_dynamic: trying to allocate dynamic SID function from block 2001:db8::/32
+2026/02/01 11:38:14.689 debugging: ZEBRA: alloc_srv6_sid_func_dynamic: allocated dynamic SID function 57344 from block 2001:db8::/32
+2026/02/01 11:38:14.689 debugging: ZEBRA: get_srv6_sid_dynamic: allocated new dynamic SRv6 SID 57344 for context End.X nh6 fe80::a8c1:abff:fef4:a10b
+2026/02/01 11:38:14.689 debugging: ZEBRA: srv6_manager_get_sid_internal: got new SRv6 SID for ctx End.X nh6 fe80::a8c1:abff:fef4:a10b: sid_value=(null) (func=57344) (proto=9, instance=0, sessionId=0), notifying all clients
+2026/02/01 11:38:14.690 debugging: ISIS: isis_zebra_srv6_sid_notify: received SRv6 SID notify: ctx End.X nh6 fe80::a8c1:abff:fef4:a10b sid_value 2001:db8:4:e000:: sid_func 57344 note ZAPI_SRV6_SID_ALLOCATED
+2026/02/01 11:38:14.690 debugging: ISIS: SRv6 SID 2001:db8:4:e000:: End.X nh6 fe80::a8c1:abff:fef4:a10b ALLOCATED
+2026/02/01 11:38:14.690 debugging: ISIS: ISIS-SRv6 (1): Add Primary End.X SID
+2026/02/01 11:38:14.690 debugging: ISIS: ISIS-SRv6 (1): setting adjacency SID 2001:db8:4:e000::
+2026/02/01 11:38:14.727 debugging: ZEBRA: srv6_manager_get_sid_internal: getting SRv6 SID for ctx End.X nh6 fe80::a8c1:abff:feea:b161, sid_value=::, locator_name=Loc0
+2026/02/01 11:38:14.727 debugging: ZEBRA: get_srv6_sid: received SRv6 SID alloc request: SID ctx End.X nh6 fe80::a8c1:abff:feea:b161 ((null)), mode=dynamic
+2026/02/01 11:38:14.727 debugging: ZEBRA: alloc_srv6_sid_func_dynamic: trying to allocate dynamic SID function from block 2001:db8::/32
+2026/02/01 11:38:14.727 debugging: ZEBRA: alloc_srv6_sid_func_dynamic: allocated dynamic SID function 57345 from block 2001:db8::/32
+2026/02/01 11:38:14.727 debugging: ZEBRA: get_srv6_sid_dynamic: allocated new dynamic SRv6 SID 57345 for context End.X nh6 fe80::a8c1:abff:feea:b161
+2026/02/01 11:38:14.727 debugging: ZEBRA: srv6_manager_get_sid_internal: got new SRv6 SID for ctx End.X nh6 fe80::a8c1:abff:feea:b161: sid_value=(null) (func=57345) (proto=9, instance=0, sessionId=0), notifying all clients
+2026/02/01 11:38:14.728 debugging: ISIS: isis_zebra_srv6_sid_notify: received SRv6 SID notify: ctx End.X nh6 fe80::a8c1:abff:feea:b161 sid_value 2001:db8:4:e001:: sid_func 57345 note ZAPI_SRV6_SID_ALLOCATED
+2026/02/01 11:38:14.728 debugging: ISIS: SRv6 SID 2001:db8:4:e001:: End.X nh6 fe80::a8c1:abff:feea:b161 ALLOCATED
+2026/02/01 11:38:14.728 debugging: ISIS: ISIS-SRv6 (1): Add Primary End.X SID
+2026/02/01 11:38:14.728 debugging: ISIS: ISIS-SRv6 (1): setting adjacency SID 2001:db8:4:e001::
+2026/02/01 11:38:14.747 debugging: ZEBRA: srv6_manager_get_sid_internal: getting SRv6 SID for ctx End.X nh6 fe80::a8c1:abff:fedc:600, sid_value=::, locator_name=Loc0
+2026/02/01 11:38:14.747 debugging: ZEBRA: get_srv6_sid: received SRv6 SID alloc request: SID ctx End.X nh6 fe80::a8c1:abff:fedc:600 ((null)), mode=dynamic
+2026/02/01 11:38:14.747 debugging: ZEBRA: alloc_srv6_sid_func_dynamic: trying to allocate dynamic SID function from block 2001:db8::/32
+2026/02/01 11:38:14.747 debugging: ZEBRA: alloc_srv6_sid_func_dynamic: allocated dynamic SID function 57346 from block 2001:db8::/32
+2026/02/01 11:38:14.747 debugging: ZEBRA: get_srv6_sid_dynamic: allocated new dynamic SRv6 SID 57346 for context End.X nh6 fe80::a8c1:abff:fedc:600
+2026/02/01 11:38:14.747 debugging: ZEBRA: srv6_manager_get_sid_internal: got new SRv6 SID for ctx End.X nh6 fe80::a8c1:abff:fedc:600: sid_value=(null) (func=57346) (proto=9, instance=0, sessionId=0), notifying all clients
+2026/02/01 11:38:14.748 debugging: ISIS: isis_zebra_srv6_sid_notify: received SRv6 SID notify: ctx End.X nh6 fe80::a8c1:abff:fedc:600 sid_value 2001:db8:4:e002:: sid_func 57346 note ZAPI_SRV6_SID_ALLOCATED
+2026/02/01 11:38:14.748 debugging: ISIS: SRv6 SID 2001:db8:4:e002:: End.X nh6 fe80::a8c1:abff:fedc:600 ALLOCATED
+2026/02/01 11:38:14.748 debugging: ISIS: ISIS-SRv6 (1): Add Primary End.X SID
+2026/02/01 11:38:14.748 debugging: ISIS: ISIS-SRv6 (1): setting adjacency SID 2001:db8:4:e002::
+2026/02/01 11:38:38.781 debugging: ISIS: ISIS-Rte (1) route created: 2001:db8:4::/48
+2026/02/01 11:38:38.781 debugging: ISIS: ISIS-Rte (1) route created: 2001:c0de:1:1::/64
+2026/02/01 11:38:38.781 debugging: ISIS: ISIS-Rte (1) route created: 2001:c0de:1:3::/64
+2026/02/01 11:38:38.781 debugging: ISIS: ISIS-Rte (1) route created: 2001:c0de:1:6::/64
+2026/02/01 11:38:38.781 debugging: ISIS: ISIS-Rte (1) route created: 2001:db8:4::1/128
+2026/02/01 11:38:38.781 debugging: ISIS: ISIS-Rte (1) route created: 2001:db8:3::1/128
+2026/02/01 11:38:42.002 debugging: ISIS: ISIS-Rte (1) route created: 2001:db8:1::/48
+2026/02/01 11:38:42.002 debugging: ISIS: ISIS-Rte (1) route created: 2001:c0de:1:5::/64
+2026/02/01 11:38:42.002 debugging: ISIS: ISIS-Rte (1) route created: 2001:db8:1::1/128
+2026/02/01 11:38:42.118 debugging: ISIS: ISIS-Rte (1) route created: 2001:db8:3::/48
+2026/02/01 11:38:42.118 debugging: ISIS: ISIS-Rte (1) route created: 2001:c0de:1:2::/64
+2026/02/01 11:38:42.118 debugging: ISIS: ISIS-Rte (1): route changed: 2001:c0de:1:5::/64, change: cost (old: 30, new: 20)
+2026/02/01 11:38:42.118 debugging: ISIS: ISIS-Rte (1): route changed: 2001:db8:1::/48, change: nhops num (old: 1, new: 2)
+2026/02/01 11:38:42.118 debugging: ISIS: ISIS-Rte (1) route created: 2001:db8:5::/48
+2026/02/01 11:38:42.118 debugging: ISIS: ISIS-Rte (1): route changed: 2001:db8:1::1/128, change: nhops num (old: 1, new: 2)
+2026/02/01 11:38:42.118 debugging: ISIS: ISIS-Rte (1) route created: 2001:c0de:1:4::/64
+2026/02/01 11:38:42.118 debugging: ISIS: ISIS-Rte (1) route created: 2001:c0de:1:7::/64
+2026/02/01 11:38:42.118 debugging: ISIS: ISIS-Rte (1) route created: 2001:db8:5::1/128
+2026/02/01 11:38:42.118 debugging: ISIS: ISIS-Rte (1) route created: 2001:db8:2::/48
+2026/02/01 11:38:42.118 debugging: ISIS: ISIS-Rte (1) route created: 2001:db8:2::1/128
+2026/02/01 11:38:42.118 debugging: ISIS: ISIS-Rte (1) route created: 2001:c0de:1:8::/64
+2026/02/01 11:38:43.120 debugging: ISIS: ISIS-Rte (1) route created: 2001:db8:6::/48
+2026/02/01 11:38:43.120 debugging: ISIS: ISIS-Rte (1): route changed: 2001:c0de:1:4::/64, change: depth (old: 3, new: 2)
+2026/02/01 11:38:43.120 debugging: ISIS: ISIS-Rte (1) route created: 2001:db8:6::1/128
+2026/02/01 11:38:43.120 debugging: ISIS: ISIS-Rte (1): route changed: 2001:c0de:1:8::/64, change: cost (old: 50, new: 40)
+2026/02/01 11:39:29.947 debugging: ISIS: ISIS-SRv6 (1): Delete SRv6 End.X SID
+2026/02/01 11:39:29.947 debugging: ISIS: ISIS-SRv6 (1): delete End.X SID 2001:db8:4:e000::
+2026/02/01 11:39:29.948 warnings: ISIS: IS-IS pfpacket: could not transmit packet on eth2: Network is down
+2026/02/01 11:39:29.948 errors: ISIS: [EC 67108865] ISIS-Adj (1): Send L2 IIH on eth2 failed
+2026/02/01 11:39:29.957 errors: ZEBRA: [EC 4043309074] 0:254:2001:db8:4:e000::/64: Failed to enqueue dataplane install
+2026/02/01 11:39:30.001 errors: ZEBRA: Extended Error: Nexthop id does not exist
+2026/02/01 11:39:30.001 errors: ZEBRA: [EC 4043309093] netlink-dp (NS 0) error: Invalid argument, type=RTM_NEWROUTE(24), seq=91, pid=3859765577
+2026/02/01 11:39:30.001 errors: ZEBRA: Extended Error: Nexthop id does not exist
+2026/02/01 11:39:30.001 errors: ZEBRA: [EC 4043309093] netlink-dp (NS 0) error: Invalid argument, type=RTM_NEWROUTE(24), seq=92, pid=3859765577
+2026/02/01 11:39:30.001 errors: ZEBRA: Extended Error: Nexthop id does not exist
+2026/02/01 11:39:30.001 errors: ZEBRA: [EC 4043309093] netlink-dp (NS 0) error: Invalid argument, type=RTM_NEWROUTE(24), seq=93, pid=3859765577
+2026/02/01 11:39:30.001 errors: ZEBRA: Extended Error: Nexthop id does not exist
+2026/02/01 11:39:30.001 errors: ZEBRA: [EC 4043309093] netlink-dp (NS 0) error: Invalid argument, type=RTM_NEWROUTE(24), seq=104, pid=3859765577
+2026/02/01 11:39:30.001 errors: ZEBRA: Extended Error: Nexthop id does not exist
+2026/02/01 11:39:30.001 errors: ZEBRA: [EC 4043309093] netlink-dp (NS 0) error: Invalid argument, type=RTM_NEWROUTE(24), seq=105, pid=3859765577
+2026/02/01 11:39:30.001 errors: ZEBRA: Extended Error: Nexthop id does not exist
+2026/02/01 11:39:30.001 errors: ZEBRA: [EC 4043309093] netlink-dp (NS 0) error: Invalid argument, type=RTM_NEWROUTE(24), seq=106, pid=3859765577
+2026/02/01 11:39:30.001 errors: ZEBRA: Extended Error: Nexthop id does not exist
+2026/02/01 11:39:30.001 errors: ZEBRA: [EC 4043309093] netlink-dp (NS 0) error: Invalid argument, type=RTM_NEWROUTE(24), seq=107, pid=3859765577
+2026/02/01 11:39:30.001 errors: ZEBRA: Extended Error: Nexthop id does not exist
+2026/02/01 11:39:30.001 errors: ZEBRA: [EC 4043309093] netlink-dp (NS 0) error: Invalid argument, type=RTM_NEWROUTE(24), seq=108, pid=3859765577
+2026/02/01 11:39:30.001 errors: ZEBRA: Extended Error: Nexthop id does not exist
+2026/02/01 11:39:30.001 errors: ZEBRA: [EC 4043309093] netlink-dp (NS 0) error: Invalid argument, type=RTM_NEWROUTE(24), seq=109, pid=3859765577
+2026/02/01 11:39:30.001 errors: ZEBRA: Extended Error: Nexthop id does not exist
+2026/02/01 11:39:30.001 errors: ZEBRA: [EC 4043309093] netlink-dp (NS 0) error: Invalid argument, type=RTM_NEWROUTE(24), seq=110, pid=3859765577
+2026/02/01 11:39:30.002 errors: ZEBRA: Extended Error: Nexthop id does not exist
+2026/02/01 11:39:30.002 errors: ZEBRA: [EC 4043309093] netlink-dp (NS 0) error: Invalid argument, type=RTM_NEWROUTE(24), seq=111, pid=3859765577
+2026/02/01 11:39:30.002 errors: ZEBRA: Extended Error: Nexthop id does not exist
+2026/02/01 11:39:30.002 errors: ZEBRA: [EC 4043309093] netlink-dp (NS 0) error: Invalid argument, type=RTM_NEWROUTE(24), seq=112, pid=3859765577
+2026/02/01 11:39:30.002 errors: ZEBRA: Extended Error: Nexthop id does not exist
+2026/02/01 11:39:30.002 errors: ZEBRA: [EC 4043309093] netlink-dp (NS 0) error: Invalid argument, type=RTM_NEWROUTE(24), seq=113, pid=3859765577
+2026/02/01 11:39:30.002 errors: ZEBRA: Extended Error: Nexthop id does not exist
+2026/02/01 11:39:30.002 errors: ZEBRA: [EC 4043309093] netlink-dp (NS 0) error: Invalid argument, type=RTM_NEWROUTE(24), seq=114, pid=3859765577
+2026/02/01 11:39:30.002 warnings: ZEBRA: default(0:254):2001:c0de:1:8::/64: Route install failed
+2026/02/01 11:39:30.002 warnings: ZEBRA: default(0:254):2001:db8:6::1/128: Route install failed
+2026/02/01 11:39:30.002 warnings: ZEBRA: default(0:254):2001:db8:6::/48: Route install failed
+2026/02/01 11:39:30.002 warnings: ZEBRA: default(0:254):2001:c0de:1:7::/64: Route install failed
+2026/02/01 11:39:30.002 warnings: ZEBRA: default(0:254):2001:c0de:1:5::/64: Route install failed
+2026/02/01 11:39:30.003 warnings: ZEBRA: default(0:254):2001:c0de:1:2::/64: Route install failed
+2026/02/01 11:39:30.003 warnings: ZEBRA: default(0:254):2001:db8:5::1/128: Route install failed
+2026/02/01 11:39:30.003 warnings: ZEBRA: default(0:254):2001:db8:5::/48: Route install failed
+2026/02/01 11:39:30.003 warnings: ZEBRA: default(0:254):2001:db8:3::/48: Route install failed
+2026/02/01 11:39:30.003 warnings: ZEBRA: default(0:254):2001:db8:2::1/128: Route install failed
+2026/02/01 11:39:30.003 warnings: ZEBRA: default(0:254):2001:db8:2::/48: Route install failed
+2026/02/01 11:39:30.003 warnings: ZEBRA: default(0:254):2001:db8:3::1/128: Route install failed
+2026/02/01 11:39:30.003 warnings: ZEBRA: default(0:254):2001:c0de:1:4::/64: Route install failed
+2026/02/01 11:39:30.003 warnings: ZEBRA: default(0:254):2001:db8:4:e002::/64: Route install failed
+2026/02/01 11:39:30.006 warnings: ISIS: isis_recv_pdu_bcast: ifname eth1, fd 16, bytesread -1, recvfrom(): Network is down
+2026/02/01 11:39:30.006 warnings: ISIS: packet is received on multiple interfaces: socket interface 0, circuit interface 1732, packet type 0
+2026/02/01 11:39:30.006 warnings: ISIS: isis_recv_pdu_bcast: recvfrom() failed
+2026/02/01 11:39:30.007 debugging: ISIS: ISIS-SRv6 (1): Delete SRv6 End.X SID
+2026/02/01 11:39:30.007 debugging: ISIS: ISIS-SRv6 (1): delete End.X SID 2001:db8:4:e002::
+2026/02/01 11:39:30.007 warnings: ISIS: IS-IS pfpacket: could not transmit packet on eth1: No such device or address
+2026/02/01 11:39:30.007 errors: ISIS: [EC 67108865] ISIS-Adj (1): Send L2 IIH on eth1 failed
+2026/02/01 11:39:30.103 debugging: ISIS: ISIS-SRv6 (1): Delete SRv6 End.X SID
+2026/02/01 11:39:30.103 debugging: ISIS: ISIS-SRv6 (1): delete End.X SID 2001:db8:4:e001::
+2026/02/01 11:39:30.103 warnings: ISIS: IS-IS pfpacket: could not transmit packet on eth3: Network is down
+2026/02/01 11:39:30.104 errors: ISIS: [EC 67108865] ISIS-Adj (1): Send L2 IIH on eth3 failed
+2026/02/01 11:39:30.112 errors: ZEBRA: [EC 4043309074] 0:254:2001:db8:1::1/128: Failed to enqueue dataplane install
+2026/02/01 11:39:30.112 errors: ZEBRA: [EC 4043309074] 0:254:2001:db8:1::/48: Failed to enqueue dataplane install
+2026/02/01 11:39:30.112 errors: ZEBRA: [EC 4043309074] 0:254:2001:db8:4:e001::/64: Failed to enqueue dataplane install
+2026/02/01 11:43:31.969 informational: BGP: Configuration Read in Took: 00:00:00
+2026/02/01 11:43:31.970 debugging: BGP: end_config: VTY:0x7542852ff0b0, pending SET-CFG: 0
+2026/02/01 11:43:31.988 informational: STATIC: Configuration Read in Took: 00:00:00
+2026/02/01 11:43:31.988 debugging: STATIC: end_config: VTY:0x7dffabbd8040, pending SET-CFG: 0
+2026/02/01 11:43:31.998 debugging: ISIS: ISIS-Sr ((null)): Initialize Segment Routing SRDB
+2026/02/01 11:43:31.998 debugging: ISIS: ISIS-SRv6 ((null)): Initialize Segment Routing SRv6 DB
+2026/02/01 11:43:31.998 warnings: ISIS: ISIS-LFA: failed to unregister RLFA with LDP
+2026/02/01 11:43:31.998 warnings: ISIS: ISIS-LFA: failed to unregister RLFA with LDP
+2026/02/01 11:43:31.998 warnings: ISIS: ISIS-LFA: failed to unregister RLFA with LDP
+2026/02/01 11:43:32.001 debugging: ISIS: Configured SRv6 locator Loc0 for IS-IS area 1
+2026/02/01 11:43:32.001 debugging: ISIS: Trying to get locator Loc0 for IS-IS area 1
+2026/02/01 11:43:32.001 errors: ISIS: [EC 100663302] srv6_manager_get_locator: invalid zclient socket
+2026/02/01 11:43:32.001 errors: ISIS: [EC 100663337] error processing configuration change: error [generic error] event [apply] operation [modify] xpath [/frr-isisd:isis/instance[area-tag='1'][vrf='default']/segment-routing-srv6/locator]
+2026/02/01 11:43:32.001 informational: ISIS: Configuration Read in Took: 00:00:00
+2026/02/01 11:43:32.001 debugging: ISIS: end_config: VTY:0x7e344ae901b0, pending SET-CFG: 0
+2026/02/01 11:43:32.680 warnings: BGP: bgp_zebra_label_manager_connect: failed connecting synchronous zclient!
+2026/02/01 11:43:33.681 warnings: ZEBRA: FD Limit set: 1048576 is stupidly large.  Is this what you intended?  Consider using --limit-fds also limiting size to 100000
+2026/02/01 11:43:33.682 notifications: ZEBRA: client 31 says hello and bids fair to announce only bgp routes vrf=0
+2026/02/01 11:43:33.787 warnings: ZEBRA: FD Limit set: 1048576 is stupidly large.  Is this what you intended?  Consider using --limit-fds also limiting size to 100000
+2026/02/01 11:43:33.788 warnings: ZEBRA: FD Limit set: 1048576 is stupidly large.  Is this what you intended?  Consider using --limit-fds also limiting size to 100000
+2026/02/01 11:43:33.788 notifications: ZEBRA: client 37 says hello and bids fair to announce only bgp routes vrf=0
+2026/02/01 11:43:33.789 notifications: ZEBRA: client 40 says hello and bids fair to announce only vnc routes vrf=0
+2026/02/01 11:43:33.860 warnings: ZEBRA: FD Limit set: 1048576 is stupidly large.  Is this what you intended?  Consider using --limit-fds also limiting size to 100000
+2026/02/01 11:43:33.860 notifications: ZEBRA: client 47 says hello and bids fair to announce only isis routes vrf=0
+2026/02/01 11:43:33.915 warnings: ZEBRA: FD Limit set: 1048576 is stupidly large.  Is this what you intended?  Consider using --limit-fds also limiting size to 100000
+2026/02/01 11:43:33.916 notifications: ZEBRA: client 52 says hello and bids fair to announce only static routes vrf=0
+2026/02/01 11:43:34.215 informational: ISIS: isis_zebra_process_srv6_locator_internal: Received SRv6 locator Loc0 2001:db8:4::/48, loc-block-len=32, loc-node-len=16 func-len=16, arg-len=0
+2026/02/01 11:43:34.215 debugging: ISIS: SRv6 locator (locator Loc0, prefix 2001:db8:4::/48) set for IS-IS area 1
+2026/02/01 11:43:34.215 debugging: ISIS: Requesting SRv6 SIDs for IS-IS area 1
+2026/02/01 11:43:34.215 debugging: ZEBRA: srv6_manager_get_sid_internal: getting SRv6 SID for ctx End USP, sid_value=::, locator_name=Loc0
+2026/02/01 11:43:34.215 debugging: ZEBRA: get_srv6_sid: received SRv6 SID alloc request: SID ctx End USP ((null)), mode=dynamic
+2026/02/01 11:43:34.215 debugging: ZEBRA: get_srv6_sid_dynamic: allocated new dynamic SRv6 SID 0 for context End USP
+2026/02/01 11:43:34.215 debugging: ZEBRA: srv6_manager_get_sid_internal: got new SRv6 SID for ctx End USP: sid_value=(null) (func=0) (proto=9, instance=0, sessionId=0), notifying all clients
+2026/02/01 11:43:34.218 debugging: ISIS: isis_zebra_srv6_sid_notify: received SRv6 SID notify: ctx End USP sid_value 2001:db8:4:: sid_func 0 note ZAPI_SRV6_SID_ALLOCATED
+2026/02/01 11:43:34.218 debugging: ISIS: SRv6 SID 2001:db8:4:: End USP ALLOCATED
+2026/02/01 11:43:34.218 debugging: ISIS: ISIS-SRv6 (1): setting SRv6 SID 2001:db8:4::
+2026/02/01 11:43:34.462 debugging: ISIS: Interface sr0 went up. Installing SIDs for area 1 in data plane
+2026/02/01 11:43:34.462 debugging: ISIS: Installing SID 2001:db8:4:: from the data plane
+2026/02/01 11:43:34.462 debugging: ISIS: ISIS-SRv6 (1): setting SRv6 SID 2001:db8:4::
+2026/02/01 11:43:35.563 debugging: ZEBRA: srv6_manager_get_sid_internal: getting SRv6 SID for ctx End.X nh6 fe80::a8c1:abff:fe8b:d1f9, sid_value=::, locator_name=Loc0
+2026/02/01 11:43:35.563 debugging: ZEBRA: get_srv6_sid: received SRv6 SID alloc request: SID ctx End.X nh6 fe80::a8c1:abff:fe8b:d1f9 ((null)), mode=dynamic
+2026/02/01 11:43:35.563 debugging: ZEBRA: alloc_srv6_sid_func_dynamic: trying to allocate dynamic SID function from block 2001:db8::/32
+2026/02/01 11:43:35.563 debugging: ZEBRA: alloc_srv6_sid_func_dynamic: allocated dynamic SID function 57344 from block 2001:db8::/32
+2026/02/01 11:43:35.563 debugging: ZEBRA: get_srv6_sid_dynamic: allocated new dynamic SRv6 SID 57344 for context End.X nh6 fe80::a8c1:abff:fe8b:d1f9
+2026/02/01 11:43:35.563 debugging: ZEBRA: srv6_manager_get_sid_internal: got new SRv6 SID for ctx End.X nh6 fe80::a8c1:abff:fe8b:d1f9: sid_value=(null) (func=57344) (proto=9, instance=0, sessionId=0), notifying all clients
+2026/02/01 11:43:35.564 debugging: ISIS: isis_zebra_srv6_sid_notify: received SRv6 SID notify: ctx End.X nh6 fe80::a8c1:abff:fe8b:d1f9 sid_value 2001:db8:4:e000:: sid_func 57344 note ZAPI_SRV6_SID_ALLOCATED
+2026/02/01 11:43:35.564 debugging: ISIS: SRv6 SID 2001:db8:4:e000:: End.X nh6 fe80::a8c1:abff:fe8b:d1f9 ALLOCATED
+2026/02/01 11:43:35.564 debugging: ISIS: ISIS-SRv6 (1): Add Primary End.X SID
+2026/02/01 11:43:35.564 debugging: ISIS: ISIS-SRv6 (1): setting adjacency SID 2001:db8:4:e000::
+2026/02/01 11:43:37.184 debugging: ZEBRA: srv6_manager_get_sid_internal: getting SRv6 SID for ctx End.X nh6 fe80::a8c1:abff:feee:4d0d, sid_value=::, locator_name=Loc0
+2026/02/01 11:43:37.184 debugging: ZEBRA: get_srv6_sid: received SRv6 SID alloc request: SID ctx End.X nh6 fe80::a8c1:abff:feee:4d0d ((null)), mode=dynamic
+2026/02/01 11:43:37.184 debugging: ZEBRA: alloc_srv6_sid_func_dynamic: trying to allocate dynamic SID function from block 2001:db8::/32
+2026/02/01 11:43:37.184 debugging: ZEBRA: alloc_srv6_sid_func_dynamic: allocated dynamic SID function 57345 from block 2001:db8::/32
+2026/02/01 11:43:37.184 debugging: ZEBRA: get_srv6_sid_dynamic: allocated new dynamic SRv6 SID 57345 for context End.X nh6 fe80::a8c1:abff:feee:4d0d
+2026/02/01 11:43:37.184 debugging: ZEBRA: srv6_manager_get_sid_internal: got new SRv6 SID for ctx End.X nh6 fe80::a8c1:abff:feee:4d0d: sid_value=(null) (func=57345) (proto=9, instance=0, sessionId=0), notifying all clients
+2026/02/01 11:43:37.185 debugging: ISIS: isis_zebra_srv6_sid_notify: received SRv6 SID notify: ctx End.X nh6 fe80::a8c1:abff:feee:4d0d sid_value 2001:db8:4:e001:: sid_func 57345 note ZAPI_SRV6_SID_ALLOCATED
+2026/02/01 11:43:37.185 debugging: ISIS: SRv6 SID 2001:db8:4:e001:: End.X nh6 fe80::a8c1:abff:feee:4d0d ALLOCATED
+2026/02/01 11:43:37.185 debugging: ISIS: ISIS-SRv6 (1): Add Primary End.X SID
+2026/02/01 11:43:37.185 debugging: ISIS: ISIS-SRv6 (1): setting adjacency SID 2001:db8:4:e001::
+2026/02/01 11:43:37.470 debugging: ZEBRA: srv6_manager_get_sid_internal: getting SRv6 SID for ctx End.X nh6 fe80::a8c1:abff:fec1:ed2b, sid_value=::, locator_name=Loc0
+2026/02/01 11:43:37.470 debugging: ZEBRA: get_srv6_sid: received SRv6 SID alloc request: SID ctx End.X nh6 fe80::a8c1:abff:fec1:ed2b ((null)), mode=dynamic
+2026/02/01 11:43:37.470 debugging: ZEBRA: alloc_srv6_sid_func_dynamic: trying to allocate dynamic SID function from block 2001:db8::/32
+2026/02/01 11:43:37.470 debugging: ZEBRA: alloc_srv6_sid_func_dynamic: allocated dynamic SID function 57346 from block 2001:db8::/32
+2026/02/01 11:43:37.470 debugging: ZEBRA: get_srv6_sid_dynamic: allocated new dynamic SRv6 SID 57346 for context End.X nh6 fe80::a8c1:abff:fec1:ed2b
+2026/02/01 11:43:37.470 debugging: ZEBRA: srv6_manager_get_sid_internal: got new SRv6 SID for ctx End.X nh6 fe80::a8c1:abff:fec1:ed2b: sid_value=(null) (func=57346) (proto=9, instance=0, sessionId=0), notifying all clients
+2026/02/01 11:43:37.470 debugging: ISIS: isis_zebra_srv6_sid_notify: received SRv6 SID notify: ctx End.X nh6 fe80::a8c1:abff:fec1:ed2b sid_value 2001:db8:4:e002:: sid_func 57346 note ZAPI_SRV6_SID_ALLOCATED
+2026/02/01 11:43:37.470 debugging: ISIS: SRv6 SID 2001:db8:4:e002:: End.X nh6 fe80::a8c1:abff:fec1:ed2b ALLOCATED
+2026/02/01 11:43:37.470 debugging: ISIS: ISIS-SRv6 (1): Add Primary End.X SID
+2026/02/01 11:43:37.470 debugging: ISIS: ISIS-SRv6 (1): setting adjacency SID 2001:db8:4:e002::
+2026/02/01 11:44:03.212 debugging: ISIS: ISIS-Rte (1) route created: 2001:db8:4::/48
+2026/02/01 11:44:03.212 debugging: ISIS: ISIS-Rte (1) route created: 2001:c0de:1:1::/64
+2026/02/01 11:44:03.212 debugging: ISIS: ISIS-Rte (1) route created: 2001:c0de:1:3::/64
+2026/02/01 11:44:03.213 debugging: ISIS: ISIS-Rte (1) route created: 2001:c0de:1:6::/64
+2026/02/01 11:44:03.213 debugging: ISIS: ISIS-Rte (1) route created: 2001:db8:4::1/128
+2026/02/01 11:44:03.213 debugging: ISIS: ISIS-Rte (1) route created: 2001:db8:3::/48
+2026/02/01 11:44:03.213 debugging: ISIS: ISIS-Rte (1) route created: 2001:c0de:1:2::/64
+2026/02/01 11:44:03.213 debugging: ISIS: ISIS-Rte (1) route created: 2001:c0de:1:5::/64
+2026/02/01 11:44:03.213 debugging: ISIS: ISIS-Rte (1) route created: 2001:db8:3::1/128
+2026/02/01 11:44:03.213 debugging: ISIS: ISIS-Rte (1) route created: 2001:db8:6::/48
+2026/02/01 11:44:03.213 debugging: ISIS: ISIS-Rte (1) route created: 2001:c0de:1:4::/64
+2026/02/01 11:44:03.213 debugging: ISIS: ISIS-Rte (1) route created: 2001:db8:6::1/128
+2026/02/01 11:44:03.213 debugging: ISIS: ISIS-Rte (1) route created: 2001:db8:1::1/128
+2026/02/01 11:44:03.213 debugging: ISIS: ISIS-Rte (1) route created: 2001:c0de:1:8::/64
+2026/02/01 11:44:03.213 debugging: ISIS: ISIS-Rte (1) route created: 2001:db8:2::/48
+2026/02/01 11:44:03.213 debugging: ISIS: ISIS-Rte (1) route created: 2001:c0de:1:7::/64
+2026/02/01 11:44:03.213 debugging: ISIS: ISIS-Rte (1) route created: 2001:db8:2::1/128
+2026/02/01 11:44:04.772 debugging: ISIS: ISIS-Rte (1) route created: 2001:db8:5::/48
+2026/02/01 11:44:04.772 debugging: ISIS: ISIS-Rte (1): route changed: 2001:c0de:1:4::/64, change: nhops num (old: 1, new: 2)
+2026/02/01 11:44:04.772 debugging: ISIS: ISIS-Rte (1): route changed: 2001:c0de:1:7::/64, change: cost (old: 50, new: 30)
+2026/02/01 11:44:04.772 debugging: ISIS: ISIS-Rte (1) route created: 2001:db8:5::1/128
+2026/02/01 11:44:04.772 debugging: ISIS: ISIS-Rte (1): route changed: 2001:db8:2::/48, change: cost (old: 40, new: 30)
+2026/02/01 11:44:04.772 debugging: ISIS: ISIS-Rte (1): route changed: 2001:db8:2::1/128, change: cost (old: 50, new: 40)
+2026/02/01 11:44:05.776 debugging: ISIS: ISIS-Rte (1) route created: 2001:db8:1::/48
+2026/02/01 11:44:54.453 warnings: ISIS: isis_recv_pdu_bcast: ifname eth1, fd 16, bytesread -1, recvfrom(): Network is down
+2026/02/01 11:44:54.453 warnings: ISIS: packet is received on multiple interfaces: socket interface 0, circuit interface 1768, packet type 0
+2026/02/01 11:44:54.453 warnings: ISIS: isis_recv_pdu_bcast: recvfrom() failed
+2026/02/01 11:44:54.453 debugging: ISIS: ISIS-SRv6 (1): Delete SRv6 End.X SID
+2026/02/01 11:44:54.453 debugging: ISIS: ISIS-SRv6 (1): delete End.X SID 2001:db8:4:e000::
+2026/02/01 11:44:54.454 warnings: ISIS: IS-IS pfpacket: could not transmit packet on eth1: No such device or address
+2026/02/01 11:44:54.454 errors: ISIS: [EC 67108865] ISIS-Adj (1): Send L2 IIH on eth1 failed
+2026/02/01 11:44:54.459 errors: ZEBRA: [EC 4043309074] 0:254:2001:c0de:1:7::/64: Failed to enqueue dataplane install
+2026/02/01 11:44:54.459 errors: ZEBRA: [EC 4043309074] 0:254:2001:db8:5::1/128: Failed to enqueue dataplane install
+2026/02/01 11:44:54.459 errors: ZEBRA: [EC 4043309074] 0:254:2001:db8:5::/48: Failed to enqueue dataplane install
+2026/02/01 11:44:54.460 errors: ZEBRA: [EC 4043309074] 0:254:2001:db8:2::1/128: Failed to enqueue dataplane install
+2026/02/01 11:44:54.460 errors: ZEBRA: [EC 4043309074] 0:254:2001:db8:2::/48: Failed to enqueue dataplane install
+2026/02/01 11:44:54.460 errors: ZEBRA: [EC 4043309074] 0:254:2001:c0de:1:5::/64: Failed to enqueue dataplane install
+2026/02/01 11:44:54.460 errors: ZEBRA: [EC 4043309074] 0:254:2001:c0de:1:2::/64: Failed to enqueue dataplane install
+2026/02/01 11:44:54.460 errors: ZEBRA: [EC 4043309074] 0:254:2001:db8:3::1/128: Failed to enqueue dataplane install
+2026/02/01 11:44:54.460 errors: ZEBRA: [EC 4043309074] 0:254:2001:db8:3::/48: Failed to enqueue dataplane install
+2026/02/01 11:44:54.460 errors: ZEBRA: [EC 4043309074] 0:254:2001:db8:4:e000::/64: Failed to enqueue dataplane install
+2026/02/01 11:44:54.509 warnings: ISIS: isis_recv_pdu_bcast: ifname eth2, fd 17, bytesread -1, recvfrom(): Network is down
+2026/02/01 11:44:54.509 warnings: ISIS: packet is received on multiple interfaces: socket interface 0, circuit interface 1782, packet type 0
+2026/02/01 11:44:54.509 warnings: ISIS: isis_recv_pdu_bcast: recvfrom() failed
+2026/02/01 11:44:54.516 errors: ZEBRA: Extended Error: Nexthop id does not exist
+2026/02/01 11:44:54.516 errors: ZEBRA: [EC 4043309093] netlink-dp (NS 0) error: Invalid argument, type=RTM_NEWROUTE(24), seq=106, pid=3025197708
+2026/02/01 11:44:54.516 errors: ZEBRA: Extended Error: Nexthop id does not exist
+2026/02/01 11:44:54.516 errors: ZEBRA: [EC 4043309093] netlink-dp (NS 0) error: Invalid argument, type=RTM_NEWROUTE(24), seq=107, pid=3025197708
+2026/02/01 11:44:54.516 errors: ZEBRA: Extended Error: Nexthop id does not exist
+2026/02/01 11:44:54.516 errors: ZEBRA: [EC 4043309093] netlink-dp (NS 0) error: Invalid argument, type=RTM_NEWROUTE(24), seq=108, pid=3025197708
+2026/02/01 11:44:54.516 errors: ZEBRA: Extended Error: Nexthop id does not exist
+2026/02/01 11:44:54.516 errors: ZEBRA: [EC 4043309093] netlink-dp (NS 0) error: Invalid argument, type=RTM_NEWROUTE(24), seq=109, pid=3025197708
+2026/02/01 11:44:54.517 errors: ZEBRA: Extended Error: Nexthop id does not exist
+2026/02/01 11:44:54.517 errors: ZEBRA: [EC 4043309093] netlink-dp (NS 0) error: Invalid argument, type=RTM_NEWROUTE(24), seq=110, pid=3025197708
+2026/02/01 11:44:54.517 warnings: ZEBRA: default(0:254):2001:c0de:1:8::/64: Route install failed
+2026/02/01 11:44:54.517 warnings: ZEBRA: default(0:254):2001:db8:6::1/128: Route install failed
+2026/02/01 11:44:54.517 warnings: ZEBRA: default(0:254):2001:db8:6::/48: Route install failed
+2026/02/01 11:44:54.517 warnings: ZEBRA: default(0:254):2001:c0de:1:4::/64: Route install failed
+2026/02/01 11:44:54.517 warnings: ZEBRA: default(0:254):2001:db8:4:e001::/64: Route install failed
+2026/02/01 11:44:54.524 debugging: ISIS: ISIS-SRv6 (1): Delete SRv6 End.X SID
+2026/02/01 11:44:54.524 debugging: ISIS: ISIS-SRv6 (1): delete End.X SID 2001:db8:4:e001::
+2026/02/01 11:44:54.524 warnings: ISIS: IS-IS pfpacket: could not transmit packet on eth2: No such device or address
+2026/02/01 11:44:54.524 errors: ISIS: [EC 67108865] ISIS-Adj (1): Send L2 IIH on eth2 failed
+2026/02/01 11:44:54.571 debugging: ISIS: ISIS-SRv6 (1): Delete SRv6 End.X SID
+2026/02/01 11:44:54.571 debugging: ISIS: ISIS-SRv6 (1): delete End.X SID 2001:db8:4:e002::
+2026/02/01 11:44:54.571 warnings: ISIS: IS-IS pfpacket: could not transmit packet on eth3: Network is down
+2026/02/01 11:44:54.571 errors: ISIS: [EC 67108865] ISIS-Adj (1): Send L2 IIH on eth3 failed
+2026/02/01 11:44:54.577 errors: ZEBRA: [EC 4043309074] 0:254:2001:db8:1::/48: Failed to enqueue dataplane install
+2026/02/01 11:44:54.577 errors: ZEBRA: [EC 4043309074] 0:254:2001:db8:1::1/128: Failed to enqueue dataplane install
+2026/02/01 11:44:54.577 errors: ZEBRA: [EC 4043309074] 0:254:2001:db8:4:e002::/64: Failed to enqueue dataplane install
+2026/02/01 11:46:06.008 informational: STATIC: Configuration Read in Took: 00:00:00
+2026/02/01 11:46:06.009 debugging: STATIC: end_config: VTY:0x7985912520c0, pending SET-CFG: 0
+2026/02/01 11:46:06.014 debugging: ZEBRA: zebra_srv6_locator_format_set: Locator Loc0 format has changed, old=(null) new=(null)
+2026/02/01 11:46:06.014 debugging: ZEBRA: zebra_srv6_locator_format_set: Locator Loc0 format has changed, send SRV6_LOCATOR_DEL notification to zclients
+2026/02/01 11:46:06.014 debugging: ZEBRA: zebra_srv6_locator_format_set: Locator Loc0 format has changed, send SRV6_LOCATOR_ADD notification to zclients
+2026/02/01 11:46:06.018 debugging: ZEBRA: zebra_srv6_locator_format_set: Locator Loc0 format has changed, old=(null) new=usid-f3216
+2026/02/01 11:46:06.031 debugging: ZEBRA: zebra_srv6_locator_format_set: Locator Loc0 format has changed, send SRV6_LOCATOR_DEL notification to zclients
+2026/02/01 11:46:06.031 debugging: ZEBRA: zebra_srv6_locator_format_set: Locator Loc0 format has changed, send SRV6_LOCATOR_ADD notification to zclients
+2026/02/01 11:46:06.060 informational: ZEBRA: Configuration Read in Took: 00:00:01
+2026/02/01 11:46:06.060 debugging: ZEBRA: end_config: VTY:0x78f0b4015030, pending SET-CFG: 0
+2026/02/01 11:46:06.088 debugging: ISIS: ISIS-Sr ((null)): Initialize Segment Routing SRDB
+2026/02/01 11:46:06.088 debugging: ISIS: ISIS-SRv6 ((null)): Initialize Segment Routing SRv6 DB
+2026/02/01 11:46:06.118 debugging: ISIS: Configured SRv6 locator Loc0 for IS-IS area 1
+2026/02/01 11:46:06.118 debugging: ISIS: Trying to get locator Loc0 for IS-IS area 1
+2026/02/01 11:46:06.119 informational: ISIS: Configuration Read in Took: 00:00:00
+2026/02/01 11:46:06.119 debugging: ISIS: end_config: VTY:0x76d0740b01b0, pending SET-CFG: 0
+2026/02/01 11:46:06.124 errors: ISIS: [EC 100663301] zebra_interface_link_params_read: unknown ifindex 0, shouldn't happen
+2026/02/01 11:46:06.124 informational: ISIS: isis_zebra_process_srv6_locator_internal: Received SRv6 locator Loc0 2001:db8:4::/48, loc-block-len=32, loc-node-len=16 func-len=16, arg-len=0
+2026/02/01 11:46:06.124 debugging: ISIS: SRv6 locator (locator Loc0, prefix 2001:db8:4::/48) set for IS-IS area 1
+2026/02/01 11:46:06.124 debugging: ISIS: Requesting SRv6 SIDs for IS-IS area 1
+2026/02/01 11:46:06.126 debugging: ZEBRA: srv6_manager_get_sid_internal: getting SRv6 SID for ctx End USP, sid_value=::, locator_name=Loc0
+2026/02/01 11:46:06.126 debugging: ZEBRA: get_srv6_sid: received SRv6 SID alloc request: SID ctx End USP ((null)), mode=dynamic
+2026/02/01 11:46:06.126 debugging: ZEBRA: get_srv6_sid_dynamic: allocated new dynamic SRv6 SID 0 for context End USP
+2026/02/01 11:46:06.126 debugging: ZEBRA: srv6_manager_get_sid_internal: got new SRv6 SID for ctx End USP: sid_value=(null) (func=0) (proto=9, instance=0, sessionId=0), notifying all clients
+2026/02/01 11:46:06.127 debugging: ISIS: isis_zebra_srv6_sid_notify: received SRv6 SID notify: ctx End USP sid_value 2001:db8:4:: sid_func 0 note ZAPI_SRV6_SID_ALLOCATED
+2026/02/01 11:46:06.127 debugging: ISIS: SRv6 SID 2001:db8:4:: End USP ALLOCATED
+2026/02/01 11:46:06.127 debugging: ISIS: ISIS-SRv6 (1): setting SRv6 SID 2001:db8:4::
+2026/02/01 11:46:06.127 warnings: ISIS: Failed to install SRv6 SID 2001:db8:4::: sr0 interface not found
+2026/02/01 11:46:06.130 informational: BGP: Configuration Read in Took: 00:00:00
+2026/02/01 11:46:06.130 debugging: BGP: end_config: VTY:0x71cf41df00b0, pending SET-CFG: 0
+2026/02/01 11:46:06.621 warnings: ZEBRA: FD Limit set: 1048576 is stupidly large.  Is this what you intended?  Consider using --limit-fds also limiting size to 100000
+2026/02/01 11:46:06.621 notifications: ZEBRA: client 51 says hello and bids fair to announce only bgp routes vrf=0
+2026/02/01 11:46:07.094 debugging: ISIS: Interface sr0 went up. Installing SIDs for area 1 in data plane
+2026/02/01 11:46:07.094 debugging: ISIS: Installing SID 2001:db8:4:: from the data plane
+2026/02/01 11:46:07.094 debugging: ISIS: ISIS-SRv6 (1): setting SRv6 SID 2001:db8:4::
+2026/02/01 11:46:07.126 debugging: ISIS: ISIS-Rte (1) route created: 2001:db8:4::1/128
+2026/02/01 11:46:08.389 debugging: ZEBRA: srv6_manager_get_sid_internal: getting SRv6 SID for ctx End.X nh6 fe80::a8c1:abff:fed5:c021, sid_value=::, locator_name=Loc0
+2026/02/01 11:46:08.389 debugging: ZEBRA: get_srv6_sid: received SRv6 SID alloc request: SID ctx End.X nh6 fe80::a8c1:abff:fed5:c021 ((null)), mode=dynamic
+2026/02/01 11:46:08.389 debugging: ZEBRA: alloc_srv6_sid_func_dynamic: trying to allocate dynamic SID function from block 2001:db8::/32
+2026/02/01 11:46:08.389 debugging: ZEBRA: alloc_srv6_sid_func_dynamic: allocated dynamic SID function 57344 from block 2001:db8::/32
+2026/02/01 11:46:08.389 debugging: ZEBRA: get_srv6_sid_dynamic: allocated new dynamic SRv6 SID 57344 for context End.X nh6 fe80::a8c1:abff:fed5:c021
+2026/02/01 11:46:08.389 debugging: ZEBRA: srv6_manager_get_sid_internal: got new SRv6 SID for ctx End.X nh6 fe80::a8c1:abff:fed5:c021: sid_value=(null) (func=57344) (proto=9, instance=0, sessionId=0), notifying all clients
+2026/02/01 11:46:08.390 debugging: ISIS: isis_zebra_srv6_sid_notify: received SRv6 SID notify: ctx End.X nh6 fe80::a8c1:abff:fed5:c021 sid_value 2001:db8:4:e000:: sid_func 57344 note ZAPI_SRV6_SID_ALLOCATED
+2026/02/01 11:46:08.390 debugging: ISIS: SRv6 SID 2001:db8:4:e000:: End.X nh6 fe80::a8c1:abff:fed5:c021 ALLOCATED
+2026/02/01 11:46:08.390 debugging: ISIS: ISIS-SRv6 (1): Add Primary End.X SID
+2026/02/01 11:46:08.390 debugging: ISIS: ISIS-SRv6 (1): setting adjacency SID 2001:db8:4:e000::
+2026/02/01 11:46:09.091 debugging: ZEBRA: srv6_manager_get_sid_internal: getting SRv6 SID for ctx End.X nh6 fe80::a8c1:abff:fea2:4c86, sid_value=::, locator_name=Loc0
+2026/02/01 11:46:09.091 debugging: ZEBRA: get_srv6_sid: received SRv6 SID alloc request: SID ctx End.X nh6 fe80::a8c1:abff:fea2:4c86 ((null)), mode=dynamic
+2026/02/01 11:46:09.091 debugging: ZEBRA: alloc_srv6_sid_func_dynamic: trying to allocate dynamic SID function from block 2001:db8::/32
+2026/02/01 11:46:09.091 debugging: ZEBRA: alloc_srv6_sid_func_dynamic: allocated dynamic SID function 57345 from block 2001:db8::/32
+2026/02/01 11:46:09.091 debugging: ZEBRA: get_srv6_sid_dynamic: allocated new dynamic SRv6 SID 57345 for context End.X nh6 fe80::a8c1:abff:fea2:4c86
+2026/02/01 11:46:09.091 debugging: ZEBRA: srv6_manager_get_sid_internal: got new SRv6 SID for ctx End.X nh6 fe80::a8c1:abff:fea2:4c86: sid_value=(null) (func=57345) (proto=9, instance=0, sessionId=0), notifying all clients
+2026/02/01 11:46:09.091 debugging: ISIS: isis_zebra_srv6_sid_notify: received SRv6 SID notify: ctx End.X nh6 fe80::a8c1:abff:fea2:4c86 sid_value 2001:db8:4:e001:: sid_func 57345 note ZAPI_SRV6_SID_ALLOCATED
+2026/02/01 11:46:09.091 debugging: ISIS: SRv6 SID 2001:db8:4:e001:: End.X nh6 fe80::a8c1:abff:fea2:4c86 ALLOCATED
+2026/02/01 11:46:09.091 debugging: ISIS: ISIS-SRv6 (1): Add Primary End.X SID
+2026/02/01 11:46:09.091 debugging: ISIS: ISIS-SRv6 (1): setting adjacency SID 2001:db8:4:e001::
+2026/02/01 11:46:09.112 debugging: ZEBRA: srv6_manager_get_sid_internal: getting SRv6 SID for ctx End.X nh6 fe80::a8c1:abff:fedb:1797, sid_value=::, locator_name=Loc0
+2026/02/01 11:46:09.112 debugging: ZEBRA: get_srv6_sid: received SRv6 SID alloc request: SID ctx End.X nh6 fe80::a8c1:abff:fedb:1797 ((null)), mode=dynamic
+2026/02/01 11:46:09.112 debugging: ZEBRA: alloc_srv6_sid_func_dynamic: trying to allocate dynamic SID function from block 2001:db8::/32
+2026/02/01 11:46:09.112 debugging: ZEBRA: alloc_srv6_sid_func_dynamic: allocated dynamic SID function 57346 from block 2001:db8::/32
+2026/02/01 11:46:09.112 debugging: ZEBRA: get_srv6_sid_dynamic: allocated new dynamic SRv6 SID 57346 for context End.X nh6 fe80::a8c1:abff:fedb:1797
+2026/02/01 11:46:09.112 debugging: ZEBRA: srv6_manager_get_sid_internal: got new SRv6 SID for ctx End.X nh6 fe80::a8c1:abff:fedb:1797: sid_value=(null) (func=57346) (proto=9, instance=0, sessionId=0), notifying all clients
+2026/02/01 11:46:09.112 debugging: ISIS: isis_zebra_srv6_sid_notify: received SRv6 SID notify: ctx End.X nh6 fe80::a8c1:abff:fedb:1797 sid_value 2001:db8:4:e002:: sid_func 57346 note ZAPI_SRV6_SID_ALLOCATED
+2026/02/01 11:46:09.112 debugging: ISIS: SRv6 SID 2001:db8:4:e002:: End.X nh6 fe80::a8c1:abff:fedb:1797 ALLOCATED
+2026/02/01 11:46:09.112 debugging: ISIS: ISIS-SRv6 (1): Add Primary End.X SID
+2026/02/01 11:46:09.112 debugging: ISIS: ISIS-SRv6 (1): setting adjacency SID 2001:db8:4:e002::
+2026/02/01 11:46:36.128 debugging: ISIS: ISIS-Rte (1) route created: 2001:db8:4::/48
+2026/02/01 11:46:36.128 debugging: ISIS: ISIS-Rte (1) route created: 2001:c0de:1:1::/64
+2026/02/01 11:46:36.128 debugging: ISIS: ISIS-Rte (1) route created: 2001:c0de:1:3::/64
+2026/02/01 11:46:36.128 debugging: ISIS: ISIS-Rte (1) route created: 2001:c0de:1:6::/64
+2026/02/01 11:46:36.128 debugging: ISIS: ISIS-Rte (1) route created: 2001:db8:3::/48
+2026/02/01 11:46:36.128 debugging: ISIS: ISIS-Rte (1) route created: 2001:c0de:1:2::/64
+2026/02/01 11:46:36.128 debugging: ISIS: ISIS-Rte (1) route created: 2001:db8:3::1/128
+2026/02/01 11:46:36.128 debugging: ISIS: ISIS-Rte (1) route created: 2001:c0de:1:5::/64
+2026/02/01 11:46:36.128 debugging: ISIS: ISIS-Rte (1) route created: 2001:db8:5::/48
+2026/02/01 11:46:36.128 debugging: ISIS: ISIS-Rte (1) route created: 2001:db8:6::1/128
+2026/02/01 11:46:36.128 debugging: ISIS: ISIS-Rte (1) route created: 2001:c0de:1:4::/64
+2026/02/01 11:46:36.128 debugging: ISIS: ISIS-Rte (1) route created: 2001:db8:5::1/128
+2026/02/01 11:46:36.128 debugging: ISIS: ISIS-Rte (1) route created: 2001:c0de:1:7::/64
+2026/02/01 11:46:36.128 debugging: ISIS: ISIS-Rte (1) route created: 2001:db8:2::/48
+2026/02/01 11:46:36.128 debugging: ISIS: ISIS-Rte (1) route created: 2001:db8:2::1/128
+2026/02/01 11:46:36.128 debugging: ISIS: ISIS-Rte (1) route created: 2001:c0de:1:8::/64
+2026/02/01 11:46:37.466 debugging: ISIS: ISIS-Rte (1) route created: 2001:db8:6::/48
+2026/02/01 11:46:37.466 debugging: ISIS: ISIS-Rte (1) route created: 2001:db8:1::/48
+2026/02/01 11:46:37.466 debugging: ISIS: ISIS-Rte (1): route changed: 2001:c0de:1:4::/64, change: depth (old: 3, new: 2)
+2026/02/01 11:46:37.466 debugging: ISIS: ISIS-Rte (1) route created: 2001:db8:1::1/128
+2026/02/01 11:46:37.466 debugging: ISIS: ISIS-Rte (1): route changed: 2001:c0de:1:8::/64, change: cost (old: 50, new: 40)
+2026/02/01 11:47:39.544 debugging: ISIS: ISIS-SRv6 (1): Delete SRv6 End.X SID
+2026/02/01 11:47:39.544 debugging: ISIS: ISIS-SRv6 (1): delete End.X SID 2001:db8:4:e000::
+2026/02/01 11:47:39.544 warnings: ISIS: IS-IS pfpacket: could not transmit packet on eth1: Network is down
+2026/02/01 11:47:39.545 errors: ISIS: [EC 67108865] ISIS-Adj (1): Send L2 IIH on eth1 failed
+2026/02/01 11:47:39.552 errors: ZEBRA: [EC 4043309074] 0:254:2001:c0de:1:7::/64: Failed to enqueue dataplane install
+2026/02/01 11:47:39.552 errors: ZEBRA: [EC 4043309074] 0:254:2001:c0de:1:5::/64: Failed to enqueue dataplane install
+2026/02/01 11:47:39.552 errors: ZEBRA: [EC 4043309074] 0:254:2001:c0de:1:2::/64: Failed to enqueue dataplane install
+2026/02/01 11:47:39.553 errors: ZEBRA: [EC 4043309074] 0:254:2001:db8:5::1/128: Failed to enqueue dataplane install
+2026/02/01 11:47:39.553 errors: ZEBRA: [EC 4043309074] 0:254:2001:db8:5::/48: Failed to enqueue dataplane install
+2026/02/01 11:47:39.553 errors: ZEBRA: [EC 4043309074] 0:254:2001:db8:3::1/128: Failed to enqueue dataplane install
+2026/02/01 11:47:39.553 errors: ZEBRA: [EC 4043309074] 0:254:2001:db8:3::/48: Failed to enqueue dataplane install
+2026/02/01 11:47:39.553 errors: ZEBRA: [EC 4043309074] 0:254:2001:db8:2::1/128: Failed to enqueue dataplane install
+2026/02/01 11:47:39.553 errors: ZEBRA: [EC 4043309074] 0:254:2001:db8:2::/48: Failed to enqueue dataplane install
+2026/02/01 11:47:39.553 errors: ZEBRA: [EC 4043309074] 0:254:2001:db8:4:e000::/64: Failed to enqueue dataplane install
+2026/02/01 11:47:39.685 debugging: ISIS: ISIS-Rte (1): route changed: 2001:db8:1::/48, change: nhops num (old: 2, new: 1)
+2026/02/01 11:47:39.685 debugging: ISIS: ISIS-Rte (1): route changed: 2001:c0de:1:4::/64, change: nhops num (old: 2, new: 1)
+2026/02/01 11:47:39.685 debugging: ISIS: ISIS-Rte (1): route changed: 2001:c0de:1:5::/64, change: cost (old: 20, new: 30)
+2026/02/01 11:47:39.685 debugging: ISIS: ISIS-Rte (1): route changed: 2001:db8:1::1/128, change: nhops num (old: 2, new: 1)
+2026/02/01 11:47:39.685 debugging: ISIS: ISIS-Rte (1): route changed: 2001:db8:5::/48, change: cost (old: 20, new: 30)
+2026/02/01 11:47:39.685 debugging: ISIS: ISIS-Rte (1): route changed: 2001:db8:3::/48, change: cost (old: 10, new: 30)
+2026/02/01 11:47:39.685 debugging: ISIS: ISIS-Rte (1): route changed: 2001:c0de:1:2::/64, change: cost (old: 20, new: 40)
+2026/02/01 11:47:39.685 debugging: ISIS: ISIS-Rte (1): route changed: 2001:db8:5::1/128, change: cost (old: 30, new: 40)
+2026/02/01 11:47:39.685 debugging: ISIS: ISIS-Rte (1): route changed: 2001:c0de:1:7::/64, change: cost (old: 30, new: 40)
+2026/02/01 11:47:39.685 debugging: ISIS: ISIS-Rte (1): route changed: 2001:c0de:1:1::/64, change: cost (old: 0, new: 40)
+2026/02/01 11:47:39.685 debugging: ISIS: ISIS-Rte (1): route changed: 2001:db8:3::1/128, change: cost (old: 20, new: 40)
+2026/02/01 11:47:39.685 debugging: ISIS: ISIS-Rte (1): route changed: 2001:db8:2::/48, change: cost (old: 30, new: 40)
+2026/02/01 11:47:39.685 debugging: ISIS: ISIS-Rte (1): route changed: 2001:db8:2::1/128, change: cost (old: 40, new: 50)
+2026/02/01 11:47:39.726 warnings: ISIS: isis_recv_pdu_bcast: ifname eth2, fd 17, bytesread -1, recvfrom(): Network is down
+2026/02/01 11:47:39.727 warnings: ISIS: packet is received on multiple interfaces: socket interface 0, circuit interface 1834, packet type 0
+2026/02/01 11:47:39.727 warnings: ISIS: isis_recv_pdu_bcast: recvfrom() failed
+2026/02/01 11:47:39.814 errors: ZEBRA: Extended Error: Nexthop id does not exist
+2026/02/01 11:47:39.815 errors: ZEBRA: [EC 4043309093] netlink-dp (NS 0) error: Invalid argument, type=RTM_NEWROUTE(24), seq=106, pid=4034189436
+2026/02/01 11:47:39.815 errors: ZEBRA: Extended Error: Nexthop id does not exist
+2026/02/01 11:47:39.815 errors: ZEBRA: [EC 4043309093] netlink-dp (NS 0) error: Invalid argument, type=RTM_NEWROUTE(24), seq=108, pid=4034189436
+2026/02/01 11:47:39.815 errors: ZEBRA: Extended Error: Nexthop id does not exist
+2026/02/01 11:47:39.815 errors: ZEBRA: [EC 4043309093] netlink-dp (NS 0) error: Invalid argument, type=RTM_NEWROUTE(24), seq=114, pid=4034189436
+2026/02/01 11:47:39.815 errors: ZEBRA: Extended Error: Nexthop id does not exist
+2026/02/01 11:47:39.815 errors: ZEBRA: [EC 4043309093] netlink-dp (NS 0) error: Invalid argument, type=RTM_NEWROUTE(24), seq=116, pid=4034189436
+2026/02/01 11:47:39.815 errors: ZEBRA: Extended Error: Invalid nexthop id
+2026/02/01 11:47:39.815 errors: ZEBRA: [EC 4043309093] netlink-dp (NS 0) error: Invalid argument, type=RTM_NEWNEXTHOP(104), seq=119, pid=4034189436
+2026/02/01 11:47:39.815 errors: ZEBRA: Extended Error: Nexthop id does not exist
+2026/02/01 11:47:39.815 errors: ZEBRA: [EC 4043309093] netlink-dp (NS 0) error: Invalid argument, type=RTM_NEWROUTE(24), seq=120, pid=4034189436
+2026/02/01 11:47:39.815 errors: ZEBRA: Extended Error: Nexthop id does not exist
+2026/02/01 11:47:39.815 errors: ZEBRA: [EC 4043309093] netlink-dp (NS 0) error: Invalid argument, type=RTM_NEWROUTE(24), seq=122, pid=4034189436
+2026/02/01 11:47:39.815 errors: ZEBRA: Extended Error: Nexthop id does not exist
+2026/02/01 11:47:39.815 errors: ZEBRA: [EC 4043309093] netlink-dp (NS 0) error: Invalid argument, type=RTM_NEWROUTE(24), seq=126, pid=4034189436
+2026/02/01 11:47:39.828 warnings: ISIS: isis_recv_pdu_bcast: ifname eth3, fd 18, bytesread -1, recvfrom(): Network is down
+2026/02/01 11:47:39.828 warnings: ISIS: packet is received on multiple interfaces: socket interface 0, circuit interface 1836, packet type 0
+2026/02/01 11:47:39.828 warnings: ISIS: isis_recv_pdu_bcast: recvfrom() failed
+2026/02/01 11:47:39.831 errors: ZEBRA: Extended Error: Nexthop id does not exist
+2026/02/01 11:47:39.831 errors: ZEBRA: [EC 4043309093] netlink-dp (NS 0) error: Invalid argument, type=RTM_NEWROUTE(24), seq=128, pid=4034189436
+2026/02/01 11:47:39.831 errors: ZEBRA: Extended Error: Nexthop id does not exist
+2026/02/01 11:47:39.831 errors: ZEBRA: [EC 4043309093] netlink-dp (NS 0) error: Invalid argument, type=RTM_NEWROUTE(24), seq=129, pid=4034189436
+2026/02/01 11:47:39.832 errors: ZEBRA: Extended Error: Nexthop id does not exist
+2026/02/01 11:47:39.832 errors: ZEBRA: [EC 4043309093] netlink-dp (NS 0) error: Invalid argument, type=RTM_NEWROUTE(24), seq=130, pid=4034189436
+2026/02/01 11:47:39.832 errors: ZEBRA: Extended Error: Nexthop id does not exist
+2026/02/01 11:47:39.832 errors: ZEBRA: [EC 4043309093] netlink-dp (NS 0) error: Invalid argument, type=RTM_NEWROUTE(24), seq=131, pid=4034189436
+2026/02/01 11:47:39.832 errors: ZEBRA: Extended Error: Nexthop id does not exist
+2026/02/01 11:47:39.832 errors: ZEBRA: [EC 4043309093] netlink-dp (NS 0) error: Invalid argument, type=RTM_NEWROUTE(24), seq=132, pid=4034189436
+2026/02/01 11:47:39.832 warnings: ZEBRA: default(0:254):2001:db8:2::/48: Route install failed
+2026/02/01 11:47:39.833 warnings: ZEBRA: default(0:254):2001:db8:2::1/128: Route install failed
+2026/02/01 11:47:39.833 warnings: ZEBRA: default(0:254):2001:db8:5::/48: Route install failed
+2026/02/01 11:47:39.833 warnings: ZEBRA: default(0:254):2001:db8:5::1/128: Route install failed
+2026/02/01 11:47:39.833 errors: ZEBRA: [EC 4043309074] Failed to install Nexthop (45[33/40]) into the kernel
+2026/02/01 11:47:39.833 warnings: ZEBRA: default(0:254):2001:c0de:1:2::/64: Route install failed
+2026/02/01 11:47:39.833 warnings: ZEBRA: default(0:254):2001:c0de:1:4::/64: Route install failed
+2026/02/01 11:47:39.833 warnings: ZEBRA: default(0:254):2001:c0de:1:7::/64: Route install failed
+2026/02/01 11:47:39.833 warnings: ZEBRA: default(0:254):2001:c0de:1:8::/64: Route install failed
+2026/02/01 11:47:39.834 warnings: ZEBRA: default(0:254):2001:db8:6::/48: Route install failed
+2026/02/01 11:47:39.834 debugging: ISIS: ISIS-SRv6 (1): Delete SRv6 End.X SID
+2026/02/01 11:47:39.834 debugging: ISIS: ISIS-SRv6 (1): delete End.X SID 2001:db8:4:e002::
+2026/02/01 11:47:39.834 warnings: ISIS: IS-IS pfpacket: could not transmit packet on eth2: No such device or address
+2026/02/01 11:47:39.835 warnings: ZEBRA: default(0:254):2001:db8:6::1/128: Route install failed
+2026/02/01 11:47:39.835 errors: ISIS: [EC 67108865] ISIS-Adj (1): Send L2 IIH on eth2 failed
+2026/02/01 11:47:39.835 warnings: ZEBRA: default(0:254):2001:c0de:1:4::/64: Route install failed
+2026/02/01 11:47:39.835 warnings: ZEBRA: default(0:254):2001:db8:4:e002::/64: Route install failed
+2026/02/01 11:47:39.840 debugging: ISIS: ISIS-SRv6 (1): Delete SRv6 End.X SID
+2026/02/01 11:47:39.840 debugging: ISIS: ISIS-SRv6 (1): delete End.X SID 2001:db8:4:e001::
+2026/02/01 11:47:39.840 warnings: ISIS: IS-IS pfpacket: could not transmit packet on eth3: No such device or address
+2026/02/01 11:47:39.840 errors: ISIS: [EC 67108865] ISIS-Adj (1): Send L2 IIH on eth3 failed
+2026/02/01 11:47:39.841 errors: ZEBRA: [EC 4043309074] 0:254:2001:c0de:1:5::/64: Failed to enqueue dataplane install
+2026/02/01 11:47:39.841 errors: ZEBRA: [EC 4043309074] 0:254:2001:c0de:1:1::/64: Failed to enqueue dataplane install
+2026/02/01 11:47:39.841 errors: ZEBRA: [EC 4043309074] 0:254:2001:db8:3::1/128: Failed to enqueue dataplane install
+2026/02/01 11:47:39.841 errors: ZEBRA: [EC 4043309074] 0:254:2001:db8:3::/48: Failed to enqueue dataplane install
+2026/02/01 11:47:39.841 errors: ZEBRA: [EC 4043309074] 0:254:2001:db8:1::1/128: Failed to enqueue dataplane install
+2026/02/01 11:47:39.841 errors: ZEBRA: [EC 4043309074] 0:254:2001:db8:1::/48: Failed to enqueue dataplane install
+2026/02/01 11:47:39.841 errors: ZEBRA: [EC 4043309074] 0:254:2001:db8:4:e001::/64: Failed to enqueue dataplane install
+2026/02/03 03:22:51.986 debugging: ZEBRA: zebra_srv6_locator_format_set: Locator Loc0 format has changed, old=(null) new=(null)
+2026/02/03 03:22:51.987 debugging: ZEBRA: zebra_srv6_locator_format_set: Locator Loc0 format has changed, send SRV6_LOCATOR_DEL notification to zclients
+2026/02/03 03:22:51.987 debugging: ZEBRA: zebra_srv6_locator_format_set: Locator Loc0 format has changed, send SRV6_LOCATOR_ADD notification to zclients
+2026/02/03 03:22:52.006 debugging: ZEBRA: zebra_srv6_locator_format_set: Locator Loc0 format has changed, old=(null) new=usid-f3216
+2026/02/03 03:22:52.006 debugging: ZEBRA: zebra_srv6_locator_format_set: Locator Loc0 format has changed, send SRV6_LOCATOR_DEL notification to zclients
+2026/02/03 03:22:52.006 debugging: ZEBRA: zebra_srv6_locator_format_set: Locator Loc0 format has changed, send SRV6_LOCATOR_ADD notification to zclients
+2026/02/03 03:22:52.015 informational: ZEBRA: Configuration Read in Took: 00:00:00
+2026/02/03 03:22:52.015 debugging: ZEBRA: end_config: VTY:0x7e0112060130, pending SET-CFG: 0
+2026/02/03 03:22:52.022 informational: BGP: Configuration Read in Took: 00:00:00
+2026/02/03 03:22:52.022 debugging: BGP: end_config: VTY:0x784e0a3540b0, pending SET-CFG: 0
+2026/02/03 03:22:52.061 informational: STATIC: Configuration Read in Took: 00:00:00
+2026/02/03 03:22:52.061 debugging: STATIC: end_config: VTY:0x752b5e28f0c0, pending SET-CFG: 0
+2026/02/03 03:22:52.036 debugging: ISIS: ISIS-Sr ((null)): Initialize Segment Routing SRDB
+2026/02/03 03:22:52.036 debugging: ISIS: ISIS-SRv6 ((null)): Initialize Segment Routing SRv6 DB
+2026/02/03 03:22:52.075 debugging: ISIS: Configured SRv6 locator Loc0 for IS-IS area 1
+2026/02/03 03:22:52.075 debugging: ISIS: Trying to get locator Loc0 for IS-IS area 1
+2026/02/03 03:22:52.075 informational: ISIS: Configuration Read in Took: 00:00:00
+2026/02/03 03:22:52.075 debugging: ISIS: end_config: VTY:0x734de5ec91b0, pending SET-CFG: 0
+2026/02/03 03:22:52.083 informational: ISIS: isis_zebra_process_srv6_locator_internal: Received SRv6 locator Loc0 2001:db8:4::/48, loc-block-len=32, loc-node-len=16 func-len=16, arg-len=0
+2026/02/03 03:22:52.083 debugging: ISIS: SRv6 locator (locator Loc0, prefix 2001:db8:4::/48) set for IS-IS area 1
+2026/02/03 03:22:52.083 debugging: ISIS: Requesting SRv6 SIDs for IS-IS area 1
+2026/02/03 03:22:52.085 debugging: ZEBRA: srv6_manager_get_sid_internal: getting SRv6 SID for ctx End USP, sid_value=::, locator_name=Loc0
+2026/02/03 03:22:52.085 debugging: ZEBRA: get_srv6_sid: received SRv6 SID alloc request: SID ctx End USP ((null)), mode=dynamic
+2026/02/03 03:22:52.085 debugging: ZEBRA: get_srv6_sid_dynamic: allocated new dynamic SRv6 SID 0 for context End USP
+2026/02/03 03:22:52.085 debugging: ZEBRA: srv6_manager_get_sid_internal: got new SRv6 SID for ctx End USP: sid_value=(null) (func=0) (proto=9, instance=0, sessionId=0), notifying all clients
+2026/02/03 03:22:52.090 debugging: ISIS: isis_zebra_srv6_sid_notify: received SRv6 SID notify: ctx End USP sid_value 2001:db8:4:: sid_func 0 note ZAPI_SRV6_SID_ALLOCATED
+2026/02/03 03:22:52.090 debugging: ISIS: SRv6 SID 2001:db8:4:: End USP ALLOCATED
+2026/02/03 03:22:52.090 debugging: ISIS: ISIS-SRv6 (1): setting SRv6 SID 2001:db8:4::
+2026/02/03 03:22:52.090 warnings: ISIS: Failed to install SRv6 SID 2001:db8:4::: sr0 interface not found
+2026/02/03 03:22:52.352 warnings: ZEBRA: FD Limit set: 1048576 is stupidly large.  Is this what you intended?  Consider using --limit-fds also limiting size to 100000
+2026/02/03 03:22:52.357 notifications: ZEBRA: client 51 says hello and bids fair to announce only bgp routes vrf=0
+2026/02/03 03:22:53.088 debugging: ISIS: ISIS-Rte (1) route created: 2001:db8:4::1/128
+2026/02/03 03:22:53.907 debugging: ISIS: Interface sr0 went up. Installing SIDs for area 1 in data plane
+2026/02/03 03:22:53.907 debugging: ISIS: Installing SID 2001:db8:4:: from the data plane
+2026/02/03 03:22:53.907 debugging: ISIS: ISIS-SRv6 (1): setting SRv6 SID 2001:db8:4::
+2026/02/03 03:22:54.606 debugging: ZEBRA: srv6_manager_get_sid_internal: getting SRv6 SID for ctx End.X nh6 fe80::a8c1:abff:fec8:ee1d, sid_value=::, locator_name=Loc0
+2026/02/03 03:22:54.606 debugging: ZEBRA: get_srv6_sid: received SRv6 SID alloc request: SID ctx End.X nh6 fe80::a8c1:abff:fec8:ee1d ((null)), mode=dynamic
+2026/02/03 03:22:54.606 debugging: ZEBRA: alloc_srv6_sid_func_dynamic: trying to allocate dynamic SID function from block 2001:db8::/32
+2026/02/03 03:22:54.606 debugging: ZEBRA: alloc_srv6_sid_func_dynamic: allocated dynamic SID function 57344 from block 2001:db8::/32
+2026/02/03 03:22:54.606 debugging: ZEBRA: get_srv6_sid_dynamic: allocated new dynamic SRv6 SID 57344 for context End.X nh6 fe80::a8c1:abff:fec8:ee1d
+2026/02/03 03:22:54.606 debugging: ZEBRA: srv6_manager_get_sid_internal: got new SRv6 SID for ctx End.X nh6 fe80::a8c1:abff:fec8:ee1d: sid_value=(null) (func=57344) (proto=9, instance=0, sessionId=0), notifying all clients
+2026/02/03 03:22:54.607 debugging: ISIS: isis_zebra_srv6_sid_notify: received SRv6 SID notify: ctx End.X nh6 fe80::a8c1:abff:fec8:ee1d sid_value 2001:db8:4:e000:: sid_func 57344 note ZAPI_SRV6_SID_ALLOCATED
+2026/02/03 03:22:54.607 debugging: ISIS: SRv6 SID 2001:db8:4:e000:: End.X nh6 fe80::a8c1:abff:fec8:ee1d ALLOCATED
+2026/02/03 03:22:54.607 debugging: ISIS: ISIS-SRv6 (1): Add Primary End.X SID
+2026/02/03 03:22:54.607 debugging: ISIS: ISIS-SRv6 (1): setting adjacency SID 2001:db8:4:e000::
+2026/02/03 03:22:54.789 debugging: ZEBRA: srv6_manager_get_sid_internal: getting SRv6 SID for ctx End.X nh6 fe80::a8c1:abff:fecd:4515, sid_value=::, locator_name=Loc0
+2026/02/03 03:22:54.789 debugging: ZEBRA: get_srv6_sid: received SRv6 SID alloc request: SID ctx End.X nh6 fe80::a8c1:abff:fecd:4515 ((null)), mode=dynamic
+2026/02/03 03:22:54.789 debugging: ZEBRA: alloc_srv6_sid_func_dynamic: trying to allocate dynamic SID function from block 2001:db8::/32
+2026/02/03 03:22:54.789 debugging: ZEBRA: alloc_srv6_sid_func_dynamic: allocated dynamic SID function 57345 from block 2001:db8::/32
+2026/02/03 03:22:54.789 debugging: ZEBRA: get_srv6_sid_dynamic: allocated new dynamic SRv6 SID 57345 for context End.X nh6 fe80::a8c1:abff:fecd:4515
+2026/02/03 03:22:54.789 debugging: ZEBRA: srv6_manager_get_sid_internal: got new SRv6 SID for ctx End.X nh6 fe80::a8c1:abff:fecd:4515: sid_value=(null) (func=57345) (proto=9, instance=0, sessionId=0), notifying all clients
+2026/02/03 03:22:54.790 debugging: ISIS: isis_zebra_srv6_sid_notify: received SRv6 SID notify: ctx End.X nh6 fe80::a8c1:abff:fecd:4515 sid_value 2001:db8:4:e001:: sid_func 57345 note ZAPI_SRV6_SID_ALLOCATED
+2026/02/03 03:22:54.790 debugging: ISIS: SRv6 SID 2001:db8:4:e001:: End.X nh6 fe80::a8c1:abff:fecd:4515 ALLOCATED
+2026/02/03 03:22:54.790 debugging: ISIS: ISIS-SRv6 (1): Add Primary End.X SID
+2026/02/03 03:22:54.790 debugging: ISIS: ISIS-SRv6 (1): setting adjacency SID 2001:db8:4:e001::
+2026/02/03 03:22:55.394 debugging: ZEBRA: srv6_manager_get_sid_internal: getting SRv6 SID for ctx End.X nh6 fe80::a8c1:abff:fe4e:7d85, sid_value=::, locator_name=Loc0
+2026/02/03 03:22:55.394 debugging: ZEBRA: get_srv6_sid: received SRv6 SID alloc request: SID ctx End.X nh6 fe80::a8c1:abff:fe4e:7d85 ((null)), mode=dynamic
+2026/02/03 03:22:55.394 debugging: ZEBRA: alloc_srv6_sid_func_dynamic: trying to allocate dynamic SID function from block 2001:db8::/32
+2026/02/03 03:22:55.394 debugging: ZEBRA: alloc_srv6_sid_func_dynamic: allocated dynamic SID function 57346 from block 2001:db8::/32
+2026/02/03 03:22:55.394 debugging: ZEBRA: get_srv6_sid_dynamic: allocated new dynamic SRv6 SID 57346 for context End.X nh6 fe80::a8c1:abff:fe4e:7d85
+2026/02/03 03:22:55.394 debugging: ZEBRA: srv6_manager_get_sid_internal: got new SRv6 SID for ctx End.X nh6 fe80::a8c1:abff:fe4e:7d85: sid_value=(null) (func=57346) (proto=9, instance=0, sessionId=0), notifying all clients
+2026/02/03 03:22:55.395 debugging: ISIS: isis_zebra_srv6_sid_notify: received SRv6 SID notify: ctx End.X nh6 fe80::a8c1:abff:fe4e:7d85 sid_value 2001:db8:4:e002:: sid_func 57346 note ZAPI_SRV6_SID_ALLOCATED
+2026/02/03 03:22:55.395 debugging: ISIS: SRv6 SID 2001:db8:4:e002:: End.X nh6 fe80::a8c1:abff:fe4e:7d85 ALLOCATED
+2026/02/03 03:22:55.395 debugging: ISIS: ISIS-SRv6 (1): Add Primary End.X SID
+2026/02/03 03:22:55.395 debugging: ISIS: ISIS-SRv6 (1): setting adjacency SID 2001:db8:4:e002::
+2026/02/03 03:23:22.091 debugging: ISIS: ISIS-Rte (1) route created: 2001:db8:4::/48
+2026/02/03 03:23:22.091 debugging: ISIS: ISIS-Rte (1) route created: 2001:c0de:1:1::/64
+2026/02/03 03:23:22.091 debugging: ISIS: ISIS-Rte (1) route created: 2001:c0de:1:3::/64
+2026/02/03 03:23:22.091 debugging: ISIS: ISIS-Rte (1) route created: 2001:c0de:1:6::/64
+2026/02/03 03:23:22.091 debugging: ISIS: ISIS-Rte (1) route created: 2001:db8:3::1/128
+2026/02/03 03:23:22.091 debugging: ISIS: ISIS-Rte (1) route created: 2001:db8:6::/48
+2026/02/03 03:23:22.091 debugging: ISIS: ISIS-Rte (1) route created: 2001:db8:1::/48
+2026/02/03 03:23:22.091 debugging: ISIS: ISIS-Rte (1) route created: 2001:c0de:1:4::/64
+2026/02/03 03:23:22.091 debugging: ISIS: ISIS-Rte (1) route created: 2001:db8:6::1/128
+2026/02/03 03:23:22.091 debugging: ISIS: ISIS-Rte (1) route created: 2001:c0de:1:5::/64
+2026/02/03 03:23:22.091 debugging: ISIS: ISIS-Rte (1) route created: 2001:db8:1::1/128
+2026/02/03 03:23:22.091 debugging: ISIS: ISIS-Rte (1) route created: 2001:c0de:1:8::/64
+2026/02/03 03:23:22.091 debugging: ISIS: ISIS-Rte (1) route created: 2001:db8:2::/48
+2026/02/03 03:23:22.091 debugging: ISIS: ISIS-Rte (1) route created: 2001:db8:2::1/128
+2026/02/03 03:23:22.091 debugging: ISIS: ISIS-Rte (1) route created: 2001:c0de:1:7::/64
+2026/02/03 03:23:23.200 debugging: ISIS: ISIS-Rte (1) route created: 2001:db8:5::/48
+2026/02/03 03:23:23.201 debugging: ISIS: ISIS-Rte (1) route created: 2001:c0de:1:2::/64
+2026/02/03 03:23:23.201 debugging: ISIS: ISIS-Rte (1): route changed: 2001:c0de:1:7::/64, change: cost (old: 50, new: 40)
+2026/02/03 03:23:23.201 debugging: ISIS: ISIS-Rte (1) route created: 2001:db8:5::1/128
+2026/02/03 03:23:24.602 debugging: ISIS: ISIS-Rte (1) route created: 2001:db8:3::/48
+2026/02/03 03:23:24.602 debugging: ISIS: ISIS-Rte (1): route changed: 2001:c0de:1:2::/64, change: cost (old: 40, new: 20)
+2026/02/03 03:23:24.602 debugging: ISIS: ISIS-Rte (1): route changed: 2001:c0de:1:5::/64, change: cost (old: 30, new: 20)
+2026/02/03 03:23:24.602 debugging: ISIS: ISIS-Rte (1): route changed: 2001:db8:1::/48, change: nhops num (old: 1, new: 2)
+2026/02/03 03:23:24.603 debugging: ISIS: ISIS-Rte (1): route changed: 2001:db8:5::/48, change: cost (old: 30, new: 20)
+2026/02/03 03:23:24.603 debugging: ISIS: ISIS-Rte (1): route changed: 2001:c0de:1:4::/64, change: nhops num (old: 1, new: 2)
+2026/02/03 03:23:24.603 debugging: ISIS: ISIS-Rte (1): route changed: 2001:db8:1::1/128, change: nhops num (old: 1, new: 2)
+2026/02/03 03:23:24.603 debugging: ISIS: ISIS-Rte (1): route changed: 2001:c0de:1:7::/64, change: cost (old: 40, new: 30)
+2026/02/03 03:23:24.603 debugging: ISIS: ISIS-Rte (1): route changed: 2001:db8:5::1/128, change: cost (old: 40, new: 30)
+2026/02/03 03:23:24.603 debugging: ISIS: ISIS-Rte (1): route changed: 2001:db8:2::/48, change: cost (old: 40, new: 30)
+2026/02/03 03:23:24.604 debugging: ISIS: ISIS-Rte (1): route changed: 2001:db8:2::1/128, change: cost (old: 50, new: 40)
+2026/02/03 03:39:48.745 debugging: ISIS: ISIS-SRv6 (1): Delete SRv6 End.X SID
+2026/02/03 03:39:48.745 debugging: ISIS: ISIS-SRv6 (1): delete End.X SID 2001:db8:4:e001::
+2026/02/03 03:39:48.745 warnings: ISIS: IS-IS pfpacket: could not transmit packet on eth3: Network is down
+2026/02/03 03:39:48.745 errors: ISIS: [EC 67108865] ISIS-Adj (1): Send L2 IIH on eth3 failed
+2026/02/03 03:39:48.759 errors: ZEBRA: [EC 4043309074] 0:254:2001:db8:4:e001::/64: Failed to enqueue dataplane install
+2026/02/03 03:42:50.479 debugging: ISIS: ISIS-SRv6 (1): Delete SRv6 End.X SID
+2026/02/03 03:42:50.479 debugging: ISIS: ISIS-SRv6 (1): delete End.X SID 2001:db8:4:e002::
+2026/02/03 03:42:50.481 warnings: ISIS: IS-IS pfpacket: could not transmit packet on eth1: Network is down
+2026/02/03 03:42:50.481 errors: ISIS: [EC 67108865] ISIS-Adj (1): Send L2 IIH on eth1 failed
+2026/02/03 03:42:50.486 errors: ZEBRA: [EC 4043309074] 0:254:2001:c0de:1:7::/64: Failed to enqueue dataplane install
+2026/02/03 03:42:50.487 errors: ZEBRA: [EC 4043309074] 0:254:2001:c0de:1:2::/64: Failed to enqueue dataplane install
+2026/02/03 03:42:50.487 errors: ZEBRA: [EC 4043309074] 0:254:2001:db8:5::1/128: Failed to enqueue dataplane install
+2026/02/03 03:42:50.487 errors: ZEBRA: [EC 4043309074] 0:254:2001:db8:5::/48: Failed to enqueue dataplane install
+2026/02/03 03:42:50.487 errors: ZEBRA: [EC 4043309074] 0:254:2001:db8:3::/48: Failed to enqueue dataplane install
+2026/02/03 03:42:50.487 errors: ZEBRA: [EC 4043309074] 0:254:2001:db8:2::1/128: Failed to enqueue dataplane install
+2026/02/03 03:42:50.487 errors: ZEBRA: [EC 4043309074] 0:254:2001:db8:2::/48: Failed to enqueue dataplane install
+2026/02/03 03:42:50.487 errors: ZEBRA: [EC 4043309074] 0:254:2001:db8:3::1/128: Failed to enqueue dataplane install
+2026/02/03 03:42:50.487 errors: ZEBRA: [EC 4043309074] 0:254:2001:db8:4:e002::/64: Failed to enqueue dataplane install
+2026/02/03 03:42:50.505 errors: ZEBRA: [EC 4043309074] 0:254:2001:c0de:1:8::/64: Failed to enqueue dataplane install
+2026/02/03 03:42:50.505 errors: ZEBRA: [EC 4043309074] 0:254:2001:db8:6::1/128: Failed to enqueue dataplane install
+2026/02/03 03:42:50.505 errors: ZEBRA: [EC 4043309074] 0:254:2001:db8:6::/48: Failed to enqueue dataplane install
+2026/02/03 03:42:50.505 errors: ZEBRA: [EC 4043309074] 0:254:2001:c0de:1:4::/64: Failed to enqueue dataplane install
+2026/02/03 03:42:50.505 errors: ZEBRA: [EC 4043309074] 0:254:2001:db8:4:e000::/64: Failed to enqueue dataplane install
+2026/02/03 03:42:50.531 warnings: ISIS: isis_recv_pdu_bcast: ifname eth2, fd 16, bytesread -1, recvfrom(): Network is down
+2026/02/03 03:42:50.531 warnings: ISIS: packet is received on multiple interfaces: socket interface 0, circuit interface 2068, packet type 0
+2026/02/03 03:42:50.531 warnings: ISIS: isis_recv_pdu_bcast: recvfrom() failed
+2026/02/03 03:42:50.531 debugging: ISIS: ISIS-SRv6 (1): Delete SRv6 End.X SID
+2026/02/03 03:42:50.531 debugging: ISIS: ISIS-SRv6 (1): delete End.X SID 2001:db8:4:e000::
+2026/02/03 03:42:50.531 warnings: ISIS: IS-IS pfpacket: could not transmit packet on eth2: No such device or address
+2026/02/03 03:42:50.532 errors: ISIS: [EC 67108865] ISIS-Adj (1): Send L2 IIH on eth2 failed
+2026/02/03 03:43:09.464 informational: BGP: Configuration Read in Took: 00:00:00
+2026/02/03 03:43:09.464 debugging: BGP: end_config: VTY:0x7692942e10b0, pending SET-CFG: 0
+2026/02/03 03:43:09.470 informational: STATIC: Configuration Read in Took: 00:00:00
+2026/02/03 03:43:09.470 debugging: STATIC: end_config: VTY:0x726335a10040, pending SET-CFG: 0
+2026/02/03 03:43:09.481 debugging: ISIS: ISIS-Sr ((null)): Initialize Segment Routing SRDB
+2026/02/03 03:43:09.482 debugging: ISIS: ISIS-SRv6 ((null)): Initialize Segment Routing SRv6 DB
+2026/02/03 03:43:09.482 warnings: ISIS: ISIS-LFA: failed to unregister RLFA with LDP
+2026/02/03 03:43:09.482 warnings: ISIS: ISIS-LFA: failed to unregister RLFA with LDP
+2026/02/03 03:43:09.483 warnings: ISIS: ISIS-LFA: failed to unregister RLFA with LDP
+2026/02/03 03:43:09.485 debugging: ISIS: Configured SRv6 locator Loc0 for IS-IS area 1
+2026/02/03 03:43:09.485 debugging: ISIS: Trying to get locator Loc0 for IS-IS area 1
+2026/02/03 03:43:09.485 errors: ISIS: [EC 100663302] srv6_manager_get_locator: invalid zclient socket
+2026/02/03 03:43:09.486 errors: ISIS: [EC 100663337] error processing configuration change: error [generic error] event [apply] operation [modify] xpath [/frr-isisd:isis/instance[area-tag='1'][vrf='default']/segment-routing-srv6/locator]
+2026/02/03 03:43:09.486 informational: ISIS: Configuration Read in Took: 00:00:00
+2026/02/03 03:43:09.486 debugging: ISIS: end_config: VTY:0x7b711dac11b0, pending SET-CFG: 0
+2026/02/03 03:43:10.565 debugging: ISIS: SRv6 locator deleted in zebra: name Loc0, prefix 2001:db8:4::/48, block_len 32, node_len 16, func_len 16, arg_len 0
+2026/02/03 03:43:10.571 informational: ISIS: isis_zebra_process_srv6_locator_internal: Received SRv6 locator Loc0 2001:db8:4::/48, loc-block-len=32, loc-node-len=16 func-len=16, arg-len=0
+2026/02/03 03:43:10.571 debugging: ISIS: SRv6 locator (locator Loc0, prefix 2001:db8:4::/48) set for IS-IS area 1
+2026/02/03 03:43:10.571 debugging: ISIS: Requesting SRv6 SIDs for IS-IS area 1
+2026/02/03 03:43:10.577 debugging: ISIS: SRv6 locator deleted in zebra: name Loc0, prefix 2001:db8:4::/48, block_len 32, node_len 16, func_len 16, arg_len 0
+2026/02/03 03:43:10.578 informational: ISIS: isis_zebra_process_srv6_locator_internal: Received SRv6 locator Loc0 2001:db8:4::/48, loc-block-len=32, loc-node-len=16 func-len=16, arg-len=0
+2026/02/03 03:43:10.578 debugging: ISIS: SRv6 locator (locator Loc0, prefix 2001:db8:4::/48) set for IS-IS area 1
+2026/02/03 03:43:10.578 debugging: ISIS: Requesting SRv6 SIDs for IS-IS area 1
+2026/02/03 03:43:10.580 debugging: ISIS: SRv6 locator deleted in zebra: name Loc0, prefix 2001:db8:4::/48, block_len 32, node_len 16, func_len 16, arg_len 0
+2026/02/03 03:43:10.583 informational: ISIS: isis_zebra_process_srv6_locator_internal: Received SRv6 locator Loc0 2001:db8:4::/48, loc-block-len=32, loc-node-len=16 func-len=16, arg-len=0
+2026/02/03 03:43:10.583 debugging: ISIS: SRv6 locator (locator Loc0, prefix 2001:db8:4::/48) set for IS-IS area 1
+2026/02/03 03:43:10.583 debugging: ISIS: Requesting SRv6 SIDs for IS-IS area 1
+2026/02/03 03:43:10.585 debugging: ISIS: isis_zebra_srv6_sid_notify: received SRv6 SID notify: ctx End USP sid_value 2001:db8:4:: sid_func 0 note ZAPI_SRV6_SID_ALLOCATED
+2026/02/03 03:43:10.585 debugging: ISIS: SRv6 SID 2001:db8:4:: End USP ALLOCATED
+2026/02/03 03:43:10.585 debugging: ISIS: ISIS-SRv6 (1): setting SRv6 SID 2001:db8:4::
+2026/02/03 03:43:10.585 warnings: ISIS: Failed to install SRv6 SID 2001:db8:4::: sr0 interface not found
+2026/02/03 03:43:10.589 debugging: ISIS: isis_zebra_srv6_sid_notify: received SRv6 SID notify: ctx End USP sid_value 2001:db8:4:: sid_func 0 note ZAPI_SRV6_SID_ALLOCATED
+2026/02/03 03:43:10.589 debugging: ISIS: SRv6 SID 2001:db8:4:: End USP ALLOCATED
+2026/02/03 03:43:10.589 debugging: ISIS: ISIS-SRv6 (1): delete SID 2001:db8:4::
+2026/02/03 03:43:10.589 warnings: ISIS: sr0 interface not found: nothing to uninstall
+2026/02/03 03:43:10.591 debugging: ISIS: ISIS-SRv6 (1): setting SRv6 SID 2001:db8:4::
+2026/02/03 03:43:10.591 warnings: ISIS: Failed to install SRv6 SID 2001:db8:4::: sr0 interface not found
+2026/02/03 03:43:10.591 debugging: ISIS: isis_zebra_srv6_sid_notify: received SRv6 SID notify: ctx End USP sid_value 2001:db8:4:: sid_func 0 note ZAPI_SRV6_SID_ALLOCATED
+2026/02/03 03:43:10.591 debugging: ISIS: SRv6 SID 2001:db8:4:: End USP ALLOCATED
+2026/02/03 03:43:10.591 debugging: ISIS: ISIS-SRv6 (1): delete SID 2001:db8:4::
+2026/02/03 03:43:10.591 warnings: ISIS: sr0 interface not found: nothing to uninstall
+2026/02/03 03:43:10.592 debugging: ISIS: ISIS-SRv6 (1): setting SRv6 SID 2001:db8:4::
+2026/02/03 03:43:10.592 warnings: ISIS: Failed to install SRv6 SID 2001:db8:4::: sr0 interface not found
+2026/02/03 03:43:12.101 debugging: ISIS: Interface sr0 went up. Installing SIDs for area 1 in data plane
+2026/02/03 03:43:12.101 debugging: ISIS: Installing SID 2001:db8:4:: from the data plane
+2026/02/03 03:43:12.101 debugging: ISIS: ISIS-SRv6 (1): setting SRv6 SID 2001:db8:4::
+2026/02/03 03:43:13.354 debugging: ZEBRA: srv6_manager_get_sid_internal: getting SRv6 SID for ctx End.X nh6 fe80::a8c1:abff:fedd:804e, sid_value=::, locator_name=Loc0
+2026/02/03 03:43:13.354 debugging: ZEBRA: get_srv6_sid: received SRv6 SID alloc request: SID ctx End.X nh6 fe80::a8c1:abff:fedd:804e ((null)), mode=dynamic
+2026/02/03 03:43:13.354 debugging: ZEBRA: alloc_srv6_sid_func_dynamic: trying to allocate dynamic SID function from block 2001:db8::/32
+2026/02/03 03:43:13.354 debugging: ZEBRA: alloc_srv6_sid_func_dynamic: allocated dynamic SID function 57344 from block 2001:db8::/32
+2026/02/03 03:43:13.354 debugging: ZEBRA: get_srv6_sid_dynamic: allocated new dynamic SRv6 SID 57344 for context End.X nh6 fe80::a8c1:abff:fedd:804e
+2026/02/03 03:43:13.354 debugging: ZEBRA: srv6_manager_get_sid_internal: got new SRv6 SID for ctx End.X nh6 fe80::a8c1:abff:fedd:804e: sid_value=(null) (func=57344) (proto=9, instance=0, sessionId=0), notifying all clients
+2026/02/03 03:43:13.355 debugging: ISIS: isis_zebra_srv6_sid_notify: received SRv6 SID notify: ctx End.X nh6 fe80::a8c1:abff:fedd:804e sid_value 2001:db8:4:e000:: sid_func 57344 note ZAPI_SRV6_SID_ALLOCATED
+2026/02/03 03:43:13.355 debugging: ISIS: SRv6 SID 2001:db8:4:e000:: End.X nh6 fe80::a8c1:abff:fedd:804e ALLOCATED
+2026/02/03 03:43:13.355 debugging: ISIS: ISIS-SRv6 (1): Add Primary End.X SID
+2026/02/03 03:43:13.355 debugging: ISIS: ISIS-SRv6 (1): setting adjacency SID 2001:db8:4:e000::
+2026/02/03 03:43:14.854 debugging: ZEBRA: srv6_manager_get_sid_internal: getting SRv6 SID for ctx End.X nh6 fe80::a8c1:abff:fee2:cf84, sid_value=::, locator_name=Loc0
+2026/02/03 03:43:14.854 debugging: ZEBRA: get_srv6_sid: received SRv6 SID alloc request: SID ctx End.X nh6 fe80::a8c1:abff:fee2:cf84 ((null)), mode=dynamic
+2026/02/03 03:43:14.854 debugging: ZEBRA: alloc_srv6_sid_func_dynamic: trying to allocate dynamic SID function from block 2001:db8::/32
+2026/02/03 03:43:14.854 debugging: ZEBRA: alloc_srv6_sid_func_dynamic: allocated dynamic SID function 57345 from block 2001:db8::/32
+2026/02/03 03:43:14.854 debugging: ZEBRA: get_srv6_sid_dynamic: allocated new dynamic SRv6 SID 57345 for context End.X nh6 fe80::a8c1:abff:fee2:cf84
+2026/02/03 03:43:14.854 debugging: ZEBRA: srv6_manager_get_sid_internal: got new SRv6 SID for ctx End.X nh6 fe80::a8c1:abff:fee2:cf84: sid_value=(null) (func=57345) (proto=9, instance=0, sessionId=0), notifying all clients
+2026/02/03 03:43:14.854 debugging: ISIS: isis_zebra_srv6_sid_notify: received SRv6 SID notify: ctx End.X nh6 fe80::a8c1:abff:fee2:cf84 sid_value 2001:db8:4:e001:: sid_func 57345 note ZAPI_SRV6_SID_ALLOCATED
+2026/02/03 03:43:14.854 debugging: ISIS: SRv6 SID 2001:db8:4:e001:: End.X nh6 fe80::a8c1:abff:fee2:cf84 ALLOCATED
+2026/02/03 03:43:14.854 debugging: ISIS: ISIS-SRv6 (1): Add Primary End.X SID
+2026/02/03 03:43:14.854 debugging: ISIS: ISIS-SRv6 (1): setting adjacency SID 2001:db8:4:e001::
+2026/02/03 03:43:15.554 debugging: ZEBRA: srv6_manager_get_sid_internal: getting SRv6 SID for ctx End.X nh6 fe80::a8c1:abff:fe32:d439, sid_value=::, locator_name=Loc0
+2026/02/03 03:43:15.554 debugging: ZEBRA: get_srv6_sid: received SRv6 SID alloc request: SID ctx End.X nh6 fe80::a8c1:abff:fe32:d439 ((null)), mode=dynamic
+2026/02/03 03:43:15.554 debugging: ZEBRA: alloc_srv6_sid_func_dynamic: trying to allocate dynamic SID function from block 2001:db8::/32
+2026/02/03 03:43:15.554 debugging: ZEBRA: alloc_srv6_sid_func_dynamic: allocated dynamic SID function 57346 from block 2001:db8::/32
+2026/02/03 03:43:15.554 debugging: ZEBRA: get_srv6_sid_dynamic: allocated new dynamic SRv6 SID 57346 for context End.X nh6 fe80::a8c1:abff:fe32:d439
+2026/02/03 03:43:15.554 debugging: ZEBRA: srv6_manager_get_sid_internal: got new SRv6 SID for ctx End.X nh6 fe80::a8c1:abff:fe32:d439: sid_value=(null) (func=57346) (proto=9, instance=0, sessionId=0), notifying all clients
+2026/02/03 03:43:15.554 debugging: ISIS: isis_zebra_srv6_sid_notify: received SRv6 SID notify: ctx End.X nh6 fe80::a8c1:abff:fe32:d439 sid_value 2001:db8:4:e002:: sid_func 57346 note ZAPI_SRV6_SID_ALLOCATED
+2026/02/03 03:43:15.554 debugging: ISIS: SRv6 SID 2001:db8:4:e002:: End.X nh6 fe80::a8c1:abff:fe32:d439 ALLOCATED
+2026/02/03 03:43:15.554 debugging: ISIS: ISIS-SRv6 (1): Add Primary End.X SID
+2026/02/03 03:43:15.554 debugging: ISIS: ISIS-SRv6 (1): setting adjacency SID 2001:db8:4:e002::
+2026/02/03 03:43:40.251 debugging: ISIS: ISIS-Rte (1) route created: 2001:db8:4::/48
+2026/02/03 03:43:40.251 debugging: ISIS: ISIS-Rte (1) route created: 2001:c0de:1:1::/64
+2026/02/03 03:43:40.251 debugging: ISIS: ISIS-Rte (1) route created: 2001:c0de:1:3::/64
+2026/02/03 03:43:40.251 debugging: ISIS: ISIS-Rte (1) route created: 2001:c0de:1:6::/64
+2026/02/03 03:43:40.251 debugging: ISIS: ISIS-Rte (1) route created: 2001:db8:4::1/128
+2026/02/03 03:43:40.251 debugging: ISIS: ISIS-Rte (1) route created: 2001:db8:1::/48
+2026/02/03 03:43:40.251 debugging: ISIS: ISIS-Rte (1) route created: 2001:c0de:1:5::/64
+2026/02/03 03:43:40.251 debugging: ISIS: ISIS-Rte (1) route created: 2001:db8:1::1/128
+2026/02/03 03:43:42.914 debugging: ISIS: ISIS-Rte (1) route created: 2001:db8:6::/48
+2026/02/03 03:43:42.914 debugging: ISIS: ISIS-Rte (1) route created: 2001:c0de:1:4::/64
+2026/02/03 03:43:42.914 debugging: ISIS: ISIS-Rte (1) route created: 2001:db8:6::1/128
+2026/02/03 03:43:42.914 debugging: ISIS: ISIS-Rte (1) route created: 2001:db8:5::/48
+2026/02/03 03:43:42.914 debugging: ISIS: ISIS-Rte (1) route created: 2001:c0de:1:8::/64
+2026/02/03 03:43:42.914 debugging: ISIS: ISIS-Rte (1) route created: 2001:db8:5::1/128
+2026/02/03 03:43:42.914 debugging: ISIS: ISIS-Rte (1) route created: 2001:c0de:1:2::/64
+2026/02/03 03:43:42.914 debugging: ISIS: ISIS-Rte (1) route created: 2001:c0de:1:7::/64
+2026/02/03 03:43:42.914 debugging: ISIS: ISIS-Rte (1) route created: 2001:db8:2::/48
+2026/02/03 03:43:42.915 debugging: ISIS: ISIS-Rte (1) route created: 2001:db8:2::1/128
+2026/02/03 03:43:43.712 debugging: ISIS: ISIS-Rte (1) route created: 2001:db8:3::/48
+2026/02/03 03:43:43.712 debugging: ISIS: ISIS-Rte (1): route changed: 2001:c0de:1:2::/64, change: cost (old: 40, new: 20)
+2026/02/03 03:43:43.712 debugging: ISIS: ISIS-Rte (1): route changed: 2001:c0de:1:5::/64, change: cost (old: 30, new: 20)
+2026/02/03 03:43:43.712 debugging: ISIS: ISIS-Rte (1) route created: 2001:db8:3::1/128
+2026/02/03 03:43:43.712 debugging: ISIS: ISIS-Rte (1): route changed: 2001:db8:1::/48, change: nhops num (old: 1, new: 2)
+2026/02/03 03:43:43.712 debugging: ISIS: ISIS-Rte (1): route changed: 2001:db8:5::/48, change: cost (old: 30, new: 20)
+2026/02/03 03:43:43.712 debugging: ISIS: ISIS-Rte (1): route changed: 2001:c0de:1:4::/64, change: nhops num (old: 1, new: 2)
+2026/02/03 03:43:43.712 debugging: ISIS: ISIS-Rte (1): route changed: 2001:db8:1::1/128, change: nhops num (old: 1, new: 2)
+2026/02/03 03:43:43.712 debugging: ISIS: ISIS-Rte (1): route changed: 2001:db8:5::1/128, change: cost (old: 40, new: 30)
+2026/02/03 03:43:43.712 debugging: ISIS: ISIS-Rte (1): route changed: 2001:c0de:1:7::/64, change: cost (old: 40, new: 30)
+2026/02/03 03:43:43.712 debugging: ISIS: ISIS-Rte (1): route changed: 2001:db8:2::/48, change: cost (old: 40, new: 30)
+2026/02/03 03:43:43.712 debugging: ISIS: ISIS-Rte (1): route changed: 2001:db8:2::1/128, change: cost (old: 50, new: 40)
+2026/02/03 03:45:47.103 warnings: ISIS: isis_recv_pdu_bcast: ifname eth2, fd 11, bytesread -1, recvfrom(): Network is down
+2026/02/03 03:45:47.103 warnings: ISIS: packet is received on multiple interfaces: socket interface 0, circuit interface 2114, packet type 0
+2026/02/03 03:45:47.103 warnings: ISIS: isis_recv_pdu_bcast: recvfrom() failed
+2026/02/03 03:45:47.103 debugging: ISIS: ISIS-SRv6 (1): Delete SRv6 End.X SID
+2026/02/03 03:45:47.103 debugging: ISIS: ISIS-SRv6 (1): delete End.X SID 2001:db8:4:e001::
+2026/02/03 03:45:47.103 warnings: ISIS: IS-IS pfpacket: could not transmit packet on eth2: Network is down
+2026/02/03 03:45:47.104 errors: ISIS: [EC 67108865] ISIS-Adj (1): Send L2 IIH on eth2 failed
+2026/02/03 03:45:47.112 errors: ZEBRA: [EC 4043309074] 0:254:2001:c0de:1:8::/64: Failed to enqueue dataplane install
+2026/02/03 03:45:47.112 errors: ZEBRA: [EC 4043309074] 0:254:2001:db8:6::1/128: Failed to enqueue dataplane install
+2026/02/03 03:45:47.112 errors: ZEBRA: [EC 4043309074] 0:254:2001:db8:6::/48: Failed to enqueue dataplane install
+2026/02/03 03:45:47.112 errors: ZEBRA: [EC 4043309074] 0:254:2001:db8:4:e001::/64: Failed to enqueue dataplane install
+2026/02/03 03:45:47.210 warnings: ISIS: isis_recv_pdu_bcast: ifname eth1, fd 18, bytesread -1, recvfrom(): Network is down
+2026/02/03 03:45:47.210 warnings: ISIS: packet is received on multiple interfaces: socket interface 0, circuit interface 2108, packet type 0
+2026/02/03 03:45:47.210 warnings: ISIS: isis_recv_pdu_bcast: recvfrom() failed
+2026/02/03 03:45:47.240 errors: ZEBRA: Extended Error: Nexthop id does not exist
+2026/02/03 03:45:47.240 errors: ZEBRA: [EC 4043309093] netlink-dp (NS 0) error: Invalid argument, type=RTM_NEWROUTE(24), seq=122, pid=2470590802
+2026/02/03 03:45:47.241 errors: ZEBRA: Extended Error: Nexthop id does not exist
+2026/02/03 03:45:47.241 errors: ZEBRA: [EC 4043309093] netlink-dp (NS 0) error: Invalid argument, type=RTM_NEWROUTE(24), seq=123, pid=2470590802
+2026/02/03 03:45:47.241 errors: ZEBRA: Extended Error: Nexthop id does not exist
+2026/02/03 03:45:47.241 errors: ZEBRA: [EC 4043309093] netlink-dp (NS 0) error: Invalid argument, type=RTM_NEWROUTE(24), seq=124, pid=2470590802
+2026/02/03 03:45:47.241 errors: ZEBRA: Extended Error: Nexthop id does not exist
+2026/02/03 03:45:47.241 errors: ZEBRA: [EC 4043309093] netlink-dp (NS 0) error: Invalid argument, type=RTM_NEWROUTE(24), seq=125, pid=2470590802
+2026/02/03 03:45:47.241 errors: ZEBRA: Extended Error: Nexthop id does not exist
+2026/02/03 03:45:47.241 errors: ZEBRA: [EC 4043309093] netlink-dp (NS 0) error: Invalid argument, type=RTM_NEWROUTE(24), seq=126, pid=2470590802
+2026/02/03 03:45:47.241 errors: ZEBRA: Extended Error: Nexthop id does not exist
+2026/02/03 03:45:47.241 errors: ZEBRA: [EC 4043309093] netlink-dp (NS 0) error: Invalid argument, type=RTM_NEWROUTE(24), seq=127, pid=2470590802
+2026/02/03 03:45:47.241 errors: ZEBRA: Extended Error: Nexthop id does not exist
+2026/02/03 03:45:47.241 errors: ZEBRA: [EC 4043309093] netlink-dp (NS 0) error: Invalid argument, type=RTM_NEWROUTE(24), seq=128, pid=2470590802
+2026/02/03 03:45:47.242 errors: ZEBRA: Extended Error: Nexthop id does not exist
+2026/02/03 03:45:47.242 errors: ZEBRA: [EC 4043309093] netlink-dp (NS 0) error: Invalid argument, type=RTM_NEWROUTE(24), seq=129, pid=2470590802
+2026/02/03 03:45:47.242 errors: ZEBRA: Extended Error: Nexthop id does not exist
+2026/02/03 03:45:47.242 errors: ZEBRA: [EC 4043309093] netlink-dp (NS 0) error: Invalid argument, type=RTM_NEWROUTE(24), seq=130, pid=2470590802
+2026/02/03 03:45:47.242 errors: ZEBRA: Extended Error: Nexthop id does not exist
+2026/02/03 03:45:47.242 errors: ZEBRA: [EC 4043309093] netlink-dp (NS 0) error: Invalid argument, type=RTM_NEWROUTE(24), seq=131, pid=2470590802
+2026/02/03 03:45:47.242 errors: ZEBRA: Extended Error: Nexthop id does not exist
+2026/02/03 03:45:47.242 errors: ZEBRA: [EC 4043309093] netlink-dp (NS 0) error: Invalid argument, type=RTM_NEWROUTE(24), seq=132, pid=2470590802
+2026/02/03 03:45:47.243 warnings: ZEBRA: default(0:254):2001:c0de:1:7::/64: Route install failed
+2026/02/03 03:45:47.243 warnings: ZEBRA: default(0:254):2001:c0de:1:5::/64: Route install failed
+2026/02/03 03:45:47.243 warnings: ZEBRA: default(0:254):2001:c0de:1:2::/64: Route install failed
+2026/02/03 03:45:47.243 warnings: ZEBRA: default(0:254):2001:db8:5::1/128: Route install failed
+2026/02/03 03:45:47.243 warnings: ZEBRA: default(0:254):2001:db8:5::/48: Route install failed
+2026/02/03 03:45:47.243 warnings: ZEBRA: default(0:254):2001:db8:3::1/128: Route install failed
+2026/02/03 03:45:47.244 warnings: ZEBRA: default(0:254):2001:db8:3::/48: Route install failed
+2026/02/03 03:45:47.244 warnings: ZEBRA: default(0:254):2001:db8:2::1/128: Route install failed
+2026/02/03 03:45:47.244 warnings: ZEBRA: default(0:254):2001:db8:2::/48: Route install failed
+2026/02/03 03:45:47.244 warnings: ZEBRA: default(0:254):2001:c0de:1:4::/64: Route install failed
+2026/02/03 03:45:47.244 warnings: ZEBRA: default(0:254):2001:db8:4:e002::/64: Route install failed
+2026/02/03 03:45:47.247 debugging: ISIS: ISIS-SRv6 (1): Delete SRv6 End.X SID
+2026/02/03 03:45:47.247 debugging: ISIS: ISIS-SRv6 (1): delete End.X SID 2001:db8:4:e002::
+2026/02/03 03:45:47.247 warnings: ISIS: IS-IS pfpacket: could not transmit packet on eth1: No such device or address
+2026/02/03 03:45:47.247 errors: ISIS: [EC 67108865] ISIS-Adj (1): Send L2 IIH on eth1 failed
+2026/02/03 03:45:47.332 debugging: ISIS: ISIS-SRv6 (1): Delete SRv6 End.X SID
+2026/02/03 03:45:47.332 debugging: ISIS: ISIS-SRv6 (1): delete End.X SID 2001:db8:4:e000::
+2026/02/03 03:45:47.332 warnings: ISIS: IS-IS pfpacket: could not transmit packet on eth3: Network is down
+2026/02/03 03:45:47.332 errors: ISIS: [EC 67108865] ISIS-Adj (1): Send L2 IIH on eth3 failed
+2026/02/03 03:45:47.344 errors: ZEBRA: [EC 4043309074] 0:254:2001:db8:1::1/128: Failed to enqueue dataplane install
+2026/02/03 03:45:47.344 errors: ZEBRA: [EC 4043309074] 0:254:2001:db8:1::/48: Failed to enqueue dataplane install
+2026/02/03 03:45:47.344 errors: ZEBRA: [EC 4043309074] 0:254:2001:db8:4:e000::/64: Failed to enqueue dataplane install

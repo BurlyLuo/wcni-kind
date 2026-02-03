@@ -1,0 +1,318 @@
+name: frr-srv6
+prefix: ""
+mgmt:
+  network: br-frr-srv6
+  ipv4-subnet: 172.28.1.0/24
+
+topology:
+  kinds:
+    linux:
+      sysctls:
+        net.ipv4.conf.all.forwarding: 1
+        net.ipv6.conf.all.forwarding: 1
+        net.ipv6.conf.default.accept_ra: 0
+        net.ipv6.conf.all.accept_ra: 0
+        net.vrf.strict_mode: 1
+        net.ipv4.conf.all.rp_filter: 0
+        net.ipv4.conf.default.rp_filter: 0
+        net.ipv6.conf.default.seg6_enabled: 1
+        net.ipv6.conf.all.seg6_enabled: 1
+        net.ipv6.seg6_flowlabel: 1
+
+  nodes:
+    # PROVIDER EDGE
+    r1:
+      kind: linux
+      image: quay.io/weiluo/frrouting/frr:10.5.0
+      cmd: sh -c "sed -i '/^bgpd=/s/no/yes/;/^isisd=/s/no/yes/' /etc/frr/daemons && /usr/lib/frr/docker-start"
+      mgmt-ipv4: 172.28.1.2
+      binds:
+        - /lib/modules:/lib/modules
+        - ./frr/r1.conf:/etc/frr/frr.conf
+        - logs:/etc/frr/logs
+      exec:
+        - bash -c "echo 'PS1=\"[\\\\u@\\\\h]\\\\$ \"' > /root/.bashrc"
+        - touch /etc/frr/vtysh.conf
+
+        # create logs directory
+        - mkdir -p /etc/frr/logs
+        - chown -R frr:frr /etc/frr/logs
+        - chmod 775 /etc/frr/logs
+
+        # create SRv6 interface
+        - ip link add sr0 type dummy
+        - ip link set sr0 up
+         
+        # create VLAN interface for RED service
+        - ip link add name eth3.10 link eth3 type vlan id 10
+        - ip link set dev eth3.10 up
+         
+        # create RED VRF and attach the VLAN interface to it
+        - ip link add dev RED type vrf table 10
+        - ip link set dev RED up
+        - ip link set dev eth3.10 master RED
+         
+        # enable VRF strict mode
+        - sysctl net.vrf.strict_mode=1
+         
+        # create VLAN interface for BLUE service
+        - ip link add name eth3.20 link eth3 type vlan id 20
+        - ip link set dev eth3.20 up
+         
+        # create BLUE VRF and attach the VLAN interface to it
+        - ip link add dev BLUE type vrf table 20
+        - ip link set dev BLUE up
+        - ip link set dev eth3.20 master BLUE
+         
+        # enable VRF strict mode
+        - sysctl net.vrf.strict_mode=1
+    
+    r2:
+      kind: linux
+      image: quay.io/weiluo/frrouting/frr:10.5.0
+      cmd: sh -c "sed -i '/^bgpd=/s/no/yes/;/^isisd=/s/no/yes/' /etc/frr/daemons && /usr/lib/frr/docker-start"
+      mgmt-ipv4: 172.28.1.3
+      binds:
+        - /lib/modules:/lib/modules
+        - ./frr/r2.conf:/etc/frr/frr.conf
+        - logs:/etc/frr/logs
+      exec: 
+        - bash -c "echo 'PS1=\"[\\\\u@\\\\h]\\\\$ \"' > /root/.bashrc"
+        - touch /etc/frr/vtysh.conf
+
+        # create logs directory
+        - mkdir -p /etc/frr/logs
+        - chown -R frr:frr /etc/frr/logs
+        - chmod 775 /etc/frr/logs
+         
+        # create SRv6 interface
+        - ip link add sr0 type dummy
+        - ip link set sr0 up
+         
+        # create VLAN interface for RED service
+        - ip link add name eth3.10 link eth3 type vlan id 10
+        - ip link set dev eth3.10 up
+         
+        # create RED VRF and attach the VLAN interface to it
+        - ip link add dev RED type vrf table 10
+        - ip link set dev RED up
+        - ip link set dev eth3.10 master RED
+         
+        # enable VRF strict mode
+        - sysctl net.vrf.strict_mode=1
+         
+        # create VLAN interface for BLUE service
+        - ip link add name eth3.20 link eth3 type vlan id 20
+        - ip link set dev eth3.20 up
+         
+        # create BLUE VRF and attach the VLAN interface to it
+        - ip link add dev BLUE type vrf table 20
+        - ip link set dev BLUE up
+        - ip link set dev eth3.20 master BLUE
+        
+        # enable VRF strict mode
+        - sysctl net.vrf.strict_mode=1
+
+  
+    # PROVIDER CORE
+    r3:
+      kind: linux
+      image: quay.io/weiluo/frrouting/frr:10.5.0
+      cmd: sh -c "sed -i '/^bgpd=/s/no/yes/;/^isisd=/s/no/yes/' /etc/frr/daemons && /usr/lib/frr/docker-start"
+      mgmt-ipv4: 172.28.1.4
+      binds:
+        - /lib/modules:/lib/modules
+        - ./frr/r3.conf:/etc/frr/frr.conf
+        - logs:/etc/frr/logs        
+      exec:
+        - bash -c "echo 'PS1=\"[\\\\u@\\\\h]\\\\$ \"' > /root/.bashrc"
+        - touch /etc/frr/vtysh.conf
+
+        # create logs directory
+        - mkdir -p /etc/frr/logs
+        - chown -R frr:frr /etc/frr/logs
+        - chmod 775 /etc/frr/logs
+
+        # create SRv6 interface
+        - ip link add sr0 type dummy
+        - ip link set sr0 up
+    
+    r4:
+      kind: linux
+      image: quay.io/weiluo/frrouting/frr:10.5.0
+      cmd: sh -c "sed -i '/^bgpd=/s/no/yes/;/^isisd=/s/no/yes/' /etc/frr/daemons && /usr/lib/frr/docker-start"
+      mgmt-ipv4: 172.28.1.5
+      binds:
+        - /lib/modules:/lib/modules
+        - ./frr/r4.conf:/etc/frr/frr.conf
+        - logs:/etc/frr/logs
+      exec:
+        - bash -c "echo 'PS1=\"[\\\\u@\\\\h]\\\\$ \"' > /root/.bashrc"
+        - touch /etc/frr/vtysh.conf
+
+        # create logs directory
+        - mkdir -p /etc/frr/logs
+        - chown -R frr:frr /etc/frr/logs
+        - chmod 775 /etc/frr/logs
+
+        # create SRv6 interface
+        - ip link add sr0 type dummy
+        - ip link set sr0 up
+    
+    r5:
+      kind: linux
+      image: quay.io/weiluo/frrouting/frr:10.5.0
+      cmd: sh -c "sed -i '/^bgpd=/s/no/yes/;/^isisd=/s/no/yes/' /etc/frr/daemons && /usr/lib/frr/docker-start"
+      mgmt-ipv4: 172.28.1.6
+      binds:
+        - /lib/modules:/lib/modules
+        - ./frr/r5.conf:/etc/frr/frr.conf
+        - logs:/etc/frr/logs
+      exec:
+        - bash -c "echo 'PS1=\"[\\\\u@\\\\h]\\\\$ \"' > /root/.bashrc"
+        - touch /etc/frr/vtysh.conf
+
+        # create logs directory
+        - mkdir -p /etc/frr/logs
+        - chown -R frr:frr /etc/frr/logs
+        - chmod 775 /etc/frr/logs
+
+        # create SRv6 interface
+        - ip link add sr0 type dummy
+        - ip link set sr0 up
+    
+    r6:
+      kind: linux
+      image: quay.io/weiluo/frrouting/frr:10.5.0
+      cmd: sh -c "sed -i '/^bgpd=/s/no/yes/;/^isisd=/s/no/yes/' /etc/frr/daemons && /usr/lib/frr/docker-start"
+      mgmt-ipv4: 172.28.1.7
+      binds:
+        - /lib/modules:/lib/modules
+        - ./frr/r6.conf:/etc/frr/frr.conf
+        - logs:/etc/frr/logs
+      exec:
+        - bash -c "echo 'PS1=\"[\\\\u@\\\\h]\\\\$ \"' > /root/.bashrc"
+        - touch /etc/frr/vtysh.conf
+
+        # create logs directory
+        - mkdir -p /etc/frr/logs
+        - chown -R frr:frr /etc/frr/logs
+        - chmod 775 /etc/frr/logs
+
+        # create SRv6 interface
+        - ip link add sr0 type dummy
+        - ip link set sr0 up
+    
+    # CLIENTS
+    ## h1
+    h1:
+      kind: linux
+      image: 192.168.2.100:5000/nettool
+      mgmt-ipv4: 172.28.1.8
+      exec:
+        # create VLAN interface for RED service
+        - ip link add name eth1.10 link eth1 type vlan id 10
+        - ip link set dev eth1.10 up
+         
+        ## IPv4
+        - ip addr add 10.10.1.2/30 dev eth1.10
+        - ip route add 10.10.2.0/30 via 10.10.1.1
+         
+        ## IPv6
+        - ip addr add 2001:c0de:10:1::2/64 dev eth1.10
+        - ip route add 2001:c0de:10:2::/64 via 2001:c0de:10:1::1
+         
+        # create VLAN interface for BLUE service
+        - ip link add name eth1.20 link eth1 type vlan id 20
+        - ip link set dev eth1.20 up
+         
+        ## IPv4
+        - ip addr add 10.20.1.2/30 dev eth1.20
+        - ip route add 10.20.2.0/30 via 10.20.1.1
+    
+    ## h2
+    h2:
+      kind: linux
+      image: 192.168.2.100:5000/nettool
+      mgmt-ipv4: 172.28.1.9
+      exec:
+        # create VLAN interface for RED service
+        - ip link add name eth1.10 link eth1 type vlan id 10
+        - ip link set dev eth1.10 up
+         
+        ## IPv4
+        - ip addr add 10.10.2.2/30 dev eth1.10
+        - ip route add 10.10.1.0/30 via 10.10.2.1
+         
+        ## IPv6
+        - ip addr add 2001:c0de:10:2::2/64 dev eth1.10
+        - ip route add 2001:c0de:10:1::/64 via 2001:c0de:10:2::1
+         
+        # create VLAN interface for BLUE service
+        - ip link add name eth1.20 link eth1 type vlan id 20
+        - ip link set dev eth1.20 up
+        
+        ## IPv4
+        - ip addr add 10.20.2.2/30 dev eth1.20
+        - ip route add 10.20.1.0/30 via 10.20.2.1
+
+
+    # LOGGING STACK
+    promtail:
+      kind: linux
+      mgmt-ipv4: 172.28.1.10
+      image: grafana/promtail:3.5.2
+      binds:
+        - promtail:/etc/promtail
+        - logs:/var/log
+      cmd: --config.file=/etc/promtail/promtail-config.yml
+      ports:
+        - 9080:9080
+
+    loki:
+      kind: linux
+      mgmt-ipv4: 172.28.1.11
+      image: grafana/loki:3.5.2
+      binds:
+        - loki:/etc/loki
+      cmd: --config.file=/etc/loki/loki-config.yml
+      ports:
+        - 3100:3100
+    
+    # MONITORING STACK
+    grafana:
+      kind: linux
+      mgmt-ipv4: 172.28.1.12
+      image: grafana/grafana:12.0.2
+      binds:
+        - grafana/provisioning:/etc/grafana/provisioning
+      ports:
+        - 3000:3000
+      env:
+        GF_SECURITY_ADMIN_PASSWORD: "admin"
+        GF_USERS_ALLOW_SIGN_UP: "false"
+
+  links:
+    # CORE
+    ## r3-r4
+    - endpoints: ["r3:eth1", "r4:eth1"]
+    ## r3-r5
+    - endpoints: ["r3:eth2", "r5:eth2"]
+    ## r4-r6
+    - endpoints: ["r4:eth2", "r6:eth2"]
+    ## r5-r6
+    - endpoints: ["r5:eth1", "r6:eth1"]
+
+    # EDGE
+    ## r1
+    - endpoints: ["r1:eth1", "r3:eth3"]
+    - endpoints: ["r1:eth2", "r4:eth3"]
+    ## r2
+    - endpoints: ["r2:eth1", "r5:eth3"]
+    - endpoints: ["r2:eth2", "r6:eth3"]
+    
+    # CLIENTS
+    ## h1
+    - endpoints: ["h1:eth1", "r1:eth3"]
+    ## h2
+    - endpoints: ["h2:eth1", "r2:eth3"]

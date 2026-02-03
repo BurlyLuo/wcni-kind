@@ -1,0 +1,7 @@
+positions:
+  /var/log/r1.log: "423330"
+  /var/log/r2.log: "433310"
+  /var/log/r3.log: "181680"
+  /var/log/r4.log: "175116"
+  /var/log/r5.log: "175495"
+  /var/log/r6.log: "164644"
