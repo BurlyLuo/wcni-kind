@@ -28,23 +28,23 @@ This repository contains extensive configurations, deployment scripts, and testi
 
 ```
 ┌─────────────────────────────────────────────────────────────────────────────┐
-│                        LabasCode Infrastructure                             │
+│                        LabasCode Infrastructure                           │
 ├─────────────────────────────────────────────────────────────────────────────┤
-│  ┌─────────────────┐  ┌─────────────────┐  ┌─────────────────┐              │
-│  │   AI/ML         │  │   Service       │  │   Multi-        │              │
-│  │   Networking    │  │   Mesh          │  │   Cluster       │              │
-│  │   • RDMA        │  │   • Istio       │  │   • Cilium      │              │
-│  │   • CLOS        │  │   • Ambient     │  │   • Clustermesh │              │
-│  │   • Spine-Leaf  │  │   • Ztunnel     │  │   • Submariner  │              │
-│  └─────────────────┘  └─────────────────┘  └─────────────────┘              │
+│  ┌─────────────────┐  ┌─────────────────┐  ┌─────────────────┐           │
+│  │   AI/ML         │  │   Service       │  │   Multi-        │           │
+│  │   Networking    │  │   Mesh          │  │   Cluster       │           │
+│  │   • RDMA        │  │   • Istio       │  │   • Cilium      │           │
+│  │   • CLOS        │  │   • Ambient     │  │   • Clustermesh │           │
+│  │   • Spine-Leaf  │  │   • Ztunnel     │  │   • Submariner  │           │
+│  └─────────────────┘  └─────────────────┘  └─────────────────┘           │
 │                                                                             │
-│  ┌─────────────────┐  ┌─────────────────┐  ┌─────────────────┐              │
-│  │   CNI Plugins   │  │   Advanced      │  │   Observability │              │
-│  │   • Cilium      │  │   Networking    │  │   • Tetragon    │              │
-│  │   • Calico      │  │   • Multus      │  │   • Hubble      │              │
-│  │   • Flannel     │  │   • OVN         │  │   • eBPF        │              │
-│  │   • Antrea      │  │   • BGP         │  │   • Traceflow   │              │
-│  └─────────────────┘  └─────────────────┘  └─────────────────┘              │
+│  ┌─────────────────┐  ┌─────────────────┐  ┌─────────────────┐           │
+│  │   CNI Plugins   │  │   Advanced      │  │   Observability │           │
+│  │   • Cilium      │  │   Networking    │  │   • Tetragon    │           │
+│  │   • Calico      │  │   • Multus      │  │   • Hubble      │           │
+│  │   • Flannel     │  │   • OVN         │  │   • eBPF        │           │
+│  │   • Antrea      │  │   • BGP         │  │   • Traceflow   │           │
+│  └─────────────────┘  └─────────────────┘  └─────────────────┘           │
 └─────────────────────────────────────────────────────────────────────────────┘
 ```
 

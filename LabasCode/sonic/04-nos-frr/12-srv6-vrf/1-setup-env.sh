@@ -1,0 +1,201 @@
+cat <<EOF>clab.yaml | clab deploy -t clab.yaml -
+name: srv6
+prefix: ""
+
+topology:
+  nodes:
+    c1r1:
+      kind: linux
+      image: quay.io/weiluo/frrouting/frr:10.5.0
+      cmd: sh -c "sed -i '/^bgpd=/s/no/yes/;/^ospfd=/s/no/yes/;/^ospf6d=/s/no/yes/;/^isisd=/s/no/yes/' /etc/frr/daemons && /usr/lib/frr/docker-start"
+      binds:
+        - /lib/modules:/lib/modules
+        - ./frr/c1r1.conf:/etc/frr/frr.conf
+      exec:
+        - bash -c "echo 'PS1=\"[\\\\u@\\\\h]\\\\$ \"' > /root/.bashrc"
+        - touch /etc/frr/vtysh.conf
+        - sysctl -w net.ipv6.conf.all.seg6_enabled=1
+        - sysctl -w net.ipv6.conf.default.seg6_enabled=1
+
+    c1r2:
+      kind: linux
+      image: quay.io/weiluo/frrouting/frr:10.5.0
+      cmd: sh -c "sed -i '/^bgpd=/s/no/yes/;/^ospfd=/s/no/yes/;/^ospf6d=/s/no/yes/;/^isisd=/s/no/yes/' /etc/frr/daemons && /usr/lib/frr/docker-start"
+      binds:
+        - /lib/modules:/lib/modules
+        - ./frr/c1r2.conf:/etc/frr/frr.conf
+      exec:
+        - bash -c "echo 'PS1=\"[\\\\u@\\\\h]\\\\$ \"' > /root/.bashrc"
+        - touch /etc/frr/vtysh.conf
+        - sysctl -w net.ipv6.conf.all.seg6_enabled=1
+        - sysctl -w net.ipv6.conf.default.seg6_enabled=1
+
+
+    c2r1:
+      kind: linux
+      image: quay.io/weiluo/frrouting/frr:10.5.0
+      cmd: sh -c "sed -i '/^bgpd=/s/no/yes/;/^ospfd=/s/no/yes/;/^ospf6d=/s/no/yes/;/^isisd=/s/no/yes/' /etc/frr/daemons && /usr/lib/frr/docker-start"
+      binds:
+        - /lib/modules:/lib/modules
+        - ./frr/c2r1.conf:/etc/frr/frr.conf
+      exec:
+        - bash -c "echo 'PS1=\"[\\\\u@\\\\h]\\\\$ \"' > /root/.bashrc"
+        - touch /etc/frr/vtysh.conf
+        - sysctl -w net.ipv6.conf.all.seg6_enabled=1
+        - sysctl -w net.ipv6.conf.default.seg6_enabled=1
+
+    c2r2:
+      kind: linux
+      image: quay.io/weiluo/frrouting/frr:10.5.0
+      cmd: sh -c "sed -i '/^bgpd=/s/no/yes/;/^ospfd=/s/no/yes/;/^ospf6d=/s/no/yes/;/^isisd=/s/no/yes/' /etc/frr/daemons && /usr/lib/frr/docker-start"
+      binds:
+        - /lib/modules:/lib/modules
+        - ./frr/c2r2.conf:/etc/frr/frr.conf
+      exec:
+        - bash -c "echo 'PS1=\"[\\\\u@\\\\h]\\\\$ \"' > /root/.bashrc"
+        - touch /etc/frr/vtysh.conf
+        - sysctl -w net.ipv6.conf.all.seg6_enabled=1
+        - sysctl -w net.ipv6.conf.default.seg6_enabled=1
+    
+    frr1:
+      kind: linux
+      image: quay.io/weiluo/frrouting/frr:10.5.0
+      cmd: sh -c "sed -i '/^bgpd=/s/no/yes/;/^ospfd=/s/no/yes/;/^ospf6d=/s/no/yes/;/^isisd=/s/no/yes/' /etc/frr/daemons && /usr/lib/frr/docker-start"
+      binds:
+        - /lib/modules:/lib/modules
+        - ./frr/frr1.conf:/etc/frr/frr.conf
+      exec:
+        - bash -c "echo 'PS1=\"[\\\\u@\\\\h]\\\\$ \"' > /root/.bashrc"
+        - touch /etc/frr/vtysh.conf
+        - sysctl -w net.ipv6.conf.all.seg6_enabled=1
+        - sysctl -w net.ipv6.conf.default.seg6_enabled=1
+
+    frr2:
+      kind: linux
+      image: quay.io/weiluo/frrouting/frr:10.5.0
+      cmd: sh -c "sed -i '/^bgpd=/s/no/yes/;/^ospfd=/s/no/yes/;/^ospf6d=/s/no/yes/;/^isisd=/s/no/yes/' /etc/frr/daemons && /usr/lib/frr/docker-start"
+      binds:
+        - /lib/modules:/lib/modules
+        - ./frr/frr2.conf:/etc/frr/frr.conf
+      exec:
+        - bash -c "echo 'PS1=\"[\\\\u@\\\\h]\\\\$ \"' > /root/.bashrc"
+        - touch /etc/frr/vtysh.conf
+        - sysctl -w net.ipv6.conf.all.seg6_enabled=1
+        - sysctl -w net.ipv6.conf.default.seg6_enabled=1
+
+    frr3:
+      kind: linux
+      image: quay.io/weiluo/frrouting/frr:10.5.0
+      cmd: sh -c "sed -i '/^bgpd=/s/no/yes/;/^ospfd=/s/no/yes/;/^ospf6d=/s/no/yes/;/^isisd=/s/no/yes/' /etc/frr/daemons && /usr/lib/frr/docker-start"
+      binds:
+        - /lib/modules:/lib/modules
+        - ./frr/frr3.conf:/etc/frr/frr.conf
+      exec:
+        - bash -c "echo 'PS1=\"[\\\\u@\\\\h]\\\\$ \"' > /root/.bashrc"
+        - touch /etc/frr/vtysh.conf
+        - sysctl -w net.ipv6.conf.all.seg6_enabled=1
+        - sysctl -w net.ipv6.conf.default.seg6_enabled=1
+
+    frr4:
+      kind: linux
+      image: quay.io/weiluo/frrouting/frr:10.5.0
+      cmd: sh -c "sed -i '/^bgpd=/s/no/yes/;/^ospfd=/s/no/yes/;/^ospf6d=/s/no/yes/;/^isisd=/s/no/yes/' /etc/frr/daemons && /usr/lib/frr/docker-start"
+      binds:
+        - /lib/modules:/lib/modules
+        - ./frr/frr4.conf:/etc/frr/frr.conf
+      exec:
+        - bash -c "echo 'PS1=\"[\\\\u@\\\\h]\\\\$ \"' > /root/.bashrc"
+        - touch /etc/frr/vtysh.conf
+        - sysctl -w net.ipv6.conf.all.seg6_enabled=1
+        - sysctl -w net.ipv6.conf.default.seg6_enabled=1
+
+    frr5:
+      kind: linux
+      image: quay.io/weiluo/frrouting/frr:10.5.0
+      cmd: sh -c "sed -i '/^bgpd=/s/no/yes/;/^ospfd=/s/no/yes/;/^ospf6d=/s/no/yes/;/^isisd=/s/no/yes/' /etc/frr/daemons && /usr/lib/frr/docker-start"
+      binds:
+        - /lib/modules:/lib/modules
+        - ./frr/frr5.conf:/etc/frr/frr.conf
+      exec:
+        - bash -c "echo 'PS1=\"[\\\\u@\\\\h]\\\\$ \"' > /root/.bashrc"
+        - touch /etc/frr/vtysh.conf
+        - sysctl -w net.ipv6.conf.all.seg6_enabled=1
+        - sysctl -w net.ipv6.conf.default.seg6_enabled=1
+
+    frr6:
+      kind: linux
+      image: quay.io/weiluo/frrouting/frr:10.5.0
+      cmd: sh -c "sed -i '/^bgpd=/s/no/yes/;/^ospfd=/s/no/yes/;/^ospf6d=/s/no/yes/;/^isisd=/s/no/yes/' /etc/frr/daemons && /usr/lib/frr/docker-start"
+      binds:
+        - /lib/modules:/lib/modules
+        - ./frr/frr6.conf:/etc/frr/frr.conf
+      exec:
+        - bash -c "echo 'PS1=\"[\\\\u@\\\\h]\\\\$ \"' > /root/.bashrc"
+        - touch /etc/frr/vtysh.conf
+        - sysctl -w net.ipv6.conf.all.seg6_enabled=1
+        - sysctl -w net.ipv6.conf.default.seg6_enabled=1
+
+    h1:
+      kind: linux
+      image: 192.168.2.100:5000/nettool
+      exec:
+        - ip addr add 192.168.11.10/24 dev eth1
+        - ip -6 addr add 2001:dead:11::10/64 dev eth1
+        - ip l s eth1 add 00:00:10:01:05:10
+        - ip r r default via 192.168.11.1
+        - ip -6 r r default via 2001:dead:11::1
+
+    h2:
+      kind: linux
+      image: 192.168.2.100:5000/nettool
+      exec:
+        - ip addr add 192.168.12.10/24 dev eth1
+        - ip l s eth1 add 00:00:10:01:05:11
+        - ip -6 addr add 2001:dead:12::10/64 dev eth1
+        - ip r r default via 192.168.12.1
+        - ip -6 r r default via 2001:dead:12::1
+
+    h3:
+      kind: linux
+      image: 192.168.2.100:5000/nettool
+      exec:
+        - ip addr add 192.168.21.10/24 dev eth1
+        - ip l s eth1 add 00:00:10:01:05:20
+        - ip -6 addr add 2001:dead:21::10/64 dev eth1
+        - ip r r default via 192.168.21.1
+        - ip -6 r r default via 2001:dead:21::1
+
+    h4:
+      kind: linux
+      image: 192.168.2.100:5000/nettool
+      exec:
+        - ip addr add 192.168.22.10/24 dev eth1
+        - ip l s eth1 add 00:00:10:01:05:21
+        - ip -6 addr add 2001:dead:22::10/64 dev eth1
+        - ip r r default via 192.168.22.1
+        - ip -6 r r default via 2001:dead:22::1
+
+  links:
+    # frr3 edge link
+    - endpoints: ["frr3:eth4", "c1r1:eth2"]
+    - endpoints: ["frr3:eth1", "frr1:eth1"]
+    - endpoints: ["frr3:eth2", "frr4:eth2"]
+    - endpoints: ["frr3:eth5", "c2r1:eth2"]
+
+    # frr6 edge link
+    - endpoints: ["frr6:eth4", "c1r2:eth2"]
+    - endpoints: ["frr6:eth1", "frr2:eth1"]
+    - endpoints: ["frr6:eth2", "frr5:eth2"]
+    - endpoints: ["frr6:eth5", "c2r2:eth2"]
+
+    # bb frr link
+    - endpoints: ["frr1:eth2", "frr2:eth2"]
+    - endpoints: ["frr1:eth3", "frr5:eth3"]
+    - endpoints: ["frr4:eth1", "frr5:eth1"]
+
+    # edge to host link
+    - endpoints: ["c1r1:eth1", "h1:eth1"]
+    - endpoints: ["c1r2:eth1", "h2:eth1"]
+    - endpoints: ["c2r1:eth1", "h3:eth1"]
+    - endpoints: ["c2r2:eth1", "h4:eth1"]
+EOF
