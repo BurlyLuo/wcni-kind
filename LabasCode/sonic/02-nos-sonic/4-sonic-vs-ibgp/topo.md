@@ -5,9 +5,9 @@
 ```mermaid
 graph TB
     subgraph "AS 65000"
-    sonic1["sonic1<br/>Lo:1.1.1.1/32"]
-    sonic2["sonic2<br/>Lo:2.2.2.2/32"]
-    sonic3["sonic3<br/>Lo:3.3.3.3/32"]
+      sonic1["sonic1<br/>Lo:1.1.1.1/32"]
+      sonic2["sonic2<br/>Lo:2.2.2.2/32"]
+      sonic3["sonic3<br/>Lo:3.3.3.3/32"]
     end
     
     server1["server1<br/>eth1:10.1.5.10/24"]
