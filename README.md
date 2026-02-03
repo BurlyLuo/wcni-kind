@@ -110,8 +110,8 @@ This repository contains extensive configurations, deployment scripts, and testi
 - **Liqo**: Virtual cluster interconnection
 
 ### 🌐 Multi-Networking (`multus/`)
-- **MacVLAN**: Multiple network interfaces per pod
-- **IPvLAN**: Layer 2/3 virtual interfaces
+- **MACVLAN**: Multiple network interfaces per pod
+- **IPVLAN**: Layer 2/3 virtual interfaces
 - **SR-IOV**: Single Root I/O Virtualization
 - **DPDK**: Data Plane Development Kit integration
 - **VPP**: Vector Packet Processing
