@@ -1,0 +1,28 @@
+username: admin
+password: admin
+insecure: true
+encoding: json_ietf
+log: true
+
+targets:
+  sonic1:
+    address: sonic1:8080
+  sonic2:
+    address: sonic2:8080
+
+subscriptions:
+  interface-telemetry:
+    paths:
+      - /openconfig-interfaces:interfaces/interface[name=*]/state/mtu
+      - /openconfig-interfaces:interfaces/interface[name=*]/state/admin-status
+    mode: stream
+    stream-mode: on_change
+    sample-interval: 20s
+    encoding: json_ietf
+    target: OC-YANG
+
+outputs:
+  prometheus:
+    type: prometheus
+    listen: :9273
+    strings-as-labels: true
