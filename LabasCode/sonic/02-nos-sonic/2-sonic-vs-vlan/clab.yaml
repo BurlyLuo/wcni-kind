@@ -1,4 +1,5 @@
 name: vs
+prefix: ""
 topology:
   nodes:
     sonic1:

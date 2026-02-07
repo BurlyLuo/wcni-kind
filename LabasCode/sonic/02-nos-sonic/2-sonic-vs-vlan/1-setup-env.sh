@@ -1,5 +1,6 @@
 cat <<EOF>clab.yaml | clab deploy -t clab.yaml -
 name: vs
+prefix: ""
 topology:
   nodes:
     sonic1:
@@ -117,6 +118,7 @@ wait_for_ready() {
     local max_attempts=20
     local attempt=1
     
+    ssh-keygen -f "/root/.ssh/known_hosts" -R "$container" >/dev/null 2>&1
     while [ $attempt -le $max_attempts ]; do
         health_status=$(docker inspect --format='{{.State.Health.Status}}' "$container" 2>/dev/null)
 
@@ -139,7 +141,7 @@ wait_for_ready() {
 }
 
 for node in "${NODES[@]}"; do
-    container="clab-vs-$node"
+    container="$node"
     node_config_dir="$CONFIG_BASE_DIR/$node"
     
     if wait_for_ready "$container"; then
@@ -172,5 +174,6 @@ for node in "${NODES[@]}"; do
         else
             echo "$node Apply configuration failed"
         fi
+        sshpass -p "$PASSWD" ssh-copy-id "$USER@$node"
     fi
 done
