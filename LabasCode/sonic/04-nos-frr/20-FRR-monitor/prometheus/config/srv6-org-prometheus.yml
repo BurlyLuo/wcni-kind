@@ -1,0 +1,27 @@
+global:
+  scrape_interval: 15s #设置抓取数据的时间间隔，即每隔15秒抓取一次数据，默认60秒
+  evaluation_interval: 15s #规则评估时间间隔，即每隔15秒评估一次规则，默认60秒
+
+scrape_configs:  #抓取配置
+  - job_name: prometheus #用来唯一标识一个任务，同一个Prometheus.yml配置文件中，不同的scrape可以有不同的job name，以便Prometheus区分和管理不同的监控目标和配置
+    scrape_interval: 15s #抓取数据的时间间隔，优先级高于全局的scrape_interval
+    static_configs:    #被监控目标的静态配置信息，在Prometheus运行过程中不会变化，比如IP、端口等
+      - targets: ['localhost:9090'] #指定监控的目标，通常是一个http或者https的端点
+        labels:      #为每个任务分配一个标签
+          instance: prometheus
+
+  - job_name: linux
+    static_configs:
+      - targets: ['node-exporter:9100']
+        labels:
+          instance: node-exporter
+
+  - job_name: frr
+    static_configs:
+      - targets:
+        - r1:9342
+        - r2:9342
+    relabel_configs:
+      - source_labels: [__address__]
+        regex: '(.*):\d+'
+        target_label: instance
