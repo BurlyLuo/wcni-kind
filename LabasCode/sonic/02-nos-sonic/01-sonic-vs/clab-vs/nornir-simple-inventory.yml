@@ -3,9 +3,9 @@ server1:
     username: 
     password: 
     platform: linux
-    hostname: 172.20.20.3
+    hostname: 172.20.20.2
 sonic1:
     username: admin
     password: admin
     platform: sonic-vm
-    hostname: 172.20.20.2
+    hostname: 172.20.20.3

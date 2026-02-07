@@ -46,10 +46,23 @@ topology:
     # eth1 - first data (front-panel port) interface that is mapped to Ethernet0 port
     # eth2 - second data interface that is mapped to Ethernet4 port. Any new port will result in a "previous interface + 4" (Ethernet4) mapping.
     # When containerlab launches sonic-vs node, it will assign IPv4/6 address to the eth0 interface. Data interface eth1 mapped to Ethernet0 port.
-
+    
+    # sonic1:eth1 <> sonic2:eth1
+    # Trunk vlan 5 8
     - endpoints: ["sonic1:eth1", "sonic2:eth1"]
+
+    # sonic1:eth2 <> server1:eth1
+    # Access vlan 5
     - endpoints: ["sonic1:eth2", "server1:eth1"]
+
+    # sonic2:eth2 <> server2:eth1
+    # Access vlan 8
     - endpoints: ["sonic2:eth2", "server2:eth1"]
 
+    # sonic1:eth3 <> server3:eth1
+    # Access vlan 5
     - endpoints: ["sonic1:eth3", "server3:eth1"]
+
+    # sonic2:eth3 <> server4:eth1
+    # Access vlan 8
     - endpoints: ["sonic2:eth3", "server4:eth1"]
