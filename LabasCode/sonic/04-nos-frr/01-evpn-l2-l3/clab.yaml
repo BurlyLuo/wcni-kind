@@ -6,8 +6,7 @@ topology:
     leaf1:
       kind: linux
       image: quay.io/weiluo/frrouting/frr:10.5.0
-      cmd: sh -c "sed -i '/^bgpd=/s/no/yes/;/^ospfd=/s/no/yes/;/^ospf6d=/s/no/yes/;/^isisd=/s/no/yes/' /etc/frr/daemons && /usr/lib/frr/docker-start"
-      #cmd: sh -c "sed -i 's/bgpd=no/bgpd=yes/;s/zebra=no/zebra=yes/' /etc/frr/daemons && /usr/lib/frr/docker-start"
+      cmd: sh -c "sed -i 's/bgpd=no/bgpd=yes/;s/zebra=no/zebra=yes/' /etc/frr/daemons && /usr/lib/frr/docker-start"
       binds:
         - /lib/modules:/lib/modules
         - ./frr/leaf1.conf:/etc/frr/frr.conf
@@ -62,6 +61,12 @@ topology:
         - ip link set eth3 master br8
         - ip link set eth4 master red
         - ip addr add 10.1.9.254/24 dev eth4
+
+        #- apk add wget curl sed
+        - wget -O /tmp/frr_exporter.tar.gz https://github.com/tynany/frr_exporter/releases/download/v1.10.0/frr_exporter-1.10.0.linux-amd64.tar.gz
+        - tar -xzf /tmp/frr_exporter.tar.gz -C /tmp/
+        - chmod +x /tmp/frr_exporter-1.10.0.linux-amd64/frr_exporter
+        - sh -c "/tmp/frr_exporter-1.10.0.linux-amd64/frr_exporter --frr.socket.dir-path=/var/run/frr --web.listen-address=:9342 --collector.bgp.peer-types --collector.bgp.peer-descriptions &"
 
 
     leaf2:

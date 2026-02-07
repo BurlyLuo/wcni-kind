@@ -63,6 +63,11 @@ topology:
         - ip link set eth4 master red
         - ip addr add 10.1.9.254/24 dev eth4
 
+        - wget -O /tmp/frr_exporter.tar.gz https://github.com/tynany/frr_exporter/releases/download/v1.10.0/frr_exporter-1.10.0.linux-amd64.tar.gz
+        - tar -xzf /tmp/frr_exporter.tar.gz -C /tmp/
+        - chmod +x /tmp/frr_exporter-1.10.0.linux-amd64/frr_exporter
+        - sh -c "/tmp/frr_exporter-1.10.0.linux-amd64/frr_exporter &"
+
 
     leaf2:
       kind: linux

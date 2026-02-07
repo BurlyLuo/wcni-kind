@@ -1,6 +1,5 @@
 cat <<EOF>clab.yaml | clab deploy -t clab.yaml -
 name: vs
-prefix: ""
 topology:
   nodes:
     sonic1:
@@ -11,66 +10,68 @@ topology:
       kind: sonic-vm
       image: 192.168.2.100:5000/sonic:latest
 
-    vm1:
+    server1:
       kind: linux
       image: 192.168.2.100:5000/nettool
       exec:
       - ip addr add 10.1.5.10/24 dev eth1
       - ip r r default via 10.1.5.1
-      - ip l s eth1 add 00:00:10:01:05:10
 
-    vm2:
+    server2:
       kind: linux
       image: 192.168.2.100:5000/nettool
       exec:
       - ip addr add 10.1.5.11/24 dev eth1
       - ip r r default via 10.1.5.1
-      - ip l s eth1 add 00:00:10:01:05:11
 
-    vm3:
+    server3:
       kind: linux
       image: 192.168.2.100:5000/nettool
       exec:
       - ip addr add 10.1.8.10/24 dev eth1
       - ip r r default via 10.1.8.1
-      - ip l s eth1 add 00:00:10:01:08:10
 
-    vm4:
+    server4:
       kind: linux
       image: 192.168.2.100:5000/nettool
       exec:
       - ip addr add 10.1.8.11/24 dev eth1
       - ip r r default via 10.1.8.1
-      - ip l s eth1 add 00:00:10:01:08:11
-
-    gnmic:
-      kind: linux
-      image: ghcr.io/openconfig/gnmic:0.43.0
-      binds:
-        - gnmic/gnmic-config.yaml:/gnmic-config.yaml:ro
-      cmd: --config /gnmic-config.yaml --debug --log --log-file /tmp/gnmic.log subscribe
 
     prometheus:
       kind: linux
+      mgmt-ipv4: 172.100.100.151
       image: prom/prometheus:v3.7.3
-      cmd: --config.file=/etc/prometheus/prometheus.yml
       binds:
-        - prometheus/prometheus.yml:/etc/prometheus/prometheus.yml:ro
+        - configs/prometheus/prometheus.yml:/etc/prometheus/prometheus.yml:ro
+        - 
+      cmd: --config.file=/etc/prometheus/prometheus.yml
       ports:
         - 9090:9090
+      exec:
+        - wget -O /tmp/telegraf-1.36.0_linux_amd64.tar.gz https://dl.influxdata.com/telegraf/releases/telegraf-1.36.0_linux_amd64.tar.gz
+        - tar -xzf /tmp/telegraf-1.36.0_linux_amd64.tar.gz -C /tmp/
+        - chmod +x /tmp/telegraf-1.36.0/usr/bin/telegraf
+        - sh -c "nohup /tmp/telegraf-1.36.0/usr/bin/telegraf --config telegraf.conf 2>&1 &"
 
     grafana:
       kind: linux
+      mgmt-ipv4: 172.100.100.152
       image: grafana/grafana:12.0.2
       binds:
-        - grafana/datasource.yaml:/etc/grafana/provisioning/datasources/datasource.yaml:ro
-        - grafana/dashboards.yaml:/etc/grafana/provisioning/dashboards/dashboards.yaml:ro
-        - grafana/dashboards:/var/lib/grafana/dashboards
+        - configs/grafana/datasource.yml:/etc/grafana/provisioning/datasources/datasource.yaml:ro
+        - configs/grafana/dashboards.yml:/etc/grafana/provisioning/dashboards/dashboards.yaml:ro
+        - configs/grafana/dashboards:/var/lib/grafana/dashboards
+        # - icons/network:/usr/share/grafana/public/img/icons/custom
       ports:
         - 3000:3000
       env:
-        GF_SECURITY_ADMIN_PASSWORD: "admin"
-        GF_USERS_ALLOW_SIGN_UP: "false"
+        GF_INSTALL_PLUGINS: https://algenty.github.io/flowcharting-repository/archives/agenty-flowcharting-panel-1.0.0d.220606199-SNAPSHOT.zip;agenty-flowcharting-panel
+        # env vars to enable anonymous access
+        GF_ORG_ROLE: "Admin"
+        GF_ORG_NAME: "Main Org"
+        GF_AUTH_ANONYMOUS_ENABLED: "true"
+        GF_AUTH_ANONYMOUS: "true"
 
   links:
     # vrnetlab uses the qemu user mode networking to connect the VM's (guest) management interface to the host.
@@ -87,21 +88,21 @@ topology:
     # Trunk vlan 5 8
     - endpoints: ["sonic1:eth1", "sonic2:eth1"]
 
-    # sonic1:eth2 <> vm1:eth1
+    # sonic1:eth2 <> server1:eth1
     # Access vlan 5
-    - endpoints: ["sonic1:eth2", "vm1:eth1"]
+    - endpoints: ["sonic1:eth2", "server1:eth1"]
 
-    # sonic2:eth2 <> vm2:eth1
+    # sonic2:eth2 <> server2:eth1
     # Access vlan 8
-    - endpoints: ["sonic2:eth2", "vm2:eth1"]
+    - endpoints: ["sonic2:eth2", "server2:eth1"]
 
-    # sonic1:eth3 <> vm3:eth1
+    # sonic1:eth3 <> server3:eth1
     # Access vlan 5
-    - endpoints: ["sonic1:eth3", "vm3:eth1"]
+    - endpoints: ["sonic1:eth3", "server3:eth1"]
 
-    # sonic2:eth3 <> vm4:eth1
+    # sonic2:eth3 <> server4:eth1
     # Access vlan 8
-    - endpoints: ["sonic2:eth3", "vm4:eth1"]
+    - endpoints: ["sonic2:eth3", "server4:eth1"]
 EOF
 
 REMOTE_PATH="/home/admin/"
@@ -152,7 +153,6 @@ wait_for_ready() {
     local max_attempts=20
     local attempt=1
     
-    ssh-keygen -f "/root/.ssh/known_hosts" -R "$container" >/dev/null 2>&1    
     while [ $attempt -le $max_attempts ]; do
         health_status=$(docker inspect --format='{{.State.Health.Status}}' "$container" 2>/dev/null)
 
@@ -175,7 +175,7 @@ wait_for_ready() {
 }
 
 for node in "${NODES[@]}"; do
-    container="$node"
+    container="clab-vs-$node"
     node_config_dir="$CONFIG_BASE_DIR/$node"
     
     if wait_for_ready "$container"; then
@@ -183,6 +183,7 @@ for node in "${NODES[@]}"; do
         if [ -n "$container_id" ]; then
             sed -i "/$container/s/$/ $container_id/" /etc/hosts
             echo "append $container id $container_id to local hosts"
+            sshpass -p "$PASSWD" ssh-copy-id $USER@$container 2>/dev/null
         fi
 
         echo "[$(date '+%Y-%m-%d %H:%M:%S')] Initing configuration for $container..."
@@ -207,6 +208,5 @@ for node in "${NODES[@]}"; do
         else
             echo "$node Apply configuration failed"
         fi
-        sshpass -p "$PASSWD" ssh-copy-id "$USER@$node"
     fi
 done
