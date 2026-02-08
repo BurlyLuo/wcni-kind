@@ -1,21 +1,70 @@
-name: vs
+name: evpn
 prefix: ""
 topology:
   nodes:
     sonic1:
       kind: sonic-vm
-      image: 192.168.2.100:5000/broadcom:sonic-4.4.1-enterprise_base
+      image: 192.168.2.100:5000/stordis:4.x
       env:
         QEMU_SMP: 6
         QEMU_MEMORY: 8192
 
     sonic2:
       kind: sonic-vm
-      image: 192.168.2.100:5000/broadcom:sonic-4.4.1-enterprise_base
+      image: 192.168.2.100:5000/stordis:4.x
       env:
         QEMU_SMP: 6
         QEMU_MEMORY: 8192
 
+
+    vm1:
+      kind: linux
+      image: 192.168.2.100:5000/nettool
+      exec:
+      - ip addr add 10.1.5.10/24 dev eth1
+      - ip r r default via 10.1.5.1
+      - ip l s eth1 add 00:00:10:01:05:10
+
+    vm2:
+      kind: linux
+      image: 192.168.2.100:5000/nettool
+      exec:
+      - ip addr add 10.1.5.11/24 dev eth1
+      - ip r r default via 10.1.5.1
+      - ip l s eth1 add 00:00:10:01:05:11
+
+    vm3:
+      kind: linux
+      image: 192.168.2.100:5000/nettool
+      exec:
+      - ip addr add 10.1.8.10/24 dev eth1
+      - ip r r default via 10.1.8.1
+      - ip l s eth1 add 00:00:10:01:08:10
+
+    vm4:
+      kind: linux
+      image: 192.168.2.100:5000/nettool
+      exec:
+      - ip addr add 10.1.8.11/24 dev eth1
+      - ip r r default via 10.1.8.1
+      - ip l s eth1 add 00:00:10:01:08:11
+
   links:
+    # sonic1:eth1 <> sonic2:eth1
     - endpoints: ["sonic1:eth1", "sonic2:eth1"]
-    - endpoints: ["sonic1:eth2", "sonic2:eth2"]
+
+    # sonic1:eth2 <> vm1:eth1
+    # Access vlan 5
+    - endpoints: ["sonic1:eth2", "vm1:eth1"]
+
+    # sonic2:eth2 <> vm2:eth1
+    # Access vlan 8
+    - endpoints: ["sonic2:eth2", "vm2:eth1"]
+
+    # sonic1:eth3 <> vm3:eth1
+    # Access vlan 5
+    - endpoints: ["sonic1:eth3", "vm3:eth1"]
+
+    # sonic2:eth3 <> vm4:eth1
+    # Access vlan 8
+    - endpoints: ["sonic2:eth3", "vm4:eth1"]
