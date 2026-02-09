@@ -29,17 +29,17 @@ topology:
       kind: linux
       image: 192.168.2.100:5000/nettool
       exec:
-      - ip addr add 10.1.5.11/24 dev eth1
-      - ip r r default via 10.1.5.1
-      - ip l s eth1 add 00:00:10:01:05:11
+      - ip addr add 10.1.8.10/24 dev eth1
+      - ip r r default via 10.1.8.1
+      - ip l s eth1 add 00:00:10:01:08:10
 
     vm3:
       kind: linux
       image: 192.168.2.100:5000/nettool
       exec:
-      - ip addr add 10.1.8.10/24 dev eth1
-      - ip r r default via 10.1.8.1
-      - ip l s eth1 add 00:00:10:01:08:10
+      - ip addr add 10.1.5.11/24 dev eth1
+      - ip r r default via 10.1.5.1
+      - ip l s eth1 add 00:00:10:01:05:11
 
     vm4:
       kind: linux
@@ -50,6 +50,10 @@ topology:
       - ip l s eth1 add 00:00:10:01:08:11
 
   links:
+    # eth1 <> Ethernet0
+    # eth2 <> Ethernet1
+    # eth3 <> Ethernet2
+
     # sonic1:eth1 <> sonic2:eth1
     - endpoints: ["sonic1:eth1", "sonic2:eth1"]
 
