@@ -1,0 +1,46 @@
+---
+gnmic:
+    username: 
+    password: 
+    platform: linux
+    hostname: 172.20.20.3
+grafana:
+    username: 
+    password: 
+    platform: linux
+    hostname: 172.20.20.5
+prometheus:
+    username: 
+    password: 
+    platform: linux
+    hostname: 172.20.20.4
+vm1:
+    username: 
+    password: 
+    platform: linux
+    hostname: 172.20.20.7
+vm2:
+    username: 
+    password: 
+    platform: linux
+    hostname: 172.20.20.10
+vm3:
+    username: 
+    password: 
+    platform: linux
+    hostname: 172.20.20.8
+vm4:
+    username: 
+    password: 
+    platform: linux
+    hostname: 172.20.20.6
+sonic1:
+    username: admin
+    password: admin
+    platform: sonic-vm
+    hostname: 172.20.20.9
+sonic2:
+    username: admin
+    password: admin
+    platform: sonic-vm
+    hostname: 172.20.20.2

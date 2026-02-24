@@ -5,14 +5,17 @@ topology:
   nodes:
     sonic1:
       kind: sonic-vm
+      mgmt-ipv4: 172.20.20.2
       image: 192.168.2.100:5000/sonic:latest
 
     sonic2:
       kind: sonic-vm
+      mgmt-ipv4: 172.20.20.3
       image: 192.168.2.100:5000/sonic:latest
 
     server1:
       kind: linux
+      mgmt-ipv4: 172.20.20.4
       image: 192.168.2.100:5000/nettool
       exec:
       - ip addr add 10.1.5.10/24 dev eth1
@@ -20,6 +23,7 @@ topology:
 
     server2:
       kind: linux
+      mgmt-ipv4: 172.20.20.5
       image: 192.168.2.100:5000/nettool
       exec:
       - ip addr add 10.1.5.11/24 dev eth1
@@ -27,6 +31,7 @@ topology:
 
     server3:
       kind: linux
+      mgmt-ipv4: 172.20.20.6
       image: 192.168.2.100:5000/nettool
       exec:
       - ip addr add 10.1.8.10/24 dev eth1
@@ -34,6 +39,7 @@ topology:
 
     server4:
       kind: linux
+      mgmt-ipv4: 172.20.20.7
       image: 192.168.2.100:5000/nettool
       exec:
       - ip addr add 10.1.8.11/24 dev eth1
@@ -41,7 +47,7 @@ topology:
 
     prometheus:
       kind: linux
-      mgmt-ipv4: 172.100.100.151
+      mgmt-ipv4: 172.20.20.8
       image: prom/prometheus:v3.7.3
       binds:
         - prometheus/prometheus.yml:/etc/prometheus/prometheus.yml:ro
@@ -53,11 +59,11 @@ topology:
         - wget -O /tmp/telegraf-1.36.0_linux_amd64.tar.gz https://dl.influxdata.com/telegraf/releases/telegraf-1.36.0_linux_amd64.tar.gz
         - tar -xzf /tmp/telegraf-1.36.0_linux_amd64.tar.gz -C /tmp/
         - chmod +x /tmp/telegraf-1.36.0/usr/bin/telegraf
-        - sh -c "nohup /tmp/telegraf-1.36.0/usr/bin/telegraf --config /tmp/telegraf.conf 2>&1 &"
+        - sh -c "nohup /tmp/telegraf-1.36.0/usr/bin/telegraf --config /tmp/telegraf.conf > /prometheus/telegraf.log 2>&1 &"
 
     grafana:
       kind: linux
-      mgmt-ipv4: 172.100.100.152
+      mgmt-ipv4: 172.20.20.9
       image: grafana/grafana:12.0.2
       binds:
         - grafana/datasource.yml:/etc/grafana/provisioning/datasources/datasource.yaml:ro
