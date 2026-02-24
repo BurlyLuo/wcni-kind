@@ -53,7 +53,9 @@ topology:
       kind: linux
       image: prom/prometheus:v3.7.3
       cmd: --config.file=/etc/prometheus/prometheus.yml
+      #cmd: --config.file=/etc/prometheus/prometheus.yml --storage.tsdb.path=/prometheus/data --web.enable-lifecycle --log.level=info --storage.tsdb.retention.time=30d
       binds:
+        #- prometheus/data:/prometheus/data
         - prometheus/prometheus.yml:/etc/prometheus/prometheus.yml:ro
       ports:
         - 9090:9090

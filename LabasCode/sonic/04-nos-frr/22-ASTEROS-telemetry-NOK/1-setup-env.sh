@@ -1,5 +1,6 @@
 cat <<EOF>clab.yaml | clab deploy -t clab.yaml -
 name: vs
+prefix: ""
 topology:
   nodes:
     sonic1:
@@ -43,8 +44,8 @@ topology:
       mgmt-ipv4: 172.100.100.151
       image: prom/prometheus:v3.7.3
       binds:
-        - configs/prometheus/prometheus.yml:/etc/prometheus/prometheus.yml:ro
-        - 
+        - prometheus/prometheus.yml:/etc/prometheus/prometheus.yml:ro
+        - prometheus/telegraf.conf:/tmp/telegraf.conf:ro
       cmd: --config.file=/etc/prometheus/prometheus.yml
       ports:
         - 9090:9090
@@ -52,16 +53,16 @@ topology:
         - wget -O /tmp/telegraf-1.36.0_linux_amd64.tar.gz https://dl.influxdata.com/telegraf/releases/telegraf-1.36.0_linux_amd64.tar.gz
         - tar -xzf /tmp/telegraf-1.36.0_linux_amd64.tar.gz -C /tmp/
         - chmod +x /tmp/telegraf-1.36.0/usr/bin/telegraf
-        - sh -c "nohup /tmp/telegraf-1.36.0/usr/bin/telegraf --config telegraf.conf 2>&1 &"
+        - sh -c "nohup /tmp/telegraf-1.36.0/usr/bin/telegraf --config /tmp/telegraf.conf 2>&1 &"
 
     grafana:
       kind: linux
       mgmt-ipv4: 172.100.100.152
       image: grafana/grafana:12.0.2
       binds:
-        - configs/grafana/datasource.yml:/etc/grafana/provisioning/datasources/datasource.yaml:ro
-        - configs/grafana/dashboards.yml:/etc/grafana/provisioning/dashboards/dashboards.yaml:ro
-        - configs/grafana/dashboards:/var/lib/grafana/dashboards
+        - grafana/datasource.yml:/etc/grafana/provisioning/datasources/datasource.yaml:ro
+        - grafana/dashboards.yml:/etc/grafana/provisioning/dashboards/dashboards.yaml:ro
+        - grafana/dashboards:/var/lib/grafana/dashboards
         # - icons/network:/usr/share/grafana/public/img/icons/custom
       ports:
         - 3000:3000
@@ -175,7 +176,7 @@ wait_for_ready() {
 }
 
 for node in "${NODES[@]}"; do
-    container="clab-vs-$node"
+    container="$node"
     node_config_dir="$CONFIG_BASE_DIR/$node"
     
     if wait_for_ready "$container"; then

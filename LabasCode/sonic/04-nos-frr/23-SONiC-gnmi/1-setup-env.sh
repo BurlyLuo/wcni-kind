@@ -67,6 +67,7 @@ topology:
       binds:
         - grafana/datasource.yaml:/etc/grafana/provisioning/datasources/datasource.yaml:ro
         - grafana/dashboards.yaml:/etc/grafana/provisioning/dashboards/dashboards.yaml:ro
+        - grafana/dashboards:/var/lib/grafana/dashboards
       ports:
         - 3000:3000
       env:

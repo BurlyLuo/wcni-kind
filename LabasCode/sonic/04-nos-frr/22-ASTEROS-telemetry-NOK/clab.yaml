@@ -36,6 +36,42 @@ topology:
       exec:
       - ip addr add 10.1.8.11/24 dev eth1
       - ip r r default via 10.1.8.1
+
+    prometheus:
+      kind: linux
+      mgmt-ipv4: 172.100.100.151
+      image: prom/prometheus:v3.7.3
+      binds:
+        - configs/prometheus/prometheus.yml:/etc/prometheus/prometheus.yml:ro
+        - 
+      cmd: --config.file=/etc/prometheus/prometheus.yml
+      ports:
+        - 9090:9090
+      exec:
+        - wget -O /tmp/telegraf-1.36.0_linux_amd64.tar.gz https://dl.influxdata.com/telegraf/releases/telegraf-1.36.0_linux_amd64.tar.gz
+        - tar -xzf /tmp/telegraf-1.36.0_linux_amd64.tar.gz -C /tmp/
+        - chmod +x /tmp/telegraf-1.36.0/usr/bin/telegraf
+        - sh -c "nohup /tmp/telegraf-1.36.0/usr/bin/telegraf --config telegraf.conf 2>&1 &"
+
+    grafana:
+      kind: linux
+      mgmt-ipv4: 172.100.100.152
+      image: grafana/grafana:12.0.2
+      binds:
+        - configs/grafana/datasource.yml:/etc/grafana/provisioning/datasources/datasource.yaml:ro
+        - configs/grafana/dashboards.yml:/etc/grafana/provisioning/dashboards/dashboards.yaml:ro
+        - configs/grafana/dashboards:/var/lib/grafana/dashboards
+        # - icons/network:/usr/share/grafana/public/img/icons/custom
+      ports:
+        - 3000:3000
+      env:
+        GF_INSTALL_PLUGINS: https://algenty.github.io/flowcharting-repository/archives/agenty-flowcharting-panel-1.0.0d.220606199-SNAPSHOT.zip;agenty-flowcharting-panel
+        # env vars to enable anonymous access
+        GF_ORG_ROLE: "Admin"
+        GF_ORG_NAME: "Main Org"
+        GF_AUTH_ANONYMOUS_ENABLED: "true"
+        GF_AUTH_ANONYMOUS: "true"
+
   links:
     # vrnetlab uses the qemu user mode networking to connect the VM's (guest) management interface to the host.
     # https://containerlab.dev/manual/vrnetlab/#management-interface
@@ -46,10 +82,23 @@ topology:
     # eth1 - first data (front-panel port) interface that is mapped to Ethernet0 port
     # eth2 - second data interface that is mapped to Ethernet4 port. Any new port will result in a "previous interface + 4" (Ethernet4) mapping.
     # When containerlab launches sonic-vs node, it will assign IPv4/6 address to the eth0 interface. Data interface eth1 mapped to Ethernet0 port.
-
+    
+    # sonic1:eth1 <> sonic2:eth1
+    # Trunk vlan 5 8
     - endpoints: ["sonic1:eth1", "sonic2:eth1"]
+
+    # sonic1:eth2 <> server1:eth1
+    # Access vlan 5
     - endpoints: ["sonic1:eth2", "server1:eth1"]
+
+    # sonic2:eth2 <> server2:eth1
+    # Access vlan 8
     - endpoints: ["sonic2:eth2", "server2:eth1"]
 
+    # sonic1:eth3 <> server3:eth1
+    # Access vlan 5
     - endpoints: ["sonic1:eth3", "server3:eth1"]
+
+    # sonic2:eth3 <> server4:eth1
+    # Access vlan 8
     - endpoints: ["sonic2:eth3", "server4:eth1"]
