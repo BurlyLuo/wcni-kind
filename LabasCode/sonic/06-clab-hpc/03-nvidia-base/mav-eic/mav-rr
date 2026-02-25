@@ -1,0 +1,518 @@
+[kni@ocp-eic-mirror ~]$ cc get pods 
+NAME          READY   STATUS    RESTARTS   AGE
+eic-gtre-0    1/1     Running   0          5d18h
+eic-mpvnf-0   1/1     Running   0          5d18h
+eic-sc-0      1/1     Running   0          5d18h
+eic-sipre-0   1/1     Running   0          5d18h
+eic-sm-0      1/1     Running   0          5d18h
+eic-sm-1      1/1     Running   0          5d18h
+eic-sm-2      1/1     Running   0          5d18h
+eic-stm-0     1/1     Running   0          2d7h
+eic-tc-0      1/1     Running   0          5d18h
+eic-upc-0     1/1     Running   0          5d18h
+eic-vlbfe-0   1/1     Running   0          5d18h
+[kni@ocp-eic-mirror ~]$ cc get pods eic-stm-0 -o yaml 
+apiVersion: v1
+kind: Pod
+metadata:
+  annotations:
+    k8s.ovn.org/pod-networks: '{"default":{"ip_addresses":["10.129.2.68/23","fd02:0:0:6::44/64"],"mac_address":"0a:58:0a:81:02:44","gateway_ips":["10.129.2.1","fd02:0:0:6::1"],"routes":[{"dest":"10.128.0.0/14","nextHop":"10.129.2.1"},{"dest":"172.30.0.0/16","nextHop":"10.129.2.1"},{"dest":"169.254.0.5/32","nextHop":"10.129.2.1"},{"dest":"100.64.0.0/16","nextHop":"10.129.2.1"},{"dest":"fd02::/48","nextHop":"fd02:0:0:6::1"},{"dest":"fd03::/112","nextHop":"fd02:0:0:6::1"},{"dest":"fd69::5/128","nextHop":"fd02:0:0:6::1"},{"dest":"fd98::/64","nextHop":"fd02:0:0:6::1"}],"role":"primary"}}'
+    k8s.v1.cni.cncf.io/network-status: |-
+      [{
+          "name": "ovn-kubernetes",
+          "interface": "eth0",
+          "ips": [
+              "10.129.2.68",
+              "fd02:0:0:6::44"
+          ],
+          "mac": "0a:58:0a:81:02:44",
+          "default": true,
+          "dns": {}
+      },{
+          "name": "eic/macvlan-emxrouter",
+          "interface": "eth1",
+          "ips": [
+              "172.19.199.59"
+          ],
+          "mac": "46:20:e6:60:d7:5d",
+          "dns": {}
+      },{
+          "name": "eic/macvlan-db",
+          "interface": "eth2",
+          "ips": [
+              "172.19.199.96"
+          ],
+          "mac": "86:7b:d0:6e:21:1e",
+          "dns": {}
+      },{
+          "name": "eic/macvlan-rtp-internal",
+          "interface": "eth3",
+          "ips": [
+              "172.19.199.223"
+          ],
+          "mac": "72:2e:80:d1:a3:fe",
+          "dns": {}
+      }]
+    k8s.v1.cni.cncf.io/networks: '[{"interface":"eth1","name":"macvlan-emxrouter"},{"interface":"eth2","name":"macvlan-db"},{"interface":"eth3","name":"macvlan-rtp-internal"}]'
+    openshift.io/scc: privileged
+    prometheus.io/path: /metrics
+    prometheus.io/scrape: "true"
+    security.openshift.io/validated-scc-subject-type: serviceaccount
+  creationTimestamp: "2026-02-23T04:51:11Z"
+  generateName: eic-stm-
+  generation: 1
+  labels:
+    ClusterID: TMO-LAB-CLUSTER-UAG-MOAS-00
+    Function: MOAS
+    Group: TMO-MOAS
+    NFName: Mavenir-MOAS
+    PodName: STM
+    Release: 8.1.9.1.8
+    SiteID: OCP-eic
+    Vendor: Mavenir
+    app: stm
+    apps.kubernetes.io/pod-index: "0"
+    cnf_uuid: cnf_uuid-nested-moas
+    cnfc_uuid: cnfc_uuid-stm-moas
+    controller-revision-hash: eic-stm-5c6c695c47
+    environment: Lab
+    ha-mode: active
+    mavrole: mav-eic-stm
+    ns_uuid: ns_uuid-nested-moas
+    statefulset.kubernetes.io/pod-name: eic-stm-0
+  name: eic-stm-0
+  namespace: eic
+  ownerReferences:
+  - apiVersion: apps/v1
+    blockOwnerDeletion: true
+    controller: true
+    kind: StatefulSet
+    name: eic-stm
+    uid: a562f81f-64ca-4bef-89fc-73e3ed341931
+  resourceVersion: "60396809"
+  uid: 4dd63582-ec14-49be-abed-3c625b271398
+spec:
+  containers:
+  - args:
+    - -c
+    - /usr/IMS/current/tools/cfginit
+    command:
+    - /bin/sh
+    env:
+    - name: readiness_checklist
+      value: +corefiles,-emxrouter
+    - name: liveness_checklist
+      value: +timeout
+    - name: liveness_cnf_failure
+      value: "60"
+    - name: liveness_cnf_timeout
+      value: "5"
+    - name: liveness_cnf_period
+      value: "3"
+    - name: MY_POD_NAME
+      valueFrom:
+        fieldRef:
+          apiVersion: v1
+          fieldPath: metadata.name
+    - name: MY_POD_UID
+      valueFrom:
+        fieldRef:
+          apiVersion: v1
+          fieldPath: metadata.name
+    - name: host_ip
+      valueFrom:
+        fieldRef:
+          apiVersion: v1
+          fieldPath: status.hostIP
+    - name: pod_ip
+      valueFrom:
+        fieldRef:
+          apiVersion: v1
+          fieldPath: status.podIP
+    - name: syslogStreaming
+      value: disabled
+    - name: CPULIMIT
+      value: 16000m
+    - name: IN_SERVICE_TIMEOUT
+      value: "900"
+    - name: LOG_STDOUT
+      value: enable
+    - name: TZ
+      value: UTC
+    image: ocp-eic-mirror.mavdallab.com:8443/isbc/stm:1.0.2.0_ava_20260212
+    imagePullPolicy: IfNotPresent
+    lifecycle:
+      preStop:
+        exec:
+          command:
+          - /bin/sh
+          - -c
+          - /bin/bash /hooks/mmxPreStopHook.sh
+    livenessProbe:
+      exec:
+        command:
+        - python
+        - /data/configmap/livenessprobe/liveness_check.py
+      failureThreshold: 60
+      initialDelaySeconds: 30
+      periodSeconds: 3
+      successThreshold: 1
+      timeoutSeconds: 5
+    name: eic-stm
+    readinessProbe:
+      exec:
+        command:
+        - python
+        - /data/configmap/probe/readiness_check.py
+      failureThreshold: 60
+      initialDelaySeconds: 60
+      periodSeconds: 10
+      successThreshold: 1
+      timeoutSeconds: 5
+    resources:
+      limits:
+        cpu: "16"
+        memory: 32G
+        nvidia.com/mig-3g.40gb: "1"
+      requests:
+        cpu: "16"
+        memory: 32G
+        nvidia.com/mig-3g.40gb: "1"
+    securityContext:
+      allowPrivilegeEscalation: true
+      capabilities:
+        add:
+        - SYS_PTRACE
+        - DAC_OVERRIDE
+        - CHOWN
+        - KILL
+        - SETGID
+        - SETUID
+        - SETPCAP
+        - SETFCAP
+        - NET_BIND_SERVICE
+        - NET_ADMIN
+        - NET_RAW
+        - IPC_LOCK
+        - IPC_OWNER
+        - SYS_ADMIN
+        - SYS_BOOT
+        - DAC_READ_SEARCH
+      privileged: true
+      procMount: Default
+      runAsGroup: 0
+      runAsNonRoot: false
+      runAsUser: 0
+    stdin: true
+    terminationMessagePath: /dev/termination-log
+    terminationMessagePolicy: File
+    tty: true
+    volumeMounts:
+    - mountPath: /data/coredump
+      name: coredump
+    - mountPath: /etc/podinfo
+      name: podinfo
+    - mountPath: /dev/shm
+      name: shm
+    - mountPath: /dev/net
+      name: devnet
+    - mountPath: /data/configmap/probe
+      name: probe-stm-configmap
+    - mountPath: /data/configmap/binary
+      name: stm-binary-configmap
+    - mountPath: /data/configmap/livenessprobe
+      name: livenessprobe-stm-configmap
+    - mountPath: /data/configmap
+      name: stm-configmap
+    - mountPath: /data/configmap/extra-configmap
+      name: stm-extra-configmap
+    - mountPath: /hooks
+      name: stm-hooks
+    - mountPath: /models
+      name: models-hostpath
+    - mountPath: /data
+      name: stm-storage
+    - mountPath: /var/run/secrets/kubernetes.io/serviceaccount
+      name: kube-api-access-4gztd
+      readOnly: true
+  dnsPolicy: ClusterFirst
+  enableServiceLinks: true
+  hostname: eic-stm-0
+  imagePullSecrets:
+  - name: artifactory-registry-eic
+  initContainers:
+  - args:
+    - -c
+    - sudo /etc/mavenir/cfg_sysctl.sh;sudo sysctl kernel.core_pattern=/var/crash/core.%e.%p.%h.%t;
+      sudo /etc/mavenir/cfg_sysctl.sh;sudo sysctl -w "net.ipv4.ip_local_port_range=9000
+      9799"
+    command:
+    - /bin/sh
+    image: ocp-eic-mirror.mavdallab.com:8443/isbc/init_container:v4.5
+    imagePullPolicy: IfNotPresent
+    name: init
+    resources:
+      limits:
+        cpu: 50m
+        memory: 50Mi
+      requests:
+        cpu: 50m
+        memory: 50Mi
+    securityContext:
+      privileged: true
+      runAsGroup: 0
+      runAsUser: 0
+    terminationMessagePath: /dev/termination-log
+    terminationMessagePolicy: File
+    volumeMounts:
+    - mountPath: /var/run/secrets/kubernetes.io/serviceaccount
+      name: kube-api-access-4gztd
+      readOnly: true
+  nodeName: worker2.eic-rhoai.mavdallab.com
+  nodeSelector:
+    nvidia.com/gpu.present: "true"
+  preemptionPolicy: PreemptLowerPriority
+  priority: 0
+  restartPolicy: Always
+  runtimeClassName: nvidia
+  schedulerName: default-scheduler
+  securityContext:
+    fsGroup: 1000
+    fsGroupChangePolicy: Always
+  serviceAccount: eic-sa
+  serviceAccountName: eic-sa
+  subdomain: stm-service
+  terminationGracePeriodSeconds: 30
+  tolerations:
+  - effect: NoSchedule
+    key: nvidia.com/gpu
+    operator: Exists
+  - effect: NoExecute
+    key: node.kubernetes.io/not-ready
+    operator: Exists
+    tolerationSeconds: 300
+  - effect: NoExecute
+    key: node.kubernetes.io/unreachable
+    operator: Exists
+    tolerationSeconds: 300
+  - effect: NoSchedule
+    key: node.kubernetes.io/memory-pressure
+    operator: Exists
+  volumes:
+  - name: stm-storage
+    persistentVolumeClaim:
+      claimName: stm-storage-eic-stm-0
+  - name: vtap
+    secret:
+      defaultMode: 420
+      secretName: vtap-stm
+  - hostPath:
+      path: /var/lib/systemd/coredump
+      type: ""
+    name: coredump
+  - configMap:
+      defaultMode: 420
+      name: probe-stm-configmap
+    name: probe-stm-configmap
+  - configMap:
+      defaultMode: 420
+      name: livenessprobe-stm-configmap
+    name: livenessprobe-stm-configmap
+  - configMap:
+      defaultMode: 420
+      name: stm-extra-configmap
+    name: stm-extra-configmap
+  - configMap:
+      defaultMode: 420
+      name: stm-configmap
+    name: stm-configmap
+  - configMap:
+      defaultMode: 420
+      name: stm-binary-configmap
+    name: stm-binary-configmap
+  - configMap:
+      defaultMode: 420
+      name: stm-hooks
+    name: stm-hooks
+  - downwardAPI:
+      defaultMode: 420
+      items:
+      - fieldRef:
+          apiVersion: v1
+          fieldPath: metadata.labels
+        path: labels
+      - fieldRef:
+          apiVersion: v1
+          fieldPath: metadata.uid
+        path: poduid
+    name: podinfo
+  - emptyDir:
+      medium: Memory
+      sizeLimit: 8Gi
+    name: shm
+  - emptyDir: {}
+    name: devnet
+  - hostPath:
+      path: /var/home/core/models
+      type: ""
+    name: models-hostpath
+  - name: kube-api-access-4gztd
+    projected:
+      defaultMode: 420
+      sources:
+      - serviceAccountToken:
+          expirationSeconds: 3607
+          path: token
+      - configMap:
+          items:
+          - key: ca.crt
+            path: ca.crt
+          name: kube-root-ca.crt
+      - downwardAPI:
+          items:
+          - fieldRef:
+              apiVersion: v1
+              fieldPath: metadata.namespace
+            path: namespace
+      - configMap:
+          items:
+          - key: service-ca.crt
+            path: service-ca.crt
+          name: openshift-service-ca.crt
+status:
+  conditions:
+  - lastProbeTime: null
+    lastTransitionTime: "2026-02-23T04:51:58Z"
+    status: "True"
+    type: PodReadyToStartContainers
+  - lastProbeTime: null
+    lastTransitionTime: "2026-02-23T04:52:03Z"
+    status: "True"
+    type: Initialized
+  - lastProbeTime: null
+    lastTransitionTime: "2026-02-23T04:53:12Z"
+    status: "True"
+    type: Ready
+  - lastProbeTime: null
+    lastTransitionTime: "2026-02-23T04:53:12Z"
+    status: "True"
+    type: ContainersReady
+  - lastProbeTime: null
+    lastTransitionTime: "2026-02-23T04:51:11Z"
+    status: "True"
+    type: PodScheduled
+  containerStatuses:
+  - allocatedResources:
+      cpu: "16"
+      memory: 32G
+      nvidia.com/mig-3g.40gb: "1"
+    containerID: cri-o://0336b176b657c7f9026e2801017d599213ebe144ebd7a64203da271d3d01cd91
+    image: ocp-eic-mirror.mavdallab.com:8443/isbc/stm:1.0.2.0_ava_20260212
+    imageID: ocp-eic-mirror.mavdallab.com:8443/isbc/stm@sha256:986d6c742f80cc374576d56ab24a9a2877b661823f44942a0398f5132d1768c3
+    lastState: {}
+    name: eic-stm
+    ready: true
+    resources:
+      limits:
+        cpu: "16"
+        memory: 31250000Ki
+        nvidia.com/mig-3g.40gb: "1"
+      requests:
+        cpu: "16"
+        memory: 32G
+        nvidia.com/mig-3g.40gb: "1"
+    restartCount: 0
+    started: true
+    state:
+      running:
+        startedAt: "2026-02-23T04:52:04Z"
+    user:
+      linux:
+        gid: 0
+        supplementalGroups:
+        - 0
+        - 1000
+        uid: 0
+    volumeMounts:
+    - mountPath: /data/coredump
+      name: coredump
+    - mountPath: /etc/podinfo
+      name: podinfo
+    - mountPath: /dev/shm
+      name: shm
+    - mountPath: /dev/net
+      name: devnet
+    - mountPath: /data/configmap/probe
+      name: probe-stm-configmap
+    - mountPath: /data/configmap/binary
+      name: stm-binary-configmap
+    - mountPath: /data/configmap/livenessprobe
+      name: livenessprobe-stm-configmap
+    - mountPath: /data/configmap
+      name: stm-configmap
+    - mountPath: /data/configmap/extra-configmap
+      name: stm-extra-configmap
+    - mountPath: /hooks
+      name: stm-hooks
+    - mountPath: /models
+      name: models-hostpath
+    - mountPath: /data
+      name: stm-storage
+    - mountPath: /var/run/secrets/kubernetes.io/serviceaccount
+      name: kube-api-access-4gztd
+      readOnly: true
+      recursiveReadOnly: Disabled
+  hostIP: 10.71.146.207
+  hostIPs:
+  - ip: 10.71.146.207
+  - ip: 2605:ca40:3:12::207
+  initContainerStatuses:
+  - allocatedResources:
+      cpu: 50m
+      memory: 50Mi
+    containerID: cri-o://67f88b92126d9d1fa1b41e632054654860cd845cf604b81e04458dcace953a9f
+    image: ocp-eic-mirror.mavdallab.com:8443/isbc/init_container:v4.5
+    imageID: ocp-eic-mirror.mavdallab.com:8443/isbc/init_container@sha256:a922de47b4c3a9d5d8ab7f01cfae41759df2522e53668df5507b6b9649ac6d5e
+    lastState: {}
+    name: init
+    ready: true
+    resources:
+      limits:
+        cpu: 50m
+        memory: 50Mi
+      requests:
+        cpu: 50m
+        memory: 50Mi
+    restartCount: 0
+    started: false
+    state:
+      terminated:
+        containerID: cri-o://67f88b92126d9d1fa1b41e632054654860cd845cf604b81e04458dcace953a9f
+        exitCode: 0
+        finishedAt: "2026-02-23T04:52:03Z"
+        reason: Completed
+        startedAt: "2026-02-23T04:51:57Z"
+    user:
+      linux:
+        gid: 0
+        supplementalGroups:
+        - 0
+        - 1000
+        uid: 0
+    volumeMounts:
+    - mountPath: /var/run/secrets/kubernetes.io/serviceaccount
+      name: kube-api-access-4gztd
+      readOnly: true
+      recursiveReadOnly: Disabled
+  phase: Running
+  podIP: 10.129.2.68
+  podIPs:
+  - ip: 10.129.2.68
+  - ip: fd02:0:0:6::44
+  qosClass: Guaranteed
+  startTime: "2026-02-23T04:51:11Z"
+[kni@ocp-eic-mirror ~]$ 
+
+
+
+
