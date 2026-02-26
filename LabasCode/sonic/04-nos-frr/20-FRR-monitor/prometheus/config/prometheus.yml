@@ -26,5 +26,9 @@ scrape_configs:  #抓取配置
         - r6:9342
     relabel_configs:
       - source_labels: [__address__]
-        regex: '(.*):\d+'
         target_label: instance
+
+#    relabel_configs:
+#      - source_labels: [__address__]
+#        regex: '(.*):\d+'
+#        target_label: instance
