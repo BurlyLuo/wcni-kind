@@ -1,0 +1,70 @@
+cat <<EOF>clab.yaml | clab deploy -t clab.yaml -
+name: ospf
+prefix: ""
+
+topology:
+  kinds:
+    linux:
+      sysctls:
+        net.ipv4.conf.all.forwarding: 1
+        net.ipv6.conf.all.forwarding: 1
+        net.ipv6.conf.default.accept_ra: 0
+        net.ipv6.conf.all.accept_ra: 0
+
+  nodes:
+    leaf1:
+      kind: linux
+      image: quay.io/weiluo/frrouting/frr:10.5.0
+      cmd: sh -c "sed -i '/^ospf6d=/s/no/yes/;/^ospfd=/s/no/yes/' /etc/frr/daemons && /usr/lib/frr/docker-start"
+      binds:
+        - /lib/modules:/lib/modules
+        - ./frr/leaf1.conf:/etc/frr/frr.conf
+      exec:
+        - bash -c "echo 'PS1=\"[\\\\u@\\\\h]\\\\$ \"' > /root/.bashrc"
+        - touch /etc/frr/vtysh.conf
+         
+    leaf2:
+      kind: linux
+      image: quay.io/weiluo/frrouting/frr:10.5.0
+      cmd: sh -c "sed -i '/^ospf6d=/s/no/yes/;/^ospfd=/s/no/yes/' /etc/frr/daemons && /usr/lib/frr/docker-start"
+      binds:
+        - /lib/modules:/lib/modules
+        - ./frr/leaf2.conf:/etc/frr/frr.conf
+      exec:
+        - bash -c "echo 'PS1=\"[\\\\u@\\\\h]\\\\$ \"' > /root/.bashrc"
+        - touch /etc/frr/vtysh.conf
+
+    spine:
+      kind: linux
+      image: quay.io/weiluo/frrouting/frr:10.5.0
+      cmd: sh -c "sed -i '/^ospf6d=/s/no/yes/;/^ospfd=/s/no/yes/' /etc/frr/daemons && /usr/lib/frr/docker-start"
+      binds:
+        - /lib/modules:/lib/modules
+        - ./frr/spine.conf:/etc/frr/frr.conf
+      exec:
+        - bash -c "echo 'PS1=\"[\\\\u@\\\\h]\\\\$ \"' > /root/.bashrc"
+        - touch /etc/frr/vtysh.conf
+
+    vm1:
+      kind: linux
+      image: 192.168.2.100:5000/nettool
+      exec:
+        - ip addr add 10:1:5::10/64 dev eth1
+        - ip l s eth1 add 00:00:10:01:05:10
+        - ip r r default via 10:1:5::254
+
+    vm3:
+      kind: linux
+      image: 192.168.2.100:5000/nettool
+      exec:
+        - ip addr add 10:1:8::10/64 dev eth1
+        - ip l s eth1 add 00:00:10:01:08:10
+        - ip r r default via 10:1:8::254
+
+  links:
+    - endpoints: ["spine:eth1", "leaf1:eth1"]
+    - endpoints: ["spine:eth2", "leaf2:eth1"]
+   
+    - endpoints: ["leaf1:eth2", "vm1:eth1"]
+    - endpoints: ["leaf2:eth2", "vm3:eth1"]
+EOF
