@@ -1,0 +1,36 @@
+---
+brx:
+    username: 
+    password: 
+    platform: bridge
+    hostname: 
+leaf1:
+    username: 
+    password: 
+    platform: linux
+    hostname: 172.20.20.3
+leaf2:
+    username: 
+    password: 
+    platform: linux
+    hostname: 172.20.20.7
+leaf3:
+    username: 
+    password: 
+    platform: linux
+    hostname: 172.20.20.4
+leaf4:
+    username: 
+    password: 
+    platform: linux
+    hostname: 172.20.20.6
+vm1:
+    username: 
+    password: 
+    platform: linux
+    hostname: 172.20.20.2
+vm2:
+    username: 
+    password: 
+    platform: linux
+    hostname: 172.20.20.5
