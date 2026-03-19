@@ -1,0 +1,81 @@
+# 1. BGP报文的状态机变化过程
+# IDEL --- CONNECT [对应启动TCP三次握手：那么对应的则是TCP三次握手的条件：1.路由可达？2.接口状态Up？3.在ebgp的env中，ebgp多跳配置了？]
+
+# CONNECT --- ACTIVE[对应TCP三次握手失败：那么对应的则是TCP握手失败的条件：1.比如端口不可达被FW drop掉了,TTL值过小，更新源不对]
+
+# ACTIVE --- OpenSent[对应TCP三次握手成功：那么对应的则是发BGP的控制消息：Open报文。Open报文主要作用是；携带BGP版本v4/v6，本端AS号，HoldTime信息，BGP标识]
+
+# OpenSent --- OpenConfirm [对应BGP控制消息收到对端对Open报文的确认。]
+
+# OpenConfirm --- ESTABLISHED[对应BGP的Peer建立成功。]
+
+# 2. BGP报文有哪些类型及作用？
+# 1. Open报文：用来携带BGP版本，Local AS号，HoldTime时间，BGP的标识
+# 2. Update报文：用来更新路由条目，增加和删除
+# 3. KeepAlive报文：保活
+# 4. Notification报文：差错控制。比如：clear/reset bgp
+# 5. Route-Refresh报文：刷新路由策略。
+
+# 3. BGP的选路属性？
+# 1. Origin起源属性：igp(i[network进来的路由])>egp(e)>?(import的路由)
+# 2. LocalPre[越大越优先]
+# 3. MED[越小越优先]
+# 4. AS_Path
+
+# 4. BGP怎么防环？
+# 1. AS-Path
+# 2. 水平分割
+# 3. 簇内OriginatorID，簇间Clueter List防环
+
+# 5. next-hop-self
+# next-hop-self 用于 BGP 协议中，在将从 eBGP 邻居学到的外部路由通告给 iBGP 邻居时，将下一跳（Next-Hop）地址修改为本地路由器接口地址。这确保了 AS 内部其他路由器能通过内部路由协议（IGP）找到下一跳，解决了路由不可达的故障，是 IBGP 环境下的必要配置。
+# r1-r2-r3
+# r2 配置neighbor 1.1.1.1 next-hop-self 前:
+# r1 学到的路由:
+#  *>i 3.3.3.3/32       10.1.23.2                0    100      0 ?
+# r2 配置neighbor 1.1.1.1 next-hop-self 后: 
+# r1 学到的路由：
+#  *>i 3.3.3.3/32       2.2.2.2                  0    100      0 ?
+# 到3.3.3.3的下一跳变了。
+
+
+name: i-e-bgp
+prefix: ""
+topology:
+  nodes:
+    r1:
+      # AS 65012
+      kind: linux
+      image: quay.io/weiluo/frrouting/frr:10.5.0
+      cmd: sh -c "sed -i 's/bgpd=no/bgpd=yes/;s/zebra=no/zebra=yes/' /etc/frr/daemons && /usr/lib/frr/docker-start"
+      binds:
+        - ./frr/r1.conf:/etc/frr/frr.conf
+      exec:
+        - bash -c "echo 'PS1=\"[\\\\u@\\\\h]\\\\$ \"' > /root/.bashrc"
+        - touch /etc/frr/vtysh.conf
+
+    r2:
+      # AS 65012
+      kind: linux
+      image: quay.io/weiluo/frrouting/frr:10.5.0
+      cmd: sh -c "sed -i 's/bgpd=no/bgpd=yes/;s/zebra=no/zebra=yes/' /etc/frr/daemons && /usr/lib/frr/docker-start"
+      binds:
+        - ./frr/r2.conf:/etc/frr/frr.conf
+      exec:
+        - bash -c "echo 'PS1=\"[\\\\u@\\\\h]\\\\$ \"' > /root/.bashrc"
+        - touch /etc/frr/vtysh.conf
+
+    r3:
+      # AS 65003
+      kind: linux
+      image: quay.io/weiluo/frrouting/frr:10.5.0
+      cmd: sh -c "sed -i 's/bgpd=no/bgpd=yes/;s/zebra=no/zebra=yes/' /etc/frr/daemons && /usr/lib/frr/docker-start"
+      binds:
+        - ./frr/r3.conf:/etc/frr/frr.conf
+      exec:
+        - bash -c "echo 'PS1=\"[\\\\u@\\\\h]\\\\$ \"' > /root/.bashrc"
+        - touch /etc/frr/vtysh.conf
+
+  links:
+    - endpoints: ["r1:eth1", "r2:eth1"]
+    - endpoints: ["r2:eth2", "r3:eth2"]
