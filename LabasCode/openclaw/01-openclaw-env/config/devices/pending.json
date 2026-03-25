@@ -1,0 +1,23 @@
+{
+  "a12481ef-6197-4b2a-a87c-8ac7d676214b": {
+    "requestId": "a12481ef-6197-4b2a-a87c-8ac7d676214b",
+    "deviceId": "42a4ed33bf98069a8f0c80cc444f631042f765b32e58b75d94ff4337f750a570",
+    "publicKey": "qtTmJ1j8HpvGj7OheBOMnpqgJ86PRX9XrgV7qKup7oM",
+    "platform": "Linux x86_64",
+    "clientId": "openclaw-control-ui",
+    "clientMode": "webchat",
+    "role": "operator",
+    "roles": [
+      "operator"
+    ],
+    "scopes": [
+      "operator.admin",
+      "operator.approvals",
+      "operator.pairing"
+    ],
+    "remoteIp": "172.19.0.1",
+    "silent": false,
+    "isRepair": false,
+    "ts": 1774094908429
+  }
+}

@@ -1,0 +1,65 @@
+{
+  "wizard": {
+    "lastRunAt": "2026-03-21T12:05:28.893Z",
+    "lastRunVersion": "2026.3.13",
+    "lastRunCommand": "onboard",
+    "lastRunMode": "local"
+  },
+  "agents": {
+    "defaults": {
+      "model": {
+        "primary": "anthropic/claude-opus-4-6"
+      },
+      "models": {
+        "anthropic/claude-opus-4-6": {}
+      },
+      "workspace": "/home/node/.openclaw/workspace"
+    }
+  },
+  "tools": {
+    "profile": "coding"
+  },
+  "commands": {
+    "native": "auto",
+    "nativeSkills": "auto",
+    "restart": true,
+    "ownerDisplay": "raw"
+  },
+  "session": {
+    "dmScope": "per-channel-peer"
+  },
+  "gateway": {
+    "port": 18789,
+    "mode": "local",
+    "bind": "lan",
+    "controlUi": {
+      "allowedOrigins": [
+        "http://localhost:18789",
+        "http://127.0.0.1:18789"
+      ]
+    },
+    "auth": {
+      "mode": "password",
+      "password": "Nsn1234!"
+    },
+    "tailscale": {
+      "mode": "off",
+      "resetOnExit": false
+    },
+    "nodes": {
+      "denyCommands": [
+        "camera.snap",
+        "camera.clip",
+        "screen.record",
+        "contacts.add",
+        "calendar.add",
+        "reminders.add",
+        "sms.send"
+      ]
+    }
+  },
+  "meta": {
+    "lastTouchedVersion": "2026.3.13",
+    "lastTouchedAt": "2026-03-21T12:05:28.914Z"
+  }
+}

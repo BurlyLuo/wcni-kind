@@ -1,0 +1,4 @@
+export OPENCLAW_HOME_VOLUME="openclaw_home"
+export OPENCLAW_IMAGE="ghcr.io/openclaw/openclaw:2026.3.13-1-amd64"
+export OPENCLAW_CONFIG_DIR="./config"
+export OPENCLAW_WORKSPACE_DIR="./workspace"
