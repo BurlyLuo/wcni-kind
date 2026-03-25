@@ -1,0 +1,44 @@
+# 1. 基于Loopback接口建立eBGP邻居 (最常见)
+# 原因：直连接口（Physical Interface）如果Down掉，BGP邻居关系立即中断。使用Loopback接口（逻辑接口）建立邻居，只要存在通往该地址的路径（通过IGP，如OSPF/ISIS），邻居关系就会保持稳定。
+# 要求：Loopback地址不直连，必须配置 ebgp-multihop [ttl]，通常将TTL设置为2或更高。
+
+# 2. 混合云与多云互联
+# 场景：本地数据中心（On-Premise）与公有云（AWS Direct Connect, Azure ExpressRoute）通过专线互联。
+# 特点：企业侧的边界路由器和云侧的路由器通常中间隔着服务商的传输网络，物理链路非直连，需要使用多跳建立eBGP。
+
+# 3. 物理链路不直连的跨设备对等体
+# 场景：两个ASBR（自治系统边界路由器）之间并非只有一条物理链路，或者物理链路上存在其他跳数（如负载均衡设备、防火墙）。
+# 特点：eBGP报文需要穿过一个或多个路由器，因此必须使用Multihop。
+
+# 4. 防火墙上使用eBGP
+# 场景：AS间使用安全防火墙作为边界设备。
+# 特点：由于防火墙通常不属于路由的一部分或者采用特殊的物理拓扑，使用Loopback建立eBGP需要Multihop支持。
+ 
+name: ebgp-multihop
+prefix: ""
+topology:
+  nodes:
+    r1:
+      kind: linux
+      image: quay.io/weiluo/frrouting/frr:10.5.0
+      cmd: sh -c "sed -i 's/bgpd=no/bgpd=yes/;s/zebra=no/zebra=yes/' /etc/frr/daemons && /usr/lib/frr/docker-start"
+      binds:
+        - ./frr/r1.conf:/etc/frr/frr.conf
+      exec:
+        - ip link set dev eth1 up
+        - bash -c "echo 'PS1=\"[\\\\u@\\\\h]\\\\$ \"' > /root/.bashrc"
+        - touch /etc/frr/vtysh.conf
+
+    r2:
+      kind: linux
+      image: quay.io/weiluo/frrouting/frr:10.5.0
+      cmd: sh -c "sed -i 's/bgpd=no/bgpd=yes/;s/zebra=no/zebra=yes/' /etc/frr/daemons && /usr/lib/frr/docker-start"
+      binds:
+        - ./frr/r2.conf:/etc/frr/frr.conf
+      exec:
+        - ip link set dev eth1 up
+        - bash -c "echo 'PS1=\"[\\\\u@\\\\h]\\\\$ \"' > /root/.bashrc"
+        - touch /etc/frr/vtysh.conf
+
+  links:
+    - endpoints: ["r1:eth1", "r2:eth1"]

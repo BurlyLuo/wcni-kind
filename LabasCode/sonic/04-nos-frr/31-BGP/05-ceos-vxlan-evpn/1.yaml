@@ -1,0 +1,43 @@
+name: ceos-vxlan-bgp-evpn
+prefix: ""
+topology:
+  nodes:
+    spine1:
+      kind: arista_ceos
+      image: ceos:4.31.5M
+      startup-config: ./startup-conf/spine1.conf
+
+    leaf1:
+      kind: arista_ceos
+      image: ceos:4.31.5M
+      startup-config: ./startup-conf/leaf1.conf
+
+    leaf2:
+      kind: arista_ceos
+      image: ceos:4.31.5M
+      startup-config: ./startup-conf/leaf2.conf
+
+    vm1:
+      kind: linux
+      image: 192.168.2.100:5000/nettool
+      exec:
+        - ip link add link eth1 name eth1.50 type vlan id 50
+        - ip a a 10.50.0.10/24 dev eth1.50
+        - ip l s eth1.50 up
+        - ip r r default via 10.50.0.1
+
+    vm2:
+      kind: linux
+      image: 192.168.2.100:5000/nettool
+      exec:
+        - ip link add link eth1 name eth1.50 type vlan id 50
+        - ip a a 10.50.0.20/24 dev eth1.50
+        - ip l s eth1.50 up
+        - ip r r default via 10.50.0.1
+
+  links:
+    - endpoints: ["spine1:eth1", "leaf1:eth1"]
+    - endpoints: ["spine1:eth2", "leaf2:eth1"]
+    - endpoints: ["leaf1:eth2", "vm1:eth1"]
+    - endpoints: ["leaf2:eth2", "vm2:eth1"]
+

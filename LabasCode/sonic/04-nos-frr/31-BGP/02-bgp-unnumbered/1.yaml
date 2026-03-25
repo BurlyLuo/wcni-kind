@@ -1,0 +1,28 @@
+name: frr-bgp-unnumbered
+prefix: ""
+topology:
+  nodes:
+    r1:
+      kind: linux
+      image: quay.io/weiluo/frrouting/frr:10.5.0
+      cmd: sh -c "sed -i 's/bgpd=no/bgpd=yes/;s/zebra=no/zebra=yes/' /etc/frr/daemons && /usr/lib/frr/docker-start"
+      binds:
+        - ./frr/r1.conf:/etc/frr/frr.conf
+      exec:
+        - ip link set dev eth1 up
+        - bash -c "echo 'PS1=\"[\\\\u@\\\\h]\\\\$ \"' > /root/.bashrc"
+        - touch /etc/frr/vtysh.conf
+
+    r2:
+      kind: linux
+      image: quay.io/weiluo/frrouting/frr:10.5.0
+      cmd: sh -c "sed -i 's/bgpd=no/bgpd=yes/;s/zebra=no/zebra=yes/' /etc/frr/daemons && /usr/lib/frr/docker-start"
+      binds:
+        - ./frr/r2.conf:/etc/frr/frr.conf
+      exec:
+        - ip link set dev eth1 up
+        - bash -c "echo 'PS1=\"[\\\\u@\\\\h]\\\\$ \"' > /root/.bashrc"
+        - touch /etc/frr/vtysh.conf
+
+  links:
+    - endpoints: ["r1:eth1", "r2:eth1"]
