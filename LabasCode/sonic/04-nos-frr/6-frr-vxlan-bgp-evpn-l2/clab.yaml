@@ -1,4 +1,6 @@
 name: vs
+prefix: ""
+
 topology:
   nodes:
     frrbr:
@@ -6,22 +8,28 @@ topology:
    
     spine1:
       kind: linux
-      image: frr:v1
-      cmd: sh -c "sed -i 's/bgpd=no/bgpd=yes/g' /etc/frr/daemons && /usr/lib/frr/docker-start"
+      image: quay.io/weiluo/frrouting/frr:10.5.0
+      cmd: sh -c "sed -i 's/bgpd=no/bgpd=yes/;s/zebra=no/zebra=yes/' /etc/frr/daemons && /usr/lib/frr/docker-start"
       binds:
         - /lib/modules:/lib/modules
         - ./startup-conf/spine1.conf:/etc/frr/frr.conf
       exec:
+        - bash -c "echo 'PS1=\"[\\u@\\h]\\$ \"' > /root/.bashrc"
+        - touch /etc/frr/vtysh.conf
+
         - ip a a 192.168.59.130/24 dev eth1
 
     leaf1:
       kind: linux
-      image: frr:v1
-      cmd: sh -c "sed -i 's/bgpd=no/bgpd=yes/g' /etc/frr/daemons && /usr/lib/frr/docker-start"
+      image: quay.io/weiluo/frrouting/frr:10.5.0
+      cmd: sh -c "sed -i 's/bgpd=no/bgpd=yes/;s/zebra=no/zebra=yes/' /etc/frr/daemons && /usr/lib/frr/docker-start"
       binds:
         - /lib/modules:/lib/modules
         - ./startup-conf/leaf1.conf:/etc/frr/frr.conf
       exec:
+        - bash -c "echo 'PS1=\"[\\u@\\h]\\$ \"' > /root/.bashrc"
+        - touch /etc/frr/vtysh.conf
+
         - ip a a 192.168.59.128/24 dev eth1 
         - ip link add br10 type bridge
         - ip link add vxlan10 type vxlan id 10 local 192.168.59.128 dstport 4789 nolearning
@@ -32,12 +40,15 @@ topology:
 
     leaf2:
       kind: linux
-      image: frr:v1
-      cmd: sh -c "sed -i 's/bgpd=no/bgpd=yes/g' /etc/frr/daemons && /usr/lib/frr/docker-start"
+      image: quay.io/weiluo/frrouting/frr:10.5.0
+      cmd: sh -c "sed -i 's/bgpd=no/bgpd=yes/;s/zebra=no/zebra=yes/' /etc/frr/daemons && /usr/lib/frr/docker-start"
       binds:
         - /lib/modules:/lib/modules
         - ./startup-conf/leaf2.conf:/etc/frr/frr.conf
       exec:
+        - bash -c "echo 'PS1=\"[\\u@\\h]\\$ \"' > /root/.bashrc"
+        - touch /etc/frr/vtysh.conf
+
         - ip a a 192.168.59.129/24 dev eth1
         - ip link add br10 type bridge
         - ip link add vxlan10 type vxlan id 10 local 192.168.59.129 dstport 4789 nolearning
