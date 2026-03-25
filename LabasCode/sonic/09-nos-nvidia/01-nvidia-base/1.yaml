@@ -1,17 +1,20 @@
-name: cvx01
+name: cumulus_vx
+prefix: ""
 
 topology:
   nodes:
     sw1:
       kind: cumulus_cvx
-      image: networkop/cx:4.3.0
+      image: networkop/cx:5.3.0
       binds:
         - startup-conf/sw1/interfaces:/etc/network/interfaces.d/host-mounts
+
     sw2:
-      kind: linux
-      image: quay.io/weiluo/frrouting/frr:10.5.0
+      kind: cumulus_cvx
+      image: networkop/cx:5.3.0
       binds:
-        - startup-conf/sw2/frr.conf:/etc/frr/frr.conf
+        - startup-conf/sw2/interfaces:/etc/network/interfaces.d/host-mounts
 
   links:
-    - endpoints: ["sw1:swp12", "sw2:eth21"]
+    - endpoints: ["sw1:swp12", "sw2:swp12"]
+    - endpoints: ["sw1:swp13", "sw2:swp13"]
