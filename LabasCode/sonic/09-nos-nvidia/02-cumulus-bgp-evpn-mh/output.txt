@@ -1,0 +1,2694 @@
+fw1 | CHANGED | rc=0 >>
+====================
+HOST: 
+fw1
+====================
+--- NV CONFIG ---
+--- IP ADDRESSES ---
+1: lo: <LOOPBACK,UP,LOWER_UP> mtu 65536 qdisc noqueue state UNKNOWN group default qlen 1000
+    link/loopback 00:00:00:00:00:00 brd 00:00:00:00:00:00
+    inet 127.0.0.1/8 scope host lo
+       valid_lft forever preferred_lft forever
+    inet6 ::1/128 scope host 
+       valid_lft forever preferred_lft forever
+2: eth0: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc fq_codel state UP group default qlen 1000
+    link/ether 44:38:39:33:01:03 brd ff:ff:ff:ff:ff:ff
+    altname enp0s8
+    altname ens8
+    inet 192.168.200.20/24 brd 192.168.200.255 scope global dynamic eth0
+       valid_lft 167140sec preferred_lft 167140sec
+    inet6 fe80::4638:39ff:fe33:103/64 scope link 
+       valid_lft forever preferred_lft forever
+3: eth1: <BROADCAST,MULTICAST,PROMISC,UP,LOWER_UP> mtu 1500 qdisc fq_codel state UP group default qlen 1000
+    link/ether 48:b0:2d:09:6f:97 brd ff:ff:ff:ff:ff:ff
+    altname enp0s9
+    altname ens9
+    inet6 fe80::4ab0:2dff:fe09:6f97/64 scope link 
+       valid_lft forever preferred_lft forever
+4: eth2: <BROADCAST,MULTICAST,PROMISC,UP,LOWER_UP> mtu 1500 qdisc fq_codel state UP group default qlen 1000
+    link/ether 48:b0:2d:10:a9:56 brd ff:ff:ff:ff:ff:ff
+    altname enp0s10
+    altname ens10
+    inet6 fe80::4ab0:2dff:fe10:a956/64 scope link 
+       valid_lft forever preferred_lft forever
+--- IP ROUTES ---
+default via 192.168.200.1 dev eth0 
+192.168.200.0/24 dev eth0 proto kernel scope link src 192.168.200.20 
+====================/bin/sh: 1: nv: not found
+fw2 | CHANGED | rc=0 >>
+====================
+HOST: 
+fw2
+====================
+--- NV CONFIG ---
+--- IP ADDRESSES ---
+1: lo: <LOOPBACK,UP,LOWER_UP> mtu 65536 qdisc noqueue state UNKNOWN group default qlen 1000
+    link/loopback 00:00:00:00:00:00 brd 00:00:00:00:00:00
+    inet 127.0.0.1/8 scope host lo
+       valid_lft forever preferred_lft forever
+    inet6 ::1/128 scope host 
+       valid_lft forever preferred_lft forever
+2: eth0: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc fq_codel state UP group default qlen 1000
+    link/ether 44:38:39:33:01:04 brd ff:ff:ff:ff:ff:ff
+    altname enp0s8
+    altname ens8
+    inet 192.168.200.21/24 brd 192.168.200.255 scope global dynamic eth0
+       valid_lft 167150sec preferred_lft 167150sec
+    inet6 fe80::4638:39ff:fe33:104/64 scope link 
+       valid_lft forever preferred_lft forever
+3: eth1: <BROADCAST,MULTICAST,PROMISC,UP,LOWER_UP> mtu 1500 qdisc fq_codel state UP group default qlen 1000
+    link/ether 48:b0:2d:b5:df:9a brd ff:ff:ff:ff:ff:ff
+    altname enp0s9
+    altname ens9
+    inet6 fe80::4ab0:2dff:feb5:df9a/64 scope link 
+       valid_lft forever preferred_lft forever
+4: eth2: <BROADCAST,MULTICAST,PROMISC,UP,LOWER_UP> mtu 1500 qdisc fq_codel state UP group default qlen 1000
+    link/ether 48:b0:2d:6f:b1:fd brd ff:ff:ff:ff:ff:ff
+    altname enp0s10
+    altname ens10
+    inet6 fe80::4ab0:2dff:fe6f:b1fd/64 scope link 
+       valid_lft forever preferred_lft forever
+--- IP ROUTES ---
+default via 192.168.200.1 dev eth0 
+192.168.200.0/24 dev eth0 proto kernel scope link src 192.168.200.21 
+====================/bin/sh: 1: nv: not found
+server01 | CHANGED | rc=0 >>
+====================
+HOST: 
+server01
+====================
+--- NV CONFIG ---
+--- IP ADDRESSES ---
+1: lo: <LOOPBACK,UP,LOWER_UP> mtu 65536 qdisc noqueue state UNKNOWN group default qlen 1000
+    link/loopback 00:00:00:00:00:00 brd 00:00:00:00:00:00
+    inet 127.0.0.1/8 scope host lo
+       valid_lft forever preferred_lft forever
+    inet6 ::1/128 scope host 
+       valid_lft forever preferred_lft forever
+2: eth0: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc fq_codel state UP group default qlen 1000
+    link/ether 44:38:39:11:01:01 brd ff:ff:ff:ff:ff:ff
+    altname enp0s8
+    altname ens8
+    inet 192.168.200.10/24 brd 192.168.200.255 scope global dynamic eth0
+       valid_lft 167185sec preferred_lft 167185sec
+    inet6 fe80::4638:39ff:fe11:101/64 scope link 
+       valid_lft forever preferred_lft forever
+3: eth1: <BROADCAST,MULTICAST,PROMISC,SLAVE,UP,LOWER_UP> mtu 9216 qdisc fq_codel master uplink state UP group default qlen 1000
+    link/ether 7a:94:af:28:d6:85 brd ff:ff:ff:ff:ff:ff permaddr 48:b0:2d:01:1b:f6
+    altname enp0s9
+    altname ens9
+4: eth2: <BROADCAST,MULTICAST,PROMISC,SLAVE,UP,LOWER_UP> mtu 9216 qdisc fq_codel master uplink state UP group default qlen 1000
+    link/ether 7a:94:af:28:d6:85 brd ff:ff:ff:ff:ff:ff permaddr 48:b0:2d:b6:75:f1
+    altname enp0s10
+    altname ens10
+5: uplink: <BROADCAST,MULTICAST,MASTER,UP,LOWER_UP> mtu 9216 qdisc noqueue state UP group default qlen 1000
+    link/ether 7a:94:af:28:d6:85 brd ff:ff:ff:ff:ff:ff
+    inet 10.1.10.101/24 scope global uplink
+       valid_lft forever preferred_lft forever
+    inet6 fe80::7894:afff:fe28:d685/64 scope link 
+       valid_lft forever preferred_lft forever
+--- IP ROUTES ---
+default via 192.168.200.1 dev eth0 
+10.0.0.0/8 via 10.1.10.1 dev uplink 
+10.1.10.0/24 dev uplink proto kernel scope link src 10.1.10.101 
+192.168.200.0/24 dev eth0 proto kernel scope link src 192.168.200.10 
+====================/bin/sh: 1: nv: not found
+server03 | CHANGED | rc=0 >>
+====================
+HOST: 
+server03
+====================
+--- NV CONFIG ---
+--- IP ADDRESSES ---
+1: lo: <LOOPBACK,UP,LOWER_UP> mtu 65536 qdisc noqueue state UNKNOWN group default qlen 1000
+    link/loopback 00:00:00:00:00:00 brd 00:00:00:00:00:00
+    inet 127.0.0.1/8 scope host lo
+       valid_lft forever preferred_lft forever
+    inet6 ::1/128 scope host 
+       valid_lft forever preferred_lft forever
+2: eth0: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc fq_codel state UP group default qlen 1000
+    link/ether 44:38:39:11:01:03 brd ff:ff:ff:ff:ff:ff
+    altname enp0s8
+    altname ens8
+    inet 192.168.200.12/24 metric 100 brd 192.168.200.255 scope global dynamic eth0
+       valid_lft 168166sec preferred_lft 168166sec
+    inet6 fe80::4638:39ff:fe11:103/64 scope link 
+       valid_lft forever preferred_lft forever
+3: eth1: <BROADCAST,MULTICAST,PROMISC,SLAVE,UP,LOWER_UP> mtu 9216 qdisc fq_codel master uplink state UP group default qlen 1000
+    link/ether 02:3b:cf:65:a7:81 brd ff:ff:ff:ff:ff:ff permaddr 48:b0:2d:70:9d:90
+    altname enp0s9
+    altname ens9
+4: eth2: <BROADCAST,MULTICAST,PROMISC,SLAVE,UP,LOWER_UP> mtu 9216 qdisc fq_codel master uplink state UP group default qlen 1000
+    link/ether 02:3b:cf:65:a7:81 brd ff:ff:ff:ff:ff:ff permaddr 48:b0:2d:15:95:54
+    altname enp0s10
+    altname ens10
+5: uplink: <BROADCAST,MULTICAST,MASTER,UP,LOWER_UP> mtu 9216 qdisc noqueue state UP group default qlen 1000
+    link/ether 02:3b:cf:65:a7:81 brd ff:ff:ff:ff:ff:ff
+    inet 10.1.30.103/24 scope global uplink
+       valid_lft forever preferred_lft forever
+    inet6 fe80::3b:cfff:fe65:a781/64 scope link 
+       valid_lft forever preferred_lft forever
+--- IP ROUTES ---
+default via 192.168.200.1 dev eth0 proto dhcp src 192.168.200.12 metric 100 
+10.0.0.0/8 via 10.1.30.1 dev uplink 
+10.1.30.0/24 dev uplink proto kernel scope link src 10.1.30.103 
+192.168.200.0/24 dev eth0 proto kernel scope link src 192.168.200.12 metric 100 
+192.168.200.1 dev eth0 proto dhcp scope link src 192.168.200.12 metric 100 
+====================/bin/sh: 1: nv: not found
+server04 | CHANGED | rc=0 >>
+====================
+HOST: 
+server04
+====================
+--- NV CONFIG ---
+--- IP ADDRESSES ---
+1: lo: <LOOPBACK,UP,LOWER_UP> mtu 65536 qdisc noqueue state UNKNOWN group default qlen 1000
+    link/loopback 00:00:00:00:00:00 brd 00:00:00:00:00:00
+    inet 127.0.0.1/8 scope host lo
+       valid_lft forever preferred_lft forever
+    inet6 ::1/128 scope host 
+       valid_lft forever preferred_lft forever
+2: eth0: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc fq_codel state UP group default qlen 1000
+    link/ether 44:38:39:11:01:04 brd ff:ff:ff:ff:ff:ff
+    altname enp0s8
+    altname ens8
+    inet 192.168.200.13/24 brd 192.168.200.255 scope global dynamic eth0
+       valid_lft 167184sec preferred_lft 167184sec
+    inet6 fe80::4638:39ff:fe11:104/64 scope link 
+       valid_lft forever preferred_lft forever
+3: eth1: <BROADCAST,MULTICAST,PROMISC,SLAVE,UP,LOWER_UP> mtu 9216 qdisc fq_codel master uplink state UP group default qlen 1000
+    link/ether 92:16:99:ee:00:e7 brd ff:ff:ff:ff:ff:ff permaddr 48:b0:2d:69:1a:56
+    altname enp0s9
+    altname ens9
+4: eth2: <BROADCAST,MULTICAST,PROMISC,SLAVE,UP,LOWER_UP> mtu 9216 qdisc fq_codel master uplink state UP group default qlen 1000
+    link/ether 92:16:99:ee:00:e7 brd ff:ff:ff:ff:ff:ff permaddr 48:b0:2d:0d:27:08
+    altname enp0s10
+    altname ens10
+5: uplink: <BROADCAST,MULTICAST,MASTER,UP,LOWER_UP> mtu 9216 qdisc noqueue state UP group default qlen 1000
+    link/ether 92:16:99:ee:00:e7 brd ff:ff:ff:ff:ff:ff
+    inet 10.1.10.104/24 scope global uplink
+       valid_lft forever preferred_lft forever
+    inet6 fe80::9016:99ff:feee:e7/64 scope link 
+       valid_lft forever preferred_lft forever
+--- IP ROUTES ---
+default via 192.168.200.1 dev eth0 
+10.0.0.0/8 via 10.1.10.1 dev uplink 
+10.1.10.0/24 dev uplink proto kernel scope link src 10.1.10.104 
+192.168.200.0/24 dev eth0 proto kernel scope link src 192.168.200.13 
+====================/bin/sh: 1: nv: not found
+server02 | CHANGED | rc=0 >>
+====================
+HOST: 
+server02
+====================
+--- NV CONFIG ---
+--- IP ADDRESSES ---
+1: lo: <LOOPBACK,UP,LOWER_UP> mtu 65536 qdisc noqueue state UNKNOWN group default qlen 1000
+    link/loopback 00:00:00:00:00:00 brd 00:00:00:00:00:00
+    inet 127.0.0.1/8 scope host lo
+       valid_lft forever preferred_lft forever
+    inet6 ::1/128 scope host 
+       valid_lft forever preferred_lft forever
+2: eth0: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc fq_codel state UP group default qlen 1000
+    link/ether 44:38:39:11:01:02 brd ff:ff:ff:ff:ff:ff
+    altname enp0s8
+    altname ens8
+    inet 192.168.200.11/24 brd 192.168.200.255 scope global dynamic eth0
+       valid_lft 167149sec preferred_lft 167149sec
+    inet6 fe80::4638:39ff:fe11:102/64 scope link 
+       valid_lft forever preferred_lft forever
+3: eth1: <BROADCAST,MULTICAST,PROMISC,SLAVE,UP,LOWER_UP> mtu 9216 qdisc fq_codel master uplink state UP group default qlen 1000
+    link/ether c6:ca:94:67:06:26 brd ff:ff:ff:ff:ff:ff permaddr 48:b0:2d:0e:17:a1
+    altname enp0s9
+    altname ens9
+4: eth2: <BROADCAST,MULTICAST,PROMISC,SLAVE,UP,LOWER_UP> mtu 9216 qdisc fq_codel master uplink state UP group default qlen 1000
+    link/ether c6:ca:94:67:06:26 brd ff:ff:ff:ff:ff:ff permaddr 48:b0:2d:2c:8b:d8
+    altname enp0s10
+    altname ens10
+5: uplink: <BROADCAST,MULTICAST,MASTER,UP,LOWER_UP> mtu 9216 qdisc noqueue state UP group default qlen 1000
+    link/ether c6:ca:94:67:06:26 brd ff:ff:ff:ff:ff:ff
+    inet 10.1.20.102/24 scope global uplink
+       valid_lft forever preferred_lft forever
+    inet6 fe80::c4ca:94ff:fe67:626/64 scope link 
+       valid_lft forever preferred_lft forever
+--- IP ROUTES ---
+default via 192.168.200.1 dev eth0 
+10.0.0.0/8 via 10.1.20.1 dev uplink 
+10.1.20.0/24 dev uplink proto kernel scope link src 10.1.20.102 
+192.168.200.0/24 dev eth0 proto kernel scope link src 192.168.200.11 
+====================/bin/sh: 1: nv: not found
+server06 | CHANGED | rc=0 >>
+====================
+HOST: 
+server06
+====================
+--- NV CONFIG ---
+--- IP ADDRESSES ---
+1: lo: <LOOPBACK,UP,LOWER_UP> mtu 65536 qdisc noqueue state UNKNOWN group default qlen 1000
+    link/loopback 00:00:00:00:00:00 brd 00:00:00:00:00:00
+    inet 127.0.0.1/8 scope host lo
+       valid_lft forever preferred_lft forever
+    inet6 ::1/128 scope host 
+       valid_lft forever preferred_lft forever
+2: eth0: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc fq_codel state UP group default qlen 1000
+    link/ether 44:38:39:11:01:06 brd ff:ff:ff:ff:ff:ff
+    altname enp0s8
+    altname ens8
+    inet 192.168.200.15/24 brd 192.168.200.255 scope global dynamic eth0
+       valid_lft 167129sec preferred_lft 167129sec
+    inet6 fe80::4638:39ff:fe11:106/64 scope link 
+       valid_lft forever preferred_lft forever
+3: eth1: <BROADCAST,MULTICAST,PROMISC,SLAVE,UP,LOWER_UP> mtu 9216 qdisc fq_codel master uplink state UP group default qlen 1000
+    link/ether 06:01:36:75:6c:72 brd ff:ff:ff:ff:ff:ff permaddr 48:b0:2d:8e:62:b1
+    altname enp0s9
+    altname ens9
+4: eth2: <BROADCAST,MULTICAST,PROMISC,SLAVE,UP,LOWER_UP> mtu 9216 qdisc fq_codel master uplink state UP group default qlen 1000
+    link/ether 06:01:36:75:6c:72 brd ff:ff:ff:ff:ff:ff permaddr 48:b0:2d:97:e4:86
+    altname enp0s10
+    altname ens10
+5: uplink: <BROADCAST,MULTICAST,MASTER,UP,LOWER_UP> mtu 9216 qdisc noqueue state UP group default qlen 1000
+    link/ether 06:01:36:75:6c:72 brd ff:ff:ff:ff:ff:ff
+    inet 10.1.30.106/24 scope global uplink
+       valid_lft forever preferred_lft forever
+    inet6 fe80::401:36ff:fe75:6c72/64 scope link 
+       valid_lft forever preferred_lft forever
+--- IP ROUTES ---
+default via 192.168.200.1 dev eth0 
+10.0.0.0/8 via 10.1.30.1 dev uplink 
+10.1.30.0/24 dev uplink proto kernel scope link src 10.1.30.106 
+192.168.200.0/24 dev eth0 proto kernel scope link src 192.168.200.15 
+====================/bin/sh: 1: nv: not found
+server05 | CHANGED | rc=0 >>
+====================
+HOST: 
+server05
+====================
+--- NV CONFIG ---
+--- IP ADDRESSES ---
+1: lo: <LOOPBACK,UP,LOWER_UP> mtu 65536 qdisc noqueue state UNKNOWN group default qlen 1000
+    link/loopback 00:00:00:00:00:00 brd 00:00:00:00:00:00
+    inet 127.0.0.1/8 scope host lo
+       valid_lft forever preferred_lft forever
+    inet6 ::1/128 scope host 
+       valid_lft forever preferred_lft forever
+2: eth0: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc fq_codel state UP group default qlen 1000
+    link/ether 44:38:39:11:01:05 brd ff:ff:ff:ff:ff:ff
+    altname enp0s8
+    altname ens8
+    inet 192.168.200.14/24 brd 192.168.200.255 scope global dynamic eth0
+       valid_lft 167130sec preferred_lft 167130sec
+    inet6 fe80::4638:39ff:fe11:105/64 scope link 
+       valid_lft forever preferred_lft forever
+3: eth1: <BROADCAST,MULTICAST,PROMISC,SLAVE,UP,LOWER_UP> mtu 9216 qdisc fq_codel master uplink state UP group default qlen 1000
+    link/ether 3a:4b:2b:f6:08:da brd ff:ff:ff:ff:ff:ff permaddr 48:b0:2d:98:ae:27
+    altname enp0s9
+    altname ens9
+4: eth2: <BROADCAST,MULTICAST,PROMISC,SLAVE,UP,LOWER_UP> mtu 9216 qdisc fq_codel master uplink state UP group default qlen 1000
+    link/ether 3a:4b:2b:f6:08:da brd ff:ff:ff:ff:ff:ff permaddr 48:b0:2d:3e:31:29
+    altname enp0s10
+    altname ens10
+5: uplink: <BROADCAST,MULTICAST,MASTER,UP,LOWER_UP> mtu 9216 qdisc noqueue state UP group default qlen 1000
+    link/ether 3a:4b:2b:f6:08:da brd ff:ff:ff:ff:ff:ff
+    inet 10.1.20.105/24 scope global uplink
+       valid_lft forever preferred_lft forever
+    inet6 fe80::384b:2bff:fef6:8da/64 scope link 
+       valid_lft forever preferred_lft forever
+--- IP ROUTES ---
+default via 192.168.200.1 dev eth0 
+10.0.0.0/8 via 10.1.20.1 dev uplink 
+10.1.20.0/24 dev uplink proto kernel scope link src 10.1.20.105 
+192.168.200.0/24 dev eth0 proto kernel scope link src 192.168.200.14 
+====================/bin/sh: 1: nv: not found
+server08 | CHANGED | rc=0 >>
+====================
+HOST: 
+server08
+====================
+--- NV CONFIG ---
+--- IP ADDRESSES ---
+1: lo: <LOOPBACK,UP,LOWER_UP> mtu 65536 qdisc noqueue state UNKNOWN group default qlen 1000
+    link/loopback 00:00:00:00:00:00 brd 00:00:00:00:00:00
+    inet 127.0.0.1/8 scope host lo
+       valid_lft forever preferred_lft forever
+    inet6 ::1/128 scope host 
+       valid_lft forever preferred_lft forever
+2: eth0: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc fq_codel state UP group default qlen 1000
+    link/ether 44:38:39:11:01:08 brd ff:ff:ff:ff:ff:ff
+    altname enp0s8
+    altname ens8
+    inet 192.168.200.19/24 brd 192.168.200.255 scope global dynamic eth0
+       valid_lft 167132sec preferred_lft 167132sec
+    inet6 fe80::4638:39ff:fe11:108/64 scope link 
+       valid_lft forever preferred_lft forever
+3: eth1: <BROADCAST,MULTICAST,PROMISC,UP,LOWER_UP> mtu 1500 qdisc fq_codel state UP group default qlen 1000
+    link/ether 48:b0:2d:1f:5c:9b brd ff:ff:ff:ff:ff:ff
+    altname enp0s9
+    altname ens9
+    inet6 fe80::4ab0:2dff:fe1f:5c9b/64 scope link 
+       valid_lft forever preferred_lft forever
+4: eth2: <BROADCAST,MULTICAST,PROMISC,UP,LOWER_UP> mtu 1500 qdisc fq_codel state UP group default qlen 1000
+    link/ether 48:b0:2d:61:98:0f brd ff:ff:ff:ff:ff:ff
+    altname enp0s10
+    altname ens10
+    inet6 fe80::4ab0:2dff:fe61:980f/64 scope link 
+       valid_lft forever preferred_lft forever
+--- IP ROUTES ---
+default via 192.168.200.1 dev eth0 
+192.168.200.0/24 dev eth0 proto kernel scope link src 192.168.200.19 
+====================/bin/sh: 1: nv: not found
+server07 | CHANGED | rc=0 >>
+====================
+HOST: 
+server07
+====================
+--- NV CONFIG ---
+--- IP ADDRESSES ---
+1: lo: <LOOPBACK,UP,LOWER_UP> mtu 65536 qdisc noqueue state UNKNOWN group default qlen 1000
+    link/loopback 00:00:00:00:00:00 brd 00:00:00:00:00:00
+    inet 127.0.0.1/8 scope host lo
+       valid_lft forever preferred_lft forever
+    inet6 ::1/128 scope host 
+       valid_lft forever preferred_lft forever
+2: eth0: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc fq_codel state UP group default qlen 1000
+    link/ether 44:38:39:11:01:07 brd ff:ff:ff:ff:ff:ff
+    altname enp0s8
+    altname ens8
+    inet 192.168.200.18/24 brd 192.168.200.255 scope global dynamic eth0
+       valid_lft 167129sec preferred_lft 167129sec
+    inet6 fe80::4638:39ff:fe11:107/64 scope link 
+       valid_lft forever preferred_lft forever
+3: eth1: <BROADCAST,MULTICAST,PROMISC,UP,LOWER_UP> mtu 1500 qdisc fq_codel state UP group default qlen 1000
+    link/ether 48:b0:2d:a1:a5:e8 brd ff:ff:ff:ff:ff:ff
+    altname enp0s9
+    altname ens9
+    inet6 fe80::4ab0:2dff:fea1:a5e8/64 scope link 
+       valid_lft forever preferred_lft forever
+4: eth2: <BROADCAST,MULTICAST,PROMISC,UP,LOWER_UP> mtu 1500 qdisc fq_codel state UP group default qlen 1000
+    link/ether 48:b0:2d:78:93:d6 brd ff:ff:ff:ff:ff:ff
+    altname enp0s10
+    altname ens10
+    inet6 fe80::4ab0:2dff:fe78:93d6/64 scope link 
+       valid_lft forever preferred_lft forever
+--- IP ROUTES ---
+default via 192.168.200.1 dev eth0 
+192.168.200.0/24 dev eth0 proto kernel scope link src 192.168.200.18 
+====================/bin/sh: 1: nv: not found
+leaf03 | CHANGED | rc=0 >>
+====================
+HOST: 
+leaf03
+====================
+--- NV CONFIG ---
+nv set bridge domain br_default type vlan-aware
+nv set bridge domain br_default vlan 10 vni 10 flooding enable on
+nv set bridge domain br_default vlan 10 vni 10 flooding multicast-group 224.1.1.10
+nv set bridge domain br_default vlan 20 vni 20 flooding enable on
+nv set bridge domain br_default vlan 20 vni 20 flooding multicast-group 224.1.1.20
+nv set bridge domain br_default vlan 30 vni 30 flooding enable on
+nv set bridge domain br_default vlan 30 vni 30 flooding multicast-group 224.1.1.30
+nv set evpn enable on
+nv set evpn multihoming enable on
+nv set evpn multihoming startup-delay 10
+nv set evpn route-advertise svi-ip on
+nv set interface bond1 bond member swp1
+nv set interface bond1 bridge domain br_default access 10
+nv set interface bond1 evpn multihoming segment local-id 1
+nv set interface bond1-3 bond lacp-bypass on
+nv set interface bond1-3 bond mode lacp
+nv set interface bond1-3 bridge domain br_default stp admin-edge on
+nv set interface bond1-3 bridge domain br_default stp auto-edge on
+nv set interface bond1-3 bridge domain br_default stp bpdu-guard on
+nv set interface bond1-3 evpn multihoming segment df-preference 50000
+nv set interface bond1-3 evpn multihoming segment enable on
+nv set interface bond1-3 evpn multihoming segment mac-address 44:38:39:BE:EF:BB
+nv set interface bond1-3 link mtu 9216
+nv set interface bond1-3 type bond
+nv set interface bond2 bond member swp2
+nv set interface bond2 bridge domain br_default access 20
+nv set interface bond2 evpn multihoming segment local-id 2
+nv set interface bond3 bond member swp3
+nv set interface bond3 bridge domain br_default access 30
+nv set interface bond3 evpn multihoming segment local-id 3
+nv set interface eth0 ip address 192.168.200.8/24
+nv set interface eth0 ip vrf mgmt
+nv set interface eth0 type eth
+nv set interface lo ip address 10.10.10.3/32
+nv set interface lo router pim address-family ipv4-unicast use-source 10.10.10.3
+nv set interface lo type loopback
+nv set interface lo,swp51-54,vlan10,20,30 router pim enable on
+nv set interface swp51-54 evpn multihoming uplink on
+nv set interface swp51-54 link state up
+nv set interface swp51-54 type swp
+nv set interface vlan10 ip address 10.1.10.4/24
+nv set interface vlan10 ip vrr address 10.1.10.1/24
+nv set interface vlan10 ip vrr mac-address 00:00:00:00:00:10
+nv set interface vlan10 vlan 10
+nv set interface vlan10,20 ip vrf RED
+nv set interface vlan10,20,30 ip igmp enable on
+nv set interface vlan10,20,30 ip vrr enable on
+nv set interface vlan10,20,30 ip vrr state up
+nv set interface vlan10,20,30 type svi
+nv set interface vlan20 ip address 10.1.20.4/24
+nv set interface vlan20 ip vrr address 10.1.20.1/24
+nv set interface vlan20 ip vrr mac-address 00:00:00:00:00:20
+nv set interface vlan20 vlan 20
+nv set interface vlan30 ip address 10.1.30.4/24
+nv set interface vlan30 ip vrf BLUE
+nv set interface vlan30 ip vrr address 10.1.30.1/24
+nv set interface vlan30 ip vrr mac-address 00:00:00:00:00:30
+nv set interface vlan30 vlan 30
+nv set nve vxlan arp-nd-suppress on
+nv set nve vxlan enable on
+nv set nve vxlan source address 10.10.10.3
+nv set router bgp enable on
+nv set router bgp graceful-restart mode helper-only
+nv set router pim enable on
+nv set router pim timers keepalive 3600
+nv set router vrr enable on
+nv set service dns mgmt server 1.1.1.1
+nv set service dns mgmt server 8.8.8.8
+nv set service ntp mgmt server 0.cumulusnetworks.pool.ntp.org iburst on
+nv set service ntp mgmt server 1.cumulusnetworks.pool.ntp.org iburst on
+nv set service ntp mgmt server 2.cumulusnetworks.pool.ntp.org iburst on
+nv set service ntp mgmt server 3.cumulusnetworks.pool.ntp.org iburst on
+nv set service syslog mgmt server 192.168.200.1
+nv set system aaa class nvapply action allow
+nv set system aaa class nvapply command-path / permission all
+nv set system aaa class nvshow action allow
+nv set system aaa class nvshow command-path / permission ro
+nv set system aaa class sudo action allow
+nv set system aaa class sudo command-path / permission all
+nv set system aaa role nvue-admin class nvapply
+nv set system aaa role nvue-monitor class nvshow
+nv set system aaa role system-admin class nvapply
+nv set system aaa role system-admin class sudo
+nv set system aaa user cumulus full-name cumulus
+nv set system aaa user cumulus hashed-password '*'
+nv set system aaa user cumulus role system-admin
+nv set system api state enabled
+nv set system config auto-save state enabled
+nv set system control-plane acl acl-default-dos inbound
+nv set system control-plane acl acl-default-whitelist inbound
+nv set system global anycast-mac 44:38:39:BE:EF:BB
+nv set system hostname leaf03
+nv set system message post-login '##################################################################################### 
+#                     You are successfully logged in to: leaf03                     # 
+#####################################################################################'
+nv set system message pre-login '##################################################################################### 
+#  Welcome to NVIDIA Cumulus VX (TM) 5.12.0                                            # 
+#  NVIDIA Cumulus VX (TM) is a community supported virtual appliance designed       # 
+#  for experiencing, testing and prototyping NVIDIA Cumulus'"'"' latest technology.     # 
+#  For any questions or technical support, visit our community site at:             # 
+#  https://www.nvidia.com/en-us/support                                             # 
+#####################################################################################'
+nv set system reboot mode cold
+nv set system snmp-server listening-address all vrf mgmt
+nv set system snmp-server listening-address all-v6 vrf mgmt
+nv set system snmp-server readonly-community '$nvsec$9cb7a999fcb470bcd67cf6b040983cbc' access any
+nv set system snmp-server state enabled
+nv set system ssh-server state enabled
+nv set vrf BLUE evpn enable on
+nv set vrf BLUE evpn vni 4002
+nv set vrf BLUE router bgp address-family ipv4-unicast enable on
+nv set vrf BLUE router bgp address-family ipv4-unicast redistribute connected enable on
+nv set vrf BLUE router bgp address-family l2vpn-evpn enable on
+nv set vrf BLUE router bgp autonomous-system 65103
+nv set vrf BLUE router bgp enable on
+nv set vrf BLUE router bgp router-id 10.10.10.3
+nv set vrf RED evpn enable on
+nv set vrf RED evpn vni 4001
+nv set vrf RED router bgp address-family ipv4-unicast enable on
+nv set vrf RED router bgp address-family ipv4-unicast redistribute connected enable on
+nv set vrf RED router bgp address-family l2vpn-evpn enable on
+nv set vrf RED router bgp autonomous-system 65103
+nv set vrf RED router bgp enable on
+nv set vrf RED router bgp router-id 10.10.10.3
+nv set vrf default router bgp address-family ipv4-unicast enable on
+nv set vrf default router bgp address-family ipv4-unicast redistribute connected enable on
+nv set vrf default router bgp address-family l2vpn-evpn enable on
+nv set vrf default router bgp autonomous-system 65103
+nv set vrf default router bgp enable on
+nv set vrf default router bgp neighbor swp51 peer-group underlay
+nv set vrf default router bgp neighbor swp51 type unnumbered
+nv set vrf default router bgp neighbor swp52 peer-group underlay
+nv set vrf default router bgp neighbor swp52 type unnumbered
+nv set vrf default router bgp neighbor swp53 peer-group underlay
+nv set vrf default router bgp neighbor swp53 type unnumbered
+nv set vrf default router bgp neighbor swp54 peer-group underlay
+nv set vrf default router bgp neighbor swp54 type unnumbered
+nv set vrf default router bgp peer-group underlay address-family l2vpn-evpn enable on
+nv set vrf default router bgp peer-group underlay bfd detect-multiplier 3
+nv set vrf default router bgp peer-group underlay bfd enable on
+nv set vrf default router bgp peer-group underlay bfd min-rx-interval 300
+nv set vrf default router bgp peer-group underlay bfd min-tx-interval 300
+nv set vrf default router bgp peer-group underlay remote-as external
+nv set vrf default router bgp router-id 10.10.10.3
+nv set vrf default router pim address-family ipv4 rp 10.10.100.100 group-range 224.1.1.0/24
+nv set vrf default router pim ecmp enable on
+nv set vrf default router pim enable on
+nv set vrf mgmt router static 0.0.0.0/0 address-family ipv4-unicast
+nv set vrf mgmt router static 0.0.0.0/0 via 192.168.200.1 type ipv4-address
+--- IP ADDRESSES ---
+1: lo: <LOOPBACK,UP,LOWER_UP> mtu 65536 qdisc noqueue state UNKNOWN group default qlen 1000
+    link/loopback 00:00:00:00:00:00 brd 00:00:00:00:00:00
+    inet 127.0.0.1/8 scope host lo
+       valid_lft forever preferred_lft forever
+    inet 10.10.10.3/32 scope global lo
+       valid_lft forever preferred_lft forever
+    inet6 ::1/128 scope host noprefixroute 
+       valid_lft forever preferred_lft forever
+2: eth0: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc pfifo_fast master mgmt state UP group default qlen 1000
+    link/ether 44:38:39:22:01:03 brd ff:ff:ff:ff:ff:ff
+    inet 192.168.200.8/24 scope global eth0
+       valid_lft forever preferred_lft forever
+    inet6 fe80::4638:39ff:fe22:103/64 scope link 
+       valid_lft forever preferred_lft forever
+3: swp1: <BROADCAST,MULTICAST,SLAVE,UP,LOWER_UP> mtu 9216 qdisc pfifo_fast master bond1 state UP group default qlen 1000
+    link/ether 48:b0:2d:21:e3:03 brd ff:ff:ff:ff:ff:ff
+4: swp2: <BROADCAST,MULTICAST,SLAVE,UP,LOWER_UP> mtu 9216 qdisc pfifo_fast master bond2 state UP group default qlen 1000
+    link/ether 48:b0:2d:56:31:bc brd ff:ff:ff:ff:ff:ff
+5: swp3: <BROADCAST,MULTICAST,SLAVE,UP,LOWER_UP> mtu 9216 qdisc pfifo_fast master bond3 state UP group default qlen 1000
+    link/ether 48:b0:2d:1c:d8:e2 brd ff:ff:ff:ff:ff:ff
+6: swp49: <BROADCAST,MULTICAST> mtu 1500 qdisc pfifo_fast state DOWN group default qlen 1000
+    link/ether 48:b0:2d:da:b4:93 brd ff:ff:ff:ff:ff:ff
+7: swp50: <BROADCAST,MULTICAST> mtu 1500 qdisc pfifo_fast state DOWN group default qlen 1000
+    link/ether 48:b0:2d:8f:17:49 brd ff:ff:ff:ff:ff:ff
+8: swp51: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 9216 qdisc pfifo_fast state UP group default qlen 1000
+    link/ether 48:b0:2d:1e:75:79 brd ff:ff:ff:ff:ff:ff
+    inet6 fe80::4ab0:2dff:fe1e:7579/64 scope link 
+       valid_lft forever preferred_lft forever
+9: swp52: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 9216 qdisc pfifo_fast state UP group default qlen 1000
+    link/ether 48:b0:2d:6b:9e:28 brd ff:ff:ff:ff:ff:ff
+    inet6 fe80::4ab0:2dff:fe6b:9e28/64 scope link 
+       valid_lft forever preferred_lft forever
+10: swp53: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 9216 qdisc pfifo_fast state UP group default qlen 1000
+    link/ether 48:b0:2d:67:7c:44 brd ff:ff:ff:ff:ff:ff
+    inet6 fe80::4ab0:2dff:fe67:7c44/64 scope link 
+       valid_lft forever preferred_lft forever
+11: swp54: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 9216 qdisc pfifo_fast state UP group default qlen 1000
+    link/ether 48:b0:2d:ea:3c:90 brd ff:ff:ff:ff:ff:ff
+    inet6 fe80::4ab0:2dff:feea:3c90/64 scope link 
+       valid_lft forever preferred_lft forever
+12: mgmt: <NOARP,MASTER,UP,LOWER_UP> mtu 65575 qdisc noqueue state UP group default qlen 1000
+    link/ether 4a:3b:7b:e9:97:b3 brd ff:ff:ff:ff:ff:ff
+    inet 127.0.0.1/8 scope host mgmt
+       valid_lft forever preferred_lft forever
+    inet 127.0.1.1/8 scope host secondary mgmt
+       valid_lft forever preferred_lft forever
+    inet6 ::1/128 scope host 
+       valid_lft forever preferred_lft forever
+13: bond1: <BROADCAST,MULTICAST,MASTER,UP,LOWER_UP> mtu 9216 qdisc noqueue master br_default state UP group default qlen 1000
+    link/ether 48:b0:2d:21:e3:03 brd ff:ff:ff:ff:ff:ff
+14: bond3: <BROADCAST,MULTICAST,MASTER,UP,LOWER_UP> mtu 9216 qdisc noqueue master br_default state UP group default qlen 1000
+    link/ether 48:b0:2d:1c:d8:e2 brd ff:ff:ff:ff:ff:ff
+15: ipmr-lo: <BROADCAST,NOARP,UP,LOWER_UP> mtu 16000 qdisc noqueue state UNKNOWN group default qlen 1000
+    link/ether c6:a0:df:e8:f3:5f brd ff:ff:ff:ff:ff:ff
+    inet6 fe80::c4a0:dfff:fee8:f35f/64 scope link 
+       valid_lft forever preferred_lft forever
+16: vxlan48: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 9216 qdisc noqueue master br_default state UNKNOWN group default qlen 1000
+    link/ether e2:f5:7c:63:2b:66 brd ff:ff:ff:ff:ff:ff
+    inet6 fe80::e0f5:7cff:fe63:2b66/64 scope link 
+       valid_lft forever preferred_lft forever
+17: bond2: <BROADCAST,MULTICAST,MASTER,UP,LOWER_UP> mtu 9216 qdisc noqueue master br_default state UP group default qlen 1000
+    link/ether 48:b0:2d:56:31:bc brd ff:ff:ff:ff:ff:ff
+18: br_default: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 9216 qdisc noqueue state UP group default qlen 1000
+    link/ether 44:38:39:22:01:0d brd ff:ff:ff:ff:ff:ff
+    inet6 fe80::4638:39ff:fe22:10d/64 scope link 
+       valid_lft forever preferred_lft forever
+19: vlan30@br_default: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 9216 qdisc noqueue master BLUE state UP group default qlen 1000
+    link/ether 44:38:39:22:01:0d brd ff:ff:ff:ff:ff:ff
+    inet 10.1.30.4/24 scope global vlan30
+       valid_lft forever preferred_lft forever
+    inet6 fe80::4638:39ff:fe22:10d/64 scope link 
+       valid_lft forever preferred_lft forever
+20: BLUE: <NOARP,MASTER,UP,LOWER_UP> mtu 65575 qdisc noqueue state UP group default qlen 1000
+    link/ether ba:1f:d6:d5:36:04 brd ff:ff:ff:ff:ff:ff
+    inet 127.0.0.1/8 scope host BLUE
+       valid_lft forever preferred_lft forever
+    inet 127.0.1.1/8 scope host secondary BLUE
+       valid_lft forever preferred_lft forever
+    inet6 ::1/128 scope host 
+       valid_lft forever preferred_lft forever
+21: vlan30-v0@vlan30: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 9216 qdisc noqueue master BLUE state UP group default qlen 1000
+    link/ether 00:00:00:00:00:30 brd ff:ff:ff:ff:ff:ff
+    inet 10.1.30.1/24 metric 1024 scope global vlan30-v0
+       valid_lft forever preferred_lft forever
+    inet6 fe80::200:ff:fe00:30/64 scope link 
+       valid_lft forever preferred_lft forever
+22: vxlan99: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 9216 qdisc noqueue master br_l3vni state UNKNOWN group default qlen 1000
+    link/ether 5a:12:99:60:72:a6 brd ff:ff:ff:ff:ff:ff
+    inet6 fe80::5812:99ff:fe60:72a6/64 scope link 
+       valid_lft forever preferred_lft forever
+23: br_l3vni: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 9216 qdisc noqueue state UP group default qlen 1000
+    link/ether 44:38:39:22:01:0d brd ff:ff:ff:ff:ff:ff
+    inet6 fe80::4638:39ff:fe22:10d/64 scope link 
+       valid_lft forever preferred_lft forever
+24: vlan3607_l3@br_l3vni: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 9216 qdisc noqueue master BLUE state UP group default qlen 1000
+    link/ether 44:38:39:22:01:0d brd ff:ff:ff:ff:ff:ff
+    inet6 fe80::4638:39ff:fe22:10d/64 scope link 
+       valid_lft forever preferred_lft forever
+25: vlan10@br_default: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 9216 qdisc noqueue master RED state UP group default qlen 1000
+    link/ether 44:38:39:22:01:0d brd ff:ff:ff:ff:ff:ff
+    inet 10.1.10.4/24 scope global vlan10
+       valid_lft forever preferred_lft forever
+    inet6 fe80::4638:39ff:fe22:10d/64 scope link 
+       valid_lft forever preferred_lft forever
+26: RED: <NOARP,MASTER,UP,LOWER_UP> mtu 65575 qdisc noqueue state UP group default qlen 1000
+    link/ether 8e:e2:33:72:bc:fa brd ff:ff:ff:ff:ff:ff
+    inet 127.0.0.1/8 scope host RED
+       valid_lft forever preferred_lft forever
+    inet 127.0.1.1/8 scope host secondary RED
+       valid_lft forever preferred_lft forever
+    inet6 ::1/128 scope host 
+       valid_lft forever preferred_lft forever
+27: vlan10-v0@vlan10: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 9216 qdisc noqueue master RED state UP group default qlen 1000
+    link/ether 00:00:00:00:00:10 brd ff:ff:ff:ff:ff:ff
+    inet 10.1.10.1/24 metric 1024 scope global vlan10-v0
+       valid_lft forever preferred_lft forever
+    inet6 fe80::200:ff:fe00:10/64 scope link 
+       valid_lft forever preferred_lft forever
+28: vlan20@br_default: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 9216 qdisc noqueue master RED state UP group default qlen 1000
+    link/ether 44:38:39:22:01:0d brd ff:ff:ff:ff:ff:ff
+    inet 10.1.20.4/24 scope global vlan20
+       valid_lft forever preferred_lft forever
+    inet6 fe80::4638:39ff:fe22:10d/64 scope link 
+       valid_lft forever preferred_lft forever
+29: vlan20-v0@vlan20: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 9216 qdisc noqueue master RED state UP group default qlen 1000
+    link/ether 00:00:00:00:00:20 brd ff:ff:ff:ff:ff:ff
+    inet 10.1.20.1/24 metric 1024 scope global vlan20-v0
+       valid_lft forever preferred_lft forever
+    inet6 fe80::200:ff:fe00:20/64 scope link 
+       valid_lft forever preferred_lft forever
+30: vlan3159_l3@br_l3vni: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 9216 qdisc noqueue master RED state UP group default qlen 1000
+    link/ether 44:38:39:22:01:0d brd ff:ff:ff:ff:ff:ff
+    inet6 fe80::4638:39ff:fe22:10d/64 scope link 
+       valid_lft forever preferred_lft forever
+31: pimreg@NONE: <NOARP,UP,LOWER_UP> mtu 1472 qdisc noqueue state UNKNOWN group default qlen 1000
+    link/pimreg 
+32: pimreg1001@NONE: <NOARP,ALLMULTI,UP,LOWER_UP> mtu 1472 qdisc noqueue master mgmt state UNKNOWN group default qlen 1000
+    link/pimreg 
+33: pimreg1002@NONE: <NOARP,ALLMULTI,UP,LOWER_UP> mtu 1472 qdisc noqueue master BLUE state UNKNOWN group default qlen 1000
+    link/pimreg 
+34: pimreg1003@NONE: <NOARP,ALLMULTI,UP,LOWER_UP> mtu 1472 qdisc noqueue master RED state UNKNOWN group default qlen 1000
+    link/pimreg 
+--- IP ROUTES ---
+10.10.10.1 nhid 223 proto bgp metric 20 
+10.10.10.2 nhid 223 proto bgp metric 20 
+10.10.10.4 nhid 223 proto bgp metric 20 
+10.10.10.63 nhid 223 proto bgp metric 20 
+10.10.10.64 nhid 223 proto bgp metric 20 
+10.10.10.101 nhid 151 proto bgp metric 20 
+10.10.10.102 nhid 224 proto bgp metric 20 
+10.10.10.103 nhid 70 proto bgp metric 20 
+10.10.10.104 nhid 71 proto bgp metric 20 
+10.10.100.100 nhid 223 proto bgp metric 20 
+====================
+spine01 | CHANGED | rc=0 >>
+====================
+HOST: 
+spine01
+====================
+--- NV CONFIG ---
+nv set evpn enable on
+nv set interface eth0 ip address 192.168.200.2/24
+nv set interface eth0 ip vrf mgmt
+nv set interface eth0 type eth
+nv set interface lo ip address 10.10.10.101/32
+nv set interface lo router pim address-family ipv4-unicast use-source 10.10.10.101
+nv set interface lo type loopback
+nv set interface lo,swp1-6 router pim enable on
+nv set interface swp1-6 link state up
+nv set interface swp1-6 type swp
+nv set nve vxlan enable on
+nv set router bgp enable on
+nv set router bgp graceful-restart mode helper-only
+nv set router pim enable on
+nv set router pim timers keepalive 3600
+nv set service dns mgmt server 1.1.1.1
+nv set service dns mgmt server 8.8.8.8
+nv set service ntp mgmt server 0.cumulusnetworks.pool.ntp.org iburst on
+nv set service ntp mgmt server 1.cumulusnetworks.pool.ntp.org iburst on
+nv set service ntp mgmt server 2.cumulusnetworks.pool.ntp.org iburst on
+nv set service ntp mgmt server 3.cumulusnetworks.pool.ntp.org iburst on
+nv set service syslog mgmt server 192.168.200.1
+nv set system aaa class nvapply action allow
+nv set system aaa class nvapply command-path / permission all
+nv set system aaa class nvshow action allow
+nv set system aaa class nvshow command-path / permission ro
+nv set system aaa class sudo action allow
+nv set system aaa class sudo command-path / permission all
+nv set system aaa role nvue-admin class nvapply
+nv set system aaa role nvue-monitor class nvshow
+nv set system aaa role system-admin class nvapply
+nv set system aaa role system-admin class sudo
+nv set system aaa user cumulus full-name cumulus
+nv set system aaa user cumulus hashed-password '*'
+nv set system aaa user cumulus role system-admin
+nv set system api state enabled
+nv set system config auto-save state enabled
+nv set system control-plane acl acl-default-dos inbound
+nv set system control-plane acl acl-default-whitelist inbound
+nv set system hostname spine01
+nv set system message post-login '###################################################################################### 
+#                     You are successfully logged in to: spine01                     # 
+######################################################################################'
+nv set system message pre-login '###################################################################################### 
+#  Welcome to NVIDIA Cumulus VX (TM) 5.12.0                                             # 
+#  NVIDIA Cumulus VX (TM) is a community supported virtual appliance designed        # 
+#  for experiencing, testing and prototyping NVIDIA Cumulus'"'"' latest technology.      # 
+#  For any questions or technical support, visit our community site at:              # 
+#  https://www.nvidia.com/en-us/support                                              # 
+######################################################################################'
+nv set system reboot mode cold
+nv set system snmp-server listening-address all vrf mgmt
+nv set system snmp-server listening-address all-v6 vrf mgmt
+nv set system snmp-server readonly-community '$nvsec$9cb7a999fcb470bcd67cf6b040983cbc' access any
+nv set system snmp-server state enabled
+nv set system ssh-server state enabled
+nv set vrf default router bgp address-family ipv4-unicast enable on
+nv set vrf default router bgp address-family ipv4-unicast redistribute connected enable on
+nv set vrf default router bgp address-family l2vpn-evpn enable on
+nv set vrf default router bgp autonomous-system 65100
+nv set vrf default router bgp enable on
+nv set vrf default router bgp neighbor swp1 peer-group underlay
+nv set vrf default router bgp neighbor swp1 type unnumbered
+nv set vrf default router bgp neighbor swp2 peer-group underlay
+nv set vrf default router bgp neighbor swp2 type unnumbered
+nv set vrf default router bgp neighbor swp3 peer-group underlay
+nv set vrf default router bgp neighbor swp3 type unnumbered
+nv set vrf default router bgp neighbor swp4 peer-group underlay
+nv set vrf default router bgp neighbor swp4 type unnumbered
+nv set vrf default router bgp neighbor swp5 peer-group underlay
+nv set vrf default router bgp neighbor swp5 type unnumbered
+nv set vrf default router bgp neighbor swp6 peer-group underlay
+nv set vrf default router bgp neighbor swp6 type unnumbered
+nv set vrf default router bgp peer-group underlay address-family l2vpn-evpn enable on
+nv set vrf default router bgp peer-group underlay bfd detect-multiplier 3
+nv set vrf default router bgp peer-group underlay bfd enable on
+nv set vrf default router bgp peer-group underlay bfd min-rx-interval 300
+nv set vrf default router bgp peer-group underlay bfd min-tx-interval 300
+nv set vrf default router bgp peer-group underlay remote-as external
+nv set vrf default router bgp router-id 10.10.10.101
+nv set vrf default router pim address-family ipv4 rp 10.10.100.100 group-range 224.1.1.0/24
+nv set vrf default router pim ecmp enable on
+nv set vrf default router pim enable on
+nv set vrf mgmt router static 0.0.0.0/0 address-family ipv4-unicast
+nv set vrf mgmt router static 0.0.0.0/0 via 192.168.200.1 type ipv4-address
+--- IP ADDRESSES ---
+1: lo: <LOOPBACK,UP,LOWER_UP> mtu 65536 qdisc noqueue state UNKNOWN group default qlen 1000
+    link/loopback 00:00:00:00:00:00 brd 00:00:00:00:00:00
+    inet 127.0.0.1/8 scope host lo
+       valid_lft forever preferred_lft forever
+    inet 10.10.10.101/32 scope global lo
+       valid_lft forever preferred_lft forever
+    inet6 ::1/128 scope host noprefixroute 
+       valid_lft forever preferred_lft forever
+2: eth0: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc pfifo_fast master mgmt state UP group default qlen 1000
+    link/ether 44:38:39:22:01:05 brd ff:ff:ff:ff:ff:ff
+    inet 192.168.200.2/24 scope global eth0
+       valid_lft forever preferred_lft forever
+    inet6 fe80::4638:39ff:fe22:105/64 scope link 
+       valid_lft forever preferred_lft forever
+3: swp1: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 9216 qdisc pfifo_fast state UP group default qlen 1000
+    link/ether 48:b0:2d:29:84:aa brd ff:ff:ff:ff:ff:ff
+    inet6 fe80::4ab0:2dff:fe29:84aa/64 scope link 
+       valid_lft forever preferred_lft forever
+4: swp2: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 9216 qdisc pfifo_fast state UP group default qlen 1000
+    link/ether 48:b0:2d:9b:45:ce brd ff:ff:ff:ff:ff:ff
+    inet6 fe80::4ab0:2dff:fe9b:45ce/64 scope link 
+       valid_lft forever preferred_lft forever
+5: swp3: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 9216 qdisc pfifo_fast state UP group default qlen 1000
+    link/ether 48:b0:2d:92:f0:e8 brd ff:ff:ff:ff:ff:ff
+    inet6 fe80::4ab0:2dff:fe92:f0e8/64 scope link 
+       valid_lft forever preferred_lft forever
+6: swp4: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 9216 qdisc pfifo_fast state UP group default qlen 1000
+    link/ether 48:b0:2d:e1:3b:24 brd ff:ff:ff:ff:ff:ff
+    inet6 fe80::4ab0:2dff:fee1:3b24/64 scope link 
+       valid_lft forever preferred_lft forever
+7: swp5: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 9216 qdisc pfifo_fast state UP group default qlen 1000
+    link/ether 48:b0:2d:86:8a:cb brd ff:ff:ff:ff:ff:ff
+    inet6 fe80::4ab0:2dff:fe86:8acb/64 scope link 
+       valid_lft forever preferred_lft forever
+8: swp6: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 9216 qdisc pfifo_fast state UP group default qlen 1000
+    link/ether 48:b0:2d:c8:24:62 brd ff:ff:ff:ff:ff:ff
+    inet6 fe80::4ab0:2dff:fec8:2462/64 scope link 
+       valid_lft forever preferred_lft forever
+9: mgmt: <NOARP,MASTER,UP,LOWER_UP> mtu 65575 qdisc noqueue state UP group default qlen 1000
+    link/ether 62:c9:8b:c3:c3:60 brd ff:ff:ff:ff:ff:ff
+    inet 127.0.0.1/8 scope host mgmt
+       valid_lft forever preferred_lft forever
+    inet 127.0.1.1/8 scope host secondary mgmt
+       valid_lft forever preferred_lft forever
+    inet6 ::1/128 scope host 
+       valid_lft forever preferred_lft forever
+10: pimreg@NONE: <NOARP,UP,LOWER_UP> mtu 1472 qdisc noqueue state UNKNOWN group default qlen 1000
+    link/pimreg 
+11: pimreg1001@NONE: <NOARP,ALLMULTI,UP,LOWER_UP> mtu 1472 qdisc noqueue master mgmt state UNKNOWN group default qlen 1000
+    link/pimreg 
+--- IP ROUTES ---
+10.10.10.1 nhid 40 proto bgp metric 20 
+10.10.10.2 nhid 48 proto bgp metric 20 
+10.10.10.3 nhid 44 proto bgp metric 20 
+10.10.10.4 nhid 46 proto bgp metric 20 
+10.10.10.63 nhid 38 proto bgp metric 20 
+10.10.10.64 nhid 42 proto bgp metric 20 
+10.10.100.100 nhid 38 proto bgp metric 20 
+====================
+border02 | CHANGED | rc=0 >>
+====================
+HOST: 
+border02
+====================
+--- NV CONFIG ---
+nv set bridge domain br_default type vlan-aware
+nv set evpn enable on
+nv set evpn multihoming enable on
+nv set evpn multihoming startup-delay 10
+nv set evpn route-advertise svi-ip on
+nv set interface eth0 ip address 192.168.200.17/24
+nv set interface eth0 ip vrf mgmt
+nv set interface eth0 type eth
+nv set interface lo ip address 10.10.10.64/32
+nv set interface lo ip address 10.10.100.100/32
+nv set interface lo router pim address-family ipv4-unicast use-source 10.10.10.64
+nv set interface lo type loopback
+nv set interface lo,swp51-54 router pim enable on
+nv set interface swp1-4,51-54 link state up
+nv set interface swp1-4,51-54 type swp
+nv set interface swp51-54 evpn multihoming uplink on
+nv set nve vxlan arp-nd-suppress on
+nv set nve vxlan enable on
+nv set nve vxlan source address 10.10.10.64
+nv set router bgp enable on
+nv set router bgp graceful-restart mode helper-only
+nv set router pim enable on
+nv set router pim timers keepalive 3600
+nv set service dns mgmt server 1.1.1.1
+nv set service dns mgmt server 8.8.8.8
+nv set service ntp mgmt server 0.cumulusnetworks.pool.ntp.org iburst on
+nv set service ntp mgmt server 1.cumulusnetworks.pool.ntp.org iburst on
+nv set service ntp mgmt server 2.cumulusnetworks.pool.ntp.org iburst on
+nv set service ntp mgmt server 3.cumulusnetworks.pool.ntp.org iburst on
+nv set service syslog mgmt server 192.168.200.1
+nv set system aaa class nvapply action allow
+nv set system aaa class nvapply command-path / permission all
+nv set system aaa class nvshow action allow
+nv set system aaa class nvshow command-path / permission ro
+nv set system aaa class sudo action allow
+nv set system aaa class sudo command-path / permission all
+nv set system aaa role nvue-admin class nvapply
+nv set system aaa role nvue-monitor class nvshow
+nv set system aaa role system-admin class nvapply
+nv set system aaa role system-admin class sudo
+nv set system aaa user cumulus full-name cumulus
+nv set system aaa user cumulus hashed-password '*'
+nv set system aaa user cumulus role system-admin
+nv set system api state enabled
+nv set system config auto-save state enabled
+nv set system control-plane acl acl-default-dos inbound
+nv set system control-plane acl acl-default-whitelist inbound
+nv set system global anycast-mac 44:38:39:BE:EF:FF
+nv set system hostname border02
+nv set system message post-login '####################################################################################### 
+#                     You are successfully logged in to: border02                     # 
+#######################################################################################'
+nv set system message pre-login '####################################################################################### 
+#  Welcome to NVIDIA Cumulus VX (TM) 5.12.0                                              # 
+#  NVIDIA Cumulus VX (TM) is a community supported virtual appliance designed         # 
+#  for experiencing, testing and prototyping NVIDIA Cumulus'"'"' latest technology.       # 
+#  For any questions or technical support, visit our community site at:               # 
+#  https://www.nvidia.com/en-us/support                                               # 
+#######################################################################################'
+nv set system reboot mode cold
+nv set system snmp-server listening-address all vrf mgmt
+nv set system snmp-server listening-address all-v6 vrf mgmt
+nv set system snmp-server readonly-community '$nvsec$9cb7a999fcb470bcd67cf6b040983cbc' access any
+nv set system snmp-server state enabled
+nv set system ssh-server state enabled
+nv set vrf BLUE evpn enable on
+nv set vrf BLUE evpn vni 4002
+nv set vrf BLUE router bgp address-family ipv4-unicast enable on
+nv set vrf BLUE router bgp address-family ipv4-unicast redistribute static enable on
+nv set vrf BLUE router bgp address-family l2vpn-evpn enable on
+nv set vrf BLUE router bgp autonomous-system 65164
+nv set vrf BLUE router bgp enable on
+nv set vrf BLUE router bgp router-id 10.10.10.64
+nv set vrf RED evpn enable on
+nv set vrf RED evpn vni 4001
+nv set vrf RED router bgp address-family ipv4-unicast enable on
+nv set vrf RED router bgp address-family ipv4-unicast redistribute static enable on
+nv set vrf RED router bgp address-family l2vpn-evpn enable on
+nv set vrf RED router bgp autonomous-system 65164
+nv set vrf RED router bgp enable on
+nv set vrf RED router bgp router-id 10.10.10.64
+nv set vrf default router bgp address-family ipv4-unicast enable on
+nv set vrf default router bgp address-family ipv4-unicast redistribute connected enable on
+nv set vrf default router bgp address-family l2vpn-evpn enable on
+nv set vrf default router bgp autonomous-system 65164
+nv set vrf default router bgp enable on
+nv set vrf default router bgp neighbor swp51 peer-group underlay
+nv set vrf default router bgp neighbor swp51 type unnumbered
+nv set vrf default router bgp neighbor swp52 peer-group underlay
+nv set vrf default router bgp neighbor swp52 type unnumbered
+nv set vrf default router bgp neighbor swp53 peer-group underlay
+nv set vrf default router bgp neighbor swp53 type unnumbered
+nv set vrf default router bgp neighbor swp54 peer-group underlay
+nv set vrf default router bgp neighbor swp54 type unnumbered
+nv set vrf default router bgp peer-group underlay address-family l2vpn-evpn enable on
+nv set vrf default router bgp peer-group underlay bfd detect-multiplier 3
+nv set vrf default router bgp peer-group underlay bfd enable on
+nv set vrf default router bgp peer-group underlay bfd min-rx-interval 300
+nv set vrf default router bgp peer-group underlay bfd min-tx-interval 300
+nv set vrf default router bgp peer-group underlay remote-as external
+nv set vrf default router bgp router-id 10.10.10.64
+nv set vrf default router pim address-family ipv4 rp 10.10.100.100 group-range 224.1.1.0/24
+nv set vrf default router pim ecmp enable on
+nv set vrf default router pim enable on
+nv set vrf default router pim msdp-mesh-group rpmesh member-address 10.10.10.63
+nv set vrf default router pim msdp-mesh-group rpmesh source-address 10.10.10.64
+nv set vrf mgmt router static 0.0.0.0/0 address-family ipv4-unicast
+nv set vrf mgmt router static 0.0.0.0/0 via 192.168.200.1 type ipv4-address
+--- IP ADDRESSES ---
+1: lo: <LOOPBACK,UP,LOWER_UP> mtu 65536 qdisc noqueue state UNKNOWN group default qlen 1000
+    link/loopback 00:00:00:00:00:00 brd 00:00:00:00:00:00
+    inet 127.0.0.1/8 scope host lo
+       valid_lft forever preferred_lft forever
+    inet 10.10.10.64/32 scope global lo
+       valid_lft forever preferred_lft forever
+    inet 10.10.100.100/32 scope global lo
+       valid_lft forever preferred_lft forever
+    inet6 ::1/128 scope host noprefixroute 
+       valid_lft forever preferred_lft forever
+2: eth0: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc pfifo_fast master mgmt state UP group default qlen 1000
+    link/ether 44:38:39:33:01:02 brd ff:ff:ff:ff:ff:ff
+    inet 192.168.200.17/24 scope global eth0
+       valid_lft forever preferred_lft forever
+    inet6 fe80::4638:39ff:fe33:102/64 scope link 
+       valid_lft forever preferred_lft forever
+3: swp1: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 9216 qdisc pfifo_fast state UP group default qlen 1000
+    link/ether 48:b0:2d:86:e4:37 brd ff:ff:ff:ff:ff:ff
+    inet6 fe80::4ab0:2dff:fe86:e437/64 scope link 
+       valid_lft forever preferred_lft forever
+4: swp2: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 9216 qdisc pfifo_fast state UP group default qlen 1000
+    link/ether 48:b0:2d:35:8d:96 brd ff:ff:ff:ff:ff:ff
+    inet6 fe80::4ab0:2dff:fe35:8d96/64 scope link 
+       valid_lft forever preferred_lft forever
+5: swp3: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 9216 qdisc pfifo_fast state UP group default qlen 1000
+    link/ether 48:b0:2d:22:6b:85 brd ff:ff:ff:ff:ff:ff
+    inet6 fe80::4ab0:2dff:fe22:6b85/64 scope link 
+       valid_lft forever preferred_lft forever
+6: swp4: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 9216 qdisc pfifo_fast state UP group default qlen 1000
+    link/ether 48:b0:2d:52:1b:3b brd ff:ff:ff:ff:ff:ff
+    inet6 fe80::4ab0:2dff:fe52:1b3b/64 scope link 
+       valid_lft forever preferred_lft forever
+7: swp49: <BROADCAST,MULTICAST> mtu 1500 qdisc pfifo_fast state DOWN group default qlen 1000
+    link/ether 48:b0:2d:08:31:28 brd ff:ff:ff:ff:ff:ff
+8: swp50: <BROADCAST,MULTICAST> mtu 1500 qdisc pfifo_fast state DOWN group default qlen 1000
+    link/ether 48:b0:2d:3e:4f:cf brd ff:ff:ff:ff:ff:ff
+9: swp51: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 9216 qdisc pfifo_fast state UP group default qlen 1000
+    link/ether 48:b0:2d:39:51:b1 brd ff:ff:ff:ff:ff:ff
+    inet6 fe80::4ab0:2dff:fe39:51b1/64 scope link 
+       valid_lft forever preferred_lft forever
+10: swp52: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 9216 qdisc pfifo_fast state UP group default qlen 1000
+    link/ether 48:b0:2d:13:9d:ed brd ff:ff:ff:ff:ff:ff
+    inet6 fe80::4ab0:2dff:fe13:9ded/64 scope link 
+       valid_lft forever preferred_lft forever
+11: swp53: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 9216 qdisc pfifo_fast state UP group default qlen 1000
+    link/ether 48:b0:2d:08:65:a9 brd ff:ff:ff:ff:ff:ff
+    inet6 fe80::4ab0:2dff:fe08:65a9/64 scope link 
+       valid_lft forever preferred_lft forever
+12: swp54: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 9216 qdisc pfifo_fast state UP group default qlen 1000
+    link/ether 48:b0:2d:6d:1a:80 brd ff:ff:ff:ff:ff:ff
+    inet6 fe80::4ab0:2dff:fe6d:1a80/64 scope link 
+       valid_lft forever preferred_lft forever
+13: mgmt: <NOARP,MASTER,UP,LOWER_UP> mtu 65575 qdisc noqueue state UP group default qlen 1000
+    link/ether be:da:cf:e8:e6:a6 brd ff:ff:ff:ff:ff:ff
+    inet 127.0.0.1/8 scope host mgmt
+       valid_lft forever preferred_lft forever
+    inet 127.0.1.1/8 scope host secondary mgmt
+       valid_lft forever preferred_lft forever
+    inet6 ::1/128 scope host 
+       valid_lft forever preferred_lft forever
+14: vxlan99: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 9216 qdisc noqueue master br_l3vni state UNKNOWN group default qlen 1000
+    link/ether 76:91:10:43:de:a6 brd ff:ff:ff:ff:ff:ff
+    inet6 fe80::7491:10ff:fe43:dea6/64 scope link 
+       valid_lft forever preferred_lft forever
+15: br_l3vni: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 9216 qdisc noqueue state UP group default qlen 1000
+    link/ether 44:38:39:33:01:0d brd ff:ff:ff:ff:ff:ff
+    inet6 fe80::4638:39ff:fe33:10d/64 scope link 
+       valid_lft forever preferred_lft forever
+16: vlan3607_l3@br_l3vni: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 9216 qdisc noqueue master BLUE state UP group default qlen 1000
+    link/ether 44:38:39:33:01:0d brd ff:ff:ff:ff:ff:ff
+    inet6 fe80::4638:39ff:fe33:10d/64 scope link 
+       valid_lft forever preferred_lft forever
+17: BLUE: <NOARP,MASTER,UP,LOWER_UP> mtu 65575 qdisc noqueue state UP group default qlen 1000
+    link/ether 7e:59:a8:55:76:f1 brd ff:ff:ff:ff:ff:ff
+    inet 127.0.0.1/8 scope host BLUE
+       valid_lft forever preferred_lft forever
+    inet 127.0.1.1/8 scope host secondary BLUE
+       valid_lft forever preferred_lft forever
+    inet6 ::1/128 scope host 
+       valid_lft forever preferred_lft forever
+18: vlan3159_l3@br_l3vni: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 9216 qdisc noqueue master RED state UP group default qlen 1000
+    link/ether 44:38:39:33:01:0d brd ff:ff:ff:ff:ff:ff
+    inet6 fe80::4638:39ff:fe33:10d/64 scope link 
+       valid_lft forever preferred_lft forever
+19: RED: <NOARP,MASTER,UP,LOWER_UP> mtu 65575 qdisc noqueue state UP group default qlen 1000
+    link/ether fe:4f:5b:57:fb:ac brd ff:ff:ff:ff:ff:ff
+    inet 127.0.0.1/8 scope host RED
+       valid_lft forever preferred_lft forever
+    inet 127.0.1.1/8 scope host secondary RED
+       valid_lft forever preferred_lft forever
+    inet6 ::1/128 scope host 
+       valid_lft forever preferred_lft forever
+20: pimreg@NONE: <NOARP,UP,LOWER_UP> mtu 1472 qdisc noqueue state UNKNOWN group default qlen 1000
+    link/pimreg 
+21: pimreg1001@NONE: <NOARP,ALLMULTI,UP,LOWER_UP> mtu 1472 qdisc noqueue master mgmt state UNKNOWN group default qlen 1000
+    link/pimreg 
+22: pimreg1002@NONE: <NOARP,ALLMULTI,UP,LOWER_UP> mtu 1472 qdisc noqueue master BLUE state UNKNOWN group default qlen 1000
+    link/pimreg 
+23: pimreg1003@NONE: <NOARP,ALLMULTI,UP,LOWER_UP> mtu 1472 qdisc noqueue master RED state UNKNOWN group default qlen 1000
+    link/pimreg 
+--- IP ROUTES ---
+10.10.10.1 nhid 155 proto bgp metric 20 
+10.10.10.2 nhid 155 proto bgp metric 20 
+10.10.10.3 nhid 155 proto bgp metric 20 
+10.10.10.4 nhid 155 proto bgp metric 20 
+10.10.10.63 nhid 155 proto bgp metric 20 
+10.10.10.101 nhid 102 proto bgp metric 20 
+10.10.10.102 nhid 127 proto bgp metric 20 
+10.10.10.103 nhid 156 proto bgp metric 20 
+10.10.10.104 nhid 121 proto bgp metric 20 
+====================
+leaf01 | CHANGED | rc=0 >>
+====================
+HOST: 
+leaf01
+====================
+--- NV CONFIG ---
+nv set bridge domain br_default type vlan-aware
+nv set bridge domain br_default vlan 10 vni 10 flooding enable on
+nv set bridge domain br_default vlan 10 vni 10 flooding multicast-group 224.1.1.10
+nv set bridge domain br_default vlan 20 vni 20 flooding enable on
+nv set bridge domain br_default vlan 20 vni 20 flooding multicast-group 224.1.1.20
+nv set bridge domain br_default vlan 30 vni 30 flooding enable on
+nv set bridge domain br_default vlan 30 vni 30 flooding multicast-group 224.1.1.30
+nv set evpn enable on
+nv set evpn multihoming enable on
+nv set evpn multihoming startup-delay 10
+nv set evpn route-advertise svi-ip on
+nv set interface bond1 bond member swp1
+nv set interface bond1 bridge domain br_default access 10
+nv set interface bond1 evpn multihoming segment local-id 1
+nv set interface bond1-3 bond lacp-bypass on
+nv set interface bond1-3 bond mode lacp
+nv set interface bond1-3 bridge domain br_default stp admin-edge on
+nv set interface bond1-3 bridge domain br_default stp auto-edge on
+nv set interface bond1-3 bridge domain br_default stp bpdu-guard on
+nv set interface bond1-3 evpn multihoming segment df-preference 50000
+nv set interface bond1-3 evpn multihoming segment enable on
+nv set interface bond1-3 evpn multihoming segment mac-address 44:38:39:BE:EF:AA
+nv set interface bond1-3 link mtu 9216
+nv set interface bond1-3 type bond
+nv set interface bond2 bond member swp2
+nv set interface bond2 bridge domain br_default access 20
+nv set interface bond2 evpn multihoming segment local-id 2
+nv set interface bond3 bond member swp3
+nv set interface bond3 bridge domain br_default access 30
+nv set interface bond3 evpn multihoming segment local-id 3
+nv set interface eth0 ip address 192.168.200.6/24
+nv set interface eth0 ip vrf mgmt
+nv set interface eth0 type eth
+nv set interface lo ip address 10.10.10.1/32
+nv set interface lo router pim address-family ipv4-unicast use-source 10.10.10.1
+nv set interface lo type loopback
+nv set interface lo,swp51-54,vlan10,20,30 router pim enable on
+nv set interface swp51-54 evpn multihoming uplink on
+nv set interface swp51-54 link state up
+nv set interface swp51-54 type swp
+nv set interface vlan10 ip address 10.1.10.2/24
+nv set interface vlan10 ip vrr address 10.1.10.1/24
+nv set interface vlan10 ip vrr mac-address 00:00:00:00:00:10
+nv set interface vlan10 vlan 10
+nv set interface vlan10,20 ip vrf RED
+nv set interface vlan10,20,30 ip igmp enable on
+nv set interface vlan10,20,30 ip vrr enable on
+nv set interface vlan10,20,30 ip vrr state up
+nv set interface vlan10,20,30 type svi
+nv set interface vlan20 ip address 10.1.20.2/24
+nv set interface vlan20 ip vrr address 10.1.20.1/24
+nv set interface vlan20 ip vrr mac-address 00:00:00:00:00:20
+nv set interface vlan20 vlan 20
+nv set interface vlan30 ip address 10.1.30.2/24
+nv set interface vlan30 ip vrf BLUE
+nv set interface vlan30 ip vrr address 10.1.30.1/24
+nv set interface vlan30 ip vrr mac-address 00:00:00:00:00:30
+nv set interface vlan30 vlan 30
+nv set nve vxlan arp-nd-suppress on
+nv set nve vxlan enable on
+nv set nve vxlan source address 10.10.10.1
+nv set router bgp enable on
+nv set router bgp graceful-restart mode helper-only
+nv set router pim enable on
+nv set router pim timers keepalive 3600
+nv set router vrr enable on
+nv set service dns mgmt server 1.1.1.1
+nv set service dns mgmt server 8.8.8.8
+nv set service ntp mgmt server 0.cumulusnetworks.pool.ntp.org iburst on
+nv set service ntp mgmt server 1.cumulusnetworks.pool.ntp.org iburst on
+nv set service ntp mgmt server 2.cumulusnetworks.pool.ntp.org iburst on
+nv set service ntp mgmt server 3.cumulusnetworks.pool.ntp.org iburst on
+nv set service syslog mgmt server 192.168.200.1
+nv set system aaa class nvapply action allow
+nv set system aaa class nvapply command-path / permission all
+nv set system aaa class nvshow action allow
+nv set system aaa class nvshow command-path / permission ro
+nv set system aaa class sudo action allow
+nv set system aaa class sudo command-path / permission all
+nv set system aaa role nvue-admin class nvapply
+nv set system aaa role nvue-monitor class nvshow
+nv set system aaa role system-admin class nvapply
+nv set system aaa role system-admin class sudo
+nv set system aaa user cumulus full-name cumulus
+nv set system aaa user cumulus hashed-password '*'
+nv set system aaa user cumulus role system-admin
+nv set system api state enabled
+nv set system config auto-save state enabled
+nv set system control-plane acl acl-default-dos inbound
+nv set system control-plane acl acl-default-whitelist inbound
+nv set system global anycast-mac 44:38:39:BE:EF:AA
+nv set system hostname leaf01
+nv set system message post-login '##################################################################################### 
+#                     You are successfully logged in to: leaf01                     # 
+#####################################################################################'
+nv set system message pre-login '##################################################################################### 
+#  Welcome to NVIDIA Cumulus VX (TM) 5.12.0                                            # 
+#  NVIDIA Cumulus VX (TM) is a community supported virtual appliance designed       # 
+#  for experiencing, testing and prototyping NVIDIA Cumulus'"'"' latest technology.     # 
+#  For any questions or technical support, visit our community site at:             # 
+#  https://www.nvidia.com/en-us/support                                             # 
+#####################################################################################'
+nv set system reboot mode cold
+nv set system snmp-server listening-address all vrf mgmt
+nv set system snmp-server listening-address all-v6 vrf mgmt
+nv set system snmp-server readonly-community '$nvsec$9cb7a999fcb470bcd67cf6b040983cbc' access any
+nv set system snmp-server state enabled
+nv set system ssh-server state enabled
+nv set vrf BLUE evpn enable on
+nv set vrf BLUE evpn vni 4002
+nv set vrf BLUE router bgp address-family ipv4-unicast enable on
+nv set vrf BLUE router bgp address-family ipv4-unicast redistribute connected enable on
+nv set vrf BLUE router bgp address-family l2vpn-evpn enable on
+nv set vrf BLUE router bgp autonomous-system 65101
+nv set vrf BLUE router bgp enable on
+nv set vrf BLUE router bgp router-id 10.10.10.1
+nv set vrf RED evpn enable on
+nv set vrf RED evpn vni 4001
+nv set vrf RED router bgp address-family ipv4-unicast enable on
+nv set vrf RED router bgp address-family ipv4-unicast redistribute connected enable on
+nv set vrf RED router bgp address-family l2vpn-evpn enable on
+nv set vrf RED router bgp autonomous-system 65101
+nv set vrf RED router bgp enable on
+nv set vrf RED router bgp router-id 10.10.10.1
+nv set vrf default router bgp address-family ipv4-unicast enable on
+nv set vrf default router bgp address-family ipv4-unicast redistribute connected enable on
+nv set vrf default router bgp address-family l2vpn-evpn enable on
+nv set vrf default router bgp autonomous-system 65101
+nv set vrf default router bgp enable on
+nv set vrf default router bgp neighbor swp51 peer-group underlay
+nv set vrf default router bgp neighbor swp51 type unnumbered
+nv set vrf default router bgp neighbor swp52 peer-group underlay
+nv set vrf default router bgp neighbor swp52 type unnumbered
+nv set vrf default router bgp neighbor swp53 peer-group underlay
+nv set vrf default router bgp neighbor swp53 type unnumbered
+nv set vrf default router bgp neighbor swp54 peer-group underlay
+nv set vrf default router bgp neighbor swp54 type unnumbered
+nv set vrf default router bgp peer-group underlay address-family l2vpn-evpn enable on
+nv set vrf default router bgp peer-group underlay bfd detect-multiplier 3
+nv set vrf default router bgp peer-group underlay bfd enable on
+nv set vrf default router bgp peer-group underlay bfd min-rx-interval 300
+nv set vrf default router bgp peer-group underlay bfd min-tx-interval 300
+nv set vrf default router bgp peer-group underlay remote-as external
+nv set vrf default router bgp router-id 10.10.10.1
+nv set vrf default router pim address-family ipv4 rp 10.10.100.100 group-range 224.1.1.0/24
+nv set vrf default router pim ecmp enable on
+nv set vrf default router pim enable on
+nv set vrf mgmt router static 0.0.0.0/0 address-family ipv4-unicast
+nv set vrf mgmt router static 0.0.0.0/0 via 192.168.200.1 type ipv4-address
+--- IP ADDRESSES ---
+1: lo: <LOOPBACK,UP,LOWER_UP> mtu 65536 qdisc noqueue state UNKNOWN group default qlen 1000
+    link/loopback 00:00:00:00:00:00 brd 00:00:00:00:00:00
+    inet 127.0.0.1/8 scope host lo
+       valid_lft forever preferred_lft forever
+    inet 10.10.10.1/32 scope global lo
+       valid_lft forever preferred_lft forever
+    inet6 ::1/128 scope host noprefixroute 
+       valid_lft forever preferred_lft forever
+2: eth0: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc pfifo_fast master mgmt state UP group default qlen 1000
+    link/ether 44:38:39:22:01:01 brd ff:ff:ff:ff:ff:ff
+    inet 192.168.200.6/24 scope global eth0
+       valid_lft forever preferred_lft forever
+    inet6 fe80::4638:39ff:fe22:101/64 scope link 
+       valid_lft forever preferred_lft forever
+3: swp1: <BROADCAST,MULTICAST,SLAVE,UP,LOWER_UP> mtu 9216 qdisc pfifo_fast master bond1 state UP group default qlen 1000
+    link/ether 48:b0:2d:de:0b:7f brd ff:ff:ff:ff:ff:ff
+4: swp2: <BROADCAST,MULTICAST,SLAVE,UP,LOWER_UP> mtu 9216 qdisc pfifo_fast master bond2 state UP group default qlen 1000
+    link/ether 48:b0:2d:b7:b6:9e brd ff:ff:ff:ff:ff:ff
+5: swp3: <BROADCAST,MULTICAST,SLAVE,UP,LOWER_UP> mtu 9216 qdisc pfifo_fast master bond3 state UP group default qlen 1000
+    link/ether 48:b0:2d:52:57:2c brd ff:ff:ff:ff:ff:ff
+6: swp49: <BROADCAST,MULTICAST> mtu 1500 qdisc pfifo_fast state DOWN group default qlen 1000
+    link/ether 48:b0:2d:77:0b:45 brd ff:ff:ff:ff:ff:ff
+7: swp50: <BROADCAST,MULTICAST> mtu 1500 qdisc pfifo_fast state DOWN group default qlen 1000
+    link/ether 48:b0:2d:b9:9c:d3 brd ff:ff:ff:ff:ff:ff
+8: swp51: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 9216 qdisc pfifo_fast state UP group default qlen 1000
+    link/ether 48:b0:2d:ca:9e:cd brd ff:ff:ff:ff:ff:ff
+    inet6 fe80::4ab0:2dff:feca:9ecd/64 scope link 
+       valid_lft forever preferred_lft forever
+9: swp52: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 9216 qdisc pfifo_fast state UP group default qlen 1000
+    link/ether 48:b0:2d:92:6c:e3 brd ff:ff:ff:ff:ff:ff
+    inet6 fe80::4ab0:2dff:fe92:6ce3/64 scope link 
+       valid_lft forever preferred_lft forever
+10: swp53: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 9216 qdisc pfifo_fast state UP group default qlen 1000
+    link/ether 48:b0:2d:33:38:7d brd ff:ff:ff:ff:ff:ff
+    inet6 fe80::4ab0:2dff:fe33:387d/64 scope link 
+       valid_lft forever preferred_lft forever
+11: swp54: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 9216 qdisc pfifo_fast state UP group default qlen 1000
+    link/ether 48:b0:2d:b4:cc:c9 brd ff:ff:ff:ff:ff:ff
+    inet6 fe80::4ab0:2dff:feb4:ccc9/64 scope link 
+       valid_lft forever preferred_lft forever
+12: mgmt: <NOARP,MASTER,UP,LOWER_UP> mtu 65575 qdisc noqueue state UP group default qlen 1000
+    link/ether 6a:a2:6a:0b:41:c0 brd ff:ff:ff:ff:ff:ff
+    inet 127.0.0.1/8 scope host mgmt
+       valid_lft forever preferred_lft forever
+    inet 127.0.1.1/8 scope host secondary mgmt
+       valid_lft forever preferred_lft forever
+    inet6 ::1/128 scope host 
+       valid_lft forever preferred_lft forever
+13: bond3: <BROADCAST,MULTICAST,MASTER,UP,LOWER_UP> mtu 9216 qdisc noqueue master br_default state UP group default qlen 1000
+    link/ether 48:b0:2d:52:57:2c brd ff:ff:ff:ff:ff:ff
+14: bond2: <BROADCAST,MULTICAST,MASTER,UP,LOWER_UP> mtu 9216 qdisc noqueue master br_default state UP group default qlen 1000
+    link/ether 48:b0:2d:b7:b6:9e brd ff:ff:ff:ff:ff:ff
+15: ipmr-lo: <BROADCAST,NOARP,UP,LOWER_UP> mtu 16000 qdisc noqueue state UNKNOWN group default qlen 1000
+    link/ether fe:81:fb:94:66:68 brd ff:ff:ff:ff:ff:ff
+    inet6 fe80::fc81:fbff:fe94:6668/64 scope link 
+       valid_lft forever preferred_lft forever
+16: vxlan48: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 9216 qdisc noqueue master br_default state UNKNOWN group default qlen 1000
+    link/ether e6:c7:b3:70:72:68 brd ff:ff:ff:ff:ff:ff
+    inet6 fe80::e4c7:b3ff:fe70:7268/64 scope link 
+       valid_lft forever preferred_lft forever
+17: bond1: <BROADCAST,MULTICAST,MASTER,UP,LOWER_UP> mtu 9216 qdisc noqueue master br_default state UP group default qlen 1000
+    link/ether 48:b0:2d:de:0b:7f brd ff:ff:ff:ff:ff:ff
+18: br_default: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 9216 qdisc noqueue state UP group default qlen 1000
+    link/ether 44:38:39:22:01:0b brd ff:ff:ff:ff:ff:ff
+    inet6 fe80::4638:39ff:fe22:10b/64 scope link 
+       valid_lft forever preferred_lft forever
+19: vlan30@br_default: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 9216 qdisc noqueue master BLUE state UP group default qlen 1000
+    link/ether 44:38:39:22:01:0b brd ff:ff:ff:ff:ff:ff
+    inet 10.1.30.2/24 scope global vlan30
+       valid_lft forever preferred_lft forever
+    inet6 fe80::4638:39ff:fe22:10b/64 scope link 
+       valid_lft forever preferred_lft forever
+20: BLUE: <NOARP,MASTER,UP,LOWER_UP> mtu 65575 qdisc noqueue state UP group default qlen 1000
+    link/ether 6a:0f:9a:78:92:0b brd ff:ff:ff:ff:ff:ff
+    inet 127.0.0.1/8 scope host BLUE
+       valid_lft forever preferred_lft forever
+    inet 127.0.1.1/8 scope host secondary BLUE
+       valid_lft forever preferred_lft forever
+    inet6 ::1/128 scope host 
+       valid_lft forever preferred_lft forever
+21: vlan30-v0@vlan30: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 9216 qdisc noqueue master BLUE state UP group default qlen 1000
+    link/ether 00:00:00:00:00:30 brd ff:ff:ff:ff:ff:ff
+    inet 10.1.30.1/24 metric 1024 scope global vlan30-v0
+       valid_lft forever preferred_lft forever
+    inet6 fe80::200:ff:fe00:30/64 scope link 
+       valid_lft forever preferred_lft forever
+22: vxlan99: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 9216 qdisc noqueue master br_l3vni state UNKNOWN group default qlen 1000
+    link/ether 76:dd:e9:48:e5:b7 brd ff:ff:ff:ff:ff:ff
+    inet6 fe80::74dd:e9ff:fe48:e5b7/64 scope link 
+       valid_lft forever preferred_lft forever
+23: br_l3vni: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 9216 qdisc noqueue state UP group default qlen 1000
+    link/ether 44:38:39:22:01:0b brd ff:ff:ff:ff:ff:ff
+    inet6 fe80::4638:39ff:fe22:10b/64 scope link 
+       valid_lft forever preferred_lft forever
+24: vlan3607_l3@br_l3vni: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 9216 qdisc noqueue master BLUE state UP group default qlen 1000
+    link/ether 44:38:39:22:01:0b brd ff:ff:ff:ff:ff:ff
+    inet6 fe80::4638:39ff:fe22:10b/64 scope link 
+       valid_lft forever preferred_lft forever
+25: vlan10@br_default: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 9216 qdisc noqueue master RED state UP group default qlen 1000
+    link/ether 44:38:39:22:01:0b brd ff:ff:ff:ff:ff:ff
+    inet 10.1.10.2/24 scope global vlan10
+       valid_lft forever preferred_lft forever
+    inet6 fe80::4638:39ff:fe22:10b/64 scope link 
+       valid_lft forever preferred_lft forever
+26: RED: <NOARP,MASTER,UP,LOWER_UP> mtu 65575 qdisc noqueue state UP group default qlen 1000
+    link/ether 2e:ef:50:89:1f:aa brd ff:ff:ff:ff:ff:ff
+    inet 127.0.0.1/8 scope host RED
+       valid_lft forever preferred_lft forever
+    inet 127.0.1.1/8 scope host secondary RED
+       valid_lft forever preferred_lft forever
+    inet6 ::1/128 scope host 
+       valid_lft forever preferred_lft forever
+27: vlan10-v0@vlan10: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 9216 qdisc noqueue master RED state UP group default qlen 1000
+    link/ether 00:00:00:00:00:10 brd ff:ff:ff:ff:ff:ff
+    inet 10.1.10.1/24 metric 1024 scope global vlan10-v0
+       valid_lft forever preferred_lft forever
+    inet6 fe80::200:ff:fe00:10/64 scope link 
+       valid_lft forever preferred_lft forever
+28: vlan20@br_default: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 9216 qdisc noqueue master RED state UP group default qlen 1000
+    link/ether 44:38:39:22:01:0b brd ff:ff:ff:ff:ff:ff
+    inet 10.1.20.2/24 scope global vlan20
+       valid_lft forever preferred_lft forever
+    inet6 fe80::4638:39ff:fe22:10b/64 scope link 
+       valid_lft forever preferred_lft forever
+29: vlan20-v0@vlan20: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 9216 qdisc noqueue master RED state UP group default qlen 1000
+    link/ether 00:00:00:00:00:20 brd ff:ff:ff:ff:ff:ff
+    inet 10.1.20.1/24 metric 1024 scope global vlan20-v0
+       valid_lft forever preferred_lft forever
+    inet6 fe80::200:ff:fe00:20/64 scope link 
+       valid_lft forever preferred_lft forever
+30: vlan3159_l3@br_l3vni: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 9216 qdisc noqueue master RED state UP group default qlen 1000
+    link/ether 44:38:39:22:01:0b brd ff:ff:ff:ff:ff:ff
+    inet6 fe80::4638:39ff:fe22:10b/64 scope link 
+       valid_lft forever preferred_lft forever
+31: pimreg@NONE: <NOARP,UP,LOWER_UP> mtu 1472 qdisc noqueue state UNKNOWN group default qlen 1000
+    link/pimreg 
+32: pimreg1001@NONE: <NOARP,ALLMULTI,UP,LOWER_UP> mtu 1472 qdisc noqueue master mgmt state UNKNOWN group default qlen 1000
+    link/pimreg 
+33: pimreg1002@NONE: <NOARP,ALLMULTI,UP,LOWER_UP> mtu 1472 qdisc noqueue master BLUE state UNKNOWN group default qlen 1000
+    link/pimreg 
+34: pimreg1003@NONE: <NOARP,ALLMULTI,UP,LOWER_UP> mtu 1472 qdisc noqueue master RED state UNKNOWN group default qlen 1000
+    link/pimreg 
+--- IP ROUTES ---
+10.10.10.2 nhid 197 proto bgp metric 20 
+10.10.10.3 nhid 197 proto bgp metric 20 
+10.10.10.4 nhid 197 proto bgp metric 20 
+10.10.10.63 nhid 197 proto bgp metric 20 
+10.10.10.64 nhid 197 proto bgp metric 20 
+10.10.10.101 nhid 145 proto bgp metric 20 
+10.10.10.102 nhid 179 proto bgp metric 20 
+10.10.10.103 nhid 150 proto bgp metric 20 
+10.10.10.104 nhid 198 proto bgp metric 20 
+10.10.100.100 nhid 197 proto bgp metric 20 
+====================
+border01 | CHANGED | rc=0 >>
+====================
+HOST: 
+border01
+====================
+--- NV CONFIG ---
+nv set bridge domain br_default type vlan-aware
+nv set evpn enable on
+nv set evpn multihoming enable on
+nv set evpn multihoming startup-delay 10
+nv set evpn route-advertise svi-ip on
+nv set interface eth0 ip address 192.168.200.16/24
+nv set interface eth0 ip vrf mgmt
+nv set interface eth0 type eth
+nv set interface lo ip address 10.10.10.63/32
+nv set interface lo ip address 10.10.100.100/32
+nv set interface lo router pim address-family ipv4-unicast use-source 10.10.10.63
+nv set interface lo type loopback
+nv set interface lo,swp51-54 router pim enable on
+nv set interface swp1-4,51-54 link state up
+nv set interface swp1-4,51-54 type swp
+nv set interface swp51-54 evpn multihoming uplink on
+nv set nve vxlan arp-nd-suppress on
+nv set nve vxlan enable on
+nv set nve vxlan source address 10.10.10.63
+nv set router bgp enable on
+nv set router bgp graceful-restart mode helper-only
+nv set router pim enable on
+nv set router pim timers keepalive 3600
+nv set service dns mgmt server 1.1.1.1
+nv set service dns mgmt server 8.8.8.8
+nv set service ntp mgmt server 0.cumulusnetworks.pool.ntp.org iburst on
+nv set service ntp mgmt server 1.cumulusnetworks.pool.ntp.org iburst on
+nv set service ntp mgmt server 2.cumulusnetworks.pool.ntp.org iburst on
+nv set service ntp mgmt server 3.cumulusnetworks.pool.ntp.org iburst on
+nv set service syslog mgmt server 192.168.200.1
+nv set system aaa class nvapply action allow
+nv set system aaa class nvapply command-path / permission all
+nv set system aaa class nvshow action allow
+nv set system aaa class nvshow command-path / permission ro
+nv set system aaa class sudo action allow
+nv set system aaa class sudo command-path / permission all
+nv set system aaa role nvue-admin class nvapply
+nv set system aaa role nvue-monitor class nvshow
+nv set system aaa role system-admin class nvapply
+nv set system aaa role system-admin class sudo
+nv set system aaa user cumulus full-name cumulus
+nv set system aaa user cumulus hashed-password '*'
+nv set system aaa user cumulus role system-admin
+nv set system api state enabled
+nv set system config auto-save state enabled
+nv set system control-plane acl acl-default-dos inbound
+nv set system control-plane acl acl-default-whitelist inbound
+nv set system global anycast-mac 44:38:39:BE:EF:FF
+nv set system hostname border01
+nv set system message post-login '####################################################################################### 
+#                     You are successfully logged in to: border01                     # 
+#######################################################################################'
+nv set system message pre-login '####################################################################################### 
+#  Welcome to NVIDIA Cumulus VX (TM) 5.12.0                                              # 
+#  NVIDIA Cumulus VX (TM) is a community supported virtual appliance designed         # 
+#  for experiencing, testing and prototyping NVIDIA Cumulus'"'"' latest technology.       # 
+#  For any questions or technical support, visit our community site at:               # 
+#  https://www.nvidia.com/en-us/support                                               # 
+#######################################################################################'
+nv set system reboot mode cold
+nv set system snmp-server listening-address all vrf mgmt
+nv set system snmp-server listening-address all-v6 vrf mgmt
+nv set system snmp-server readonly-community '$nvsec$9cb7a999fcb470bcd67cf6b040983cbc' access any
+nv set system snmp-server state enabled
+nv set system ssh-server state enabled
+nv set vrf BLUE evpn enable on
+nv set vrf BLUE evpn vni 4002
+nv set vrf BLUE router bgp address-family ipv4-unicast enable on
+nv set vrf BLUE router bgp address-family ipv4-unicast redistribute static enable on
+nv set vrf BLUE router bgp address-family l2vpn-evpn enable on
+nv set vrf BLUE router bgp autonomous-system 65163
+nv set vrf BLUE router bgp enable on
+nv set vrf BLUE router bgp router-id 10.10.10.63
+nv set vrf RED evpn enable on
+nv set vrf RED evpn vni 4001
+nv set vrf RED router bgp address-family ipv4-unicast enable on
+nv set vrf RED router bgp address-family ipv4-unicast redistribute static enable on
+nv set vrf RED router bgp address-family l2vpn-evpn enable on
+nv set vrf RED router bgp autonomous-system 65163
+nv set vrf RED router bgp enable on
+nv set vrf RED router bgp router-id 10.10.10.63
+nv set vrf default router bgp address-family ipv4-unicast enable on
+nv set vrf default router bgp address-family ipv4-unicast redistribute connected enable on
+nv set vrf default router bgp address-family l2vpn-evpn enable on
+nv set vrf default router bgp autonomous-system 65163
+nv set vrf default router bgp enable on
+nv set vrf default router bgp neighbor swp51 peer-group underlay
+nv set vrf default router bgp neighbor swp51 type unnumbered
+nv set vrf default router bgp neighbor swp52 peer-group underlay
+nv set vrf default router bgp neighbor swp52 type unnumbered
+nv set vrf default router bgp neighbor swp53 peer-group underlay
+nv set vrf default router bgp neighbor swp53 type unnumbered
+nv set vrf default router bgp neighbor swp54 peer-group underlay
+nv set vrf default router bgp neighbor swp54 type unnumbered
+nv set vrf default router bgp peer-group underlay address-family l2vpn-evpn enable on
+nv set vrf default router bgp peer-group underlay bfd detect-multiplier 3
+nv set vrf default router bgp peer-group underlay bfd enable on
+nv set vrf default router bgp peer-group underlay bfd min-rx-interval 300
+nv set vrf default router bgp peer-group underlay bfd min-tx-interval 300
+nv set vrf default router bgp peer-group underlay remote-as external
+nv set vrf default router bgp router-id 10.10.10.63
+nv set vrf default router pim address-family ipv4 rp 10.10.100.100 group-range 224.1.1.0/24
+nv set vrf default router pim ecmp enable on
+nv set vrf default router pim enable on
+nv set vrf default router pim msdp-mesh-group rpmesh member-address 10.10.10.64
+nv set vrf default router pim msdp-mesh-group rpmesh source-address 10.10.10.63
+nv set vrf mgmt router static 0.0.0.0/0 address-family ipv4-unicast
+nv set vrf mgmt router static 0.0.0.0/0 via 192.168.200.1 type ipv4-address
+--- IP ADDRESSES ---
+1: lo: <LOOPBACK,UP,LOWER_UP> mtu 65536 qdisc noqueue state UNKNOWN group default qlen 1000
+    link/loopback 00:00:00:00:00:00 brd 00:00:00:00:00:00
+    inet 127.0.0.1/8 scope host lo
+       valid_lft forever preferred_lft forever
+    inet 10.10.10.63/32 scope global lo
+       valid_lft forever preferred_lft forever
+    inet 10.10.100.100/32 scope global lo
+       valid_lft forever preferred_lft forever
+    inet6 ::1/128 scope host noprefixroute 
+       valid_lft forever preferred_lft forever
+2: eth0: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc pfifo_fast master mgmt state UP group default qlen 1000
+    link/ether 44:38:39:33:01:01 brd ff:ff:ff:ff:ff:ff
+    inet 192.168.200.16/24 scope global eth0
+       valid_lft forever preferred_lft forever
+    inet6 fe80::4638:39ff:fe33:101/64 scope link 
+       valid_lft forever preferred_lft forever
+3: swp1: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 9216 qdisc pfifo_fast state UP group default qlen 1000
+    link/ether 48:b0:2d:25:74:e0 brd ff:ff:ff:ff:ff:ff
+    inet6 fe80::4ab0:2dff:fe25:74e0/64 scope link 
+       valid_lft forever preferred_lft forever
+4: swp2: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 9216 qdisc pfifo_fast state UP group default qlen 1000
+    link/ether 48:b0:2d:76:f7:87 brd ff:ff:ff:ff:ff:ff
+    inet6 fe80::4ab0:2dff:fe76:f787/64 scope link 
+       valid_lft forever preferred_lft forever
+5: swp3: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 9216 qdisc pfifo_fast state UP group default qlen 1000
+    link/ether 48:b0:2d:23:3d:87 brd ff:ff:ff:ff:ff:ff
+    inet6 fe80::4ab0:2dff:fe23:3d87/64 scope link 
+       valid_lft forever preferred_lft forever
+6: swp4: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 9216 qdisc pfifo_fast state UP group default qlen 1000
+    link/ether 48:b0:2d:97:22:05 brd ff:ff:ff:ff:ff:ff
+    inet6 fe80::4ab0:2dff:fe97:2205/64 scope link 
+       valid_lft forever preferred_lft forever
+7: swp49: <BROADCAST,MULTICAST> mtu 1500 qdisc pfifo_fast state DOWN group default qlen 1000
+    link/ether 48:b0:2d:33:26:80 brd ff:ff:ff:ff:ff:ff
+8: swp50: <BROADCAST,MULTICAST> mtu 1500 qdisc pfifo_fast state DOWN group default qlen 1000
+    link/ether 48:b0:2d:1a:2d:71 brd ff:ff:ff:ff:ff:ff
+9: swp51: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 9216 qdisc pfifo_fast state UP group default qlen 1000
+    link/ether 48:b0:2d:69:b2:e2 brd ff:ff:ff:ff:ff:ff
+    inet6 fe80::4ab0:2dff:fe69:b2e2/64 scope link 
+       valid_lft forever preferred_lft forever
+10: swp52: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 9216 qdisc pfifo_fast state UP group default qlen 1000
+    link/ether 48:b0:2d:1f:3b:f3 brd ff:ff:ff:ff:ff:ff
+    inet6 fe80::4ab0:2dff:fe1f:3bf3/64 scope link 
+       valid_lft forever preferred_lft forever
+11: swp53: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 9216 qdisc pfifo_fast state UP group default qlen 1000
+    link/ether 48:b0:2d:7b:8f:4b brd ff:ff:ff:ff:ff:ff
+    inet6 fe80::4ab0:2dff:fe7b:8f4b/64 scope link 
+       valid_lft forever preferred_lft forever
+12: swp54: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 9216 qdisc pfifo_fast state UP group default qlen 1000
+    link/ether 48:b0:2d:a8:3c:45 brd ff:ff:ff:ff:ff:ff
+    inet6 fe80::4ab0:2dff:fea8:3c45/64 scope link 
+       valid_lft forever preferred_lft forever
+13: mgmt: <NOARP,MASTER,UP,LOWER_UP> mtu 65575 qdisc noqueue state UP group default qlen 1000
+    link/ether ae:0d:fe:93:7e:b4 brd ff:ff:ff:ff:ff:ff
+    inet 127.0.0.1/8 scope host mgmt
+       valid_lft forever preferred_lft forever
+    inet 127.0.1.1/8 scope host secondary mgmt
+       valid_lft forever preferred_lft forever
+    inet6 ::1/128 scope host 
+       valid_lft forever preferred_lft forever
+14: vxlan99: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 9216 qdisc noqueue master br_l3vni state UNKNOWN group default qlen 1000
+    link/ether 42:f4:18:d3:34:7d brd ff:ff:ff:ff:ff:ff
+    inet6 fe80::40f4:18ff:fed3:347d/64 scope link 
+       valid_lft forever preferred_lft forever
+15: br_l3vni: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 9216 qdisc noqueue state UP group default qlen 1000
+    link/ether 44:38:39:33:01:0c brd ff:ff:ff:ff:ff:ff
+    inet6 fe80::4638:39ff:fe33:10c/64 scope link 
+       valid_lft forever preferred_lft forever
+16: vlan3607_l3@br_l3vni: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 9216 qdisc noqueue master BLUE state UP group default qlen 1000
+    link/ether 44:38:39:33:01:0c brd ff:ff:ff:ff:ff:ff
+    inet6 fe80::4638:39ff:fe33:10c/64 scope link 
+       valid_lft forever preferred_lft forever
+17: BLUE: <NOARP,MASTER,UP,LOWER_UP> mtu 65575 qdisc noqueue state UP group default qlen 1000
+    link/ether ae:b5:0c:a1:06:6d brd ff:ff:ff:ff:ff:ff
+    inet 127.0.0.1/8 scope host BLUE
+       valid_lft forever preferred_lft forever
+    inet 127.0.1.1/8 scope host secondary BLUE
+       valid_lft forever preferred_lft forever
+    inet6 ::1/128 scope host 
+       valid_lft forever preferred_lft forever
+18: vlan3159_l3@br_l3vni: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 9216 qdisc noqueue master RED state UP group default qlen 1000
+    link/ether 44:38:39:33:01:0c brd ff:ff:ff:ff:ff:ff
+    inet6 fe80::4638:39ff:fe33:10c/64 scope link 
+       valid_lft forever preferred_lft forever
+19: RED: <NOARP,MASTER,UP,LOWER_UP> mtu 65575 qdisc noqueue state UP group default qlen 1000
+    link/ether 82:26:4c:e6:73:11 brd ff:ff:ff:ff:ff:ff
+    inet 127.0.0.1/8 scope host RED
+       valid_lft forever preferred_lft forever
+    inet 127.0.1.1/8 scope host secondary RED
+       valid_lft forever preferred_lft forever
+    inet6 ::1/128 scope host 
+       valid_lft forever preferred_lft forever
+20: pimreg@NONE: <NOARP,UP,LOWER_UP> mtu 1472 qdisc noqueue state UNKNOWN group default qlen 1000
+    link/pimreg 
+21: pimreg1001@NONE: <NOARP,ALLMULTI,UP,LOWER_UP> mtu 1472 qdisc noqueue master mgmt state UNKNOWN group default qlen 1000
+    link/pimreg 
+22: pimreg1002@NONE: <NOARP,ALLMULTI,UP,LOWER_UP> mtu 1472 qdisc noqueue master BLUE state UNKNOWN group default qlen 1000
+    link/pimreg 
+23: pimreg1003@NONE: <NOARP,ALLMULTI,UP,LOWER_UP> mtu 1472 qdisc noqueue master RED state UNKNOWN group default qlen 1000
+    link/pimreg 
+--- IP ROUTES ---
+10.10.10.1 nhid 178 proto bgp metric 20 
+10.10.10.2 nhid 178 proto bgp metric 20 
+10.10.10.3 nhid 178 proto bgp metric 20 
+10.10.10.4 nhid 178 proto bgp metric 20 
+10.10.10.64 nhid 178 proto bgp metric 20 
+10.10.10.101 nhid 125 proto bgp metric 20 
+10.10.10.102 nhid 179 proto bgp metric 20 
+10.10.10.103 nhid 135 proto bgp metric 20 
+10.10.10.104 nhid 155 proto bgp metric 20 
+====================
+leaf02 | CHANGED | rc=0 >>
+====================
+HOST: 
+leaf02
+====================
+--- NV CONFIG ---
+nv set bridge domain br_default type vlan-aware
+nv set bridge domain br_default vlan 10 vni 10 flooding enable on
+nv set bridge domain br_default vlan 10 vni 10 flooding multicast-group 224.1.1.10
+nv set bridge domain br_default vlan 20 vni 20 flooding enable on
+nv set bridge domain br_default vlan 20 vni 20 flooding multicast-group 224.1.1.20
+nv set bridge domain br_default vlan 30 vni 30 flooding enable on
+nv set bridge domain br_default vlan 30 vni 30 flooding multicast-group 224.1.1.30
+nv set evpn enable on
+nv set evpn multihoming enable on
+nv set evpn multihoming startup-delay 10
+nv set evpn route-advertise svi-ip on
+nv set interface bond1 bond member swp1
+nv set interface bond1 bridge domain br_default access 10
+nv set interface bond1 evpn multihoming segment local-id 1
+nv set interface bond1-3 bond lacp-bypass on
+nv set interface bond1-3 bond mode lacp
+nv set interface bond1-3 bridge domain br_default stp admin-edge on
+nv set interface bond1-3 bridge domain br_default stp auto-edge on
+nv set interface bond1-3 bridge domain br_default stp bpdu-guard on
+nv set interface bond1-3 evpn multihoming segment enable on
+nv set interface bond1-3 evpn multihoming segment mac-address 44:38:39:BE:EF:AA
+nv set interface bond1-3 link mtu 9216
+nv set interface bond1-3 type bond
+nv set interface bond2 bond member swp2
+nv set interface bond2 bridge domain br_default access 20
+nv set interface bond2 evpn multihoming segment local-id 2
+nv set interface bond3 bond member swp3
+nv set interface bond3 bridge domain br_default access 30
+nv set interface bond3 evpn multihoming segment local-id 3
+nv set interface eth0 ip address 192.168.200.7/24
+nv set interface eth0 ip vrf mgmt
+nv set interface eth0 type eth
+nv set interface lo ip address 10.10.10.2/32
+nv set interface lo router pim address-family ipv4-unicast use-source 10.10.10.2
+nv set interface lo type loopback
+nv set interface lo,swp51-54,vlan10,20,30 router pim enable on
+nv set interface swp51-54 evpn multihoming uplink on
+nv set interface swp51-54 link state up
+nv set interface swp51-54 type swp
+nv set interface vlan10 ip address 10.1.10.3/24
+nv set interface vlan10 ip vrr address 10.1.10.1/24
+nv set interface vlan10 ip vrr mac-address 00:00:00:00:00:10
+nv set interface vlan10 vlan 10
+nv set interface vlan10,20 ip vrf RED
+nv set interface vlan10,20,30 ip igmp enable on
+nv set interface vlan10,20,30 ip vrr enable on
+nv set interface vlan10,20,30 ip vrr state up
+nv set interface vlan10,20,30 type svi
+nv set interface vlan20 ip address 10.1.20.3/24
+nv set interface vlan20 ip vrr address 10.1.20.1/24
+nv set interface vlan20 ip vrr mac-address 00:00:00:00:00:20
+nv set interface vlan20 vlan 20
+nv set interface vlan30 ip address 10.1.30.3/24
+nv set interface vlan30 ip vrf BLUE
+nv set interface vlan30 ip vrr address 10.1.30.1/24
+nv set interface vlan30 ip vrr mac-address 00:00:00:00:00:30
+nv set interface vlan30 vlan 30
+nv set nve vxlan arp-nd-suppress on
+nv set nve vxlan enable on
+nv set nve vxlan source address 10.10.10.2
+nv set router bgp enable on
+nv set router bgp graceful-restart mode helper-only
+nv set router pim enable on
+nv set router pim timers keepalive 3600
+nv set router vrr enable on
+nv set service dns mgmt server 1.1.1.1
+nv set service dns mgmt server 8.8.8.8
+nv set service ntp mgmt server 0.cumulusnetworks.pool.ntp.org iburst on
+nv set service ntp mgmt server 1.cumulusnetworks.pool.ntp.org iburst on
+nv set service ntp mgmt server 2.cumulusnetworks.pool.ntp.org iburst on
+nv set service ntp mgmt server 3.cumulusnetworks.pool.ntp.org iburst on
+nv set service syslog mgmt server 192.168.200.1
+nv set system aaa class nvapply action allow
+nv set system aaa class nvapply command-path / permission all
+nv set system aaa class nvshow action allow
+nv set system aaa class nvshow command-path / permission ro
+nv set system aaa class sudo action allow
+nv set system aaa class sudo command-path / permission all
+nv set system aaa role nvue-admin class nvapply
+nv set system aaa role nvue-monitor class nvshow
+nv set system aaa role system-admin class nvapply
+nv set system aaa role system-admin class sudo
+nv set system aaa user cumulus full-name cumulus
+nv set system aaa user cumulus hashed-password '*'
+nv set system aaa user cumulus role system-admin
+nv set system api state enabled
+nv set system config auto-save state enabled
+nv set system control-plane acl acl-default-dos inbound
+nv set system control-plane acl acl-default-whitelist inbound
+nv set system global anycast-mac 44:38:39:BE:EF:AA
+nv set system hostname leaf02
+nv set system message post-login '##################################################################################### 
+#                     You are successfully logged in to: leaf02                     # 
+#####################################################################################'
+nv set system message pre-login '##################################################################################### 
+#  Welcome to NVIDIA Cumulus VX (TM) 5.12.0                                            # 
+#  NVIDIA Cumulus VX (TM) is a community supported virtual appliance designed       # 
+#  for experiencing, testing and prototyping NVIDIA Cumulus'"'"' latest technology.     # 
+#  For any questions or technical support, visit our community site at:             # 
+#  https://www.nvidia.com/en-us/support                                             # 
+#####################################################################################'
+nv set system reboot mode cold
+nv set system snmp-server listening-address all vrf mgmt
+nv set system snmp-server listening-address all-v6 vrf mgmt
+nv set system snmp-server readonly-community '$nvsec$9cb7a999fcb470bcd67cf6b040983cbc' access any
+nv set system snmp-server state enabled
+nv set system ssh-server state enabled
+nv set vrf BLUE evpn enable on
+nv set vrf BLUE evpn vni 4002
+nv set vrf BLUE router bgp address-family ipv4-unicast enable on
+nv set vrf BLUE router bgp address-family ipv4-unicast redistribute connected enable on
+nv set vrf BLUE router bgp address-family l2vpn-evpn enable on
+nv set vrf BLUE router bgp autonomous-system 65102
+nv set vrf BLUE router bgp enable on
+nv set vrf BLUE router bgp router-id 10.10.10.2
+nv set vrf RED evpn enable on
+nv set vrf RED evpn vni 4001
+nv set vrf RED router bgp address-family ipv4-unicast enable on
+nv set vrf RED router bgp address-family ipv4-unicast redistribute connected enable on
+nv set vrf RED router bgp address-family l2vpn-evpn enable on
+nv set vrf RED router bgp autonomous-system 65102
+nv set vrf RED router bgp enable on
+nv set vrf RED router bgp router-id 10.10.10.2
+nv set vrf default router bgp address-family ipv4-unicast enable on
+nv set vrf default router bgp address-family ipv4-unicast redistribute connected enable on
+nv set vrf default router bgp address-family l2vpn-evpn enable on
+nv set vrf default router bgp autonomous-system 65102
+nv set vrf default router bgp enable on
+nv set vrf default router bgp neighbor swp51 peer-group underlay
+nv set vrf default router bgp neighbor swp51 type unnumbered
+nv set vrf default router bgp neighbor swp52 peer-group underlay
+nv set vrf default router bgp neighbor swp52 type unnumbered
+nv set vrf default router bgp neighbor swp53 peer-group underlay
+nv set vrf default router bgp neighbor swp53 type unnumbered
+nv set vrf default router bgp neighbor swp54 peer-group underlay
+nv set vrf default router bgp neighbor swp54 type unnumbered
+nv set vrf default router bgp peer-group underlay address-family l2vpn-evpn enable on
+nv set vrf default router bgp peer-group underlay bfd detect-multiplier 3
+nv set vrf default router bgp peer-group underlay bfd enable on
+nv set vrf default router bgp peer-group underlay bfd min-rx-interval 300
+nv set vrf default router bgp peer-group underlay bfd min-tx-interval 300
+nv set vrf default router bgp peer-group underlay remote-as external
+nv set vrf default router bgp router-id 10.10.10.2
+nv set vrf default router pim address-family ipv4 rp 10.10.100.100 group-range 224.1.1.0/24
+nv set vrf default router pim ecmp enable on
+nv set vrf default router pim enable on
+nv set vrf mgmt router static 0.0.0.0/0 address-family ipv4-unicast
+nv set vrf mgmt router static 0.0.0.0/0 via 192.168.200.1 type ipv4-address
+--- IP ADDRESSES ---
+1: lo: <LOOPBACK,UP,LOWER_UP> mtu 65536 qdisc noqueue state UNKNOWN group default qlen 1000
+    link/loopback 00:00:00:00:00:00 brd 00:00:00:00:00:00
+    inet 127.0.0.1/8 scope host lo
+       valid_lft forever preferred_lft forever
+    inet 10.10.10.2/32 scope global lo
+       valid_lft forever preferred_lft forever
+    inet6 ::1/128 scope host noprefixroute 
+       valid_lft forever preferred_lft forever
+2: eth0: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc pfifo_fast master mgmt state UP group default qlen 1000
+    link/ether 44:38:39:22:01:02 brd ff:ff:ff:ff:ff:ff
+    inet 192.168.200.7/24 scope global eth0
+       valid_lft forever preferred_lft forever
+    inet6 fe80::4638:39ff:fe22:102/64 scope link 
+       valid_lft forever preferred_lft forever
+3: swp1: <BROADCAST,MULTICAST,SLAVE,UP,LOWER_UP> mtu 9216 qdisc pfifo_fast master bond1 state UP group default qlen 1000
+    link/ether 48:b0:2d:8e:f3:a1 brd ff:ff:ff:ff:ff:ff
+4: swp2: <BROADCAST,MULTICAST,SLAVE,UP,LOWER_UP> mtu 9216 qdisc pfifo_fast master bond2 state UP group default qlen 1000
+    link/ether 48:b0:2d:08:3f:fe brd ff:ff:ff:ff:ff:ff
+5: swp3: <BROADCAST,MULTICAST,SLAVE,UP,LOWER_UP> mtu 9216 qdisc pfifo_fast master bond3 state UP group default qlen 1000
+    link/ether 48:b0:2d:2e:a0:bf brd ff:ff:ff:ff:ff:ff
+6: swp49: <BROADCAST,MULTICAST> mtu 1500 qdisc pfifo_fast state DOWN group default qlen 1000
+    link/ether 48:b0:2d:c4:33:46 brd ff:ff:ff:ff:ff:ff
+7: swp50: <BROADCAST,MULTICAST> mtu 1500 qdisc pfifo_fast state DOWN group default qlen 1000
+    link/ether 48:b0:2d:db:8f:b6 brd ff:ff:ff:ff:ff:ff
+8: swp51: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 9216 qdisc pfifo_fast state UP group default qlen 1000
+    link/ether 48:b0:2d:8b:b3:43 brd ff:ff:ff:ff:ff:ff
+    inet6 fe80::4ab0:2dff:fe8b:b343/64 scope link 
+       valid_lft forever preferred_lft forever
+9: swp52: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 9216 qdisc pfifo_fast state UP group default qlen 1000
+    link/ether 48:b0:2d:6c:0f:4a brd ff:ff:ff:ff:ff:ff
+    inet6 fe80::4ab0:2dff:fe6c:f4a/64 scope link 
+       valid_lft forever preferred_lft forever
+10: swp53: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 9216 qdisc pfifo_fast state UP group default qlen 1000
+    link/ether 48:b0:2d:a3:5b:95 brd ff:ff:ff:ff:ff:ff
+    inet6 fe80::4ab0:2dff:fea3:5b95/64 scope link 
+       valid_lft forever preferred_lft forever
+11: swp54: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 9216 qdisc pfifo_fast state UP group default qlen 1000
+    link/ether 48:b0:2d:54:37:53 brd ff:ff:ff:ff:ff:ff
+    inet6 fe80::4ab0:2dff:fe54:3753/64 scope link 
+       valid_lft forever preferred_lft forever
+12: mgmt: <NOARP,MASTER,UP,LOWER_UP> mtu 65575 qdisc noqueue state UP group default qlen 1000
+    link/ether 66:b0:6d:19:e7:96 brd ff:ff:ff:ff:ff:ff
+    inet 127.0.0.1/8 scope host mgmt
+       valid_lft forever preferred_lft forever
+    inet 127.0.1.1/8 scope host secondary mgmt
+       valid_lft forever preferred_lft forever
+    inet6 ::1/128 scope host 
+       valid_lft forever preferred_lft forever
+13: ipmr-lo: <BROADCAST,NOARP,UP,LOWER_UP> mtu 16000 qdisc noqueue state UNKNOWN group default qlen 1000
+    link/ether 7a:43:62:f3:02:6b brd ff:ff:ff:ff:ff:ff
+    inet6 fe80::7843:62ff:fef3:26b/64 scope link 
+       valid_lft forever preferred_lft forever
+14: vxlan48: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 9216 qdisc noqueue master br_default state UNKNOWN group default qlen 1000
+    link/ether 6e:3a:02:6f:25:d0 brd ff:ff:ff:ff:ff:ff
+    inet6 fe80::6c3a:2ff:fe6f:25d0/64 scope link 
+       valid_lft forever preferred_lft forever
+15: bond1: <BROADCAST,MULTICAST,MASTER,UP,LOWER_UP> mtu 9216 qdisc noqueue master br_default state UP group default qlen 1000
+    link/ether 48:b0:2d:8e:f3:a1 brd ff:ff:ff:ff:ff:ff
+16: bond3: <BROADCAST,MULTICAST,MASTER,UP,LOWER_UP> mtu 9216 qdisc noqueue master br_default state UP group default qlen 1000
+    link/ether 48:b0:2d:2e:a0:bf brd ff:ff:ff:ff:ff:ff
+17: bond2: <BROADCAST,MULTICAST,MASTER,UP,LOWER_UP> mtu 9216 qdisc noqueue master br_default state UP group default qlen 1000
+    link/ether 48:b0:2d:08:3f:fe brd ff:ff:ff:ff:ff:ff
+18: br_default: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 9216 qdisc noqueue state UP group default qlen 1000
+    link/ether 44:38:39:22:01:0c brd ff:ff:ff:ff:ff:ff
+    inet6 fe80::4638:39ff:fe22:10c/64 scope link 
+       valid_lft forever preferred_lft forever
+19: vlan30@br_default: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 9216 qdisc noqueue master BLUE state UP group default qlen 1000
+    link/ether 44:38:39:22:01:0c brd ff:ff:ff:ff:ff:ff
+    inet 10.1.30.3/24 scope global vlan30
+       valid_lft forever preferred_lft forever
+    inet6 fe80::4638:39ff:fe22:10c/64 scope link 
+       valid_lft forever preferred_lft forever
+20: BLUE: <NOARP,MASTER,UP,LOWER_UP> mtu 65575 qdisc noqueue state UP group default qlen 1000
+    link/ether f6:2d:08:95:e4:ae brd ff:ff:ff:ff:ff:ff
+    inet 127.0.0.1/8 scope host BLUE
+       valid_lft forever preferred_lft forever
+    inet 127.0.1.1/8 scope host secondary BLUE
+       valid_lft forever preferred_lft forever
+    inet6 ::1/128 scope host 
+       valid_lft forever preferred_lft forever
+21: vlan30-v0@vlan30: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 9216 qdisc noqueue master BLUE state UP group default qlen 1000
+    link/ether 00:00:00:00:00:30 brd ff:ff:ff:ff:ff:ff
+    inet 10.1.30.1/24 metric 1024 scope global vlan30-v0
+       valid_lft forever preferred_lft forever
+    inet6 fe80::200:ff:fe00:30/64 scope link 
+       valid_lft forever preferred_lft forever
+22: vxlan99: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 9216 qdisc noqueue master br_l3vni state UNKNOWN group default qlen 1000
+    link/ether 5a:b7:44:73:70:8c brd ff:ff:ff:ff:ff:ff
+    inet6 fe80::58b7:44ff:fe73:708c/64 scope link 
+       valid_lft forever preferred_lft forever
+23: br_l3vni: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 9216 qdisc noqueue state UP group default qlen 1000
+    link/ether 44:38:39:22:01:0c brd ff:ff:ff:ff:ff:ff
+    inet6 fe80::4638:39ff:fe22:10c/64 scope link 
+       valid_lft forever preferred_lft forever
+24: vlan3607_l3@br_l3vni: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 9216 qdisc noqueue master BLUE state UP group default qlen 1000
+    link/ether 44:38:39:22:01:0c brd ff:ff:ff:ff:ff:ff
+    inet6 fe80::4638:39ff:fe22:10c/64 scope link 
+       valid_lft forever preferred_lft forever
+25: vlan10@br_default: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 9216 qdisc noqueue master RED state UP group default qlen 1000
+    link/ether 44:38:39:22:01:0c brd ff:ff:ff:ff:ff:ff
+    inet 10.1.10.3/24 scope global vlan10
+       valid_lft forever preferred_lft forever
+    inet6 fe80::4638:39ff:fe22:10c/64 scope link 
+       valid_lft forever preferred_lft forever
+26: RED: <NOARP,MASTER,UP,LOWER_UP> mtu 65575 qdisc noqueue state UP group default qlen 1000
+    link/ether 76:52:8b:2f:70:64 brd ff:ff:ff:ff:ff:ff
+    inet 127.0.0.1/8 scope host RED
+       valid_lft forever preferred_lft forever
+    inet 127.0.1.1/8 scope host secondary RED
+       valid_lft forever preferred_lft forever
+    inet6 ::1/128 scope host 
+       valid_lft forever preferred_lft forever
+27: vlan10-v0@vlan10: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 9216 qdisc noqueue master RED state UP group default qlen 1000
+    link/ether 00:00:00:00:00:10 brd ff:ff:ff:ff:ff:ff
+    inet 10.1.10.1/24 metric 1024 scope global vlan10-v0
+       valid_lft forever preferred_lft forever
+    inet6 fe80::200:ff:fe00:10/64 scope link 
+       valid_lft forever preferred_lft forever
+28: vlan20@br_default: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 9216 qdisc noqueue master RED state UP group default qlen 1000
+    link/ether 44:38:39:22:01:0c brd ff:ff:ff:ff:ff:ff
+    inet 10.1.20.3/24 scope global vlan20
+       valid_lft forever preferred_lft forever
+    inet6 fe80::4638:39ff:fe22:10c/64 scope link 
+       valid_lft forever preferred_lft forever
+29: vlan20-v0@vlan20: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 9216 qdisc noqueue master RED state UP group default qlen 1000
+    link/ether 00:00:00:00:00:20 brd ff:ff:ff:ff:ff:ff
+    inet 10.1.20.1/24 metric 1024 scope global vlan20-v0
+       valid_lft forever preferred_lft forever
+    inet6 fe80::200:ff:fe00:20/64 scope link 
+       valid_lft forever preferred_lft forever
+30: vlan3159_l3@br_l3vni: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 9216 qdisc noqueue master RED state UP group default qlen 1000
+    link/ether 44:38:39:22:01:0c brd ff:ff:ff:ff:ff:ff
+    inet6 fe80::4638:39ff:fe22:10c/64 scope link 
+       valid_lft forever preferred_lft forever
+31: pimreg@NONE: <NOARP,UP,LOWER_UP> mtu 1472 qdisc noqueue state UNKNOWN group default qlen 1000
+    link/pimreg 
+32: pimreg1001@NONE: <NOARP,ALLMULTI,UP,LOWER_UP> mtu 1472 qdisc noqueue master mgmt state UNKNOWN group default qlen 1000
+    link/pimreg 
+33: pimreg1002@NONE: <NOARP,ALLMULTI,UP,LOWER_UP> mtu 1472 qdisc noqueue master BLUE state UNKNOWN group default qlen 1000
+    link/pimreg 
+34: pimreg1003@NONE: <NOARP,ALLMULTI,UP,LOWER_UP> mtu 1472 qdisc noqueue master RED state UNKNOWN group default qlen 1000
+    link/pimreg 
+--- IP ROUTES ---
+10.10.10.1 nhid 168 proto bgp metric 20 
+10.10.10.3 nhid 168 proto bgp metric 20 
+10.10.10.4 nhid 168 proto bgp metric 20 
+10.10.10.63 nhid 168 proto bgp metric 20 
+10.10.10.64 nhid 168 proto bgp metric 20 
+10.10.10.101 nhid 165 proto bgp metric 20 
+10.10.10.102 nhid 70 proto bgp metric 20 
+10.10.10.103 nhid 166 proto bgp metric 20 
+10.10.10.104 nhid 69 proto bgp metric 20 
+10.10.100.100 nhid 168 proto bgp metric 20 
+====================
+spine03 | CHANGED | rc=0 >>
+====================
+HOST: 
+spine03
+====================
+--- NV CONFIG ---
+nv set evpn enable on
+nv set interface eth0 ip address 192.168.200.4/24
+nv set interface eth0 ip vrf mgmt
+nv set interface eth0 type eth
+nv set interface lo ip address 10.10.10.103/32
+nv set interface lo router pim address-family ipv4-unicast use-source 10.10.10.103
+nv set interface lo type loopback
+nv set interface lo,swp1-6 router pim enable on
+nv set interface swp1-6 link state up
+nv set interface swp1-6 type swp
+nv set nve vxlan enable on
+nv set router bgp enable on
+nv set router bgp graceful-restart mode helper-only
+nv set router pim enable on
+nv set router pim timers keepalive 3600
+nv set service dns mgmt server 1.1.1.1
+nv set service dns mgmt server 8.8.8.8
+nv set service ntp mgmt server 0.cumulusnetworks.pool.ntp.org iburst on
+nv set service ntp mgmt server 1.cumulusnetworks.pool.ntp.org iburst on
+nv set service ntp mgmt server 2.cumulusnetworks.pool.ntp.org iburst on
+nv set service ntp mgmt server 3.cumulusnetworks.pool.ntp.org iburst on
+nv set service syslog mgmt server 192.168.200.1
+nv set system aaa class nvapply action allow
+nv set system aaa class nvapply command-path / permission all
+nv set system aaa class nvshow action allow
+nv set system aaa class nvshow command-path / permission ro
+nv set system aaa class sudo action allow
+nv set system aaa class sudo command-path / permission all
+nv set system aaa role nvue-admin class nvapply
+nv set system aaa role nvue-monitor class nvshow
+nv set system aaa role system-admin class nvapply
+nv set system aaa role system-admin class sudo
+nv set system aaa user cumulus full-name cumulus
+nv set system aaa user cumulus hashed-password '*'
+nv set system aaa user cumulus role system-admin
+nv set system api state enabled
+nv set system config auto-save state enabled
+nv set system control-plane acl acl-default-dos inbound
+nv set system control-plane acl acl-default-whitelist inbound
+nv set system hostname spine03
+nv set system message post-login '###################################################################################### 
+#                     You are successfully logged in to: spine03                     # 
+######################################################################################'
+nv set system message pre-login '###################################################################################### 
+#  Welcome to NVIDIA Cumulus VX (TM) 5.12.0                                             # 
+#  NVIDIA Cumulus VX (TM) is a community supported virtual appliance designed        # 
+#  for experiencing, testing and prototyping NVIDIA Cumulus'"'"' latest technology.      # 
+#  For any questions or technical support, visit our community site at:              # 
+#  https://www.nvidia.com/en-us/support                                              # 
+######################################################################################'
+nv set system reboot mode cold
+nv set system snmp-server listening-address all vrf mgmt
+nv set system snmp-server listening-address all-v6 vrf mgmt
+nv set system snmp-server readonly-community '$nvsec$9cb7a999fcb470bcd67cf6b040983cbc' access any
+nv set system snmp-server state enabled
+nv set system ssh-server state enabled
+nv set vrf default router bgp address-family ipv4-unicast enable on
+nv set vrf default router bgp address-family ipv4-unicast redistribute connected enable on
+nv set vrf default router bgp address-family l2vpn-evpn enable on
+nv set vrf default router bgp autonomous-system 65100
+nv set vrf default router bgp enable on
+nv set vrf default router bgp neighbor swp1 peer-group underlay
+nv set vrf default router bgp neighbor swp1 type unnumbered
+nv set vrf default router bgp neighbor swp2 peer-group underlay
+nv set vrf default router bgp neighbor swp2 type unnumbered
+nv set vrf default router bgp neighbor swp3 peer-group underlay
+nv set vrf default router bgp neighbor swp3 type unnumbered
+nv set vrf default router bgp neighbor swp4 peer-group underlay
+nv set vrf default router bgp neighbor swp4 type unnumbered
+nv set vrf default router bgp neighbor swp5 peer-group underlay
+nv set vrf default router bgp neighbor swp5 type unnumbered
+nv set vrf default router bgp neighbor swp6 peer-group underlay
+nv set vrf default router bgp neighbor swp6 type unnumbered
+nv set vrf default router bgp peer-group underlay address-family l2vpn-evpn enable on
+nv set vrf default router bgp peer-group underlay bfd detect-multiplier 3
+nv set vrf default router bgp peer-group underlay bfd enable on
+nv set vrf default router bgp peer-group underlay bfd min-rx-interval 300
+nv set vrf default router bgp peer-group underlay bfd min-tx-interval 300
+nv set vrf default router bgp peer-group underlay remote-as external
+nv set vrf default router bgp router-id 10.10.10.103
+nv set vrf default router pim address-family ipv4 rp 10.10.100.100 group-range 224.1.1.0/24
+nv set vrf default router pim ecmp enable on
+nv set vrf default router pim enable on
+nv set vrf mgmt router static 0.0.0.0/0 address-family ipv4-unicast
+nv set vrf mgmt router static 0.0.0.0/0 via 192.168.200.1 type ipv4-address
+--- IP ADDRESSES ---
+1: lo: <LOOPBACK,UP,LOWER_UP> mtu 65536 qdisc noqueue state UNKNOWN group default qlen 1000
+    link/loopback 00:00:00:00:00:00 brd 00:00:00:00:00:00
+    inet 127.0.0.1/8 scope host lo
+       valid_lft forever preferred_lft forever
+    inet 10.10.10.103/32 scope global lo
+       valid_lft forever preferred_lft forever
+    inet6 ::1/128 scope host noprefixroute 
+       valid_lft forever preferred_lft forever
+2: eth0: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc pfifo_fast master mgmt state UP group default qlen 1000
+    link/ether 44:38:39:22:01:07 brd ff:ff:ff:ff:ff:ff
+    inet 192.168.200.4/24 scope global eth0
+       valid_lft forever preferred_lft forever
+    inet6 fe80::4638:39ff:fe22:107/64 scope link 
+       valid_lft forever preferred_lft forever
+3: swp1: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 9216 qdisc pfifo_fast state UP group default qlen 1000
+    link/ether 48:b0:2d:46:a9:d8 brd ff:ff:ff:ff:ff:ff
+    inet6 fe80::4ab0:2dff:fe46:a9d8/64 scope link 
+       valid_lft forever preferred_lft forever
+4: swp2: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 9216 qdisc pfifo_fast state UP group default qlen 1000
+    link/ether 48:b0:2d:e4:b0:91 brd ff:ff:ff:ff:ff:ff
+    inet6 fe80::4ab0:2dff:fee4:b091/64 scope link 
+       valid_lft forever preferred_lft forever
+5: swp3: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 9216 qdisc pfifo_fast state UP group default qlen 1000
+    link/ether 48:b0:2d:9f:e6:a2 brd ff:ff:ff:ff:ff:ff
+    inet6 fe80::4ab0:2dff:fe9f:e6a2/64 scope link 
+       valid_lft forever preferred_lft forever
+6: swp4: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 9216 qdisc pfifo_fast state UP group default qlen 1000
+    link/ether 48:b0:2d:5b:f2:a5 brd ff:ff:ff:ff:ff:ff
+    inet6 fe80::4ab0:2dff:fe5b:f2a5/64 scope link 
+       valid_lft forever preferred_lft forever
+7: swp5: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 9216 qdisc pfifo_fast state UP group default qlen 1000
+    link/ether 48:b0:2d:c6:f3:2a brd ff:ff:ff:ff:ff:ff
+    inet6 fe80::4ab0:2dff:fec6:f32a/64 scope link 
+       valid_lft forever preferred_lft forever
+8: swp6: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 9216 qdisc pfifo_fast state UP group default qlen 1000
+    link/ether 48:b0:2d:03:b5:97 brd ff:ff:ff:ff:ff:ff
+    inet6 fe80::4ab0:2dff:fe03:b597/64 scope link 
+       valid_lft forever preferred_lft forever
+9: mgmt: <NOARP,MASTER,UP,LOWER_UP> mtu 65575 qdisc noqueue state UP group default qlen 1000
+    link/ether 9a:55:a8:26:d3:a4 brd ff:ff:ff:ff:ff:ff
+    inet 127.0.0.1/8 scope host mgmt
+       valid_lft forever preferred_lft forever
+    inet 127.0.1.1/8 scope host secondary mgmt
+       valid_lft forever preferred_lft forever
+    inet6 ::1/128 scope host 
+       valid_lft forever preferred_lft forever
+10: pimreg@NONE: <NOARP,UP,LOWER_UP> mtu 1472 qdisc noqueue state UNKNOWN group default qlen 1000
+    link/pimreg 
+11: pimreg1001@NONE: <NOARP,ALLMULTI,UP,LOWER_UP> mtu 1472 qdisc noqueue master mgmt state UNKNOWN group default qlen 1000
+    link/pimreg 
+--- IP ROUTES ---
+10.10.10.1 nhid 49 proto bgp metric 20 
+10.10.10.2 nhid 56 proto bgp metric 20 
+10.10.10.3 nhid 32 proto bgp metric 20 
+10.10.10.4 nhid 26 proto bgp metric 20 
+10.10.10.63 nhid 47 proto bgp metric 20 
+10.10.10.64 nhid 58 proto bgp metric 20 
+10.10.100.100 nhid 47 proto bgp metric 20 
+====================
+spine02 | CHANGED | rc=0 >>
+====================
+HOST: 
+spine02
+====================
+--- NV CONFIG ---
+nv set evpn enable on
+nv set interface eth0 ip address 192.168.200.3/24
+nv set interface eth0 ip vrf mgmt
+nv set interface eth0 type eth
+nv set interface lo ip address 10.10.10.102/32
+nv set interface lo router pim address-family ipv4-unicast use-source 10.10.10.102
+nv set interface lo type loopback
+nv set interface lo,swp1-6 router pim enable on
+nv set interface swp1-6 link state up
+nv set interface swp1-6 type swp
+nv set nve vxlan enable on
+nv set router bgp enable on
+nv set router bgp graceful-restart mode helper-only
+nv set router pim enable on
+nv set router pim timers keepalive 3600
+nv set service dns mgmt server 1.1.1.1
+nv set service dns mgmt server 8.8.8.8
+nv set service ntp mgmt server 0.cumulusnetworks.pool.ntp.org iburst on
+nv set service ntp mgmt server 1.cumulusnetworks.pool.ntp.org iburst on
+nv set service ntp mgmt server 2.cumulusnetworks.pool.ntp.org iburst on
+nv set service ntp mgmt server 3.cumulusnetworks.pool.ntp.org iburst on
+nv set service syslog mgmt server 192.168.200.1
+nv set system aaa class nvapply action allow
+nv set system aaa class nvapply command-path / permission all
+nv set system aaa class nvshow action allow
+nv set system aaa class nvshow command-path / permission ro
+nv set system aaa class sudo action allow
+nv set system aaa class sudo command-path / permission all
+nv set system aaa role nvue-admin class nvapply
+nv set system aaa role nvue-monitor class nvshow
+nv set system aaa role system-admin class nvapply
+nv set system aaa role system-admin class sudo
+nv set system aaa user cumulus full-name cumulus
+nv set system aaa user cumulus hashed-password '*'
+nv set system aaa user cumulus role system-admin
+nv set system api state enabled
+nv set system config auto-save state enabled
+nv set system control-plane acl acl-default-dos inbound
+nv set system control-plane acl acl-default-whitelist inbound
+nv set system hostname spine02
+nv set system message post-login '###################################################################################### 
+#                     You are successfully logged in to: spine02                     # 
+######################################################################################'
+nv set system message pre-login '###################################################################################### 
+#  Welcome to NVIDIA Cumulus VX (TM) 5.12.0                                             # 
+#  NVIDIA Cumulus VX (TM) is a community supported virtual appliance designed        # 
+#  for experiencing, testing and prototyping NVIDIA Cumulus'"'"' latest technology.      # 
+#  For any questions or technical support, visit our community site at:              # 
+#  https://www.nvidia.com/en-us/support                                              # 
+######################################################################################'
+nv set system reboot mode cold
+nv set system snmp-server listening-address all vrf mgmt
+nv set system snmp-server listening-address all-v6 vrf mgmt
+nv set system snmp-server readonly-community '$nvsec$9cb7a999fcb470bcd67cf6b040983cbc' access any
+nv set system snmp-server state enabled
+nv set system ssh-server state enabled
+nv set vrf default router bgp address-family ipv4-unicast enable on
+nv set vrf default router bgp address-family ipv4-unicast redistribute connected enable on
+nv set vrf default router bgp address-family l2vpn-evpn enable on
+nv set vrf default router bgp autonomous-system 65100
+nv set vrf default router bgp enable on
+nv set vrf default router bgp neighbor swp1 peer-group underlay
+nv set vrf default router bgp neighbor swp1 type unnumbered
+nv set vrf default router bgp neighbor swp2 peer-group underlay
+nv set vrf default router bgp neighbor swp2 type unnumbered
+nv set vrf default router bgp neighbor swp3 peer-group underlay
+nv set vrf default router bgp neighbor swp3 type unnumbered
+nv set vrf default router bgp neighbor swp4 peer-group underlay
+nv set vrf default router bgp neighbor swp4 type unnumbered
+nv set vrf default router bgp neighbor swp5 peer-group underlay
+nv set vrf default router bgp neighbor swp5 type unnumbered
+nv set vrf default router bgp neighbor swp6 peer-group underlay
+nv set vrf default router bgp neighbor swp6 type unnumbered
+nv set vrf default router bgp peer-group underlay address-family l2vpn-evpn enable on
+nv set vrf default router bgp peer-group underlay bfd detect-multiplier 3
+nv set vrf default router bgp peer-group underlay bfd enable on
+nv set vrf default router bgp peer-group underlay bfd min-rx-interval 300
+nv set vrf default router bgp peer-group underlay bfd min-tx-interval 300
+nv set vrf default router bgp peer-group underlay remote-as external
+nv set vrf default router bgp router-id 10.10.10.102
+nv set vrf default router pim address-family ipv4 rp 10.10.100.100 group-range 224.1.1.0/24
+nv set vrf default router pim ecmp enable on
+nv set vrf default router pim enable on
+nv set vrf mgmt router static 0.0.0.0/0 address-family ipv4-unicast
+nv set vrf mgmt router static 0.0.0.0/0 via 192.168.200.1 type ipv4-address
+--- IP ADDRESSES ---
+1: lo: <LOOPBACK,UP,LOWER_UP> mtu 65536 qdisc noqueue state UNKNOWN group default qlen 1000
+    link/loopback 00:00:00:00:00:00 brd 00:00:00:00:00:00
+    inet 127.0.0.1/8 scope host lo
+       valid_lft forever preferred_lft forever
+    inet 10.10.10.102/32 scope global lo
+       valid_lft forever preferred_lft forever
+    inet6 ::1/128 scope host noprefixroute 
+       valid_lft forever preferred_lft forever
+2: eth0: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc pfifo_fast master mgmt state UP group default qlen 1000
+    link/ether 44:38:39:22:01:06 brd ff:ff:ff:ff:ff:ff
+    inet 192.168.200.3/24 scope global eth0
+       valid_lft forever preferred_lft forever
+    inet6 fe80::4638:39ff:fe22:106/64 scope link 
+       valid_lft forever preferred_lft forever
+3: swp1: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 9216 qdisc pfifo_fast state UP group default qlen 1000
+    link/ether 48:b0:2d:b2:01:91 brd ff:ff:ff:ff:ff:ff
+    inet6 fe80::4ab0:2dff:feb2:191/64 scope link 
+       valid_lft forever preferred_lft forever
+4: swp2: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 9216 qdisc pfifo_fast state UP group default qlen 1000
+    link/ether 48:b0:2d:8e:24:77 brd ff:ff:ff:ff:ff:ff
+    inet6 fe80::4ab0:2dff:fe8e:2477/64 scope link 
+       valid_lft forever preferred_lft forever
+5: swp3: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 9216 qdisc pfifo_fast state UP group default qlen 1000
+    link/ether 48:b0:2d:cc:c2:d8 brd ff:ff:ff:ff:ff:ff
+    inet6 fe80::4ab0:2dff:fecc:c2d8/64 scope link 
+       valid_lft forever preferred_lft forever
+6: swp4: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 9216 qdisc pfifo_fast state UP group default qlen 1000
+    link/ether 48:b0:2d:2e:47:f6 brd ff:ff:ff:ff:ff:ff
+    inet6 fe80::4ab0:2dff:fe2e:47f6/64 scope link 
+       valid_lft forever preferred_lft forever
+7: swp5: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 9216 qdisc pfifo_fast state UP group default qlen 1000
+    link/ether 48:b0:2d:55:c5:5a brd ff:ff:ff:ff:ff:ff
+    inet6 fe80::4ab0:2dff:fe55:c55a/64 scope link 
+       valid_lft forever preferred_lft forever
+8: swp6: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 9216 qdisc pfifo_fast state UP group default qlen 1000
+    link/ether 48:b0:2d:7b:3a:d5 brd ff:ff:ff:ff:ff:ff
+    inet6 fe80::4ab0:2dff:fe7b:3ad5/64 scope link 
+       valid_lft forever preferred_lft forever
+9: mgmt: <NOARP,MASTER,UP,LOWER_UP> mtu 65575 qdisc noqueue state UP group default qlen 1000
+    link/ether 16:7c:50:ac:c8:f5 brd ff:ff:ff:ff:ff:ff
+    inet 127.0.0.1/8 scope host mgmt
+       valid_lft forever preferred_lft forever
+    inet 127.0.1.1/8 scope host secondary mgmt
+       valid_lft forever preferred_lft forever
+    inet6 ::1/128 scope host 
+       valid_lft forever preferred_lft forever
+10: pimreg@NONE: <NOARP,UP,LOWER_UP> mtu 1472 qdisc noqueue state UNKNOWN group default qlen 1000
+    link/pimreg 
+11: pimreg1001@NONE: <NOARP,ALLMULTI,UP,LOWER_UP> mtu 1472 qdisc noqueue master mgmt state UNKNOWN group default qlen 1000
+    link/pimreg 
+--- IP ROUTES ---
+10.10.10.1 nhid 46 proto bgp metric 20 
+10.10.10.2 nhid 30 proto bgp metric 20 
+10.10.10.3 nhid 49 proto bgp metric 20 
+10.10.10.4 nhid 47 proto bgp metric 20 
+10.10.10.63 nhid 51 proto bgp metric 20 
+10.10.10.64 nhid 41 proto bgp metric 20 
+10.10.100.100 nhid 41 proto bgp metric 20 
+====================
+spine04 | CHANGED | rc=0 >>
+====================
+HOST: 
+spine04
+====================
+--- NV CONFIG ---
+nv set evpn enable on
+nv set interface eth0 ip address 192.168.200.5/24
+nv set interface eth0 ip vrf mgmt
+nv set interface eth0 type eth
+nv set interface lo ip address 10.10.10.104/32
+nv set interface lo router pim address-family ipv4-unicast use-source 10.10.10.104
+nv set interface lo type loopback
+nv set interface lo,swp1-6 router pim enable on
+nv set interface swp1-6 link state up
+nv set interface swp1-6 type swp
+nv set nve vxlan enable on
+nv set router bgp enable on
+nv set router bgp graceful-restart mode helper-only
+nv set router pim enable on
+nv set router pim timers keepalive 3600
+nv set service dns mgmt server 1.1.1.1
+nv set service dns mgmt server 8.8.8.8
+nv set service ntp mgmt server 0.cumulusnetworks.pool.ntp.org iburst on
+nv set service ntp mgmt server 1.cumulusnetworks.pool.ntp.org iburst on
+nv set service ntp mgmt server 2.cumulusnetworks.pool.ntp.org iburst on
+nv set service ntp mgmt server 3.cumulusnetworks.pool.ntp.org iburst on
+nv set service syslog mgmt server 192.168.200.1
+nv set system aaa class nvapply action allow
+nv set system aaa class nvapply command-path / permission all
+nv set system aaa class nvshow action allow
+nv set system aaa class nvshow command-path / permission ro
+nv set system aaa class sudo action allow
+nv set system aaa class sudo command-path / permission all
+nv set system aaa role nvue-admin class nvapply
+nv set system aaa role nvue-monitor class nvshow
+nv set system aaa role system-admin class nvapply
+nv set system aaa role system-admin class sudo
+nv set system aaa user cumulus full-name cumulus
+nv set system aaa user cumulus hashed-password '*'
+nv set system aaa user cumulus role system-admin
+nv set system api state enabled
+nv set system config auto-save state enabled
+nv set system control-plane acl acl-default-dos inbound
+nv set system control-plane acl acl-default-whitelist inbound
+nv set system hostname spine04
+nv set system message post-login '###################################################################################### 
+#                     You are successfully logged in to: spine04                     # 
+######################################################################################'
+nv set system message pre-login '###################################################################################### 
+#  Welcome to NVIDIA Cumulus VX (TM) 5.12.0                                             # 
+#  NVIDIA Cumulus VX (TM) is a community supported virtual appliance designed        # 
+#  for experiencing, testing and prototyping NVIDIA Cumulus'"'"' latest technology.      # 
+#  For any questions or technical support, visit our community site at:              # 
+#  https://www.nvidia.com/en-us/support                                              # 
+######################################################################################'
+nv set system reboot mode cold
+nv set system snmp-server listening-address all vrf mgmt
+nv set system snmp-server listening-address all-v6 vrf mgmt
+nv set system snmp-server readonly-community '$nvsec$9cb7a999fcb470bcd67cf6b040983cbc' access any
+nv set system snmp-server state enabled
+nv set system ssh-server state enabled
+nv set vrf default router bgp address-family ipv4-unicast enable on
+nv set vrf default router bgp address-family ipv4-unicast redistribute connected enable on
+nv set vrf default router bgp address-family l2vpn-evpn enable on
+nv set vrf default router bgp autonomous-system 65100
+nv set vrf default router bgp enable on
+nv set vrf default router bgp neighbor swp1 peer-group underlay
+nv set vrf default router bgp neighbor swp1 type unnumbered
+nv set vrf default router bgp neighbor swp2 peer-group underlay
+nv set vrf default router bgp neighbor swp2 type unnumbered
+nv set vrf default router bgp neighbor swp3 peer-group underlay
+nv set vrf default router bgp neighbor swp3 type unnumbered
+nv set vrf default router bgp neighbor swp4 peer-group underlay
+nv set vrf default router bgp neighbor swp4 type unnumbered
+nv set vrf default router bgp neighbor swp5 peer-group underlay
+nv set vrf default router bgp neighbor swp5 type unnumbered
+nv set vrf default router bgp neighbor swp6 peer-group underlay
+nv set vrf default router bgp neighbor swp6 type unnumbered
+nv set vrf default router bgp peer-group underlay address-family l2vpn-evpn enable on
+nv set vrf default router bgp peer-group underlay bfd detect-multiplier 3
+nv set vrf default router bgp peer-group underlay bfd enable on
+nv set vrf default router bgp peer-group underlay bfd min-rx-interval 300
+nv set vrf default router bgp peer-group underlay bfd min-tx-interval 300
+nv set vrf default router bgp peer-group underlay remote-as external
+nv set vrf default router bgp router-id 10.10.10.104
+nv set vrf default router pim address-family ipv4 rp 10.10.100.100 group-range 224.1.1.0/24
+nv set vrf default router pim ecmp enable on
+nv set vrf default router pim enable on
+nv set vrf mgmt router static 0.0.0.0/0 address-family ipv4-unicast
+nv set vrf mgmt router static 0.0.0.0/0 via 192.168.200.1 type ipv4-address
+--- IP ADDRESSES ---
+1: lo: <LOOPBACK,UP,LOWER_UP> mtu 65536 qdisc noqueue state UNKNOWN group default qlen 1000
+    link/loopback 00:00:00:00:00:00 brd 00:00:00:00:00:00
+    inet 127.0.0.1/8 scope host lo
+       valid_lft forever preferred_lft forever
+    inet 10.10.10.104/32 scope global lo
+       valid_lft forever preferred_lft forever
+    inet6 ::1/128 scope host noprefixroute 
+       valid_lft forever preferred_lft forever
+2: eth0: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc pfifo_fast master mgmt state UP group default qlen 1000
+    link/ether 44:38:39:22:01:08 brd ff:ff:ff:ff:ff:ff
+    inet 192.168.200.5/24 scope global eth0
+       valid_lft forever preferred_lft forever
+    inet6 fe80::4638:39ff:fe22:108/64 scope link 
+       valid_lft forever preferred_lft forever
+3: swp1: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 9216 qdisc pfifo_fast state UP group default qlen 1000
+    link/ether 48:b0:2d:b5:6e:80 brd ff:ff:ff:ff:ff:ff
+    inet6 fe80::4ab0:2dff:feb5:6e80/64 scope link 
+       valid_lft forever preferred_lft forever
+4: swp2: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 9216 qdisc pfifo_fast state UP group default qlen 1000
+    link/ether 48:b0:2d:45:97:bf brd ff:ff:ff:ff:ff:ff
+    inet6 fe80::4ab0:2dff:fe45:97bf/64 scope link 
+       valid_lft forever preferred_lft forever
+5: swp3: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 9216 qdisc pfifo_fast state UP group default qlen 1000
+    link/ether 48:b0:2d:a8:06:9c brd ff:ff:ff:ff:ff:ff
+    inet6 fe80::4ab0:2dff:fea8:69c/64 scope link 
+       valid_lft forever preferred_lft forever
+6: swp4: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 9216 qdisc pfifo_fast state UP group default qlen 1000
+    link/ether 48:b0:2d:b0:6d:e8 brd ff:ff:ff:ff:ff:ff
+    inet6 fe80::4ab0:2dff:feb0:6de8/64 scope link 
+       valid_lft forever preferred_lft forever
+7: swp5: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 9216 qdisc pfifo_fast state UP group default qlen 1000
+    link/ether 48:b0:2d:67:c4:39 brd ff:ff:ff:ff:ff:ff
+    inet6 fe80::4ab0:2dff:fe67:c439/64 scope link 
+       valid_lft forever preferred_lft forever
+8: swp6: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 9216 qdisc pfifo_fast state UP group default qlen 1000
+    link/ether 48:b0:2d:96:6e:64 brd ff:ff:ff:ff:ff:ff
+    inet6 fe80::4ab0:2dff:fe96:6e64/64 scope link 
+       valid_lft forever preferred_lft forever
+9: mgmt: <NOARP,MASTER,UP,LOWER_UP> mtu 65575 qdisc noqueue state UP group default qlen 1000
+    link/ether 86:25:28:76:d3:bc brd ff:ff:ff:ff:ff:ff
+    inet 127.0.0.1/8 scope host mgmt
+       valid_lft forever preferred_lft forever
+    inet 127.0.1.1/8 scope host secondary mgmt
+       valid_lft forever preferred_lft forever
+    inet6 ::1/128 scope host 
+       valid_lft forever preferred_lft forever
+10: pimreg@NONE: <NOARP,UP,LOWER_UP> mtu 1472 qdisc noqueue state UNKNOWN group default qlen 1000
+    link/pimreg 
+11: pimreg1001@NONE: <NOARP,ALLMULTI,UP,LOWER_UP> mtu 1472 qdisc noqueue master mgmt state UNKNOWN group default qlen 1000
+    link/pimreg 
+--- IP ROUTES ---
+10.10.10.1 nhid 55 proto bgp metric 20 
+10.10.10.2 nhid 53 proto bgp metric 20 
+10.10.10.3 nhid 32 proto bgp metric 20 
+10.10.10.4 nhid 26 proto bgp metric 20 
+10.10.10.63 nhid 49 proto bgp metric 20 
+10.10.10.64 nhid 51 proto bgp metric 20 
+10.10.100.100 nhid 49 proto bgp metric 20 
+====================
+leaf04 | CHANGED | rc=0 >>
+====================
+HOST: 
+leaf04
+====================
+--- NV CONFIG ---
+nv set bridge domain br_default type vlan-aware
+nv set bridge domain br_default vlan 10 vni 10 flooding enable on
+nv set bridge domain br_default vlan 10 vni 10 flooding multicast-group 224.1.1.10
+nv set bridge domain br_default vlan 20 vni 20 flooding enable on
+nv set bridge domain br_default vlan 20 vni 20 flooding multicast-group 224.1.1.20
+nv set bridge domain br_default vlan 30 vni 30 flooding enable on
+nv set bridge domain br_default vlan 30 vni 30 flooding multicast-group 224.1.1.30
+nv set evpn enable on
+nv set evpn multihoming enable on
+nv set evpn multihoming startup-delay 10
+nv set evpn route-advertise svi-ip on
+nv set interface bond1 bond member swp1
+nv set interface bond1 bridge domain br_default access 10
+nv set interface bond1 evpn multihoming segment local-id 1
+nv set interface bond1-3 bond lacp-bypass on
+nv set interface bond1-3 bond mode lacp
+nv set interface bond1-3 bridge domain br_default stp admin-edge on
+nv set interface bond1-3 bridge domain br_default stp auto-edge on
+nv set interface bond1-3 bridge domain br_default stp bpdu-guard on
+nv set interface bond1-3 evpn multihoming segment enable on
+nv set interface bond1-3 evpn multihoming segment mac-address 44:38:39:BE:EF:BB
+nv set interface bond1-3 link mtu 9216
+nv set interface bond1-3 type bond
+nv set interface bond2 bond member swp2
+nv set interface bond2 bridge domain br_default access 20
+nv set interface bond2 evpn multihoming segment local-id 2
+nv set interface bond3 bond member swp3
+nv set interface bond3 bridge domain br_default access 30
+nv set interface bond3 evpn multihoming segment local-id 3
+nv set interface eth0 ip address 192.168.200.9/24
+nv set interface eth0 ip vrf mgmt
+nv set interface eth0 type eth
+nv set interface lo ip address 10.10.10.4/32
+nv set interface lo router pim address-family ipv4-unicast use-source 10.10.10.4
+nv set interface lo type loopback
+nv set interface lo,swp51-54,vlan10,20,30 router pim enable on
+nv set interface swp51-54 evpn multihoming uplink on
+nv set interface swp51-54 link state up
+nv set interface swp51-54 type swp
+nv set interface vlan10 ip address 10.1.10.5/24
+nv set interface vlan10 ip vrr address 10.1.10.1/24
+nv set interface vlan10 ip vrr mac-address 00:00:00:00:00:10
+nv set interface vlan10 vlan 10
+nv set interface vlan10,20 ip vrf RED
+nv set interface vlan10,20,30 ip igmp enable on
+nv set interface vlan10,20,30 ip vrr enable on
+nv set interface vlan10,20,30 ip vrr state up
+nv set interface vlan10,20,30 type svi
+nv set interface vlan20 ip address 10.1.20.5/24
+nv set interface vlan20 ip vrr address 10.1.20.1/24
+nv set interface vlan20 ip vrr mac-address 00:00:00:00:00:20
+nv set interface vlan20 vlan 20
+nv set interface vlan30 ip address 10.1.30.5/24
+nv set interface vlan30 ip vrf BLUE
+nv set interface vlan30 ip vrr address 10.1.30.1/24
+nv set interface vlan30 ip vrr mac-address 00:00:00:00:00:30
+nv set interface vlan30 vlan 30
+nv set nve vxlan arp-nd-suppress on
+nv set nve vxlan enable on
+nv set nve vxlan source address 10.10.10.4
+nv set router bgp enable on
+nv set router bgp graceful-restart mode helper-only
+nv set router pim enable on
+nv set router pim timers keepalive 3600
+nv set router vrr enable on
+nv set service dns mgmt server 1.1.1.1
+nv set service dns mgmt server 8.8.8.8
+nv set service ntp mgmt server 0.cumulusnetworks.pool.ntp.org iburst on
+nv set service ntp mgmt server 1.cumulusnetworks.pool.ntp.org iburst on
+nv set service ntp mgmt server 2.cumulusnetworks.pool.ntp.org iburst on
+nv set service ntp mgmt server 3.cumulusnetworks.pool.ntp.org iburst on
+nv set service syslog mgmt server 192.168.200.1
+nv set system aaa class nvapply action allow
+nv set system aaa class nvapply command-path / permission all
+nv set system aaa class nvshow action allow
+nv set system aaa class nvshow command-path / permission ro
+nv set system aaa class sudo action allow
+nv set system aaa class sudo command-path / permission all
+nv set system aaa role nvue-admin class nvapply
+nv set system aaa role nvue-monitor class nvshow
+nv set system aaa role system-admin class nvapply
+nv set system aaa role system-admin class sudo
+nv set system aaa user cumulus full-name cumulus
+nv set system aaa user cumulus hashed-password '*'
+nv set system aaa user cumulus role system-admin
+nv set system api state enabled
+nv set system config auto-save state enabled
+nv set system control-plane acl acl-default-dos inbound
+nv set system control-plane acl acl-default-whitelist inbound
+nv set system global anycast-mac 44:38:39:BE:EF:BB
+nv set system hostname leaf04
+nv set system message post-login '##################################################################################### 
+#                     You are successfully logged in to: leaf04                     # 
+#####################################################################################'
+nv set system message pre-login '##################################################################################### 
+#  Welcome to NVIDIA Cumulus VX (TM) 5.12.0                                            # 
+#  NVIDIA Cumulus VX (TM) is a community supported virtual appliance designed       # 
+#  for experiencing, testing and prototyping NVIDIA Cumulus'"'"' latest technology.     # 
+#  For any questions or technical support, visit our community site at:             # 
+#  https://www.nvidia.com/en-us/support                                             # 
+#####################################################################################'
+nv set system reboot mode cold
+nv set system snmp-server listening-address all vrf mgmt
+nv set system snmp-server listening-address all-v6 vrf mgmt
+nv set system snmp-server readonly-community '$nvsec$9cb7a999fcb470bcd67cf6b040983cbc' access any
+nv set system snmp-server state enabled
+nv set system ssh-server state enabled
+nv set vrf BLUE evpn enable on
+nv set vrf BLUE evpn vni 4002
+nv set vrf BLUE router bgp address-family ipv4-unicast enable on
+nv set vrf BLUE router bgp address-family ipv4-unicast redistribute connected enable on
+nv set vrf BLUE router bgp address-family l2vpn-evpn enable on
+nv set vrf BLUE router bgp autonomous-system 65104
+nv set vrf BLUE router bgp enable on
+nv set vrf BLUE router bgp router-id 10.10.10.4
+nv set vrf RED evpn enable on
+nv set vrf RED evpn vni 4001
+nv set vrf RED router bgp address-family ipv4-unicast enable on
+nv set vrf RED router bgp address-family ipv4-unicast redistribute connected enable on
+nv set vrf RED router bgp address-family l2vpn-evpn enable on
+nv set vrf RED router bgp autonomous-system 65104
+nv set vrf RED router bgp enable on
+nv set vrf RED router bgp router-id 10.10.10.4
+nv set vrf default router bgp address-family ipv4-unicast enable on
+nv set vrf default router bgp address-family ipv4-unicast redistribute connected enable on
+nv set vrf default router bgp address-family l2vpn-evpn enable on
+nv set vrf default router bgp autonomous-system 65104
+nv set vrf default router bgp enable on
+nv set vrf default router bgp neighbor swp51 peer-group underlay
+nv set vrf default router bgp neighbor swp51 type unnumbered
+nv set vrf default router bgp neighbor swp52 peer-group underlay
+nv set vrf default router bgp neighbor swp52 type unnumbered
+nv set vrf default router bgp neighbor swp53 peer-group underlay
+nv set vrf default router bgp neighbor swp53 type unnumbered
+nv set vrf default router bgp neighbor swp54 peer-group underlay
+nv set vrf default router bgp neighbor swp54 type unnumbered
+nv set vrf default router bgp peer-group underlay address-family l2vpn-evpn enable on
+nv set vrf default router bgp peer-group underlay bfd detect-multiplier 3
+nv set vrf default router bgp peer-group underlay bfd enable on
+nv set vrf default router bgp peer-group underlay bfd min-rx-interval 300
+nv set vrf default router bgp peer-group underlay bfd min-tx-interval 300
+nv set vrf default router bgp peer-group underlay remote-as external
+nv set vrf default router bgp router-id 10.10.10.4
+nv set vrf default router pim address-family ipv4 rp 10.10.100.100 group-range 224.1.1.0/24
+nv set vrf default router pim ecmp enable on
+nv set vrf default router pim enable on
+nv set vrf mgmt router static 0.0.0.0/0 address-family ipv4-unicast
+nv set vrf mgmt router static 0.0.0.0/0 via 192.168.200.1 type ipv4-address
+--- IP ADDRESSES ---
+1: lo: <LOOPBACK,UP,LOWER_UP> mtu 65536 qdisc noqueue state UNKNOWN group default qlen 1000
+    link/loopback 00:00:00:00:00:00 brd 00:00:00:00:00:00
+    inet 127.0.0.1/8 scope host lo
+       valid_lft forever preferred_lft forever
+    inet 10.10.10.4/32 scope global lo
+       valid_lft forever preferred_lft forever
+    inet6 ::1/128 scope host noprefixroute 
+       valid_lft forever preferred_lft forever
+2: eth0: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc pfifo_fast master mgmt state UP group default qlen 1000
+    link/ether 44:38:39:22:01:04 brd ff:ff:ff:ff:ff:ff
+    inet 192.168.200.9/24 scope global eth0
+       valid_lft forever preferred_lft forever
+    inet6 fe80::4638:39ff:fe22:104/64 scope link 
+       valid_lft forever preferred_lft forever
+3: swp1: <BROADCAST,MULTICAST,SLAVE,UP,LOWER_UP> mtu 9216 qdisc pfifo_fast master bond1 state UP group default qlen 1000
+    link/ether 48:b0:2d:1d:c4:a3 brd ff:ff:ff:ff:ff:ff
+4: swp2: <BROADCAST,MULTICAST,SLAVE,UP,LOWER_UP> mtu 9216 qdisc pfifo_fast master bond2 state UP group default qlen 1000
+    link/ether 48:b0:2d:d4:35:56 brd ff:ff:ff:ff:ff:ff
+5: swp3: <BROADCAST,MULTICAST,SLAVE,UP,LOWER_UP> mtu 9216 qdisc pfifo_fast master bond3 state UP group default qlen 1000
+    link/ether 48:b0:2d:31:7e:b1 brd ff:ff:ff:ff:ff:ff
+6: swp49: <BROADCAST,MULTICAST> mtu 1500 qdisc pfifo_fast state DOWN group default qlen 1000
+    link/ether 48:b0:2d:19:4d:dd brd ff:ff:ff:ff:ff:ff
+7: swp50: <BROADCAST,MULTICAST> mtu 1500 qdisc pfifo_fast state DOWN group default qlen 1000
+    link/ether 48:b0:2d:93:35:c1 brd ff:ff:ff:ff:ff:ff
+8: swp51: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 9216 qdisc pfifo_fast state UP group default qlen 1000
+    link/ether 48:b0:2d:17:54:50 brd ff:ff:ff:ff:ff:ff
+    inet6 fe80::4ab0:2dff:fe17:5450/64 scope link 
+       valid_lft forever preferred_lft forever
+9: swp52: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 9216 qdisc pfifo_fast state UP group default qlen 1000
+    link/ether 48:b0:2d:75:07:ec brd ff:ff:ff:ff:ff:ff
+    inet6 fe80::4ab0:2dff:fe75:7ec/64 scope link 
+       valid_lft forever preferred_lft forever
+10: swp53: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 9216 qdisc pfifo_fast state UP group default qlen 1000
+    link/ether 48:b0:2d:f2:73:75 brd ff:ff:ff:ff:ff:ff
+    inet6 fe80::4ab0:2dff:fef2:7375/64 scope link 
+       valid_lft forever preferred_lft forever
+11: swp54: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 9216 qdisc pfifo_fast state UP group default qlen 1000
+    link/ether 48:b0:2d:90:4c:e5 brd ff:ff:ff:ff:ff:ff
+    inet6 fe80::4ab0:2dff:fe90:4ce5/64 scope link 
+       valid_lft forever preferred_lft forever
+12: mgmt: <NOARP,MASTER,UP,LOWER_UP> mtu 65575 qdisc noqueue state UP group default qlen 1000
+    link/ether 9e:70:1b:9c:c1:fd brd ff:ff:ff:ff:ff:ff
+    inet 127.0.0.1/8 scope host mgmt
+       valid_lft forever preferred_lft forever
+    inet 127.0.1.1/8 scope host secondary mgmt
+       valid_lft forever preferred_lft forever
+    inet6 ::1/128 scope host 
+       valid_lft forever preferred_lft forever
+13: bond3: <BROADCAST,MULTICAST,MASTER,UP,LOWER_UP> mtu 9216 qdisc noqueue master br_default state UP group default qlen 1000
+    link/ether 48:b0:2d:31:7e:b1 brd ff:ff:ff:ff:ff:ff
+14: ipmr-lo: <BROADCAST,NOARP,UP,LOWER_UP> mtu 16000 qdisc noqueue state UNKNOWN group default qlen 1000
+    link/ether fe:7b:90:fc:20:2d brd ff:ff:ff:ff:ff:ff
+    inet6 fe80::fc7b:90ff:fefc:202d/64 scope link 
+       valid_lft forever preferred_lft forever
+15: vxlan48: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 9216 qdisc noqueue master br_default state UNKNOWN group default qlen 1000
+    link/ether 22:d1:4c:3a:79:16 brd ff:ff:ff:ff:ff:ff
+    inet6 fe80::20d1:4cff:fe3a:7916/64 scope link 
+       valid_lft forever preferred_lft forever
+16: bond1: <BROADCAST,MULTICAST,MASTER,UP,LOWER_UP> mtu 9216 qdisc noqueue master br_default state UP group default qlen 1000
+    link/ether 48:b0:2d:1d:c4:a3 brd ff:ff:ff:ff:ff:ff
+17: bond2: <BROADCAST,MULTICAST,MASTER,UP,LOWER_UP> mtu 9216 qdisc noqueue master br_default state UP group default qlen 1000
+    link/ether 48:b0:2d:d4:35:56 brd ff:ff:ff:ff:ff:ff
+18: br_default: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 9216 qdisc noqueue state UP group default qlen 1000
+    link/ether 44:38:39:22:01:0e brd ff:ff:ff:ff:ff:ff
+    inet6 fe80::4638:39ff:fe22:10e/64 scope link 
+       valid_lft forever preferred_lft forever
+19: vlan30@br_default: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 9216 qdisc noqueue master BLUE state UP group default qlen 1000
+    link/ether 44:38:39:22:01:0e brd ff:ff:ff:ff:ff:ff
+    inet 10.1.30.5/24 scope global vlan30
+       valid_lft forever preferred_lft forever
+    inet6 fe80::4638:39ff:fe22:10e/64 scope link 
+       valid_lft forever preferred_lft forever
+20: BLUE: <NOARP,MASTER,UP,LOWER_UP> mtu 65575 qdisc noqueue state UP group default qlen 1000
+    link/ether ee:28:bc:97:3a:5a brd ff:ff:ff:ff:ff:ff
+    inet 127.0.0.1/8 scope host BLUE
+       valid_lft forever preferred_lft forever
+    inet 127.0.1.1/8 scope host secondary BLUE
+       valid_lft forever preferred_lft forever
+    inet6 ::1/128 scope host 
+       valid_lft forever preferred_lft forever
+21: vlan30-v0@vlan30: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 9216 qdisc noqueue master BLUE state UP group default qlen 1000
+    link/ether 00:00:00:00:00:30 brd ff:ff:ff:ff:ff:ff
+    inet 10.1.30.1/24 metric 1024 scope global vlan30-v0
+       valid_lft forever preferred_lft forever
+    inet6 fe80::200:ff:fe00:30/64 scope link 
+       valid_lft forever preferred_lft forever
+22: vxlan99: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 9216 qdisc noqueue master br_l3vni state UNKNOWN group default qlen 1000
+    link/ether fa:17:e9:03:53:88 brd ff:ff:ff:ff:ff:ff
+    inet6 fe80::f817:e9ff:fe03:5388/64 scope link 
+       valid_lft forever preferred_lft forever
+23: br_l3vni: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 9216 qdisc noqueue state UP group default qlen 1000
+    link/ether 44:38:39:22:01:0e brd ff:ff:ff:ff:ff:ff
+    inet6 fe80::4638:39ff:fe22:10e/64 scope link 
+       valid_lft forever preferred_lft forever
+24: vlan3607_l3@br_l3vni: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 9216 qdisc noqueue master BLUE state UP group default qlen 1000
+    link/ether 44:38:39:22:01:0e brd ff:ff:ff:ff:ff:ff
+    inet6 fe80::4638:39ff:fe22:10e/64 scope link 
+       valid_lft forever preferred_lft forever
+25: vlan10@br_default: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 9216 qdisc noqueue master RED state UP group default qlen 1000
+    link/ether 44:38:39:22:01:0e brd ff:ff:ff:ff:ff:ff
+    inet 10.1.10.5/24 scope global vlan10
+       valid_lft forever preferred_lft forever
+    inet6 fe80::4638:39ff:fe22:10e/64 scope link 
+       valid_lft forever preferred_lft forever
+26: RED: <NOARP,MASTER,UP,LOWER_UP> mtu 65575 qdisc noqueue state UP group default qlen 1000
+    link/ether 6a:eb:a6:5c:77:16 brd ff:ff:ff:ff:ff:ff
+    inet 127.0.0.1/8 scope host RED
+       valid_lft forever preferred_lft forever
+    inet 127.0.1.1/8 scope host secondary RED
+       valid_lft forever preferred_lft forever
+    inet6 ::1/128 scope host 
+       valid_lft forever preferred_lft forever
+27: vlan10-v0@vlan10: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 9216 qdisc noqueue master RED state UP group default qlen 1000
+    link/ether 00:00:00:00:00:10 brd ff:ff:ff:ff:ff:ff
+    inet 10.1.10.1/24 metric 1024 scope global vlan10-v0
+       valid_lft forever preferred_lft forever
+    inet6 fe80::200:ff:fe00:10/64 scope link 
+       valid_lft forever preferred_lft forever
+28: vlan20@br_default: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 9216 qdisc noqueue master RED state UP group default qlen 1000
+    link/ether 44:38:39:22:01:0e brd ff:ff:ff:ff:ff:ff
+    inet 10.1.20.5/24 scope global vlan20
+       valid_lft forever preferred_lft forever
+    inet6 fe80::4638:39ff:fe22:10e/64 scope link 
+       valid_lft forever preferred_lft forever
+29: vlan20-v0@vlan20: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 9216 qdisc noqueue master RED state UP group default qlen 1000
+    link/ether 00:00:00:00:00:20 brd ff:ff:ff:ff:ff:ff
+    inet 10.1.20.1/24 metric 1024 scope global vlan20-v0
+       valid_lft forever preferred_lft forever
+    inet6 fe80::200:ff:fe00:20/64 scope link 
+       valid_lft forever preferred_lft forever
+30: vlan3159_l3@br_l3vni: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 9216 qdisc noqueue master RED state UP group default qlen 1000
+    link/ether 44:38:39:22:01:0e brd ff:ff:ff:ff:ff:ff
+    inet6 fe80::4638:39ff:fe22:10e/64 scope link 
+       valid_lft forever preferred_lft forever
+31: pimreg@NONE: <NOARP,UP,LOWER_UP> mtu 1472 qdisc noqueue state UNKNOWN group default qlen 1000
+    link/pimreg 
+32: pimreg1001@NONE: <NOARP,ALLMULTI,UP,LOWER_UP> mtu 1472 qdisc noqueue master mgmt state UNKNOWN group default qlen 1000
+    link/pimreg 
+33: pimreg1002@NONE: <NOARP,ALLMULTI,UP,LOWER_UP> mtu 1472 qdisc noqueue master BLUE state UNKNOWN group default qlen 1000
+    link/pimreg 
+34: pimreg1003@NONE: <NOARP,ALLMULTI,UP,LOWER_UP> mtu 1472 qdisc noqueue master RED state UNKNOWN group default qlen 1000
+    link/pimreg 
+--- IP ROUTES ---
+10.10.10.1 nhid 219 proto bgp metric 20 
+10.10.10.2 nhid 219 proto bgp metric 20 
+10.10.10.3 nhid 219 proto bgp metric 20 
+10.10.10.63 nhid 219 proto bgp metric 20 
+10.10.10.64 nhid 219 proto bgp metric 20 
+10.10.10.101 nhid 155 proto bgp metric 20 
+10.10.10.102 nhid 217 proto bgp metric 20 
+10.10.10.103 nhid 70 proto bgp metric 20 
+10.10.10.104 nhid 71 proto bgp metric 20 
+10.10.100.100 nhid 219 proto bgp metric 20 
+====================
+netq-ts | UNREACHABLE! => {
+    "changed": false,
+    "msg": "Failed to authenticate: Authentication failed.",
+    "unreachable": true
+}

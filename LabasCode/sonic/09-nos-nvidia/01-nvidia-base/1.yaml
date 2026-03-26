@@ -17,4 +17,4 @@ topology:
 
   links:
     - endpoints: ["sw1:swp12", "sw2:swp12"]
-    - endpoints: ["sw1:swp13", "sw2:swp13"]
+    - endpoints: ["sw1:swp51", "sw2:swp51"]

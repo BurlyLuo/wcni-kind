@@ -1,0 +1,144 @@
+name: cumulus-bgp-evpn-mh
+prefix: ""
+
+topology:
+  nodes:
+    leaf01:
+      kind: cumulus_cvx
+      image: networkop/cx:5.3.0
+
+    leaf02:
+      kind: cumulus_cvx
+      image: networkop/cx:5.3.0
+
+    leaf03:
+      kind: cumulus_cvx
+      image: networkop/cx:5.3.0
+
+    leaf04:
+      kind: cumulus_cvx
+      image: networkop/cx:5.3.0
+
+    spine01:
+      kind: cumulus_cvx
+      image: networkop/cx:5.3.0
+
+    spine02:
+      kind: cumulus_cvx
+      image: networkop/cx:5.3.0
+
+    spine03:
+      kind: cumulus_cvx
+      image: networkop/cx:5.3.0
+
+    spine04:
+      kind: cumulus_cvx
+      image: networkop/cx:5.3.0
+
+    border01:
+      kind: cumulus_cvx
+      image: networkop/cx:5.3.0
+
+    border02:
+      kind: cumulus_cvx
+      image: networkop/cx:5.3.0
+
+    fw1:
+      kind: linux
+      image: 192.168.2.100:5000/nettool
+
+    fw2:
+      kind: linux
+      image: 192.168.2.100:5000/nettool
+
+    server01:
+      kind: linux
+      image: 192.168.2.100:5000/nettool
+
+    server02:
+      kind: linux
+      image: 192.168.2.100:5000/nettool
+
+    server03:
+      kind: linux
+      image: 192.168.2.100:5000/nettool
+
+    server04:
+      kind: linux
+      image: 192.168.2.100:5000/nettool
+
+    server05:
+      kind: linux
+      image: 192.168.2.100:5000/nettool
+
+    server06:
+      kind: linux
+      image: 192.168.2.100:5000/nettool
+
+    server07:
+      kind: linux
+      image: 192.168.2.100:5000/nettool
+      exec:
+
+    server08:
+      kind: linux
+      image: 192.168.2.100:5000/nettool
+
+
+  links:
+    # leaf01
+    - endpoints: ["leaf01:swp1", "server01:eth1"]
+    - endpoints: ["leaf01:swp2", "server02:eth1"]
+    - endpoints: ["leaf01:swp3", "server03:eth1"]
+    - endpoints: ["leaf01:swp51", "spine01:swp1"]
+    - endpoints: ["leaf01:swp52", "spine02:swp1"]
+    - endpoints: ["leaf01:swp53", "spine03:swp1"]
+    - endpoints: ["leaf01:swp54", "spine04:swp1"]
+
+    # leaf02
+    - endpoints: ["leaf02:swp1", "server01:eth2"]
+    - endpoints: ["leaf02:swp2", "server02:eth2"]
+    - endpoints: ["leaf02:swp3", "server03:eth2"]
+    - endpoints: ["leaf02:swp51", "spine01:swp2"]
+    - endpoints: ["leaf02:swp52", "spine02:swp2"]
+    - endpoints: ["leaf02:swp53", "spine03:swp2"]
+    - endpoints: ["leaf02:swp54", "spine04:swp2"]
+
+    # leaf03
+    - endpoints: ["leaf03:swp1", "server04:eth1"]
+    - endpoints: ["leaf03:swp2", "server05:eth1"]
+    - endpoints: ["leaf03:swp3", "server06:eth1"]
+    - endpoints: ["leaf03:swp51", "spine01:swp3"]
+    - endpoints: ["leaf03:swp52", "spine02:swp3"]
+    - endpoints: ["leaf03:swp53", "spine03:swp3"]
+    - endpoints: ["leaf03:swp54", "spine04:swp3"]
+
+    # leaf04
+    - endpoints: ["leaf04:swp1", "server04:eth2"]
+    - endpoints: ["leaf04:swp2", "server05:eth2"]
+    - endpoints: ["leaf04:swp3", "server06:eth2"]
+    - endpoints: ["leaf04:swp51", "spine01:swp4"]
+    - endpoints: ["leaf04:swp52", "spine02:swp4"]
+    - endpoints: ["leaf04:swp53", "spine03:swp4"]
+    - endpoints: ["leaf04:swp54", "spine04:swp4"]
+
+    # border01
+    - endpoints: ["border01:swp1", "server07:eth1"]
+    - endpoints: ["border01:swp2", "server08:eth1"]
+    - endpoints: ["border01:swp3", "fw1:eth1"]
+    - endpoints: ["border01:swp4", "fw2:eth1"]
+    - endpoints: ["border01:swp51", "spine01:swp5"]
+    - endpoints: ["border01:swp52", "spine02:swp5"]
+    - endpoints: ["border01:swp53", "spine03:swp5"]
+    - endpoints: ["border01:swp54", "spine04:swp5"]
+
+    # border02
+    - endpoints: ["border02:swp1", "server07:eth2"]
+    - endpoints: ["border02:swp2", "server08:eth2"]
+    - endpoints: ["border02:swp3", "fw1:eth2"]
+    - endpoints: ["border02:swp4", "fw2:eth2"]
+    - endpoints: ["border02:swp51", "spine01:swp6"]
+    - endpoints: ["border02:swp52", "spine02:swp6"]
+    - endpoints: ["border02:swp53", "spine03:swp6"]
+    - endpoints: ["border02:swp54", "spine04:swp6"]
+
