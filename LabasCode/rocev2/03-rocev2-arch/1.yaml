@@ -1,10 +1,6 @@
 name: rocev2-rail
 prefix: ""
 topology:
-  kinds:
-    linux:
-      image: 192.168.2.100:5000/nettool
-
   nodes:
     # ===== Spine Switches (AS 65000) =====
     s1:
