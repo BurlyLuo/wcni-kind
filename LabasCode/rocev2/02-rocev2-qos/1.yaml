@@ -1,0 +1,29 @@
+name: cumulus-vx
+prefix: ""
+
+topology:
+  nodes:
+    l1:
+      kind: cumulus_cvx
+      image: networkop/cx:5.3.0
+      binds:
+      - frr/l1.conf:/etc/startup.conf
+      exec:
+      - ip a a 10.1.1.1/24 dev swp1
+
+    l2:
+      kind: cumulus_cvx
+      image: networkop/cx:5.3.0
+      binds:
+      - frr/l2.conf:/etc/startup.conf
+      exec:
+      - ip a a 10.1.1.2/24 dev swp1
+
+  links:
+    - endpoints: ["l1:swp1", "l2:swp1"]
+    - endpoints: ["l1:swp2", "l2:swp2"]
+    - endpoints: ["l1:swp3", "l2:swp3"]
+    - endpoints: ["l1:swp4", "l2:swp4"]
+    - endpoints: ["l1:swp5", "l2:swp5"]
+
+# for node in l1 l2;do echo "Apply configuration to $node: ";docker exec -it $node bash -c "cat /etc/startup.conf | bash";done
