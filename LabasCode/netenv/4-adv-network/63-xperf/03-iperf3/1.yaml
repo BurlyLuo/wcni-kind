@@ -1,0 +1,38 @@
+name: iperf3
+prefix: ""
+
+topology:
+  nodes:
+    leaf1:
+      kind: linux
+      image: quay.io/weiluo/frrouting/frr:10.5.0
+      cmd: sh -c "sed -i 's/bgpd=no/bgpd=yes/;s/zebra=no/zebra=yes/' /etc/frr/daemons && /usr/lib/frr/docker-start"
+      binds:
+        - /lib/modules:/lib/modules
+      exec:
+        - bash -c "echo 'PS1=\"[\\\\u@\\\\h]\\\\$ \"' > /root/.bashrc"
+        - touch /etc/frr/vtysh.conf
+        - ip l s eth1 up
+        - ip a a 10.1.5.1/24 dev eth1
+        - ip l s eth2 up
+        - ip a a 10.1.8.1/24 dev eth2
+
+    vm1:
+      kind: linux
+      image: 192.168.2.100:5000/ucni:latest
+      exec:
+        - ip addr add 10.1.5.10/24 dev eth1
+        - ip l s eth1 add 00:00:10:01:05:10
+        - ip r r default via 10.1.5.1
+
+    vm2:
+      kind: linux
+      image: 192.168.2.100:5000/ucni:latest
+      exec:
+        - ip addr add 10.1.8.11/24 dev eth1
+        - ip l s eth1 add 00:00:10:01:08:11
+        - ip r r default via 10.1.8.1
+
+  links:
+    - endpoints: ["leaf1:eth1", "vm1:eth1"]
+    - endpoints: ["leaf1:eth2", "vm2:eth1"]

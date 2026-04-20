@@ -1,0 +1,16 @@
+---
+leaf1:
+    username: 
+    password: 
+    platform: linux
+    hostname: 172.20.20.3
+vm1:
+    username: 
+    password: 
+    platform: linux
+    hostname: 172.20.20.4
+vm2:
+    username: 
+    password: 
+    platform: linux
+    hostname: 172.20.20.2

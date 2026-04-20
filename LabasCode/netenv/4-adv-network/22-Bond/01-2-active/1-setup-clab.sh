@@ -34,7 +34,7 @@ topology:
         - /lib/modules:/lib/modules
       exec:
       - bash -c "modprobe bonding"
-      - ip link add bond0 type bond mode 802.3ad miimon 100 lacp_rate fast
+      - ip link add bond0 type bond mode 802.3ad miimon 100
       - ip l s eth1 down
       - ip l s eth2 down
       - ip l s eth1 master bond0
@@ -52,4 +52,3 @@ topology:
 
     - endpoints: ["br-poolx:net7", "gw:eth1"]
 EOF
-
