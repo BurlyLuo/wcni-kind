@@ -414,7 +414,7 @@ topology:
 
 
 # 1.apply configuration
-# for node in l1 l2 l3 l4 l5 l6 l7 l8 s1 s2 s3 s4;do echo "Apply configuration to $node: ";docker exec -it $node bash -c "cat /etc/startup.conf | bash";done 
+# for node in l1 l2 l3 l4 l5 l6 l7 l8 s1 s2 s3 s4;do echo "Apply configuration to $node: ";docker exec -it $node bash -c "bash -x /etc/startup.conf";done 
 
 # 2.server list
 # server        rail1--eth1     rail2--eth2     rail3--eth3     rail4--eth4     rail5--eth5     rail6--eth6     rail7--eth7     rail8--eth8

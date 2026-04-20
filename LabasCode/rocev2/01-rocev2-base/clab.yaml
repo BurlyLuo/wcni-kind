@@ -1,0 +1,21 @@
+name: rdma
+prefix: ""
+topology:
+  nodes:
+    r1:
+      kind: generic_vm
+      image: 192.168.2.100:5000/debian13
+      env:
+        QEMU_SMP: 6
+        QEMU_MEMORY: 8192
+
+    r2:
+      kind: generic_vm
+      image: 192.168.2.100:5000/debian13
+      env:
+        QEMU_SMP: 6
+        QEMU_MEMORY: 8192
+
+  links:
+    - endpoints: ["r1:eth1", "r2:eth1"]
+    - endpoints: ["r1:eth2", "r2:eth2"]

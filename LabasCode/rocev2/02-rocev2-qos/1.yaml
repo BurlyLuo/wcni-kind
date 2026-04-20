@@ -26,4 +26,4 @@ topology:
     - endpoints: ["l1:swp4", "l2:swp4"]
     - endpoints: ["l1:swp5", "l2:swp5"]
 
-# for node in l1 l2;do echo "Apply configuration to $node: ";docker exec -it $node bash -c "cat /etc/startup.conf | bash";done
+# for node in l1 l2;do echo "Apply configuration to $node: ";docker exec -it $node bash -c "bash -x /etc/startup.conf";done

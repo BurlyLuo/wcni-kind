@@ -1,4 +1,4 @@
-name: rocev2-rail
+name: frr-rocev2-rail
 prefix: ""
 topology:
   nodes:
