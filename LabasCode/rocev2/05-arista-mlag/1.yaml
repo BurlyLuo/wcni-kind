@@ -1,0 +1,71 @@
+name: arista-mlag
+prefix: ""
+topology:
+  nodes:
+    l1:
+      kind: arista_ceos
+      mgmt-ipv4: 172.20.20.3
+      image: 192.168.2.100:5000/ceos:4.36.0f
+      startup-config: ./startup-conf/l1.conf     
+ 
+    l2:
+      kind: arista_ceos
+      mgmt-ipv4: 172.20.20.4
+      image: 192.168.2.100:5000/ceos:4.36.0f
+      startup-config: ./startup-conf/l2.conf
+
+    s1:
+      kind: arista_ceos
+      mgmt-ipv4: 172.20.20.5
+      image: 192.168.2.100:5000/ceos:4.36.0f
+      startup-config: ./startup-conf/s1.conf
+
+    s2:
+      kind: arista_ceos
+      mgmt-ipv4: 172.20.20.6
+      image: 192.168.2.100:5000/ceos:4.36.0f
+      startup-config: ./startup-conf/s2.conf
+
+    h1:
+      kind: linux
+      image: 192.168.2.100:5000/nettool
+      binds:
+        - /lib/modules:/lib/modules
+      exec:
+      - modprobe bonding
+      - ip link add bond0 type bond mode 802.3ad miimon 100 lacp_rate fast
+      - ip l s eth1 down
+      - ip l s eth2 down
+      - ip l s eth1 master bond0
+      - ip l s eth2 master bond0
+      - ip l s bond0 up
+      - ip a a 10.1.8.10/24 dev bond0
+      - ip r r default via 10.1.8.1
+
+    hx:
+      kind: linux
+      image: 192.168.2.100:5000/nettool
+      binds:
+        - /lib/modules:/lib/modules
+      exec:
+      - modprobe bonding
+      - ip a a 10.1.9.10/24 dev eth1
+      - ip r r default via 10.1.9.1
+
+  links:
+    - endpoints: ["l1:eth1", "l2:eth1"]
+    - endpoints: ["l1:eth3", "l2:eth3"]
+    - endpoints: ["l1:eth4", "l2:eth4"]
+   
+    # bgp unnumbered 
+    - endpoints: ["s1:eth1", "l1:eth5"]
+    - endpoints: ["s1:eth2", "l2:eth5"]
+    - endpoints: ["s2:eth1", "l1:eth6"]
+    - endpoints: ["s2:eth2", "l2:eth6"]
+
+    - endpoints: ["l1:eth2", "h1:eth1"]
+    - endpoints: ["l2:eth2", "h1:eth2"]
+    
+    # 10.1.9.10-gw:10.1.9.1
+    - endpoints: ["s1:eth3", "hx:eth1"]
+
