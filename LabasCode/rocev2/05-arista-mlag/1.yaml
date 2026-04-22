@@ -57,7 +57,7 @@ topology:
     - endpoints: ["l1:eth3", "l2:eth3"]
     - endpoints: ["l1:eth4", "l2:eth4"]
    
-    # bgp unnumbered 
+    # bgp network
     - endpoints: ["s1:eth1", "l1:eth5"]
     - endpoints: ["s1:eth2", "l2:eth5"]
     - endpoints: ["s2:eth1", "l1:eth6"]
