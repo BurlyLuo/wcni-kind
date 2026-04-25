@@ -10,7 +10,7 @@ mgmt:
 topology:
   kinds:
     ceos:
-      image: ceos:4.31.5M
+      image: 192.168.2.100:5000/ceos:4.36.0f
   nodes:
     eos1:
       kind: ceos
