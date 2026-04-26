@@ -1,0 +1,39 @@
+name: bond
+prefix: ""
+topology:
+  nodes:
+    h1:
+      kind: linux
+      image: 192.168.2.100:5000/nettool
+      binds:
+        - /lib/modules:/lib/modules
+      exec:
+      - modprobe bonding
+      - ip link add bond0 type bond mode 802.3ad miimon 100 lacp_rate fast xmit_hash_policy layer3+4 ad_select bandwidth all_slaves_active 0 fail_over_mac none
+      - ip l s eth1 down
+      - ip l s eth2 down
+      - ip l s eth1 master bond0
+      - ip l s eth2 master bond0
+      - ip l s bond0 up
+      - ip a a 10.1.5.10/24 dev bond0
+      - ip a a 10.1.8.10/24 dev bond0
+
+    h2:
+      kind: linux
+      image: 192.168.2.100:5000/nettool
+      binds:
+        - /lib/modules:/lib/modules
+      exec:
+      - modprobe bonding
+      - ip link add bond0 type bond mode 802.3ad miimon 100 lacp_rate fast xmit_hash_policy layer3+4 ad_select bandwidth all_slaves_active 0 fail_over_mac none
+      - ip l s eth1 down
+      - ip l s eth2 down
+      - ip l s eth1 master bond0
+      - ip l s eth2 master bond0
+      - ip l s bond0 up
+      - ip a a 10.1.5.11/24 dev bond0
+      - ip a a 10.1.8.11/24 dev bond0
+
+  links:
+    - endpoints: ["h1:eth1", "h2:eth1"]
+    - endpoints: ["h1:eth2", "h2:eth2"]
