@@ -1,0 +1,40 @@
+name: cumulus-mlag
+prefix: ""
+topology:
+  nodes:
+    l1:
+      kind: cumulus_vx
+      mgmt-ipv4: 172.20.20.3
+      image: 192.168.2.100:5000/cumulus:5.15.1
+ 
+    l2:
+      kind: cumulus_vx
+      mgmt-ipv4: 172.20.20.4
+      image: 192.168.2.100:5000/cumulus:5.15.1
+
+    s1:
+      kind: cumulus_vx
+      mgmt-ipv4: 172.20.20.5
+      image: 192.168.2.100:5000/cumulus:5.15.1
+
+    s2:
+      kind: cumulus_vx
+      mgmt-ipv4: 172.20.20.6
+      image: 192.168.2.100:5000/cumulus:5.15.1
+
+    h1:
+      kind: cumulus_vx
+      mgmt-ipv4: 172.20.20.6
+      image: 192.168.2.100:5000/cumulus:5.15.1
+
+  links:
+    - endpoints: ["s1:swp1", "l1:swp6"]
+    - endpoints: ["s1:swp2", "l2:swp6"]
+    - endpoints: ["s2:swp1", "l1:swp7"]
+    - endpoints: ["s2:swp2", "l2:swp7"]
+
+    - endpoints: ["l1:swp4", "l2:swp4"]
+    - endpoints: ["l1:swp5", "l2:swp5"]
+
+    - endpoints: ["l1:swp1", "h1:swp1"]
+    - endpoints: ["l2:swp1", "h1:swp2"]
